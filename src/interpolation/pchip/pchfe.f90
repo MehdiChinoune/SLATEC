@@ -1,8 +1,7 @@
 !** PCHFE
-SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
-  !> Evaluate a piecewise cubic Hermite function at an array of
-  !            points.  May be used by itself for Hermite interpolation,
-  !            or as an evaluator for PCHIM or PCHIC.
+PURE SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
+  !> Evaluate a piecewise cubic Hermite function at an array of points.
+  !  May be used by itself for Hermite interpolation, or as an evaluator for PCHIM or PCHIC.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -112,7 +111,7 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   !  Programming notes:
   !
   !     1. To produce a double precision version, simply:
@@ -137,9 +136,11 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd, Ne, Ierr
-  REAL(SP) :: X(N), F(Incfd,N), D(Incfd,N), Xe(Ne), Fe(Ne)
-  LOGICAL :: Skip
+  INTEGER, INTENT(IN) :: N, Incfd, Ne
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: X(N), F(Incfd,N), D(Incfd,N), Xe(Ne)
+  REAL(SP), INTENT(OUT) :: Fe(Ne)
+  LOGICAL, INTENT(INOUT) :: Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -156,13 +157,13 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
       !
       !     N<2 RETURN.
       Ierr = -1
-      CALL XERMSG('PCHFE','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
+      ERROR STOP 'PCHFE : NUMBER OF DATA POINTS LESS THAN TWO'
       RETURN
     ELSEIF( Incfd<1 ) THEN
       !
       !     INCFD<1 RETURN.
       Ierr = -2
-      CALL XERMSG('PCHFE','INCREMENT LESS THAN ONE',Ierr,1)
+      ERROR STOP 'PCHFE : INCREMENT LESS THAN ONE'
       RETURN
     ELSE
       DO i = 2, N
@@ -177,9 +178,7 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
     !
     !     NE<1 RETURN.
     Ierr = -4
-    CALL XERMSG('PCHFE','NUMBER OF EVALUATION POINTS LESS THAN ONE'&
-      ,Ierr,1)
-    RETURN
+    ERROR STOP 'PCHFE : NUMBER OF EVALUATION POINTS LESS THAN ONE'
   ELSE
     Ierr = 0
     Skip = .TRUE.
@@ -293,12 +292,12 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
   500  Ierr = -3
-  CALL XERMSG('PCHFE','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
+  ERROR STOP 'PCHFE : X-ARRAY NOT STRICTLY INCREASING'
   RETURN
   !
   !     ERROR RETURN FROM CHFEV.
   !   *** THIS CASE SHOULD NEVER OCCUR ***
   600  Ierr = -5
-  CALL XERMSG('PCHFE','ERROR RETURN FROM CHFEV -- FATAL',Ierr,2)
+  ERROR STOP 'PCHFE : ERROR RETURN FROM CHFEV -- FATAL'
   !------------- LAST LINE OF PCHFE FOLLOWS ------------------------------
 END SUBROUTINE PCHFE

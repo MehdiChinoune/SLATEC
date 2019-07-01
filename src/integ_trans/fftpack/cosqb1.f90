@@ -1,5 +1,5 @@
 !** COSQB1
-SUBROUTINE COSQB1(N,X,W,Xh)
+PURE SUBROUTINE COSQB1(N,X,W,Xh)
   !> Compute the unnormalized inverse of COSQF1.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -35,8 +35,10 @@ SUBROUTINE COSQB1(N,X,W,Xh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: W(N), X(N), Xh(2*N+15)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: W(N)
+  REAL(SP), INTENT(INOUT) :: X(N)
+  REAL(SP), INTENT(OUT) :: Xh(2*N+15)
   INTEGER :: i, k, kc, modn, np2, ns2
   REAL(SP) :: xim1
   !* FIRST EXECUTABLE STATEMENT  COSQB1
@@ -63,4 +65,5 @@ SUBROUTINE COSQB1(N,X,W,Xh)
     X(kc) = Xh(k) - Xh(kc)
   END DO
   X(1) = X(1) + X(1)
+
 END SUBROUTINE COSQB1

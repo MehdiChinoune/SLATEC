@@ -43,7 +43,7 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE DXBLK ,ONLY: radixl_com, rad2l_com, l2_com, kmax_com
-  USE service, ONLY : XERMSG
+
   INTEGER :: Ierror, Ix
   REAL(DP) :: X
   !
@@ -80,7 +80,7 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
       RETURN
     END IF
   END IF
-  100  CALL XERMSG('DXADJ','overflow in auxiliary index',207,1)
+  100  ERROR STOP 'DXADJ : overflow in auxiliary index'
   Ierror = 207
   RETURN
   200 CONTINUE

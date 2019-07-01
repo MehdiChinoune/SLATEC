@@ -1,5 +1,5 @@
 !** DPCHCI
-SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
+PURE SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !> Set interior derivatives for DPCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -95,8 +95,9 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd
-  REAL(DP) :: H(N), Slope(N), D(Incfd,N)
+  INTEGER, INTENT(IN) :: N, Incfd
+  REAL(DP), INTENT(IN) :: H(N), Slope(N)
+  REAL(DP), INTENT(OUT) :: D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !

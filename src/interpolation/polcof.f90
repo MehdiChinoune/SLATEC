@@ -1,8 +1,7 @@
 !** POLCOF
-SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
-  !> Compute the coefficients of the polynomial fit (including
-  !            Hermite polynomial fits) produced by a previous call to
-  !            POLINT.
+PURE SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
+  !> Compute the coefficients of the polynomial fit (including Hermite polynomial fits)
+  !  produced by a previous call to POLINT.
   !***
   ! **Library:**   SLATEC
   !***
@@ -67,8 +66,9 @@ SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
   !   891024  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: N
-  REAL(SP) :: C(N), D(N), Work(2*N), X(N), Xx
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: C(N), X(N), Xx
+  REAL(SP), INTENT(OUT) :: D(N), Work(2*N)
   REAL(SP) :: pone, ptwo
   INTEGER :: i, im1, k, km1, km1pi, km2n, km2npi, nm1, nmkp1, npkm1
   !* FIRST EXECUTABLE STATEMENT  POLCOF
@@ -101,4 +101,5 @@ SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
       D(k) = D(k) + Work(i)*D(km1pi)
     END DO
   END DO
+
 END SUBROUTINE POLCOF

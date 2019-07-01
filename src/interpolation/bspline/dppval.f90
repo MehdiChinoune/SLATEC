@@ -1,7 +1,7 @@
 !** DPPVAL
-REAL(DP) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
+REAL(DP) PURE  FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X)
   !> Calculate the value of the IDERIV-th derivative of the
-  !            B-spline from the PP-representation.
+  !  B-spline from the PP-representation.
   !***
   ! **Library:**   SLATEC
   !***
@@ -69,32 +69,26 @@ REAL(DP) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: Ideriv, Inppv, K, Ldc, Lxi
-  REAL(DP) :: C(Ldc,Lxi), X, Xi(Lxi+1)
-  INTEGER :: i, j, ndummy, kk
+
+  INTEGER, INTENT(IN) :: Ideriv, K, Ldc, Lxi
+  REAL(DP), INTENT(IN) :: C(Ldc,Lxi), X, Xi(Lxi+1)
+  INTEGER :: i, j, ndummy, kk, inppv
   REAL(DP) :: dx
   !* FIRST EXECUTABLE STATEMENT  DPPVAL
   DPPVAL = 0._DP
+  inppv = 1
   IF( K<1 ) THEN
-    CALL XERMSG('DPPVAL','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'DPPVAL : K DOES NOT SATISFY K>=1'
   ELSEIF( Ldc<K ) THEN
-    !
-    !
-    CALL XERMSG('DPPVAL','LDC DOES NOT SATISFY LDC>=K',2,1)
-    RETURN
+    ERROR STOP 'DPPVAL : LDC DOES NOT SATISFY LDC>=K'
   ELSEIF( Lxi<1 ) THEN
-    CALL XERMSG('DPPVAL','LXI DOES NOT SATISFY LXI>=1',2,1)
-    RETURN
+    ERROR STOP 'DPPVAL : LXI DOES NOT SATISFY LXI>=1'
   ELSEIF( Ideriv<0 .OR. Ideriv>=K ) THEN
-    CALL XERMSG('DPPVAL','IDERIV DOES NOT SATISFY 0<=IDERIV<K',2,1)
-    RETURN
+    ERROR STOP 'DPPVAL : IDERIV DOES NOT SATISFY 0<=IDERIV<K'
   ELSE
     i = K - Ideriv
     kk = i
-    CALL DINTRV(Xi,Lxi,X,Inppv,i,ndummy)
+    CALL DINTRV(Xi,Lxi,X,inppv,i,ndummy)
     dx = X - Xi(i)
     j = K
     DO
@@ -104,5 +98,6 @@ REAL(DP) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
       IF( kk<=0 ) EXIT
     END DO
   END IF
+
   RETURN
 END FUNCTION DPPVAL

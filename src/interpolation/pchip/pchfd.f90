@@ -1,10 +1,9 @@
 !** PCHFD
-SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
+PURE SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   !> Evaluate a piecewise cubic Hermite function and its first
-  !            derivative at an array of points.  May be used by itself
-  !            for Hermite interpolation, or as an evaluator for PCHIM
-  !            or PCHIC.  If only function values are required, use
-  !            PCHFE instead.
+  !  derivative at an array of points.  May be used by itself
+  !  for Hermite interpolation, or as an evaluator for PCHIM or PCHIC.
+  !  If only function values are required, use PCHFE instead.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -124,7 +123,7 @@ SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   !  Programming notes:
   !
   !     1. To produce a double precision version, simply:
@@ -149,9 +148,11 @@ SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd, Ne, Ierr
-  REAL(SP) :: X(N), F(Incfd,N), D(Incfd,N), Xe(Ne), Fe(Ne), De(Ne)
-  LOGICAL :: Skip
+  INTEGER, INTENT(IN) :: N, Incfd, Ne
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: X(N), F(Incfd,N), D(Incfd,N), Xe(Ne)
+  REAL(SP), INTENT(OUT) :: Fe(Ne), De(Ne)
+  LOGICAL, INTENT(INOUT) :: Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -168,13 +169,13 @@ SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
       !
       !     N<2 RETURN.
       Ierr = -1
-      CALL XERMSG('PCHFD','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
+      ERROR STOP 'PCHFD : NUMBER OF DATA POINTS LESS THAN TWO'
       RETURN
     ELSEIF( Incfd<1 ) THEN
       !
       !     INCFD<1 RETURN.
       Ierr = -2
-      CALL XERMSG('PCHFD','INCREMENT LESS THAN ONE',Ierr,1)
+      ERROR STOP 'PCHFD : INCREMENT LESS THAN ONE'
       RETURN
     ELSE
       DO i = 2, N
@@ -189,7 +190,7 @@ SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
     !
     !     NE<1 RETURN.
     Ierr = -4
-    CALL XERMSG('PCHFD','NUMBER OF EVALUATION POINTS LESS THAN ONE',Ierr,1)
+    ERROR STOP 'PCHFD : NUMBER OF EVALUATION POINTS LESS THAN ONE'
     RETURN
   ELSE
     Ierr = 0
@@ -304,12 +305,12 @@ SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
   500  Ierr = -3
-  CALL XERMSG('PCHFD','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
+  ERROR STOP 'PCHFD : X-ARRAY NOT STRICTLY INCREASING'
   RETURN
   !
   !     ERROR RETURN FROM CHFDV.
   !   *** THIS CASE SHOULD NEVER OCCUR ***
   600  Ierr = -5
-  CALL XERMSG('PCHFD','ERROR RETURN FROM CHFDV -- FATAL',Ierr,2)
+  ERROR STOP 'PCHFD : ERROR RETURN FROM CHFDV -- FATAL'
   !------------- LAST LINE OF PCHFD FOLLOWS ------------------------------
 END SUBROUTINE PCHFD

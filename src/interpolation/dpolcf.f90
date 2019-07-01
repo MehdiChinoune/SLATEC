@@ -1,8 +1,7 @@
 !** DPOLCF
-SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
-  !> Compute the coefficients of the polynomial fit (including
-  !            Hermite polynomial fits) produced by a previous call to
-  !            POLINT.
+PURE SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
+  !> Compute the coefficients of the polynomial fit (including Hermite polynomial fits)
+  !   produced by a previous call to POLINT.
   !***
   ! **Library:**   SLATEC
   !***
@@ -21,8 +20,7 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   !     fit (including Hermite polynomial fits ) produced by a previous
   !     call to DPLINT.  The coefficients of the polynomial, expanded
   !     about XX, are stored in the array D. The expansion is of the form
-  !     P(Z) = D(1) + D(2)*(Z-XX) +D(3)*((Z-XX)**2) + ... +
-  !                                                  D(N)*((Z-XX)**(N-1)).
+  !     P(Z) = D(1) + D(2)*(Z-XX) +D(3)*((Z-XX)**2) + ... +  D(N)*((Z-XX)**(N-1)).
   !     Between the call to DPLINT and the call to DPOLCF the variable N
   !     and the arrays X and C must not be altered.
   !
@@ -68,9 +66,9 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   !   891024  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  !
-  INTEGER :: N
-  REAL(DP) :: C(N), D(N), X(N), Xx, Work(2*N)
+  INTEGER, INTENT(IN) :: N
+  REAL(DP), INTENT(IN) :: C(N), X(N), Xx
+  REAL(DP), INTENT(OUT) :: D(N), Work(2*N)
   INTEGER :: i, im1, k, km1, km1pi, km2n, km2npi, nm1, nmkp1, npkm1
   REAL(DP) :: pone, ptwo
   !* FIRST EXECUTABLE STATEMENT  DPOLCF
@@ -103,4 +101,5 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
       D(k) = D(k) + Work(i)*D(km1pi)
     END DO
   END DO
+
 END SUBROUTINE DPOLCF

@@ -1,7 +1,6 @@
 !** RFFTB1
-SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
-  !> Compute the backward fast Fourier transform of a real
-  !            coefficient array.
+PURE SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
+  !> Compute the backward fast Fourier transform of a real coefficient array.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -90,8 +89,9 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N, Ifac(15)
-  REAL(SP) :: C(N), Ch(N), Wa(N)
+  INTEGER, INTENT(IN) :: N, Ifac(15)
+  REAL(SP), INTENT(IN) :: Wa(N)
+  REAL(SP), INTENT(INOUT) :: C(N),  Ch(N)
   INTEGER :: i, idl1, ido, ip, iw, ix2, ix3, ix4, k1, l1, l2, na, nf
   !* FIRST EXECUTABLE STATEMENT  RFFTB1
   nf = Ifac(2)

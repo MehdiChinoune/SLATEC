@@ -195,7 +195,7 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE DXBLK, ONLY : l_com, dlg10r_com, kmax_com, l2_com, mlg102_com, nbitsf_com, &
     nlg102_com, rad2l_com, radixl_com, lg102_com, radixx_com
-  USE service, ONLY : XERMSG, I1MACH
+  USE service, ONLY : I1MACH
   INTEGER :: Ierror, Irad, Nradpl, Nbits
   REAL(DP) :: Dzero
   INTEGER :: i, ic, ii, imaxex, iminex, iradx, it, j, k, kk, lg102x, log2r, lx, &
@@ -234,7 +234,7 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
     IF( iradx/=4 ) THEN
       IF( iradx/=8 ) THEN
         IF( iradx/=16 ) THEN
-          CALL XERMSG('DXSET','IMPROPER VALUE OF IRAD',201,1)
+          ERROR STOP 'DXSET : IMPROPER VALUE OF IRAD'
           Ierror = 201
           RETURN
         END IF
@@ -310,7 +310,7 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
         !
         ! CHECK SPECIAL CONDITIONS REQUIRED BY SUBROUTINES...
         IF( nrdplc>=l_com ) THEN
-          CALL XERMSG('DXSET','NRADPL >= l_com',205,1)
+          ERROR STOP 'DXSET : NRADPL >= l_com'
           Ierror = 205
           RETURN
         ELSEIF( 6*l_com<=kmax_com ) THEN
@@ -318,21 +318,21 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
           RETURN
         END IF
       ELSE
-        CALL XERMSG('DXSET','IMPROPER VALUE OF NRADPL',204,1)
+        ERROR STOP 'DXSET : IMPROPER VALUE OF NRADPL'
         Ierror = 204
         RETURN
       END IF
     ELSE
-      CALL XERMSG('DXSET','IMPROPER VALUE OF NBITS',203,1)
+      ERROR STOP 'DXSET : IMPROPER VALUE OF NBITS'
       Ierror = 203
       RETURN
     END IF
   ELSE
-    CALL XERMSG('DXSET','IMPROPER VALUE OF DZERO',202,1)
+    ERROR STOP 'DXSET : IMPROPER VALUE OF DZERO'
     Ierror = 202
     RETURN
   END IF
-  CALL XERMSG('DXSET','6*l_com > KMAX',206,1)
+  ERROR STOP 'DXSET : 6*l_com > KMAX'
   Ierror = 206
   RETURN
 END SUBROUTINE DXSET

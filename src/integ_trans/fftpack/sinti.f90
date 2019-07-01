@@ -1,5 +1,5 @@
 !** SINTI
-SUBROUTINE SINTI(N,Wsave)
+PURE SUBROUTINE SINTI(N,Wsave)
   !> Initialize a work array for SINT.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -54,8 +54,8 @@ SUBROUTINE SINTI(N,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(7*N/2+16)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(OUT) :: Wsave(7*N/2+16)
   INTEGER :: k, kf, ks, np1, ns2
   REAL(SP) :: dt, fk, pi
   !* FIRST EXECUTABLE STATEMENT  SINTI
@@ -72,4 +72,5 @@ SUBROUTINE SINTI(N,Wsave)
     Wsave(k) = 2._SP*SIN(fk*dt)
   END DO
   CALL RFFTI(np1,Wsave(kf+1))
+
 END SUBROUTINE SINTI

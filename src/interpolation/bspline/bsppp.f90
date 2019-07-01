@@ -1,7 +1,6 @@
 !** BSPPP
-SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
-  !> Convert the B-representation of a B-spline to the piecewise
-  !            polynomial (PP) form.
+PURE SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
+  !> Convert the B-representation of a B-spline to the piecewise polynomial (PP) form.
   !***
   ! **Library:**   SLATEC
   !***
@@ -62,26 +61,23 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: K, Ldc, Lxi, N
-  REAL(SP) :: A(N), C(Ldc,N-K+1), T(N+K), Work(K*(N+3)), Xi(N-K+2)
+
+  INTEGER, INTENT(IN) :: K, Ldc, N
+  INTEGER, INTENT(OUT) :: Lxi
+  REAL(SP), INTENT(IN) :: A(N), T(N+K)
+  REAL(SP), INTENT(OUT) :: C(Ldc,N-K+1), Work(K*(N+3)), Xi(N-K+2)
   INTEGER :: ileft, inev, nk
   !     DIMENSION T(N+K),XI(LXI+1),C(LDC,*)
   !     HERE, * = THE FINAL VALUE OF THE OUTPUT PARAMETER LXI.
   !* FIRST EXECUTABLE STATEMENT  BSPPP
   IF( K<1 ) THEN
-    CALL XERMSG('BSPPP','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'BSPPP : K DOES NOT SATISFY K>=1'
   ELSEIF( N<K ) THEN
-    CALL XERMSG('BSPPP','N DOES NOT SATISFY N>=K',2,1)
-    RETURN
+    ERROR STOP 'BSPPP : N DOES NOT SATISFY N>=K'
   ELSEIF( Ldc<K ) THEN
-    CALL XERMSG('BSPPP','LDC DOES NOT SATISFY LDC>=K',2,1)
-    RETURN
+    ERROR STOP 'BSPPP : LDC DOES NOT SATISFY LDC>=K'
   END IF
   CALL BSPDR(T,A,N,K,K,Work)
   Lxi = 0
@@ -95,5 +91,6 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
       CALL BSPEV(T,Work(1),N,K,K,Xi(Lxi),inev,C(1,Lxi),Work(nk))
     END IF
   END DO
+
   RETURN
 END SUBROUTINE BSPPP

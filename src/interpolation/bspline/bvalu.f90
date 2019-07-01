@@ -1,7 +1,7 @@
 !** BVALU
-REAL(SP) FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
+PURE REAL(SP) FUNCTION BVALU(T,A,N,K,Ideriv,X)
   !> Evaluate the B-representation of a B-spline at X for the
-  !            function value or any of its derivatives.
+  !  function value or any of its derivatives.
   !***
   ! **Library:**   SLATEC
   !***
@@ -47,8 +47,8 @@ REAL(SP) FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !                    to 1 the first time BVALU is called.
   !
   !         Output
-  !          INBV    - INBV contains information for efficient process-
-  !                    ing after the initial call and INBV must not
+  !          INBV    - INBV contains information for efficient processing
+  !                    after the initial call and INBV must not
   !                    be changed by the user.  Distinct splines require
   !                    distinct INBV parameters.
   !          WORK    - work vector of length 3*K.
@@ -70,53 +70,43 @@ REAL(SP) FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ideriv, Inbv, K, N
-  REAL(SP) :: A(N), T(N+K), Work(3*K), X
-  INTEGER :: i, iderp1, ihi, ihmkmj, ilo, imk, imkpj, &
+
+  INTEGER, INTENT(IN) :: Ideriv, K, N
+  REAL(SP), INTENT(IN) :: A(N), T(N+K), X
+  INTEGER :: inbv, i, iderp1, ihi, ihmkmj, ilo, imk, imkpj, &
     ipj, ip1, ip1mj, j, jj, j1, j2, kmider, kmj, km1, kpk, mflag
-  REAL(SP) :: fkmj
+  REAL(SP) :: fkmj, Work(3*K)
   !     DIMENSION T(N+K), WORK(3*K)
   !* FIRST EXECUTABLE STATEMENT  BVALU
   BVALU = 0._SP
+  inbv = 1
   IF( K<1 ) THEN
-    CALL XERMSG('BVALU','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'BVALU : K DOES NOT SATISFY K>=1'
   ELSEIF( N<K ) THEN
-    !
-    !
-    CALL XERMSG('BVALU','N DOES NOT SATISFY N>=K',2,1)
-    RETURN
+    ERROR STOP 'BVALU : N DOES NOT SATISFY N>=K'
   ELSEIF( Ideriv<0 .OR. Ideriv>=K ) THEN
-    CALL XERMSG('BVALU','IDERIV DOES NOT SATISFY 0<=IDERIV<K',2,1)
-    RETURN
+    ERROR STOP 'BVALU : IDERIV DOES NOT SATISFY 0<=IDERIV<K'
   ELSE
     kmider = K - Ideriv
     !
     !- ** FIND *I* IN (K,N) SUCH THAT T(I) <= X < T(I+1)
     !     (OR, <= T(I+1) IF T(I) < T(I+1) = T(N+1)).
     km1 = K - 1
-    CALL INTRV(T,N+1,X,Inbv,i,mflag)
+    CALL INTRV(T,N+1,X,inbv,i,mflag)
     IF( X<T(K) ) THEN
-      CALL XERMSG('BVALU','X IS N0T GREATER THAN OR EQUAL TO T(K)',2,1)
-      RETURN
+      ERROR STOP 'BVALU : X IS N0T GREATER THAN OR EQUAL TO T(K)'
     ELSE
       IF( mflag/=0 ) THEN
         IF( X>T(i) ) THEN
-          CALL XERMSG('BVALU',&
-            'X IS NOT LESS THAN OR EQUAL TO T(N+1)',2,1)
-          RETURN
+          ERROR STOP 'BVALU : X IS NOT LESS THAN OR EQUAL TO T(N+1)'
         ELSE
           DO WHILE( i/=K )
             i = i - 1
             IF( X/=T(i) ) GOTO 20
           END DO
-          CALL XERMSG('BVALU',&
-            'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
-          RETURN
+          ERROR STOP 'BVALU : A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)'
         END IF
       END IF
       !
@@ -169,5 +159,6 @@ REAL(SP) FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
     END IF
   END IF
   BVALU = Work(1)
+
   RETURN
 END FUNCTION BVALU

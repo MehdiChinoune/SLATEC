@@ -134,7 +134,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE service, ONLY : XERMSG
+
   INTEGER :: Nu, Mu1, Mu2, Mode, Ipn(Mu2-Mu1+1), Isig, Ierror
   REAL(DP) :: Darg, Dpn(Mu2-Mu1+1)
   INTEGER :: i, ip, ip1, ip2, j, k, mu
@@ -265,10 +265,10 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !
   !          ERROR PRINTOUTS AND TERMINATION.
   !
-  300  CALL XERMSG('DXNRMP','NU, MU1, MU2 or MODE not valid',212,1)
+  300 ERROR STOP 'DXNRMP : NU, MU1, MU2 or MODE not valid'
   Ierror = 212
   RETURN
-  400  CALL XERMSG('DXNRMP','DARG out of range',213,1)
+  400 ERROR STOP 'DXNRMP : DARG out of range'
   Ierror = 213
   RETURN
   !

@@ -1,7 +1,6 @@
 !** CFFTF1
-SUBROUTINE CFFTF1(N,C,Ch,Wa,Ifac)
-  !> Compute the forward transform of a complex, periodic
-  !            sequence.
+PURE SUBROUTINE CFFTF1(N,C,Ch,Wa,Ifac)
+  !> Compute the forward transform of a complex, periodic sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -78,8 +77,9 @@ SUBROUTINE CFFTF1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N, Ifac(15)
-  REAL(SP) :: C(2*N), Ch(2*N), Wa(2*N)
+  INTEGER, INTENT(IN) :: N, Ifac(15)
+  REAL(SP), INTENT(IN) :: Wa(2*N)
+  REAL(SP), INTENT(INOUT) :: C(2*N), Ch(2*N)
   INTEGER :: i, idl1, ido, idot, ip, iw, ix2, ix3, ix4, k1, l1, l2, n2, na, nac, nf
   !* FIRST EXECUTABLE STATEMENT  CFFTF1
   nf = Ifac(2)

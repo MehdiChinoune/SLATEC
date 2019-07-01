@@ -1,5 +1,5 @@
 !** SINT
-SUBROUTINE SINT(N,X,Wsave)
+PURE SUBROUTINE SINT(N,X,Wsave)
   !> Compute the sine transform of a REAL(SP), odd sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -78,8 +78,8 @@ SUBROUTINE SINT(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(7*N/2+15), X(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(INOUT) :: Wsave(7*N/2+15), X(N)
   INTEGER :: i, k, kc, kw, modn, nf, np1, ns2
   REAL(SP) :: sqrt3, t1, t2, xh
   !* FIRST EXECUTABLE STATEMENT  SINT
@@ -117,4 +117,5 @@ SUBROUTINE SINT(N,X,Wsave)
     IF( modn/=0 ) RETURN
     X(N) = -Wsave(N+1)
   END IF
+
 END SUBROUTINE SINT

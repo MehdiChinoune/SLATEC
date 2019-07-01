@@ -80,7 +80,7 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   USE interpolation, ONLY : DPPGQ8, DINTRV
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    PURE REAL(DP) FUNCTION F(X)
       IMPORT DP
       REAL(DP), INTENT(IN) :: X
     END FUNCTION F
@@ -124,7 +124,7 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
         tb = bb
         IF( left<Lxi ) tb = Xi(left+1)
         b = MIN(bb,tb)
-        CALL DPPGQ8(F,Ldc,C,Xi,Lxi,K,Id,a,b,inppv,Tol,ans,iflg)
+        CALL DPPGQ8(F,Ldc,C,Xi,Lxi,K,Id,a,b,Tol,ans,iflg)
         IF( iflg>1 ) Ierr = 2
         q = q + ans
       END DO

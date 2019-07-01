@@ -39,7 +39,7 @@ CONTAINS
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
     USE slatec, ONLY : BFQAD, BINT4, BINTK, BSPDR, BSPEV, BSPPP, BSPVD, BSPVN, &
-      BSQAD, BVALU, INTRV, PFQAD, PPQAD, PPVAL, R1MACH, control_xer, num_xer
+      BSQAD, BVALU, INTRV, PFQAD, PPQAD, PPVAL, R1MACH
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -89,7 +89,7 @@ CONTAINS
       inbv = 1
       DO i = 1, ndata
         xx = x(i)
-        bv = BVALU(t,bc,n,k,0,xx,inbv,w)
+        bv = BVALU(t,bc,n,k,0,xx)
         er = ABS(y(i)-bv)
         IF( er>tol ) THEN
           Ipass = 0
@@ -98,7 +98,7 @@ CONTAINS
         END IF
       END DO
       inbv = 1
-      bv = BVALU(t,bc,n,k,1,x(1),inbv,w)
+      bv = BVALU(t,bc,n,k,1,x(1))
       er = ABS(pi-bv)
       IF( er>tol ) THEN
         Ipass = 0
@@ -106,7 +106,7 @@ CONTAINS
         99003 FORMAT (' ERROR TEST FOR INTERPOLATION BY BINT4 NOT SATISFIED ',&
           'BY FIRST DERIVATIVE')
       END IF
-      bv = BVALU(t,bc,n,k,2,x(ndata),inbv,w)
+      bv = BVALU(t,bc,n,k,2,x(ndata))
       er = ABS(bv)
       IF( er>tol ) THEN
         Ipass = 0
@@ -119,11 +119,11 @@ CONTAINS
       !
       x1 = x(1)
       x2 = x(ndata)
-      CALL BSQAD(t,bc,n,k,x1,x2,bquad,w)
+      CALL BSQAD(t,bc,n,k,x1,x2,bquad)
       ldc = 4
       CALL BSPPP(t,bc,n,k,ldc,c,xi,lxi,w)
       CALL PPQAD(ldc,c,xi,lxi,k,x1,x2,q(1))
-      CALL BFQAD(FB,t,bc,n,k,0,x1,x2,tol,q(2),ierr,w)
+      CALL BFQAD(FB,t,bc,n,k,0,x1,x2,tol,q(2),ierr)
       CALL PFQAD(FB,ldc,c,xi,lxi,k,0,x1,x2,tol,q(3),ierr)
       !
       !       Error test for quadratures.
@@ -157,7 +157,7 @@ CONTAINS
       CALL BSPEV(t,adif,n,k,k,xx,inev,sv,w)
       atol = tol
       DO j = 1, k
-        spv = BVALU(t,bc,n,k,j-1,xx,inbv,w)
+        spv = BVALU(t,bc,n,k,j-1,xx)
         er = ABS(spv-sv(j))
         x2 = ABS(sv(j))
         IF( x2>1._SP ) er = er/x2
@@ -170,7 +170,7 @@ CONTAINS
       END DO
       atol = tol
       DO j = 1, k
-        spv = PPVAL(ldc,c,xi,lxi,k,j-1,xx,inppv)
+        spv = PPVAL(ldc,c,xi,lxi,k,j-1,xx)
         er = ABS(spv-sv(j))
         x2 = ABS(sv(j))
         IF( x2>1._SP ) er = er/x2
@@ -223,7 +223,7 @@ CONTAINS
       inbv = 1
       DO i = 1, n
         xx = x(i)
-        bv = BVALU(t,bc,n,k,0,xx,inbv,w)
+        bv = BVALU(t,bc,n,k,0,xx)
         er = ABS(y(i)-bv)
         IF( er>tol ) THEN
           Ipass = 0
@@ -235,214 +235,214 @@ CONTAINS
     !
     !     Trigger error conditions.
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
-    fatal = .FALSE.
-    num_xer = 0
-    !
-    IF( Kprint>=3 ) WRITE (Lun,99011)
-    99011 FORMAT (/' TRIGGER 52 ERROR CONDITIONS',/)
-    !
-    w(1) = 11._SP
-    w(2) = 4._SP
-    w(3) = 2._SP
-    w(4) = 0.5_SP
-    w(5) = 4._SP
-    ilo = 1
-    inev = 1
-    inbv = 1
-    CALL INTRV(t,n+1,w(4),ilo,ileft,mflag)
-    DO i = 1, 5
-      w(i) = -w(i)
-      n = INT( w(1) )
-      k = INT( w(2) )
-      id = INT( w(3) )
-      xx = w(4)
-      ldc = INT( w(5) )
-      IF( i<=4 ) THEN
-        bv = BVALU(t,bc,n,k,id,xx,inbv,qq)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-        !
-        CALL BSPEV(t,adif,n,k,id,xx,inev,sv,qq)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-        !
-        jhigh = n - 10
-        CALL BSPVN(t,jhigh,k,id,xx,ileft,sv,qq,iwork)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-        !
-        CALL BFQAD(FB,t,bc,n,k,id,xx,x2,tol,quad,ierr,qq)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-      END IF
-      !
-      IF( i/=3 .AND. i/=4 ) THEN
-        CALL BSPPP(t,bc,n,k,ldc,c,xi,lxi,qq)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-      END IF
-      !
-      IF( i<=3 ) THEN
-        CALL BSPDR(t,bc,n,k,id,adif)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-      END IF
-      !
-      IF( i/=3 .AND. i/=5 ) THEN
-        CALL BSQAD(t,bc,n,k,xx,x2,bquad,qq)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-      END IF
-      !
-      IF( i>1 ) THEN
-        CALL BSPVD(t,k,id,xx,ileft,ldc,c,qq)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-      END IF
-      !
-      IF( i<=2 ) THEN
-        CALL BINTK(x,y,t,n,k,bc,qq,adif)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-      END IF
-      !
-      IF( i/=4 ) THEN
-        kntopt = ldc - 2
-        ibcl = k - 2
-        CALL BINT4(x,y,n,ibcl,id,fbcl,fbcr,kntopt,t,bc,nn,kk,qq)
-        IF( num_xer/=2 ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-      END IF
-      w(i) = -w(i)
-    END DO
-    kntopt = 1
-    x(1) = 1._SP
-    CALL BINT4(x,y,n,ibcl,ibcr,fbcl,fbcr,kntopt,t,bc,n,k,qq)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
-    !
-    CALL BINTK(x,y,t,n,k,bc,qq,adif)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
-    !
-    x(1) = 0._SP
-    atol = 1._SP
-    kntopt = 3
-    DO i = 1, 3
-      qq(i) = -0.30_SP + 0.10_SP*(i-1)
-      qq(i+3) = 1.1_SP + 0.10_SP*(i-1)
-    END DO
-    qq(1) = 1._SP
-    CALL BINT4(x,y,ndata,1,1,fbcl,fbcr,3,t,bc,n,k,qq)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
-    !
-    CALL BFQAD(FB,t,bc,n,k,id,x1,x2,atol,quad,ierr,qq)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
-    !
-    inppv = 1
-    DO i = 1, 5
-      w(i) = -w(i)
-      lxi = INT( w(1) )
-      k = INT( w(2) )
-      id = INT( w(3) )
-      xx = w(4)
-      ldc = INT( w(5) )
-      spv = PPVAL(ldc,c,xi,lxi,k,id,xx,inppv)
-      IF( (i/=4 .AND. num_xer/=2) .OR. (i==4 .AND. num_xer/=0) ) THEN
-        Ipass = 0
-        fatal = .TRUE.
-      END IF
-      num_xer = 0
-      !
-      CALL PFQAD(FB,ldc,c,xi,lxi,k,id,xx,x2,tol,quad,ierr)
-      IF( (i/=4 .AND. num_xer/=2) .OR. (i==4 .AND. num_xer/=0) ) THEN
-        Ipass = 0
-        fatal = .TRUE.
-      END IF
-      num_xer = 0
-      !
-      IF( i/=3 ) THEN
-        CALL PPQAD(ldc,c,xi,lxi,k,xx,x2,pquad)
-        IF( (i/=4 .AND. num_xer/=2) .OR. (i==4 .AND. num_xer/=0) ) THEN
-          Ipass = 0
-          fatal = .TRUE.
-        END IF
-        num_xer = 0
-      END IF
-      !
-      w(i) = -w(i)
-    END DO
-    ldc = INT( w(5) )
-    CALL PFQAD(FB,ldc,c,xi,lxi,k,id,x1,x2,atol,quad,ierr)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
+!    kontrl = control_xer
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    fatal = .FALSE.
+!    num_xer = 0
+!    !
+!    IF( Kprint>=3 ) WRITE (Lun,99011)
+!    99011 FORMAT (/' TRIGGER 52 ERROR CONDITIONS',/)
+!    !
+!    w(1) = 11._SP
+!    w(2) = 4._SP
+!    w(3) = 2._SP
+!    w(4) = 0.5_SP
+!    w(5) = 4._SP
+!    ilo = 1
+!    inev = 1
+!    inbv = 1
+!    CALL INTRV(t,n+1,w(4),ilo,ileft,mflag)
+!    DO i = 1, 5
+!      w(i) = -w(i)
+!      n = INT( w(1) )
+!      k = INT( w(2) )
+!      id = INT( w(3) )
+!      xx = w(4)
+!      ldc = INT( w(5) )
+!      IF( i<=4 ) THEN
+!        bv = BVALU(t,bc,n,k,id,xx,inbv,qq)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!        !
+!        CALL BSPEV(t,adif,n,k,id,xx,inev,sv,qq)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!        !
+!        jhigh = n - 10
+!        CALL BSPVN(t,jhigh,k,id,xx,ileft,sv,qq,iwork)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!        !
+!        CALL BFQAD(FB,t,bc,n,k,id,xx,x2,tol,quad,ierr,qq)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!      END IF
+!      !
+!      IF( i/=3 .AND. i/=4 ) THEN
+!        CALL BSPPP(t,bc,n,k,ldc,c,xi,lxi,qq)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!      END IF
+!      !
+!      IF( i<=3 ) THEN
+!        CALL BSPDR(t,bc,n,k,id,adif)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!      END IF
+!      !
+!      IF( i/=3 .AND. i/=5 ) THEN
+!        CALL BSQAD(t,bc,n,k,xx,x2,bquad,qq)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!      END IF
+!      !
+!      IF( i>1 ) THEN
+!        CALL BSPVD(t,k,id,xx,ileft,ldc,c,qq)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!      END IF
+!      !
+!      IF( i<=2 ) THEN
+!        CALL BINTK(x,y,t,n,k,bc,qq,adif)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!      END IF
+!      !
+!      IF( i/=4 ) THEN
+!        kntopt = ldc - 2
+!        ibcl = k - 2
+!        CALL BINT4(x,y,n,ibcl,id,fbcl,fbcr,kntopt,t,bc,nn,kk,qq)
+!        IF( num_xer/=2 ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!      END IF
+!      w(i) = -w(i)
+!    END DO
+!    kntopt = 1
+!    x(1) = 1._SP
+!    CALL BINT4(x,y,n,ibcl,ibcr,fbcl,fbcr,kntopt,t,bc,n,k,qq)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
+!    !
+!    CALL BINTK(x,y,t,n,k,bc,qq,adif)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
+!    !
+!    x(1) = 0._SP
+!    atol = 1._SP
+!    kntopt = 3
+!    DO i = 1, 3
+!      qq(i) = -0.30_SP + 0.10_SP*(i-1)
+!      qq(i+3) = 1.1_SP + 0.10_SP*(i-1)
+!    END DO
+!    qq(1) = 1._SP
+!    CALL BINT4(x,y,ndata,1,1,fbcl,fbcr,3,t,bc,n,k,qq)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
+!    !
+!    CALL BFQAD(FB,t,bc,n,k,id,x1,x2,atol,quad,ierr,qq)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
+!    !
+!    inppv = 1
+!    DO i = 1, 5
+!      w(i) = -w(i)
+!      lxi = INT( w(1) )
+!      k = INT( w(2) )
+!      id = INT( w(3) )
+!      xx = w(4)
+!      ldc = INT( w(5) )
+!      spv = PPVAL(ldc,c,xi,lxi,k,id,xx)
+!      IF( (i/=4 .AND. num_xer/=2) .OR. (i==4 .AND. num_xer/=0) ) THEN
+!        Ipass = 0
+!        fatal = .TRUE.
+!      END IF
+!      num_xer = 0
+!      !
+!      CALL PFQAD(FB,ldc,c,xi,lxi,k,id,xx,x2,tol,quad,ierr)
+!      IF( (i/=4 .AND. num_xer/=2) .OR. (i==4 .AND. num_xer/=0) ) THEN
+!        Ipass = 0
+!        fatal = .TRUE.
+!      END IF
+!      num_xer = 0
+!      !
+!      IF( i/=3 ) THEN
+!        CALL PPQAD(ldc,c,xi,lxi,k,xx,x2,pquad)
+!        IF( (i/=4 .AND. num_xer/=2) .OR. (i==4 .AND. num_xer/=0) ) THEN
+!          Ipass = 0
+!          fatal = .TRUE.
+!        END IF
+!        num_xer = 0
+!      END IF
+!      !
+!      w(i) = -w(i)
+!    END DO
+!    ldc = INT( w(5) )
+!    CALL PFQAD(FB,ldc,c,xi,lxi,k,id,x1,x2,atol,quad,ierr)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
     !
-    control_xer = kontrl
-    IF( fatal ) THEN
-      IF( Kprint>=2 ) THEN
-        WRITE (Lun,99012)
-        99012 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      END IF
-    ELSEIF( Kprint>=3 ) THEN
-      WRITE (Lun,99013)
-      99013 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    END IF
+!    control_xer = kontrl
+!    IF( fatal ) THEN
+!      IF( Kprint>=2 ) THEN
+!        WRITE (Lun,99012)
+!        99012 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+!      END IF
+!    ELSEIF( Kprint>=3 ) THEN
+!      WRITE (Lun,99013)
+!      99013 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+!    END IF
     !
     !     Print PASS/FAIL message.
     !
@@ -453,7 +453,7 @@ CONTAINS
     RETURN
   END SUBROUTINE BSPCK
   !** FB
-  REAL(SP) FUNCTION FB(X)
+  PURE REAL(SP) FUNCTION FB(X)
     !> Subsidiary to BSPCK.
     !***
     ! **Library:**   SLATEC
@@ -469,7 +469,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Added TYPE statement.  (WRB)
 
-    REAL(SP),INTENT(IN) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  FB
     FB = 1._SP
   END FUNCTION FB

@@ -1,7 +1,6 @@
 !** RFFTB
-SUBROUTINE RFFTB(N,R,Wsave)
-  !> Compute the backward fast Fourier transform of a real
-  !            coefficient array.
+PURE SUBROUTINE RFFTB(N,R,Wsave)
+  !> Compute the backward fast Fourier transform of a real coefficient array.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -95,12 +94,13 @@ SUBROUTINE RFFTB(N,R,Wsave)
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: R(N), Wsave(2*N+15)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(INOUT) :: R(N), Wsave(2*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  RFFTB
   IF( N==1 ) RETURN
   ifac = INT( Wsave(2*N+1:2*N+15) )
   CALL RFFTB1(N,R,Wsave,Wsave(N+1),ifac)
   Wsave(2*N+1:2*N+15) = ifac
+
 END SUBROUTINE RFFTB

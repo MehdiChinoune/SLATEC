@@ -1,7 +1,6 @@
 !** BFQAD
-SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
-  !> Compute the integral of a product of a function and a
-  !            derivative of a B-spline.
+PURE SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr)
+  !> Compute the integral of a product of a function and a derivative of a B-spline.
   !***
   ! **Library:**   SLATEC
   !***
@@ -68,32 +67,32 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
+
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    PURE REAL(SP) FUNCTION F(X)
       IMPORT SP
       REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Id, Ierr, K, N
-  REAL(SP) :: Bcoef(N), Quad, T(N+K), Tol, Work(3*K), X1, X2
+  INTEGER, INTENT(IN) :: Id, K, N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: Bcoef(N), T(N+K), X1, X2
+  REAL(SP), INTENT(INOUT) :: Tol
+  REAL(SP), INTENT(OUT) :: Quad
   INTEGER :: inbv, iflg, ilo, il1, il2, left, mflag, npk, np1
   REAL(SP) :: a, aa, ans, b, bb, q, ta, tb, wtol
   !* FIRST EXECUTABLE STATEMENT  BFQAD
   Ierr = 1
   Quad = 0._SP
   IF( K<1 ) THEN
-    CALL XERMSG('BFQAD','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'BFQAD : K DOES NOT SATISFY K>=1'
   ELSEIF( N<K ) THEN
-    CALL XERMSG('BFQAD','N DOES NOT SATISFY N>=K',2,1)
-    RETURN
+    ERROR STOP 'BFQAD : N DOES NOT SATISFY N>=K'
   ELSEIF( Id<0 .OR. Id>=K ) THEN
-    CALL XERMSG('BFQAD','ID DOES NOT SATISFY 0 <= ID < K',2,1)
-    RETURN
+    ERROR STOP 'BFQAD : ID DOES NOT SATISFY 0 <= ID < K'
   ELSE
     wtol = R1MACH(4)
     IF( Tol>=wtol .AND. Tol<=0.1_SP ) THEN
@@ -117,7 +116,7 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
             IF( ta/=tb ) THEN
               a = MAX(aa,ta)
               b = MIN(bb,tb)
-              CALL BSGQ8(F,T,Bcoef,N,K,Id,a,b,inbv,Tol,ans,iflg,Work)
+              CALL BSGQ8(F,T,Bcoef,N,K,Id,a,b,Tol,ans,iflg)
               IF( iflg>1 ) Ierr = 2
               q = q + ans
             END IF
@@ -127,14 +126,11 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
           RETURN
         END IF
       END IF
-      !
-      !
-      CALL XERMSG('BFQAD',&
-        'X1 OR X2 OR BOTH DO NOT SATISFY T(K)<=X<=T(N+1)',2,1)
+      ERROR STOP 'BFQAD : X1 OR X2 OR BOTH DO NOT SATISFY T(K)<=X<=T(N+1)'
       RETURN
     END IF
   END IF
-  CALL XERMSG('BFQAD',&
-    'TOL IS LESS THAN THE SINGLE PRECISION TOLERANCE OR GREATER THAN 0.1',2,1)
+  ERROR STOP 'BFQAD : TOL IS LESS THAN THE SINGLE PRECISION TOLERANCE OR GREATER THAN 0.1'
+
   RETURN
 END SUBROUTINE BFQAD

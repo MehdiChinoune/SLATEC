@@ -1,8 +1,7 @@
 !** PCHSP
 SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
-  !> Set derivatives needed to determine the Hermite represen-
-  !            tation of the cubic spline interpolant to given data, with
-  !            specified boundary conditions.
+  !> Set derivatives needed to determine the Hermite representation of the cubic
+  !  spline interpolant to given data, with specified boundary conditions.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -10,8 +9,8 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !***
   ! **Type:**      SINGLE PRECISION (PCHSP-S, DPCHSP-D)
   !***
-  ! **Keywords:**  CUBIC HERMITE INTERPOLATION, PCHIP,
-  !             PIECEWISE CUBIC INTERPOLATION, SPLINE INTERPOLATION
+  ! **Keywords:**  CUBIC HERMITE INTERPOLATION, PCHIP, PIECEWISE CUBIC INTERPOLATION,
+  !                SPLINE INTERPOLATION
   !***
   ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
@@ -144,7 +143,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  USE service, ONLY : XERMSG
+
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -154,8 +153,10 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: Ic(2), N, Incfd, Nwk, Ierr
-  REAL(SP) :: Vc(2), X(N), F(Incfd,N), D(Incfd,N), Wk(2,Nwk)
+  INTEGER, INTENT(IN) :: Ic(2), N, Incfd, Nwk
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: Vc(2), X(N), F(Incfd,N)
+  REAL(SP), INTENT(OUT) :: D(Incfd,N), Wk(2,Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -173,15 +174,13 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
     !
     !     N<2 RETURN.
     Ierr = -1
-    CALL XERMSG('PCHSP','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
-    RETURN
+    ERROR STOP 'PCHSP : NUMBER OF DATA POINTS LESS THAN TWO'
   ELSE
     IF( Incfd<1 ) THEN
       !
       !     INCFD<1 RETURN.
       Ierr = -2
-      CALL XERMSG('PCHSP','INCREMENT LESS THAN ONE',Ierr,1)
-      RETURN
+      ERROR STOP 'PCHSP : INCREMENT LESS THAN ONE'
     ELSE
       DO j = 2, N
         IF( X(j)<=X(j-1) ) GOTO 20
@@ -196,8 +195,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !     IC OUT OF RANGE RETURN.
         Ierr = Ierr - 3
-        CALL XERMSG('PCHSP','IC OUT OF RANGE',Ierr,1)
-        RETURN
+        ERROR STOP 'PCHSP : IC OUT OF RANGE'
         !
         !  FUNCTION DEFINITION IS OK -- GO ON.
         !
@@ -205,8 +203,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !     NWK TOO SMALL RETURN.
         Ierr = -7
-        CALL XERMSG('PCHSP','WORK ARRAY TOO SMALL',Ierr,1)
-        RETURN
+        ERROR STOP 'PCHSP : WORK ARRAY TOO SMALL'
       ELSE
         !
         !  COMPUTE FIRST DIFFERENCES OF X SEQUENCE AND STORE IN WK(1,.). ALSO,
@@ -234,9 +231,8 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             IF( j<ibeg ) stemp(j) = Wk(2,indexx)
           END DO
           !                 --------------------------------
-          D(1,1) = PCHDF(ibeg,xtemp,stemp,Ierr)
+          D(1,1) = PCHDF(ibeg,xtemp,stemp)
           !                 --------------------------------
-          IF( Ierr/=0 ) GOTO 100
           ibeg = 1
         END IF
         !
@@ -251,9 +247,8 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             IF( j<iend ) stemp(j) = Wk(2,indexx+1)
           END DO
           !                 --------------------------------
-          D(1,N) = PCHDF(iend,xtemp,stemp,Ierr)
+          D(1,N) = PCHDF(iend,xtemp,stemp)
           !                 --------------------------------
-          IF( Ierr/=0 ) GOTO 100
           iend = 1
         END IF
         !
@@ -277,8 +272,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             !           NOT-A-KNOT CONDITION AT LEFT END AND N > 2.
             Wk(2,1) = Wk(1,3)
             Wk(1,1) = Wk(1,2) + Wk(1,3)
-            D(1,1) = ((Wk(1,2)+two*Wk(1,1))*Wk(2,2)*Wk(1,3)+Wk(1,2)&
-              **2*Wk(2,3))/Wk(1,1)
+            D(1,1) = ((Wk(1,2)+two*Wk(1,1))*Wk(2,2)*Wk(1,3)+Wk(1,2)**2*Wk(2,3))/Wk(1,1)
           END IF
         ELSEIF( ibeg==1 ) THEN
           !        SLOPE PRESCRIBED AT LEFT END.
@@ -335,8 +329,8 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             !           KNOT AT LEFT END POINT.
             g = Wk(1,N-1) + Wk(1,N)
             !           DO NOT NEED TO CHECK FOLLOWING DENOMINATORS (X-DIFFERENCES).
-            D(1,N) = ((Wk(1,N)+two*g)*Wk(2,N)*Wk(1,N-1)+Wk(1,N)&
-              **2*(F(1,N-1)-F(1,N-2))/Wk(1,N-1))/g
+            D(1,N) = ((Wk(1,N)+two*g)*Wk(2,N)*Wk(1,N-1)+Wk(1,N)**2*(F(1,N-1)-F(1,N-2))&
+              /Wk(1,N-1))/g
             IF( Wk(2,N-1)==zero ) GOTO 50
             g = -g/Wk(2,N-1)
             Wk(2,N) = Wk(1,N-1)
@@ -365,21 +359,15 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
       !
       !     X-ARRAY NOT STRICTLY INCREASING.
       20  Ierr = -3
-      CALL XERMSG('PCHSP','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
-      RETURN
+      ERROR STOP 'PCHSP : X-ARRAY NOT STRICTLY INCREASING'
     END IF
     !
     !     SINGULAR SYSTEM.
     !   *** THEORETICALLY, THIS CAN ONLY OCCUR IF SUCCESSIVE X-VALUES   ***
     !   *** ARE EQUAL, WHICH SHOULD ALREADY HAVE BEEN CAUGHT (IERR=-3). ***
     50  Ierr = -8
-    CALL XERMSG('PCHSP','SINGULAR LINEAR SYSTEM',Ierr,1)
-    RETURN
+    ERROR STOP 'PCHSP : SINGULAR LINEAR SYSTEM'
   END IF
   !
-  !     ERROR RETURN FROM PCHDF.
-  !   *** THIS CASE SHOULD NEVER OCCUR ***
-  100  Ierr = -9
-  CALL XERMSG('PCHSP','ERROR RETURN FROM PCHDF',Ierr,1)
   !------------- LAST LINE OF PCHSP FOLLOWS ------------------------------
 END SUBROUTINE PCHSP

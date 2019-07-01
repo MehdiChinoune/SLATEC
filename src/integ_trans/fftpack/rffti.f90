@@ -1,5 +1,5 @@
 !** RFFTI
-SUBROUTINE RFFTI(N,Wsave)
+PURE SUBROUTINE RFFTI(N,Wsave)
   !> Initialize a work array for RFFTF and RFFTB.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -61,12 +61,13 @@ SUBROUTINE RFFTI(N,Wsave)
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(2*N+15)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(OUT) :: Wsave(2*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  RFFTI
   IF( N==1 ) RETURN
   ifac = INT( Wsave(2*N+1:2*N+15) )
   CALL RFFTI1(N,Wsave(N+1),ifac)
   Wsave(2*N+1:2*N+15) = ifac
+
 END SUBROUTINE RFFTI

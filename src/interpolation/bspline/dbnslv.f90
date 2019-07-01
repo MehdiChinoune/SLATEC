@@ -1,5 +1,5 @@
 !** DBNSLV
-SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
+PURE SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !> Subsidiary to DBINT4 and DBINTK
   !***
   ! **Library:**   SLATEC
@@ -47,8 +47,9 @@ SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER :: Nbandl, Nbandu, Nrow, Nroww
-  REAL(DP) :: W(Nroww,Nrow), B(Nrow)
+  INTEGER, INTENT(IN) :: Nbandl, Nbandu, Nrow, Nroww
+  REAL(DP), INTENT(IN) :: W(Nroww,Nrow)
+  REAL(DP), INTENT(INOUT) :: B(Nrow)
   INTEGER :: i, j, jmax, middle, nrowm1
   !* FIRST EXECUTABLE STATEMENT  DBNSLV
   middle = Nbandu + 1
@@ -93,4 +94,5 @@ SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
       RETURN
     END IF
   END IF
+
 END SUBROUTINE DBNSLV

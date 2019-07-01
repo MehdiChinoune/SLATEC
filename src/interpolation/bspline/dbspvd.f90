@@ -1,7 +1,7 @@
 !** DBSPVD
-SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
+PURE SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !> Calculate the value and all derivatives of order less than
-  !            NDERIV of all basis functions which do not vanish at X.
+  !  NDERIV of all basis functions which do not vanish at X.
   !***
   ! **Library:**   SLATEC
   !***
@@ -78,9 +78,10 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ldvnik, Ileft, K, Nderiv
-  REAL(DP) :: T(Ileft+K), Vnikx(Ldvnik,Nderiv), Work((K+1)*(K+2)/2), X
+
+  INTEGER, INTENT(IN) :: Ldvnik, Ileft, K, Nderiv
+  REAL(DP), INTENT(IN) :: T(Ileft+K), X
+  REAL(DP), INTENT(OUT) :: Vnikx(Ldvnik,Nderiv), Work((K+1)*(K+2)/2)
   INTEGER :: iwork, i, ideriv, ipkmd, j, jj, jlow, jm, jp1mid, kmd, kp1, l, &
     ldummy, m, mhigh
   REAL(DP) :: factor, fkmd, v
@@ -90,16 +91,11 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !     WORK(1) AND WORK((K+1)*(K+2)/2) ARE NOT USED.
   !* FIRST EXECUTABLE STATEMENT  DBSPVD
   IF( K<1 ) THEN
-    !
-    !
-    CALL XERMSG('DBSPVD','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'DBSPVD : K DOES NOT SATISFY K>=1'
   ELSEIF( Nderiv<1 .OR. Nderiv>K ) THEN
-    CALL XERMSG('DBSPVD','NDERIV DOES NOT SATISFY 1<=NDERIV<=K',2,1)
-    RETURN
+    ERROR STOP 'DBSPVD : NDERIV DOES NOT SATISFY 1<=NDERIV<=K'
   ELSEIF( Ldvnik<K ) THEN
-    CALL XERMSG('DBSPVD','LDVNIK DOES NOT SATISFY LDVNIK>=K',2,1)
-    RETURN
+    ERROR STOP 'DBSPVD : LDVNIK DOES NOT SATISFY LDVNIK>=K'
   ELSE
     ideriv = Nderiv
     kp1 = K + 1
@@ -163,5 +159,6 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
       END DO
     END IF
   END IF
+
   RETURN
 END SUBROUTINE DBSPVD

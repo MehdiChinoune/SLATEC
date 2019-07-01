@@ -1,7 +1,6 @@
 !** PASSF5
-SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
-  !> Calculate the fast Fourier transform of subvectors of
-  !            length five.
+PURE SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
+  !> Calculate the fast Fourier transform of subvectors of length five.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -24,9 +23,10 @@ SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Ido, L1
+  INTEGER, INTENT(IN) :: Ido, L1
+  REAL(SP), INTENT(IN) :: Cc(Ido,5,L1), Wa1(Ido), Wa2(Ido), Wa3(Ido), Wa4(Ido)
+  REAL(SP), INTENT(OUT) :: Ch(Ido,L1,5)
   INTEGER :: i, k
-  REAL(SP) :: Cc(Ido,5,L1), Ch(Ido,L1,5), Wa1(Ido), Wa2(Ido), Wa3(Ido), Wa4(Ido)
   REAL(SP) :: ci2, ci3, ci4, ci5, cr2, cr3, cr4, cr5, di2, di3, di4, di5, dr2, dr3, &
     dr4, dr5, pi, ti11, ti12, ti2, ti3, ti4, ti5, tr11, tr12, tr2, tr3, tr4, tr5
   !* FIRST EXECUTABLE STATEMENT  PASSF5
@@ -144,5 +144,6 @@ SUBROUTINE PASSF5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
       Ch(i,k,5) = Wa4(i-1)*di5 - Wa4(i)*dr5
     END DO
   END DO
+
   RETURN
 END SUBROUTINE PASSF5

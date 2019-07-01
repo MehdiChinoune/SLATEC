@@ -1,5 +1,5 @@
 !** BNSLV
-SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
+PURE SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !> Subsidiary to BINT4 and BINTK
   !***
   ! **Library:**   SLATEC
@@ -45,8 +45,9 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER :: Nbandl, Nbandu, Nrow, Nroww
-  REAL(SP) :: W(Nroww,Nrow), B(Nrow)
+  INTEGER, INTENT(IN) :: Nbandl, Nbandu, Nrow, Nroww
+  REAL(SP), INTENT(IN) :: W(Nroww,Nrow)
+  REAL(SP), INTENT(INOUT) :: B(Nrow)
   INTEGER :: i, j, jmax, middle, nrowm1
   !* FIRST EXECUTABLE STATEMENT  BNSLV
   middle = Nbandu + 1
@@ -84,11 +85,12 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
         END IF
       END DO
     ELSE
-      !                                A  IS LOWER TRIANGULAR .
+      !  A  IS LOWER TRIANGULAR .
       DO i = 1, Nrow
         B(i) = B(i)/W(1,i)
       END DO
       RETURN
     END IF
   END IF
+
 END SUBROUTINE BNSLV

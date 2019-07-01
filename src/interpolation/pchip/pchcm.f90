@@ -1,5 +1,5 @@
 !** PCHCM
-SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
+PURE SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !> Check a cubic Hermite function for monotonicity.
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -123,7 +123,7 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !   890407  Modified DESCRIPTION to LDOC format.
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  USE service, ONLY : XERMSG
+
   !
   !  Fortran intrinsics used:  ISIGN.
   !  Other routines used:  CHFCM, XERMSG.
@@ -145,9 +145,10 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd, Ismon(N), Ierr
-  REAL(SP) :: X(N), F(Incfd,N), D(Incfd,N)
-  LOGICAL :: Skip
+  INTEGER, INTENT(IN) :: N, Incfd
+  INTEGER, INTENT(OUT) :: Ismon(N), Ierr
+  REAL(SP), INTENT(IN) :: X(N), F(Incfd,N), D(Incfd,N)
+  LOGICAL, INTENT(INOUT) :: Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -165,14 +166,12 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
       !
       !     N<2 RETURN.
       Ierr = -1
-      CALL XERMSG('PCHCM','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
-      RETURN
+      ERROR STOP 'PCHCM : NUMBER OF DATA POINTS LESS THAN TWO'
     ELSEIF( Incfd<1 ) THEN
       !
       !     INCFD<1 RETURN.
       Ierr = -2
-      CALL XERMSG('PCHCM','INCREMENT LESS THAN ONE',Ierr,1)
-      RETURN
+      ERROR STOP 'PCHCM : INCREMENT LESS THAN ONE'
     ELSE
       DO i = 2, N
         IF( X(i)<=X(i-1) ) GOTO 100
@@ -230,6 +229,6 @@ SUBROUTINE PCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
   100  Ierr = -3
-  CALL XERMSG('PCHCM','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
+  ERROR STOP 'PCHCM : X-ARRAY NOT STRICTLY INCREASING'
   !------------- LAST LINE OF PCHCM FOLLOWS ------------------------------
 END SUBROUTINE PCHCM

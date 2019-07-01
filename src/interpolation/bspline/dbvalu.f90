@@ -1,7 +1,7 @@
 !** DBVALU
-REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
+REAL(DP) PURE FUNCTION DBVALU(T,A,N,K,Ideriv,X)
   !> Evaluate the B-representation of a B-spline at X for the
-  !            function value or any of its derivatives.
+  !  function value or any of its derivatives.
   !***
   ! **Library:**   SLATEC
   !***
@@ -73,51 +73,40 @@ REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: Ideriv, Inbv, K, N
-  REAL(DP) :: A(N), T(N+K), Work(3*K), X
-  INTEGER :: i, iderp1, ihi, ihmkmj, ilo, imk, imkpj, &
+
+  INTEGER, INTENT(IN) :: Ideriv, K, N
+  REAL(DP), INTENT(IN) :: A(N), T(N+K), X
+  INTEGER :: i, iderp1, ihi, ihmkmj, ilo, imk, imkpj, inbv, &
     ipj, ip1, ip1mj, j, jj, j1, j2, kmider, kmj, km1, kpk, mflag
-  REAL(DP) :: fkmj
+  REAL(DP) :: fkmj, Work(3*K)
   !* FIRST EXECUTABLE STATEMENT  DBVALU
   DBVALU = 0._DP
+  inbv = 1
   IF( K<1 ) THEN
-    CALL XERMSG('DBVALU','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'DBVALU : K DOES NOT SATISFY K>=1'
   ELSEIF( N<K ) THEN
-    !
-    !
-    CALL XERMSG('DBVALU','N DOES NOT SATISFY N>=K',2,1)
-    RETURN
+    ERROR STOP 'DBVALU : N DOES NOT SATISFY N>=K'
   ELSEIF( Ideriv<0 .OR. Ideriv>=K ) THEN
-    CALL XERMSG('DBVALU','IDERIV DOES NOT SATISFY 0<=IDERIV<K',2,1)
-    RETURN
+    ERROR STOP 'DBVALU : IDERIV DOES NOT SATISFY 0<=IDERIV<K'
   ELSE
     kmider = K - Ideriv
     !
     !- ** FIND *I* IN (K,N) SUCH THAT T(I) <= X < T(I+1)
     !     (OR, <= T(I+1) IF T(I) < T(I+1) = T(N+1)).
     km1 = K - 1
-    CALL DINTRV(T,N+1,X,Inbv,i,mflag)
+    CALL DINTRV(T,N+1,X,inbv,i,mflag)
     IF( X<T(K) ) THEN
-      CALL XERMSG('DBVALU',&
-        'X IS N0T GREATER THAN OR EQUAL TO T(K)',2,1)
-      RETURN
+      ERROR STOP 'DBVALU : X IS N0T GREATER THAN OR EQUAL TO T(K)'
     ELSE
       IF( mflag/=0 ) THEN
         IF( X>T(i) ) THEN
-          CALL XERMSG('DBVALU',&
-            'X IS NOT LESS THAN OR EQUAL TO T(N+1)',2,1)
-          RETURN
+          ERROR STOP 'DBVALU : X IS NOT LESS THAN OR EQUAL TO T(N+1)'
         ELSE
           DO WHILE( i/=K )
             i = i - 1
             IF( X/=T(i) ) GOTO 20
           END DO
-          CALL XERMSG('DBVALU',&
-            'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
-          RETURN
+          ERROR STOP 'DBVALU : A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)'
         END IF
       END IF
       !
@@ -170,5 +159,6 @@ REAL(DP) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
     END IF
   END IF
   DBVALU = Work(1)
+
   RETURN
 END FUNCTION DBVALU

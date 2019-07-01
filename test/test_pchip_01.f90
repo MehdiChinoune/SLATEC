@@ -553,8 +553,7 @@ CONTAINS
   END SUBROUTINE EVERCK
   !** EVPCCK
   SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
-    !> Test usage of increment argument in PCHFD and PCHFE for
-    !            PCHQK1.
+    !> Test usage of increment argument in PCHFD and PCHFE for PCHQK1.
     !***
     ! **Library:**   SLATEC (PCHIP)
     !***
@@ -995,8 +994,8 @@ CONTAINS
     !
     !  TEST ERROR RETURNS.
     !
-    CALL EVERCK(Lun,Kprint,fail)
-    IF( fail ) ifail = ifail + 4
+!    CALL EVERCK(Lun,Kprint,fail)
+!    IF( fail ) ifail = ifail + 4
     !
     !  PRINT SUMMARY AND TERMINATE.
     !     At this point, IFAIL has the following value:
@@ -1093,7 +1092,6 @@ CONTAINS
     !
     INTEGER :: i, ierr, ifail
     REAL(SP) :: calc, d(7), errmax, error, f(7), machep, tol, true
-    LOGICAL :: fail, skip
     !
     !  INITIALIZE.
     !
@@ -1105,8 +1103,6 @@ CONTAINS
       -4._SP, 3._SP, -5._SP, -5._SP, -6._SP, 6._SP, -1.5_SP, -1.5_SP, -3._SP, 3._SP, 0.5_SP ]
     REAL(SP), PARAMETER :: b(17) = [ 3._SP, -3._SP, 1._SP, 2._SP, 5._SP, -0.5_SP, &
       4._SP, 5._SP, -3._SP, 5._SP, -5._SP, 5._SP, -0.5_SP, -1._SP, -2.5_SP, 3.5_SP, 0.5_SP ]
-    INTEGER, PARAMETER :: ierexp(17) = [ 0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, &
-      0, 0, 0, 0 ]
     !
     !  SET PASS/FAIL TOLERANCE.
     !
@@ -1139,26 +1135,20 @@ CONTAINS
     !
     ifail = 0
     !
-    skip = .FALSE.
+    ierr = 0
     DO i = 1, npairs
       !               ---------------------------------------------
-      calc = PCHIA(n,x,f,d,1,skip,a(i),b(i),ierr)
+      calc = PCHIA(n,x,f,d,1,a(i),b(i))
       !               ---------------------------------------------
       IF( ierr>=0 ) THEN
-        fail = ierr/=ierexp(i)
         true = ANTDER(b(i)) - ANTDER(a(i))
         error = calc - true
         IF( Kprint>=3 ) THEN
-          IF( fail ) THEN
-            WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error, ierexp(i)
-            99005 FORMAT (2F6.1,I5,1P,2E20.10,E15.5,'  (',I1,') *****')
-          ELSE
-            WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
-          END IF
+          WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
         END IF
         !
         error = ABS(error)/MAX(one,ABS(true))
-        IF( fail .OR. (error>tol) ) ifail = ifail + 1
+        IF( error>tol ) ifail = ifail + 1
         IF( i==1 ) THEN
           errmax = error
         ELSE
@@ -1174,8 +1164,7 @@ CONTAINS
     !
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99006) errmax, tol
-      99006 FORMAT (/'  MAXIMUM RELATIVE ERROR IS:',1P,E15.5,',   TOLERANCE:',1P,&
-        E15.5)
+      99006 FORMAT (/'  MAXIMUM RELATIVE ERROR IS:',1P,E15.5,',   TOLERANCE:',1P,E15.5)
       IF( ifail/=0 ) WRITE (Lun,99007) ifail
       99007 FORMAT (/' *** TROUBLE ***',I5,' INTEGRATION TESTS FAILED.')
     END IF
@@ -1866,7 +1855,7 @@ CONTAINS
     INTEGER :: i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
     INTEGER, PARAMETER :: N = 9
     REAL(SP) :: bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, &
-      fermax, t(2*N+4), terr, termax, tol, tolz, tsave(2*N+4), work(16*N)
+      fermax, t(2*N+4), terr, termax, tol, tolz, tsave(2*N+4)
     REAL(SP), PARAMETER :: ZERO = 0._SP
     LOGICAL :: fail
     !
@@ -1921,10 +1910,10 @@ CONTAINS
           j = 1
         END IF
         DO i = 1, N
-          fcalc = BVALU(t,bcoef,ndim,k,0,x(i),inbv,work)
+          fcalc = BVALU(t,bcoef,ndim,k,0,x(i))
           ferr = f(i) - fcalc
           fermax = MAX(fermax,RELERR(ferr,f(i)))
-          dcalc = BVALU(t,bcoef,ndim,k,1,x(i),inbv,work)
+          dcalc = BVALU(t,bcoef,ndim,k,1,x(i))
           derr = d(i) - dcalc
           dermax = MAX(dermax,RELERR(derr,d(i)))
           IF( Kprint>=3 ) THEN

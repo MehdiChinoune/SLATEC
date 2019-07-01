@@ -1,7 +1,7 @@
 !** DBFQAD
-SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
-  !> Compute the integral of a product of a function and a
-  !            derivative of a K-th order B-spline.
+PURE SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr)
+  !> Compute the integral of a product of a function and a derivative
+  !  of a K-th order B-spline.
   !***
   ! **Library:**   SLATEC
   !***
@@ -60,8 +60,7 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !
   !***
   ! **References:**  D. E. Amos, Quadrature subroutines for splines and
-  !                 B-splines, Report SAND79-1825, Sandia Laboratories,
-  !                 December 1979.
+  !                 B-splines, Report SAND79-1825, Sandia Laboratories, December 1979.
   !***
   ! **Routines called:**  D1MACH, DBSGQ8, DINTRV, XERMSG
 
@@ -71,32 +70,31 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section. (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : D1MACH
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    PURE REAL(DP) FUNCTION F(X)
       IMPORT DP
       REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Id, Ierr, K, N
-  REAL(DP) :: Bcoef(N), Quad, T(N+K), Tol, Work(3*K), X1, X2
+  INTEGER, INTENT(IN) :: Id, K, N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: Bcoef(N), T(N+K), X1, X2
+  REAL(DP), INTENT(INOUT) :: Tol
+  REAL(DP), INTENT(OUT) :: Quad
   INTEGER :: inbv, iflg, ilo, il1, il2, left, mflag, npk, np1
   REAL(DP) :: a, aa, ans, b, bb, q, ta, tb, wtol
   !* FIRST EXECUTABLE STATEMENT  DBFQAD
   Ierr = 1
   Quad = 0._DP
   IF( K<1 ) THEN
-    CALL XERMSG('DBFQAD','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'DBFQAD : K DOES NOT SATISFY K>=1'
   ELSEIF( N<K ) THEN
-    CALL XERMSG('DBFQAD','N DOES NOT SATISFY N>=K',2,1)
-    RETURN
+    ERROR STOP 'DBFQAD : N DOES NOT SATISFY N>=K'
   ELSEIF( Id<0 .OR. Id>=K ) THEN
-    CALL XERMSG('DBFQAD','ID DOES NOT SATISFY 0<=ID<K',2,1)
-    RETURN
+    ERROR STOP 'DBFQAD : ID DOES NOT SATISFY 0<=ID<K'
   ELSE
     wtol = D1MACH(4)
     wtol = MAX(wtol,1.E-18_DP)
@@ -121,7 +119,7 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
             IF( ta/=tb ) THEN
               a = MAX(aa,ta)
               b = MIN(bb,tb)
-              CALL DBSGQ8(F,T,Bcoef,N,K,Id,a,b,inbv,Tol,ans,iflg,Work)
+              CALL DBSGQ8(F,T,Bcoef,N,K,Id,a,b,Tol,ans,iflg)
               IF( iflg>1 ) Ierr = 2
               q = q + ans
             END IF
@@ -131,13 +129,10 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
           RETURN
         END IF
       END IF
-      !
-      !
-      CALL XERMSG('DBFQAD',&
-        'X1 OR X2 OR BOTH DO NOT SATISFY T(K)<=X<=T(N+1)',2,1)
-      RETURN
+      ERROR STOP 'DBFQAD : X1 OR X2 OR BOTH DO NOT SATISFY T(K)<=X<=T(N+1)'
     END IF
   END IF
-  CALL XERMSG('DBFQAD','TOL IS LESS DTOL OR GREATER THAN 0.1',2,1)
+  ERROR STOP 'DBFQAD : TOL IS LESS DTOL OR GREATER THAN 0.1'
+
   RETURN
 END SUBROUTINE DBFQAD

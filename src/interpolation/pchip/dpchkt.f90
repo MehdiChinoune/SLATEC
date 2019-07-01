@@ -1,5 +1,5 @@
 !** DPCHKT
-SUBROUTINE DPCHKT(N,X,Knotyp,T)
+PURE SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !> Compute B-spline knot sequence for DPCHBS.
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -51,8 +51,9 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !
   !  Declare arguments.
   !
-  INTEGER :: N, Knotyp
-  REAL(DP) :: X(N), T(2*N+4)
+  INTEGER, INTENT(IN) :: N, Knotyp
+  REAL(DP), INTENT(IN) :: X(N)
+  REAL(DP), INTENT(OUT) :: T(2*N+4)
   !
   !  Declare local variables.
   !

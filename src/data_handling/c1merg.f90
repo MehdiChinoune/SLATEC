@@ -1,7 +1,6 @@
 !** C1MERG
-SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
-  !> Merge two strings of complex numbers.  Each string is
-  !            ascending by the real part.
+PURE SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
+  !> Merge two strings of complex numbers.  Each string is ascending by the real part.
   !***
   ! **Library:**   SLATEC
   !***
@@ -30,8 +29,8 @@ SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
   !           which was modified earlier due to compiler problems on
   !           the IBM RS6000.  (RWC)
   !   920130  Code name changed from CMPMRG to C1MERG.  (WRB)
-  INTEGER :: I1, I2, I3, M1, M2
-  COMPLEX(SP) :: Tcos( MAX(I1+M1,I2+M2,I3+M1+M2) )
+  INTEGER, INTENT(IN) :: I1, I2, I3, M1, M2
+  COMPLEX(SP), INTENT(INOUT) :: Tcos( MAX(I1+M1,I2+M2,I3+M1+M2) )
   !
   INTEGER :: j1, j2, j3
   !
@@ -70,4 +69,5 @@ SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
     END IF
     j3 = j3 + 1
   END DO
+
 END SUBROUTINE C1MERG

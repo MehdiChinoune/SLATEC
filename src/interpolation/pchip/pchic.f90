@@ -1,9 +1,9 @@
 !** PCHIC
-SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
+PURE SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !> Set derivatives needed to determine a piecewise monotone
-  !            piecewise cubic Hermite interpolant to given data.
-  !            User control is available over boundary conditions and/or
-  !            treatment of points where monotonicity switches direction.
+  !  piecewise cubic Hermite interpolant to given data.
+  !  User control is available over boundary conditions and/or
+  !  treatment of points where monotonicity switches direction.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -205,7 +205,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  USE service, ONLY : XERMSG
+
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -218,8 +218,10 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: Ic(2), N, Incfd, Nwk, Ierr
-  REAL(SP) :: Vc(2), Switch, X(N), F(Incfd,N), D(Incfd,N), Wk(Nwk)
+  INTEGER, INTENT(IN) :: Ic(2), N, Incfd, Nwk
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: Vc(2), Switch, X(N), F(Incfd,N)
+  REAL(SP), INTENT(OUT) :: D(Incfd,N), Wk(Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -235,14 +237,12 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
     !
     !     N<2 RETURN.
     Ierr = -1
-    CALL XERMSG('PCHIC','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
-    RETURN
+    ERROR STOP 'PCHIC : NUMBER OF DATA POINTS LESS THAN TWO'
   ELSEIF( Incfd<1 ) THEN
     !
     !     INCFD<1 RETURN.
     Ierr = -2
-    CALL XERMSG('PCHIC','INCREMENT LESS THAN ONE',Ierr,1)
-    RETURN
+    ERROR STOP 'PCHIC : INCREMENT LESS THAN ONE'
   ELSE
     DO i = 2, N
       IF( X(i)<=X(i-1) ) GOTO 100
@@ -257,8 +257,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
       !
       !     IC OUT OF RANGE RETURN.
       Ierr = Ierr - 3
-      CALL XERMSG('PCHIC','IC OUT OF RANGE',Ierr,1)
-      RETURN
+      ERROR STOP 'PCHIC : IC OUT OF RANGE'
     ELSE
       !
       !  FUNCTION DEFINITION IS OK -- GO ON.
@@ -268,8 +267,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !     NWK < 2*(N-1)  RETURN.
         Ierr = -7
-        CALL XERMSG('PCHIC','WORK ARRAY TOO SMALL',Ierr,1)
-        RETURN
+        ERROR STOP 'PCHIC : WORK ARRAY TOO SMALL'
       ELSE
         !
         !  SET UP H AND SLOPE ARRAYS.
@@ -302,8 +300,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
               !
               !     ERROR RETURN FROM PCHCS.
               Ierr = -8
-              CALL XERMSG('PCHIC','ERROR RETURN FROM PCHCS',Ierr,1)
-              RETURN
+              ERROR STOP 'PCHIC : ERROR RETURN FROM PCHCS'
             END IF
           END IF
         ELSE
@@ -322,8 +319,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             !     ERROR RETURN FROM PCHCE.
             !   *** THIS CASE SHOULD NEVER OCCUR ***
             Ierr = -9
-            CALL XERMSG('PCHIC','ERROR RETURN FROM PCHCE',Ierr,1)
-            RETURN
+            ERROR STOP 'PCHIC : ERROR RETURN FROM PCHCE'
           END IF
         END IF
         !
@@ -336,8 +332,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
   100  Ierr = -3
-  CALL XERMSG('PCHIC','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
-  RETURN
+  ERROR STOP 'PCHIC : X-ARRAY NOT STRICTLY INCREASING'
   !------------- LAST LINE OF PCHIC FOLLOWS ------------------------------
   RETURN
 END SUBROUTINE PCHIC

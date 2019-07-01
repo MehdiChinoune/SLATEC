@@ -1,7 +1,6 @@
 !** RFFTI1
-SUBROUTINE RFFTI1(N,Wa,Ifac)
-  !> Initialize a real and an integer work array for RFFTF1 and
-  !            RFFTB1.
+PURE SUBROUTINE RFFTI1(N,Wa,Ifac)
+  !> Initialize a real and an integer work array for RFFTF1 and RFFTB1.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -50,16 +49,16 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   !           (b) changing references to intrinsic function FLOAT
   !               to REAL(SP), and
   !           (c) changing definition of variable TPI by using
-  !               FORTRAN intrinsic functions instead of DATA
-  !               statements.
+  !               FORTRAN intrinsic functions instead of DATA statements.
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N, Ifac(15)
-  REAL(SP) :: Wa(N)
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ifac(15)
+  REAL(SP), INTENT(OUT) :: Wa(N)
   INTEGER :: i, ib, ido, ii, ip, ipm, is, j, k1, l1, l2, ld, nf, nfm1, nl, nq, nr, ntry
   REAL(SP) :: arg, argh, argld, fi, tpi
   INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
@@ -123,4 +122,5 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
       EXIT
     END IF
   END DO
+
 END SUBROUTINE RFFTI1

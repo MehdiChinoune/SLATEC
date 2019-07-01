@@ -1,7 +1,7 @@
 !** BSPDR
-SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
+PURE SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   !> Use the B-representation to construct a divided difference
-  !            table preparatory to a (right) derivative calculation.
+  !  table preparatory to a (right) derivative calculation.
   !***
   ! **Library:**   SLATEC
   !***
@@ -62,28 +62,22 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: K, N, Nderiv
-  REAL(SP) :: A(N), Ad((2*N-Nderiv+1)*Nderiv/2), T(N+K)
+
+  INTEGER, INTENT(IN) :: K, N, Nderiv
+  REAL(SP), INTENT(IN) :: A(N), T(N+K)
+  REAL(SP), INTENT(OUT) :: Ad((2*N-Nderiv+1)*Nderiv/2)
   INTEGER :: i, id, ii, ipkmid, jj, jm, kmid
   REAL(SP) :: diff, fkmid
   !     DIMENSION T(N+K), AD((2*N-NDERIV+1)*NDERIV/2)
   !* FIRST EXECUTABLE STATEMENT  BSPDR
   IF( K<1 ) THEN
-    !
-    !
-    CALL XERMSG('BSPDR','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'BSPDR : K DOES NOT SATISFY K>=1'
   ELSEIF( N<K ) THEN
-    CALL XERMSG('BSPDR','N DOES NOT SATISFY N>=K',2,1)
-    RETURN
+    ERROR STOP 'BSPDR : N DOES NOT SATISFY N>=K'
   ELSEIF( Nderiv<1 .OR. Nderiv>K ) THEN
-    CALL XERMSG('BSPDR','NDERIV DOES NOT SATISFY 1<=NDERIV<=K',2,1)
-    RETURN
+    ERROR STOP 'BSPDR : NDERIV DOES NOT SATISFY 1<=NDERIV<=K'
   END IF
   DO i = 1, N
     Ad(i) = A(i)
@@ -105,5 +99,6 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
     jm = jj
     jj = jj + N - id + 1
   END DO
+
   RETURN
 END SUBROUTINE BSPDR

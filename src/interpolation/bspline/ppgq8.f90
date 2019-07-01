@@ -1,5 +1,5 @@
 !** PPGQ8
-SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
+PURE SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Err,Ans,Ierr)
   !> Subsidiary to PFQAD
   !***
   ! **Library:**   SLATEC
@@ -62,20 +62,22 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH, I1MACH
+  USE service, ONLY : R1MACH, I1MACH
   !
   INTERFACE
-    REAL(SP) FUNCTION FUN(X)
+    PURE REAL(SP) FUNCTION FUN(X)
       IMPORT SP
       REAL(SP), INTENT(IN) :: X
     END FUNCTION FUN
   END INTERFACE
-  INTEGER :: Id, Ierr, Inppv, Kk, Ldc, Lxi
-  REAL(SP) :: A, Ans, B, C(Ldc,Lxi), Err, Xi(Lxi+1)
+  INTEGER, INTENT(IN) :: Id, Kk, Ldc, Lxi
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: A, B, C(Ldc,Lxi), Xi(Lxi+1)
+  REAL(SP), INTENT(INOUT) :: Err
+  REAL(SP), INTENT(OUT) :: Ans
   INTEGER :: k, l, lmn, lmx, lr(30), mxl, nbits, nib, nlmx
   REAL(SP) :: aa(30), ae, anib, area, be, cc, ee, ef, eps, est, gl, glr, gr(30), &
     hh(30), tol, vl(30), vr
@@ -115,8 +117,8 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
             lmx = MIN(nlmx,nbits-nib-7)
             IF( lmx<1 ) THEN
               Ierr = -1
-              CALL XERMSG('PPGQ8',&
-                'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION. ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
+              ! CALL XERMSG('PPGQ8','A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL&
+                ! & INTEGRATION. ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
               IF( Err<0._SP ) Err = be
               RETURN
             ELSE
@@ -197,8 +199,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     Ans = vr
     IF( (mxl/=0) .AND. (ABS(be)>2._SP*tol*area) ) THEN
       Ierr = 2
-      CALL XERMSG('PPGQ8',&
-        'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
+      ! CALL XERMSG('PPGQ8','ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     END IF
     IF( Err<0._SP ) Err = be
     RETURN
@@ -207,17 +208,18 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   lr(l) = 1
   aa(l) = aa(l) + 4._SP*hh(l)
   GOTO 100
+
   RETURN
 CONTAINS
-  REAL(SP) FUNCTION G8(x,h)
+  PURE REAL(SP) FUNCTION G8(x,h)
     REAL(SP), INTENT(IN) :: x, h
-    G8 = h*((w1*(FUN(x-x1*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x1*h,Inppv)+FUN(&
-      x+x1*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x1*h,Inppv))&
-      +w2*(FUN(x-x2*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x2*h,Inppv)&
-      +FUN(x+x2*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x2*h,Inppv)))&
-      +(w3*(FUN(x-x3*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x3*h,Inppv)&
-      +FUN(x+x3*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x3*h,Inppv))&
-      +w4*(FUN(x-x4*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x4*h,Inppv)&
-      +FUN(x+x4*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x4*h,Inppv))))
+    G8 = h*((w1*(FUN(x-x1*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x1*h)&
+      +FUN(x+x1*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x1*h))&
+      +w2*(FUN(x-x2*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x2*h)&
+      +FUN(x+x2*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x2*h)))&
+      +(w3*(FUN(x-x3*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x3*h)&
+      +FUN(x+x3*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x3*h))&
+      +w4*(FUN(x-x4*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x-x4*h)&
+      +FUN(x+x4*h)*PPVAL(Ldc,C,Xi,Lxi,Kk,Id,x+x4*h))))
   END FUNCTION G8
 END SUBROUTINE PPGQ8

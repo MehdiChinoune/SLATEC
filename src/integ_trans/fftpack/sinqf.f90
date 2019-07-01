@@ -1,5 +1,5 @@
 !** SINQF
-SUBROUTINE SINQF(N,X,Wsave)
+PURE SUBROUTINE SINQF(N,X,Wsave)
   !> Compute the forward sine transform with odd wave numbers.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -20,8 +20,7 @@ SUBROUTINE SINQF(N,X,Wsave)
   !  is defined below at output parameter X.
   !
   !  SINQB is the unnormalized inverse of SINQF since a call of SINQF
-  !  followed by a call of SINQB will multiply the input sequence X
-  !  by 4*N.
+  !  followed by a call of SINQB will multiply the input sequence X by 4*N.
   !
   !  The array WSAVE which is used by subroutine SINQF must be
   !  initialized by calling subroutine SINQI(N,WSAVE).
@@ -76,8 +75,8 @@ SUBROUTINE SINQF(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(N), X(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(INOUT) :: Wsave(N), X(N)
   INTEGER :: k, kc, ns2
   REAL(SP) :: xhold
   !* FIRST EXECUTABLE STATEMENT  SINQF
@@ -93,4 +92,5 @@ SUBROUTINE SINQF(N,X,Wsave)
   DO k = 2, N, 2
     X(k) = -X(k)
   END DO
+
 END SUBROUTINE SINQF

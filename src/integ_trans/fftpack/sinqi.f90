@@ -1,5 +1,5 @@
 !** SINQI
-SUBROUTINE SINQI(N,Wsave)
+PURE SUBROUTINE SINQI(N,Wsave)
   !> Initialize a work array for SINQF and SINQB.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -49,8 +49,9 @@ SUBROUTINE SINQI(N,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(3*N+15)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(OUT) :: Wsave(3*N+15)
   !* FIRST EXECUTABLE STATEMENT  SINQI
   CALL COSQI(N,Wsave)
+
 END SUBROUTINE SINQI

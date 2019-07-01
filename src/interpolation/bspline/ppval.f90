@@ -1,7 +1,7 @@
 !** PPVAL
-REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
+PURE REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X)
   !> Calculate the value of the IDERIV-th derivative of the
-  !            B-spline from the PP-representation.
+  !  B-spline from the PP-representation.
   !***
   ! **Library:**   SLATEC
   !***
@@ -56,8 +56,7 @@ REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !
   !***
   ! **References:**  Carl de Boor, Package for calculating with B-splines,
-  !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
-  !                 pp. 441-472.
+  !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977), pp. 441-472.
   !***
   ! **Routines called:**  INTRV, XERMSG
 
@@ -69,31 +68,26 @@ REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ideriv, Inppv, K, Ldc, Lxi
-  REAL(SP) :: C(Ldc,Lxi), X, Xi(Lxi+1)
-  INTEGER :: i, j, ndummy
+
+  INTEGER, INTENT(IN) :: Ideriv, K, Ldc, Lxi
+  REAL(SP), INTENT(IN) :: C(Ldc,Lxi), X, Xi(Lxi+1)
+  INTEGER :: i, j, ndummy, inppv
   REAL(SP) :: dx, fltk
   !* FIRST EXECUTABLE STATEMENT  PPVAL
   PPVAL = 0._SP
+  inppv = 1
   IF( K<1 ) THEN
-    CALL XERMSG('PPVAL','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'PPVAL : K DOES NOT SATISFY K>=1'
   ELSEIF( Ldc<K ) THEN
-    !
-    !
-    CALL XERMSG('PPVAL','LDC DOES NOT SATISFY LDC>=K',2,1)
-    RETURN
+    ERROR STOP 'PPVAL : LDC DOES NOT SATISFY LDC>=K'
   ELSEIF( Lxi<1 ) THEN
-    CALL XERMSG('PPVAL','LXI DOES NOT SATISFY LXI>=1',2,1)
-    RETURN
+    ERROR STOP 'PPVAL : LXI DOES NOT SATISFY LXI>=1'
   ELSEIF( Ideriv<0 .OR. Ideriv>=K ) THEN
-    CALL XERMSG('PPVAL','IDERIV DOES NOT SATISFY 0<=IDERIV<K',2,1)
-    RETURN
+    ERROR STOP 'PPVAL : IDERIV DOES NOT SATISFY 0<=IDERIV<K'
   ELSE
     i = K - Ideriv
     fltk = i
-    CALL INTRV(Xi,Lxi,X,Inppv,i,ndummy)
+    CALL INTRV(Xi,Lxi,X,inppv,i,ndummy)
     dx = X - Xi(i)
     j = K
     DO
@@ -103,5 +97,6 @@ REAL(SP) FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
       IF( fltk<=0._SP ) EXIT
     END DO
   END IF
+
   RETURN
 END FUNCTION PPVAL

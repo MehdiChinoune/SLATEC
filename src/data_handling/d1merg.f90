@@ -1,5 +1,5 @@
 !** D1MERG
-SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
+PURE SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
   !> Merge two strings of ascending double precision numbers.
   !***
   ! **Library:**   SLATEC
@@ -24,8 +24,8 @@ SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
 
   !* REVISION HISTORY  (YYMMDD)
   !   910819  DATE WRITTEN
-  INTEGER :: I1, I2, I3, M1, M2
-  REAL(DP) :: Tcos( MAX(I1+M1,I2+M2,I3+M1+M2) )
+  INTEGER, INTENT(IN) :: I1, I2, I3, M1, M2
+  REAL(DP), INTENT(INOUT) :: Tcos( MAX(I1+M1,I2+M2,I3+M1+M2) )
   !
   INTEGER :: j1, j2, j3
   !
@@ -64,4 +64,5 @@ SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
     END IF
     j3 = j3 + 1
   END DO
+
 END SUBROUTINE D1MERG

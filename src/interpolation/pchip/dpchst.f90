@@ -1,5 +1,5 @@
 !** DPCHST
-REAL(DP) FUNCTION DPCHST(Arg1,Arg2)
+REAL(DP) ELEMENTAL FUNCTION DPCHST(Arg1,Arg2)
   !> DPCHIP Sign-Testing Routine
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -45,7 +45,7 @@ REAL(DP) FUNCTION DPCHST(Arg1,Arg2)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(DP) :: Arg1, Arg2
+  REAL(DP), INTENT(IN) :: Arg1, Arg2
   !
   !  DECLARE LOCAL VARIABLES.
   !

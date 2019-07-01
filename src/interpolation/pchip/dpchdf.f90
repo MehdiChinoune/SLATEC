@@ -1,5 +1,5 @@
 !** DPCHDF
-REAL(DP) FUNCTION DPCHDF(K,X,S,Ierr)
+REAL(DP) PURE FUNCTION DPCHDF(K,X,S)
   !> Computes divided differences for DPCHCE and DPCHSP
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -60,19 +60,19 @@ REAL(DP) FUNCTION DPCHDF(K,X,S,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920429  Revised format and order of references.  (WRB,FNF)
   !   930503  Improved purpose.  (FNF)
-  USE service, ONLY : XERMSG
+
   !
   !**End
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: K, Ierr
-  REAL(DP) :: X(K), S(K)
+  INTEGER, INTENT(IN) :: K
+  REAL(DP), INTENT(IN) :: X(K), S(K)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER :: i, j
-  REAL(DP) :: value
+  REAL(DP) :: value, s_tmp(K)
   REAL(DP), PARAMETER :: zero = 0._DP
   !
   !  CHECK FOR LEGAL VALUE OF K.
@@ -83,32 +83,27 @@ REAL(DP) FUNCTION DPCHDF(K,X,S,Ierr)
     !  ERROR RETURN.
     !
     !     K<3 RETURN.
-    Ierr = -1
-    CALL XERMSG('DPCHDF','K LESS THAN THREE',Ierr,1)
-    DPCHDF = zero
-    RETURN
+    ERROR STOP 'DPCHDF : K LESS THAN THREE'
   END IF
   !
   !  COMPUTE COEFFICIENTS OF INTERPOLATING POLYNOMIAL.
   !
   DO j = 2, K - 1
     DO i = 1, K - j
-      S(i) = (S(i+1)-S(i))/(X(i+j)-X(i))
+      s_tmp(i) = (S(i+1)-S(i))/(X(i+j)-X(i))
     END DO
   END DO
   !
   !  EVALUATE DERIVATIVE AT X(K).
   !
-  value = S(1)
+  value = s_tmp(1)
   DO i = 2, K - 1
-    value = S(i) + value*(X(K)-X(i))
+    value = s_tmp(i) + value*(X(K)-X(i))
   END DO
   !
   !  NORMAL RETURN.
   !
-  Ierr = 0
   DPCHDF = value
   RETURN
   !------------- LAST LINE OF DPCHDF FOLLOWS -----------------------------
-  RETURN
 END FUNCTION DPCHDF

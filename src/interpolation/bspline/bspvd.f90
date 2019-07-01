@@ -1,7 +1,7 @@
 !** BSPVD
-SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
+PURE SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !> Calculate the value and all derivatives of order less than
-  !            NDERIV of all basis functions which do not vanish at X.
+  !  NDERIV of all basis functions which do not vanish at X.
   !***
   ! **Library:**   SLATEC
   !***
@@ -76,12 +76,12 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section. (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ldvnik, Ileft, K, Nderiv
-  REAL(SP) :: T(Ileft+K), Vnikx(Ldvnik,Nderiv), Work((K+1)*(K+2)/2), X
+
+  INTEGER, INTENT(IN) :: Ldvnik, Ileft, K, Nderiv
+  REAL(SP), INTENT(IN) :: T(Ileft+K), X
+  REAL(SP), INTENT(OUT) :: Vnikx(Ldvnik,Nderiv), Work((K+1)*(K+2)/2)
   INTEGER :: iwork, i, ideriv, ipkmd, j, jj, jlow, jm, jp1mid, kmd, kp1, l, &
     ldummy, m, mhigh
   REAL(SP) :: factor, fkmd, v
@@ -91,16 +91,11 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !     WORK(1) AND WORK((K+1)*(K+2)/2) ARE NOT USED.
   !* FIRST EXECUTABLE STATEMENT  BSPVD
   IF( K<1 ) THEN
-    !
-    !
-    CALL XERMSG('BSPVD','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'BSPVD : K DOES NOT SATISFY K>=1'
   ELSEIF( Nderiv<1 .OR. Nderiv>K ) THEN
-    CALL XERMSG('BSPVD','NDERIV DOES NOT SATISFY 1<=NDERIV<=K',2,1)
-    RETURN
+    ERROR STOP 'BSPVD : NDERIV DOES NOT SATISFY 1<=NDERIV<=K'
   ELSEIF( Ldvnik<K ) THEN
-    CALL XERMSG('BSPVD','LDVNIK DOES NOT SATISFY LDVNIK>=K',2,1)
-    RETURN
+    ERROR STOP 'BSPVD : LDVNIK DOES NOT SATISFY LDVNIK>=K'
   ELSE
     ideriv = Nderiv
     kp1 = K + 1
@@ -164,5 +159,6 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
       END DO
     END IF
   END IF
+
   RETURN
 END SUBROUTINE BSPVD

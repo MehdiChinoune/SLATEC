@@ -25,13 +25,13 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of IPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    USE slatec, ONLY : IPPERM, IPSORT, ISORT, control_xer, num_xer
+    USE slatec, ONLY : IPPERM, IPSORT, ISORT
     !
     INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL :: fail
     INTEGER :: y(N), yc(N), iy(N)
-    INTEGER :: Kprint, Lun, Ipass, j, i, kabs, ier, nn, kkflag
+    INTEGER :: Kprint, Lun, Ipass, j, i, kabs, ier!, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -177,33 +177,33 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
-    !
-    nn = -1
-    kkflag = 1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL IPSORT(y,nn,iy,kkflag,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    kkflag = 0
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL IPSORT(y,nn,iy,kkflag,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' IPSORT PASSED ERROR MESSAGE TESTS'
-    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' IPSORT FAILED ERROR MESSAGE TESTS'
-    END IF
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = -1
+!    END IF
+!    !
+!    nn = -1
+!    kkflag = 1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL IPSORT(y,nn,iy,kkflag,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    kkflag = 0
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL IPSORT(y,nn,iy,kkflag,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' IPSORT PASSED ERROR MESSAGE TESTS'
+!    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' IPSORT FAILED ERROR MESSAGE TESTS'
+!    END IF
     !
     !     -------------------------------------------------------------
     !                            CHECK IPPERM
@@ -269,32 +269,32 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
-    !
-    nn = -1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL IPPERM(y,nn,iy,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    iy(1) = 5
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL IPPERM(y,nn,iy,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' IPPERM PASSED ERROR MESSAGE TESTS'
-    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' IPPERM FAILED ERROR MESSAGE TESTS'
-    END IF
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = -1
+!    END IF
+!    !
+!    nn = -1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL IPPERM(y,nn,iy,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    iy(1) = 5
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL IPPERM(y,nn,iy,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' IPPERM PASSED ERROR MESSAGE TESTS'
+!    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' IPPERM FAILED ERROR MESSAGE TESTS'
+!    END IF
     !
     RETURN
     !
@@ -325,15 +325,14 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of HPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    USE slatec, ONLY : HPPERM, HPSORT, control_xer, num_xer
+    USE slatec, ONLY : HPPERM, HPSORT
     !
     INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL :: fail
     CHARACTER :: short
     CHARACTER(2) :: y(N), work
-    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nn, &
-      kkflag, strbeg, strend
+    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier!, strbeg, strend, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -425,73 +424,73 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
-    !
-    nn = -1
-    strbeg = 1
-    strend = 2
-    kkflag = 1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    strbeg = 1
-    strend = 2
-    kkflag = 0
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    strbeg = 1
-    strend = 2
-    kkflag = 1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,short,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    strbeg = 2
-    strend = 1
-    kkflag = 1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    strbeg = -1
-    strend = 2
-    kkflag = 1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    strbeg = 1
-    strend = 3
-    kkflag = 1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' HPSORT PASSED ERROR MESSAGE TESTS'
-    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' HPSORT FAILED ERROR MESSAGE TESTS'
-    END IF
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = -1
+!    END IF
+!    !
+!    nn = -1
+!    strbeg = 1
+!    strend = 2
+!    kkflag = 1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    strbeg = 1
+!    strend = 2
+!    kkflag = 0
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    strbeg = 1
+!    strend = 2
+!    kkflag = 1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,short,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    strbeg = 2
+!    strend = 1
+!    kkflag = 1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    strbeg = -1
+!    strend = 2
+!    kkflag = 1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    strbeg = 1
+!    strend = 3
+!    kkflag = 1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL HPSORT(y,nn,strbeg,strend,iy,kkflag,work,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' HPSORT PASSED ERROR MESSAGE TESTS'
+!    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' HPSORT FAILED ERROR MESSAGE TESTS'
+!    END IF
     !
     !     -------------------------------------------------------------
     !                            CHECK HPPERM
@@ -557,32 +556,32 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
-    !
-    nn = -1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL HPPERM(y,nn,iy,work,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    iy(1) = 5
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL HPPERM(y,nn,iy,work,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' HPPERM PASSED ERROR MESSAGE TESTS'
-    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' HPPERM FAILED ERROR MESSAGE TESTS'
-    END IF
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = -1
+!    END IF
+!    !
+!    nn = -1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL HPPERM(y,nn,iy,work,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    iy(1) = 5
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL HPPERM(y,nn,iy,work,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' HPPERM PASSED ERROR MESSAGE TESTS'
+!    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' HPPERM FAILED ERROR MESSAGE TESTS'
+!    END IF
     !
     RETURN
     !
@@ -613,13 +612,13 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of SPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    USE slatec, ONLY : SPPERM, SPSORT, SSORT, control_xer, num_xer
+    USE slatec, ONLY : SPPERM, SPSORT, SSORT
     !
     INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL :: fail
     REAL(SP) :: y(N), yc(N)
-    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nn, kkflag
+    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier!, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -768,33 +767,33 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
-    !
-    nn = -1
-    kkflag = 1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL SPSORT(y,nn,iy,kkflag,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    kkflag = 0
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL SPSORT(y,nn,iy,kkflag,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' SPSORT PASSED ERROR MESSAGE TESTS'
-    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' SPSORT FAILED ERROR MESSAGE TESTS'
-    END IF
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = -1
+!    END IF
+!    !
+!    nn = -1
+!    kkflag = 1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL SPSORT(y,nn,iy,kkflag,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    kkflag = 0
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL SPSORT(y,nn,iy,kkflag,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' SPSORT PASSED ERROR MESSAGE TESTS'
+!    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' SPSORT FAILED ERROR MESSAGE TESTS'
+!    END IF
     !
     !     -------------------------------------------------------------
     !                            CHECK SPPERM
@@ -860,32 +859,32 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
-    !
-    nn = -1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL SPPERM(y,nn,iy,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    iy(1) = 5
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL SPPERM(y,nn,iy,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' SPPERM PASSED ERROR MESSAGE TESTS'
-    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' SPPERM FAILED ERROR MESSAGE TESTS'
-    END IF
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = -1
+!    END IF
+!    !
+!    nn = -1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL SPPERM(y,nn,iy,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    iy(1) = 5
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL SPPERM(y,nn,iy,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' SPPERM PASSED ERROR MESSAGE TESTS'
+!    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' SPPERM FAILED ERROR MESSAGE TESTS'
+!    END IF
     !
     RETURN
     !
@@ -916,13 +915,13 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of DPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    USE slatec, ONLY : DPPERM, DPSORT, DSORT, control_xer, num_xer
+    USE slatec, ONLY : DPPERM, DPSORT, DSORT
     !
     INTEGER, PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL :: fail
     REAL(DP) :: y(N), yc(N)
-    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nn, kkflag
+    INTEGER :: iy(N), Kprint, Lun, Ipass, j, i, kabs, ier!, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -1071,33 +1070,33 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
-    !
-    nn = -1
-    kkflag = 1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL DPSORT(y,nn,iy,kkflag,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    kkflag = 0
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL DPSORT(y,nn,iy,kkflag,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' DPSORT PASSED ERROR MESSAGE TESTS'
-    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' DPSORT FAILED ERROR MESSAGE TESTS'
-    END IF
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = -1
+!    END IF
+!    !
+!    nn = -1
+!    kkflag = 1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL DPSORT(y,nn,iy,kkflag,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    kkflag = 0
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL DPSORT(y,nn,iy,kkflag,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' DPSORT PASSED ERROR MESSAGE TESTS'
+!    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' DPSORT FAILED ERROR MESSAGE TESTS'
+!    END IF
     !
     !     -------------------------------------------------------------
     !                            CHECK DPPERM
@@ -1163,32 +1162,32 @@ CONTAINS
     !
     !     ... TEST ERROR MESSAGES
     !
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
-    !
-    nn = -1
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL DPPERM(y,nn,iy,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    nn = 1
-    iy(1) = 5
-    IF( Kprint>=3 ) WRITE (Lun,*)
-    num_xer = 0
-    CALL DPPERM(y,nn,iy,ier)
-    IF( num_xer/=ier ) Ipass = 0
-    !
-    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' DPPERM PASSED ERROR MESSAGE TESTS'
-    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
-      WRITE (Lun,*)
-      WRITE (Lun,*) ' DPPERM FAILED ERROR MESSAGE TESTS'
-    END IF
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = -1
+!    END IF
+!    !
+!    nn = -1
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL DPPERM(y,nn,iy,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    nn = 1
+!    iy(1) = 5
+!    IF( Kprint>=3 ) WRITE (Lun,*)
+!    num_xer = 0
+!    CALL DPPERM(y,nn,iy,ier)
+!    IF( num_xer/=ier ) Ipass = 0
+!    !
+!    IF( (Kprint>=2) .AND. (Ipass==1) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' DPPERM PASSED ERROR MESSAGE TESTS'
+!    ELSEIF( (Kprint>=1) .AND. (Ipass==0) ) THEN
+!      WRITE (Lun,*)
+!      WRITE (Lun,*) ' DPPERM FAILED ERROR MESSAGE TESTS'
+!    END IF
     !
     RETURN
     !

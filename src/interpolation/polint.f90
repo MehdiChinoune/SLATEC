@@ -1,7 +1,6 @@
 !** POLINT
-SUBROUTINE POLINT(N,X,Y,C)
-  !> Produce the polynomial which interpolates a set of discrete
-  !            data points.
+PURE SUBROUTINE POLINT(N,X,Y,C)
+  !> Produce the polynomial which interpolates a set of discrete data points.
   !***
   ! **Library:**   SLATEC
   !***
@@ -46,14 +45,15 @@ SUBROUTINE POLINT(N,X,Y,C)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: N
-  REAL(SP) :: C(N), X(N), Y(N)
+
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: X(N), Y(N)
+  REAL(SP), INTENT(OUT) :: C(N)
   INTEGER :: i, k, km1
   REAL(SP) :: dif
   !* FIRST EXECUTABLE STATEMENT  POLINT
   IF( N<=0 ) THEN
-    CALL XERMSG('POLINT','N IS ZERO OR NEGATIVE.',2,1)
+    ERROR STOP 'POLINT : N IS <= 0'
     RETURN
   ELSE
     C(1) = Y(1)
@@ -70,5 +70,6 @@ SUBROUTINE POLINT(N,X,Y,C)
     END DO
     RETURN
   END IF
-  100  CALL XERMSG('POLINT','THE ABSCISSAS ARE NOT DISTINCT.',2,1)
+  100 ERROR STOP 'POLINT : THE ABSCISSAS ARE NOT DISTINCT.'
+
 END SUBROUTINE POLINT

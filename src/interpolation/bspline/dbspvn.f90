@@ -1,7 +1,6 @@
 !** DBSPVN
-SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
-  !> Calculate the value of all (possibly) nonzero basis
-  !            functions at X.
+PURE SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
+  !> Calculate the value of all (possibly) nonzero basis functions at X.
   !***
   ! **Library:**   SLATEC
   !***
@@ -75,10 +74,11 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: Ileft, Indexx, Iwork, Jhigh, K
-  REAL(DP) :: T(Ileft+Jhigh), Vnikx(K), Work(2*K), X
+
+  INTEGER, INTENT(IN) :: Ileft, Indexx, Jhigh, K
+  INTEGER, INTENT(OUT) :: Iwork
+  REAL(DP), INTENT(IN) :: T(Ileft+Jhigh), X
+  REAL(DP), INTENT(OUT) :: Vnikx(K), Work(2*K)
   INTEGER :: imjp1, ipj, jp1, jp1ml, l
   REAL(DP) :: vm, vmprev
   !     DIMENSION T(ILEFT+JHIGH)
@@ -86,20 +86,13 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !     WORK(I) = DELTAP(I), WORK(K+I) = DELTAM(I), I = 1,K
   !* FIRST EXECUTABLE STATEMENT  DBSPVN
   IF( K<1 ) THEN
-    !
-    !
-    CALL XERMSG('DBSPVN','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'DBSPVN : K DOES NOT SATISFY K>=1'
   ELSEIF( Jhigh>K .OR. Jhigh<1 ) THEN
-    CALL XERMSG('DBSPVN','JHIGH DOES NOT SATISFY 1<=JHIGH<=K',2,1)
-    RETURN
+    ERROR STOP 'DBSPVN : JHIGH DOES NOT SATISFY 1<=JHIGH<=K'
   ELSEIF( Indexx<1 .OR. Indexx>2 ) THEN
-    CALL XERMSG('DBSPVN','INDEX IS NOT 1 OR 2',2,1)
-    RETURN
+    ERROR STOP 'DBSPVN : INDEX IS NOT 1 OR 2'
   ELSEIF( X<T(Ileft) .OR. X>T(Ileft+1) ) THEN
-    CALL XERMSG('DBSPVN',&
-      'X DOES NOT SATISFY T(ILEFT)<=X<=T(ILEFT+1)',2,1)
-    RETURN
+    ERROR STOP 'DBSPVN : X DOES NOT SATISFY T(ILEFT)<=X<=T(ILEFT+1)'
   ELSE
     IF( Indexx/=2 ) THEN
       Iwork = 1

@@ -1,5 +1,5 @@
 !** PCHST
-REAL(SP) FUNCTION PCHST(Arg1,Arg2)
+REAL(SP) ELEMENTAL FUNCTION PCHST(Arg1,Arg2)
   !> PCHIP Sign-Testing Routine
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -43,7 +43,7 @@ REAL(SP) FUNCTION PCHST(Arg1,Arg2)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(SP) :: Arg1, Arg2
+  REAL(SP), INTENT(IN) :: Arg1, Arg2
   !
   !  DECLARE LOCAL VARIABLES.
   !

@@ -1,7 +1,6 @@
 !** RADFG
-SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
-  !> Calculate the fast Fourier transform of subvectors of
-  !            arbitrary length.
+PURE SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
+  !> Calculate the fast Fourier transform of subvectors of arbitrary length.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -27,8 +26,10 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Idl1, Ido, Ip, L1
-  REAL(SP) :: C1(Ido,L1,Ip), C2(Idl1,Ip), Cc(Ido,Ip,L1), Ch(Ido,L1,Ip), Ch2(Idl1,Ip), Wa(:)
+  INTEGER , INTENT(IN) :: Idl1, Ido, Ip, L1
+  REAL(SP), INTENT(IN) :: Wa(:)
+  REAL(SP), INTENT(INOUT) :: Ch2(Idl1,Ip)
+  REAL(SP), INTENT(OUT) :: Cc(Ido,Ip,L1), C1(Ido,L1,Ip), C2(Idl1,Ip), Ch(Ido,L1,Ip)
   INTEGER :: i, ic, idij, idp2, ik, ipp2, ipph, is, j, j2, jc, k, l, lc, nbd
   REAL(SP) :: ai1, ai2, ar1, ar1h, ar2, ar2h, arg, dc2, dcp, ds2, dsp, tpi
   !* FIRST EXECUTABLE STATEMENT  RADFG
@@ -197,5 +198,6 @@ SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       END DO
     END DO
   END DO
+
   RETURN
 END SUBROUTINE RADFG

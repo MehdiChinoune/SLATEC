@@ -1,5 +1,5 @@
 !** COSTI
-SUBROUTINE COSTI(N,Wsave)
+PURE SUBROUTINE COSTI(N,Wsave)
   !> Initialize a work array for COST.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -54,8 +54,8 @@ SUBROUTINE COSTI(N,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(3*N+15)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(OUT) :: Wsave(3*N+15)
   INTEGER :: k, kc, nm1, np1, ns2
   REAL(SP) :: dt, fk, pi
   !* FIRST EXECUTABLE STATEMENT  COSTI
@@ -73,4 +73,5 @@ SUBROUTINE COSTI(N,Wsave)
     Wsave(kc) = 2._SP*COS(fk*dt)
   END DO
   CALL RFFTI(nm1,Wsave(N+1))
+
 END SUBROUTINE COSTI

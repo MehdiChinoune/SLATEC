@@ -273,8 +273,8 @@ REAL(DP) ELEMENTAL FUNCTION DRF(X,Y,Z)
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
-    ERROR STOP 'DRF : MIN(X,Y,Z)<0 WHERE X = '//xern3//&
-      ' Y = '//xern4//' AND Z = '//xern5
+    ERROR STOP 'DRF : MIN(X,Y,Z)<0'
+    ! WHERE X = '//xern3//' Y = '//xern4//' AND Z = '//xern5
   END IF
   !
   IF( MAX(X,Y,Z)>uplim ) THEN
@@ -282,8 +282,8 @@ REAL(DP) ELEMENTAL FUNCTION DRF(X,Y,Z)
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') uplim
-    ERROR STOP 'DRF : MAX(X,Y,Z)>UPLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6
+    ERROR STOP 'DRF : MAX(X,Y,Z)>UPLIM'
+    ! WHERE X = '//xern3//' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6
   END IF
   !
   IF( MIN(X+Y,X+Z,Y+Z)<lolim ) THEN
@@ -291,8 +291,8 @@ REAL(DP) ELEMENTAL FUNCTION DRF(X,Y,Z)
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
-    ERROR STOP 'DRF : MIN(X+Y,X+Z,Y+Z)<LOLIM WHERE X = '//&
-      xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6
+    ERROR STOP 'DRF : MIN(X+Y,X+Z,Y+Z)<LOLIM'
+    ! WHERE X = '//xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6
   END IF
   !
   xn = X

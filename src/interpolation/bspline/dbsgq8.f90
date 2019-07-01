@@ -1,5 +1,5 @@
 !** DBSGQ8
-SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
+PURE SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
   !> Subsidiary to DBFQAD
   !***
   ! **Library:**   SLATEC
@@ -64,20 +64,21 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH, I1MACH
+  USE service, ONLY : D1MACH, I1MACH
   !
   INTERFACE
-    REAL(DP) FUNCTION FUN(X)
+    PURE REAL(DP) FUNCTION FUN(X)
       IMPORT DP
       REAL(DP), INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER :: Id, Ierr, Inbv, Kk, N
-  REAL(DP) :: A, Ans, B, Bc(N), Err, Work(3*Kk), Xt(N+Kk)
+  INTEGER, INTENT(IN) :: Id, Kk, N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: A, B, Bc(N), Xt(N+Kk)
+  REAL(DP), INTENT(OUT) :: Ans, Err
   INTEGER :: k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
   REAL(DP) :: aa(60), ae, anib, area, c, ce, ee, ef, eps, est, gl, glr, gr(60), &
     hh(60), tol, vl(60), vr
@@ -117,9 +118,8 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
             lmx = MIN(nlmx,nbits-nib-7)
             IF( lmx<1 ) THEN
               Ierr = -1
-              CALL XERMSG('DBSGQ8',&
-                'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION.&
-                & ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
+              ! CALL XERMSG('DBSGQ8','A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL&
+                ! & INTEGRATION. ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
               IF( Err<0._DP ) Err = ce
               RETURN
             ELSE
@@ -200,8 +200,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     Ans = vr
     IF( (mxl/=0) .AND. (ABS(ce)>2._DP*tol*area) ) THEN
       Ierr = 2
-      CALL XERMSG('DBSGQ8',&
-        'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
+      ! CALL XERMSG('DBSGQ8','ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     END IF
     IF( Err<0._DP ) Err = ce
     RETURN
@@ -210,17 +209,18 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   lr(l) = 1
   aa(l) = aa(l) + 4._DP*hh(l)
   GOTO 100
+
   RETURN
 CONTAINS
-  REAL(DP) FUNCTION G8(x,h)
+  PURE REAL(DP) FUNCTION G8(x,h)
     REAL(DP), INTENT(IN) :: x, h
-    G8 = h*((w1*(FUN(x-x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x1*h,Inbv,Work)+FUN(x+&
-      x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x1*h,Inbv,Work))&
-      +w2*(FUN(x-x2*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x2*h,Inbv,Work)&
-      +FUN(x+x2*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x2*h,Inbv,Work)))&
-      +(w3*(FUN(x-x3*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x3*h,Inbv,Work)&
-      +FUN(x+x3*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x3*h,Inbv,Work))&
-      +w4*(FUN(x-x4*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x4*h,Inbv,Work)&
-      +FUN(x+x4*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x4*h,Inbv,Work))))
+    G8 = h*((w1*(FUN(x-x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x1*h)+FUN(x+&
+      x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x1*h))&
+      +w2*(FUN(x-x2*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x2*h)&
+      +FUN(x+x2*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x2*h)))&
+      +(w3*(FUN(x-x3*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x3*h)&
+      +FUN(x+x3*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x3*h))&
+      +w4*(FUN(x-x4*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x4*h)&
+      +FUN(x+x4*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x4*h))))
   END FUNCTION G8
 END SUBROUTINE DBSGQ8

@@ -1,5 +1,5 @@
 !** DPCHSW
-SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
+ELEMENTAL SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !> Limits excursion from data for DPCHCS
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -76,14 +76,16 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920526  Eliminated possible divide by zero problem.  (FNF)
   !   930503  Improved purpose.  (FNF)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : D1MACH
   !
   !**End
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: Iextrm, Ierr
-  REAL(DP) :: Dfmax, D1, D2, H, Slope
+  INTEGER, INTENT(IN) :: Iextrm
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: Dfmax, H, Slope
+  REAL(DP), INTENT(INOUT) :: D1, D2
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -158,7 +160,7 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
           !
           !     NEGATIVE VALUE OF RADICAL (SHOULD NEVER OCCUR).
           Ierr = -2
-          CALL XERMSG('DPCHSW','NEGATIVE RADICAL',Ierr,1)
+          ERROR STOP 'DPCHSW : NEGATIVE RADICAL'
           RETURN
         ELSE
           that = (cp-SQRT(radcal))/(three*nu)
@@ -190,7 +192,7 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !     D1 AND D2 BOTH ZERO, OR BOTH NONZERO AND SAME SIGN.
   200  Ierr = -1
-  CALL XERMSG('DPCHSW','D1 AND/OR D2 INVALID',Ierr,1)
+  ERROR STOP 'DPCHSW : D1 AND/OR D2 INVALID'
   RETURN
   !------------- LAST LINE OF DPCHSW FOLLOWS -----------------------------
   RETURN

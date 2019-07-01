@@ -1,5 +1,5 @@
 !** BSGQ8
-SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
+PURE SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
   !> Subsidiary to BFQAD
   !***
   ! **Library:**   SLATEC
@@ -62,20 +62,22 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH, I1MACH
+  USE service, ONLY : R1MACH, I1MACH
   !
   INTERFACE
-    REAL(SP) FUNCTION FUN(X)
+    PURE REAL(SP) FUNCTION FUN(X)
       IMPORT SP
       REAL(SP), INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER :: Id, Ierr, Inbv, Kk, N
-  REAL(SP) :: A, Ans, B, Bc(N), Err, Work(3*Kk), Xt(N+Kk)
+  INTEGER, INTENT(IN) :: Id, Kk, N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: A, B, Bc(N), Xt(N+Kk)
+  REAL(SP), INTENT(INOUT) :: Err
+  REAL(SP), INTENT(OUT) :: Ans
   INTEGER :: k, l, lmn, lmx, lr(30), mxl, nbits, nib, nlmx
   REAL(SP) :: aa(30), ae, anib, area, c, ce, ee, ef, eps, est, gl, glr, gr(30), &
     hh(30), tol, vl(30), vr
@@ -115,8 +117,8 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
             lmx = MIN(nlmx,nbits-nib-7)
             IF( lmx<1 ) THEN
               Ierr = -1
-              CALL XERMSG('BSGQ8',&
-                'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION.  ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
+              ! CALL XERMSG('BSGQ8','A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL&
+                ! &INTEGRATION.  ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
               IF( Err<0._SP ) Err = ce
               RETURN
             ELSE
@@ -197,8 +199,7 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     Ans = vr
     IF( (mxl/=0) .AND. (ABS(ce)>2._SP*tol*area) ) THEN
       Ierr = 2
-      CALL XERMSG('BSGQ8',&
-        'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
+      ! CALL XERMSG('BSGQ8','ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     END IF
     IF( Err<0._SP ) Err = ce
     RETURN
@@ -209,16 +210,16 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   GOTO 100
   RETURN
 CONTAINS
-  REAL(SP) FUNCTION G8(x,h)
+  PURE REAL(SP) FUNCTION G8(x,h)
     REAL(SP), INTENT(IN) :: x, h
-    G8 = h*((w1*(FUN(x-x1*h)*BVALU(Xt,Bc,N,Kk,Id,x-x1*h,Inbv,Work)+FUN(x+&
-      x1*h)*BVALU(Xt,Bc,N,Kk,Id,x+x1*h,Inbv,Work))&
-      +w2*(FUN(x-x2*h)*BVALU(Xt,Bc,N,Kk,Id,x-x2*h,Inbv,Work)&
-      +FUN(x+x2*h)*BVALU(Xt,Bc,N,Kk,Id,x+x2*h,Inbv,Work)))&
-      +(w3*(FUN(x-x3*h)*BVALU(Xt,Bc,N,Kk,Id,x-x3*h,Inbv,Work)&
-      +FUN(x+x3*h)*BVALU(Xt,Bc,N,Kk,Id,x+x3*h,Inbv,Work))&
-      +w4*(FUN(x-x4*h)*BVALU(Xt,Bc,N,Kk,Id,x-x4*h,Inbv,Work)&
-      +FUN(x+x4*h)*BVALU(Xt,Bc,N,Kk,Id,x+x4*h,Inbv,Work))))
+    G8 = h*((w1*(FUN(x-x1*h)*BVALU(Xt,Bc,N,Kk,Id,x-x1*h)+FUN(x+&
+      x1*h)*BVALU(Xt,Bc,N,Kk,Id,x+x1*h))&
+      +w2*(FUN(x-x2*h)*BVALU(Xt,Bc,N,Kk,Id,x-x2*h)&
+      +FUN(x+x2*h)*BVALU(Xt,Bc,N,Kk,Id,x+x2*h)))&
+      +(w3*(FUN(x-x3*h)*BVALU(Xt,Bc,N,Kk,Id,x-x3*h)&
+      +FUN(x+x3*h)*BVALU(Xt,Bc,N,Kk,Id,x+x3*h))&
+      +w4*(FUN(x-x4*h)*BVALU(Xt,Bc,N,Kk,Id,x-x4*h)&
+      +FUN(x+x4*h)*BVALU(Xt,Bc,N,Kk,Id,x+x4*h))))
   END FUNCTION G8
 
 END SUBROUTINE BSGQ8

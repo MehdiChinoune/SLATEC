@@ -1,5 +1,5 @@
 !** COSQI
-SUBROUTINE COSQI(N,Wsave)
+PURE SUBROUTINE COSQI(N,Wsave)
   !> Initialize a work array for COSQF and COSQB.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -55,8 +55,8 @@ SUBROUTINE COSQI(N,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(3*N+15)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(OUT) :: Wsave(3*N+15)
   INTEGER :: k
   REAL(SP) :: dt, fk, pih
   !* FIRST EXECUTABLE STATEMENT  COSQI
@@ -68,4 +68,5 @@ SUBROUTINE COSQI(N,Wsave)
     Wsave(k) = COS(fk*dt)
   END DO
   CALL RFFTI(N,Wsave(N+1))
+
 END SUBROUTINE COSQI

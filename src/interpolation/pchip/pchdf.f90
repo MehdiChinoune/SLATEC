@@ -1,5 +1,5 @@
 !** PCHDF
-REAL(SP) FUNCTION PCHDF(K,X,S,Ierr)
+REAL(SP) PURE FUNCTION PCHDF(K,X,S)
   !> Computes divided differences for PCHCE and PCHSP
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -45,7 +45,7 @@ REAL(SP) FUNCTION PCHDF(K,X,S,Ierr)
   !                 Verlag, New York, 1978, pp. 10-16.
   !***
   ! **Routines called:**  XERMSG
-  USE service, ONLY : XERMSG
+
   !* REVISION HISTORY  (YYMMDD)
   !   820503  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
@@ -64,13 +64,13 @@ REAL(SP) FUNCTION PCHDF(K,X,S,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: K, Ierr
-  REAL(SP) :: X(K), S(K)
+  INTEGER, INTENT(IN) :: K
+  REAL(SP), INTENT(IN) :: X(K), S(K)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER :: i, j
-  REAL(SP) :: value
+  REAL(SP) :: value, s_tmp(K)
   REAL(SP), PARAMETER :: zero = 0.
   !
   !  CHECK FOR LEGAL VALUE OF K.
@@ -81,32 +81,27 @@ REAL(SP) FUNCTION PCHDF(K,X,S,Ierr)
     !  ERROR RETURN.
     !
     !     K<3 RETURN.
-    Ierr = -1
-    CALL XERMSG('PCHDF','K LESS THAN THREE',Ierr,1)
-    PCHDF = zero
-    RETURN
+    ERROR STOP 'PCHDF : K LESS THAN THREE'
   END IF
   !
   !  COMPUTE COEFFICIENTS OF INTERPOLATING POLYNOMIAL.
   !
   DO j = 2, K - 1
     DO i = 1, K - j
-      S(i) = (S(i+1)-S(i))/(X(i+j)-X(i))
+      s_tmp(i) = (S(i+1)-S(i))/(X(i+j)-X(i))
     END DO
   END DO
   !
   !  EVALUATE DERIVATIVE AT X(K).
   !
-  value = S(1)
+  value = s_tmp(1)
   DO i = 2, K - 1
-    value = S(i) + value*(X(K)-X(i))
+    value = s_tmp(i) + value*(X(K)-X(i))
   END DO
   !
   !  NORMAL RETURN.
   !
-  Ierr = 0
   PCHDF = value
   RETURN
   !------------- LAST LINE OF PCHDF FOLLOWS ------------------------------
-  RETURN
 END FUNCTION PCHDF

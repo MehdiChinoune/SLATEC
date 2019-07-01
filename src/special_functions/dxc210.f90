@@ -49,7 +49,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE DXBLK ,ONLY: nlg102_com, mlg102_com, lg102_com
-  USE service, ONLY : XERMSG
+
   INTEGER :: Ierror, K, J
   REAL(DP) :: Z
   INTEGER :: i, ic, id, ii, it, ja, ka, ka1, ka2, m, nm1, np1
@@ -116,7 +116,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   END IF
   !   THIS ERROR OCCURS IF K EXCEEDS  MLG102**2 - 1  IN MAGNITUDE.
   !
-  CALL XERMSG('DXC210','K too large',208,1)
+  ERROR STOP 'DXC210 : K too large'
   Ierror = 208
   RETURN
 END SUBROUTINE DXC210

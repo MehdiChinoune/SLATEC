@@ -1,9 +1,8 @@
 !** DSORT
-SUBROUTINE DSORT(Dx,Dy,N,Kflag)
-  !> Sort an array and optionally make the same interchanges in
-  !            an auxiliary array.  The array may be sorted in increasing
-  !            or decreasing order.  A slightly modified QUICKSORT
-  !            algorithm is used.
+PURE SUBROUTINE DSORT(Dx,Dy,N,Kflag)
+  !> Sort an array and optionally make the same interchanges in an auxiliary array.
+  !  The array may be sorted in increasing or decreasing order.
+  !  A slightly modified QUICKSORT algorithm is used.
   !***
   ! **Library:**   SLATEC
   !***
@@ -55,11 +54,11 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !   920519  Clarified error messages.  (DWL)
   !   920801  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
-  USE service, ONLY : XERMSG
+
   !     .. Scalar Arguments ..
-  INTEGER :: Kflag, N
+  INTEGER, INTENT(IN) :: Kflag, N
   !     .. Array Arguments ..
-  REAL(DP) :: Dx(N), Dy(N)
+  REAL(DP), INTENT(INOUT) :: Dx(N), Dy(N)
   !     .. Local Scalars ..
   REAL(DP) :: r, t, tt, tty, ty
   INTEGER :: i, ij, j, k, kk, l, m, nn
@@ -69,15 +68,12 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !* FIRST EXECUTABLE STATEMENT  DSORT
   nn = N
   IF( nn<1 ) THEN
-    CALL XERMSG('DSORT',&
-      'The number of values to be sorted is not positive.',1,1)
-    RETURN
+    ERROR STOP 'DSORT : The number of values to be sorted is not positive.'
   END IF
   !
   kk = ABS(Kflag)
   IF( kk/=1 .AND. kk/=2 ) THEN
-    CALL XERMSG('DSORT',&
-      'The sort control parameter, K, is not 2, 1, -1, or -2.',2,1)
+    ERROR STOP 'DSORT : The sort control parameter, K, is not 2, 1, -1, or -2.'
     RETURN
   END IF
   !
@@ -356,4 +352,5 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
       Dx(i) = -Dx(i)
     END DO
   END IF
+
 END SUBROUTINE DSORT

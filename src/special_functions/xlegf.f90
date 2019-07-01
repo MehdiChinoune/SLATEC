@@ -131,7 +131,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  USE service, ONLY : XERMSG
+
   INTEGER :: Id, Ierror, Mu1, Mu2, Nudiff, Ipqa(Nudiff+Mu2-Mu1+1)
   REAL(SP) :: Pqa(Nudiff+Mu2-Mu1+1), Dnu1, Theta
   INTEGER :: i, l
@@ -158,7 +158,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
       IF( Mu2>=Mu1 ) THEN
         IF( Mu1>=0 ) THEN
           IF( Theta<=0. .OR. Theta>pi2 ) THEN
-            CALL XERMSG('XLEGF','THETA out of range',111,1)
+            ERROR STOP 'XLEGF : THETA out of range'
             Ierror = 111
             RETURN
           ELSEIF( Id>=1 .AND. Id<=4 ) THEN
@@ -239,8 +239,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !
   !        *****     ERROR TERMINATION     *****
   !
-  100  CALL XERMSG('XLEGF','DNU1, NUDIFF, MU1, MU2, or ID not valid',&
-    110,1)
+  100 ERROR STOP 'XLEGF : DNU1, NUDIFF, MU1, MU2, or ID not valid'
   Ierror = 110
   RETURN
 END SUBROUTINE XLEGF

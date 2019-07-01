@@ -1,5 +1,5 @@
 !** DCHFCM
-INTEGER FUNCTION DCHFCM(D1,D2,Delta)
+INTEGER ELEMENTAL FUNCTION DCHFCM(D1,D2,Delta)
   !> Check a single cubic for monotonicity.
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -90,7 +90,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(DP) :: D1, D2, Delta
+  REAL(DP), INTENT(IN) :: D1, D2, Delta
   !
   !  DECLARE LOCAL VARIABLES.
   !

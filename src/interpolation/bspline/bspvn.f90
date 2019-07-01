@@ -1,7 +1,6 @@
 !** BSPVN
-SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
-  !> Calculate the value of all (possibly) nonzero basis
-  !            functions at X.
+PURE SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
+  !> Calculate the value of all (possibly) nonzero basis functions at X.
   !***
   ! **Library:**   SLATEC
   !***
@@ -73,13 +72,13 @@ SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: Ileft, Indexx, Iwork, Jhigh, K
-  REAL(SP) :: T(Ileft+Jhigh), Vnikx(K), Work(2*K), X
+
+  INTEGER, INTENT(IN) :: Ileft, Indexx, Jhigh, K
+  INTEGER, INTENT(OUT) :: Iwork
+  REAL(SP), INTENT(IN) :: T(Ileft+Jhigh), X
+  REAL(SP), INTENT(OUT) :: Vnikx(K), Work(2*K)
   INTEGER :: imjp1, ipj, jp1, jp1ml, l
   REAL(SP) :: vm, vmprev
   !     DIMENSION T(ILEFT+JHIGH)
@@ -89,17 +88,16 @@ SUBROUTINE BSPVN(T,Jhigh,K,Indexx,X,Ileft,Vnikx,Work,Iwork)
   IF( K<1 ) THEN
     !
     !
-    CALL XERMSG('BSPVN','K DOES NOT SATISFY K>=1',2,1)
+    ERROR STOP 'BSPVN : K DOES NOT SATISFY K>=1'
     RETURN
   ELSEIF( Jhigh>K .OR. Jhigh<1 ) THEN
-    CALL XERMSG('BSPVN','JHIGH DOES NOT SATISFY 1<=JHIGH<=K',2,1)
+    ERROR STOP 'BSPVN : JHIGH DOES NOT SATISFY 1<=JHIGH<=K'
     RETURN
   ELSEIF( Indexx<1 .OR. Indexx>2 ) THEN
-    CALL XERMSG('BSPVN','INDEX IS NOT 1 OR 2',2,1)
+    ERROR STOP 'BSPVN : INDEX IS NOT 1 OR 2'
     RETURN
   ELSEIF( X<T(Ileft) .OR. X>T(Ileft+1) ) THEN
-    CALL XERMSG('BSPVN',&
-      'X DOES NOT SATISFY T(ILEFT)<=X<=T(ILEFT+1)',2,1)
+    ERROR STOP 'BSPVN : X DOES NOT SATISFY T(ILEFT)<=X<=T(ILEFT+1)'
     RETURN
   ELSE
     IF( Indexx/=2 ) THEN

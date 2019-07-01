@@ -1,7 +1,6 @@
 !** HPPERM
-SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
-  !> Rearrange a given array according to a prescribed
-  !            permutation vector.
+PURE SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
+  !> Rearrange a given array according to a prescribed permutation vector.
   !***
   ! **Library:**   SLATEC
   !***
@@ -18,8 +17,7 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   !
   !         HPPERM rearranges the data vector HX according to the
   !         permutation IPERM: HX(I) <--- HX(IPERM(I)).  IPERM could come
-  !         from one of the sorting routines IPSORT, SPSORT, DPSORT or
-  !         HPSORT.
+  !         from one of the sorting routines IPSORT, SPSORT, DPSORT or HPSORT.
   !
   !     Description of Parameters
   !         HX - input/output -- character array of values to be
@@ -43,23 +41,21 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text and to add
   !           check for length of work array.
-  USE service, ONLY : XERMSG
-  INTEGER :: N, Iperm(N), Ier
-  CHARACTER(*) Hx(N), Work
+
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(INOUT) :: Iperm(N)
+  INTEGER, INTENT(OUT) :: Ier
+  CHARACTER(*), INTENT(INOUT) :: Hx(N), Work
   INTEGER :: i, indx, indx0, istrt
   !* FIRST EXECUTABLE STATEMENT  HPPERM
   Ier = 0
   IF( N<1 ) THEN
     Ier = 1
-    CALL XERMSG('HPPERM',&
-      'The number of values to be rearranged, N, is not positive.',Ier,1)
-    RETURN
+    ERROR STOP 'HPPERM : The number of values to be rearranged, N, is not positive.'
   END IF
   IF( LEN(Work)<LEN(Hx(1)) ) THEN
     Ier = 2
-    CALL XERMSG('HPPERM',&
-      'The length of the work variable, WORK, is too short.',Ier,1)
-    RETURN
+    ERROR STOP 'HPPERM : The length of the work variable, WORK, is too short.'
   END IF
   !
   !     CHECK WHETHER IPERM IS A VALID PERMUTATION
@@ -73,9 +69,7 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
       END IF
     END IF
     Ier = 3
-    CALL XERMSG('HPPERM',&
-      'The permutation vector, IPERM, is not valid.',Ier,1)
-    RETURN
+    ERROR STOP 'HPPERM : The permutation vector, IPERM, is not valid.'
   END DO
   !
   !     REARRANGE THE VALUES OF HX

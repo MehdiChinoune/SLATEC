@@ -1,5 +1,5 @@
 !** DBNFAC
-SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
+PURE SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !> Subsidiary to DBINT4 and DBINTK
   !***
   ! **Library:**   SLATEC
@@ -82,8 +82,9 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER :: Iflag, Nbandl, Nbandu, Nrow, Nroww
-  REAL(DP) :: W(Nroww,Nrow)
+  INTEGER, INTENT(IN) :: Nbandl, Nbandu, Nrow, Nroww
+  INTEGER, INTENT(OUT) :: Iflag
+  REAL(DP), INTENT(INOUT) :: W(Nroww,Nrow)
   INTEGER :: i, ipk, j, jmax, k, kmax, middle, midmk, nrowm1
   REAL(DP) :: factor, pivot
   !
@@ -145,4 +146,5 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   IF( W(middle,Nrow)/=0._DP ) RETURN
   100 CONTINUE
   IFlag = 2
+
 END SUBROUTINE DBNFAC

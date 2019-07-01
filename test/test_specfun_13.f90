@@ -41,6 +41,7 @@ CONTAINS
     ipass1 = 1
     ipass2 = 1
     ipass3 = 1
+    ier = 0
     !
     !  FORCE ERROR 1
     !
@@ -147,6 +148,7 @@ CONTAINS
     ipass1 = 1
     ipass2 = 1
     ipass3 = 1
+    ier = 0
     !
     !  FORCE ERROR 1
     !
@@ -254,6 +256,7 @@ CONTAINS
     ipass1 = 1
     ipass2 = 1
     ipass3 = 1
+    ier = 0
     !
     !  FORCE ERROR 1
     !
@@ -361,6 +364,7 @@ CONTAINS
     ipass1 = 1
     ipass2 = 1
     ipass3 = 1
+    ier = 0
     !
     !  FORCE ERROR 1
     !

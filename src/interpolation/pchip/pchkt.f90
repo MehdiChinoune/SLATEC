@@ -1,5 +1,5 @@
 !** PCHKT
-SUBROUTINE PCHKT(N,X,Knotyp,T)
+PURE SUBROUTINE PCHKT(N,X,Knotyp,T)
   !> Compute B-spline knot sequence for PCHBS.
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -50,8 +50,9 @@ SUBROUTINE PCHKT(N,X,Knotyp,T)
   !
   !  Declare arguments.
   !
-  INTEGER :: N, Knotyp
-  REAL(SP) :: X(N), T(2*N+4)
+  INTEGER, INTENT(IN) :: N, Knotyp
+  REAL(SP), INTENT(IN) :: X(N)
+  REAL(SP), INTENT(OUT) :: T(2*N+4)
   !
   !  Declare local variables.
   !

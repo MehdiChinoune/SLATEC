@@ -1,7 +1,6 @@
 !** SPPERM
-SUBROUTINE SPPERM(X,N,Iperm,Ier)
-  !> Rearrange a given array according to a prescribed
-  !            permutation vector.
+PURE SUBROUTINE SPPERM(X,N,Iperm,Ier)
+  !> Rearrange a given array according to a prescribed permutation vector.
   !***
   ! **Library:**   SLATEC
   !***
@@ -38,18 +37,18 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
   !* REVISION HISTORY  (YYMMDD)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-  USE service, ONLY : XERMSG
-  INTEGER :: N, Iperm(N), Ier
-  REAL(SP) :: X(N)
+
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(INOUT) :: Iperm(N)
+  INTEGER, INTENT(OUT) :: Ier
+  REAL(SP), INTENT(INOUT) :: X(N)
   INTEGER :: i, indx, indx0, istrt
   REAL(SP) :: temp
   !* FIRST EXECUTABLE STATEMENT  SPPERM
   Ier = 0
   IF( N<1 ) THEN
     Ier = 1
-    CALL XERMSG('SPPERM',&
-      'The number of values to be rearranged, N, is not positive.',Ier,1)
-    RETURN
+    ERROR STOP 'SPPERM : The number of values to be rearranged, N, is not positive.'
   END IF
   !
   !     CHECK WHETHER IPERM IS A VALID PERMUTATION
@@ -63,9 +62,7 @@ SUBROUTINE SPPERM(X,N,Iperm,Ier)
       END IF
     END IF
     Ier = 2
-    CALL XERMSG('SPPERM',&
-      'The permutation vector, IPERM, is not valid.',Ier,1)
-    RETURN
+    ERROR STOP 'SPPERM : The permutation vector, IPERM, is not valid.'
   END DO
   !
   !     REARRANGE THE VALUES OF X

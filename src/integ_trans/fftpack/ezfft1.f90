@@ -1,7 +1,6 @@
 !** EZFFT1
-SUBROUTINE EZFFT1(N,Wa,Ifac)
-  !> EZFFTI calls EZFFT1 with appropriate work array
-  !            partitioning.
+PURE SUBROUTINE EZFFT1(N,Wa,Ifac)
+  !> EZFFTI calls EZFFT1 with appropriate work array partitioning.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -19,16 +18,16 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   !           (b) changing references to intrinsic function FLOAT
   !               to REAL(SP), and
   !           (c) changing definition of variable TPI by using
-  !               FORTRAN intrinsic function ATAN instead of a DATA
-  !               statement.
+  !               FORTRAN intrinsic function ATAN instead of a DATA statement.
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: N, Ifac(15)
-  REAL(SP) :: Wa(N)
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ifac(15)
+  REAL(SP), INTENT(OUT) :: Wa(N)
   INTEGER :: i, ib, ido, ii, ip, ipm, is, j, k1, l1, l2, nf, nfm1, nl, nq, nr, ntry
   REAL(SP) :: arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi
   INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
@@ -98,4 +97,5 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
       EXIT
     END IF
   END DO
+
 END SUBROUTINE EZFFT1

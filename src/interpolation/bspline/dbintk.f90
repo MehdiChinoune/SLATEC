@@ -1,7 +1,6 @@
 !** DBINTK
-SUBROUTINE DBINTK(X,Y,T,N,K,Bcoef,Q,Work)
-  !> Compute the B-representation of a spline which interpolates
-  !            given data.
+PURE SUBROUTINE DBINTK(X,Y,T,N,K,Bcoef,Q,Work)
+  !> Compute the B-representation of a spline which interpolates given data.
   !***
   ! **Library:**   SLATEC
   !***
@@ -94,24 +93,21 @@ SUBROUTINE DBINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: K, N
-  REAL(DP) :: Bcoef(N), Y(N), Q((2*K-1)*N), T(N+K), X(N), Work(2*K)
+
+  INTEGER, INTENT(IN) :: K, N
+  REAL(DP), INTENT(IN) :: Y(N), T(N+K), X(N)
+  REAL(DP), INTENT(OUT) :: Bcoef(N), Q((2*K-1)*N), Work(2*K)
   INTEGER :: iflag, iwork, i, ilp1mx, j, jj, km1, kpkm2, left, lenq, np1
   REAL(DP) :: xi
   !     DIMENSION Q(2*K-1,N), T(N+K)
   !* FIRST EXECUTABLE STATEMENT  DBINTK
   IF( K<1 ) THEN
-    CALL XERMSG('DBINTK','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'DBINTK : K DOES NOT SATISFY K>=1'
   ELSE
     IF( N<K ) THEN
-      CALL XERMSG('DBINTK','N DOES NOT SATISFY N>=K',2,1)
-      RETURN
+      ERROR STOP 'DBINTK : N DOES NOT SATISFY N>=K'
     ELSE
       jj = N - 1
       IF( jj/=0 ) THEN
@@ -173,10 +169,8 @@ SUBROUTINE DBINTK(X,Y,T,N,K,Bcoef,Q,Work)
       !     ***OBTAIN FACTORIZATION OF  A , STORED AGAIN IN  Q.
       CALL DBNFAC(Q,K+km1,N,km1,km1,iflag)
       IF( iflag==2 ) THEN
-        CALL XERMSG('DBINTK',&
-          'THE SYSTEM OF SOLVER DETECTS A SINGULAR SYSTEM ALTHOUGH '&
-          &'THE THEORETICAL CONDITIONS FOR A SOLUTION WERE SATISFIED.',8,1)
-        RETURN
+        ERROR STOP 'DBINTK : THE SYSTEM OF SOLVER DETECTS A SINGULAR SYSTEM ALTHOUGH '&
+          &'THE THEORETICAL CONDITIONS FOR A SOLUTION WERE SATISFIED.'
       ELSE
         !     *** SOLVE  A*BCOEF = Y  BY BACKSUBSTITUTION
         DO i = 1, N
@@ -187,12 +181,10 @@ SUBROUTINE DBINTK(X,Y,T,N,K,Bcoef,Q,Work)
       END IF
       !
       !
-      20  CALL XERMSG('DBINTK',&
-        'SOME ABSCISSA WAS NOT IN THE SUPPORT OF THE CORRESPONDING BASIS FUNCTION&
-        & AND THE SYSTEM IS SINGULAR.',2,1)
-      RETURN
+      20 ERROR STOP 'DBINTK : SOME ABSCISSA WAS NOT IN THE SUPPORT OF THE&
+           & CORRESPONDING BASIS FUNCTION AND THE SYSTEM IS SINGULAR.'
     END IF
-    50  CALL XERMSG('DBINTK',&
-      'X(I) DOES NOT SATISFY X(I)<X(I+1) FOR SOME I',2,1)
+    50  ERROR STOP 'DBINTK : X(I) DOES NOT SATISFY X(I)<X(I+1) FOR SOME I'
   END IF
+
 END SUBROUTINE DBINTK

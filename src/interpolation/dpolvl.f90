@@ -1,8 +1,7 @@
 !** DPOLVL
-SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
-  !> Calculate the value of a polynomial and its first NDER
-  !            derivatives where the polynomial was produced by a previous
-  !            call to DPLINT.
+PURE SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
+  !> Calculate the value of a polynomial and its first NDER derivatives where
+  !  the polynomial was produced by a previous call to DPLINT.
   !***
   ! **Library:**   SLATEC
   !***
@@ -82,8 +81,10 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Ierr, N, Nder
-  REAL(DP) :: C(N), X(N), Xx, Yfit, Yp(Nder), Work(2*N)
+  INTEGER, INTENT(IN) :: N, Nder
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: C(N), X(N), Xx
+  REAL(DP), INTENT(OUT) :: Yfit, Yp(Nder), Work(2*N)
   INTEGER :: i, im1, izero, k, km1, km1pi, km2pn, km2pni, m, mm, ndr, nmkp1, npkm1
   REAL(DP) :: fac, pione, pitwo, pone, ptwo, xk
   !* FIRST EXECUTABLE STATEMENT  DPOLVL
@@ -212,4 +213,5 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     END DO
     RETURN
   END IF
+
 END SUBROUTINE DPOLVL

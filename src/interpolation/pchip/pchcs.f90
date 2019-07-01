@@ -1,5 +1,5 @@
 !** PCHCS
-SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
+PURE SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !> Adjusts derivative values for PCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -95,8 +95,10 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd, Ierr
-  REAL(SP) :: Switch, H(N), Slope(N), D(Incfd,N)
+  INTEGER, INTENT(IN) :: N, Incfd
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: Switch, H(N), Slope(N)
+  REAL(SP), INTENT(INOUT) :: D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -229,15 +231,14 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !------------- LAST LINE OF PCHCS FOLLOWS ------------------------------
 CONTAINS
-
   !
   !  DEFINE INLINE FUNCTION FOR WEIGHTED AVERAGE OF SLOPES.
   !
-  REAL(SP) FUNCTION PCHSD(s1,s2,h1,h2)
+  REAL(SP) ELEMENTAL FUNCTION PCHSD(s1,s2,h1,h2)
     REAL(SP), INTENT(IN) :: s1, s2, h1, h2
 
     PCHSD = (h2/(h1+h2))*s1 + (h1/(h1+h2))*s2
 
   END FUNCTION PCHSD
-
+  !
 END SUBROUTINE PCHCS

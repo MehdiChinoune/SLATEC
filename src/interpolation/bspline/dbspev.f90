@@ -1,7 +1,6 @@
 !** DBSPEV
-SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
-  !> Calculate the value of the spline and its derivatives from
-  !            the B-representation.
+PURE SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
+  !> Calculate the value of the spline and its derivatives from the B-representation.
   !***
   ! **Library:**   SLATEC
   !***
@@ -76,25 +75,21 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: Inev, K, N, Nderiv
-  REAL(DP) :: Ad((2*N-Nderiv+1)*Nderiv/2), Svalue(Nderiv), T(N+K), Work(3*K), X
+
+  INTEGER, INTENT(IN) :: K, N, Nderiv
+  INTEGER, INTENT(INOUT) :: Inev
+  REAL(DP), INTENT(IN) :: Ad((2*N-Nderiv+1)*Nderiv/2), T(N+K), X
+  REAL(DP), INTENT(OUT) :: Svalue(Nderiv), Work(3*K)
   INTEGER :: i, id, iwork, jj, kp1, kp1mn, l, left, ll, mflag
   REAL(DP) :: summ
   !     DIMENSION T(N+K)
   !* FIRST EXECUTABLE STATEMENT  DBSPEV
   IF( K<1 ) THEN
-    !
-    !
-    CALL XERMSG('DBSPEV','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'DBSPEV : K DOES NOT SATISFY K>=1'
   ELSEIF( N<K ) THEN
-    CALL XERMSG('DBSPEV','N DOES NOT SATISFY N>=K',2,1)
-    RETURN
+    ERROR STOP 'DBSPEV : N DOES NOT SATISFY N>=K'
   ELSEIF( Nderiv<1 .OR. Nderiv>K ) THEN
-    CALL XERMSG('DBSPEV','NDERIV DOES NOT SATISFY 1<=NDERIV<=K',2,1)
-    RETURN
+    ERROR STOP 'DBSPEV : NDERIV DOES NOT SATISFY 1<=NDERIV<=K'
   ELSE
     id = Nderiv
     CALL DINTRV(T,N+1,X,Inev,i,mflag)
@@ -105,9 +100,7 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
           i = i - 1
           IF( X/=T(i) ) GOTO 20
         END DO
-        CALL XERMSG('DBSPEV',&
-          'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
-        RETURN
+        ERROR STOP 'DBSPEV : A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)'
       END IF
       !
       !- I* HAS BEEN FOUND IN (K,N) SO THAT T(I) <= X < T(I+1)
@@ -139,6 +132,7 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
       END DO
     END IF
   END IF
-  100  CALL XERMSG('DBSPEV','X IS NOT IN T(K)<=X<=T(N+1)',2,1)
+  100  ERROR STOP 'DBSPEV : X IS NOT IN T(K)<=X<=T(N+1)'
+
   RETURN
 END SUBROUTINE DBSPEV

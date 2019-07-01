@@ -1,8 +1,7 @@
 !** POLYVL
-SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
-  !> Calculate the value of a polynomial and its first NDER
-  !            derivatives where the polynomial was produced by a previous
-  !            call to POLINT.
+PURE SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
+  !> Calculate the value of a polynomial and its first NDER derivatives where
+  !  the polynomial was produced by a previous call to POLINT.
   !***
   ! **Library:**   SLATEC
   !***
@@ -81,8 +80,10 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Ierr, N, Nder
-  REAL(SP) :: C(N), Work(2*N), X(N), Yp(Nder), Xx, Yfit
+  INTEGER, INTENT(IN) :: N, Nder
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: C(N), X(N), Xx
+  REAL(SP), INTENT(OUT) :: Work(2*N), Yp(Nder), Yfit
   INTEGER :: i, im1, izero, k, km1, km1pi, km2pn, km2pni, m, mm, ndr, nmkp1, npkm1
   REAL(SP) :: fac, pione, pitwo, pone, ptwo, xk
   !* FIRST EXECUTABLE STATEMENT  POLYVL
@@ -211,4 +212,5 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     END DO
     RETURN
   END IF
+
 END SUBROUTINE POLYVL

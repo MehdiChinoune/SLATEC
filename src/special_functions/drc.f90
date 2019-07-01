@@ -282,23 +282,24 @@ REAL(DP) ELEMENTAL FUNCTION DRC(X,Y)
   IF( X<0._DP .OR. Y<=0._DP ) THEN
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    ERROR STOP 'DRC : X<0 .OR. Y<=0 WHERE X = '//xern3//' AND Y = '//xern4
+    ERROR STOP 'DRC : X<0 .OR. Y<=0'
+    ! WHERE X = '//xern3//' AND Y = '//xern4
   END IF
   !
   IF( MAX(X,Y)>uplim ) THEN
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') uplim
-    ERROR STOP 'DRC : MAX(X,Y)>UPLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' AND UPLIM = '//xern5
+    ERROR STOP 'DRC : MAX(X,Y)>UPLIM'
+    ! WHERE X = '//xern3//' Y = '//xern4//' AND UPLIM = '//xern5
   END IF
   !
   IF( X+Y<lolim ) THEN
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') lolim
-    ERROR STOP 'DRC : X+Y<LOLIM WHERE X = '//xern3//' Y = '//&
-      xern4//' AND LOLIM = '//xern5
+    ERROR STOP 'DRC : X+Y<LOLIM'
+    ! WHERE X = '//xern3//' Y = '//xern4//' AND LOLIM = '//xern5
   END IF
   !
   xn = X

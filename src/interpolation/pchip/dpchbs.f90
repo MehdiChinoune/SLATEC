@@ -1,5 +1,5 @@
 !** DPCHBS
-SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
+PURE SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !> Piecewise Cubic Hermite to B-Spline converter.
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -157,7 +157,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !   930514  Corrected problems with dimensioning of arguments and
   !           clarified DESCRIPTION.  (FNF)
   !   930604  Removed  NKNOTS from DPCHKT call list.  (FNF)
-  USE service, ONLY : XERMSG
+
   !
   !*Internal Notes:
   !
@@ -165,14 +165,17 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !
   !  Declare arguments.
   !
-  INTEGER :: N, Incfd, Knotyp, Nknots, Ndim, Kord, Ierr
-  REAL(DP) :: X(N), F(Incfd,N), D(Incfd,N), T(2*N+4), Bcoef(2*N)
+  INTEGER, INTENT(IN) :: N, Incfd, Knotyp
+  INTEGER, INTENT(INOUT) :: Nknots
+  INTEGER, INTENT(OUT) :: Ndim, Kord, Ierr
+  REAL(DP), INTENT(IN) :: X(N), F(Incfd,N), D(Incfd,N)
+  REAL(DP), INTENT(INOUT) :: T(2*N+4)
+  REAL(DP), INTENT(OUT) :: Bcoef(2*N)
   !
   !  Declare local variables.
   !
   INTEGER :: k, kk
   REAL(DP) :: dov3, hnew, hold
-  CHARACTER(8) :: libnam, subnam
   !* FIRST EXECUTABLE STATEMENT  DPCHBS
   !
   !  Initialize.
@@ -180,15 +183,12 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   Ndim = 2*N
   Kord = 4
   Ierr = 0
-  libnam = 'SLATEC'
-  subnam = 'DPCHBS'
   !
   !  Check argument validity.  Set up knot sequence if OK.
   !
   IF( Knotyp>2 ) THEN
     Ierr = -1
-    CALL XERMSG(subnam,'KNOTYP GREATER THAN 2',Ierr,1)
-    RETURN
+    ERROR STOP 'DPCHBS : KNOTYP GREATER THAN 2'
   END IF
   IF( Knotyp>=0 ) THEN
     !          Set up knot sequence.
@@ -196,8 +196,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
     CALL DPCHKT(N,X,Knotyp,T)
   ELSEIF( Nknots/=Ndim+4 ) THEN
     Ierr = -2
-    CALL XERMSG(subnam,'KNOTYP<0 AND NKNOTS/=(2*N+4)',Ierr,1)
-    RETURN
+    ERROR STOP 'DPCHBS : KNOTYP<0 AND NKNOTS/=(2*N+4)'
   END IF
   !
   !  Compute B-spline coefficients.

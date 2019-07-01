@@ -1,5 +1,5 @@
 !** CHFIE
-REAL(SP) FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
+REAL(SP) ELEMENTAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !> Evaluates integral of a single cubic for PCHIA
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -63,7 +63,7 @@ REAL(SP) FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(SP) :: X1, X2, F1, F2, D1, D2, A, B
+  REAL(SP), INTENT(IN) :: X1, X2, F1, F2, D1, D2, A, B
   !
   !  DECLARE LOCAL VARIABLES.
   !

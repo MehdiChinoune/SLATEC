@@ -1,5 +1,5 @@
 !** DPCHCE
-SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
+PURE SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !> Set boundary conditions for DPCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -97,7 +97,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  USE service, ONLY : XERMSG
+
   !
   !  Programming notes:
   !     1. The function DPCHST(ARG1,ARG2)  is assumed to return zero if
@@ -115,12 +115,14 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: Ic(2), N, Incfd, Ierr
-  REAL(DP) :: Vc(2), X(N), H(N), Slope(N), D(Incfd,N)
+  INTEGER, INTENT(IN) :: Ic(2), N, Incfd
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: Vc(2), X(N), H(N), Slope(N)
+  REAL(DP), INTENT(INOUT) :: D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER :: ibeg, iend, ierf, indexx, j, k
+  INTEGER :: ibeg, iend, indexx, j, k
   REAL(DP) :: stemp(3), xtemp(4)
   !
   !  INITIALIZE.
@@ -157,9 +159,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
         IF( j<k ) stemp(j) = Slope(indexx-1)
       END DO
       !                 -----------------------------
-      D(1,1) = DPCHDF(k,xtemp,stemp,ierf)
-      !                 -----------------------------
-      IF( ierf/=0 ) GOTO 100
+      D(1,1) = DPCHDF(k,xtemp,stemp)
     ELSE
       !        USE 'NOT A KNOT' CONDITION.
       D(1,1) = (three*(H(1)*Slope(2)+H(2)*Slope(1))-two*(H(1)+H(2))*D(1,2)&
@@ -205,9 +205,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
         IF( j<k ) stemp(j) = Slope(indexx)
       END DO
       !                 -----------------------------
-      D(1,N) = DPCHDF(k,xtemp,stemp,ierf)
-      !                 -----------------------------
-      IF( ierf/=0 ) GOTO 100
+      D(1,N) = DPCHDF(k,xtemp,stemp)
     ELSE
       !        USE 'NOT A KNOT' CONDITION.
       D(1,N) = (three*(H(N-1)*Slope(N-2)+H(N-2)*Slope(N-1))&
@@ -237,11 +235,5 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   RETURN
   !
-  !  ERROR RETURN.
-  !
-  !     ERROR RETURN FROM DPCHDF.
-  !   *** THIS CASE SHOULD NEVER OCCUR ***
-  100  Ierr = -1
-  CALL XERMSG('DPCHCE','ERROR RETURN FROM DPCHDF',Ierr,1)
   !------------- LAST LINE OF DPCHCE FOLLOWS -----------------------------
 END SUBROUTINE DPCHCE

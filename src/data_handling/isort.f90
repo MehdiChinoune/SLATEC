@@ -1,9 +1,8 @@
 !** ISORT
-SUBROUTINE ISORT(Ix,Iy,N,Kflag)
-  !> Sort an array and optionally make the same interchanges in
-  !            an auxiliary array.  The array may be sorted in increasing
-  !            or decreasing order.  A slightly modified QUICKSORT
-  !            algorithm is used.
+PURE SUBROUTINE ISORT(Ix,Iy,N,Kflag)
+  !> Sort an array and optionally make the same interchanges in an auxiliary array.
+  !  The array may be sorted in increasing or decreasing order.
+  !  A slightly modified QUICKSORT algorithm is used.
   !***
   ! **Library:**   SLATEC
   !***
@@ -54,11 +53,11 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !   920519  Clarified error messages.  (DWL)
   !   920801  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
-  USE service, ONLY : XERMSG
+
   !     .. Scalar Arguments ..
-  INTEGER :: Kflag, N
+  INTEGER, INTENT(IN) :: Kflag, N
   !     .. Array Arguments ..
-  INTEGER :: Ix(N), Iy(N)
+  INTEGER, INTENT(INOUT) :: Ix(N), Iy(N)
   !     .. Local Scalars ..
   REAL(SP) :: r
   INTEGER :: i, ij, j, k, kk, l, m, nn, t, tt, tty, ty
@@ -68,16 +67,12 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !* FIRST EXECUTABLE STATEMENT  ISORT
   nn = N
   IF( nn<1 ) THEN
-    CALL XERMSG('ISORT',&
-      'The number of values to be sorted is not positive.',1,1)
-    RETURN
+    ERROR STOP 'ISORT : The number of values to be sorted is not positive.'
   END IF
   !
   kk = ABS(Kflag)
   IF( kk/=1 .AND. kk/=2 ) THEN
-    CALL XERMSG('ISORT',&
-      'The sort control parameter, K, is not 2, 1, -1, or -2.',2,1)
-    RETURN
+    ERROR STOP 'ISORT : The sort control parameter, K, is not 2, 1, -1, or -2.'
   END IF
   !
   !     Alter array IX to get decreasing order if needed
@@ -355,4 +350,5 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
       Ix(i) = -Ix(i)
     END DO
   END IF
+
 END SUBROUTINE ISORT

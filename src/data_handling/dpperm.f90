@@ -1,7 +1,6 @@
 !** DPPERM
-SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
-  !> Rearrange a given array according to a prescribed
-  !            permutation vector.
+PURE SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
+  !> Rearrange a given array according to a prescribed permutation vector.
   !***
   ! **Library:**   SLATEC
   !***
@@ -22,8 +21,7 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !         HPSORT.
   !
   !     Description of Parameters
-  !         DX - input/output -- double precision array of values to be
-  !                   rearranged.
+  !         DX - input/output -- double precision array of values to be rearranged.
   !         N - input -- number of values in double precision array DX.
   !         IPERM - input -- permutation vector.
   !         IER - output -- error indicator:
@@ -39,18 +37,17 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !* REVISION HISTORY  (YYMMDD)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-  USE service, ONLY : XERMSG
-  INTEGER :: N, Iperm(N), Ier
-  REAL(DP) :: Dx(N)
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(INOUT) :: Iperm(N)
+  INTEGER, INTENT(OUT) :: Ier
+  REAL(DP), INTENT(INOUT) :: Dx(N)
   INTEGER :: i, indx, indx0, istrt
   REAL(DP) :: dtemp
   !* FIRST EXECUTABLE STATEMENT  DPPERM
   Ier = 0
   IF( N<1 ) THEN
     Ier = 1
-    CALL XERMSG('DPPERM',&
-      'The number of values to be rearranged, N, is not positive.',Ier,1)
-    RETURN
+    ERROR STOP 'DPPERM : The number of values to be rearranged, N, is not positive.'
   END IF
   !
   !     CHECK WHETHER IPERM IS A VALID PERMUTATION
@@ -64,9 +61,7 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
       END IF
     END IF
     Ier = 2
-    CALL XERMSG('DPPERM',&
-      'The permutation vector, IPERM, is not valid.',Ier,1)
-    RETURN
+    ERROR STOP 'DPPERM : The permutation vector, IPERM, is not valid.'
   END DO
   !
   !     REARRANGE THE VALUES OF DX

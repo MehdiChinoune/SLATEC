@@ -1,7 +1,6 @@
 !** CFFTI1
-SUBROUTINE CFFTI1(N,Wa,Ifac)
-  !> Initialize a real and an integer work array for CFFTF1 and
-  !            CFFTB1.
+PURE SUBROUTINE CFFTI1(N,Wa,Ifac)
+  !> Initialize a real and an integer work array for CFFTF1 and CFFTB1.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -48,19 +47,18 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
   !           (a) changing dummy array size declarations (1) to (*),
-  !           (b) changing references to intrinsic function FLOAT
-  !               to REAL(SP), and
+  !           (b) changing references to intrinsic function FLOAT to REAL(SP), and
   !           (c) changing definition of variable TPI by using
-  !               FORTRAN intrinsic function ATAN instead of a DATA
-  !               statement.
+  !               FORTRAN intrinsic function ATAN instead of a DATA statement.
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N, Ifac(15)
-  REAL(SP) :: Wa(2*N)
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ifac(15)
+  REAL(SP), INTENT(OUT) :: Wa(2*N)
   REAL(SP) :: arg, argh, argld, fi, tpi
   INTEGER :: i, i1, ib, ido, idot, ii, ip, ipm, j, k1, l1, l2, ld, nf, nl, nq, nr, ntry
   INTEGER, PARAMETER :: ntryh(4) = [ 3, 4, 2, 5 ]
@@ -128,4 +126,5 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
       EXIT
     END IF
   END DO
+
 END SUBROUTINE CFFTI1

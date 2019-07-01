@@ -1,7 +1,6 @@
 !** RADB3
-SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
-  !> Calculate the fast Fourier transform of subvectors of
-  !            length three.
+PURE SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
+  !> Calculate the fast Fourier transform of subvectors of length three.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -17,15 +16,15 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
   !           (a) changing dummy array size declarations (1) to (*),
   !           (b) changing definition of variable TAUI by using
-  !               FORTRAN intrinsic function SQRT instead of a DATA
-  !               statement.
+  !               FORTRAN intrinsic function SQRT instead of a DATA statement.
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Ido, L1
-  REAL(SP) :: Cc(Ido,3,L1), Ch(Ido,L1,3), Wa1(Ido), Wa2(Ido)
+  INTEGER, INTENT(IN) :: Ido, L1
+  REAL(SP), INTENT(IN) :: Cc(Ido,3,L1), Wa1(Ido), Wa2(Ido)
+  REAL(SP), INTENT(OUT) :: Ch(Ido,L1,3)
   INTEGER :: i, ic, idp2, k
   REAL(SP) :: ci2, ci3, cr2, cr3, di2, di3, dr2, dr3, taui, taur, ti2, tr2
   !* FIRST EXECUTABLE STATEMENT  RADB3
@@ -86,5 +85,6 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
       Ch(i,k,3) = Wa2(i-2)*di3 + Wa2(i-1)*dr3
     END DO
   END DO
+
   RETURN
 END SUBROUTINE RADB3

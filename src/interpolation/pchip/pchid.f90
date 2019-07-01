@@ -1,8 +1,7 @@
 !** PCHID
-REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
-  !> Evaluate the definite integral of a piecewise cubic
-  !            Hermite function over an interval whose endpoints are data
-  !            points.
+REAL(SP) PURE FUNCTION PCHID(N,X,F,D,Incfd,Ia,Ib)
+  !> Evaluate the definite integral of a piecewise cubicBHermite function over
+  !  an interval whose endpoints are data points.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -100,7 +99,7 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930504  Corrected to set VALUE=0 when IERR/=0.  (FNF)
-  USE service, ONLY : XERMSG
+
   !
   !  Programming notes:
   !  1. This routine uses a special formula that is valid only for
@@ -111,14 +110,14 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd, Ia, Ib, Ierr
-  REAL(SP) :: X(N), F(Incfd,N), D(Incfd,N)
-  LOGICAL :: Skip
+  INTEGER, INTENT(IN) :: N, Incfd, Ia, Ib
+  REAL(SP), INTENT(IN) :: X(N), F(Incfd,N), D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER :: i, iup, low
   REAL(SP) :: h, summ, value
+  LOGICAL, PARAMETER :: Skip = .FALSE.
   !
   !  INITIALIZE.
   !
@@ -135,15 +134,11 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
       !  ERROR RETURNS.
       !
       !     N<2 RETURN.
-      Ierr = -1
-      CALL XERMSG('PCHID','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
-      GOTO 100
+      ERROR STOP 'PCHID : NUMBER OF DATA POINTS LESS THAN TWO'
     ELSEIF( Incfd<1 ) THEN
       !
       !     INCFD<1 RETURN.
-      Ierr = -2
-      CALL XERMSG('PCHID','INCREMENT LESS THAN ONE',Ierr,1)
-      GOTO 100
+      ERROR STOP 'PCHID : INCREMENT LESS THAN ONE'
     ELSE
       DO i = 2, N
         IF( X(i)<=X(i-1) ) GOTO 200
@@ -153,10 +148,8 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !
   !  FUNCTION DEFINITION IS OK, GO ON.
   !
-  Skip = .TRUE.
   IF( (Ia<1) .OR. (Ia>N) ) GOTO 300
   IF( (Ib<1) .OR. (Ib>N) ) GOTO 300
-  Ierr = 0
   !
   !  COMPUTE INTEGRAL VALUE.
   !
@@ -174,17 +167,13 @@ REAL(SP) FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !
   !  NORMAL RETURN.
   !
-  100  PCHID = value
+  PCHID = value
   RETURN
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
-  200  Ierr = -3
-  CALL XERMSG('PCHID','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
-  GOTO 100
+  200 ERROR STOP 'PCHID : X-ARRAY NOT STRICTLY INCREASING'
   !
   !     IA OR IB OUT OF RANGE RETURN.
-  300  Ierr = -4
-  CALL XERMSG('PCHID','IA OR IB OUT OF RANGE',Ierr,1)
-  GOTO 100
+  300 ERROR STOP 'PCHID : IA OR IB OUT OF RANGE'
   !------------- LAST LINE OF PCHID FOLLOWS ------------------------------
 END FUNCTION PCHID

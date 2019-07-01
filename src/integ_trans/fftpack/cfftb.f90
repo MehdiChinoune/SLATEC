@@ -1,5 +1,5 @@
 !** CFFTB
-SUBROUTINE CFFTB(N,C,Wsave)
+PURE SUBROUTINE CFFTB(N,C,Wsave)
   !> Compute the unnormalized inverse of CFFTF.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -84,9 +84,9 @@ SUBROUTINE CFFTB(N,C,Wsave)
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(4*N+15)
-  COMPLEX(SP) :: C(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(INOUT) :: Wsave(4*N+15)
+  COMPLEX(SP), INTENT(INOUT) :: C(N)
   REAL(SP) :: rc(2*N)
   INTEGER :: ifac(15), i
   !* FIRST EXECUTABLE STATEMENT  CFFTF
@@ -96,4 +96,5 @@ SUBROUTINE CFFTB(N,C,Wsave)
   CALL CFFTB1(N,rc,Wsave,Wsave(2*N+1),ifac)
   C(1:N) = [ ( CMPLX(rc(i),rc(i+1),SP), i=1,2*N-1,2 ) ]
   Wsave(4*N+1:4*N+15) = ifac
+
 END SUBROUTINE CFFTB

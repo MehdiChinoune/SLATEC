@@ -1,5 +1,5 @@
 !** RFFTF1
-SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
+PURE SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   !> Compute the forward transform of a REAL(SP), periodic sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -71,8 +71,7 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   !           sequence by N.
   !
   !           WA and IFAC contain initialization calculations which must
-  !           not be destroyed between calls of subroutine RFFTF1 or
-  !           RFFTB1.
+  !           not be destroyed between calls of subroutine RFFTF1 or RFFTB1.
   !
   !***
   ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
@@ -91,8 +90,9 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N, Ifac(15)
-  REAL(SP) :: C(N), Ch(N), Wa(N)
+  INTEGER, INTENT(IN) :: N, Ifac(15)
+  REAL(SP), INTENT(IN) :: Wa(N)
+  REAL(SP), INTENT(INOUT) :: C(N), Ch(N)
   INTEGER :: i, idl1, ido, ip, iw, ix2, ix3, ix4, k1, kh, l1, l2, na, nf
   !* FIRST EXECUTABLE STATEMENT  RFFTF1
   nf = Ifac(2)
@@ -153,4 +153,5 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   DO i = 1, N
     C(i) = Ch(i)
   END DO
+
 END SUBROUTINE RFFTF1

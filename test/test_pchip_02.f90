@@ -999,8 +999,8 @@ CONTAINS
     !
     !  TEST ERROR RETURNS.
     !
-    CALL DEVERK(Lun,Kprint,fail)
-    IF( fail ) ifail = ifail + 4
+!    CALL DEVERK(Lun,Kprint,fail)
+!    IF( fail ) ifail = ifail + 4
     !
     !  PRINT SUMMARY AND TERMINATE.
     !     At this point, IFAIL has the following value:
@@ -1097,7 +1097,6 @@ CONTAINS
     !
     INTEGER :: i, ierr, ifail
     REAL(DP) :: calc, d(7), errmax, error, f(7), machep, tol, true
-    LOGICAL :: fail, skip
     !
     !  INITIALIZE.
     !
@@ -1109,8 +1108,6 @@ CONTAINS
       -4._DP, 3._DP, -5._DP, -5._DP, -6._DP, 6._DP, -1.5_DP, -1.5_DP, -3._DP, 3._DP, 0.5_DP ]
     REAL(DP), PARAMETER :: b(17) =  [ 3._DP, -3._DP, 1._DP, 2._DP, 5._DP, -0.5_DP, &
       4._DP, 5._DP, -3._DP, 5._DP, -5._DP, 5._DP, -0.5_DP, -1._DP, -2.5_DP, 3.5_DP, 0.5_DP ]
-    INTEGER, PARAMETER :: ierexp(17) = [ 0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, &
-      0, 0, 0, 0 ]
     !
     !  SET PASS/FAIL TOLERANCE.
     !
@@ -1142,27 +1139,21 @@ CONTAINS
       15X,'ERROR')
     !
     ifail = 0
+    ierr = 0
     !
-    skip = .FALSE.
     DO i = 1, npairs
       !               ---------------------------------------------
-      calc = DPCHIA(n,x,f,d,1,skip,a(i),b(i),ierr)
+      calc = DPCHIA(n,x,f,d,1,a(i),b(i))
       !               ---------------------------------------------
       IF( ierr>=0 ) THEN
-        fail = ierr/=ierexp(i)
         true = ANTDER(b(i)) - ANTDER(a(i))
         error = calc - true
         IF( Kprint>=3 ) THEN
-          IF( fail ) THEN
-            WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error, ierexp(i)
-            99005 FORMAT (2F6.1,I5,1P,2D20.10,D15.5,'  (',I1,') *****')
-          ELSE
-            WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
-          END IF
+          WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
         END IF
         !
         error = ABS(error)/MAX(one,ABS(true))
-        IF( fail .OR. (error>tol) ) ifail = ifail + 1
+        IF( error>tol ) ifail = ifail + 1
         IF( i==1 ) THEN
           errmax = error
         ELSE
@@ -1872,7 +1863,7 @@ CONTAINS
     INTEGER :: i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
     INTEGER, PARAMETER :: N = 9
     REAL(DP) :: bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, fermax, t(2*N+4), &
-      terr, termax, tol, tolz, tsave(2*N+4), work(16*N)
+      terr, termax, tol, tolz, tsave(2*N+4)
     REAL(DP), PARAMETER :: ZERO = 0._DP
     LOGICAL :: fail
     !
@@ -1927,10 +1918,10 @@ CONTAINS
           j = 1
         END IF
         DO i = 1, N
-          fcalc = DBVALU(t,bcoef,ndim,k,0,x(i),inbv,work)
+          fcalc = DBVALU(t,bcoef,ndim,k,0,x(i))
           ferr = f(i) - fcalc
           fermax = MAX(fermax,RELERR(ferr,f(i)))
-          dcalc = DBVALU(t,bcoef,ndim,k,1,x(i),inbv,work)
+          dcalc = DBVALU(t,bcoef,ndim,k,1,x(i))
           derr = d(i) - dcalc
           dermax = MAX(dermax,RELERR(derr,d(i)))
           IF( Kprint>=3 ) THEN

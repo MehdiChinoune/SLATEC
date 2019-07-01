@@ -1,7 +1,6 @@
 !** PASSB
-SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
-  !> Calculate the fast Fourier transform of subvectors of
-  !            arbitrary length.
+PURE SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
+  !> Calculate the fast Fourier transform of subvectors of arbitrary length.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -22,8 +21,11 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Nac, L1, Idl1, Ido, Ip
-  REAL(SP) :: C1(Ido,L1,Ip), C2(Idl1,Ip), Cc(Ido,Ip,L1), Ch(Ido,L1,Ip), Ch2(Idl1,Ip), Wa(:)
+  INTEGER, INTENT(IN) :: L1, Idl1, Ido, Ip
+  INTEGER, INTENT(OUT) :: Nac
+  REAL(SP), INTENT(IN) :: Cc(Ido,Ip,L1), Wa(:)
+  REAL(SP), INTENT(INOUT) :: Ch2(Idl1,Ip)
+  REAL(SP), INTENT(OUT) :: C1(Ido,L1,Ip), C2(Idl1,Ip), Ch(Ido,L1,Ip)
   INTEGER :: i, idij, idj, idl, idlj, idot, idp, ik, inc, ipp2, ipph, j, jc, k, l, lc
   REAL(SP) :: wai, war
   !* FIRST EXECUTABLE STATEMENT  PASSB
@@ -138,5 +140,6 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       END DO
     END DO
   END DO
+
   RETURN
 END SUBROUTINE PASSB

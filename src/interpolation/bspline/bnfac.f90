@@ -1,5 +1,5 @@
 !** BNFAC
-SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
+PURE SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !> Subsidiary to BINT4 and BINTK
   !***
   ! **Library:**   SLATEC
@@ -80,8 +80,9 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER :: Iflag, Nbandl, Nbandu, Nrow, Nroww
-  REAL(SP) :: W(Nroww,Nrow)
+  INTEGER, INTENT(IN) :: Nbandl, Nbandu, Nrow, Nroww
+  INTEGER, INTENT(OUT) :: Iflag
+  REAL(SP), INTENT(INOUT) :: W(Nroww,Nrow)
   INTEGER :: i, ipk, j, jmax, k, kmax, middle, midmk, nrowm1
   REAL(SP) :: factor, pivot
   !
@@ -143,4 +144,5 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   IF( W(middle,Nrow)/=0._SP ) RETURN
   100 CONTINUE
   IFlag = 2
+
 END SUBROUTINE BNFAC

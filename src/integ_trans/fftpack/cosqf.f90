@@ -1,5 +1,5 @@
 !** COSQF
-SUBROUTINE COSQF(N,X,Wsave)
+PURE SUBROUTINE COSQF(N,X,Wsave)
   !> Compute the forward cosine transform with odd wave numbers.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -20,8 +20,7 @@ SUBROUTINE COSQF(N,X,Wsave)
   !  is defined below at Output Parameter X
   !
   !  COSQF is the unnormalized inverse of COSQB since a call of COSQF
-  !  followed by a call of COSQB will multiply the input sequence X
-  !  by 4*N.
+  !  followed by a call of COSQB will multiply the input sequence X by 4*N.
   !
   !  The array WSAVE which is used by subroutine COSQF must be
   !  initialized by calling subroutine COSQI(N,WSAVE).
@@ -71,15 +70,14 @@ SUBROUTINE COSQF(N,X,Wsave)
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
   !           (a) changing dummy array size declarations (1) to (*),
   !           (b) changing definition of variable SQRT2 by using
-  !               FORTRAN intrinsic function SQRT instead of a DATA
-  !               statement.
+  !               FORTRAN intrinsic function SQRT instead of a DATA statement.
   !   861211  REVISION DATE from Version 3.2
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(3*N+15), X(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(INOUT) :: Wsave(3*N+15), X(N)
   REAL(SP) :: sqrt2, tsqx
   !* FIRST EXECUTABLE STATEMENT  COSQF
   sqrt2 = SQRT(2._SP)
@@ -92,5 +90,6 @@ SUBROUTINE COSQF(N,X,Wsave)
     CALL COSQF1(N,X,Wsave,Wsave(N+1))
     RETURN
   END IF
+
   RETURN
 END SUBROUTINE COSQF

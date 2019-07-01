@@ -1,11 +1,10 @@
 !** PCHIM
-SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
+PURE SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   !> Set derivatives needed to determine a monotone piecewise
-  !            cubic Hermite interpolant to given data.  Boundary values
-  !            are provided which are compatible with monotonicity.  The
-  !            interpolant will have an extremum at each point where mono-
-  !            tonicity switches direction.  (See PCHIC if user control is
-  !            desired over boundary or switch conditions.)
+  !  cubic Hermite interpolant to given data.
+  !  Boundary values are provided which are compatible with monotonicity.
+  !  The interpolant will have an extremum at each point where monotonicity switches
+  !  direction.  (See PCHIC if user control is desired over boundary or switch conditions.)
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -24,8 +23,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   !***
   ! **Description:**
   !
-  !          PCHIM:  Piecewise Cubic Hermite Interpolation to
-  !                  Monotone data.
+  !          PCHIM:  Piecewise Cubic Hermite Interpolation to Monotone data.
   !
   !     Sets derivatives needed to determine a monotone piecewise cubic
   !     Hermite interpolant to the data given in X and F.
@@ -142,8 +140,10 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd, Ierr
-  REAL(SP) :: X(N), F(Incfd,N), D(Incfd,N)
+  INTEGER, INTENT(IN) :: N, Incfd
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: X(N), F(Incfd,N)
+  REAL(SP), INTENT(OUT) :: D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -160,15 +160,13 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
     !
     !     N<2 RETURN.
     Ierr = -1
-    CALL XERMSG('PCHIM','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
-    RETURN
+    ERROR STOP 'PCHIM : NUMBER OF DATA POINTS LESS THAN TWO'
   ELSE
     IF( Incfd<1 ) THEN
       !
       !     INCFD<1 RETURN.
       Ierr = -2
-      CALL XERMSG('PCHIM','INCREMENT LESS THAN ONE',Ierr,1)
-      RETURN
+      ERROR STOP 'PCHIM : INCREMENT LESS THAN ONE'
     ELSE
       DO i = 2, N
         IF( X(i)<=X(i-1) ) GOTO 50
@@ -274,7 +272,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
     !
     !     X-ARRAY NOT STRICTLY INCREASING.
     50 Ierr = -3
-    CALL XERMSG('PCHIM','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
+    ERROR STOP 'PCHIM : X-ARRAY NOT STRICTLY INCREASING'
   END IF
   !------------- LAST LINE OF PCHIM FOLLOWS ------------------------------
 END SUBROUTINE PCHIM

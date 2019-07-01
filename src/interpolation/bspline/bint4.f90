@@ -1,7 +1,6 @@
 !** BINT4
-SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
-  !> Compute the B-representation of a cubic spline
-  !            which interpolates given data.
+PURE SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
+  !> Compute the B-representation of a cubic spline which interpolates given data.
   !***
   ! **Library:**   SLATEC
   !***
@@ -100,35 +99,32 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
   !
-  INTEGER :: Ibcl, Ibcr, K, Kntopt, N, Ndata
-  REAL(SP) :: Bcoef(Ndata+2), Fbcl, Fbcr, T(Ndata+6), W(5,Ndata+2), X(Ndata), Y(Ndata)
+  INTEGER, INTENT(IN) :: Ibcl, Ibcr, Kntopt, Ndata
+  INTEGER, INTENT(OUT) :: K, N
+  REAL(SP), INTENT(IN) :: Fbcl, Fbcr, X(Ndata), Y(Ndata)
+  REAL(SP), INTENT(OUT) :: Bcoef(Ndata+2), T(Ndata+6), W(5,Ndata+2)
   INTEGER :: i, iflag, ilb, ileft, it, iub, iw, iwp, j, jw, ndm, np, nwrow
   REAL(SP) :: tol, txn, tx1, vnikx(4,4), wdtol, work(15), xl
   !* FIRST EXECUTABLE STATEMENT  BINT4
   wdtol = R1MACH(4)
   tol = SQRT(wdtol)
   IF( Ndata<2 ) THEN
-    CALL XERMSG('BINT4','NDATA IS LESS THAN 2',2,1)
-    RETURN
+    ERROR STOP 'BINT4 : NDATA IS LESS THAN 2'
   ELSE
     ndm = Ndata - 1
     DO i = 1, ndm
       IF( X(i)>=X(i+1) ) GOTO 50
     END DO
     IF( Ibcl<1 .OR. Ibcl>2 ) THEN
-      CALL XERMSG('BINT4','IBCL IS NOT 1 OR 2',2,1)
-      RETURN
+      ERROR STOP 'BINT4 : IBCL IS NOT 1 OR 2'
     ELSEIF( Ibcr<1 .OR. Ibcr>2 ) THEN
-      CALL XERMSG('BINT4','IBCR IS NOT 1 OR 2',2,1)
-      RETURN
+      ERROR STOP 'BINT4 : IBCR IS NOT 1 OR 2'
     ELSEIF( Kntopt<1 .OR. Kntopt>3 ) THEN
-      CALL XERMSG('BINT4','KNTOPT IS NOT 1, 2, OR 3',2,1)
-      RETURN
+      ERROR STOP 'BINT4 : KNTOPT IS NOT 1, 2, OR 3'
     ELSE
       K = 4
       N = Ndata + 2
@@ -222,17 +218,16 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       IF( iflag==2 ) THEN
         !
         !
-        CALL XERMSG('BINT4','THE SYSTEM OF EQUATIONS IS SINGULAR', 2,1)
+        ERROR STOP 'BINT4 : THE SYSTEM OF EQUATIONS IS SINGULAR'
         RETURN
       ELSE
         CALL BNSLV(W(iwp,1),nwrow,N,ilb,iub,Bcoef)
         RETURN
       END IF
     END IF
-    50 CALL XERMSG('BINT4','X VALUES ARE NOT DISTINCT OR NOT ORDERED',&
-      2,1)
+    50 ERROR STOP 'BINT4 : X VALUES ARE NOT DISTINCT OR NOT ORDERED'
     RETURN
   END IF
-  100  CALL XERMSG('BINT4',&
-    'KNOT INPUT THROUGH W ARRAY IS NOT ORDERED PROPERLY',2,1)
+  100  ERROR STOP 'BINT4 : KNOT INPUT THROUGH W ARRAY IS NOT ORDERED PROPERLY'
+
 END SUBROUTINE BINT4

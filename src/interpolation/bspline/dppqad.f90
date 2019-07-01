@@ -1,7 +1,7 @@
 !** DPPQAD
-SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
+PURE SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !> Compute the integral on (X1,X2) of a K-th order B-spline
-  !            using the piecewise polynomial (PP) representation.
+  !  using the piecewise polynomial (PP) representation.
   !***
   ! **Library:**   SLATEC
   !***
@@ -55,26 +55,21 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: K, Ldc, Lxi
-  REAL(DP) :: C(Ldc,Lxi), Pquad, Xi(Lxi+1), X1, X2
+
+  INTEGER, INTENT(IN) :: K, Ldc, Lxi
+  REAL(DP), INTENT(IN) :: C(Ldc,Lxi), Xi(Lxi+1), X1, X2
+  REAL(DP), INTENT(OUT) :: Pquad
   INTEGER :: i, ii, il, ilo, il1, il2, im, left, mf1, mf2
   REAL(DP) :: a, aa, bb, dx, flk, q, s, ss(2), ta, tb, x
   !
   !* FIRST EXECUTABLE STATEMENT  DPPQAD
   Pquad = 0._DP
   IF( K<1 ) THEN
-    !
-    !
-    CALL XERMSG('DPPQAD','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'DPPQAD : K DOES NOT SATISFY K>=1'
   ELSEIF( Lxi<1 ) THEN
-    CALL XERMSG('DPPQAD','LXI DOES NOT SATISFY LXI>=1',2,1)
-    RETURN
+    ERROR STOP 'DPPQAD : LXI DOES NOT SATISFY LXI>=1'
   ELSEIF( Ldc<K ) THEN
-    CALL XERMSG('DPPQAD','LDC DOES NOT SATISFY LDC>=K',2,1)
-    RETURN
+    ERROR STOP 'DPPQAD : LDC DOES NOT SATISFY LDC>=K'
   END IF
   aa = MIN(X1,X2)
   bb = MAX(X1,X2)
@@ -111,5 +106,6 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   END DO
   IF( X1>X2 ) q = -q
   Pquad = q
+
   RETURN
 END SUBROUTINE DPPQAD

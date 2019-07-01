@@ -1,7 +1,7 @@
 !** PCHIA
-REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
+REAL(SP) PURE FUNCTION PCHIA(N,X,F,D,Incfd,A,B)
   !> Evaluate the definite integral of a piecewise cubic
-  !            Hermite function over an arbitrary interval.
+  !  Hermite function over an arbitrary interval.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -110,7 +110,7 @@ REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930503  Corrected to set VALUE=0 when IERR<0.  (FNF)
   !   930504  Changed CHFIV to CHFIE.  (FNF)
-  USE service, ONLY : XERMSG
+
   !
   !  Programming notes:
   !  1. The error flag from PCHID is tested, because a logic flaw
@@ -119,14 +119,14 @@ REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd, Ierr
-  REAL(SP) :: X(N), F(Incfd,N), D(Incfd,N), A, B
-  LOGICAL :: Skip
+  INTEGER, INTENT(IN) :: N, Incfd
+  REAL(SP), INTENT(IN) :: X(N), F(Incfd,N), D(Incfd,N), A, B
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER :: i, ia, ib, ierd, il, ir
+  INTEGER :: i, ia, ib, il, ir
   REAL(SP) :: value, xa, xb
+  LOGICAL, PARAMETER :: Skip = .FALSE.
   !
   !  INITIALIZE.
   !
@@ -143,15 +143,11 @@ REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
       !  ERROR RETURNS.
       !
       !     N<2 RETURN.
-      Ierr = -1
-      CALL XERMSG('PCHIA','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
-      GOTO 100
+      ERROR STOP 'PCHIA : NUMBER OF DATA POINTS LESS THAN TWO'
     ELSEIF( Incfd<1 ) THEN
       !
       !     INCFD<1 RETURN.
-      Ierr = -2
-      CALL XERMSG('PCHIA','INCREMENT LESS THAN ONE',Ierr,1)
-      GOTO 100
+      ERROR STOP 'PCHIA : INCREMENT LESS THAN ONE'
     ELSE
       DO i = 2, N
         IF( X(i)<=X(i-1) ) GOTO 200
@@ -161,10 +157,6 @@ REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   !  FUNCTION DEFINITION IS OK, GO ON.
   !
-  Skip = .TRUE.
-  Ierr = 0
-  IF( (A<X(1)) .OR. (A>X(N)) ) Ierr = Ierr + 1
-  IF( (B<X(1)) .OR. (B>X(N)) ) Ierr = Ierr + 2
   !
   !  COMPUTE INTEGRAL VALUE.
   !
@@ -213,15 +205,8 @@ REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
         !                 of VALUE to ZERO.)
         IF( ib>ia ) THEN
           !                         ---------------------------------------------
-          value = PCHID(N,X,F,D,Incfd,Skip,ia,ib,ierd)
+          value = PCHID(N,X,F,D,Incfd,ia,ib)
           !                         ---------------------------------------------
-          IF( ierd<0 ) THEN
-            !
-            !     TROUBLE IN PCHID.  (SHOULD NEVER OCCUR.)
-            Ierr = -4
-            CALL XERMSG('PCHIA','TROUBLE IN PCHID',Ierr,1)
-            GOTO 100
-          END IF
         END IF
         !
         !              THEN ADD ON INTEGRAL OVER (XA,X(IA)).
@@ -229,8 +214,7 @@ REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
           il = MAX(1,ia-1)
           ir = il + 1
           !                                 -------------------------------------
-          value = value + CHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir),&
-            xa,X(ia))
+          value = value + CHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir),xa,X(ia))
           !                                 -------------------------------------
         END IF
         !
@@ -239,8 +223,7 @@ REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
           ir = MIN(ib+1,N)
           il = ir - 1
           !                                 -------------------------------------
-          value = value + CHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir),&
-            X(ib),xb)
+          value = value + CHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir),X(ib),xb)
           !                                 -------------------------------------
         END IF
         !
@@ -252,12 +235,10 @@ REAL(SP) FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   !  NORMAL RETURN.
   !
-  100  PCHIA = value
+  PCHIA = value
   RETURN
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
-  200  Ierr = -3
-  CALL XERMSG('PCHIA','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
-  GOTO 100
+  200 ERROR STOP 'PCHIA : X-ARRAY NOT STRICTLY INCREASING'
   !------------- LAST LINE OF PCHIA FOLLOWS ------------------------------
 END FUNCTION PCHIA

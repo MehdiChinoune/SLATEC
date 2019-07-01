@@ -1,10 +1,10 @@
 !** RC
 REAL(SP) ELEMENTAL FUNCTION RC(X,Y)
   !> Calculate an approximation to
-  !           RC(X,Y) = Integral from zero to infinity of
+  !  RC(X,Y) = Integral from zero to infinity of
   !                              -1/2     -1
   !                    (1/2)(t+X)    (t+Y)  dt,
-  !            where X is nonnegative and Y is positive.
+  !  where X is nonnegative and Y is positive.
   !***
   ! **Library:**   SLATEC
   !***
@@ -287,23 +287,24 @@ REAL(SP) ELEMENTAL FUNCTION RC(X,Y)
   IF( X<0._SP .OR. Y<=0._SP ) THEN
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    ERROR STOP 'RC : X<0 .OR. Y<=0 WHERE X = '//xern3//' AND Y = '//xern4
+    ERROR STOP 'RC : X<0 .OR. Y<=0'
+    ! WHERE X = '//xern3//' AND Y = '//xern4
   END IF
   !
   IF( MAX(X,Y)>uplim ) THEN
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') uplim
-    ERROR STOP 'RC : MAX(X,Y)>UPLIM WHERE X = '//xern3//' Y = '//xern4//&
-      ' AND UPLIM = '//xern5
+    ERROR STOP 'RC : MAX(X,Y)>UPLIM'
+    ! WHERE X = '//xern3//' Y = '//xern4//' AND UPLIM = '//xern5
   END IF
   !
   IF( X+Y<lolim ) THEN
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') lolim
-    ERROR STOP 'RC : X+Y<LOLIM WHERE X = '//xern3//' Y = '//xern4//&
-      ' AND LOLIM = '//xern5
+    ERROR STOP 'RC : X+Y<LOLIM'
+    ! WHERE X = '//xern3//' Y = '//xern4//' AND LOLIM = '//xern5
   END IF
   !
   xn = X

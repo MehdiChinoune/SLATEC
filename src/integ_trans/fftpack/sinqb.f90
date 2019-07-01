@@ -1,5 +1,5 @@
 !** SINQB
-SUBROUTINE SINQB(N,X,Wsave)
+PURE SUBROUTINE SINQB(N,X,Wsave)
   !> Compute the unnormalized inverse of SINQF.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -74,8 +74,8 @@ SUBROUTINE SINQB(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(3*N+15), X(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(INOUT) :: Wsave(3*N+15), X(N)
   INTEGER :: k, kc, ns2
   REAL(SP) :: xhold
   !* FIRST EXECUTABLE STATEMENT  SINQB
@@ -94,5 +94,6 @@ SUBROUTINE SINQB(N,X,Wsave)
     RETURN
   END IF
   X(1) = 4._SP*X(1)
+
   RETURN
 END SUBROUTINE SINQB

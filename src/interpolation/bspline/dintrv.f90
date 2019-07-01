@@ -1,8 +1,7 @@
 !** DINTRV
-SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
+PURE SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !> Compute the largest integer ILEFT in 1 <= ILEFT <= LXT
-  !            such that XT(ILEFT) <= X where XT(*) is a subdivision of
-  !            the X interval.
+  !  such that XT(ILEFT) <= X where XT(*) is a subdivision of the X interval.
   !***
   ! **Library:**   SLATEC
   !***
@@ -68,8 +67,10 @@ SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   !
-  INTEGER :: Ileft, Ilo, Lxt, Mflag
-  REAL(DP) :: X, Xt(Lxt)
+  INTEGER, INTENT(IN) :: Lxt
+  INTEGER, INTENT(INOUT) :: Ilo
+  INTEGER, INTENT(OUT) :: Ileft, Mflag
+  REAL(DP), INTENT(IN) :: X, Xt(Lxt)
   INTEGER :: ihi, istep, middle
   !* FIRST EXECUTABLE STATEMENT  DINTRV
   ihi = Ilo + 1
@@ -134,4 +135,5 @@ SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   RETURN
   300  Mflag = 1
   Ileft = Lxt
+
 END SUBROUTINE DINTRV

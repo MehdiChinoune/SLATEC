@@ -1,7 +1,6 @@
 !** IPPERM
-SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
-  !> Rearrange a given array according to a prescribed
-  !            permutation vector.
+PURE SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
+  !> Rearrange a given array according to a prescribed permutation vector.
   !***
   ! **Library:**   SLATEC
   !***
@@ -18,8 +17,7 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   !
   !         IPPERM rearranges the data vector IX according to the
   !         permutation IPERM: IX(I) <--- IX(IPERM(I)).  IPERM could come
-  !         from one of the sorting routines IPSORT, SPSORT, DPSORT or
-  !         HPSORT.
+  !         from one of the sorting routines IPSORT, SPSORT, DPSORT or HPSORT.
   !
   !     Description of Parameters
   !         IX - input/output -- integer array of values to be rearranged.
@@ -38,16 +36,16 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   !* REVISION HISTORY  (YYMMDD)
   !   900618  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-  USE service, ONLY : XERMSG
-  INTEGER :: N, Ix(N), Iperm(N), Ier
+
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(INOUT) :: Ix(N), Iperm(N)
+  INTEGER, INTENT(OUT) :: Ier
   INTEGER :: i, indx, indx0, itemp, istrt
   !* FIRST EXECUTABLE STATEMENT  IPPERM
   Ier = 0
   IF( N<1 ) THEN
     Ier = 1
-    CALL XERMSG('IPPERM',&
-      'The number of values to be rearranged, N, is not positive.',Ier,1)
-    RETURN
+    ERROR STOP 'IPPERM : The number of values to be rearranged, N, is not positive.'
   END IF
   !
   !     CHECK WHETHER IPERM IS A VALID PERMUTATION
@@ -61,8 +59,7 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
       END IF
     END IF
     Ier = 2
-    CALL XERMSG('IPPERM',&
-      'The permutation vector, IPERM, is not valid.',Ier,1)
+    ERROR STOP 'IPPERM : The permutation vector, IPERM, is not valid.'
     RETURN
   END DO
   !

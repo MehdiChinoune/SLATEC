@@ -322,8 +322,8 @@ REAL(DP) ELEMENTAL FUNCTION DRJ(X,Y,Z,P)
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
-    ERROR STOP 'DRJ : MIN(X,Y,Z)<0 WHERE X = '//xern3//&
-      ' Y = '//xern4//' AND Z = '//xern5
+    ERROR STOP 'DRJ : MIN(X,Y,Z)<0'
+    ! WHERE X = '//xern3//' Y = '//xern4//' AND Z = '//xern5
   END IF
   !
   IF( MAX(X,Y,Z,P)>uplim ) THEN
@@ -332,8 +332,9 @@ REAL(DP) ELEMENTAL FUNCTION DRJ(X,Y,Z,P)
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') P
     WRITE (xern7,'(1PE15.6)') uplim
-    ERROR STOP 'DRJ : MAX(X,Y,Z,P)>UPLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' Z = '//xern5//' P = '//xern6//' AND UPLIM = '//xern7
+    ERROR STOP 'DRJ : MAX(X,Y,Z,P)>UPLIM'
+    ! WHERE X = '//xern3//&
+      ! ' Y = '//xern4//' Z = '//xern5//' P = '//xern6//' AND UPLIM = '//xern7
   END IF
   !
   IF( MIN(X+Y,X+Z,Y+Z,P)<lolim ) THEN
@@ -342,8 +343,9 @@ REAL(DP) ELEMENTAL FUNCTION DRJ(X,Y,Z,P)
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') P
     WRITE (xern7,'(1PE15.6)') lolim
-    ERROR STOP 'RJ : MIN(X+Y,X+Z,Y+Z,P)<LOLIM WHERE X = '//&
-      xern3//' Y = '//xern4//' Z = '//xern5//' P = '//xern6//' AND LOLIM = '//xern7
+    ERROR STOP 'RJ : MIN(X+Y,X+Z,Y+Z,P)<LOLIM'
+    ! WHERE X = '//&
+      ! xern3//' Y = '//xern4//' Z = '//xern5//' P = '//xern6//' AND LOLIM = '//xern7
   END IF
   !
   xn = X

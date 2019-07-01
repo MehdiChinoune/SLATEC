@@ -1,5 +1,5 @@
 !** EZFFTI
-SUBROUTINE EZFFTI(N,Wsave)
+PURE SUBROUTINE EZFFTI(N,Wsave)
   !> Initialize a work array for EZFFTF and EZFFTB.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -47,12 +47,13 @@ SUBROUTINE EZFFTI(N,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(3*N+15)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(OUT) :: Wsave(3*N+15)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  EZFFTI
   IF( N==1 ) RETURN
   ifac = INT( Wsave(3*N+1:3*N+15) )
   CALL EZFFT1(N,Wsave(2*N+1),ifac)
   Wsave(3*N+1:3*N+15) = ifac
+
 END SUBROUTINE EZFFTI

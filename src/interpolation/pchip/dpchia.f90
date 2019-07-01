@@ -1,7 +1,7 @@
 !** DPCHIA
-REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
+REAL(DP) PURE FUNCTION DPCHIA(N,X,F,D,Incfd,A,B)
   !> Evaluate the definite integral of a piecewise cubic
-  !            Hermite function over an arbitrary interval.
+  !  Hermite function over an arbitrary interval.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -113,7 +113,7 @@ REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930503  Corrected to set VALUE=0 when IERR<0.  (FNF)
   !   930504  Changed DCHFIV to DCHFIE.  (FNF)
-  USE service, ONLY : XERMSG
+
   !
   !  Programming notes:
   !  1. The error flag from DPCHID is tested, because a logic flaw
@@ -122,14 +122,14 @@ REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd, Ierr
-  REAL(DP) :: X(N), F(Incfd,N), D(Incfd,N), A, B
-  LOGICAL :: Skip
+  INTEGER, INTENT(IN) :: N, Incfd
+  REAL(DP), INTENT(IN) :: X(N), F(Incfd,N), D(Incfd,N), A, B
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER :: i, ia, ib, ierd, il, ir
+  INTEGER :: i, ia, ib, il, ir
   REAL(DP) :: value, xa, xb
+  LOGICAL, PARAMETER :: Skip = .FALSE.
   !
   !  INITIALIZE.
   !
@@ -146,15 +146,11 @@ REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
       !  ERROR RETURNS.
       !
       !     N<2 RETURN.
-      Ierr = -1
-      CALL XERMSG('DPCHIA','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
-      GOTO 100
+      ERROR STOP 'DPCHIA : NUMBER OF DATA POINTS LESS THAN TWO'
     ELSEIF( Incfd<1 ) THEN
       !
       !     INCFD<1 RETURN.
-      Ierr = -2
-      CALL XERMSG('DPCHIA','INCREMENT LESS THAN ONE',Ierr,1)
-      GOTO 100
+      ERROR STOP 'DPCHIA : INCREMENT LESS THAN ONE'
     ELSE
       DO i = 2, N
         IF( X(i)<=X(i-1) ) GOTO 200
@@ -164,10 +160,6 @@ REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   !  FUNCTION DEFINITION IS OK, GO ON.
   !
-  Skip = .TRUE.
-  Ierr = 0
-  IF( (A<X(1)) .OR. (A>X(N)) ) Ierr = Ierr + 1
-  IF( (B<X(1)) .OR. (B>X(N)) ) Ierr = Ierr + 2
   !
   !  COMPUTE INTEGRAL VALUE.
   !
@@ -216,15 +208,8 @@ REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
         !                 of VALUE to ZERO.)
         IF( ib>ia ) THEN
           !                         ---------------------------------------------
-          value = DPCHID(N,X,F,D,Incfd,Skip,ia,ib,ierd)
+          value = DPCHID(N,X,F,D,Incfd,ia,ib)
           !                         ---------------------------------------------
-          IF( ierd<0 ) THEN
-            !
-            !     TROUBLE IN DPCHID.  (SHOULD NEVER OCCUR.)
-            Ierr = -4
-            CALL XERMSG('DPCHIA','TROUBLE IN DPCHID',Ierr,1)
-            GOTO 100
-          END IF
         END IF
         !
         !              THEN ADD ON INTEGRAL OVER (XA,X(IA)).
@@ -232,8 +217,7 @@ REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
           il = MAX(1,ia-1)
           ir = il + 1
           !                                 -------------------------------------
-          value = value + DCHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir)&
-            ,xa,X(ia))
+          value = value + DCHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir),xa,X(ia))
           !                                 -------------------------------------
         END IF
         !
@@ -242,8 +226,7 @@ REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
           ir = MIN(ib+1,N)
           il = ir - 1
           !                                 -------------------------------------
-          value = value + DCHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir)&
-            ,X(ib),xb)
+          value = value + DCHFIE(X(il),X(ir),F(1,il),F(1,ir),D(1,il),D(1,ir),X(ib),xb)
           !                                 -------------------------------------
         END IF
         !
@@ -255,12 +238,10 @@ REAL(DP) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   !  NORMAL RETURN.
   !
-  100  DPCHIA = value
+  DPCHIA = value
   RETURN
   !
   !     X-ARRAY NOT STRICTLY INCREASING.
-  200  Ierr = -3
-  CALL XERMSG('DPCHIA','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
-  GOTO 100
+  200 ERROR STOP 'DPCHIA : X-ARRAY NOT STRICTLY INCREASING'
   !------------- LAST LINE OF DPCHIA FOLLOWS -----------------------------
 END FUNCTION DPCHIA

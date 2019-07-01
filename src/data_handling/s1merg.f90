@@ -1,5 +1,5 @@
 !** S1MERG
-SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
+PURE SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
   !> Merge two strings of ascending real numbers.
   !***
   ! **Library:**   SLATEC
@@ -25,11 +25,10 @@ SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   901120  Modified to use IF-THEN-ELSE.  Previous spaghetti code did
-  !           not compile correctly with optimization on the IBM RS6000.
-  !           (RWC)
+  !           not compile correctly with optimization on the IBM RS6000.  (RWC)
   !   920130  Code name changed from MERGE to S1MERG.  (WRB)
-  INTEGER :: I1, I2, I3, M1, M2
-  REAL(SP) :: Tcos( MAX(I1+M1,I2+M2,I3+M1+M2) )
+  INTEGER, INTENT(IN) :: I1, I2, I3, M1, M2
+  REAL(SP), INTENT(INOUT) :: Tcos( MAX(I1+M1,I2+M2,I3+M1+M2) )
   !
   INTEGER :: j1, j2, j3
   !
@@ -68,4 +67,5 @@ SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
     END IF
     j3 = j3 + 1
   END DO
+
 END SUBROUTINE S1MERG

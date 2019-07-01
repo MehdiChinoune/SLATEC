@@ -1,7 +1,6 @@
 !** BSQAD
-SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
-  !> Compute the integral of a K-th order B-spline using the
-  !            B-representation.
+PURE SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad)
+  !> Compute the integral of a K-th order B-spline using the B-representation.
   !***
   ! **Library:**   SLATEC
   !***
@@ -54,15 +53,14 @@ SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: K, N
-  REAL(SP) :: Bcoef(N), Bquad, T(N+K), Work(3*K), X1, X2, y1, y2
+
+  INTEGER, INTENT(IN) :: K, N
+  REAL(SP), INTENT(IN) :: Bcoef(N), T(N+K), X1, X2
+  REAL(SP), INTENT(OUT) :: Bquad
   INTEGER :: i, il1, il2, ilo, inbv, jf, left, m, mf, mflag, npk, np1
-  REAL(SP) :: a, aa, b, bb, bma, bpa, c1, gx, q, summ(5), ta, tb
+  REAL(SP) :: a, aa, b, bb, bma, bpa, c1, gx, q, summ(5), ta, tb, y1, y2
 
   !
   REAL(SP), PARAMETER :: gpts(9) = [ 5.77350269189625764E-01_SP, 2.38619186083196909E-01_SP, &
@@ -77,11 +75,9 @@ SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !* FIRST EXECUTABLE STATEMENT  BSQAD
   Bquad = 0._SP
   IF( K<1 .OR. K>20 ) THEN
-    CALL XERMSG('BSQAD','K DOES NOT SATISFY 1<=K<=20',2,1)
-    RETURN
+    ERROR STOP 'BSQAD : K DOES NOT SATISFY 1<=K<=20'
   ELSEIF( N<K ) THEN
-    CALL XERMSG('BSQAD','N DOES NOT SATISFY N>=K',2,1)
-    RETURN
+    ERROR STOP 'BSQAD : N DOES NOT SATISFY N>=K'
   ELSE
     aa = MIN(X1,X2)
     bb = MAX(X1,X2)
@@ -121,9 +117,9 @@ SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
             DO m = 1, mf
               c1 = bma*gpts(jf+m)
               gx = -c1 + bpa
-              y2 = BVALU(T,Bcoef,N,K,0,gx,inbv,Work)
+              y2 = BVALU(T,Bcoef,N,K,0,gx)
               gx = c1 + bpa
-              y1 = BVALU(T,Bcoef,N,K,0,gx,inbv,Work)
+              y1 = BVALU(T,Bcoef,N,K,0,gx)
               summ(m) = summ(m) + (y1+y2)*bma
             END DO
           END IF
@@ -138,9 +134,7 @@ SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
       END IF
     END IF
   END IF
-  !
-  !
-  CALL XERMSG('BSQAD',&
-    'X1 OR X2 OR BOTH DO NOT SATISFY T(K)<=X<=T(N+1)',2,1)
+  ERROR STOP 'BSQAD : X1 OR X2 OR BOTH DO NOT SATISFY T(K)<=X<=T(N+1)'
+
   RETURN
 END SUBROUTINE BSQAD

@@ -1,7 +1,6 @@
 !** BSPEV
-SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
-  !> Calculate the value of the spline and its derivatives from
-  !            the B-representation.
+PURE SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
+  !> Calculate the value of the spline and its derivatives from the B-representation.
   !***
   ! **Library:**   SLATEC
   !***
@@ -63,8 +62,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !
   !***
   ! **References:**  Carl de Boor, Package for calculating with B-splines,
-  !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
-  !                 pp. 441-472.
+  !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977), pp. 441-472.
   !***
   ! **Routines called:**  BSPVN, INTRV, XERMSG
 
@@ -74,28 +72,23 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  !
-  INTEGER :: Inev, K, N, Nderiv
-  REAL(SP) :: Ad((2*N-Nderiv+1)*Nderiv/2), Svalue(Nderiv), T(N+K), Work(3*K), X
+
+  INTEGER, INTENT(IN) :: K, N, Nderiv
+  INTEGER, INTENT(INOUT) :: Inev
+  REAL(SP), INTENT(IN) :: Ad((2*N-Nderiv+1)*Nderiv/2), T(N+K), X
+  REAL(SP), INTENT(OUT) :: Svalue(Nderiv), Work(3*K)
   INTEGER :: i, id, iwork, jj, kp1, kp1mn, l, left, ll, mflag
   REAL(SP) :: summ
   !     DIMENSION T(N+K)
   !* FIRST EXECUTABLE STATEMENT  BSPEV
   IF( K<1 ) THEN
-    !
-    !
-    CALL XERMSG('BSPEV','K DOES NOT SATISFY K>=1',2,1)
-    RETURN
+    ERROR STOP 'BSPEV : K DOES NOT SATISFY K>=1'
   ELSEIF( N<K ) THEN
-    CALL XERMSG('BSPEV','N DOES NOT SATISFY N>=K',2,1)
-    RETURN
+    ERROR STOP 'BSPEV : N DOES NOT SATISFY N>=K'
   ELSEIF( Nderiv<1 .OR. Nderiv>K ) THEN
-    CALL XERMSG('BSPEV','NDERIV DOES NOT SATISFY 1<=NDERIV<=K',2,1)
-    RETURN
+    ERROR STOP 'BSPEV : NDERIV DOES NOT SATISFY 1<=NDERIV<=K'
   ELSE
     id = Nderiv
     CALL INTRV(T,N+1,X,Inev,i,mflag)
@@ -106,9 +99,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
           i = i - 1
           IF( X/=T(i) ) GOTO 20
         END DO
-        CALL XERMSG('BSPEV',&
-          'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
-        RETURN
+        ERROR STOP 'BSPEV : A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)'
       END IF
       !
       !- I* HAS BEEN FOUND IN (K,N) SO THAT T(I) <= X < T(I+1)
@@ -140,6 +131,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
       END DO
     END IF
   END IF
-  100  CALL XERMSG('BSPEV','X IS NOT IN T(K)<=X<=T(N+1)',2,1)
+  100  ERROR STOP 'BSPEV : X IS NOT IN T(K)<=X<=T(N+1)'
+
   RETURN
 END SUBROUTINE BSPEV

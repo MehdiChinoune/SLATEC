@@ -1,10 +1,9 @@
 !** CHFEV
-SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
-  !> Evaluate a cubic polynomial given in Hermite form at an
-  !            array of points.  While designed for use by PCHFE, it may
-  !            be useful directly as an evaluator for a piecewise cubic
-  !            Hermite function in applications, such as graphing, where
-  !            the interval is known in advance.
+PURE SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
+  !> Evaluate a cubic polynomial given in Hermite form at an array of points.
+  !  While designed for use by PCHFE, it may be useful directly as an evaluator
+  !  for a piecewise cubic Hermite function in applications, such as graphing,
+  !  where the interval is known in advance.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -12,8 +11,7 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !***
   ! **Type:**      SINGLE PRECISION (CHFEV-S, DCHFEV-D)
   !***
-  ! **Keywords:**  CUBIC HERMITE EVALUATION, CUBIC POLYNOMIAL EVALUATION,
-  !             PCHIP
+  ! **Keywords:**  CUBIC HERMITE EVALUATION, CUBIC POLYNOMIAL EVALUATION, PCHIP
   !***
   ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
@@ -84,7 +82,7 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !   890703  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -94,8 +92,10 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: Ne, Next(2), Ierr
-  REAL(SP) :: X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
+  INTEGER, INTENT(IN) :: Ne
+  INTEGER, INTENT(OUT) :: Next(2), Ierr
+  REAL(SP), INTENT(IN) :: X1, X2, F1, F2, D1, D2, Xe(Ne)
+  REAL(SP), INTENT(OUT) :: Fe(Ne)
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -112,17 +112,14 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
     !
     !     NE<1 RETURN.
     Ierr = -1
-    CALL XERMSG('CHFEV','NUMBER OF EVALUATION POINTS LESS THAN ONE'&
-      ,Ierr,1)
-    RETURN
+    ERROR STOP 'CHFEV : NUMBER OF EVALUATION POINTS LESS THAN ONE'
   ELSE
     h = X2 - X1
     IF( h==zero ) THEN
       !
       !     X1=X2 RETURN.
       Ierr = -2
-      CALL XERMSG('CHFEV','INTERVAL ENDPOINTS EQUAL',Ierr,1)
-      RETURN
+      ERROR STOP 'CHFEV : INTERVAL ENDPOINTS EQUAL'
     END IF
   END IF
   !
@@ -159,5 +156,4 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   RETURN
   !------------- LAST LINE OF CHFEV FOLLOWS ------------------------------
-  RETURN
 END SUBROUTINE CHFEV

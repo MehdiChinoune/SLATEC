@@ -1,5 +1,5 @@
 !** CFFTB1
-SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
+PURE SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   !> Compute the unnormalized inverse of CFFTF1.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -76,8 +76,9 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N, Ifac(15)
-  REAL(SP) :: C(2*N), Ch(2*N), Wa(2*N)
+  INTEGER, INTENT(IN) :: N, Ifac(15)
+  REAL(SP), INTENT(IN) :: Wa(2*N)
+  REAL(SP), INTENT(INOUT) :: Ch(2*N), C(2*N)
   INTEGER :: i, idl1, ido, idot, ip, iw, ix2, ix3, ix4, k1, l1, l2, n2, na, nac, nf
   !* FIRST EXECUTABLE STATEMENT  CFFTB1
   nf = Ifac(2)
@@ -140,4 +141,5 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   DO i = 1, n2
     C(i) = Ch(i)
   END DO
+
 END SUBROUTINE CFFTB1

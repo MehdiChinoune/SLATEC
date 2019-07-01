@@ -1,5 +1,5 @@
 !** COSQB
-SUBROUTINE COSQB(N,X,Wsave)
+PURE SUBROUTINE COSQB(N,X,Wsave)
   !> Compute the unnormalized inverse cosine transform.
   !***
   ! **Library:**   SLATEC (FFTPACK)
@@ -20,8 +20,7 @@ SUBROUTINE COSQB(N,X,Wsave)
   !  The transform is defined below at output parameter X.
   !
   !  COSQB is the unnormalized inverse of COSQF since a call of COSQB
-  !  followed by a call of COSQF will multiply the input sequence X
-  !  by 4*N.
+  !  followed by a call of COSQF will multiply the input sequence X by 4*N.
   !
   !  The array WSAVE which is used by subroutine COSQB must be
   !  initialized by calling subroutine COSQI(N,WSAVE).
@@ -78,8 +77,8 @@ SUBROUTINE COSQB(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(3*N+15), X(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(INOUT) :: Wsave(3*N+15), X(N)
   REAL(SP) :: tsqrt2, x1
   !* FIRST EXECUTABLE STATEMENT  COSQB
   tsqrt2 = 2._SP*SQRT(2._SP)
@@ -94,4 +93,5 @@ SUBROUTINE COSQB(N,X,Wsave)
   ELSE
     CALL COSQB1(N,X,Wsave,Wsave(N+1))
   END IF
+
 END SUBROUTINE COSQB

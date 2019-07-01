@@ -1,7 +1,6 @@
 !** CFFTF
-SUBROUTINE CFFTF(N,C,Wsave)
-  !> Compute the forward transform of a complex, periodic
-  !            sequence.
+PURE SUBROUTINE CFFTF(N,C,Wsave)
+  !> Compute the forward transform of a complex, periodic sequence.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -86,9 +85,9 @@ SUBROUTINE CFFTF(N,C,Wsave)
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: Wsave(4*N+15)
-  COMPLEX(SP) :: C(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(INOUT) :: Wsave(4*N+15)
+  COMPLEX(SP), INTENT(INOUT) :: C(N)
   REAL(SP) :: rc(2*N)
   INTEGER :: ifac(15), i
   !* FIRST EXECUTABLE STATEMENT  CFFTF
@@ -97,4 +96,5 @@ SUBROUTINE CFFTF(N,C,Wsave)
   ifac = INT( Wsave(4*N+1:4*N+15) )
   CALL CFFTF1(N,rc,Wsave,Wsave(2*N+1),ifac)
   C(1:N) = [ ( CMPLX(rc(i),rc(i+1),SP), i=1,2*N-1,2 ) ]
+
 END SUBROUTINE CFFTF

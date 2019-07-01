@@ -1,5 +1,5 @@
 !** I1MERG
-SUBROUTINE I1MERG(Icos,I1,M1,I2,M2,I3)
+PURE SUBROUTINE I1MERG(Icos,I1,M1,I2,M2,I3)
   !> Merge two strings of ascending integers.
   !***
   ! **Library:**   SLATEC
@@ -21,8 +21,8 @@ SUBROUTINE I1MERG(Icos,I1,M1,I2,M2,I3)
 
   !* REVISION HISTORY  (YYMMDD)
   !   920202  DATE WRITTEN
-  INTEGER :: I1, I2, I3, M1, M2
-  INTEGER :: Icos( MAX(I1+M1,I2+M2,I3+M1+M2) )
+  INTEGER, INTENT(IN) :: I1, I2, I3, M1, M2
+  INTEGER, INTENT(INOUT) :: Icos( MAX(I1+M1,I2+M2,I3+M1+M2) )
   !
   INTEGER :: j1, j2, j3
   !
@@ -61,4 +61,5 @@ SUBROUTINE I1MERG(Icos,I1,M1,I2,M2,I3)
     END IF
     j3 = j3 + 1
   END DO
+
 END SUBROUTINE I1MERG

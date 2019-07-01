@@ -1,11 +1,11 @@
 !** CHFDV
-SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
+PURE SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !> Evaluate a cubic polynomial given in Hermite form and its
-  !            first derivative at an array of points.  While designed for
-  !            use by PCHFD, it may be useful directly as an evaluator
-  !            for a piecewise cubic Hermite function in applications,
-  !            such as graphing, where the interval is known in advance.
-  !            If only function values are required, use CHFEV instead.
+  !  first derivative at an array of points.  While designed for
+  !  use by PCHFD, it may be useful directly as an evaluator
+  !  for a piecewise cubic Hermite function in applications,
+  !  such as graphing, where the interval is known in advance.
+  !  If only function values are required, use CHFEV instead.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -90,7 +90,7 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -100,8 +100,10 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: Ne, Next(2), Ierr
-  REAL(SP) :: X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne), De(Ne)
+  INTEGER, INTENT(IN) :: Ne
+  INTEGER, INTENT(OUT) :: Next(2), Ierr
+  REAL(SP), INTENT(IN) :: X1, X2, F1, F2, D1, D2, Xe(Ne)
+  REAL(SP), INTENT(OUT) :: Fe(Ne), De(Ne)
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -118,17 +120,14 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
     !
     !     NE<1 RETURN.
     Ierr = -1
-    CALL XERMSG('CHFDV','NUMBER OF EVALUATION POINTS LESS THAN ONE'&
-      ,Ierr,1)
-    RETURN
+    ERROR STOP 'CHFDV : NUMBER OF EVALUATION POINTS LESS THAN ONE'
   ELSE
     h = X2 - X1
     IF( h==zero ) THEN
       !
       !     X1=X2 RETURN.
       Ierr = -2
-      CALL XERMSG('CHFDV','INTERVAL ENDPOINTS EQUAL',Ierr,1)
-      RETURN
+      ERROR STOP 'CHFDV : INTERVAL ENDPOINTS EQUAL'
     END IF
   END IF
   !
@@ -168,5 +167,4 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !
   RETURN
   !------------- LAST LINE OF CHFDV FOLLOWS ------------------------------
-  RETURN
 END SUBROUTINE CHFDV

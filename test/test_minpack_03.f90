@@ -768,7 +768,7 @@ CONTAINS
     INTEGER :: kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nval
     LOGICAL :: fatal
     !     .. Local Arrays ..
-    REAL(SP) :: coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
+    REAL(SP) :: coeff(9), v(51,5), w(529), xconst(11), yconst(11)
     INTEGER :: iw(30), nderiv(11)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, REAL, SQRT
@@ -934,7 +934,7 @@ CONTAINS
       xval = REAL(i-1,SP)/(nval-1)
       ii = 1
       DO j = 1, 3
-        v(i,j+1) = BVALU(bkpt,coeff,n,nord,j-1,xval,ii,work)
+        v(i,j+1) = BVALU(bkpt,coeff,n,nord,j-1,xval)
       END DO
       v(i,1) = xval
       !

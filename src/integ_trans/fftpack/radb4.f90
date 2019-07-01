@@ -1,7 +1,6 @@
 !** RADB4
-SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
-  !> Calculate the fast Fourier transform of subvectors of
-  !            length four.
+PURE SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
+  !> Calculate the fast Fourier transform of subvectors of length four.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -24,8 +23,9 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Ido, L1
-  REAL(SP) :: Cc(Ido,4,L1), Ch(Ido,L1,4), Wa1(Ido), Wa2(Ido), Wa3(Ido)
+  INTEGER, INTENT(IN) :: Ido, L1
+  REAL(SP), INTENT(IN) :: Cc(Ido,4,L1), Wa1(Ido), Wa2(Ido), Wa3(Ido)
+  REAL(SP), INTENT(OUT) :: Ch(Ido,L1,4)
   INTEGER :: i, ic, idp2, k
   REAL(SP) :: ci2, ci3, ci4, cr2, cr3, cr4, sqrt2, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4
   !* FIRST EXECUTABLE STATEMENT  RADB4

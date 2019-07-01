@@ -1,7 +1,6 @@
 !** DBINT4
-SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
-  !> Compute the B-representation of a cubic spline
-  !            which interpolates given data.
+PURE SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
+  !> Compute the B-representation of a cubic spline which interpolates given data.
   !***
   ! **Library:**   SLATEC
   !***
@@ -102,35 +101,33 @@ SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : D1MACH
   !
-  INTEGER :: Ibcl, Ibcr, K, Kntopt, N, Ndata
-  REAL(DP) :: Bcoef(Ndata+2), Fbcl, Fbcr, T(Ndata+6), W(5,Ndata+2), X(Ndata), Y(Ndata)
+  INTEGER, INTENT(IN) :: Ibcl, Ibcr, Kntopt, Ndata
+  INTEGER, INTENT(OUT) :: K, N
+  REAL(DP), INTENT(IN) :: Fbcl, Fbcr, X(Ndata), Y(Ndata)
+  REAL(DP), INTENT(INOUT) :: W(5,Ndata+2)
+  REAL(DP), INTENT(OUT) :: Bcoef(Ndata+2), T(Ndata+6)
   INTEGER :: i, iflag, ilb, ileft, it, iub, iw, iwp, j, jw, ndm, np, nwrow
   REAL(DP) :: tol, txn, tx1, vnikx(4,4), wdtol, work(15), xl
   !* FIRST EXECUTABLE STATEMENT  DBINT4
   wdtol = D1MACH(4)
   tol = SQRT(wdtol)
   IF( Ndata<2 ) THEN
-    CALL XERMSG('DBINT4','NDATA IS LESS THAN 2',2,1)
-    RETURN
+    ERROR STOP 'DBINT4 : NDATA IS LESS THAN 2'
   ELSE
     ndm = Ndata - 1
     DO i = 1, ndm
       IF( X(i)>=X(i+1) ) GOTO 50
     END DO
     IF( Ibcl<1 .OR. Ibcl>2 ) THEN
-      CALL XERMSG('DBINT4','IBCL IS NOT 1 OR 2',2,1)
-      RETURN
+      ERROR STOP 'DBINT4 : IBCL IS NOT 1 OR 2'
     ELSEIF( Ibcr<1 .OR. Ibcr>2 ) THEN
-      CALL XERMSG('DBINT4','IBCR IS NOT 1 OR 2',2,1)
-      RETURN
+      ERROR STOP 'DBINT4 : IBCR IS NOT 1 OR 2'
     ELSEIF( Kntopt<1 .OR. Kntopt>3 ) THEN
-      CALL XERMSG('DBINT4','KNTOPT IS NOT 1, 2, OR 3',2,1)
-      RETURN
+      ERROR STOP 'DBINT4 : KNTOPT IS NOT 1, 2, OR 3'
     ELSE
       K = 4
       N = Ndata + 2
@@ -222,18 +219,14 @@ SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       iwp = iw + 1
       CALL DBNFAC(W(iwp,1),nwrow,N,ilb,iub,iflag)
       IF( iflag==2 ) THEN
-        !
-        !
-        CALL XERMSG('DBINT4','THE SYSTEM OF EQUATIONS IS SINGULAR',2,1)
-        RETURN
+        ERROR STOP 'DBINT4 : THE SYSTEM OF EQUATIONS IS SINGULAR'
       ELSE
         CALL DBNSLV(W(iwp,1),nwrow,N,ilb,iub,Bcoef)
         RETURN
       END IF
     END IF
-    50 CALL XERMSG('DBINT4','X VALUES ARE NOT DISTINCT OR NOT ORDERED',2,1)
-    RETURN
+    50 ERROR STOP 'DBINT4 : X VALUES ARE NOT DISTINCT OR NOT ORDERED'
   END IF
-  100  CALL XERMSG('DBINT4',&
-    'KNOT INPUT THROUGH W ARRAY IS NOT ORDERED PROPERLY',2,1)
+  100  ERROR STOP 'DBINT4 : KNOT INPUT THROUGH W ARRAY IS NOT ORDERED PROPERLY'
+
 END SUBROUTINE DBINT4

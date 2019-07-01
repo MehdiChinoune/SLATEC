@@ -1,8 +1,7 @@
 !** INTRV
-SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
+PURE SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !> Compute the largest integer ILEFT in 1 <= ILEFT <= LXT
-  !            such that XT(ILEFT) <= X where XT(*) is a subdivision
-  !            of the X interval.
+  !  such that XT(ILEFT) <= X where XT(*) is a subdivision of the X interval.
   !***
   ! **Library:**   SLATEC
   !***
@@ -54,8 +53,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !
   !***
   ! **References:**  Carl de Boor, Package for calculating with B-splines,
-  !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
-  !                 pp. 441-472.
+  !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977), pp. 441-472.
   !***
   ! **Routines called:**  (NONE)
 
@@ -67,8 +65,10 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   !
-  INTEGER :: Ileft, Ilo, Lxt, Mflag
-  REAL(SP) :: X, Xt(Lxt)
+  INTEGER, INTENT(IN) :: Lxt
+  INTEGER, INTENT(INOUT) :: Ilo
+  INTEGER, INTENT(OUT) :: Ileft, Mflag
+  REAL(SP), INTENT(IN) :: X, Xt(Lxt)
   INTEGER :: ihi, istep, middle
   !* FIRST EXECUTABLE STATEMENT  INTRV
   ihi = Ilo + 1
@@ -133,4 +133,5 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   RETURN
   300  Mflag = 1
   Ileft = Lxt
+
 END SUBROUTINE INTRV

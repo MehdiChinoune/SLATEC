@@ -1,7 +1,6 @@
 !** EZFFTB
-SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
-  !> A simplified REAL(SP), periodic, backward fast Fourier
-  !            transform.
+PURE SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
+  !> A simplified REAL(SP), periodic, backward fast Fourier transform.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -107,8 +106,10 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: A(N/2), Azero, B(N/2), R(N), Wsave(3*N+15)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: A(N/2), Azero, B(N/2)
+  REAL(SP), INTENT(INOUT) :: Wsave(3*N+15)
+  REAL(SP), INTENT(OUT) :: R(N)
   INTEGER :: i, ns2
   !* FIRST EXECUTABLE STATEMENT  EZFFTB
   IF( N<2 ) THEN
@@ -128,4 +129,5 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
     IF( MOD(N,2)==0 ) R(N) = A(ns2+1)
     CALL RFFTB(N,R,Wsave(N+1))
   END IF
+
 END SUBROUTINE EZFFTB

@@ -1,5 +1,5 @@
 !** DPCHCS
-SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
+PURE SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !> Adjusts derivative values for DPCHIC
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -97,8 +97,10 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: N, Incfd, Ierr
-  REAL(DP) :: Switch, H(N), Slope(N), D(Incfd,N)
+  INTEGER, INTENT(IN) :: N, Incfd
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: Switch, H(N), Slope(N)
+  REAL(DP), INTENT(INOUT) :: D(Incfd,N)
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -231,14 +233,14 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !------------- LAST LINE OF DPCHCS FOLLOWS -----------------------------
 CONTAINS
-
   !
   !  DEFINE INLINE FUNCTION FOR WEIGHTED AVERAGE OF SLOPES.
   !
-  REAL(DP) FUNCTION DPCHSD(s1,s2,h1,h2)
+  REAL(DP) ELEMENTAL FUNCTION DPCHSD(s1,s2,h1,h2)
     REAL(DP), INTENT(IN) :: s1, s2, h1, h2
 
     DPCHSD = (h2/(h1+h2))*s1 + (h1/(h1+h2))*s2
 
   END FUNCTION DPCHSD
+  !
 END SUBROUTINE DPCHCS

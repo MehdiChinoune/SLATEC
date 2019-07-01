@@ -76,7 +76,7 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   USE interpolation, ONLY : PPGQ8, INTRV
   !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    PURE REAL(SP) FUNCTION F(X)
       IMPORT SP
       REAL(SP), INTENT(IN) :: X
     END FUNCTION F
@@ -119,7 +119,7 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
         tb = bb
         IF( left<Lxi ) tb = Xi(left+1)
         b = MIN(bb,tb)
-        CALL PPGQ8(F,Ldc,C,Xi,Lxi,K,Id,a,b,inppv,Tol,ans,iflg)
+        CALL PPGQ8(F,Ldc,C,Xi,Lxi,K,Id,a,b,Tol,ans,iflg)
         IF( iflg>1 ) Ierr = 2
         q = q + ans
       END DO

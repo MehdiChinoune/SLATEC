@@ -25,12 +25,12 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test errors for all values
     !           of KPRINT.  (WRB)
-    USE slatec, ONLY : POLCOF, POLINT, POLYVL, R1MACH, num_xer, control_xer
+    USE slatec, ONLY : POLCOF, POLINT, POLYVL, R1MACH
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(SP) :: tol, yf
-    INTEGER :: i, ierr, kontrl, n
+    INTEGER :: i, ierr, n
     LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(SP) :: c(6), d(6), w(12)
@@ -92,42 +92,42 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
-    fatal = .FALSE.
-    num_xer = 0
-    !
-    IF( Kprint>=3 ) WRITE (Lun,99002)
-    99002 FORMAT (/' 2 Error messages expected')
-    CALL POLINT(0,x,y,c)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
-    !
-    x(1) = -1._SP
-    CALL POLINT(n,x,y,c)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
-    !
-    control_xer = kontrl
-    IF( fatal ) THEN
-      IF( Kprint>=2 ) THEN
-        WRITE (Lun,99003)
-        99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      END IF
-    ELSEIF( Kprint>=3 ) THEN
-      WRITE (Lun,99004)
-      99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    END IF
+!    kontrl = control_xer
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    fatal = .FALSE.
+!    num_xer = 0
+!    !
+!    IF( Kprint>=3 ) WRITE (Lun,99002)
+!    99002 FORMAT (/' 2 Error messages expected')
+!    CALL POLINT(0,x,y,c)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
+!    !
+!    x(1) = -1._SP
+!    CALL POLINT(n,x,y,c)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
+!    !
+!    control_xer = kontrl
+!    IF( fatal ) THEN
+!      IF( Kprint>=2 ) THEN
+!        WRITE (Lun,99003)
+!        99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+!      END IF
+!    ELSEIF( Kprint>=3 ) THEN
+!      WRITE (Lun,99004)
+!      99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+!    END IF
     !
     IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ****************POLINT PASSED ALL TESTS**************')
@@ -159,12 +159,12 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-    USE slatec, ONLY : D1MACH, DPLINT, DPOLCF, DPOLVL, num_xer, control_xer
+    USE slatec, ONLY : D1MACH, DPLINT, DPOLCF, DPOLVL
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: tol, yf
-    INTEGER :: i, ierr, kontrl, n
+    INTEGER :: i, ierr, n
     LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: c(6), d(6), w(12)
@@ -226,42 +226,42 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
-    fatal = .FALSE.
-    num_xer = 0
-    !
-    IF( Kprint>=3 ) WRITE (Lun,99002)
-    99002 FORMAT (/' 2 Error messages expected')
-    CALL DPLINT(0,x,y,c)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
-    !
-    x(1) = -1._DP
-    CALL DPLINT(n,x,y,c)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
-    !
-    control_xer = kontrl
-    IF( fatal ) THEN
-      IF( Kprint>=2 ) THEN
-        WRITE (Lun,99003)
-        99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      END IF
-    ELSEIF( Kprint>=3 ) THEN
-      WRITE (Lun,99004)
-      99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    END IF
+!    kontrl = control_xer
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    fatal = .FALSE.
+!    num_xer = 0
+!    !
+!    IF( Kprint>=3 ) WRITE (Lun,99002)
+!    99002 FORMAT (/' 2 Error messages expected')
+!    CALL DPLINT(0,x,y,c)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
+!    !
+!    x(1) = -1._DP
+!    CALL DPLINT(n,x,y,c)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
+!    !
+!    control_xer = kontrl
+!    IF( fatal ) THEN
+!      IF( Kprint>=2 ) THEN
+!        WRITE (Lun,99003)
+!        99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+!      END IF
+!    ELSEIF( Kprint>=3 ) THEN
+!      WRITE (Lun,99004)
+!      99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+!    END IF
     !
     IF( Ipass==1 .AND. Kprint>=2 ) WRITE (Lun,99005)
     99005 FORMAT (/' ****************DPLINT PASSED ALL TESTS**************')

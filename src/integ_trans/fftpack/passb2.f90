@@ -1,7 +1,6 @@
 !** PASSB2
-SUBROUTINE PASSB2(Ido,L1,Cc,Ch,Wa1)
-  !> Calculate the fast Fourier transform of subvectors of
-  !            length two.
+PURE SUBROUTINE PASSB2(Ido,L1,Cc,Ch,Wa1)
+  !> Calculate the fast Fourier transform of subvectors of length two.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -21,8 +20,9 @@ SUBROUTINE PASSB2(Ido,L1,Cc,Ch,Wa1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Ido, L1
-  REAL(SP) :: Cc(Ido,2,L1), Ch(Ido,L1,2), Wa1(Ido)
+  INTEGER, INTENT(IN) :: Ido, L1
+  REAL(SP), INTENT(IN) :: Cc(Ido,2,L1), Wa1(Ido)
+  REAL(SP), INTENT(OUT) :: Ch(Ido,L1,2)
   INTEGER :: i, k
   REAL(SP) :: ti2, tr2
   !* FIRST EXECUTABLE STATEMENT  PASSB2

@@ -1,10 +1,9 @@
 !** DCHFEV
-SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
-  !> Evaluate a cubic polynomial given in Hermite form at an
-  !            array of points.  While designed for use by DPCHFE, it may
-  !            be useful directly as an evaluator for a piecewise cubic
-  !            Hermite function in applications, such as graphing, where
-  !            the interval is known in advance.
+PURE SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
+  !> Evaluate a cubic polynomial given in Hermite form at an array of points.
+  !  While designed for use by DPCHFE, it may be useful directly as an evaluator
+  !  for a piecewise cubic Hermite function in applications, such as graphing,
+  !  where the interval is known in advance.
   !***
   ! **Library:**   SLATEC (PCHIP)
   !***
@@ -88,7 +87,7 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   !  Programming notes:
   !
   !     To produce a single precision version, simply:
@@ -98,8 +97,10 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER :: Ne, Next(2), Ierr
-  REAL(DP) :: X1, X2, F1, F2, D1, D2, Xe(Ne), Fe(Ne)
+  INTEGER, INTENT(IN) :: Ne
+  INTEGER, INTENT(OUT) :: Next(2), Ierr
+  REAL(DP), INTENT(IN) :: X1, X2, F1, F2, D1, D2, Xe(Ne)
+  REAL(DP), INTENT(OUT) :: Fe(Ne)
   !
   !  DECLARE LOCAL VARIABLES.
   !
@@ -116,17 +117,14 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
     !
     !     NE<1 RETURN.
     Ierr = -1
-    CALL XERMSG('DCHFEV',&
-      'NUMBER OF EVALUATION POINTS LESS THAN ONE',Ierr,1)
-    RETURN
+    ERROR STOP 'DCHFEV : NUMBER OF EVALUATION POINTS LESS THAN ONE'
   ELSE
     h = X2 - X1
     IF( h==zero ) THEN
       !
       !     X1=X2 RETURN.
       Ierr = -2
-      CALL XERMSG('DCHFEV','INTERVAL ENDPOINTS EQUAL',Ierr,1)
-      RETURN
+      ERROR STOP 'DCHFEV : INTERVAL ENDPOINTS EQUAL'
     END IF
   END IF
   !
@@ -163,5 +161,4 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   RETURN
   !------------- LAST LINE OF DCHFEV FOLLOWS -----------------------------
-  RETURN
 END SUBROUTINE DCHFEV

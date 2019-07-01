@@ -1,5 +1,5 @@
 !** CHFCM
-INTEGER FUNCTION CHFCM(D1,D2,Delta)
+INTEGER ELEMENTAL FUNCTION CHFCM(D1,D2,Delta)
   !> Check a single cubic for monotonicity.
   !***
   ! **Library:**   SLATEC (PCHIP)
@@ -84,7 +84,7 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !        b. Change the real declarations to double precision, and
   !        c. Change the constants ZERO, ONE, ... to double precision.
   !  DECLARE ARGUMENTS.
-  REAL(SP) :: D1, D2, Delta
+  REAL(SP), INTENT(IN) :: D1, D2, Delta
   !  DECLARE LOCAL VARIABLES
   INTEGER :: ismon, itrue
   REAL(SP) :: a, b, eps, phi

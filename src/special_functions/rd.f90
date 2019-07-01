@@ -5,7 +5,7 @@ REAL(SP) ELEMENTAL FUNCTION RD(X,Y,Z)
   !  RD(X,Y,Z) = Integral from zero to infinity of
   !                                -1/2     -1/2     -3/2
   !                      (3/2)(t+X)    (t+Y)    (t+Z)    dt.
-  !            If X or Y is zero, the integral is complete.
+  !  If X or Y is zero, the integral is complete.
   !***
   ! **Library:**   SLATEC
   !***
@@ -333,7 +333,8 @@ REAL(SP) ELEMENTAL FUNCTION RD(X,Y,Z)
   IF( MIN(X,Y)<0._SP ) THEN
     WRITE (xern3,'(1PE15.6)') X
     WRITE (xern4,'(1PE15.6)') Y
-    ERROR STOP 'RD : MIN(X,Y)<0 WHERE X = '//xern3//' AND Y = '//xern4
+    ERROR STOP 'RD : MIN(X,Y)<0'
+    ! WHERE X = '//xern3//' AND Y = '//xern4
   END IF
   !
   IF( MAX(X,Y,Z)>uplim ) THEN
@@ -341,8 +342,8 @@ REAL(SP) ELEMENTAL FUNCTION RD(X,Y,Z)
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') uplim
-    ERROR STOP 'RD : MAX(X,Y,Z)>UPLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6
+    ERROR STOP 'RD : MAX(X,Y,Z)>UPLIM'
+    ! WHERE X = '//xern3//' Y = '//xern4//' Z = '//xern5//' AND UPLIM = '//xern6
   END IF
   !
   IF( MIN(X+Y,Z)<lolim ) THEN
@@ -350,8 +351,8 @@ REAL(SP) ELEMENTAL FUNCTION RD(X,Y,Z)
     WRITE (xern4,'(1PE15.6)') Y
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
-    ERROR STOP 'RD : MIN(X+Y,Z)<LOLIM WHERE X = '//xern3//&
-      ' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6
+    ERROR STOP 'RD : MIN(X+Y,Z)<LOLIM'
+    ! WHERE X = '//xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6
   END IF
   !
   xn = X

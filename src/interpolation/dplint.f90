@@ -1,7 +1,6 @@
 !** DPLINT
-SUBROUTINE DPLINT(N,X,Y,C)
-  !> Produce the polynomial which interpolates a set of discrete
-  !            data points.
+PURE SUBROUTINE DPLINT(N,X,Y,C)
+  !> Produce the polynomial which interpolates a set of data points.
   !***
   ! **Library:**   SLATEC
   !***
@@ -29,8 +28,7 @@ SUBROUTINE DPLINT(N,X,Y,C)
   !     Y  - the array of ordinates
   !     C  - an array of information used by subroutines
   !     *******  Dimensioning Information  *******
-  !     Arrays X,Y, and C must be dimensioned at least N in the calling
-  !     program.
+  !     Arrays X,Y, and C must be dimensioned at least N in the calling program.
   !
   !***
   ! **References:**  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
@@ -46,15 +44,15 @@ SUBROUTINE DPLINT(N,X,Y,C)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: N
-  REAL(DP) :: C(N), X(N), Y(N)
+
+  INTEGER, INTENT(IN) :: N
+  REAL(DP), INTENT(IN) :: X(N), Y(N)
+  REAL(DP), INTENT(OUT) :: C(N)
   INTEGER :: i, k, km1
   REAL(DP) :: dif
   !* FIRST EXECUTABLE STATEMENT  DPLINT
   IF( N<=0 ) THEN
-    CALL XERMSG('DPLINT','N IS ZERO OR NEGATIVE.',2,1)
-    RETURN
+    ERROR STOP 'DPLINT : N < = 0'
   ELSE
     C(1) = Y(1)
     IF( N==1 ) RETURN
@@ -64,11 +62,12 @@ SUBROUTINE DPLINT(N,X,Y,C)
       DO i = 1, km1
         !     CHECK FOR DISTINCT X VALUES
         dif = X(i) - X(k)
-        IF( dif==0.0 ) GOTO 100
+        IF( dif==0._DP ) GOTO 100
         C(k) = (C(i)-C(k))/dif
       END DO
     END DO
     RETURN
   END IF
-  100  CALL XERMSG('DPLINT','THE ABSCISSAS ARE NOT DISTINCT.',2,1)
+  100  ERROR STOP 'DPLINT : THE ABSCISSAS ARE NOT DISTINCT.'
+
 END SUBROUTINE DPLINT

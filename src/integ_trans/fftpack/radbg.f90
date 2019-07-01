@@ -1,7 +1,6 @@
 !** RADBG
-SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
-  !> Calculate the fast Fourier transform of subvectors of
-  !            arbitrary length.
+PURE SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
+  !> Calculate the fast Fourier transform of subvectors of arbitrary length.
   !***
   ! **Library:**   SLATEC (FFTPACK)
   !***
@@ -19,16 +18,17 @@ SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !           (b) changing references to intrinsic function FLOAT
   !               to REAL(SP), and
   !           (c) changing definition of variable TPI by using
-  !               FORTRAN intrinsic function ATAN instead of a DATA
-  !               statement.
+  !               FORTRAN intrinsic function ATAN instead of a DATA statement.
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Idl1, Ido, Ip, L1
-  REAL(SP) :: C1(Ido,L1,Ip), C2(Idl1,Ip), Cc(Ido,Ip,L1), Ch(Ido,L1,Ip), Ch2(Idl1,Ip), Wa(:)
+  INTEGER, INTENT(IN) :: Idl1, Ido, Ip, L1
+  REAL(SP), INTENT(IN) :: Cc(Ido,Ip,L1), Wa(:)
+  REAL(SP), INTENT(INOUT) :: Ch2(Idl1,Ip)
+  REAL(SP), INTENT(OUT) :: C1(Ido,L1,Ip), C2(Idl1,Ip), Ch(Ido,L1,Ip)
   INTEGER :: i, ic, idij, idp2, ik, ipp2, ipph, is, j, j2, jc, k, l, lc, nbd
   REAL(SP) :: ai1, ai2, ar1, ar1h, ar2, ar2h, arg, dc2, dcp, ds2, dsp, tpi
   !* FIRST EXECUTABLE STATEMENT  RADBG
@@ -191,4 +191,5 @@ SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       END DO
     END DO
   END IF
+
 END SUBROUTINE RADBG
