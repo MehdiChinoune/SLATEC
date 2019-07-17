@@ -1,5 +1,5 @@
 !** CGEFS
-SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
+PURE SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !> Solve a general system of linear equations.
   !***
   ! **Library:**   SLATEC
@@ -109,11 +109,13 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
+  USE service, ONLY : R1MACH
   USE linpack, ONLY : CGECO, CGESL
   !
-  INTEGER :: Lda, N, Itask, Ind, Iwork(N)
-  COMPLEX(SP) :: A(Lda,N), V(N), Work(N)
+  INTEGER, INTENT(IN) :: Lda, N, Itask
+  INTEGER, INTENT(OUT) :: Ind, Iwork(N)
+  COMPLEX(SP), INTENT(INOUT) :: A(Lda,N), V(N)
+  COMPLEX(SP), INTENT(OUT) :: Work(N)
   REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CGEFS
@@ -121,21 +123,21 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('CGEFS','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
+    ERROR STOP 'CGEFS : LDA IS LESS THAN N '
     RETURN
   END IF
   !
   IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('CGEFS','N = '//xern1//' IS LESS THAN 1',-2,1)
+    ERROR STOP 'CGEFS : N IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('CGEFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    ERROR STOP 'CGEFS : ITASK IS LESS THAN 1'
     RETURN
   END IF
   !
@@ -148,7 +150,7 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     IF( rcond==0._SP ) THEN
       Ind = -4
-      CALL XERMSG('CGEFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
+      ERROR STOP 'CGEFS : SINGULAR MATRIX A - NO SOLUTION'
       RETURN
     END IF
     !
@@ -160,11 +162,12 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     IF( Ind<=0 ) THEN
       Ind = -10
-      CALL XERMSG('CGEFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+      ! 'CGEFS : SOLUTION MAY HAVE NO SIGNIFICANCE'
     END IF
   END IF
   !
   !     SOLVE AFTER FACTORING
   !
   CALL CGESL(A,Lda,N,Iwork,V,0)
+
 END SUBROUTINE CGEFS

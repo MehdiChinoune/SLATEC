@@ -1,8 +1,7 @@
 !** DFZERO
-SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
-  !> Search for a zero of a function F(X) in a given interval
-  !            (B,C).  It is designed primarily for problems where F(B)
-  !            and F(C) have opposite signs.
+PURE SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
+  !> Search for a zero of a function F(X) in a given interval (B,C).
+  !  It is designed primarily for problems where F(B) and F(C) have opposite signs.
   !***
   ! **Library:**   SLATEC
   !***
@@ -101,14 +100,17 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH
+
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
       REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Iflag
-  REAL(DP) :: Ae, B, C, R, Re
+  INTEGER, INTENT(OUT) :: Iflag
+  REAL(DP), INTENT(IN) :: Ae, Re
+  REAL(DP), INTENT(INOUT) :: B, C
+  REAL(DP), INTENT(OUT) :: R
   INTEGER :: ic, kount
   REAL(DP) :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
   !
@@ -253,4 +255,5 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
       END IF
     END IF
   END DO
+
 END SUBROUTINE DFZERO

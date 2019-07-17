@@ -1544,18 +1544,22 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
+    PURE SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
       IMPORT SP
-      INTEGER :: I, J, indcat, iflag(10)
-      REAL(SP) :: Dattrv(:), Aij
+      INTEGER, INTENT(OUT) :: I, J, Indcat
+      INTEGER, INTENT(INOUT) :: Iflag(4)
+      REAL(SP), INTENT(IN) :: Dattrv(:)
+      REAL(SP), INTENT(OUT) :: Aij
     END SUBROUTINE USRMAT
   END INTERFACE
-  INTEGER :: Info, Liw, Lw, Mrelas, Nvars
-  INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas), Iwork(Liw)
-  REAL(SP) :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars), Dattrv(:), &
-    Duals(Nvars+Mrelas), Prgopt(:), Primal(Nvars+Mrelas), Work(Lw)
+  INTEGER, INTENT(IN) :: Liw, Lw, Mrelas, Nvars
+  INTEGER, INTENT(OUT) :: Info
+  INTEGER, INTENT(INOUT) :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas), Iwork(Liw)
+  REAL(SP), INTENT(IN) :: Costs(Nvars), Dattrv(:), Prgopt(:)
+  REAL(SP), INTENT(INOUT) :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Work(Lw)
+  REAL(SP), INTENT(OUT) :: Duals(Nvars+Mrelas), Primal(Nvars+Mrelas)
   INTEGER :: iadbig, ictmax, ictopt, iopt, key, lamat, last, lbasma, lbm, lcolnr, &
     lcsc, lerd, lerp, libb, librc, limat, lipr, liwork, liwr, lmx, lrg, lrhs, &
     lrprim, lrz, lwork, lwr, lww, nerr, next
@@ -1569,15 +1573,15 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   IF( Mrelas<=0 ) THEN
     WRITE (xern1,'(I8)') Mrelas
-    CALL XERMSG('SPLP','VALUE OF MRELAS MUST BE > 0.  NOW = '//xern1,5,1)
     Info = -5
+    ERROR STOP 'SPLP : VALUE OF MRELAS MUST BE > 0.' ! NOW = '//xern1
     RETURN
   END IF
   !
   IF( Nvars<=0 ) THEN
     WRITE (xern1,'(I8)') Nvars
-    CALL XERMSG('SPLP','VALUE OF NVARS MUST BE > 0.  NOW = '//xern1,6,1)
     Info = -6
+    ERROR STOP 'SPLP : VALUE OF NVARS MUST BE > 0.' !  NOW = '//xern1
     RETURN
   END IF
   !
@@ -1596,9 +1600,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       !     THE CHECKS FOR SMALL OR LARGE VALUES OF NEXT ARE TO PREVENT
       !     WORKING WITH UNDEFINED DATA.
       nerr = 14
-      CALL XERMSG('SPLP',&
-        'THE USER OPTION ARRAY HAS UNDEFINED DATA.',nerr,iopt)
       Info = -nerr
+      ERROR STOP 'SPLP : THE USER OPTION ARRAY HAS UNDEFINED DATA.'
       RETURN
     ELSEIF( next==1 ) THEN
       !
@@ -1606,9 +1609,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       !
       IF( lmx<Nvars+7 ) THEN
         WRITE (xern1,'(I8)') lmx
-        CALL XERMSG('SPLP','USER-DEFINED VALUE OF LAMAT = '//&
-          xern1//' MUST BE >= NVARS+7.',20,1)
         Info = -20
+        ERROR STOP 'SPLP : USER-DEFINED VALUE OF LAMAT  MUST BE >= NVARS+7.'
         RETURN
       END IF
       !
@@ -1642,8 +1644,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       IF( Lw<lwork .OR. Liw<liwork ) THEN
         WRITE (xern1,'(I8)') lwork
         WRITE (xern2,'(I8)') liwork
-        CALL XERMSG('SPLP','WORK OR IWORK IS NOT LONG ENOUGH. LW MUST BE = '&
-          //xern1//' AND LIW MUST BE = '//xern2,4,1)
+        ERROR STOP 'SPLP : WORK OR IWORK IS NOT LONG ENOUGH.'
+         ! LW MUST BE = '//xern1//' AND LIW MUST BE = '//xern2,4,1)
         Info = -4
         RETURN
       END IF
@@ -1671,13 +1673,13 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       last = next
     ELSE
       nerr = 15
-      CALL XERMSG('SPLP','OPTION ARRAY PROCESSING IS CYCLING.',nerr,iopt)
+      ERROR STOP 'SPLP : OPTION ARRAY PROCESSING IS CYCLING.'
       Info = -nerr
       RETURN
     END IF
   END DO
   nerr = 21
-  CALL XERMSG('SPLP','USER-DEFINED VALUE OF LBM MUST BE >= 0.',nerr,iopt)
+  ERROR STOP 'SPLP : USER-DEFINED VALUE OF LBM MUST BE >= 0.'
   Info = -nerr
   RETURN
   !

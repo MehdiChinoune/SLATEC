@@ -1,10 +1,8 @@
 !** SSLI
-SUBROUTINE SSLI(N,B,X,Rwork,Iwork)
+PURE SUBROUTINE SSLI(N,B,X,Rwork,Iwork)
   !> SLAP MSOLVE for Lower Triangle Matrix.
-  !            This routine acts as an interface between the SLAP generic
-  !            MSOLVE calling convention and the routine that actually
-  !                      -1
-  !            computes L  B = X.
+  !  This routine acts as an interface between the SLAP generic
+  !  MSOLVE calling convention and the routine that actually computes L^-1  B = X.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -38,8 +36,7 @@ SUBROUTINE SSLI(N,B,X,Rwork,Iwork)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
@@ -47,10 +44,11 @@ SUBROUTINE SSLI(N,B,X,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: N
+  INTEGER, INTENT(IN) :: N
   !     .. Array Arguments ..
-  REAL(SP) :: B(N), Rwork(*), X(N)
-  INTEGER :: Iwork(*)
+  INTEGER, INTENT(IN) :: Iwork(*)
+  REAL(SP), INTENT(IN) :: B(N), Rwork(*)
+  REAL(SP), INTENT(OUT) :: X(N)
   !     .. Local Scalars ..
   INTEGER :: locel, lociel, locjel, nel
   !* FIRST EXECUTABLE STATEMENT  SSLI

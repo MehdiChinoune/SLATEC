@@ -1,8 +1,7 @@
 !** DSDSCL
 SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !> Diagonal Scaling of system Ax = b.
-  !            This routine scales (and unscales) the system  Ax = b
-  !            by symmetric diagonal scaling.
+  !  This routine scales (and unscales) the system Ax = b by symmetric diagonal scaling.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -136,8 +135,7 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910502  Added C***FIRST EXECUTABLE STATEMENT line.  (FNF)
@@ -147,10 +145,10 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,X,B,Dinv,Job,Itol)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   USE DSLBLK, ONLY : soln_com
   !     .. Scalar Arguments ..
-  INTEGER :: Itol, Job, N, Nelt
+  INTEGER, INTENT(IN) :: Itol, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), B(N), Dinv(N), X(N)
-  INTEGER :: Ia(Nelt), Ja(Nelt)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Ja(Nelt)
+  REAL(DP), INTENT(INOUT) :: A(Nelt), B(N), Dinv(N), X(N)
   !     .. Local Scalars ..
   REAL(DP) :: di
   INTEGER :: icol, j, jbgn, jend

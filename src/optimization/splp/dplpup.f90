@@ -40,19 +40,24 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !   900510  Convert XERRWV calls to XERMSG calls, changed do-it-yourself
   !           DO loops to DO loops.  (RWC)
   !   900602  Get rid of ASSIGNed GOTOs.  (RWC)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
+    PURE SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
       IMPORT DP
-      INTEGER :: I, J, indcat, iflag(10)
-      REAL(DP) :: Dattrv(:), Aij
-    END SUBROUTINE
+      INTEGER, INTENT(OUT) :: I, J, Indcat
+      INTEGER, INTENT(INOUT) :: Iflag(4)
+      REAL(DP), INTENT(IN) :: Dattrv(:)
+      REAL(DP), INTENT(OUT) :: Aij
+    END SUBROUTINE DUSRMT
   END INTERFACE
-  INTEGER :: Info, Mrelas, Nvars
-  REAL(DP) :: Abig, Asmall
-  LOGICAL :: Sizeup
-  INTEGER :: Imat(:), Ind(Nvars+Mrelas)
-  REAL(DP) :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Dattrv(:)
+  INTEGER, INTENT(IN) :: Mrelas, Nvars
+  INTEGER, INTENT(OUT) :: Info
+  REAL(DP), INTENT(IN) :: Abig, Asmall
+  LOGICAL, INTENT(IN) :: Sizeup
+  INTEGER, INTENT(IN) :: Ind(Nvars+Mrelas)
+  INTEGER, INTENT(INOUT) :: Imat(:)
+  REAL(DP), INTENT(IN) :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Dattrv(:)
+  REAL(DP), INTENT(INOUT) :: Amat(:)
   INTEGER :: iflag(10), i, indcat, indexx, iplace, itcnt, itmax, j
   REAL(DP) :: aij, amn, amx, xval, zero
   LOGICAL :: first
@@ -70,9 +75,8 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   DO j = 1, Nvars
     IF( Ind(j)<1 .OR. Ind(j)>4 ) THEN
       WRITE (xern1,'(I8)') j
-      CALL XERMSG('DPLPUP','IN DSPLP, INDEPENDENT VARIABLE = '//&
-        xern1//' IS NOT DEFINED.',10,1)
       Info = -10
+      ERROR STOP 'DPLPUP : IN DSPLP, INDEPENDENT VARIABLE IS NOT DEFINED.'
       RETURN
     END IF
     !
@@ -81,10 +85,8 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
         WRITE (xern1,'(I8)') j
         WRITE (xern3,'(1PE15.6)') Bl(j)
         WRITE (xern4,'(1PE15.6)') Bu(j)
-        CALL XERMSG('DPLPUP','IN DSPLP, LOWER BOUND = '//xern3//&
-          ' AND UPPER BOUND = '//xern4//&
-          ' FOR INDEPENDENT VARIABLE = '//xern1//&
-          ' ARE NOT CONSISTENT.',11,1)
+        ERROR STOP 'DPLPUP : IN DSPLP, LOWER BOUND  AND UPPER BOUND  FOR &
+          &INDEPENDENT VARIABLE  ARE NOT CONSISTENT.'
         RETURN
       END IF
     END IF
@@ -93,9 +95,8 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   DO i = Nvars + 1, Nvars + Mrelas
     IF( Ind(i)<1 .OR. Ind(i)>4 ) THEN
       WRITE (xern1,'(I8)') i - Nvars
-      CALL XERMSG('DPLPUP','IN DSPLP, DEPENDENT VARIABLE = '//&
-        xern1//' IS NOT DEFINED.',12,1)
       Info = -12
+      ERROR STOP 'DPLPUP : IN DSPLP, DEPENDENT VARIABLE IS NOT DEFINED.'
       RETURN
     END IF
     !
@@ -104,11 +105,9 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
         WRITE (xern1,'(I8)') i
         WRITE (xern3,'(1PE15.6)') Bl(i)
         WRITE (xern4,'(1PE15.6)') Bu(i)
-        CALL XERMSG('DPLPUP','IN DSPLP, LOWER BOUND = '//xern3//&
-          ' AND UPPER BOUND = '//xern4//&
-          ' FOR DEPENDANT VARIABLE = '//xern1//&
-          ' ARE NOT CONSISTENT.',13,1)
         Info = -13
+        ERROR STOP 'DPLPUP : IN DSPLP, LOWER BOUND  AND UPPER BOUND &
+          &FOR DEPENDANT VARIABLE  ARE NOT CONSISTENT.'
         RETURN
       END IF
     END IF
@@ -134,9 +133,8 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     !
     itcnt = itcnt + 1
     IF( itcnt>itmax ) THEN
-      CALL XERMSG('DPLPUP',&
-        'IN DSPLP, MORE THAN 2*NVARS*MRELAS ITERATIONS DEFINING OR UPDATING MATRIX DATA.',7,1)
       Info = -7
+      ERROR STOP 'DPLPUP : IN DSPLP, MORE THAN 2*NVARS*MRELAS ITERATIONS DEFINING OR UPDATING MATRIX DATA.'
       RETURN
     END IF
     !
@@ -171,9 +169,8 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       !
       WRITE (xern1,'(I8)') i
       WRITE (xern2,'(I8)') j
-      CALL XERMSG('DPLPUP','IN DSPLP, ROW INDEX = '//xern1//&
-        ' OR COLUMN INDEX = '//xern2//' IS OUT OF RANGE.',8,1)
       Info = -8
+      ERROR STOP 'DPLPUP : IN DSPLP, ROW INDEX  OR COLUMN INDEX IS OUT OF RANGE.'
       RETURN
     END IF
     !
@@ -189,9 +186,8 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       CALL DPCHNG(i,aij,iplace,Amat,Imat,j)
     ELSE
       WRITE (xern1,'(I8)') indcat
-      CALL XERMSG('DPLPUP','IN DSPLP, INDICATION FLAG = '//xern1//&
-        ' FOR MATRIX DATA MUST BE EITHER 0 OR 1.',9,1)
       Info = -9
+      ERROR STOP 'DPLPUP : IN DSPLP, INDICATION FLAG FOR MATRIX DATA MUST BE EITHER 0 OR 1.'
       RETURN
     END IF
     !
@@ -214,10 +210,10 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !
   IF( Sizeup .AND. .NOT. first ) THEN
     IF( amn<Asmall .OR. amx>Abig ) THEN
-      CALL XERMSG('DPLPUP',&
-        'IN DSPLP, A MATRIX ELEMENT''S SIZE IS OUT OF THE SPECIFIED RANGE.',22,1)
       Info = -22
+      ERROR STOP 'DPLPUP : IN DSPLP, A MATRIX ELEMENT''S SIZE IS OUT OF THE SPECIFIED RANGE.'
       RETURN
     END IF
   END IF
+
 END SUBROUTINE DPLPUP

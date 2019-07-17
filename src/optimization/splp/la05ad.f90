@@ -48,19 +48,21 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
-  !   890605  Added D1MACH to list of DOUBLE PRECISION variables.
+  !   890605  Added D1MACH to list of DOUBLE PRECISION variables.  (WRB)
   !   890605  Corrected references to XERRWV.  (WRB)
-  !           (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE LA05DD, ONLY : lp_com, lcol_com, lenl_com, lenu_com, lrow_com, ncp_com, small_com
-  USE service, ONLY : XERMSG, D1MACH
-  INTEGER :: Ia, N, Nz
-  INTEGER :: Ip(N,2), Ind(Ia,2), Iw(N,8)
-  REAL(DP) :: G, U, W(:), A(:)
+  USE service, ONLY : D1MACH
+
+  INTEGER, INTENT(IN) :: Ia, N
+  INTEGER , INTENT(INOUT):: Ind(Ia,2), Nz
+  INTEGER , INTENT(OUT):: Ip(N,2), Iw(N,8)
+  REAL(DP), INTENT(INOUT) :: A(:), U
+  REAL(DP), INTENT(OUT) :: G, W(:)
   INTEGER :: i, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
     kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, nc, nzc
   REAL(DP) :: amax, au, am
@@ -76,8 +78,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IF( U<eps ) U = eps
   IF( N<1 ) THEN
     !
-    IF( lp_com>0 ) CALL XERMSG('LA05AD',&
-      'THE ORDER OF THE SYSTEM, N, IS NOT POSITIVE.',-1,1)
+    IF( lp_com>0 ) ERROR STOP 'LA05AD : THE ORDER OF THE SYSTEM, N, IS NOT POSITIVE.'
     G = -1._DP
     RETURN
   ELSE
@@ -480,7 +481,8 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IF( lp_com>0 ) THEN
     WRITE (xern1,'(I8)') ir
     WRITE (xern2,'(I8)') j
-    CALL XERMSG('LA05AD','MORE THAN ONE MATRIX ENTRY.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
+    ERROR STOP 'LA05AD : MORE THAN ONE MATRIX ENTRY.'
+      ! HERE ROW = '//xern1//' AND COL = '//xern2
   END IF
   G = -4.
   RETURN
@@ -490,8 +492,8 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     WRITE (xern0,'(I8)') k
     WRITE (xern1,'(I8)') i
     WRITE (xern2,'(I8)') j
-    CALL XERMSG('LA05AD','ELEMENT K = '//xern0//&
-      ' IS OUT OF BOUNDS.$$HERE ROW = '//xern1//' AND COL = '//xern2,-3,1)
+    ERROR STOP 'LA05AD : ELEMENT K IS OUT OF BOUNDS. '
+      !'HERE ROW = '//xern1//' AND COL = '//xern2
   END IF
   G = -3.
   RETURN
@@ -499,14 +501,14 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   300 CONTINUE
   IF( lp_com>0 ) THEN
     WRITE (xern1,'(I8)') l
-    CALL XERMSG('LA05AD','ROW OR COLUMN HAS NO ELEMENTS.  HERE INDEX = '//xern1,-2,1)
+    ERROR STOP 'LA05AD : ROW OR COLUMN HAS NO ELEMENTS.'
+      ! HERE INDEX = '//xern1,-2,1)
   END IF
   G = -2.
   RETURN
   !
   400 CONTINUE
-  IF( lp_com>0 ) CALL XERMSG('LA05AD',&
-    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
+  IF( lp_com>0 ) ERROR STOP 'LA05AD : LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'
   G = -7.
   RETURN
   !
@@ -518,19 +520,21 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   END DO
   !
   IF( lp_com>0 ) THEN
-    xern1 = 'ROWS'
-    IF( l==2 ) xern1 = 'COLUMNS'
-    CALL XERMSG('LA05AD','DEPENDANT '//xern1,-5,1)
+    IF( l==2 ) THEN
+      ERROR STOP 'LA05AD : DEPENDANT COLUMNS'
+    ELSE
+      ERROR STOP 'LA05AD : DEPENDANT ROWS'
+    END IF
     DO
       !
       WRITE (xern1,'(I8)') Iw(i,1)
       xern2 = ' '
       IF( i+1<=ipv ) WRITE (xern2,'(I8)') Iw(i+1,1)
-      CALL XERMSG('LA05AD','DEPENDENT VECTOR INDICES ARE '//xern1//&
-        ' AND '//xern2,-5,1)
+      ERROR STOP 'LA05AD : DEPENDENT VECTOR INDICES'! ARE '//xern1//' AND '//xern2
       i = i + 2
       IF( i>ipv ) EXIT
     END DO
   END IF
   G = -5.
+
 END SUBROUTINE LA05AD

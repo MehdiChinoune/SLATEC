@@ -1,7 +1,6 @@
 !** SNBDI
-SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
-  !> Compute the determinant of a band matrix using the factors
-  !            computed by SNBCO or SNBFA.
+PURE SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
+  !> Compute the determinant of a band matrix using the factors computed by SNBCO or SNBFA.
   !***
   ! **Library:**   SLATEC
   !***
@@ -61,8 +60,9 @@ SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N)
-  REAL(SP) :: Abe(Lda,2*Ml+Mu+1), Det(2)
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu, Ipvt(N)
+  REAL(SP), INTENT(IN) :: Abe(Lda,2*Ml+Mu+1)
+  REAL(SP), INTENT(OUT) :: Det(2)
   !
   REAL(SP) :: ten
   INTEGER :: i
@@ -83,4 +83,5 @@ SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
       Det(2) = Det(2) + 1._SP
     END DO
   END DO
+
 END SUBROUTINE SNBDI

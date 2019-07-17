@@ -1,5 +1,5 @@
 !** RPQR79
-SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
+PURE SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr)
   !> Find the zeros of a polynomial with real coefficients.
   !***
   ! **Library:**   SLATEC
@@ -54,25 +54,26 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   911010  Code reworked and simplified.  (RWC and WRB)
-  USE service, ONLY : XERMSG
   USE lapack, ONLY : SHSEQR
-  INTEGER :: Ndeg, Ierr
-  REAL(SP) :: Coeff(Ndeg+1), Work(Ndeg*(Ndeg+2))
-  COMPLEX(SP) :: Root(Ndeg)
-  INTEGER :: km1, kwend, k, kh, kwr, kwi
+
+  INTEGER, INTENT(IN) :: Ndeg
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: Coeff(Ndeg+1)
+  COMPLEX(SP), INTENT(OUT) :: Root(Ndeg)
+  INTEGER :: kwend, k, kh, kwr, kwi
   REAL(SP) :: scalee
-  REAL(SP) :: z(1,Ndeg), h(Ndeg,Ndeg)
+  REAL(SP) :: z(1,Ndeg), h(Ndeg,Ndeg), wrkr(Ndeg), wrki(Ndeg), wrk(Ndeg)
   !* FIRST EXECUTABLE STATEMENT  RPQR79
   Ierr = 0
   IF( ABS(Coeff(1))==0.0 ) THEN
     Ierr = 2
-    CALL XERMSG('RPQR79','LEADING COEFFICIENT IS ZERO.',2,1)
+    ERROR STOP 'RPQR79 : LEADING COEFFICIENT IS ZERO.'
     RETURN
   END IF
   !
   IF( Ndeg<=0 ) THEN
     Ierr = 3
-    CALL XERMSG('RPQR79','DEGREE INVALID.',3,1)
+    ERROR STOP 'RPQR79 : DEGREE INVALID.'
     RETURN
   END IF
   !
@@ -94,16 +95,14 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
     h(k+1,k) = 1._SP
   END DO
   !
-  CALL SHSEQR('E','N',Ndeg,1,Ndeg,h,Ndeg,Work(kwr),Work(kwi),z,1,Work,Ndeg,Ierr)
+  CALL SHSEQR('E','N',Ndeg,1,Ndeg,h,Ndeg,wrkr,wrki,z,1,wrk,Ndeg,Ierr)
   !
   IF( Ierr/=0 ) THEN
     Ierr = 1
-    CALL XERMSG('CPQR79','NO CONVERGENCE IN 30 QR ITERATIONS.',1,1)
+    ERROR STOP 'CPQR79 : NO CONVERGENCE IN 30 QR ITERATIONS.'
     RETURN
   END IF
   !
-  DO k = 1, Ndeg
-    km1 = k - 1
-    Root(k) = CMPLX(Work(kwr+km1),Work(kwi+km1),SP)
-  END DO
+  Root(1:Ndeg) = CMPLX(wrkr(1:Ndeg),wrki(1:Ndeg),SP)
+
 END SUBROUTINE RPQR79

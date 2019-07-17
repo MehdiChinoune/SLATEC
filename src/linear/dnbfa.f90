@@ -1,5 +1,5 @@
 !** DNBFA
-SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
+PURE SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !> Factor a band matrix by elimination.
   !***
   ! **Library:**   SLATEC
@@ -8,8 +8,7 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !***
   ! **Type:**      DOUBLE PRECISION (SNBFA-S, DNBFA-D, CNBFA-C)
   !***
-  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
-  !             NONSYMMETRIC
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION, NONSYMMETRIC
   !***
   ! **Author:**  Voorhees, E. A., (LANL)
   !***
@@ -118,10 +117,11 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
   USE blas, ONLY : DAXPY, DSWAP
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
-  REAL(DP) :: Abe(Lda,2*Ml+Mu+1)
+
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu
+  INTEGER, INTENT(OUT) :: Ipvt(N), Info
+  REAL(DP), INTENT(INOUT) :: Abe(Lda,2*Ml+Mu+1)
   !
   INTEGER :: ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp, i2
   REAL(DP) :: t, v(2*Ml+Mu+1)
@@ -183,4 +183,5 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   END IF
   Ipvt(N) = N
   IF( Abe(N,ml1)==0._DP ) Info = N
+
 END SUBROUTINE DNBFA

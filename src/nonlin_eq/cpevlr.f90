@@ -1,5 +1,5 @@
 !** CPEVLR
-SUBROUTINE CPEVLR(N,M,A,X,C)
+PURE SUBROUTINE CPEVLR(N,M,A,X,C)
   !> Subsidiary to CPZERO
   !***
   ! **Library:**   SLATEC
@@ -19,8 +19,9 @@ SUBROUTINE CPEVLR(N,M,A,X,C)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: M, N
-  REAL(SP) :: X, A(N+1), C(MIN(M+1,N+1))
+  INTEGER, INTENT(IN) :: M, N
+  REAL(SP), INTENT(IN) :: X, A(N+1)
+  REAL(SP), INTENT(INOUT) :: C(MIN(M+1,N+1))
   INTEGER :: i, j, mini, np1
   REAL(SP) :: ci, cim1
   !* FIRST EXECUTABLE STATEMENT  CPEVLR
@@ -35,4 +36,5 @@ SUBROUTINE CPEVLR(N,M,A,X,C)
       C(i) = cim1 + X*ci
     END DO
   END DO
+
 END SUBROUTINE CPEVLR

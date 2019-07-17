@@ -1,5 +1,5 @@
 !** DHEQR
-SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
+PURE SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
   !> Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
@@ -67,17 +67,18 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: Ijob, Info, Lda, N
+  INTEGER, INTENT(IN) :: Ijob, Lda, N
+  INTEGER, INTENT(OUT) :: Info
   !     .. Array Arguments ..
-  REAL(DP) :: A(Lda,*), Q(*)
+  REAL(DP), INTENT(INOUT) :: A(Lda,*)
+  REAL(DP), INTENT(OUT) :: Q(*)
   !     .. Local Scalars ..
   REAL(DP) :: c, s, t, t1, t2
   INTEGER :: i, iq, j, k, km1, kp1, nm1

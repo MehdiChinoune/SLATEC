@@ -1,5 +1,5 @@
 !** FULMAT
-SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
+PURE SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
@@ -37,10 +37,11 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: I, Indcat, J
-  INTEGER :: Iflag(10)
-  REAL(SP) :: Aij, Dattrv(:), Prgopt(:)
+
+  INTEGER, INTENT(OUT) :: I, Indcat, J
+  INTEGER, INTENT(OUT) :: Iflag(6)
+  REAL(SP), INTENT(IN) :: Dattrv(:), Prgopt(:)
+  REAL(SP), INTENT(OUT) :: Aij
   INTEGER :: key, level, lp, nerr, next
   REAL(SP), PARAMETER :: zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  FULMAT
@@ -67,9 +68,8 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       ELSE
         nerr = 29
         level = 1
-        CALL XERMSG('FULMAT',&
-          'IN SPLP PACKAGE, ROW DIM., MRELAS, NVARS ARE MISSING FROM PRGOPT.',nerr,level)
         Iflag(1) = 3
+        ERROR STOP 'FULMAT : IN SPLP, ROW DIM., MRELAS, NVARS ARE MISSING FROM PRGOPT.'
         EXIT
       END IF
     END DO
@@ -93,4 +93,5 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       END IF
     END DO
   END IF
+
 END SUBROUTINE FULMAT

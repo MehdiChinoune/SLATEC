@@ -25,7 +25,9 @@ SUBROUTINE MPADD(X,Y,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: X(*), Y(*), Z(*)
+  INTEGER, INTENT(IN) :: X(:), Y(:)
+  INTEGER, INTENT(OUT) :: Z(:)
   !* FIRST EXECUTABLE STATEMENT  MPADD
   CALL MPADD2(X,Y,Z,Y,0)
+
 END SUBROUTINE MPADD

@@ -1,10 +1,9 @@
 !** SSDGMR
-SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
-    Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
+    Ierr,Rwork,Lenw,Iwork,Leniw)
   !> Diagonally Scaled GMRES Iterative Sparse Ax=b Solver.
-  !            This routine uses the generalized minimum residual
-  !            (GMRES) method with diagonal scaling to solve possibly
-  !            non-symmetric linear systems of the form: Ax = b.
+  !  This routine uses the generalized minimum residual (GMRES) method with diagonal
+  !  scaling to solve possibly non-symmetric linear systems of the form: Ax = b.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -316,8 +315,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !   880615  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
@@ -327,11 +325,14 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER, INTENT(IN) :: Isym, Itmax, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(SP), INTENT(INOUT) :: Tol
+  REAL(SP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  REAL(SP), INTENT(IN) :: B(N)
+  REAL(SP), INTENT(INOUT) :: A(Nelt), Rwork(Lenw), X(N)
   !     .. Local Scalars ..
   INTEGER :: locdin, locigw, lociw, locrgw, locw, myitol
   !* FIRST EXECUTABLE STATEMENT  SSDGMR
@@ -377,8 +378,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   myitol = 0
   !
   CALL SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSDI,myitol,Tol,Iter,Err,&
-    Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw)&
-    ,20,Rwork,Iwork)
+    Ierr,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw),20,Rwork,Iwork)
   !
   IF( Iter>Itmax ) Ierr = 2
   !------------- LAST LINE OF SSDGMR FOLLOWS ----------------------------

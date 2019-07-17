@@ -1,9 +1,9 @@
 !** SSDCGS
-SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
+    Rwork,Lenw,Iwork,Leniw)
   !> Diagonally Scaled CGS Sparse Ax=b Solver.
-  !            Routine to solve a linear system  Ax = b  using the
-  !            BiConjugate Gradient Squared method with diagonal scaling.
+  !  Routine to solve a linear system  Ax = b  using the BiConjugate Gradient
+  !  Squared method with diagonal scaling.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -224,8 +224,7 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
@@ -236,11 +235,14 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(SP), INTENT(INOUT) :: Tol
+  REAL(SP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(SP) :: A(N), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Ja(Nelt), Iwork(Leniw)
+  REAL(SP), INTENT(IN) :: B(N)
+  REAL(SP), INTENT(INOUT) :: A(N), X(N), Rwork(Lenw)
   !     .. Local Scalars ..
   INTEGER :: locdin, lociw, locp, locq, locr, locr0, locu, locv1, locv2, locw
   !* FIRST EXECUTABLE STATEMENT  SSDCGS
@@ -280,8 +282,8 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !         Perform the Diagonally Scaled
   !         BiConjugate Gradient Squared algorithm.
-  CALL SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSDI,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork(locr),Rwork(locr0),Rwork(locp),Rwork(locq),&
+  CALL SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSDI,Itol,Tol,Itmax,Iter,Ierr,&
+    Rwork(locr),Rwork(locr0),Rwork(locp),Rwork(locq),&
     Rwork(locu),Rwork(locv1),Rwork(locv2),Rwork(1),Iwork(1))
   !------------- LAST LINE OF SSDCGS FOLLOWS ----------------------------
 END SUBROUTINE SSDCGS

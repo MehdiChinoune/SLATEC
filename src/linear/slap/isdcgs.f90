@@ -1,11 +1,10 @@
 !** ISDCGS
-INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
-    Iter,Err,Ierr,Iunit,R,V2,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
+INTEGER PURE FUNCTION ISDCGS(N,Itol,Tol,R,V2,Bnrm,Solnrm)
   !> Preconditioned BiConjugate Gradient Squared Stop Test.
-  !            This routine calculates the stop test for the BiConjugate
-  !            Gradient Squared iteration scheme.  It returns a non-zero
-  !            if the error estimate (the type of which is determined by
-  !            ITOL) is less than the user specified tolerance TOL.
+  !  This routine calculates the stop test for the BiConjugate Gradient Squared
+  !  iteration scheme.
+  !  It returns a non-zero if the error estimate (the type of which is determined
+  !  by ITOL) is less than the user specified tolerance TOL.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -181,8 +180,7 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   891003  Removed C***REFER TO line, per MKS.
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
@@ -191,80 +189,39 @@ INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   920930  Corrected to not print AK,BK when ITER=0.  (FNF)
-  !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in
-  !           output format.  (FNF)
+  !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  USE DSLBLK, ONLY : soln_com
   USE service, ONLY : D1MACH
-  INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
-      IMPORT DP
-      INTEGER :: N, Iwork(*)
-      REAL(DP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
-    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-      IMPORT DP
-      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(DP) :: X(N), R(N), A(Nelt)
-    END SUBROUTINE
-  END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(DP) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
-  INTEGER :: Ierr, Isym, Iter, Itol, Iunit, N, Nelt
+  INTEGER, INTENT(IN) :: Itol, N
+  REAL(DP), INTENT(IN) :: Bnrm, Solnrm, Tol
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), B(N), R(N), Rwork(*), V2(N), X(N)
-  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(DP), INTENT(IN) :: R(N), V2(N)
   !     .. Local Scalars ..
-  INTEGER :: i
+  INTEGER :: ierr
+  REAL(DP) :: eror
   !* FIRST EXECUTABLE STATEMENT  ISDCGS
   ISDCGS = 0
   !
   IF( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF( Iter==0 ) Bnrm = NORM2(B)
-    CALL MATVEC(N,X,V2,Nelt,Ia,Ja,A,Isym)
-    DO i = 1, N
-      V2(i) = V2(i) - B(i)
-    END DO
-    Err = NORM2(V2)/Bnrm
+    eror = NORM2(V2)/Bnrm
   ELSEIF( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
-    IF( Iter==0 ) THEN
-      CALL MSOLVE(N,B,V2,Rwork,Iwork)
-      Bnrm = NORM2(V2)
-    END IF
-    Err = NORM2(R)/Bnrm
+    eror = NORM2(R)/Bnrm
   ELSEIF( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
-    DO i = 1, N
-      V2(i) = X(i) - soln_com(i)
-    END DO
-    Err = NORM2(V2)/Solnrm
+    eror = NORM2(V2)/Solnrm
   ELSE
-    !
     !         If we get here ITOL is not one of the acceptable values.
-    Err = D1MACH(2)
-    Ierr = 3
+    eror = D1MACH(2)
+    ierr = 3
+    ERROR STOP "Itol is not one of the acceptable values {1,2,11}"
   END IF
   !
-  !         Print the error and Coefficients AK, BK on each step,
-  !         if desired.
-  IF( Iunit/=0 ) THEN
-    IF( Iter==0 ) THEN
-      WRITE (Iunit,99001) N, Itol
-      99001 FORMAT (' Preconditioned BiConjugate Gradient Squared for ',&
-        'N, ITOL = ',I5,I5,/' ITER','   Error Estimate',&
-        '            Alpha','             Beta')
-      WRITE (Iunit,99002) Iter, Err
-    ELSE
-      WRITE (Iunit,99002) Iter, Err, Ak, Bk
-    END IF
-  END IF
-  IF( Err<=Tol ) ISDCGS = 1
+  IF( eror<=Tol ) ISDCGS = 1
   !
   RETURN
-  99002 FORMAT (1X,I4,1X,D16.7,1X,D16.7,1X,D16.7)
   !------------- LAST LINE OF ISDCGS FOLLOWS ----------------------------
 END FUNCTION ISDCGS

@@ -1,5 +1,5 @@
 !** CPZERO
-SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
+PURE SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !> Find the zeros of a polynomial with complex coefficients.
   !***
   ! **Library:**   SLATEC
@@ -56,9 +56,11 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: Iflg, In
-  REAL(SP) :: S(In)
-  COMPLEX(SP) :: R(In), T(4*In+4), A(In+1)
+  INTEGER, INTENT(IN) :: In
+  INTEGER, INTENT(OUT) :: Iflg
+  REAL(SP), INTENT(OUT) :: S(In)
+  COMPLEX(SP), INTENT(IN) :: A(In+1)
+  COMPLEX(SP), INTENT(INOUT) :: R(In), T(4*In+4)
   INTEGER :: i, imax, j, n, n1, nit, nmax, nr
   REAL(SP) :: u, v, x
   COMPLEX(SP) :: pn(1), temp(1)
@@ -168,5 +170,6 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !        ERROR EXITS
   200 CONTINUE
   IFlg = 2
+
   RETURN
 END SUBROUTINE CPZERO

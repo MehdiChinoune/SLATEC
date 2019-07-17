@@ -1,9 +1,8 @@
 !** DPLPMU
-SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
-    Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,&
-    Rprnrm,Erdnrm,Dulnrm,Theta,Costsc,Xlamda,Rhsnrm,Amat,&
-    Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
-    Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
+SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
+    Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Rprnrm,Erdnrm,Dulnrm,&
+    Theta,Costsc,Xlamda,Rhsnrm,Amat,Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,&
+    Rg,Colnrm,Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
   !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
@@ -45,20 +44,27 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ienter, Ileave, Info, Iopt, Jstrt, Lbm, Lmx, Mrelas, Npp, Nredc, Nvars
-  REAL(DP) :: Anorm, Costsc, Erdnrm, Dulnrm, Eps, Gg, Rprnrm, Theta, Uu, Xlamda, Rhsnrm
-  LOGICAL :: Singlr, Redbas, Zerolv
-  INTEGER :: Ibasis(Nvars+Mrelas), Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), &
-    Iwr(8*Mrelas), Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
-  REAL(DP) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Rprim(Mrelas), &
-    Ww(Mrelas), Bu(Nvars+Mrelas), Bl(Nvars+Mrelas), Rhs(Mrelas), Erd(Mrelas), &
-    Erp(Mrelas), Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Costs(Nvars), &
-    Primal(Nvars+Mrelas), Duals(Nvars+Mrelas), Colnrm(Nvars)
-  INTEGER :: i, ibas, ihi, il1, ilow, ipage, iplace, iu1, j, k, key, lpg, n20002, &
+
+  INTEGER, INTENT(IN) :: Ienter, Ileave, Lbm, Lmx, Mrelas, Npp, Nvars
+  INTEGER, INTENT(INOUT) :: Jstrt
+  INTEGER, INTENT(OUT) :: Info, Nredc
+  REAL(DP), INTENT(IN) :: Costsc, Erdnrm, Eps, Xlamda
+  REAL(DP), INTENT(INOUT) :: Dulnrm, Gg, Rhsnrm, Rprnrm, Theta, Uu
+  REAL(DP), INTENT(OUT) :: Anorm
+  LOGICAL, INTENT(IN) :: Stpedg, Zerolv
+  LOGICAL, INTENT(OUT) :: Redbas, Singlr
+  INTEGER, INTENT(IN) :: Imat(Lmx), Ind(Nvars+Mrelas)
+  INTEGER, INTENT(INOUT) :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas), Ibrc(Lbm,2), &
+    Ipr(2*Mrelas), Iwr(8*Mrelas)
+  REAL(DP), INTENT(IN) :: Amat(Lmx), Csc(Nvars), Bu(Nvars+Mrelas), Bl(Nvars+Mrelas), &
+    Erp(Mrelas), Costs(Nvars), Colnrm(Nvars)
+  REAL(DP), INTENT(INOUT) :: Basmat(Lbm), Primal(Nvars+Mrelas), Rg(Nvars+Mrelas), &
+    Rhs(Mrelas), Rprim(Mrelas), Rz(Nvars+Mrelas), Ww(Mrelas)
+  REAL(DP), INTENT(OUT) :: Duals(Nvars+Mrelas), Erd(Mrelas), Wr(Mrelas)
+  INTEGER :: i, ibas, ihi, il1, ilow, ipage, iplace, iu1, j, k, lpg, n20002, &
     n20018, n20121, nerr, nnegrc, npr001, npr003
   REAL(DP) :: aij, alpha, gama, gq, rzj, scalr, wp, rcost, cnorm
-  LOGICAL :: pagepl, trans, Stpedg
+  LOGICAL :: pagepl, trans
   REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, two = 2._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DPLPMU
@@ -170,7 +176,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !     REDECOMPOSE BASIS MATRIX WHEN AN ERROR RETURN FROM
     !     LA05CD( ) IS NOTED.  THIS WILL PROBABLY BE DUE TO
     !     SPACE BEING EXHAUSTED, GG=-7.
-    CALL DPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,Ipr,&
+    CALL DPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Ibasis,Imat,Ibrc,Ipr,&
       Iwr,Ind,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
     IF( .NOT. (Singlr) ) THEN
       !     PROCEDURE (COMPUTE NEW PRIMAL)
@@ -184,9 +190,8 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       GOTO 1000
     ELSE
       nerr = 26
-      CALL XERMSG('DPLPMU',&
-        'IN DSPLP, MOVED TO A SINGULAR POINT. THIS SHOULD NOT HAPPEN.',nerr,Iopt)
       Info = -nerr
+      ERROR STOP 'DPLPMU : IN DSPLP, MOVED TO A SINGULAR POINT. THIS SHOULD NOT HAPPEN.'
       RETURN
     END IF
   END IF
@@ -257,10 +262,10 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     IF( .NOT. (pagepl) ) THEN
       il1 = ihi + 1
     ELSE
-      il1 = IDLOC(ilow,Amat,Imat)
+      il1 = IDLOC(ilow,Imat)
       IF( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
-        il1 = IDLOC(ilow,Amat,Imat)
+        il1 = IDLOC(ilow,Imat)
       END IF
       ipage = ABS(Imat(Lmx-1))
     END IF
@@ -274,9 +279,6 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
         gama = gama + Amat(i)*Ww(Imat(i))
       END DO
       IF( ihi<=Lmx-2 ) EXIT
-      ipage = ipage + 1
-      key = 1
-      CALL DPRWPG(key,ipage,lpg,Amat,Imat)
       il1 = Nvars + 5
       ihi = ihi - lpg
     END DO
@@ -336,10 +338,10 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     IF( .NOT. (pagepl) ) THEN
       il1 = ihi + 1
     ELSE
-      il1 = IDLOC(ilow,Amat,Imat)
+      il1 = IDLOC(ilow,Imat)
       IF( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
-        il1 = IDLOC(ilow,Amat,Imat)
+        il1 = IDLOC(ilow,Imat)
       END IF
       ipage = ABS(Imat(Lmx-1))
     END IF
@@ -358,9 +360,6 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
       Rz(j) = Rz(j) - Amat(i)*Duals(Imat(i)) - Amat(i+1)*Duals(Imat(i+1))
     END DO
     IF( ihi>Lmx-2 ) THEN
-      ipage = ipage + 1
-      key = 1
-      CALL DPRWPG(key,ipage,lpg,Amat,Imat)
       il1 = Nvars + 5
       ihi = ihi - lpg
       GOTO 1500
@@ -440,4 +439,5 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     CASE(1700)
       GOTO 1700
   END SELECT
+
 END SUBROUTINE DPLPMU

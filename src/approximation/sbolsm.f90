@@ -420,9 +420,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
   !
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : XERMSG, R1MACH, SVOUT, IVOUT
   USE blas, ONLY : SAXPY, SROT, SROTG, SSWAP
-  USE optimization, ONLY : SVOUT, IVOUT
   INTEGER :: Mdw, Minput, Mode, Ncols
   INTEGER :: Ibasis(Ncols), Ibb(Ncols), Ind(Ncols), Iopt(*)
   REAL(SP) :: Rnorm, W(Mdw,Ncols+1), Bl(Ncols), Bu(Ncols), X(2*Ncols+7), Rw(Ncols), &

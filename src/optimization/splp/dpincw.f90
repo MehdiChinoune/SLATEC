@@ -1,5 +1,5 @@
 !** DPINCW
-SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
+PURE SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Costsc,Gg,Erdnrm,Dulnrm,Amat,Basmat,Csc,Wr,Ww,&
     Rz,Rg,Costs,Colnrm,Duals,Stpedg)
   !> Subsidiary to DSPLP
@@ -34,15 +34,17 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER :: Jstrt, Lbm, Lmx, Mrelas, Npp, Nvars
-  REAL(DP) :: Costsc, Erdnrm, Dulnrm, Gg
-  LOGICAL :: Stpedg
-  INTEGER :: Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), Iwr(8*Mrelas), &
-    Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
-  REAL(DP) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
-    Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Costs(Nvars), Colnrm(Nvars), &
-    Duals(Nvars+Mrelas)
-  INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, lpg, nnegrc
+  INTEGER, INTENT(IN) :: Lbm, Lmx, Mrelas, Npp, Nvars
+  INTEGER, INTENT(INOUT) :: Jstrt
+  REAL(DP), INTENT(IN) :: Costsc, Erdnrm, Dulnrm, Gg
+  LOGICAL, INTENT(IN) :: Stpedg
+  INTEGER, INTENT(IN) :: Imat(Lmx), Ibrc(Lbm,2), Iwr(8*Mrelas), Ind(Nvars+Mrelas), &
+    Ibb(Nvars+Mrelas)
+  INTEGER, INTENT(INOUT) :: Ipr(2*Mrelas)
+  REAL(DP), INTENT(IN) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Costs(Nvars), &
+    Colnrm(Nvars), Duals(Nvars+Mrelas)
+  REAL(DP), INTENT(OUT) :: Rg(Nvars+Mrelas), Rz(Nvars+Mrelas), Wr(Mrelas), Ww(Mrelas)
+  INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, lpg, nnegrc
   REAL(DP) :: one, rzj, scalr, zero, rcost, cnorm
   LOGICAL :: pagepl, trans
   !* FIRST EXECUTABLE STATEMENT  DPINCW
@@ -86,10 +88,10 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
     IF( .NOT. (pagepl) ) THEN
       il1 = ihi + 1
     ELSE
-      il1 = IDLOC(ilow,Amat,Imat)
+      il1 = IDLOC(ilow,Imat)
       IF( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
-        il1 = IDLOC(ilow,Amat,Imat)
+        il1 = IDLOC(ilow,Imat)
       END IF
       ipage = ABS(Imat(Lmx-1))
     END IF
@@ -102,9 +104,6 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
         Ww(Imat(i)) = Amat(i)*Csc(j)
       END DO
       IF( ihi<=Lmx-2 ) EXIT
-      ipage = ipage + 1
-      key = 1
-      CALL DPRWPG(key,ipage,lpg,Amat,Imat)
       il1 = Nvars + 5
       ihi = ihi - lpg
     END DO
@@ -129,4 +128,5 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   j = MOD(j,Mrelas+Nvars) + 1
   IF( nnegrc<Npp .AND. j/=Jstrt ) GOTO 100
   Jstrt = j
+
 END SUBROUTINE DPINCW

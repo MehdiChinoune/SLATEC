@@ -1,5 +1,5 @@
 !** DUSRMT
-SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
+PURE SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
   !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
@@ -22,9 +22,10 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: I, Indcat, J
-  INTEGER :: Iflag(10)
-  REAL(DP) :: Dattrv(:), Aij
+  INTEGER, INTENT(OUT) :: I, Indcat, J
+  INTEGER, INTENT(INOUT) :: Iflag(4)
+  REAL(DP), INTENT(IN) :: Dattrv(:)
+  REAL(DP), INTENT(OUT) :: Aij
   INTEGER :: l
   !
   !* FIRST EXECUTABLE STATEMENT  DUSRMT
@@ -74,4 +75,5 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Dattrv,Iflag)
     Indcat = 0
     RETURN
   END IF
+
 END SUBROUTINE DUSRMT

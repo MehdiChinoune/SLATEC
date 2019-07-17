@@ -1,5 +1,5 @@
 !** DU11US
-SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
+PURE SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !> Subsidiary to DULSIA
   !***
   ! **Library:**   SLATEC
@@ -13,8 +13,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !       This routine performs an LQ factorization of the
   !       matrix A using Householder transformations. Row
   !       and column pivots are chosen to reduce the growth
-  !       of round-off and to help detect possible rank
-  !       deficiency.
+  !       of round-off and to help detect possible rank deficiency.
   !
   !***
   ! **See also:**  DULSIA
@@ -29,11 +28,13 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : XERMSG
   USE blas, ONLY : DAXPY, DSWAP
-  INTEGER :: Mda, Mode, N, Np, Krank, Ksure, M
-  INTEGER :: Ic(N), Ir(M)
-  REAL(DP) :: A(Mda,N), Db(N), Eb(N), H(N), Ub(N), W(N)
+
+  INTEGER, INTENT(IN) :: Mda, Mode, N, Np, M
+  INTEGER, INTENT(OUT) :: Krank, Ksure
+  INTEGER, INTENT(OUT) :: Ic(N), Ir(M)
+  REAL(DP), INTENT(INOUT) :: A(Mda,N), Db(M), Ub(M)
+  REAL(DP), INTENT(OUT) :: Eb(M), H(M), W(M)
   INTEGER :: mmk, nn, i, ii, im1, imin, is, j, jm1, jmax, jp1, kk, km1, kmi, kp1, &
     kz, l, lm1
   REAL(DP) :: bb, r2, rmin, summ, t, temp, tn, tt
@@ -90,8 +91,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
         CALL ISWAP(1,Ir(i),1,Ir(kk),1)
         CALL DSWAP(N,A(i,1),Mda,A(kk,1),Mda)
       ELSE
-        CALL XERMSG('DU11US',&
-          'FIRST NP ROWS ARE LINEARLY DEPENDENT',8,0)
+        ! 'DU11US : FIRST NP ROWS ARE LINEARLY DEPENDENT'
         Krank = i - 1
         RETURN
       END IF
@@ -183,7 +183,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     IF( j<=Krank ) GOTO 200
     GOTO 500
   ELSE
-    CALL XERMSG('DU11US','FIRST NP ROWS ARE LINEARLY DEPENDENT',8,0)
+    ! 'DU11US : FIRST NP ROWS ARE LINEARLY DEPENDENT'
     Krank = j - 1
     RETURN
   END IF
@@ -305,4 +305,5 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
       i = i - 1
     END DO
   END IF
+
 END SUBROUTINE DU11US

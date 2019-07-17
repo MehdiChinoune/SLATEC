@@ -1,7 +1,6 @@
 !** DNBSL
-SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
-  !> Solve a real band system using the factors computed by
-  !            DNBCO or DNBFA.
+PURE SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
+  !> Solve a real band system using the factors computed by DNBCO or DNBFA.
   !***
   ! **Library:**   SLATEC
   !***
@@ -82,10 +81,11 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
   USE blas, ONLY : DAXPY
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Job
-  REAL(DP) :: Abe(Lda,2*Ml+Mu+1), B(N)
+
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu, Ipvt(N), Job
+  REAL(DP), INTENT(IN) :: Abe(Lda,2*Ml+Mu+1)
+  REAL(DP), INTENT(INOUT) :: B(N)
   !
   REAL(DP) :: t, v(2*Ml+Mu+1)
   INTEGER :: k, kb, l, lb, ldb, lm, m, mlm, nm1, i
@@ -162,4 +162,5 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
       CALL DAXPY(lm,t,Abe(k-1,Ml+2),ldb,B(lb),1)
     END DO
   END IF
+
 END SUBROUTINE DNBSL

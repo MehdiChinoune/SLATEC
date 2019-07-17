@@ -1,5 +1,5 @@
 !** SPLPFL
-SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
+PURE SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
     Rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,Finite,Zerolv)
   !> Subsidiary to SPLP
   !***
@@ -34,12 +34,14 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: Ienter, Ileave, Mrelas, Nvars
-  REAL(SP) :: Dirnrm, Rprnrm, Theta
-  LOGICAL :: Finite, Zerolv
-  INTEGER :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas)
-  REAL(SP) :: Csc(Nvars), Ww(Mrelas), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Erp(Mrelas), &
-    Rprim(Mrelas), Primal(Nvars+Mrelas)
+  INTEGER, INTENT(IN) :: Ienter, Mrelas, Nvars
+  INTEGER, INTENT(OUT) :: Ileave
+  REAL(SP), INTENT(IN) :: Dirnrm, Rprnrm
+  REAL(SP), INTENT(OUT) :: Theta
+  LOGICAL, INTENT(OUT) :: Finite, Zerolv
+  INTEGER, INTENT(IN) :: Ibasis(Nvars+Mrelas), Ind(Nvars+Mrelas)
+  REAL(SP), INTENT(IN) :: Csc(Nvars), Ww(Mrelas), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
+    Erp(Mrelas), Rprim(Mrelas), Primal(Nvars+Mrelas)
   INTEGER :: i, j, n20005, n20036
   REAL(SP) ::  bound, ratio, zero
   !* FIRST EXECUTABLE STATEMENT  SPLPFL
@@ -148,4 +150,5 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
       i = i + 1
     END DO
   END IF
+
 END SUBROUTINE SPLPFL

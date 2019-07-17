@@ -102,8 +102,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH
   INTEGER :: Ldfjac, M, Mode, N

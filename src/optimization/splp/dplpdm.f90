@@ -1,5 +1,5 @@
 !** DPLPDM
-SUBROUTINE DPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
+SUBROUTINE DPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Ibasis,Imat,Ibrc,&
     Ipr,Iwr,Ind,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
   !> Subsidiary to DSPLP
   !***
@@ -34,13 +34,19 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !   900510  Convert XERRWV calls to XERMSG calls, convert do-it-yourself
   !           DO loops to DO loops.  (RWC)
   USE LA05DD, ONLY : small_com
-  USE service, ONLY : XERMSG
-  INTEGER :: Info, Iopt, Lbm, Mrelas, Nredc, Nvars
-  REAL(DP) :: Anorm, Eps, Gg, Uu
-  LOGICAL :: Singlr, Redbas
-  INTEGER :: Ibasis(Nvars+Mrelas), Imat(:), Ibrc(Lbm,2), Ipr(2*Mrelas), &
-    Iwr(8*Mrelas), Ind(Nvars+Mrelas)
-  REAL(DP) :: Amat(:), Basmat(Lbm), Csc(Nvars), Wr(Mrelas)
+
+  INTEGER, INTENT(IN) :: Lbm, Mrelas, Nvars
+  INTEGER, INTENT(INOUT) :: Nredc
+  INTEGER, INTENT(OUT) :: Info
+  REAL(DP), INTENT(IN) :: Eps
+  REAL(DP), INTENT(INOUT) :: Uu
+  REAL(DP), INTENT(OUT) :: Anorm, Gg
+  LOGICAL, INTENT(OUT) :: Singlr, Redbas
+  INTEGER, INTENT(IN) :: Ibasis(Nvars+Mrelas), Imat(:), Ind(Nvars+Mrelas)
+  INTEGER, INTENT(INOUT) :: Ipr(2*Mrelas)
+  INTEGER, INTENT(OUT) :: Ibrc(Lbm,2), Iwr(8*Mrelas)
+  REAL(DP), INTENT(IN) :: Amat(:), Csc(Nvars)
+  REAL(DP), INTENT(OUT) :: Basmat(Lbm), Wr(Mrelas)
   INTEGER :: i, iplace, j, k, nzbm
   REAL(DP) :: aij, one, zero
   CHARACTER(16) :: xern3
@@ -106,14 +112,14 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !
   IF( Gg>=zero ) RETURN
   IF( Gg==(-7.) ) THEN
-    CALL XERMSG('DPLPDM','IN DSPLP, SHORT ON STORAGE FOR LA05AD.  USE PRGOPT(*) TO GIVE MORE.',28,Iopt)
     Info = -28
+    ERROR STOP 'DPLPDM : IN DSPLP, SHORT ON STORAGE FOR LA05AD. USE PRGOPT(*) TO GIVE MORE.'
   ELSEIF( Gg==(-5.) ) THEN
     Singlr = .TRUE.
   ELSE
     WRITE (xern3,'(1PE15.6)') Gg
-    CALL XERMSG('DPLPDM','IN DSPLP, LA05AD RETURNED ERROR FLAG = '&
-      //xern3,27,Iopt)
     Info = -27
+    ERROR STOP 'DPLPDM : IN DSPLP, LA05AD RETURNED ERROR FLAG '!//xern3
   END IF
+
 END SUBROUTINE DPLPDM

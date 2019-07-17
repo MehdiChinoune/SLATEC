@@ -1,7 +1,7 @@
 !** SGBSL
-SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
+PURE SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !> Solve the real band system A*X=B or TRANS(A)*X=B using
-  !            the factors computed by SGBCO or SGBFA.
+  !  the factors computed by SGBCO or SGBFA.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
@@ -80,13 +80,13 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : SAXPY
 
-  INTEGER :: Lda, N, Ml, Mu, Job, Ipvt(N)
-  REAL(SP) :: Abd(Lda,N), B(N)
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu, Job, Ipvt(N)
+  REAL(SP), INTENT(IN) :: Abd(Lda,N)
+  REAL(SP), INTENT(INOUT) :: B(N)
   !
   INTEGER :: k, kb, l, la, lb, lm, m, nm1
   REAL(SP) :: t

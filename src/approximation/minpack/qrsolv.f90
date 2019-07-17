@@ -84,8 +84,7 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !   800301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
 
   INTEGER :: N, Ldr

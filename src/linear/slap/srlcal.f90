@@ -1,5 +1,5 @@
 !** SRLCAL
-SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
+PURE SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !> Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
@@ -68,18 +68,18 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  REAL(SP) :: Prod, R0nrm, Snormw
-  INTEGER :: Kmp, Ll, Maxl, N
+  INTEGER, INTENT(IN) :: Kmp, Ll, Maxl, N
+  REAL(SP), INTENT(IN) :: Prod, R0nrm, Snormw
   !     .. Array Arguments ..
-  REAL(SP) :: Q(2*Maxl), Rl(N), V(N,Ll+1)
+  REAL(SP), INTENT(IN) :: Q(2*Maxl), V(N,Ll+1)
+  REAL(SP), INTENT(OUT) :: Rl(N)
   !     .. Local Scalars ..
   REAL(SP) :: c, s, tem
   INTEGER :: i, i2, ip1, k, llm1, llp1

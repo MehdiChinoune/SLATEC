@@ -1,7 +1,7 @@
 !** SPOCO
-SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
+PURE SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !> Factor a real symmetric positive definite matrix
-  !            and estimate the condition number of the matrix.
+  !  and estimate the condition number of the matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
@@ -80,14 +80,14 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : SAXPY
 
-  INTEGER :: Lda, N, Info
-  REAL(SP) :: A(Lda,N), Z(N)
-  REAL(SP) :: Rcond
+  INTEGER, INTENT(IN) :: Lda, N
+  INTEGER, INTENT(OUT) :: Info
+  REAL(SP), INTENT(INOUT) :: A(Lda,N)
+  REAL(SP), INTENT(OUT) :: Rcond, Z(N)
   !
   REAL(SP) :: ek, t, wk, wkm
   REAL(SP) :: anorm, s, sm, ynorm
@@ -213,4 +213,5 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
     IF( anorm/=0._SP ) Rcond = ynorm/anorm
     IF( anorm==0._SP ) Rcond = 0._SP
   END IF
+
 END SUBROUTINE SPOCO

@@ -1,8 +1,8 @@
 !** BNDSOL
-SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
+PURE SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !> Solve the least squares problem for a banded matrix using
-  !            sequential accumulation of rows of the data matrix.
-  !            Exactly one right-hand side vector is permitted.
+  !  sequential accumulation of rows of the data matrix.
+  !  Exactly one right-hand side vector is permitted.
   !***
   ! **Library:**   SLATEC
   !***
@@ -193,12 +193,13 @@ SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ip, Ir, Mdg, Mode, N, Nb
-  REAL(SP) :: G(Mdg,Nb+1), Rnorm, X(N)
+
+  INTEGER, INTENT(IN) :: Ip, Ir, Mdg, Mode, N, Nb
+  REAL(SP), INTENT(IN) :: G(Mdg,Nb+1)
+  REAL(SP), INTENT(INOUT) :: X(N)
+  REAL(SP), INTENT(OUT) :: Rnorm
   INTEGER :: i, i1, i2, ie, ii, iopt, irm1, ix, j, jg, l, nerr, np1
   REAL(SP) :: rsq, s, zero
   !* FIRST EXECUTABLE STATEMENT  BNDSOL
@@ -266,6 +267,6 @@ SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !
   100  nerr = 1
   iopt = 2
-  CALL XERMSG('BNDSOL',&
-    'A ZERO DIAGONAL TERM IS IN THE N BY N UPPER TRIANGULAR MATRIX.',nerr,iopt)
+  ERROR STOP 'BNDSOL : A ZERO DIAGONAL TERM IS IN THE N BY N UPPER TRIANGULAR MATRIX.'
+
 END SUBROUTINE BNDSOL

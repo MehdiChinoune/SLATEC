@@ -1,8 +1,7 @@
 !** SNBIR
-SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
-  !> Solve a general nonsymmetric banded system of linear
-  !            equations.  Iterative refinement is used to obtain an error
-  !            estimate.
+PURE SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
+  !> Solve a general nonsymmetric banded system of linear equations.
+  !  Iterative refinement is used to obtain an error estimate.
   !***
   ! **Library:**   SLATEC
   !***
@@ -177,10 +176,13 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
+  USE service, ONLY : R1MACH
   !
-  INTEGER :: Lda, N, Itask, Ind, Ml, Mu, Iwork(N)
-  REAL(SP) :: Abe(Lda,Ml+Mu+1), V(N), Work(N,2*Ml+Mu+2)
+  INTEGER, INTENT(IN) :: Lda, N, Itask, Ml, Mu
+  INTEGER, INTENT(OUT) :: Ind, Iwork(N)
+  REAL(SP), INTENT(IN) :: Abe(Lda,Ml+Mu+1)
+  REAL(SP), INTENT(INOUT) ::V(N)
+  REAL(SP), INTENT(OUT) :: Work(N,2*Ml+Mu+2)
   INTEGER :: info, j, k, kk, l, m, nc
   REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
@@ -189,35 +191,35 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SNBIR','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
+    ERROR STOP 'SNBIR : LDA IS LESS THAN N'
     RETURN
   END IF
   !
   IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SNBIR','N = '//xern1//' IS LESS THAN 1',-2,1)
+    ERROR STOP 'SNBIR : N IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SNBIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    ERROR STOP 'SNBIR : ITASK IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Ml<0 .OR. Ml>=N ) THEN
     Ind = -5
     WRITE (xern1,'(I8)') Ml
-    CALL XERMSG('SNBIR','ML = '//xern1//' IS OUT OF RANGE',-5,1)
+    ERROR STOP 'SNBIR : ML IS OUT OF RANGE'
     RETURN
   END IF
   !
   IF( Mu<0 .OR. Mu>=N ) THEN
     Ind = -6
     WRITE (xern1,'(I8)') Mu
-    CALL XERMSG('SNBIR','MU = '//xern1//' IS OUT OF RANGE',-6,1)
+    ERROR STOP 'SNBIR : MU IS OUT OF RANGE'
     RETURN
   END IF
   !
@@ -237,7 +239,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !
     IF( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('SNBIR','SINGULAR MATRIX A - NO SOLUTION',-4,1)
+      ERROR STOP 'SNBIR : SINGULAR MATRIX A - NO SOLUTION'
       RETURN
     END IF
   END IF
@@ -279,6 +281,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
   IF( Ind<=0 ) THEN
     Ind = -10
-    CALL XERMSG('SNBIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+    ! 'SNBIR : SOLUTION MAY HAVE NO SIGNIFICANCE'
   END IF
+
 END SUBROUTINE SNBIR

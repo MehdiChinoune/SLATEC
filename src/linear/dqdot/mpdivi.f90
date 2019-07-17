@@ -32,9 +32,11 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : b_com, lun_com, m_com, t_com, r_com
-  INTEGER :: Iy
-  INTEGER :: X(30), Z(30)
+  USE MPCOM, ONLY : b_com, lun_com, m_com, t_com, r_com, mxr_com
+
+  INTEGER, INTENT(IN) :: Iy
+  INTEGER, INTENT(IN) :: X(mxr_com)
+  INTEGER, INTENT(INOUT) :: Z(mxr_com)
   INTEGER :: i, i2, iq, iqj, ir, j, j1, j11, j2, k, kh, rs, re, r1, c, c2, b2
   !* FIRST EXECUTABLE STATEMENT  MPDIVI
   rs = X(1)
@@ -163,10 +165,9 @@ SUBROUTINE MPDIVI(X,Iy,Z)
     GOTO 300
   END IF
   ! CARRY NEGATIVE SO OVERFLOW MUST HAVE OCCURRED
-  400  CALL MPCHK(1,4)
-  WRITE (lun_com,99002)
-  99002 FORMAT (' *** INTEGER OVERFLOW IN MPDIVI, b_com TOO LARGE ***')
-  500  CALL MPERR
+  400 CONTINUE
+  500 ERROR STOP ' *** INTEGER OVERFLOW IN MPDIVI, b_com TOO LARGE ***'
   Z(1) = 0
+
   RETURN
 END SUBROUTINE MPDIVI

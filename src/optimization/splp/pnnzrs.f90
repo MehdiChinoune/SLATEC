@@ -1,5 +1,5 @@
 !** PNNZRS
-SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
+PURE SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
@@ -58,9 +58,12 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: I, Iplace, Ircx, Ix(:)
-  REAL(SP) :: Xval, Sx(:)
+
+  INTEGER, INTENT(IN) :: Ircx, Ix(:)
+  INTEGER, INTENT(INOUT) :: I
+  INTEGER, INTENT(OUT) :: Iplace
+  REAL(SP), INTENT(IN) :: Sx(:)
+  REAL(SP), INTENT(INOUT) :: Xval
   INTEGER :: i1, idiff, iend, ii, il, ilast, iopt, ipl, ipploc, istart,  j, l, &
     ll, lmx, lpg, n20046, nerr, np
   REAL(SP), PARAMETER :: zero = 0._SP
@@ -71,7 +74,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !
   IF( Ircx==0 ) THEN
     nerr = 55
-    CALL XERMSG('PNNZRS','IRCX=0.',nerr,iopt)
+    ERROR STOP 'PNNZRS : IRCX=0.'
   END IF
   !
   !     LMX IS THE LENGTH OF THE IN-MEMORY STORAGE AREA.
@@ -84,8 +87,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !
     IF( Ircx>Ix(3) .OR. ABS(I)>Ix(2) ) THEN
       nerr = 55
-      CALL XERMSG('PNNZRS',&
-        'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
+      ERROR STOP 'PNNZRS : SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.'
     END IF
     l = Ix(2)
   ELSE
@@ -95,8 +97,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !
     IF( Ix(2)<-Ircx .OR. Ix(3)<ABS(I) ) THEN
       nerr = 55
-      CALL XERMSG('PNNZRS',&
-        'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
+      ERROR STOP 'PNNZRS : SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.'
     END IF
     l = Ix(3)
   END IF
@@ -161,7 +162,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !
     !     SCAN THROUGH SEVERAL PAGES, IF NECESSARY, TO FIND MATRIX ENTRY.
     !
-    ipl = IPLOC(Iplace,Sx,Ix)
+    ipl = IPLOC(Iplace,Ix)
     !
     !     FIX UP IPLACE AND IPL IF THEY POINT TO PAGING DATA.
     !     THIS IS NECESSARY BECAUSE THERE IS CONTROL INFORMATION AT THE
@@ -173,7 +174,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
       !     UPDATE THE RELATIVE ADDRESS IN A NEW PAGE.
       !
       Iplace = Iplace + idiff + 1
-      ipl = IPLOC(Iplace,Sx,Ix)
+      ipl = IPLOC(Iplace,Ix)
     END IF
     np = ABS(Ix(lmx-1))
   END IF
@@ -181,7 +182,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !
   !     THE VIRTUAL END OF THE DATA FOR THIS PAGE IS ILAST.
   !
-  il = IPLOC(ilast,Sx,Ix)
+  il = IPLOC(ilast,Ix)
   il = MIN(il,lmx-2)
   !
   !     THE RELATIVE END OF DATA FOR THIS PAGE IS IL.
@@ -242,19 +243,19 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !
     !     SCAN THROUGH SEVERAL PAGES, IF NECESSARY, TO FIND MATRIX ENTRY.
     !
-    ipl = IPLOC(ipploc,Sx,Ix)
+    ipl = IPLOC(ipploc,Ix)
     !
     !     FIX UP IPPLOC AND IPL TO POINT TO MATRIX DATA.
     !
     idiff = lmx - ipl
     IF( idiff<=1 .AND. Ix(lmx-1)>0 ) THEN
       ipploc = ipploc + idiff + 1
-      ipl = IPLOC(ipploc,Sx,Ix)
+      ipl = IPLOC(ipploc,Ix)
     END IF
     np = ABS(Ix(lmx-1))
   END IF
   300  ilast = MIN(iend,np*lpg+ll-2)
-  il = IPLOC(ilast,Sx,Ix)
+  il = IPLOC(ilast,Ix)
   il = MIN(il,lmx-2)
   DO WHILE( .NOT. (ipl>=il .OR. Ix(ipl)>=j) )
     ipl = ipl + 1
@@ -272,5 +273,6 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   END IF
   I = ii
   Xval = Sx(ipl)
+
   RETURN
 END SUBROUTINE PNNZRS

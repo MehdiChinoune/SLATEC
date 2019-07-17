@@ -1,5 +1,5 @@
 !** DPCHNG
-SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
+PURE SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
@@ -11,8 +11,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !***
   ! **Description:**
   !
-  !     SUBROUTINE DPCHNG CHANGES ELEMENT II IN VECTOR +/- IRCX TO THE
-  !     VALUE XVAL.
+  !     SUBROUTINE DPCHNG CHANGES ELEMENT II IN VECTOR +/- IRCX TO THE VALUE XVAL.
   !     DPCHNG LIMITS THE TYPE OF STORAGE TO A SEQUENTIAL SCHEME.
   !     SPARSE MATRIX ELEMENT ALTERATION SUBROUTINE.
   !
@@ -26,8 +25,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !          IRCX POINTS TO THE VECTOR OF THE MATRIX BEING UPDATED.
   !               A NEGATIVE VALUE OF IRCX INDICATES THAT ROW -IRCX IS
   !               BEING UPDATED.  A POSITIVE VALUE OF IRCX INDICATES THAT
-  !               COLUMN IRCX IS BEING UPDATED.  A ZERO VALUE OF IRCX IS
-  !               AN ERROR.
+  !               COLUMN IRCX IS BEING UPDATED.  A ZERO VALUE OF IRCX IS AN ERROR.
   !
   !     SINCE DATA ITEMS ARE KEPT SORTED IN THE SEQUENTIAL DATA STRUCTURE,
   !     CHANGING A MATRIX ELEMENT CAN REQUIRE THE MOVEMENT OF ALL THE DATA
@@ -56,11 +54,14 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ii, Iplace, Ircx, Ix(:)
-  REAL(DP) :: Sx(:), Xval
+
+  INTEGER, INTENT(IN) :: Ircx
+  INTEGER, INTENT(INOUT) :: Ii, Ix(:)
+  INTEGER, INTENT(OUT) :: Iplace
+  REAL(DP), INTENT(IN) :: Xval
+  REAL(DP), INTENT(INOUT) :: Sx(:)
   INTEGER :: i, iend, il, ilast, iopt, ipl, istart, ixlast, j, jj, jstart, k, &
-    key, ll, lmx, lpg, n20055, nerr, np
+    ll, lmx, lpg, n20055, nerr, np
   REAL(DP) :: sxlast, sxval
   REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHNG
@@ -73,7 +74,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   IF( Ircx==0 ) THEN
     nerr = 55
-    CALL XERMSG('DPCHNG','IRCX=0',nerr,iopt)
+    ERROR STOP 'DPCHNG : IRCX=0'
   END IF
   lmx = Ix(1)
   !
@@ -86,8 +87,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     !
     IF( Ix(3)<Ircx .OR. Ix(2)<ABS(Ii) ) THEN
       nerr = 55
-      CALL XERMSG('DPCHNG',&
-        'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS',nerr,iopt)
+      ERROR STOP 'DPCHNG : SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS'
     END IF
     !
     !     CHECK SUBSCRIPTS OF THE ROW. THE ROW NUMBER MUST BE <= M AND
@@ -95,8 +95,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     !
   ELSEIF( Ix(2)<-Ircx .OR. Ix(3)<ABS(Ii) ) THEN
     nerr = 55
-    CALL XERMSG('DPCHNG',&
-      'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS',nerr,iopt)
+    ERROR STOP 'DPCHNG : SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS'
   END IF
   !
   !     SET I TO BE THE ELEMENT OF ROW/COLUMN J TO BE CHANGED.
@@ -130,7 +129,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   !     SCAN THROUGH SEVERAL PAGES, IF NECESSARY, TO FIND MATRIX ELEMENT.
   !
-  ipl = IDLOC(Iplace,Sx,Ix)
+  ipl = IDLOC(Iplace,Ix)
   np = ABS(Ix(lmx-1))
   !
   !     THE VIRTUAL END OF DATA FOR THIS PAGE IS ILAST.
@@ -141,7 +140,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !     SEARCH FOR A MATRIX VALUE WITH AN INDEX >= I ON THE PRESENT
   !     PAGE.
   !
-  il = IDLOC(ilast,Sx,Ix)
+  il = IDLOC(ilast,Ix)
   il = MIN(il,lmx-2)
   DO WHILE( .NOT. (ipl>=il .OR. Ix(ipl)>=i) )
     ipl = ipl + 1
@@ -170,7 +169,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     !
     !     GO TO A NEW PAGE, IF NECESSARY, TO INSERT THE ITEM.
     !
-    IF( ipl<=lmx .OR. Ix(lmx-1)>=0 ) ipl = IDLOC(Iplace,Sx,Ix)
+    IF( ipl<=lmx .OR. Ix(lmx-1)>=0 ) ipl = IDLOC(Iplace,Ix)
     iend = Ix(ll)
     np = ABS(Ix(lmx-1))
     !
@@ -185,7 +184,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     RETURN
   END IF
   200  ilast = MIN(iend,np*lpg+ll-2)
-  il = IDLOC(ilast,Sx,Ix)
+  il = IDLOC(ilast,Ix)
   il = MIN(il,lmx-2)
   sxlast = Sx(il)
   ixlast = Ix(il)
@@ -217,16 +216,6 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   il = il + 1
   IF( il==lmx-1 ) THEN
-    !
-    !     CREATE A NEW PAGE.
-    !
-    Ix(lmx-1) = np
-    !
-    !     WRITE THE OLD PAGE.
-    !
-    Sx(lmx) = zero
-    key = 2
-    CALL DPRWPG(key,np,lpg,Sx,Ix)
     Sx(lmx) = one
     !
     !     STORE LAST ELEMENT MOVED DOWN IN A NEW PAGE.
@@ -258,5 +247,6 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   !     IPLACE POINTS TO THE INSERTED DATA ITEM.
   !
-  ipl = IDLOC(Iplace,Sx,Ix)
+  ipl = IDLOC(Iplace,Ix)
+
 END SUBROUTINE DPCHNG

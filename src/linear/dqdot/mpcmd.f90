@@ -1,5 +1,5 @@
 !** MPCMD
-SUBROUTINE MPCMD(X,Dz)
+PURE SUBROUTINE MPCMD(X,Dz)
   !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
@@ -32,29 +32,29 @@ SUBROUTINE MPCMD(X,Dz)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : b_com, lun_com, t_com
-  INTEGER :: X(30)
-  REAL(DP) :: Dz
+  USE MPCOM, ONLY : b_com, t_com, mxr_com
+
+  INTEGER, INTENT(IN) :: X(mxr_com)
+  REAL(DP), INTENT(OUT) :: Dz
   INTEGER :: i, tm
   REAL(DP) :: db, dz2
   !* FIRST EXECUTABLE STATEMENT  MPCMD
-  CALL MPCHK(1,4)
-  Dz = 0_DP
+  Dz = 0._DP
   IF( X(1)==0 ) RETURN
   db = REAL( b_com, DP )
   DO i = 1, t_com
     Dz = db*Dz + REAL( X(i+2), DP )
     tm = i
     ! CHECK IF FULL DOUBLE-PRECISION ACCURACY ATTAINED
-    dz2 = Dz + 1_DP
+    dz2 = Dz + 1._DP
     ! TEST BELOW NOT ALWAYS EQUIVALENT TO - IF(DZ2<=DZ) GO TO 20,
     ! FOR EXAMPLE ON CYBER 76.
-    IF( (dz2-Dz)<=0_DP ) EXIT
+    IF( (dz2-Dz)<=0._DP ) EXIT
   END DO
   ! NOW ALLOW FOR EXPONENT
   Dz = Dz*(db**(X(2)-tm))
   ! CHECK REASONABLENESS OF RESULT.
-  IF( Dz>0_DP ) THEN
+  IF( Dz>0._DP ) THEN
     ! LHS SHOULD BE <= 0.5 BUT ALLOW FOR SOME ERROR IN LOG
     IF( ABS(REAL(X(2), DP)-(LOG(Dz)/LOG(REAL(b_com, DP))+0.5D0))<=0.6_DP ) THEN
       IF( X(1)<0 ) Dz = -Dz
@@ -63,7 +63,6 @@ SUBROUTINE MPCMD(X,Dz)
   END IF
   ! FOLLOWING MESSAGE INDICATES THAT X IS TOO LARGE OR SMALL -
   ! TRY USING MPCMDE INSTEAD.
-  WRITE (lun_com,99001)
-  99001 FORMAT (' *** FLOATING-POINT OVER/UNDER-FLOW IN MPCMD ***')
-  CALL MPERR
+  ERROR STOP ' *** FLOATING-POINT OVER/UNDER-FLOW IN MPCMD ***'
+
 END SUBROUTINE MPCMD

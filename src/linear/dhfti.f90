@@ -1,8 +1,8 @@
 !** DHFTI
-SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
+PURE SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !> Solve a least squares problem for banded matrices using
-  !            sequential accumulation of rows of the data matrix.
-  !            Exactly one right-hand side vector is permitted.
+  !  sequential accumulation of rows of the data matrix.
+  !  Exactly one right-hand side vector is permitted.
   !***
   ! **Library:**   SLATEC
   !***
@@ -141,9 +141,14 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901005  Replace usage of DDIFF with usage of D1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, XERMSG
-  INTEGER :: Krank, M, Mda, Mdb, N, Nb, Ip(N)
-  REAL(DP) :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N), Rnorm(Nb), Tau
+  USE service, ONLY : D1MACH
+
+  INTEGER, INTENT(IN) :: M, Mda, Mdb, N, Nb
+  INTEGER, INTENT(INOUT) :: Ip(N)
+  INTEGER, INTENT(OUT) :: Krank
+  REAL(DP), INTENT(IN) :: Tau
+  REAL(DP), INTENT(INOUT) :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N)
+  REAL(DP), INTENT(OUT) :: Rnorm(Nb)
   INTEGER :: i, ii, iopt, ip1, j, jb, jj, k, kp1, l, ldiag, lmax, nerr
   REAL(DP) :: dzero, factor, hmax, sm, sm1, szero, tmp
   REAL(DP), PARAMETER :: releps = D1MACH(4)
@@ -223,8 +228,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       ELSE
         nerr = 2
         iopt = 2
-        CALL XERMSG('DHFTI',&
-          'MDB<MAX(M,N) .AND. NB>1. PROBABLE ERROR.',nerr,iopt)
+        ERROR STOP 'DHFTI : MDB<MAX(M,N) .AND. NB>1. PROBABLE ERROR.'
         !     ...............EXIT
         RETURN
       END IF
@@ -232,7 +236,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
     ELSE
       nerr = 1
       iopt = 2
-      CALL XERMSG('DHFTI','MDA<M, PROBABLE ERROR.',nerr,iopt)
+      ERROR STOP 'DHFTI : MDA<M, PROBABLE ERROR.'
       !     ...............EXIT
       RETURN
     END IF
@@ -321,5 +325,6 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !         IN THE FIRST  N  ROWS OF THE ARRAY B(,).
   !
   Krank = k
+
   RETURN
 END SUBROUTINE DHFTI

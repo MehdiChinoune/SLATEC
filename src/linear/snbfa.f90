@@ -1,5 +1,5 @@
 !** SNBFA
-SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
+PURE SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !> Factor a real band matrix by elimination.
   !***
   ! **Library:**   SLATEC
@@ -8,8 +8,7 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !***
   ! **Type:**      SINGLE PRECISION (SNBFA-S, DNBFA-D, CNBFA-C)
   !***
-  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
-  !             NONSYMMETRIC
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION, NONSYMMETRIC
   !***
   ! **Author:**  Voorhees, E. A., (LANL)
   !***
@@ -118,10 +117,11 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
   USE blas, ONLY : SSWAP, SAXPY
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
-  REAL(SP) :: Abe(Lda,2*Ml+Mu+1)
+
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu
+  INTEGER, INTENT(OUT) :: Ipvt(N), Info
+  REAL(SP), INTENT(INOUT) :: Abe(Lda,2*Ml+Mu+1)
   !
   INTEGER :: ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp
   REAL(SP) :: t, v(2*Ml+Mu+1)
@@ -183,4 +183,5 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   END IF
   Ipvt(N) = N
   IF( Abe(N,ml1)==0._SP ) Info = N
+
 END SUBROUTINE SNBFA

@@ -1,8 +1,7 @@
 !** FZERO
-SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
-  !> Search for a zero of a function F(X) in a given interval
-  !            (B,C).  It is designed primarily for problems where F(B)
-  !            and F(C) have opposite signs.
+PURE SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
+  !> Search for a zero of a function F(X) in a given interval(B,C).
+  !  It is designed primarily for problems where F(B) and F(C) have opposite signs.
   !***
   ! **Library:**   SLATEC
   !***
@@ -100,14 +99,17 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH
+
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
       REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Iflag
-  REAL(SP) :: Ae, B, C, R, Re
+  INTEGER, INTENT(OUT) :: Iflag
+  REAL(SP), INTENT(IN) :: Ae, Re
+  REAL(SP), INTENT(INOUT) :: B, C
+  REAL(SP), INTENT(OUT) :: R
   INTEGER :: ic, kount
   REAL(SP) :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
   !* FIRST EXECUTABLE STATEMENT  FZERO
@@ -251,4 +253,5 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
       END IF
     END IF
   END DO
+
 END SUBROUTINE FZERO

@@ -1,5 +1,5 @@
 MODULE service
-  use ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT, ERROR_UNIT, &
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT, ERROR_UNIT, &
     NUMERIC_STORAGE_SIZE, CHARACTER_STORAGE_SIZE
   IMPLICIT NONE
   INTEGER, PARAMETER :: SP = SELECTED_REAL_KIND(6,37)
@@ -85,6 +85,9 @@ MODULE service
   INTEGER :: max_xer     = 10 !! Maximum number of times any error message is to be printed
 
 CONTAINS
+  include"ivout.f90"
+  include"svout.f90"
+  include"dvout.f90"
   include"xermsg.f90"
   include"xerprn.f90"
   include"xersve.f90"

@@ -1,5 +1,5 @@
 !** DFULMT
-SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
+PURE SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
@@ -38,16 +38,16 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: I, Indcat, J
-  INTEGER :: Iflag(10)
-  REAL(DP) :: Aij, Dattrv(:), Prgopt(:)
+
+  INTEGER, INTENT(OUT) :: I, Indcat, J
+  INTEGER, INTENT(OUT) :: Iflag(6)
+  REAL(DP), INTENT(IN) :: Dattrv(:), Prgopt(:)
+  REAL(DP), INTENT(OUT) :: Aij
   INTEGER :: key, level, lp, nerr, next
   REAL(DP), PARAMETER :: zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DFULMT
   IF( Iflag(1)==1 ) THEN
-    !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN
-    !     ARRAYS.
+    !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN ARRAYS.
     lp = 1
     DO
       next = INT( Prgopt(lp) )
@@ -68,9 +68,8 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       ELSE
         nerr = 29
         level = 1
-        CALL XERMSG('DFULMT',&
-          'IN DSPLP, ROW DIM., MRELAS, NVARS ARE MISSING FROM PRGOPT.',nerr,level)
         Iflag(1) = 3
+        ERROR STOP 'DFULMT : IN DSPLP, ROW DIM., MRELAS, NVARS ARE MISSING FROM PRGOPT.'
         EXIT
       END IF
     END DO
@@ -94,4 +93,5 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       END IF
     END DO
   END IF
+
 END SUBROUTINE DFULMT

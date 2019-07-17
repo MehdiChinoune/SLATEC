@@ -1,5 +1,5 @@
 !** CPQR79
-SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
+PURE SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr)
   !> Find the zeros of a polynomial with complex coefficients.
   !***
   ! **Library:**   SLATEC
@@ -54,28 +54,28 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   911010  Code reworked and simplified.  (RWC and WRB)
-  USE service, ONLY : XERMSG
   USE lapack, ONLY : CHSEQR
-  INTEGER :: Ndeg, Ierr
-  REAL(SP) :: Work(2*Ndeg*(Ndeg+1))
-  COMPLEX(SP) :: Coeff(Ndeg+1), Root(Ndeg)
+
+  INTEGER, INTENT(IN) :: Ndeg
+  INTEGER, INTENT(OUT) :: Ierr
+  COMPLEX(SP), INTENT(IN) :: Coeff(Ndeg+1)
+  COMPLEX(SP), INTENT(OUT) :: Root(Ndeg)
   INTEGER :: k, khr, khi
   COMPLEX(SP) :: scalee
   COMPLEX(SP) :: h(Ndeg,Ndeg), z(1,Ndeg), wrk(Ndeg)
   !* FIRST EXECUTABLE STATEMENT  CPQR79
   Ierr = 0
-  IF( ABS(Coeff(1))==0.0 ) THEN
+  IF( ABS(Coeff(1))==0._SP ) THEN
     Ierr = 2
-    CALL XERMSG('CPQR79','LEADING COEFFICIENT IS ZERO.',2,1)
+    ERROR STOP 'CPQR79 : LEADING COEFFICIENT IS ZERO.'
     RETURN
   END IF
   !
   IF( Ndeg<=0 ) THEN
     Ierr = 3
-    CALL XERMSG('CPQR79','DEGREE INVALID.',3,1)
+    ERROR STOP 'CPQR79 : DEGREE INVALID.'
     RETURN
   END IF
   !
@@ -99,7 +99,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !
   IF( Ierr/=0 ) THEN
     Ierr = 1
-    CALL XERMSG('CPQR79','NO CONVERGENCE IN 30 QR ITERATIONS.',1,1)
+    ERROR STOP 'CPQR79 : NO CONVERGENCE IN 30 QR ITERATIONS.'
     RETURN
   END IF
 

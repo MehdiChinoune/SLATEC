@@ -91,8 +91,7 @@ PURE SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
   !

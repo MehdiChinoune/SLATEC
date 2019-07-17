@@ -1,7 +1,6 @@
 !** CPOFS
-SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
-  !> Solve a positive definite symmetric complex system of
-  !            linear equations.
+PURE SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
+  !> Solve a positive definite symmetric complex system of linear equations.
   !***
   ! **Library:**   SLATEC
   !***
@@ -110,11 +109,13 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
+  USE service, ONLY : R1MACH
   USE linpack, ONLY : CPOCO, CPOSL
   !
-  INTEGER :: Lda, N, Itask, Ind
-  COMPLEX(SP) :: A(Lda,N), V(N), Work(N)
+  INTEGER, INTENT(IN) :: Lda, N, Itask
+  INTEGER, INTENT(OUT) :: Ind
+  COMPLEX(SP), INTENT(INOUT) :: A(Lda,N), V(N)
+  COMPLEX(SP), INTENT(OUT) :: Work(N)
   INTEGER :: info
   REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
@@ -123,21 +124,21 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('CPOFS','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
+    ERROR STOP 'CPOFS : LDA IS LESS THAN N'
     RETURN
   END IF
   !
   IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('CPOFS','N = '//xern1//' IS LESS THAN 1',-2,1)
+    ERROR STOP 'CPOFS : N IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('CPOFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    ERROR STOP 'CPOFS : ITASK IS LESS THAN 1'
     RETURN
   END IF
   !
@@ -151,8 +152,7 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     !
     IF( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('CPOFS',&
-        'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
+      ERROR STOP 'CPOFS : SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION'
       RETURN
     END IF
     !
@@ -162,11 +162,12 @@ SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     Ind = INT( -LOG10(R1MACH(4)/rcond) )
     IF( Ind<=0 ) THEN
       Ind = -10
-      CALL XERMSG('CPOFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+      ! 'CPOFS : SOLUTION MAY HAVE NO SIGNIFICANCE'
     END IF
   END IF
   !
   !     SOLVE AFTER FACTORING
   !
   CALL CPOSL(A,Lda,N,V)
+
 END SUBROUTINE CPOFS

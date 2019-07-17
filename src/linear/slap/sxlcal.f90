@@ -1,6 +1,6 @@
 !** SXLCAL
-SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
-    MSOLVE,Nmsl,Rpar,Ipar)
+PURE SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
+    MSOLVE,Rpar,Ipar)
   !> Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
@@ -133,8 +133,7 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910502  Removed MSOLVE from ROUTINES CALLED list.  (FNF)
@@ -142,19 +141,22 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !   920511  Added complete declaration section.  (WRB)
   USE blas, ONLY : SAXPY
   INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+    PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
-      INTEGER :: N, Iwork(*)
-      REAL(SP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
+      INTEGER, INTENT(IN) :: N, Iwork(*)
+      REAL(SP), INTENT(IN) :: R(N), Rwork(*)
+      REAL(SP), INTENT(OUT) :: Z(N)
+    END SUBROUTINE MSOLVE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) :: R0nrm
-  INTEGER :: Jpre, Jscal, Lgmr, Maxlp1, N, Nmsl
+  INTEGER, INTENT(IN) :: Jpre, Jscal, Lgmr, Maxlp1, N
+  REAL(SP), INTENT(IN) :: R0nrm
   !     .. Array Arguments ..
-  REAL(SP) :: Hes(Maxlp1,Maxlp1-1), Q(2*(Maxlp1-1)), Rpar(*), Sz(N), V(N,Maxlp1), &
-    Wk(N), X(N), Xl(N), Zl(N)
-  INTEGER :: Ipar(*)
+  INTEGER, INTENT(IN) :: Ipar(*)
+  REAL(SP), INTENT(IN) :: Hes(Maxlp1,Maxlp1-1), Q(2*(Maxlp1-1)), Rpar(*), Sz(N), &
+    V(N,Maxlp1), X(N)
+  REAL(SP), INTENT(INOUT) :: Wk(N), Zl(N)
+  REAL(SP), INTENT(OUT) :: Xl(N)
   !     .. Local Scalars ..
   INTEGER :: i, k, ll, llp1
   !* FIRST EXECUTABLE STATEMENT  SXLCAL
@@ -179,7 +181,6 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   IF( Jpre>0 ) THEN
     Wk = Zl
     CALL MSOLVE(N,Wk,Zl,Rpar,Ipar)
-    Nmsl = Nmsl + 1
   END IF
   !         calculate XL from X and ZL.
   DO k = 1, N

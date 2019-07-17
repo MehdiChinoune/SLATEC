@@ -1,5 +1,5 @@
 !** PCHNGS
-SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
+PURE SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
@@ -56,13 +56,16 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ii, Iplace, Ircx, Ix(:)
-  REAL(SP) :: Sx(:), Xval
+
+  INTEGER, INTENT(IN) :: Ircx
+  INTEGER, INTENT(INOUT) :: Ii, Ix(:)
+  INTEGER, INTENT(OUT) :: Iplace
+  REAL(SP), INTENT(IN) :: Xval
+  REAL(SP), INTENT(INOUT) :: Sx(:)
   INTEGER :: i, iend, il, ilast, iopt, ipl, istart, ixlast, j, jj, jstart, k, &
-    key, ll, lmx, lpg, n20055, nerr, np
+    ll, lmx, lpg, n20055, nerr, np
   REAL(SP) :: sxlast, sxval
-  REAL(SP), PARAMETER :: zero = 0.E0, one = 1._SP
+  REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  PCHNGS
   iopt = 1
   !
@@ -73,7 +76,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   IF( Ircx==0 ) THEN
     nerr = 55
-    CALL XERMSG('PCHNGS','IRCX=0.',nerr,iopt)
+    ERROR STOP 'PCHNGS : IRCX=0.'
   END IF
   lmx = Ix(1)
   !
@@ -86,8 +89,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
     !
     IF( Ix(3)<Ircx .OR. Ix(2)<ABS(Ii) ) THEN
       nerr = 55
-      CALL XERMSG('PCHNGS',&
-        'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
+      ERROR STOP 'PCHNGS : SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.'
     END IF
     !
     !     CHECK SUBSCRIPTS OF THE ROW. THE ROW NUMBER MUST BE <= M AND
@@ -95,8 +97,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
     !
   ELSEIF( Ix(2)<-Ircx .OR. Ix(3)<ABS(Ii) ) THEN
     nerr = 55
-    CALL XERMSG('PCHNGS',&
-      'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
+    ERROR STOP 'PCHNGS : SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.'
   END IF
   !
   !     SET I TO BE THE ELEMENT OF ROW/COLUMN J TO BE CHANGED.
@@ -130,7 +131,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   !     SCAN THROUGH SEVERAL PAGES, IF NECESSARY, TO FIND MATRIX ELEMENT.
   !
-  ipl = IPLOC(Iplace,Sx,Ix)
+  ipl = IPLOC(Iplace,Ix)
   np = ABS(Ix(lmx-1))
   !
   !     THE VIRTUAL END OF DATA FOR THIS PAGE IS ILAST.
@@ -141,7 +142,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !     SEARCH FOR A MATRIX VALUE WITH AN INDEX >= I ON THE PRESENT
   !     PAGE.
   !
-  il = IPLOC(ilast,Sx,Ix)
+  il = IPLOC(ilast,Ix)
   il = MIN(il,lmx-2)
   DO WHILE( .NOT. (ipl>=il .OR. Ix(ipl)>=i) )
     ipl = ipl + 1
@@ -170,7 +171,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
     !
     !     GO TO A NEW PAGE, IF NECESSARY, TO INSERT THE ITEM.
     !
-    IF( ipl<=lmx .OR. Ix(lmx-1)>=0 ) ipl = IPLOC(Iplace,Sx,Ix)
+    IF( ipl<=lmx .OR. Ix(lmx-1)>=0 ) ipl = IPLOC(Iplace,Ix)
     iend = Ix(ll)
     np = ABS(Ix(lmx-1))
     !
@@ -185,7 +186,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
     RETURN
   END IF
   200  ilast = MIN(iend,np*lpg+ll-2)
-  il = IPLOC(ilast,Sx,Ix)
+  il = IPLOC(ilast,Ix)
   il = MIN(il,lmx-2)
   sxlast = Sx(il)
   ixlast = Ix(il)
@@ -217,16 +218,6 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   il = il + 1
   IF( il==lmx-1 ) THEN
-    !
-    !     CREATE A NEW PAGE.
-    !
-    Ix(lmx-1) = np
-    !
-    !     WRITE THE OLD PAGE.
-    !
-    Sx(lmx) = zero
-    key = 2
-    CALL PRWPGE(key,np,lpg,Sx,Ix)
     Sx(lmx) = one
     !
     !     STORE LAST ELEMENT MOVED DOWN IN A NEW PAGE.
@@ -258,5 +249,6 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   !     IPLACE POINTS TO THE INSERTED DATA ITEM.
   !
-  ipl = IPLOC(Iplace,Sx,Ix)
+  ipl = IPLOC(Iplace,Ix)
+
 END SUBROUTINE PCHNGS

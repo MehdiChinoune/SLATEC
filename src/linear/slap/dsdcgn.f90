@@ -1,11 +1,10 @@
 !** DSDCGN
-SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
+    Rwork,Lenw,Iwork,Leniw)
   !> Diagonally Scaled CG Sparse Ax=b Solver for Normal Eqn's.
-  !            Routine to solve a general linear system  Ax = b  using
-  !            diagonal scaling with the Conjugate Gradient method
-  !            applied to the the normal equations, viz.,  AA'y = b,
-  !            where  x = A'y.
+  !  Routine to solve a general linear system  Ax = b  using diagonal scaling with
+  !  the Conjugate Gradient method applied to the the normal equations,
+  !  viz.,  AA'y = b, where  x = A'y.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -214,8 +213,7 @@ SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
@@ -225,11 +223,14 @@ SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(DP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(DP), INTENT(INOUT) :: Tol
+  REAL(DP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Ja(Nelt), Iwork(Leniw)
+  REAL(DP), INTENT(IN) :: B(N)
+  REAL(DP), INTENT(INOUT) :: A(N), X(N), Rwork(Lenw)
   !     .. Local Scalars ..
   INTEGER :: locatd, locatp, locatz, locd, locdz, lociw, locp, locr, locw, locz
   !* FIRST EXECUTABLE STATEMENT  DSDCGN
@@ -269,8 +270,8 @@ SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   CALL DSD2S(N,Nelt,Ia,Ja,A,Isym,Rwork(1))
   !
   !         Perform Conjugate Gradient algorithm on the normal equations.
-  CALL DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSMTV,DSDI,Itol,Tol,Itmax,Iter,Err,&
-    Ierr,Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locatp),&
+  CALL DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSMTV,DSDI,Itol,Tol,Itmax,Iter,&
+    Ierr,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locatp),&
     Rwork(locatz),Rwork(locdz),Rwork(locatd),Rwork,Iwork)
   !
   IF( Iter>Itmax ) Ierr = 2

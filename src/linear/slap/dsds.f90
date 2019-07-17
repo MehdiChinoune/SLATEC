@@ -1,8 +1,8 @@
 !** DSDS
-SUBROUTINE DSDS(N,Nelt,Ja,A,Dinv)
+PURE SUBROUTINE DSDS(N,Nelt,Ja,A,Dinv)
   !> Diagonal Scaling Preconditioner SLAP Set Up.
-  !            Routine to compute the inverse of the diagonal of a matrix
-  !            stored in the SLAP Column format.
+  !  Routine to compute the inverse of the diagonal of a matrix stored in the
+  !  SLAP Column format.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -101,18 +101,18 @@ SUBROUTINE DSDS(N,Nelt,Ja,A,Dinv)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: N, Nelt
+  INTEGER, INTENT(IN) :: N, Nelt
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), Dinv(N)
-  INTEGER :: Ja(Nelt)
+  INTEGER, INTENT(IN) :: Ja(Nelt)
+  REAL(DP), INTENT(IN) :: A(Nelt)
+  REAL(DP), INTENT(OUT) :: Dinv(N)
   !     .. Local Scalars ..
   INTEGER :: icol
   !* FIRST EXECUTABLE STATEMENT  DSDS

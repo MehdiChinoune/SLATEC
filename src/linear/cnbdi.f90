@@ -1,7 +1,6 @@
 !** CNBDI
-SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
-  !> Compute the determinant of a band matrix using the factors
-  !            computed by CNBCO or CNBFA.
+PURE SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
+  !> Compute the determinant of a band matrix using the factors computed by CNBCO or CNBFA.
   !***
   ! **Library:**   SLATEC
   !***
@@ -60,10 +59,11 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
   USE blas, ONLY : SCABS1
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N)
-  COMPLEX(SP) :: Abe(Lda,2*Ml+Mu+1), Det(2)
+
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu, Ipvt(N)
+  COMPLEX(SP), INTENT(IN) :: Abe(Lda,2*Ml+Mu+1)
+  COMPLEX(SP), INTENT(OUT) :: Det(2)
   !
   REAL(SP) :: ten
   INTEGER :: i
@@ -85,4 +85,5 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
       Det(2) = Det(2) + (1._SP,0._SP)
     END DO
   END DO
+
 END SUBROUTINE CNBDI

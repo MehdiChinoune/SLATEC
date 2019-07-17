@@ -1,8 +1,8 @@
 !** SCPPLT
 SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !> Printer Plot of SLAP Column Format Matrix.
-  !            Routine to print out a SLAP Column format matrix in a
-  !            "printer plot" graphical representation.
+  !  Routine to print out a SLAP Column format matrix in a
+  !  "printer plot" graphical representation.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -115,8 +115,7 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
@@ -125,10 +124,10 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: Isym, Iunit, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt)
-  INTEGER :: Ia(Nelt), Ja(Nelt)
+  REAL(SP), INTENT(IN) :: A(Nelt)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Ja(Nelt)
   !     .. Parameters ..
   INTEGER, PARAMETER :: MAXORD = 225
   !     .. Local Scalars ..

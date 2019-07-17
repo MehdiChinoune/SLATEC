@@ -1,5 +1,5 @@
 !** MPMAXR
-SUBROUTINE MPMAXR(X)
+PURE SUBROUTINE MPMAXR(X)
   !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
@@ -29,11 +29,11 @@ SUBROUTINE MPMAXR(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : b_com, m_com, t_com
-  INTEGER :: X(30)
+  USE MPCOM, ONLY : b_com, m_com, t_com, mxr_com
+
+  INTEGER, INTENT(OUT) :: X(mxr_com)
   INTEGER :: i, it
   !* FIRST EXECUTABLE STATEMENT  MPMAXR
-  CALL MPCHK(1,4)
   it = b_com - 1
   ! SET FRACTION DIGITS TO B-1
   DO i = 1, t_com
@@ -42,4 +42,5 @@ SUBROUTINE MPMAXR(X)
   ! SET SIGN AND EXPONENT
   X(1) = 1
   X(2) = m_com
+
 END SUBROUTINE MPMAXR

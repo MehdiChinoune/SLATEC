@@ -33,16 +33,18 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  REAL(SP) :: cnorm
-  INTEGER :: Jstrt, Lbm, Lmx, Mrelas, Npp, Nvars
+  INTEGER, INTENT(IN) :: Lbm, Lmx, Mrelas, Npp, Nvars
+  INTEGER, INTENT(INOUT) :: Jstrt
+  REAL(SP), INTENT(IN) :: Costsc, Erdnrm, Dulnrm, Gg
+  LOGICAL, INTENT(IN) :: Stpedg
+  INTEGER, INTENT(IN) :: Imat(Lmx), Ibrc(Lbm,2), Iwr(8*Mrelas), Ind(Nvars+Mrelas), &
+    Ibb(Nvars+Mrelas)
+  INTEGER, INTENT(INOUT) :: Ipr(2*Mrelas)
+  REAL(SP), INTENT(IN) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Costs(Nvars), &
+    Colnrm(Nvars), Duals(Nvars+Mrelas)
+  REAL(SP), INTENT(OUT) :: Rg(Nvars+Mrelas), Rz(Nvars+Mrelas), Wr(Mrelas), Ww(Mrelas)
   INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, lpg, nnegrc
-  REAL(SP) :: Costsc, Erdnrm, Dulnrm, Gg
-  LOGICAL :: Stpedg
-  INTEGER :: Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), Iwr(8*Mrelas), &
-    Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
-  REAL(SP) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
-    Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Costs(Nvars), Colnrm(Nvars), Duals(Nvars+Mrelas)
-  REAL(SP) :: one, rzj, scalr, zero, rcost
+  REAL(SP) :: one, rzj, scalr, zero, rcost, cnorm
   LOGICAL :: pagepl, trans
   !* FIRST EXECUTABLE STATEMENT  SPINCW
   lpg = Lmx - (Nvars+4)
@@ -85,10 +87,10 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
     IF( .NOT. (pagepl) ) THEN
       il1 = ihi + 1
     ELSE
-      il1 = IPLOC(ilow,Amat,Imat)
+      il1 = IPLOC(ilow,Imat)
       IF( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
-        il1 = IPLOC(ilow,Amat,Imat)
+        il1 = IPLOC(ilow,Imat)
       END IF
       ipage = ABS(Imat(Lmx-1))
     END IF
@@ -103,7 +105,6 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
       IF( ihi<=Lmx-2 ) EXIT
       ipage = ipage + 1
       key = 1
-      CALL PRWPGE(key,ipage,lpg,Amat,Imat)
       il1 = Nvars + 5
       ihi = ihi - lpg
     END DO
@@ -128,4 +129,5 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
   j = MOD(j,Mrelas+Nvars) + 1
   IF( nnegrc<Npp .AND. j/=Jstrt ) GOTO 100
   Jstrt = j
+
 END SUBROUTINE SPINCW

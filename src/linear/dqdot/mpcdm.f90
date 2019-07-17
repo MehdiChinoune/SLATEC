@@ -36,13 +36,13 @@ SUBROUTINE MPCDM(Dx,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : b_com, t_com, r_com
-  INTEGER :: Z(30)
-  REAL(DP) :: Dx
+  USE MPCOM, ONLY : b_com, t_com, r_com, mxr_com
+
+  INTEGER, INTENT(INOUT) :: Z(mxr_com)
+  REAL(DP), INTENT(IN) :: Dx
   INTEGER :: i, i2, ib, ie, k, rs, re, tp
   REAL(DP) :: db, dj
   !* FIRST EXECUTABLE STATEMENT  MPCDM
-  CALL MPCHK(1,4)
   i2 = t_com + 4
   ! CHECK SIGN
   IF( Dx<0 ) THEN
@@ -60,14 +60,14 @@ SUBROUTINE MPCDM(Dx,Z)
     dj = Dx
     ie = 0
   END IF
-  DO WHILE( dj>=1_DP )
+  DO WHILE( dj>=1._DP )
     ! INCREASE IE AND DIVIDE DJ BY 16.
     ie = ie + 1
     dj = 0.0625_DP*dj
   END DO
   DO WHILE( dj<0.0625_DP )
     ie = ie - 1
-    dj = 16_DP*dj
+    dj = 16._DP*dj
   END DO
   ! NOW DJ IS DY DIVIDED BY SUITABLE POWER OF 16
   ! SET EXPONENT TO 0
@@ -103,4 +103,5 @@ SUBROUTINE MPCDM(Dx,Z)
       END IF
     END DO
   END IF
+
 END SUBROUTINE MPCDM

@@ -32,8 +32,10 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : b_com, lun_com, m_com, t_com, r_com
-  INTEGER :: Re, Rs, Trunc, Z(30)
+  USE MPCOM, ONLY : b_com, lun_com, m_com, t_com, r_com, mxr_com
+
+  INTEGER, INTENT(IN) :: Rs, Trunc
+  INTEGER, INTENT(INOUT) :: Re, Z(mxr_com)
   INTEGER :: i, i2, i2m, i2p, is, it, j, k, b2
   !* FIRST EXECUTABLE STATEMENT  MPNZR
   i2 = t_com + 4
@@ -47,10 +49,7 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
         ! FRACTION ZERO
       END DO
     ELSE
-      WRITE (lun_com,99001)
-      99001 FORMAT (' *** SIGN NOT 0, +1 OR -1 IN CALL TO MPNZR,',&
-        ' POSSIBLE OVERWRITING PROBLEM ***')
-      CALL MPERR
+      ERROR STOP ' *** SIGN NOT 0, +1 OR -1 IN CALL TO MPNZR, POSSIBLE OVERWRITING PROBLEM ***'
     END IF
   END IF
   ! STORE ZERO IN Z
@@ -124,5 +123,6 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   DO i = 1, t_com
     Z(i+2) = r_com(i)
   END DO
+
   RETURN
 END SUBROUTINE MPNZR

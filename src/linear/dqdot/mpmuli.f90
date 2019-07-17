@@ -25,9 +25,12 @@ SUBROUTINE MPMULI(X,Iy,Z)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
+  USE MPCOM , ONLY : mxr_com
 
-  INTEGER :: Iy
-  INTEGER :: X(*), Z(*)
+  INTEGER, INTENT(IN) :: Iy
+  INTEGER, INTENT(IN) :: X(mxr_com)
+  INTEGER, INTENT(INOUT) :: Z(mxr_com)
   !* FIRST EXECUTABLE STATEMENT  MPMULI
   CALL MPMUL2(X,Iy,Z,0)
+
 END SUBROUTINE MPMULI

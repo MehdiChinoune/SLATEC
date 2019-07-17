@@ -1,8 +1,7 @@
 !** HFTI
-SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
-  !> Solve a linear least squares problems by performing a QR
-  !            factorization of the matrix using Householder
-  !            transformations.
+PURE SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
+  !> Solve a linear least squares problems by performing a QR factorization of
+  ! the matrix using Householder transformations.
   !***
   ! **Library:**   SLATEC
   !***
@@ -141,9 +140,14 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901005  Replace usage of DIFF with usage of R1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
-  INTEGER :: Krank, M, Mda, Mdb, N, Nb, Ip(N)
-  REAL(SP) :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N), Rnorm(Nb), Tau
+  USE service, ONLY : R1MACH
+
+  INTEGER, INTENT(IN) :: M, Mda, Mdb, N, Nb
+  INTEGER, INTENT(INOUT) :: Ip(N)
+  INTEGER, INTENT(OUT) :: Krank
+  REAL(SP), INTENT(IN) :: Tau
+  REAL(SP), INTENT(INOUT) :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N)
+  REAL(SP), INTENT(OUT) :: Rnorm(Nb)
   INTEGER :: i, ii, iopt, ip1, j, jb, jj, k, kp1, l, ldiag, lmax, nerr
   REAL(SP) :: factor, hmax, sm1, szero, tmp
   REAL(DP) :: sm, dzero
@@ -215,15 +219,14 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       ELSE
         nerr = 2
         iopt = 2
-        CALL XERMSG('HFTI',&
-          'MDB<MAX(M,N) .AND. NB>1. PROBABLE ERROR.',nerr,iopt)
+        ERROR STOP 'HFTI : MDB<MAX(M,N) .AND. NB>1. PROBABLE ERROR.'
         RETURN
       END IF
       20  k = j - 1
     ELSE
       nerr = 1
       iopt = 2
-      CALL XERMSG('HFTI','MDA<M, PROBABLE ERROR.',nerr,iopt)
+      ERROR STOP 'HFTI : MDA<M, PROBABLE ERROR.'
       RETURN
     END IF
     50  kp1 = k + 1
@@ -311,4 +314,5 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !     IN THE FIRST  N  ROWS OF THE ARRAY B(,).
   !
   Krank = k
+
 END SUBROUTINE HFTI

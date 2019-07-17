@@ -35,14 +35,15 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE LA05DD, ONLY : lcol_com, lrow_com, ncp_com
-  INTEGER :: N
-  LOGICAL :: Reals
-  INTEGER :: Irn(*), Iw(N), Ip(N)
-  REAL(DP) :: A(:)
+
+  INTEGER, INTENT(IN) :: N
+  LOGICAL, INTENT(IN) :: Reals
+  INTEGER, INTENT(INOUT) :: Irn(*), Iw(N), Ip(N)
+  REAL(DP), INTENT(INOUT) :: A(:)
   INTEGER :: ipi, j, k, kl, kn, nz
   !* FIRST EXECUTABLE STATEMENT  LA05ED
   ncp_com = ncp_com + 1
-  !     COMPRESS FILE OF POSITIVE INTEGERS. ENTRY J STARTS AT IRN(IP(J))
+  !  COMPRESS FILE OF POSITIVE INTEGERS. ENTRY J STARTS AT IRN(IP(J))
   !  AND CONTAINS IW(J) INTEGERS,J=1,N. OTHER COMPONENTS OF IRN ARE ZERO.
   !  LENGTH OF COMPRESSED FILE PLACED IN LROW IF REALS IS .TRUE. OR LCOL
   !  OTHERWISE.
@@ -88,4 +89,5 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Reals)
   END DO
   IF( Reals ) lrow_com = kn
   IF( .NOT. Reals ) lcol_com = kn
+
 END SUBROUTINE LA05ED

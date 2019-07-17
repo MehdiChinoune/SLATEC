@@ -1,5 +1,5 @@
 !** CPEVL
-SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
+PURE SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !> Subsidiary to CPZERO
   !***
   ! **Library:**   SLATEC
@@ -47,9 +47,11 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE service, ONLY : I1MACH
-  INTEGER :: M, N
-  LOGICAL :: Kbd
-  COMPLEX(SP) :: Z, A(N+1), C(2*(M+1)), B(2*(M+1))
+
+  INTEGER, INTENT(IN) :: M, N
+  LOGICAL, INTENT(IN) :: Kbd
+  COMPLEX(SP), INTENT(IN) :: Z, A(N+1)
+  COMPLEX(SP), INTENT(INOUT) :: C(2*(M+1)), B(2*(M+1))
   INTEGER :: i, j, mini, np1
   REAL(SP) :: r, s
   COMPLEX(SP) :: ci, cim1, bi, bim1, t
@@ -77,8 +79,9 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
       END IF
     END DO
   END DO
+
 CONTAINS
-  COMPLEX(SP) FUNCTION ZA(q)
+  COMPLEX(SP) ELEMENTAL FUNCTION ZA(q)
     COMPLEX(SP), INTENT(IN) :: q
     ZA = CMPLX(ABS(REAL(q)),ABS(AIMAG(q)),SP)
   END FUNCTION ZA

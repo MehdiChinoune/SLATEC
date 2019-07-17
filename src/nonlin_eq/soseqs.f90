@@ -1,6 +1,6 @@
 !** SOSEQS
-SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
-    Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
+PURE SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
+    Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
   !> Subsidiary to SOS
   !***
   ! **Library:**   SLATEC
@@ -93,17 +93,21 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH, I1MACH
+
   INTERFACE
-    REAL(SP) FUNCTION FNC(X,K)
+    REAL(SP) PURE FUNCTION FNC(X,K)
       IMPORT SP
-      INTEGER :: K
-      REAL(SP) :: X(:)
+      INTEGER, INTENT(IN) :: K
+      REAL(SP), INTENT(IN) :: X(:)
     END FUNCTION FNC
   END INTERFACE
-  INTEGER :: Mxit, N, Nc, Ncjs, Nsri, Nsrrc, Iflag, Iprint, Is(N)
-  REAL(SP) :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
-    X(N), Y(N)
-  INTEGER :: ksv, l, loun, ls, m, mit, mm, np1, ic, icr, isj, isv, it, item, &
+  INTEGER, INTENT(IN) :: N, Nc, Ncjs, Nsri, Nsrrc
+  INTEGER, INTENT(INOUT) :: Mxit, Is(N)
+  INTEGER, INTENT(OUT) :: Iflag
+  REAL(SP), INTENT(IN) :: Atolx, Rtolx, Tolf
+  REAL(SP), INTENT(INOUT) :: C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), X(N), Y(N)
+  REAL(SP), INTENT(OUT) :: Fmax
+  INTEGER :: ksv, l, loun, ls, m, mit, np1, ic, icr, isj, isv, it, item, &
     itry, j, jk, js, k, kd, kj, kk, km1, kn
   REAL(SP) :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, pmax, re, &
     sruro, test, uro, xnorm, yj, yn1, yn2, yn3, ynorm, yns, zero
@@ -310,16 +314,6 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         xnorm = MAX(xnorm,ABS(X(js)))
       END DO
       !
-      !
-      !     PRINT INTERMEDIATE SOLUTION ITERATES AND RESIDUAL NORM IF DESIRED
-      !
-      IF( Iprint==(-1) ) THEN
-        mm = m - 1
-        WRITE (loun,99001) Fmax, mm, (X(j),j=1,N)
-        99001 FORMAT ('0RESIDUAL NORM =',E9.2,/1X,'SOLUTION ITERATE',' (',I3,')',&
-          /(1X,5E26.14))
-      END IF
-      !
       !     TEST FOR CONVERGENCE TO A SOLUTION (RELATIVE AND/OR ABSOLUTE ERROR
       !     COMPARISON ON SUCCESSIVE APPROXIMATIONS OF EACH SOLUTION VARIABLE)
       !
@@ -448,4 +442,5 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !
   !
   400  Mxit = m
+
 END SUBROUTINE SOSEQS

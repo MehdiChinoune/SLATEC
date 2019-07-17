@@ -1,5 +1,5 @@
 !** DPINTM
-SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
+PURE SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
@@ -48,9 +48,10 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ipagef, Lmx, Ix(Lmx), M, N
-  REAL(DP) :: Sx(Lmx)
+
+  INTEGER, INTENT(IN) :: Ipagef, Lmx, M, N
+  INTEGER, INTENT(OUT) :: Ix(Lmx)
+  REAL(DP), INTENT(OUT) :: Sx(Lmx)
   INTEGER :: i, iopt, lp4, n20008, n20012, nerr
   REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   !* FIRST EXECUTABLE STATEMENT  DPINTM
@@ -60,14 +61,14 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !
   IF( M<=0 .OR. N<=0 ) THEN
     nerr = 55
-    CALL XERMSG('DPINTM','MATRIX DIMENSION M OR N <= 0',nerr,iopt)
+    ERROR STOP 'DPINTM : MATRIX DIMENSION M OR N <= 0'
   END IF
   !
   !     VERIFY IF VALUE OF LMX IS LARGE ENOUGH.
   !
   IF( Lmx<N+7 ) THEN
     nerr = 55
-    CALL XERMSG('DPINTM','THE VALUE OF LMX IS TOO SMALL',nerr,iopt)
+    ERROR STOP 'DPINTM : THE VALUE OF LMX IS TOO SMALL'
   END IF
   !
   !     INITIALIZE DATA STRUCTURE INDEPENDENT VALUES.

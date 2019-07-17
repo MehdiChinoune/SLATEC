@@ -51,9 +51,11 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !   900402  Added TYPE section.  (WRB)
   !   920528  Added a REFERENCES section revised.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : lun_com, t_com
-  INTEGER :: Trunc
-  INTEGER :: X(30), Y(30), Z(30), Y1(30)
+  USE MPCOM, ONLY : t_com, mxr_com
+
+  INTEGER, INTENT(IN) :: Trunc
+  INTEGER, INTENT(IN) :: X(mxr_com), Y(mxr_com), Y1(mxr_com)
+  INTEGER, INTENT(OUT) :: Z(mxr_com)
   INTEGER :: j, med, s, ed, rs, re
   !* FIRST EXECUTABLE STATEMENT  MPADD2
   IF( X(1)/=0 ) THEN
@@ -83,11 +85,7 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
         GOTO 100
       END IF
     ELSE
-      CALL MPCHK(1,4)
-      WRITE (lun_com,99001)
-      99001 FORMAT (' *** SIGN NOT 0, +1 OR -1 IN CALL TO MPADD2,',&
-        ' POSSIBLE OVERWRITING PROBLEM ***')
-      CALL MPERR
+      ERROR STOP ' *** SIGN NOT 0, +1 OR -1 IN CALL TO MPADD2, POSSIBLE OVERWRITING PROBLEM ***'
       Z(1) = 0
       RETURN
     END IF
@@ -107,4 +105,5 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   re = X(2)
   CALL MPADD3(Y,X,s,med,re)
   GOTO 300
+
 END SUBROUTINE MPADD2

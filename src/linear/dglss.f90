@@ -1,9 +1,8 @@
 !** DGLSS
-SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
-  !> Solve a linear least squares problems by performing a QR
-  !            factorization of the input matrix using Householder
-  !            transformations.  Emphasis is put on detecting possible
-  !            rank deficiency.
+PURE SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
+  !> Solve a linear least squares problems by performing a QR factorization of
+  ! the input matrix using Householder transformations.
+  !  Emphasis is put on detecting possible rank deficiency.
   !***
   ! **Library:**   SLATEC
   !***
@@ -125,9 +124,11 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Info, Liw, Lw, M, Mda, Mdb, N, Nb
-  INTEGER :: Iwork(M+N)
-  REAL(DP) :: A(Mda,MIN(N,M)), B(Mdb,Nb), Rnorm(Nb), Work(5*MIN(N,M))
+  INTEGER, INTENT(IN) :: Liw, Lw, M, Mda, Mdb, N, Nb
+  INTEGER, INTENT(INOUT) :: Info
+  INTEGER, INTENT(INOUT) :: Iwork(M+N)
+  REAL(DP), INTENT(INOUT) :: A(Mda,MIN(N,M)), B(Mdb,Nb), Work(5*MIN(N,M))
+  REAL(DP), INTENT(OUT) :: Rnorm(Nb)
   INTEGER :: key, krank, ksure, mode, np
   REAL(DP) :: ae(1), re(1)
   !
@@ -152,5 +153,6 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
     Lw,Iwork,Liw,Info)
   IF( Info==-1 ) RETURN
   Info = N - krank
+
   RETURN
 END SUBROUTINE DGLSS

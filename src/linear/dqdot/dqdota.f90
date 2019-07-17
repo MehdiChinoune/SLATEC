@@ -1,7 +1,7 @@
 !** DQDOTA
 REAL(DP) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !> Compute the inner product of two vectors with extended
-  !            precision accumulation and result.
+  !  precision accumulation and result.
   !***
   ! **Library:**   SLATEC
   !***
@@ -69,15 +69,14 @@ REAL(DP) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array sizes for SUN -r8.  (RWC)
+  USE MPCOM , ONLY : mxr_com
 
-  INTEGER :: Incx, Incy, N
-  INTEGER :: Qc(30)
-  REAL(DP) :: Dx(:), Dy(:), Db
+  INTEGER, INTENT(IN) :: Incx, Incy, N
+  INTEGER, INTENT(INOUT) :: Qc(mxr_com)
+  REAL(DP), INTENT(IN) :: Dx(:), Dy(:), Db
   INTEGER :: i, ix, iy
-  INTEGER :: qx(30), qy(30)
-  INTEGER, SAVE :: i1 = 0
+  INTEGER :: qx(mxr_com), qy(mxr_com)
   !* FIRST EXECUTABLE STATEMENT  DQDOTA
-  IF( i1==0 ) CALL MPBLAS(i1)
   IF( Db/=0._DP ) THEN
     CALL MPCDM(Db,qx)
     CALL MPADD(Qc,qx,Qc)
@@ -97,4 +96,5 @@ REAL(DP) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
     END DO
   END IF
   CALL MPCMD(Qc,DQDOTA)
+
 END FUNCTION DQDOTA

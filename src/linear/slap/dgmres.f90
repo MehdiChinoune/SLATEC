@@ -1,10 +1,9 @@
 !** DGMRES
-SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
-    Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,Iwork)
+PURE SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
+    Iter,Err,Ierr,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,Iwork)
   !> Preconditioned GMRES iterative sparse Ax=b solver.
-  !            This routine uses the generalized minimum residual
-  !            (GMRES) method with preconditioning to solve
-  !            non-symmetric linear systems of the form: Ax = b.
+  !  This routine uses the generalized minimum residual (GMRES) method with
+  !  preconditioning to solve non-symmetric linear systems of the form: Ax = b.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -382,8 +381,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   891004  Added new reference.
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
@@ -395,27 +393,32 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !   921026  Added check for valid value of ITOL.  (FNF)
   USE service, ONLY : D1MACH
   INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+    PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
-      INTEGER :: N, Iwork(*)
-      REAL(DP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
-    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER, INTENT(IN) :: N, Iwork(*)
+      REAL(DP), INTENT(IN) :: R(N), Rwork(*)
+      REAL(DP), INTENT(OUT) :: Z(N)
+    END SUBROUTINE MSOLVE
+    PURE SUBROUTINE MATVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
       IMPORT DP
-      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(DP) :: X(N), R(N), A(Nelt)
-    END SUBROUTINE
+      INTEGER, INTENT(IN) :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(DP), INTENT(IN) :: X(N), A(Nelt)
+      REAL(DP), INTENT(OUT) :: Y(N)
+    END SUBROUTINE MATVEC
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(DP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itol, Iunit, Ligw, Lrgw, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itol, N, Nelt, Ligw, Lrgw
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(DP), INTENT(INOUT) :: Tol
+  REAL(DP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), B(N), Rgwk(Lrgw), Rwork(*), Sb(N), Sx(N), X(N)
-  INTEGER :: Ia(Nelt), Igwk(Ligw), Iwork(*), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Igwk(Ligw), Iwork(:), Ja(Nelt)
+  REAL(DP), INTENT(IN) :: B(N), Sb(N), Sx(N)
+  REAL(DP), INTENT(INOUT) :: A(Nelt), Rgwk(Lrgw), Rwork(:), X(N)
   !     .. Local Scalars ..
   REAL(DP) :: bnrm, rhol, summ
   INTEGER :: i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
-    lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, nrsts
+    lv, lw, lxl, lz, lzm1, maxl, maxlp1, nrmax, nrsts
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !* FIRST EXECUTABLE STATEMENT  DGMRES
@@ -445,7 +448,6 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
         !
         !         Initialize counters.
         Iter = 0
-        nms = 0
         nrsts = 0
         !   ------------------------------------------------------------------
         !         Form work array segment pointers.
@@ -473,7 +475,6 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
           !   ------------------------------------------------------------------
           IF( jpre<0 ) THEN
             CALL MSOLVE(N,B,Rgwk(lr),Rwork,Iwork)
-            nms = nms + 1
           ELSE
             Rgwk(lr:lr+N-1) = B
           END IF
@@ -505,12 +506,10 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
             !         Use the DPIGMR algorithm to solve the linear system A*Z = R.
             !   ------------------------------------------------------------------
             CALL DPIGMR(N,Rgwk(lr),Sb,Sx,jscal,maxl,maxlp1,kmp,nrsts,jpre,&
-              MATVEC,MSOLVE,nmsl,Rgwk(lz),Rgwk(lv),Rgwk(lhes),&
+              MATVEC,MSOLVE,Rgwk(lz),Rgwk(lv),Rgwk(lhes),&
               Rgwk(lq),lgmr,Rwork,Iwork,Rgwk(lw),Rgwk(ldl),rhol,&
-              nrmax,bnrm,X,Rgwk(lxl),Itol,Tol,Nelt,Ia,Ja,A,Isym,&
-              Iunit,iflag,Err)
+              nrmax,bnrm,X,Rgwk(lxl),Itol,Tol,Nelt,Ia,Ja,A,Isym,iflag)
             Iter = Iter + lgmr
-            nms = nms + nmsl
             !
             !         Increment X by the current approximate solution Z of A*Z = R.
             !
@@ -527,7 +526,6 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
                 !
                 !         GMRES failed to reduce last residual in MAXL iterations.
                 !         The iteration has stalled.
-                Igwk(7) = nms
                 Rgwk(1) = rhol
                 Ierr = 2
                 RETURN
@@ -538,14 +536,12 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
             !   ------------------------------------------------------------------
             !         The iteration has converged.
             !
-            Igwk(7) = nms
             Rgwk(1) = rhol
             Ierr = 0
             RETURN
           END DO
           !
           !         Max number((NRMAX+1)*MAXL) of linear iterations performed.
-          Igwk(7) = nms
           Rgwk(1) = rhol
           Ierr = 1
           RETURN

@@ -1,11 +1,10 @@
 !** QS2I1D
-SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
+PURE SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
   !> Sort an integer array, moving an integer and DP array.
-  !            This routine sorts the integer array IA and makes the same
-  !            interchanges in the integer array JA and the double pre-
-  !            cision array A.  The array IA may be sorted in increasing
-  !            order or decreasing order.  A slightly modified QUICKSORT
-  !            algorithm is used.
+  !  This routine sorts the integer array IA and makes the same interchanges
+  !  in the integer array JA and the double precision array A.
+  !  The array IA may be sorted in increasing order or decreasing order.
+  !  A slightly modified QUICKSORT algorithm is used.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -67,8 +66,7 @@ SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
   !   761118  DATE WRITTEN
   !   890125  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   900805  Changed XERROR calls to calls to XERMSG.  (RWC)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
@@ -76,12 +74,12 @@ SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   921012  Corrected all f.p. constants to double precision.  (FNF)
-  USE service, ONLY : XERMSG
+
   !     .. Scalar Arguments ..
-  INTEGER :: Kflag, N
+  INTEGER, INTENT(IN) :: Kflag, N
   !     .. Array Arguments ..
-  REAL(DP) :: A(N)
-  INTEGER :: Ia(N), Ja(N)
+  INTEGER, INTENT(INOUT) :: Ia(N), Ja(N)
+  REAL(DP), INTENT(INOUT) :: A(N)
   !     .. Local Scalars ..
   REAL(DP) :: r, ta, tta
   INTEGER :: i, iit, ij, it, j, jjt, jt, k, kk, l, m, nn
@@ -90,15 +88,13 @@ SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
   !* FIRST EXECUTABLE STATEMENT  QS2I1D
   nn = N
   IF( nn<1 ) THEN
-    CALL XERMSG('QS2I1D',&
-      'The number of values to be sorted was not positive.',1,1)
+    ERROR STOP 'QS2I1D : The number of values to be sorted was not positive.'
     RETURN
   END IF
   IF( N==1 ) RETURN
   kk = ABS(Kflag)
   IF( kk/=1 ) THEN
-    CALL XERMSG('QS2I1D',&
-      'The sort control parameter, K, was not 1 or -1.',2,1)
+    ERROR STOP 'QS2I1D : The sort control parameter, K, was not 1 or -1.'
     RETURN
   END IF
   !

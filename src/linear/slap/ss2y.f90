@@ -1,8 +1,7 @@
 !** SS2Y
-SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
+PURE SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
   !> SLAP Triad to SLAP Column Format Converter.
-  !            Routine to convert from the SLAP Triad to SLAP Column
-  !            format.
+  !  Routine to convert from the SLAP Triad to SLAP Column format.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -122,8 +121,7 @@ SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910502  Corrected C***FIRST EXECUTABLE STATEMENT line.  (FNF)
@@ -131,10 +129,10 @@ SUBROUTINE SS2Y(N,Nelt,Ia,Ja,A)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: N, Nelt
+  INTEGER, INTENT(IN) :: N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt)
-  INTEGER :: Ia(Nelt), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Ja(Nelt)
+  REAL(SP), INTENT(INOUT) :: A(Nelt)
   !     .. Local Scalars ..
   REAL(SP) :: temp
   INTEGER :: i, ibgn, icol, iend, itemp, j

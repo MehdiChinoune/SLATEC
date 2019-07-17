@@ -1,5 +1,5 @@
 !** SOSSOL
-SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
+PURE SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   !> Subsidiary to SOS
   !***
   ! **Library:**   SLATEC
@@ -34,8 +34,9 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: K, L, M, N
-  REAL(SP) :: B(:), C(:), X(:)
+  INTEGER, INTENT(IN) :: K, L, M, N
+  REAL(SP), INTENT(IN) :: B(:), C(:)
+  REAL(SP), INTENT(INOUT) :: X(:)
   INTEGER :: j, j1, k1, k2, k3, kn, lk
   REAL(SP) :: xmax
   !* FIRST EXECUTABLE STATEMENT  SOSSOL

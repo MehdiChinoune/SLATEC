@@ -1,10 +1,9 @@
 !** DLLSIA
-SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
+PURE SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
     W,Lw,Iwork,Liw,Info)
-  !> Solve linear least squares problems by performing a QR
-  !            factorization of the input matrix using Householder
-  !            transformations.  Emphasis is put on detecting possible
-  !            rank deficiency.
+  !> Solve linear least squares problems by performing a QR factorization of
+  !  the input matrix using Householder transformations.
+  !  Emphasis is put on detecting possible rank deficiency.
   !***
   ! **Library:**   SLATEC
   !***
@@ -167,15 +166,20 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, XERMSG
-  INTEGER :: i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
-    Mode, N, n1, n2, n3, n4, n5, Nb, Np
-  REAL(DP) :: A(Mda,N), Ae(N), B(Mdb,Nb), eps, Re(N), Rnorm(Nb), W(5*N)
-  INTEGER :: Iwork(N+M)
+  USE service, ONLY : D1MACH
+
+  INTEGER, INTENT(IN) :: Key, Liw, Lw, M, Mda, Mdb, Mode, N, Nb, Np
+  INTEGER, INTENT(INOUT) :: Info
+  INTEGER, INTENT(OUT) :: Krank, Ksure
+  INTEGER, INTENT(INOUT) :: Iwork(N+M)
+  REAL(DP), INTENT(INOUT) :: Ae(N), Re(N), A(Mda,N), B(Mdb,Nb), W(5*N)
+  REAL(DP), INTENT(OUT) :: Rnorm(Nb)
+  INTEGER :: i, it, n1, n2, n3, n4, n5
+  REAL(DP) :: eps
   !
   !* FIRST EXECUTABLE STATEMENT  DLLSIA
   IF( Info<0 .OR. Info>1 ) THEN
-    CALL XERMSG('DLLSIA','INFO OUT OF RANGE',2,1)
+    ERROR STOP 'DLLSIA : INFO OUT OF RANGE'
     RETURN
   ELSE
     it = Info
@@ -184,45 +188,44 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
       !
       !     ERROR MESSAGES
       !
-      CALL XERMSG('DLLSIA',&
-        'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
+      ERROR STOP 'DLLSIA : SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)'
       RETURN
     ELSEIF( M<1 ) THEN
-      CALL XERMSG('DLLSIA','M<1',2,1)
+      ERROR STOP 'DLLSIA : M<1'
       RETURN
     ELSEIF( N<1 ) THEN
-      CALL XERMSG('DLLSIA','N<1',2,1)
+      ERROR STOP 'DLLSIA : N<1'
       RETURN
     ELSE
       IF( N>M ) THEN
-        CALL XERMSG('DLLSIA','N>M',2,1)
+        ERROR STOP 'DLLSIA : N>M'
         RETURN
       ELSE
         IF( Mda<M ) THEN
-          CALL XERMSG('DLLSIA','MDA<M',2,1)
+          ERROR STOP 'DLLSIA : MDA<M'
           RETURN
         ELSE
           IF( Liw<M+N ) THEN
-            CALL XERMSG('DLLSIA','LIW<M+N',2,1)
+            ERROR STOP 'DLLSIA : LIW<M+N'
             RETURN
           ELSE
             IF( Mode<0 .OR. Mode>3 ) THEN
-              CALL XERMSG('DLLSIA','MODE OUT OF RANGE',2,1)
+              ERROR STOP 'DLLSIA : MODE OUT OF RANGE'
               RETURN
             ELSE
               IF( Nb/=0 ) THEN
                 IF( Nb<0 ) THEN
-                  CALL XERMSG('DLLSIA','NB<0',2,1)
+                  ERROR STOP 'DLLSIA : NB<0'
                   RETURN
                 ELSEIF( Mdb<M ) THEN
-                  CALL XERMSG('DLLSIA','MDB<M',2,1)
+                  ERROR STOP 'DLLSIA : MDB<M'
                   RETURN
                 ELSEIF( it/=0 ) THEN
                   GOTO 2
                 END IF
               END IF
               IF( Key<0 .OR. Key>3 ) THEN
-                CALL XERMSG('DLLSIA','KEY OUT OF RANGE',2,1)
+                ERROR STOP 'DLLSIA : KEY OUT OF RANGE'
                 RETURN
               ELSE
                 IF( Key==0 .AND. Lw<5*N ) GOTO 5
@@ -230,7 +233,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                 IF( Key==2 .AND. Lw<4*N ) GOTO 5
                 IF( Key==3 .AND. Lw<3*N ) GOTO 5
                 IF( Np<0 .OR. Np>N ) THEN
-                  CALL XERMSG('DLLSIA','NP OUT OF RANGE',2,1)
+                  ERROR STOP 'DLLSIA : NP OUT OF RANGE'
                   RETURN
                 ELSE
                   !
@@ -324,17 +327,18 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
               RETURN
             END IF
           END IF
-          5  CALL XERMSG('DLLSIA','INSUFFICIENT WORK SPACE',8,1)
+          5  ERROR STOP 'DLLSIA : INSUFFICIENT WORK SPACE'
           Info = -1
           RETURN
         END IF
-        10  CALL XERMSG('DLLSIA','RE(I) < 0',2,1)
+        10  ERROR STOP 'DLLSIA : RE(I) < 0'
         RETURN
       END IF
-      20  CALL XERMSG('DLLSIA','RE(I) > 1',2,1)
+      20  ERROR STOP 'DLLSIA : RE(I) > 1'
       RETURN
     END IF
   END IF
-  100  CALL XERMSG('DLLSIA','AE(I) < 0',2,1)
+  100  ERROR STOP 'DLLSIA : AE(I) < 0'
+
   RETURN
 END SUBROUTINE DLLSIA

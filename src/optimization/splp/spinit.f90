@@ -1,5 +1,5 @@
 !** SPINIT
-SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
+PURE SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,Lopt)
   !> Subsidiary to SPLP
   !***
@@ -32,12 +32,13 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER :: Mrelas, Nvars
-  REAL(SP) :: Anorm, Costsc, Rhsnrm, Xlamda
-  INTEGER :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas), Imat(:), Ind(Nvars+Mrelas)
-  REAL(SP) :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Colnrm(Nvars), Costs(Nvars), &
-    Csc(Nvars), Primal(Nvars+Mrelas), Rhs(Mrelas)
-  LOGICAL :: Lopt(8)
+  INTEGER, INTENT(IN) :: Mrelas, Nvars
+  REAL(SP), INTENT(OUT) :: Anorm, Costsc, Xlamda, Rhsnrm
+  INTEGER, INTENT(IN) :: Imat(:), Ind(Nvars+Mrelas)
+  INTEGER, INTENT(OUT) :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas)
+  REAL(SP), INTENT(IN) :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars)
+  REAL(SP), INTENT(OUT) :: Csc(Nvars), Primal(Nvars+Mrelas), Colnrm(Nvars), Rhs(Mrelas)
+  LOGICAL, INTENT(IN) :: Lopt(8)
   INTEGER :: i, ip, iplace, j, n20007, n20019, n20028, n20041, n20056, n20066, &
     n20070, n20074, n20078
   REAL(SP) :: aij, cmax, csum, scalr, testsc
@@ -217,5 +218,6 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     END IF
     j = j + 1
   END DO
+
   RETURN
 END SUBROUTINE SPINIT

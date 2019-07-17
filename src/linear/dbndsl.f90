@@ -1,8 +1,8 @@
 !** DBNDSL
-SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
+PURE SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !> Solve the least squares problem for a banded matrix using
-  !            sequential accumulation of rows of the data matrix.
-  !            Exactly one right-hand side vector is permitted.
+  !  sequential accumulation of rows of the data matrix.
+  !  Exactly one right-hand side vector is permitted.
   !***
   ! **Library:**   SLATEC
   !***
@@ -194,9 +194,11 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ip, Ir, Mdg, Mode, N, Nb
-  REAL(DP) :: G(Mdg,Nb+1), Rnorm, X(N)
+
+  INTEGER, INTENT(IN) :: Ip, Ir, Mdg, Mode, N, Nb
+  REAL(DP), INTENT(IN) :: G(Mdg,Nb+1)
+  REAL(DP), INTENT(INOUT) :: X(N)
+  REAL(DP), INTENT(OUT) :: Rnorm
   INTEGER :: i, i1, i2, ie, ii, iopt, irm1, ix, j, jg, l, nerr, np1
   REAL(DP) :: rsq, s, zero
   !* FIRST EXECUTABLE STATEMENT  DBNDSL
@@ -264,6 +266,6 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !
   100  nerr = 1
   iopt = 2
-  CALL XERMSG('DBNDSL',&
-    'A ZERO DIAGONAL TERM IS IN THE N BY N UPPER TRIANGULAR MATRIX.',nerr,iopt)
+  ERROR STOP 'DBNDSL : A ZERO DIAGONAL TERM IS IN THE N BY N UPPER TRIANGULAR MATRIX.'
+
 END SUBROUTINE DBNDSL

@@ -1,12 +1,10 @@
 !** ISDGMR
-INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
-  Iwork,Rnrm,Bnrm,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,R0nrm,Hes,Jpre)
+INTEGER PURE FUNCTION ISDGMR(N,X,Xl,MSOLVE,Itol,Tol,Iter,R,Dz,Rwork,Iwork, &
+  Rnrm,Bnrm,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,R0nrm,Hes,Jpre,Solnrm)
   !> Generalized Minimum Residual Stop Test.
-  !            This routine calculates the stop test for the Generalized
-  !            Minimum RESidual (GMRES) iteration scheme.  It returns a
-  !            non-zero if the error estimate (the type of which is
-  !            determined by ITOL) is less than the user specified
-  !            tolerance TOL.
+  !  This routine calculates the stop test for the Generalized Minimum RESidual
+  !  (GMRES) iteration scheme.  It returns a non-zero if the error estimate
+  !  (the type of which is determined by ITOL) is less than the user specified tolerance TOL.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -253,8 +251,7 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910502  Corrected conversion errors, etc.  (FNF)
@@ -266,132 +263,110 @@ INTEGER FUNCTION ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,Iter,Err,Iunit,R,Dz,Rwork, &
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE DSLBLK, ONLY : soln_com
   USE service, ONLY : D1MACH
+
   INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+    PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
-      INTEGER :: N, Iwork(*)
-      REAL(DP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
+      INTEGER, INTENT(IN) :: N, Iwork(*)
+      REAL(DP), INTENT(IN) :: R(N), Rwork(*)
+      REAL(DP), INTENT(OUT) :: Z(N)
+    END SUBROUTINE MSOLVE
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(DP) :: Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
-  INTEGER :: Iter, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, Maxlp1, N, Nmsl
+  INTEGER, INTENT(IN) :: Iter, Itol, Jpre, Jscal, Kmp, Lgmr, Maxl, Maxlp1, N
+  REAL(DP), INTENT(IN) :: Bnrm, Prod, R0nrm, Rnrm, Snormw, Tol, Solnrm
   !     .. Array Arguments ..
-  REAL(DP) :: Dz(N), Hes(Maxlp1,Maxl), Q(2*Maxl), R(N), Rwork(*), Sx(N), V(N,Maxlp1), &
-    X(N), Xl(N)
-  INTEGER :: Iwork(*)
+  INTEGER, INTENT(IN) :: Iwork(*)
+  REAL(DP), INTENT(IN) :: Dz(N), Hes(Maxlp1,Maxl), Q(2*Maxl), R(N), Rwork(*), Sx(N), &
+    V(N,Maxlp1), X(N), Xl(N)
   !     .. Local Scalars ..
-  REAL(DP) :: dxnrm, fuzz, rat, ratmax, tem
+  REAL(DP) :: dxnrm, fuzz, rat, ratmax, tem, eror
   INTEGER :: i, ielmax
+  !     .. Local Arrays ..
+  REAL(DP) :: dz2(N), xl2(N), r2(N)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MAX, SQRT
-  !     .. Save statement ..
-  REAL(DP), SAVE :: solnrm
   !* FIRST EXECUTABLE STATEMENT  ISDGMR
   ISDGMR = 0
   !
   !       Use input from DPIGMR to determine if stop conditions are met.
   !
-  IF( Itol==0 ) Err = Rnrm/Bnrm
+  dz2 = Dz
+  r2 = R
+  IF( Itol==0 ) eror = Rnrm/Bnrm
   IF( (Itol>0) .AND. (Itol<=3) ) THEN
     !
     !       Use DRLCAL to calculate the scaled residual vector.
     !       Store answer in R.
     !
-    IF( Lgmr/=0 ) CALL DRLCAL(N,Kmp,Lgmr,Maxl,V,Q,R,Snormw,Prod,R0nrm)
+    IF( Lgmr/=0 ) CALL DRLCAL(N,Kmp,Lgmr,Maxl,V,Q,r2,Snormw,Prod,R0nrm)
     IF( Itol<=2 ) THEN
       !         err = ||Residual||/||RightHandSide||(2-Norms).
-      Err = NORM2(R)/Bnrm
+      eror = NORM2(r2)/Bnrm
       !
       !         Unscale R by R0NRM*PROD when KMP < MAXL.
       !
       IF( (Kmp<Maxl) .AND. (Lgmr/=0) ) THEN
         tem = 1._DP/(R0nrm*Prod)
-        R = tem*R
+        r2 = tem*r2
       END IF
     ELSEIF( Itol==3 ) THEN
       !         err = Max |(Minv*Residual)(i)/x(i)|
       !         When JPRE < 0, R already contains Minv*Residual.
       IF( Jpre>0 ) THEN
-        CALL MSOLVE(N,R,Dz,Rwork,Iwork)
-        Nmsl = Nmsl + 1
+        CALL MSOLVE(N,r2,dz2,Rwork,Iwork)
       END IF
       !
       !         Unscale R by R0NRM*PROD when KMP < MAXL.
       !
       IF( (Kmp<Maxl) .AND. (Lgmr/=0) ) THEN
         tem = 1._DP/(R0nrm*Prod)
-        R = tem*R
+        r2 = tem*r2
       END IF
       !
       fuzz = D1MACH(1)
       ielmax = 1
-      ratmax = ABS(Dz(1))/MAX(ABS(X(1)),fuzz)
+      ratmax = ABS(dz2(1))/MAX(ABS(X(1)),fuzz)
       DO i = 2, N
-        rat = ABS(Dz(i))/MAX(ABS(X(i)),fuzz)
+        rat = ABS(dz2(i))/MAX(ABS(X(i)),fuzz)
         IF( rat>ratmax ) THEN
           ielmax = i
           ratmax = rat
         END IF
       END DO
-      Err = ratmax
+      eror = ratmax
       IF( ratmax<=Tol ) ISDGMR = 1
-      IF( Iunit>0 ) WRITE (Iunit,99001) Iter, ielmax, ratmax
-      99001 FORMAT (1X,' ITER = ',I5,' IELMAX = ',I5,' |R(IELMAX)/X(IELMAX)| = ',&
-        D12.5)
       RETURN
     END IF
   END IF
+  xl2 = Xl
   IF( Itol==11 ) THEN
     !
     !       Use DXLCAL to calculate the approximate solution XL.
     !
     IF( (Lgmr/=0) .AND. (Iter>0) ) THEN
-      CALL DXLCAL(N,Lgmr,X,Xl,Xl,Hes,Maxlp1,Q,V,R0nrm,Dz,Sx,Jscal,Jpre,&
-        MSOLVE,Nmsl,Rwork,Iwork)
-    ELSEIF( Iter==0 ) THEN
-      !         Copy X to XL to check if initial guess is good enough.
-      Xl(1:N) = X(1:N)
-    ELSE
+      CALL DXLCAL(N,Lgmr,X,xl2,xl2,Hes,Maxlp1,Q,V,R0nrm,dz2,Sx,Jscal,Jpre,&
+        MSOLVE,Rwork,Iwork)
+    ELSEIF( Iter/=0 ) THEN
       !         Return since this is the first call to DPIGMR on a restart.
       RETURN
     END IF
     !
     IF( (Jscal==0) .OR. (Jscal==2) ) THEN
       !         err = ||x-TrueSolution||/||TrueSolution||(2-Norms).
-      IF( Iter==0 ) solnrm = NORM2(soln_com(1:N))
-      DO i = 1, N
-        Dz(i) = Xl(i) - soln_com(i)
-      END DO
-      Err = NORM2(Dz)/solnrm
+      eror = NORM2(dz2)/Solnrm
     ELSE
-      IF( Iter==0 ) THEN
-        solnrm = 0
-        DO i = 1, N
-          solnrm = solnrm + (Sx(i)*soln_com(i))**2
-        END DO
-        solnrm = SQRT(solnrm)
-      END IF
       dxnrm = 0
       DO i = 1, N
-        dxnrm = dxnrm + (Sx(i)*(Xl(i)-soln_com(i)))**2
+        dxnrm = dxnrm + (Sx(i)*(xl2(i)-soln_com(i)))**2
       END DO
       dxnrm = SQRT(dxnrm)
       !         err = ||SX*(x-TrueSolution)||/||SX*TrueSolution|| (2-Norms).
-      Err = dxnrm/solnrm
+      eror = dxnrm/Solnrm
     END IF
   END IF
   !
-  IF( Iunit/=0 ) THEN
-    IF( Iter==0 ) THEN
-      WRITE (Iunit,99002) N, Itol, Maxl, Kmp
-      99002 FORMAT (' Generalized Minimum Residual(',I3,I3,') for ','N, ITOL = ',&
-        I5,I5,/' ITER','   Natural Err Est','   Error Estimate')
-    END IF
-    WRITE (Iunit,99003) Iter, Rnrm/Bnrm, Err
-    99003 FORMAT (1X,I4,1X,D16.7,1X,D16.7)
-  END IF
-  IF( Err<=Tol ) ISDGMR = 1
+  IF( eror<=Tol ) ISDGMR = 1
   !
   RETURN
   !------------- LAST LINE OF ISDGMR FOLLOWS ----------------------------

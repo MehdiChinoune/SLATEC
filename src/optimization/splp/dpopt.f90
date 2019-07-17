@@ -1,5 +1,5 @@
 !** DPOPT
-SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
+PURE SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
@@ -35,11 +35,15 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
-  USE service, ONLY : XERMSG, D1MACH
-  INTEGER :: Info, Mrelas, Nvars
-  INTEGER :: Ibasis(Nvars+Mrelas), Intopt(08)
-  REAL(DP) :: Csc(Nvars), Prgopt(:), Ropt(07)
-  LOGICAL :: Lopt(8)
+  USE service, ONLY : D1MACH
+
+  INTEGER, INTENT(IN) :: Mrelas, Nvars
+  INTEGER, INTENT(OUT) :: Info
+  INTEGER, INTENT(INOUT) :: Ibasis(Nvars+Mrelas)
+  INTEGER, INTENT(OUT) :: Intopt(8)
+  REAL(DP), INTENT(IN) :: Prgopt(:)
+  REAL(DP), INTENT(OUT) :: Csc(Nvars), Ropt(7)
+  LOGICAL, INTENT(OUT) :: Lopt(8)
   INTEGER :: i, iadbig, ictmax, ictopt, idg, iopt, ipagef, isave, itbrc, itest, &
     j, key, kprint, last, lds, lprg, mxitlp, n20043, n20053, n20096, nerr, next, npp
   REAL(DP) :: abig, asmall, costsc, eps, one, tolls, tune, zero, tolabs
@@ -92,9 +96,8 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       !     THE CHECKS FOR SMALL OR LARGE VALUES OF NEXT ARE TO PREVENT
       !     WORKING WITH UNDEFINED DATA.
       nerr = 14
-      CALL XERMSG('DPOPT',&
-        'IN DSPLP, THE USER OPTION ARRAY HAS UNDEFINED DATA.',nerr,iopt)
       Info = -nerr
+      ERROR STOP 'DPOPT : IN DSPLP, THE USER OPTION ARRAY HAS UNDEFINED DATA.'
       RETURN
     ELSEIF( next==1 ) THEN
       !
@@ -110,10 +113,8 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
             i = i + 1
           ELSE
             nerr = 16
-            CALL XERMSG('DPOPT',&
-              'IN DSPLP, AN INDEX OF USER-SUPPLIED BASIS IS OUT OF RANGE.'&
-              ,nerr,iopt)
             Info = -nerr
+            ERROR STOP 'DPOPT : IN DSPLP, AN INDEX OF USER-SUPPLIED BASIS IS OUT OF RANGE.'
             RETURN
           END IF
         END DO
@@ -124,9 +125,9 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       IF( sizeup ) THEN
         IF( asmall<=zero .OR. abig<asmall ) THEN
           nerr = 17
-          CALL XERMSG('DPOPT',&
-            'IN DSPLP, SIZE PARAMETERS FOR MATRIX MUST BE SMALLEST AND LARGEST MAGNITUDES OF NONZERO ENTRIES.',nerr,iopt)
           Info = -nerr
+          ERROR STOP 'DPOPT : IN DSPLP, SIZE PARAMETERS FOR MATRIX MUST BE SMALLEST&
+            & AND LARGEST MAGNITUDES OF NONZERO ENTRIES.'
           RETURN
         END IF
       END IF
@@ -165,9 +166,9 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         RETURN
       ELSE
         nerr = 18
-        CALL XERMSG('DPOPT',&
-          'IN DSPLP, THE NUMBER OF REVISED SIMPLEX STEPS BETWEEN CHECK-POINTS MUST BE POSITIVE.',nerr,iopt)
         Info = -nerr
+        ERROR STOP 'DPOPT : IN DSPLP, THE NUMBER OF REVISED SIMPLEX STEPS&
+          & BETWEEN CHECK-POINTS MUST BE POSITIVE.'
         RETURN
       END IF
     ELSEIF( ictopt<=ictmax ) THEN
@@ -321,15 +322,15 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       lprg = lprg + lds
     ELSE
       nerr = 15
-      CALL XERMSG('DPOPT',&
-        'IN DSPLP, OPTION ARRAY PROCESSING IS CYCLING.',nerr,iopt)
       Info = -nerr
+      ERROR STOP 'DPOPT : IN DSPLP, OPTION ARRAY PROCESSING IS CYCLING.'
       RETURN
     END IF
   END DO
   nerr = 19
-  CALL XERMSG('DPOPT',&
-    'IN DSPLP, FILE NUMBERS FOR SAVED DATA AND MATRIX PAGES MUST BE POSITIVE AND NOT EQUAL.',nerr,iopt)
   Info = -nerr
+  ERROR STOP 'DPOPT : IN DSPLP, FILE NUMBERS FOR SAVED DATA AND MATRIX PAGES&
+    & MUST BE POSITIVE AND NOT EQUAL.'
+
   RETURN
 END SUBROUTINE DPOPT

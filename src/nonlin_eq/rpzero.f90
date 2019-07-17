@@ -1,5 +1,5 @@
 !** RPZERO
-SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
+PURE SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !> Find the zeros of a polynomial with real coefficients.
   !***
   ! **Library:**   SLATEC
@@ -55,9 +55,11 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: Iflg, N
-  REAL(SP) :: A(N+1), S(N)
-  COMPLEX(SP) :: R(N), T(6*N+6)
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Iflg
+  REAL(SP), INTENT(IN) :: A(N+1)
+  REAL(SP), INTENT(OUT) :: S(N)
+  COMPLEX(SP), INTENT(INOUT) :: T(6*N+6), R(N)
   INTEGER :: i, n1
   !* FIRST EXECUTABLE STATEMENT  RPZERO
   n1 = N + 1
@@ -65,4 +67,5 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
     T(i) = CMPLX(A(i),0._SP,SP)
   END DO
   CALL CPZERO(N,T,R,T(N+2),Iflg,S)
+
 END SUBROUTINE RPZERO

@@ -55,10 +55,13 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE LA05DS, ONLY : lp_com, lcol_com, lenl_com, lenu_com, ncp_com, lrow_com, small_com
-  USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: Ia, N, Nz
-  INTEGER :: Ip(N,2), Ind(Ia,2), Iw(N,8)
-  REAL(SP) :: G, U, A(:), W(:)
+  USE service, ONLY : R1MACH
+
+  INTEGER, INTENT(IN) :: Ia, N
+  INTEGER , INTENT(INOUT):: Ind(Ia,2), Nz
+  INTEGER , INTENT(OUT):: Ip(N,2), Iw(N,8)
+  REAL(SP), INTENT(INOUT) :: A(:), U
+  REAL(SP), INTENT(OUT) :: G, W(:)
   INTEGER :: i, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
     kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, nc, nzc
   REAL(SP) :: amax, au, am
@@ -74,7 +77,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IF( U<eps ) U = eps
   IF( N<1 ) THEN
     !
-    IF( lp_com>0 ) CALL XERMSG('LA05AS','THE ORDER OF THE SYSTEM, N, IS NOT POSITIVE.',-1,1)
+    IF( lp_com>0 ) ERROR STOP 'LA05AS : THE ORDER OF THE SYSTEM, N, IS NOT POSITIVE.'
     G = -1._SP
     RETURN
   ELSE
@@ -477,9 +480,10 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IF( lp_com>0 ) THEN
     WRITE (xern1,'(I8)') ir
     WRITE (xern2,'(I8)') j
-    CALL XERMSG('LA05AS','MORE THAN ONE MATRIX ENTRY.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
+    ERROR STOP 'LA05AS : MORE THAN ONE MATRIX ENTRY'
+      !.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
   END IF
-  G = -4.
+  G = -4._SP
   RETURN
   !
   200 CONTINUE
@@ -487,24 +491,23 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     WRITE (xern0,'(I8)') k
     WRITE (xern1,'(I8)') i
     WRITE (xern2,'(I8)') j
-    CALL XERMSG('LA05AS','ELEMENT K = '//xern0//&
-      ' IS OUT OF BOUNDS.$$HERE ROW = '//xern1//' AND COL = '//xern2,-3,1)
+    ERROR STOP 'LA05AS : ELEMENT K IS OUT OF BOUNDS.'
+      ! 'HERE ROW = '//xern1//' AND COL = '//xern2
   END IF
-  G = -3.
+  G = -3._SP
   RETURN
   !
   300 CONTINUE
   IF( lp_com>0 ) THEN
     WRITE (xern1,'(I8)') l
-    CALL XERMSG('LA05AS','ROW OR COLUMN HAS NO ELEMENTS.  HERE INDEX = '//xern1,-2,1)
+    ERROR STOP 'LA05AS : ROW OR COLUMN HAS NO ELEMENTS' !.  HERE INDEX = '//xern1
   END IF
-  G = -2.
+  G = -2._SP
   RETURN
   !
   400 CONTINUE
-  IF( lp_com>0 ) CALL XERMSG('LA05AS',&
-    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
-  G = -7.
+  IF( lp_com>0 ) ERROR STOP 'LA05AS : LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'
+  G = -7._SP
   RETURN
   !
   500  ipv = ipv + 1
@@ -515,19 +518,21 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   END DO
   !
   IF( lp_com>0 ) THEN
-    xern1 = 'ROWS'
-    IF( l==2 ) xern1 = 'COLUMNS'
-    CALL XERMSG('LA05AS','DEPENDANT '//xern1,-5,1)
+    IF( l==2 ) THEN
+       ERROR STOP 'LA05AS : DEPENDANT COLUMNS'
+    ELSE
+       ERROR STOP 'LA05AS : DEPENDANT ROWS'
+    END IF
     DO
       !
       WRITE (xern1,'(I8)') Iw(i,1)
       xern2 = ' '
       IF( i+1<=ipv ) WRITE (xern2,'(I8)') Iw(i+1,1)
-      CALL XERMSG('LA05AS','DEPENDENT VECTOR INDICES ARE '//xern1//&
-        ' AND '//xern2,-5,1)
+      ERROR STOP 'LA05AS : DEPENDENT VECTOR INDICES' ! ARE '//xern1//' AND '//xern2
       i = i + 2
       IF( i>ipv ) EXIT
     END DO
   END IF
-  G = -5.
+  G = -5._SP
+
 END SUBROUTINE LA05AS

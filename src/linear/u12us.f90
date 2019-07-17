@@ -1,5 +1,5 @@
 !** U12US
-SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
+PURE SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !> Subsidiary to ULSIA
   !***
   ! **Library:**   SLATEC
@@ -28,11 +28,13 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
   USE blas, ONLY : SAXPY, SSWAP
-  INTEGER :: Krank, M, Mda, Mdb, Mode, N, Nb
-  INTEGER :: Ic(N), Ir(M)
-  REAL(SP) :: A(Mda,N), B(Mdb,Nb), H(M), Rnorm(Nb), W(4*M)
+
+  INTEGER, INTENT(IN) :: Krank, M, Mda, Mdb, Mode, N, Nb
+  INTEGER, INTENT(INOUT) :: Ic(N), Ir(M)
+  REAL(SP), INTENT(IN) :: H(M), W(4*M)
+  REAL(SP), INTENT(INOUT) :: A(Mda,N), B(Mdb,Nb)
+  REAL(SP), INTENT(OUT) :: Rnorm(Nb)
   INTEGER :: i, ij, ip1, j, jb, k, kp1, mmk
   REAL(SP) :: bb, tt
   !* FIRST EXECUTABLE STATEMENT  U12US

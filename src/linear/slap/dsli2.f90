@@ -1,8 +1,7 @@
 !** DSLI2
-SUBROUTINE DSLI2(N,B,X,Nel,Iel,Jel,El)
+PURE SUBROUTINE DSLI2(N,B,X,Nel,Iel,Jel,El)
   !> SLAP Lower Triangle Matrix Backsolve.
-  !            Routine to solve a system of the form  Lx = b, where L
-  !            is a lower triangular matrix.
+  !  Routine to solve a system of the form  Lx = b, where L is a lower triangular matrix.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -103,8 +102,7 @@ SUBROUTINE DSLI2(N,B,X,Nel,Iel,Jel,El)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
@@ -112,10 +110,11 @@ SUBROUTINE DSLI2(N,B,X,Nel,Iel,Jel,El)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: N, Nel
+  INTEGER, INTENT(IN) :: N, Nel
   !     .. Array Arguments ..
-  REAL(DP) :: B(N), El(Nel), X(N)
-  INTEGER :: Iel(Nel), Jel(Nel)
+  INTEGER, INTENT(IN) :: Iel(Nel), Jel(Nel)
+  REAL(DP), INTENT(IN) :: B(N), El(Nel)
+  REAL(DP), INTENT(OUT) :: X(N)
   !     .. Local Scalars ..
   INTEGER :: i, icol, j, jbgn, jend
   !* FIRST EXECUTABLE STATEMENT  DSLI2

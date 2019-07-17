@@ -1,5 +1,5 @@
 !** IPLOC
-INTEGER FUNCTION IPLOC(Locc,Sx,Ix)
+PURE INTEGER FUNCTION IPLOC(Locc,Ix)
   !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
@@ -34,15 +34,13 @@ INTEGER FUNCTION IPLOC(Locc,Sx,Ix)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IPLOC to 0 if LOC is non-positive.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Locc
-  INTEGER :: Ix(:)
-  REAL(SP) :: Sx(:)
-  INTEGER :: ipage, itemp, k, key, lmx, lmxm1, lpg, np
+
+  INTEGER, INTENT(IN) :: Locc
+  INTEGER, INTENT(IN) :: Ix(:)
+  INTEGER :: ipage, itemp, k, lmx, lmxm1, lpg
   !* FIRST EXECUTABLE STATEMENT  IPLOC
   IF( Locc<=0 ) THEN
-    CALL XERMSG('IPLOC',&
-      'A value of LOC, the first argument, <= 0 was encountered',55,1)
+    ERROR STOP 'IPLO : A value of LOC, the first argument, <= 0 was encountered'
     IPLOC = 0
     RETURN
   END IF
@@ -64,19 +62,5 @@ INTEGER FUNCTION IPLOC(Locc,Sx,Ix)
   itemp = Locc - k - 1
   ipage = itemp/lpg + 1
   IPLOC = MOD(itemp,lpg) + k + 1
-  np = ABS(Ix(lmxm1))
-  !
-  !     Determine if a page fault has occurred.  If so, write page NP
-  !     and read page IPAGE.  Write the page only if it has been
-  !     modified.
-  !
-  IF( ipage/=np ) THEN
-    IF( Sx(lmx)==1.0 ) THEN
-      Sx(lmx) = 0.0
-      key = 2
-      CALL PRWPGE(key,np,lpg,Sx,Ix)
-    END IF
-    key = 1
-    CALL PRWPGE(key,ipage,lpg,Sx,Ix)
-  END IF
+
 END FUNCTION IPLOC

@@ -205,7 +205,7 @@ CONTAINS
         CALL VFILL(n,xiter,0._SP)
         !
         CALL SSJAC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,2*itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL OUTERR('SSJAC ',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -215,7 +215,7 @@ CONTAINS
         CALL VFILL(n,xiter,0._SP)
         !
         CALL SSGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL OUTERR('SSGS  ',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -225,7 +225,7 @@ CONTAINS
         CALL VFILL(n,xiter,0._SP)
         !
         CALL SSILUR(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL OUTERR('SSILUR',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -236,7 +236,7 @@ CONTAINS
           CALL VFILL(n,xiter,0._SP)
           !
           CALL SSDCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-            iunit,rwork,lenw,iwork,leniw)
+            rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSDCG ',ierr,Kprint,nfail,Lun,iter,err)
         END IF
@@ -248,7 +248,7 @@ CONTAINS
           CALL VFILL(n,xiter,0._SP)
           !
           CALL SSICCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,&
-            ierr,iunit,rwork,lenw,iwork,leniw)
+            ierr,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSICCG',ierr,Kprint,nfail,Lun,iter,err)
         END IF
@@ -259,7 +259,7 @@ CONTAINS
         CALL VFILL(n,xiter,0._SP)
         !
         CALL SSDCGN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL OUTERR('SSDCGN',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -269,7 +269,7 @@ CONTAINS
         CALL VFILL(n,xiter,0._SP)
         !
         CALL SSLUCN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL OUTERR('SSLUCN',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -279,7 +279,7 @@ CONTAINS
         CALL VFILL(n,xiter,0._SP)
         !
         CALL SSDBCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL OUTERR('SSDBCG',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -289,7 +289,7 @@ CONTAINS
         CALL VFILL(n,xiter,0._SP)
         !
         CALL SSLUBC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL OUTERR('SSLUBC',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -299,7 +299,7 @@ CONTAINS
         CALL VFILL(n,xiter,0._SP)
         !
         CALL SSDCGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL OUTERR('SSDCGS',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -309,7 +309,7 @@ CONTAINS
         CALL VFILL(n,xiter,0._SP)
         !
         CALL SSLUCS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL OUTERR('SSLUCS',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -320,7 +320,7 @@ CONTAINS
           CALL VFILL(n,xiter,0._SP)
           !
           CALL SSDOMN(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
-            err,ierr,iunit,rwork,lenw,iwork,leniw)
+            err,ierr,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSDOMN',ierr,Kprint,nfail,Lun,iter,err)
         END DO
@@ -332,7 +332,7 @@ CONTAINS
           CALL VFILL(n,xiter,0._SP)
           !
           CALL SSLUOM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
-            err,ierr,iunit,rwork,lenw,iwork,leniw)
+            err,ierr,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSLUOM',ierr,Kprint,nfail,Lun,iter,err)
         END DO
@@ -345,7 +345,7 @@ CONTAINS
           itolgm = 0
           !
           CALL SSDGMR(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
-            err,ierr,iunit,rwork,lenw,iwork,leniw)
+            err,ierr,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSDGMR',ierr,Kprint,nfail,Lun,iter,err)
         END DO
@@ -357,7 +357,7 @@ CONTAINS
           CALL VFILL(n,xiter,0._SP)
           !
           CALL SSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
-            err,ierr,iunit,rwork,lenw,iwork,leniw)
+            err,ierr,rwork,lenw,iwork,leniw)
           !
           CALL OUTERR('SSLUGM',ierr,Kprint,nfail,Lun,iter,err)
         END DO

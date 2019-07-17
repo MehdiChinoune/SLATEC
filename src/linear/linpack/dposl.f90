@@ -1,7 +1,7 @@
 !** DPOSL
-SUBROUTINE DPOSL(A,Lda,N,B)
+PURE SUBROUTINE DPOSL(A,Lda,N,B)
   !> Solve the real symmetric positive definite linear system
-  !            using the factors computed by DPOCO or DPOFA.
+  !  using the factors computed by DPOCO or DPOFA.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
@@ -64,13 +64,13 @@ SUBROUTINE DPOSL(A,Lda,N,B)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : DAXPY
 
-  INTEGER :: Lda, N
-  REAL(DP) :: A(Lda,N), B(N)
+  INTEGER, INTENT(IN) :: Lda, N
+  REAL(DP), INTENT(IN) :: A(Lda,N)
+  REAL(DP), INTENT(INOUT) :: B(N)
   !
   REAL(DP) :: t
   INTEGER :: k, kb
@@ -91,4 +91,5 @@ SUBROUTINE DPOSL(A,Lda,N,B)
     t = -B(k)
     CALL DAXPY(k-1,t,A(1,k),1,B(1),1)
   END DO
+
 END SUBROUTINE DPOSL

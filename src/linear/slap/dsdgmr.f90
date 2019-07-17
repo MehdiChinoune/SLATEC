@@ -1,10 +1,9 @@
 !** DSDGMR
-SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
-    Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
+    Ierr,Rwork,Lenw,Iwork,Leniw)
   !> Diagonally scaled GMRES iterative sparse Ax=b solver.
-  !            This routine uses the generalized minimum residual
-  !            (GMRES) method with diagonal scaling to solve possibly
-  !            non-symmetric linear systems of the form: Ax = b.
+  !  This routine uses the generalized minimum residual (GMRES) method with diagonal
+  !  scaling to solve possibly non-symmetric linear systems of the form: Ax = b.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -317,8 +316,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
@@ -328,11 +326,14 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(DP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER, INTENT(IN) :: Isym, Itmax, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(DP), INTENT(INOUT) :: Tol
+  REAL(DP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  REAL(DP), INTENT(IN) :: B(N)
+  REAL(DP), INTENT(INOUT) :: A(Nelt), Rwork(Lenw), X(N)
   !     .. Local Scalars ..
   INTEGER :: locdin, locigw, lociw, locrgw, locw, myitol
   !* FIRST EXECUTABLE STATEMENT  DSDGMR
@@ -378,8 +379,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Tol,Itmax,Iter,Err,&
   myitol = 0
   !
   CALL DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSDI,myitol,Tol,Iter,Err,&
-    Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw)&
-    ,20,Rwork,Iwork)
+    Ierr,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw),20,Rwork,Iwork)
   !
   IF( Iter>Itmax ) Ierr = 2
   !------------- LAST LINE OF DSDGMR FOLLOWS ----------------------------

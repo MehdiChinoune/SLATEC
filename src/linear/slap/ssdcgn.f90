@@ -1,11 +1,10 @@
 !** SSDCGN
-SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
+    Rwork,Lenw,Iwork,Leniw)
   !> Diagonally Scaled CG Sparse Ax=b Solver for Normal Eqn's.
-  !            Routine to solve a general linear system  Ax = b  using
-  !            diagonal scaling with the Conjugate Gradient method
-  !            applied to the the normal equations, viz.,  AA'y = b,
-  !            where  x = A'y.
+  !  Routine to solve a general linear system  Ax = b  using diagonal scaling
+  !  with the Conjugate Gradient method applied to the the normal equations,
+  !  viz.,  AA'y = b,  where  x = A'y.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -212,8 +211,7 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
@@ -223,11 +221,14 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(SP), INTENT(INOUT) :: Tol
+  REAL(SP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Ja(Nelt), Iwork(Leniw)
+  REAL(SP), INTENT(IN) :: B(N)
+  REAL(SP), INTENT(INOUT) :: A(N), X(N), Rwork(Lenw)
   !     .. Local Scalars ..
   INTEGER :: locatd, locatp, locatz, locd, locdz, lociw, locp, locr, locw, locz
   !* FIRST EXECUTABLE STATEMENT  SSDCGN
@@ -267,8 +268,8 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   CALL SSD2S(N,Nelt,Ia,Ja,A,Isym,Rwork(1))
   !
   !         Perform Conjugate Gradient algorithm on the normal equations.
-  CALL SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSMTV,SSDI,Itol,Tol,Itmax,Iter,Err,&
-    Ierr,Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locatp),&
+  CALL SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSMTV,SSDI,Itol,Tol,Itmax,Iter,&
+    Ierr,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locatp),&
     Rwork(locatz),Rwork(locdz),Rwork(locatd),Rwork,Iwork)
   !
   IF( Iter>Itmax ) Ierr = 2

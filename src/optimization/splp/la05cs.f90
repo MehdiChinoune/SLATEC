@@ -41,10 +41,11 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !   920422  Changed upper limit on DO from LAST to LAST-1.  (WRB)
   USE LA05DS, ONLY : lp_com, lcol_com, lenl_com, lenu_com, lrow_com, ncp_com, small_com
-  USE service, ONLY : XERMSG
-  INTEGER :: Ia, Mm, N
-  INTEGER :: Ind(Ia,2), Iw(N,8), Ip(N,2)
-  REAL(SP) :: G, U, A(:), W(:)
+
+  INTEGER, INTENT(IN) :: Ia, Mm, N
+  INTEGER, INTENT(INOUT) :: Ind(Ia,2), Iw(N,8), Ip(N,2)
+  REAL(SP), INTENT(IN) :: U
+  REAL(SP), INTENT(INOUT) :: G, A(:), W(:)
   INTEGER :: i, ii, ij, im, in, ins, ipp, ir, is, j, jm, jns, jp, k, kj, kk, kl, &
     km, knp, kp, kpl, kq, kr, krl, ks, l, last, last1, last2, m, m1, mcp, nz
   REAL(SP) :: am, au
@@ -52,8 +53,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !* FIRST EXECUTABLE STATEMENT  LA05CS
   IF( G<0.0E0 ) THEN
     !
-    IF( lp_com>0 ) CALL XERMSG('LA05CS',&
-      'EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
+    IF( lp_com>0 ) ERROR STOP 'LA05CS : EARLIER ENTRY GAVE ERROR RETURN.'
     G = -8._SP
     RETURN
   ELSE
@@ -435,14 +435,14 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   200 CONTINUE
   IF( lp_com>0 ) THEN
     WRITE (xern1,'(I8)') Mm
-    CALL XERMSG('LA05CS','SINGULAR MATRIX AFTER REPLACEMENT OF COLUMN.  INDEX = '//xern1,-6,1)
+    ERROR STOP 'LA05CS : SINGULAR MATRIX AFTER REPLACEMENT OF COLUMN' !.  INDEX = '//xern1
   END IF
   G = -6._SP
   RETURN
   !
   300 CONTINUE
-  IF( lp_com>0 ) CALL XERMSG('LA05CS',&
-    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
+  IF( lp_com>0 ) ERROR STOP 'LA05CS : LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'
   G = -7._SP
+
   RETURN
 END SUBROUTINE LA05CS

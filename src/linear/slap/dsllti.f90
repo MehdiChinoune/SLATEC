@@ -1,10 +1,8 @@
 !** DSLLTI
-SUBROUTINE DSLLTI(N,B,X,Rwork,Iwork)
+PURE SUBROUTINE DSLLTI(N,B,X,Rwork,Iwork)
   !> SLAP MSOLVE for LDL' (IC) Factorization.
-  !            This routine acts as an interface between the SLAP generic
-  !            MSOLVE calling convention and the routine that actually
-  !                           -1
-  !            computes (LDL')  B = X.
+  !  This routine acts as an interface between the SLAP generic
+  !  MSOLVE calling convention and the routine that actually computes (LDL')^-1  B = X.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -39,8 +37,7 @@ SUBROUTINE DSLLTI(N,B,X,Rwork,Iwork)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910502  Corrected conversion error.  (FNF)
@@ -49,10 +46,11 @@ SUBROUTINE DSLLTI(N,B,X,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: N
+  INTEGER, INTENT(IN) :: N
   !     .. Array Arguments ..
-  REAL(DP) :: B(N), Rwork(*), X(N)
-  INTEGER :: Iwork(*)
+  INTEGER, INTENT(IN) :: Iwork(*)
+  REAL(DP), INTENT(IN) :: B(N), Rwork(*)
+  REAL(DP), INTENT(OUT) :: X(N)
   !     .. Local Scalars ..
   INTEGER :: locdin, locel, lociel, locjel, nel
   !* FIRST EXECUTABLE STATEMENT  DSLLTI

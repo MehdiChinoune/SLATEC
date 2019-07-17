@@ -1,7 +1,7 @@
 !** CGESL
-SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
+PURE SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   !> Solve the complex system A*X=B or CTRANS(A)*X=B using the
-  !            factors computed by CGECO or CGEFA.
+  !  factors computed by CGECO or CGEFA.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
@@ -73,13 +73,13 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : CAXPY
 
-  INTEGER :: Lda, N, Ipvt(N), Job
-  COMPLEX(SP) :: A(Lda,N), B(N)
+  INTEGER, INTENT(IN) :: Lda, N, Job, Ipvt(N)
+  COMPLEX(SP), INTENT(IN) :: A(Lda,N)
+  COMPLEX(SP), INTENT(INOUT) :: B(N)
   !
   COMPLEX(SP) :: t
   INTEGER :: k, kb, l, nm1
@@ -135,4 +135,5 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
       CALL CAXPY(k-1,t,A(1,k),1,B(1),1)
     END DO
   END IF
+
 END SUBROUTINE CGESL

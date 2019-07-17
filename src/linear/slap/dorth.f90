@@ -1,5 +1,5 @@
 !** DORTH
-SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
+PURE SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !> Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
@@ -66,19 +66,19 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-
   USE blas, ONLY : DAXPY
+
   !     .. Scalar Arguments ..
-  REAL(DP) :: Snormw
-  INTEGER :: Kmp, Ldhes, Ll, N
+  INTEGER, INTENT(IN) :: Kmp, Ldhes, Ll, N
+  REAL(DP), INTENT(OUT) :: Snormw
   !     .. Array Arguments ..
-  REAL(DP) :: Hes(Ldhes,Ll), V(N,Ll), Vnew(N)
+  REAL(DP), INTENT(IN) :: V(N,Ll)
+  REAL(DP), INTENT(INOUT) :: Hes(Ldhes,Ll), Vnew(N)
   !     .. Local Scalars ..
   REAL(DP) :: arg, sumdsq, tem, vnrm
   INTEGER :: i, i0

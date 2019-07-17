@@ -1,10 +1,9 @@
 !** DCGN
-SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
-    Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,Atdz,Rwork,Iwork)
+PURE SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
+    Itmax,Iter,Ierr,R,Z,P,Atp,Atz,Dz,Atdz,Rwork,Iwork)
   !> Preconditioned CG Sparse Ax=b Solver for Normal Equations.
-  !            Routine to solve a general linear system  Ax = b  using the
-  !            Preconditioned Conjugate Gradient method applied to the
-  !            normal equations  AA'y = b, x=A'y.
+  !  Routine to solve a general linear system  Ax = b  using the Preconditioned
+  !  Conjugate Gradient method applied to the normal equations  AA'y = b, x=A'y.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -264,8 +263,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   891004  Added new reference.
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
@@ -278,30 +276,37 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE service, ONLY : D1MACH
   USE blas, ONLY : DAXPY
+  USE DSLBLK, ONLY : soln_com
+
   INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+    PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
-      INTEGER :: N, Iwork(*)
-      REAL(DP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
-    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER, INTENT(IN) :: N, Iwork(*)
+      REAL(DP), INTENT(IN) :: R(N), Rwork(*)
+      REAL(DP), INTENT(OUT) :: Z(N)
+    END SUBROUTINE MSOLVE
+    PURE SUBROUTINE MATVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
       IMPORT DP
-      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(DP) :: X(N), R(N), A(Nelt)
-    END SUBROUTINE
-    SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
+      INTEGER, INTENT(IN) :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(DP), INTENT(IN) :: X(N), A(Nelt)
+      REAL(DP), INTENT(OUT) :: Y(N)
+    END SUBROUTINE MATVEC
+    PURE SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
       IMPORT DP
-      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(DP) :: X(N), Y(N), A(Nelt)
+      INTEGER, INTENT(IN) :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(DP), INTENT(IN) :: X(N), A(Nelt)
+      REAL(DP), INTENT(OUT) :: Y(N)
     END SUBROUTINE MTTVEC
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(DP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(DP), INTENT(INOUT) :: Tol
   !     .. Array Arguments ..
-  REAL(DP) :: A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), &
-    R(N), Rwork(*), X(N), Z(N)
-  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(DP), INTENT(IN) :: A(N), B(N), Rwork(*)
+  REAL(DP), INTENT(INOUT) :: X(N)
+  REAL(DP), INTENT(OUT) :: Atdz(N), Atp(N), Atz(N), Dz(N), P(N), R(N), Z(N)
   !     .. Local Scalars ..
   REAL(DP) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
   INTEGER :: i, k
@@ -328,11 +333,18 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   END DO
   CALL MSOLVE(N,R,Z,Rwork,Iwork)
   CALL MTTVEC(N,Z,Atz,Nelt,Ia,Ja,A,Isym)
+  IF( Itol==1 ) THEN
+    bnrm = NORM2(B)
+  ELSEIF( Itol==2 ) THEN
+    CALL MSOLVE(N,B,Dz,Rwork,Iwork)
+    CALL MTTVEC(N,Dz,Atdz,Nelt,Ia,Ja,A,Isym)
+    bnrm = NORM2(Dz)
+  ELSEIF( Itol==11 ) THEN
+    solnrm = NORM2(soln_com(1:N))
+    Dz(1:N) = X(1:N) - soln_com(1:N)
+  END IF
   !
-  IF( ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,Tol,&
-      Iter,Err,Ierr,Iunit,R,Atz,Dz,Atdz,Rwork,Iwork,ak,bk,bnrm,&
-      solnrm)==0 ) THEN
-    IF( Ierr/=0 ) RETURN
+  IF( ISDCGN(N,Itol,Tol,R,Atz,Dz,bnrm,solnrm)==0 ) THEN
     !
     !         ***** iteration loop *****
     !
@@ -370,10 +382,10 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       CALL DAXPY(N,-ak,Z,1,R,1)
       CALL MSOLVE(N,R,Z,Rwork,Iwork)
       CALL MTTVEC(N,Z,Atz,Nelt,Ia,Ja,A,Isym)
+      IF( Itol==11 ) Dz(1:N) = X(1:N) - soln_com(1:N)
       !
       !         check stopping criterion.
-      IF( ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MTTVEC,MSOLVE,Itol,Tol,Iter,Err,Ierr, &
-        Iunit,R,Atz,Dz,Atdz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 ) RETURN
+      IF( ISDCGN(N,Itol,Tol,R,Atz,Dz,bnrm,solnrm)/=0 ) RETURN
       !
     END DO
     !

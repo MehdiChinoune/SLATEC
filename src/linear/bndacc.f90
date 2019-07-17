@@ -1,8 +1,8 @@
 !** BNDACC
-SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
+PURE SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !> Compute the LU factorization of a banded matrices using
-  !            sequential accumulation of rows of the data matrix.
-  !            Exactly one right-hand side vector is permitted.
+  !  sequential accumulation of rows of the data matrix.
+  !  Exactly one right-hand side vector is permitted.
   !***
   ! **Library:**   SLATEC
   !***
@@ -194,12 +194,12 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ip, Ir, Jt, Mdg, Mt, Nb
-  REAL(SP) :: G(Mdg,Nb+1)
+
+  INTEGER, INTENT(IN) :: Jt, Mdg, Mt, Nb
+  INTEGER, INTENT(INOUT) :: Ip, Ir
+  REAL(SP), INTENT(INOUT) :: G(Mdg,Nb+1)
   INTEGER :: i, ie, ig, ig1, ig2, iopt, j, jg, k, kh, l, lp1, mh, mu, nbp1, nerr
   REAL(SP) :: rho, zero
   !* FIRST EXECUTABLE STATEMENT  BNDACC
@@ -279,8 +279,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   ELSE
     nerr = 1
     iopt = 2
-    CALL XERMSG('BNDACC','MDG<IR, PROBABLE ERROR.',nerr,iopt)
-    RETURN
+    ERROR STOP 'BNDACC : MDG<IR, PROBABLE ERROR.'
   END IF
   !  ALG. STEP 24
   !  ALG. STEP 25

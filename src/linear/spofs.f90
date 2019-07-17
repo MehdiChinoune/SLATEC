@@ -1,7 +1,6 @@
 !** SPOFS
-SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
-  !> Solve a positive definite symmetric system of linear
-  !            equations.
+PURE SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
+  !> Solve a positive definite symmetric system of linear equations.
   !***
   ! **Library:**   SLATEC
   !***
@@ -106,11 +105,13 @@ SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
+  USE service, ONLY : R1MACH
   USE linpack, ONLY : SPOCO, SPOSL
   !
-  INTEGER :: Lda, N, Itask, Ind
-  REAL(SP) :: A(Lda,N), V(N), Work(N)
+  INTEGER, INTENT(IN) :: Lda, N, Itask
+  INTEGER, INTENT(OUT) :: Ind
+  REAL(SP), INTENT(INOUT) :: A(Lda,N), V(N)
+  REAL(SP), INTENT(OUT) :: Work(N)
   INTEGER :: info
   REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
@@ -119,22 +120,21 @@ SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SPOFS','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    ERROR STOP 'SPOFS : LDA IS LESS THAN N'
     RETURN
   END IF
   !
   IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SPOFS','N = '//xern1//' IS LESS THAN 1',-2,1)
+    ERROR STOP 'SPOFS : N IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SPOFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    ERROR STOP 'SPOFS : ITASK IS LESS THAN 1'
     RETURN
   END IF
   !
@@ -148,8 +148,7 @@ SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
     !
     IF( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('SPOFS',&
-        'SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
+      ERROR STOP 'SPOFS : SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION'
       RETURN
     END IF
     !
@@ -159,11 +158,12 @@ SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
     Ind = INT( -LOG10(R1MACH(4)/rcond) )
     IF( Ind<=0 ) THEN
       Ind = -10
-      CALL XERMSG('SPOFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+      ! 'SPOFS : SOLUTION MAY HAVE NO SIGNIFICANCE'
     END IF
   END IF
   !
   !     SOLVE AFTER FACTORING
   !
   CALL SPOSL(A,Lda,N,V)
+
 END SUBROUTINE SPOFS

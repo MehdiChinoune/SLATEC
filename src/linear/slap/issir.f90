@@ -1,11 +1,9 @@
 !** ISSIR
-INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
-    Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
+INTEGER PURE FUNCTION ISSIR(N,Itol,Tol,R,Z,Dz,Bnrm,Solnrm)
   !> Preconditioned Iterative Refinement Stop Test.
-  !            This routine calculates the stop test for the iterative
-  !            refinement iteration scheme.  It returns a non-zero if the
-  !            error estimate (the type of which is determined by ITOL)
-  !            is less than the user specified tolerance TOL.
+  !  This routine calculates the stop test for the iterative refinement iteration scheme.
+  !  It returns a non-zero if the error estimate (the type of which is determined
+  !  by ITOL) is less than the user specified tolerance TOL.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -150,8 +148,7 @@ INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
   !   871119  DATE WRITTEN
   !   880320  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   891003  Removed C***REFER TO line, per MKS.
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
@@ -160,57 +157,35 @@ INTEGER FUNCTION ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,&
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
-  USE SSLBLK, ONLY : soln_com
   USE service, ONLY : R1MACH
-  INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
-      IMPORT SP
-      INTEGER :: N, Iwork(*)
-      REAL(SP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
-  END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) :: Bnrm, Err, Solnrm, Tol
-  INTEGER :: Ierr, Iter, Itol, Iunit, N
+  INTEGER, INTENT(IN) :: Itol, N
+  REAL(SP), INTENT(IN) :: Bnrm, Solnrm, Tol
   !     .. Array Arguments ..
-  REAL(SP) :: B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
-  INTEGER :: Iwork(*)
+  REAL(SP), INTENT(IN) :: Dz(N), R(N), Z(N)
   !     .. Local Scalars ..
-  INTEGER :: i
+  INTEGER :: ierr
+  REAL(SP) :: eror
   !* FIRST EXECUTABLE STATEMENT  ISSIR
   ISSIR = 0
   IF( Itol==1 ) THEN
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
-    IF( Iter==0 ) Bnrm = NORM2(B)
-    Err = NORM2(R)/Bnrm
+    eror = NORM2(R)/Bnrm
   ELSEIF( Itol==2 ) THEN
     !                  -1              -1
     !         err = ||M  Residual||/||M  RightHandSide|| (2-Norms).
-    IF( Iter==0 ) THEN
-      CALL MSOLVE(N,B,Dz,Rwork,Iwork)
-      Bnrm = NORM2(Dz)
-    END IF
-    Err = NORM2(Z)/Bnrm
+    eror = NORM2(Z)/Bnrm
   ELSEIF( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
-    IF( Iter==0 ) Solnrm = NORM2(soln_com(1:N))
-    DO i = 1, N
-      Dz(i) = X(i) - soln_com(i)
-    END DO
-    Err = NORM2(Dz)/Solnrm
+    eror = NORM2(Dz)/Solnrm
   ELSE
-    !
     !         If we get here ITOL is not one of the acceptable values.
-    Err = R1MACH(2)
-    Ierr = 3
+    eror = R1MACH(2)
+    ierr = 3
+    ERROR STOP "Itol is not one of the acceptable values {1,2,11}"
   END IF
   !
-  IF( Iunit/=0 ) THEN
-    WRITE (Iunit,99001) Iter, Err
-    99001 FORMAT (5X,'ITER = ',I4,' Error Estimate = ',E16.7)
-  END IF
-  !
-  IF( Err<=Tol ) ISSIR = 1
+  IF( eror<=Tol ) ISSIR = 1
   !
   RETURN
   !------------- LAST LINE OF ISSIR FOLLOWS -----------------------------

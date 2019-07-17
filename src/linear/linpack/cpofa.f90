@@ -1,5 +1,5 @@
 !** CPOFA
-SUBROUTINE CPOFA(A,Lda,N,Info)
+PURE SUBROUTINE CPOFA(A,Lda,N,Info)
   !> Factor a complex Hermitian positive definite matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)
@@ -8,8 +8,7 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !***
   ! **Type:**      COMPLEX (SPOFA-S, DPOFA-D, CPOFA-C)
   !***
-  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
-  !             POSITIVE DEFINITE
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, POSITIVE DEFINITE
   !***
   ! **Author:**  Moler, C. B., (U. of New Mexico)
   !***
@@ -56,12 +55,12 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Lda, N, Info
-  COMPLEX(SP) :: A(Lda,N)
+  INTEGER, INTENT(IN) :: Lda, N
+  INTEGER, INTENT(OUT) :: Info
+  COMPLEX(SP), INTENT(INOUT) :: A(Lda,N)
   !
   COMPLEX(SP) :: t
   REAL(SP) :: s
@@ -84,5 +83,6 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
     A(j,j) = CMPLX(SQRT(s),0._SP,SP)
   END DO
   Info = 0
+
   RETURN
 END SUBROUTINE CPOFA

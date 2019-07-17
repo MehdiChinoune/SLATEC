@@ -39,11 +39,12 @@ SUBROUTINE MPMUL(X,Y,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : b_com, lun_com, t_com, r_com
-  INTEGER :: X(30), Y(30), Z(30)
+  USE MPCOM, ONLY : b_com, t_com, r_com, mxr_com
+
+  INTEGER, INTENT(IN) :: X(mxr_com), Y(mxr_com)
+  INTEGER, INTENT(OUT) :: Z(mxr_com)
   INTEGER :: i, i2, i2p, j, j1, rs, re, xi, c, ri
   !* FIRST EXECUTABLE STATEMENT  MPMUL
-  CALL MPCHK(1,4)
   i2 = t_com + 4
   i2p = i2 + 1
   ! FORM SIGN OF PRODUCT
@@ -100,12 +101,8 @@ SUBROUTINE MPMUL(X,Y,Z)
     Z(1) = 0
     RETURN
   END IF
-  100  WRITE (lun_com,99001)
-  99001 FORMAT (' *** INTEGER OVERFLOW IN MPMUL, b_com TOO LARGE ***')
-  GOTO 300
-  200  WRITE (lun_com,99002)
-  99002 FORMAT (' *** ILLEGAL BASE b_com DIGIT IN CALL TO MPMUL,',&
-    ' POSSIBLE OVERWRITING PROBLEM ***')
-  300  CALL MPERR
+  100 ERROR STOP ' *** INTEGER OVERFLOW IN MPMUL, b_com TOO LARGE ***'
+  200 ERROR STOP ' *** ILLEGAL BASE b_com DIGIT IN CALL TO MPMUL, POSSIBLE OVERWRITING PROBLEM ***'
   Z(1) = 0
+
 END SUBROUTINE MPMUL

@@ -1,7 +1,6 @@
 !** SNBFS
-SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
-  !> Solve a general nonsymmetric banded system of linear
-  !            equations.
+PURE SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
+  !> Solve a general nonsymmetric banded system of linear equations.
   !***
   ! **Library:**   SLATEC
   !***
@@ -176,10 +175,12 @@ SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
+  USE service, ONLY : R1MACH
   !
-  INTEGER :: Lda, N, Itask, Ind, Iwork(N), Ml, Mu
-  REAL(SP) :: Abe(Lda,2*Ml+Mu+1), V(N), Work(N)
+  INTEGER, INTENT(IN) :: Lda, N, Itask, Ml, Mu
+  INTEGER, INTENT(OUT) :: Ind, Iwork(N)
+  REAL(SP), INTENT(INOUT) :: Abe(Lda,2*Ml+Mu+1), V(N)
+  REAL(SP), INTENT(OUT) :: Work(N)
   REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SNBFS
@@ -187,36 +188,35 @@ SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SNBFS','LDA = '//xern1//' IS LESS THAN N = '//&
-      xern2,-1,1)
+    ERROR STOP 'SNBFS : LDA IS LESS THAN N'
     RETURN
   END IF
   !
   IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SNBFS','N = '//xern1//' IS LESS THAN 1',-2,1)
+    ERROR STOP 'SNBFS : N IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SNBFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    ERROR STOP 'SNBFS : ITASK IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Ml<0 .OR. Ml>=N ) THEN
     Ind = -5
     WRITE (xern1,'(I8)') Ml
-    CALL XERMSG('SNBFS','ML = '//xern1//' IS OUT OF RANGE',-5,1)
+    ERROR STOP 'SNBFS : ML IS OUT OF RANGE'
     RETURN
   END IF
   !
   IF( Mu<0 .OR. Mu>=N ) THEN
     Ind = -6
     WRITE (xern1,'(I8)') Mu
-    CALL XERMSG('SNBFS','MU = '//xern1//' IS OUT OF RANGE',-6,1)
+    ERROR STOP 'SNBFS : MU IS OUT OF RANGE'
     RETURN
   END IF
   !
@@ -230,7 +230,7 @@ SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !
     IF( rcond==0._SP ) THEN
       Ind = -4
-      CALL XERMSG('SNBFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
+      ERROR STOP 'SNBFS : SINGULAR MATRIX A - NO SOLUTION'
       RETURN
     END IF
     !
@@ -240,11 +240,12 @@ SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     Ind = INT( -LOG10(R1MACH(4)/rcond) )
     IF( Ind<=0 ) THEN
       Ind = -10
-      CALL XERMSG('SNBFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+      ! 'SNBFS : SOLUTION MAY HAVE NO SIGNIFICANCE'
     END IF
   END IF
   !
   !     SOLVE AFTER FACTORING
   !
   CALL SNBSL(Abe,Lda,N,Ml,Mu,Iwork,V,0)
+
 END SUBROUTINE SNBFS

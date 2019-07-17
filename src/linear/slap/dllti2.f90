@@ -1,9 +1,8 @@
 !** DLLTI2
-SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
+PURE SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !> SLAP Backsolve routine for LDL' Factorization.
-  !            Routine to solve a system of the form  L*D*L' X = B,
-  !            where L is a unit lower triangular matrix and D is a
-  !            diagonal matrix and ' means transpose.
+  !  Routine to solve a system of the form  L*D*L' X = B, where L is a unit lower
+  !  triangular matrix and D is a diagonal matrix and ' means transpose.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -114,8 +113,7 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
@@ -123,10 +121,11 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: N, Nel
+  INTEGER, INTENT(IN) :: N, Nel
   !     .. Array Arguments ..
-  REAL(DP) :: B(N), Dinv(N), El(Nel), X(N)
-  INTEGER :: Iel(Nel), Jel(Nel)
+  INTEGER, INTENT(IN) :: Iel(Nel), Jel(Nel)
+  REAL(DP), INTENT(IN) :: B(N), Dinv(N), El(Nel)
+  REAL(DP), INTENT(OUT) :: X(N)
   !     .. Local Scalars ..
   INTEGER :: i, ibgn, iend, irow
   !* FIRST EXECUTABLE STATEMENT  DLLTI2

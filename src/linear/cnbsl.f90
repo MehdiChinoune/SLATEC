@@ -1,7 +1,6 @@
 !** CNBSL
-SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
-  !> Solve a complex band system using the factors computed by
-  !            CNBCO or CNBFA.
+PURE SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
+  !> Solve a complex band system using the factors computed by CNBCO or CNBFA.
   !***
   ! **Library:**   SLATEC
   !***
@@ -82,10 +81,11 @@ SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
   USE blas, ONLY : CAXPY
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Job
-  COMPLEX(SP) :: Abe(Lda,2*Ml+Mu+1), B(N)
+
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu, Ipvt(N), Job
+  COMPLEX(SP), INTENT(IN) :: Abe(Lda,2*Ml+Mu+1)
+  COMPLEX(SP), INTENT(INOUT) :: B(N)
   !
   COMPLEX(SP) :: t, v(2*Ml+Mu+1)
   INTEGER :: k, kb, l, lb, ldb, lm, m, mlm, nm1, i
@@ -162,4 +162,5 @@ SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
       CALL CAXPY(lm,t,Abe(k-1,Ml+2),ldb,B(lb),1)
     END DO
   END IF
+
 END SUBROUTINE CNBSL

@@ -1,9 +1,9 @@
 !** SSDOMN
-SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
-    Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
+    Ierr,Rwork,Lenw,Iwork,Leniw)
   !> Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
-  !            Routine to solve a general linear system  Ax = b  using
-  !            the Orthomin method with diagonal scaling.
+  !  Routine to solve a general linear system  Ax = b  using
+  !  the Orthomin method with diagonal scaling.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -202,8 +202,7 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
@@ -213,11 +212,14 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(SP), INTENT(INOUT) :: Tol
+  REAL(SP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(SP) :: A(N), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Ja(Nelt), Iwork(Leniw)
+  REAL(SP), INTENT(IN) :: B(N)
+  REAL(SP), INTENT(INOUT) :: A(N), X(N), Rwork(Lenw)
   !     .. Local Scalars ..
   INTEGER :: locap, loccsa, locdin, locdz, locema, lociw, locp, locr, locw, locz
   !* FIRST EXECUTABLE STATEMENT  SSDOMN
@@ -256,8 +258,8 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   CALL SSDS(N,Nelt,Ja,A,Rwork(locdin))
   !
   !         Perform the Diagonally Scaled Orthomin iteration algorithm.
-  CALL SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSDI,Nsave,Itol,Tol,Itmax,Iter,Err,&
-    Ierr,Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locap),&
+  CALL SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSDI,Nsave,Itol,Tol,Itmax,Iter,&
+    Ierr,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locap),&
     Rwork(locema),Rwork(locdz),Rwork(loccsa),Rwork,Iwork)
   !------------- LAST LINE OF SSDOMN FOLLOWS ----------------------------
 END SUBROUTINE SSDOMN

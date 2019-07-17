@@ -1,5 +1,5 @@
 !** MC20AS
-SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
+PURE SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
@@ -33,9 +33,10 @@ SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Nc, Jdisp, Jptr(Nc), Maxa
-  INTEGER :: Inum(Maxa), Jnum(Maxa)
-  REAL(SP) :: A(Maxa)
+  INTEGER, INTENT(IN) :: Nc, Jdisp, Maxa
+  INTEGER, INTENT(INOUT) :: Inum(Maxa), Jnum(Maxa)
+  INTEGER, INTENT(OUT) :: Jptr(Nc)
+  REAL(SP), INTENT(INOUT) :: A(Maxa)
   INTEGER :: i, ice, icep, j, ja, jb, jce, jcep, k, kr, locc, nul
   REAL(SP) :: ace, acep
   !* FIRST EXECUTABLE STATEMENT  MC20AS
@@ -99,4 +100,5 @@ SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
     Jptr(j) = ja
     ja = jb
   END DO
+
 END SUBROUTINE MC20AS

@@ -1,5 +1,5 @@
 !** DPOFA
-SUBROUTINE DPOFA(A,Lda,N,Info)
+PURE SUBROUTINE DPOFA(A,Lda,N,Info)
   !> Factor a real symmetric positive definite matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)
@@ -8,8 +8,7 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
   !***
   ! **Type:**      DOUBLE PRECISION (SPOFA-S, DPOFA-D, CPOFA-C)
   !***
-  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
-  !             POSITIVE DEFINITE
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, POSITIVE DEFINITE
   !***
   ! **Author:**  Moler, C. B., (U. of New Mexico)
   !***
@@ -58,12 +57,12 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Lda, N, Info
-  REAL(DP) :: A(Lda,N)
+  INTEGER, INTENT(IN) :: Lda, N
+  INTEGER, INTENT(OUT) :: Info
+  REAL(DP), INTENT(INOUT) :: A(Lda,N)
   !
   REAL(DP) :: t
   REAL(DP) :: s
@@ -86,5 +85,6 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
     A(j,j) = SQRT(s)
   END DO
   Info = 0
+
   RETURN
 END SUBROUTINE DPOFA

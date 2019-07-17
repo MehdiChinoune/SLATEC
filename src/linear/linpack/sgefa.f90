@@ -1,5 +1,5 @@
 !** SGEFA
-SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
+PURE SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   !> Factor a matrix using Gaussian elimination.
   !***
   ! **Library:**   SLATEC (LINPACK)
@@ -8,8 +8,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   !***
   ! **Type:**      SINGLE PRECISION (SGEFA-S, DGEFA-D, CGEFA-C)
   !***
-  ! **Keywords:**  GENERAL MATRIX, LINEAR ALGEBRA, LINPACK,
-  !             MATRIX FACTORIZATION
+  ! **Keywords:**  GENERAL MATRIX, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION
   !***
   ! **Author:**  Moler, C. B., (U. of New Mexico)
   !***
@@ -62,13 +61,13 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : SAXPY
 
-  INTEGER :: Lda, N, Ipvt(N), Info
-  REAL(SP) :: A(Lda,N)
+  INTEGER, INTENT(IN) :: Lda, N
+  INTEGER, INTENT(OUT) :: Ipvt(N), Info
+  REAL(SP), INTENT(INOUT) :: A(Lda,N)
   !
   REAL(SP) :: t
   INTEGER :: j, k, kp1, l, nm1
@@ -121,4 +120,5 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   END IF
   Ipvt(N) = N
   IF( A(N,N)==0._SP ) Info = N
+
 END SUBROUTINE SGEFA

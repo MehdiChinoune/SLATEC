@@ -1,5 +1,5 @@
 !** LA05BD
-SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
+PURE SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !> Subsidiary to DSPLP
   !***
   ! **Library:**   SLATEC
@@ -42,17 +42,20 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   USE LA05DD, ONLY : lp_com, lenl_com
-  USE service, ONLY : XERMSG
-  INTEGER :: Ia, N
-  LOGICAL :: Trans
-  INTEGER :: Ind(Ia,2), Iw(N,8), Ip(N,2)
-  REAL(DP) :: G, A(Ia), B(:), W(:)
+
+  INTEGER, INTENT(IN) :: Ia, N
+  LOGICAL, INTENT(IN) :: Trans
+  INTEGER, INTENT(IN) :: Ind(Ia,2), Iw(N,8)
+  INTEGER, INTENT(INOUT) :: Ip(N,2)
+  REAL(DP), INTENT(IN) :: G, A(Ia)
+  REAL(DP), INTENT(INOUT) :: B(:)
+  REAL(DP), INTENT(OUT) :: W(:)
   INTEGER :: i, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, n1, nz
   REAL(DP) :: am
   !* FIRST EXECUTABLE STATEMENT  LA05BD
   IF( G<0._DP ) THEN
     !
-    IF( lp_com>0 ) CALL XERMSG('LA05BD','EARLIER ENTRY GAVE ERROR RETURN.',-8,2)
+    IF( lp_com>0 ) ERROR STOP 'LA05BD : EARLIER ENTRY GAVE ERROR RETURN.'
   ELSE
     kll = Ia - lenl_com + 1
     IF( Trans ) THEN
@@ -143,4 +146,5 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       END DO
     END IF
   END IF
+
 END SUBROUTINE LA05BD

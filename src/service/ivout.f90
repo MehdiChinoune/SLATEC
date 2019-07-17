@@ -54,15 +54,14 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
-  USE service, ONLY : I1MACH
-  INTEGER :: Idigit, N, Ix(N)
-  CHARACTER :: Ifmt*(*)
-  INTEGER :: i, j, k1, k2, lout, ndigit
+
+  INTEGER, INTENT(IN) :: Idigit, N, Ix(N)
+  CHARACTER(*), INTENT(IN) :: Ifmt
+  INTEGER :: i, k1, k2, lout, ndigit
   !
   !     GET THE UNIT NUMBER WHERE OUTPUT WILL BE WRITTEN.
   !* FIRST EXECUTABLE STATEMENT  IVOUT
-  j = 2
-  lout = I1MACH(j)
+  lout = I1MACH(2)
   WRITE (lout,Ifmt)
   IF( N<=0 ) RETURN
   ndigit = Idigit
@@ -136,4 +135,5 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   99002 FORMAT (1X,I4,' - ',I4,15(1X,I7))
   99003 FORMAT (1X,I4,' - ',I4,10(1X,I11))
   99004 FORMAT (1X,I4,' - ',I4,7(1X,I15))
+
 END SUBROUTINE IVOUT

@@ -1,8 +1,7 @@
 !** SPOIR
-SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
-  !> Solve a positive definite symmetric system of linear
-  !            equations.  Iterative refinement is used to obtain an error
-  !            estimate.
+PURE SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
+  !> Solve a positive definite symmetric system of linear equations.
+  !  Iterative refinement is used to obtain an error estimate.
   !***
   ! **Library:**   SLATEC
   !***
@@ -111,11 +110,14 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
+  USE service, ONLY : R1MACH
   USE linpack, ONLY : SPOFA, SPOSL
   !
-  INTEGER :: Lda, N, Itask, Ind
-  REAL(SP) :: A(Lda,N), V(N), Work(N,N+1)
+  INTEGER, INTENT(IN) :: Lda, N, Itask
+  INTEGER, INTENT(OUT) :: Ind
+  REAL(SP), INTENT(IN) :: A(Lda,N)
+  REAL(SP), INTENT(INOUT) :: V(N)
+  REAL(SP), INTENT(OUT) :: Work(N,N+1)
   INTEGER ::  info, j
   REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
@@ -124,21 +126,21 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SPOIR','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
+    ERROR STOP 'SPOIR : LDA IS LESS THAN N'
     RETURN
   END IF
   !
   IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SPOIR','N = '//xern1//' IS LESS THAN 1',-2,1)
+    ERROR STOP 'SPOIR : N IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SPOIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    ERROR STOP 'SPOIR : ITASK IS LESS THAN 1'
     RETURN
   END IF
   !
@@ -154,7 +156,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
     !        CHECK FOR  SINGULAR OR NOT POS.DEF. MATRIX
     IF( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('SPOIR','SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
+      ERROR STOP 'SPOIR : SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION'
       RETURN
     END IF
   END IF
@@ -194,6 +196,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
   IF( Ind<=0 ) THEN
     Ind = -10
-    CALL XERMSG('SPOIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+    ! 'SPOIR : SOLUTION MAY HAVE NO SIGNIFICANCE'
   END IF
+
 END SUBROUTINE SPOIR

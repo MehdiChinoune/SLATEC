@@ -1,5 +1,5 @@
 !** CGEFA
-SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
+PURE SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !> Factor a matrix using Gaussian elimination.
   !***
   ! **Library:**   SLATEC (LINPACK)
@@ -8,8 +8,7 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !***
   ! **Type:**      COMPLEX (SGEFA-S, DGEFA-D, CGEFA-C)
   !***
-  ! **Keywords:**  GENERAL MATRIX, LINEAR ALGEBRA, LINPACK,
-  !             MATRIX FACTORIZATION
+  ! **Keywords:**  GENERAL MATRIX, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION
   !***
   ! **Author:**  Moler, C. B., (U. of New Mexico)
   !***
@@ -62,13 +61,13 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : CAXPY, SCABS1, ICAMAX
 
-  INTEGER :: Lda, N, Ipvt(N), Info
-  COMPLEX(SP) :: A(Lda,N)
+  INTEGER, INTENT(IN) :: Lda, N
+  INTEGER, INTENT(OUT) :: Ipvt(N), Info
+  COMPLEX(SP), INTENT(INOUT) :: A(Lda,N)
   !
   COMPLEX(SP) :: t
   INTEGER :: j, k, kp1, l, nm1
@@ -121,4 +120,5 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   END IF
   Ipvt(N) = N
   IF( SCABS1(A(N,N))==0._SP ) Info = N
+
 END SUBROUTINE CGEFA

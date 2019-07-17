@@ -75,8 +75,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   USE service, ONLY : XERMSG, R1MACH, I1MACH
   INTERFACE
     REAL(SP) FUNCTION FUN(X)

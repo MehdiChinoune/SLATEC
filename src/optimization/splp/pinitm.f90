@@ -1,5 +1,5 @@
 !** PINITM
-SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
+PURE SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
@@ -48,11 +48,12 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ipagef, Lmx, Ix(Lmx), M, N
-  REAL(SP) :: Sx(Lmx)
+
+  INTEGER, INTENT(IN) :: Ipagef, Lmx, M, N
+  INTEGER, INTENT(OUT) :: Ix(Lmx)
+  REAL(SP), INTENT(OUT) :: Sx(Lmx)
   INTEGER :: i, iopt, lp4, n20008, n20012, nerr
-  REAL(SP), PARAMETER :: zero = 0.E0, one = 1._SP
+  REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  PINITM
   iopt = 1
   !
@@ -60,14 +61,14 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !
   IF( M<=0 .OR. N<=0 ) THEN
     nerr = 55
-    CALL XERMSG('PINITM','MATRIX DIMENSION M OR N <= 0.',nerr,iopt)
+    ERROR STOP 'PINITM : MATRIX DIMENSION M OR N <= 0.'
   END IF
   !
   !     VERIFY IF VALUE OF LMX IS LARGE ENOUGH.
   !
   IF( Lmx<N+7 ) THEN
     nerr = 55
-    CALL XERMSG('PINITM','THE VALUE OF LMX IS TOO SMALL.',nerr,iopt)
+    ERROR STOP 'PINITM : THE VALUE OF LMX IS TOO SMALL.'
   END IF
   !
   !     INITIALIZE DATA STRUCTURE INDEPENDENT VALUES.

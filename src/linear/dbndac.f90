@@ -1,8 +1,8 @@
 !** DBNDAC
-SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
+PURE SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !> Compute the LU factorization of a  banded matrices using
-  !            sequential accumulation of rows of the data matrix.
-  !            Exactly one right-hand side vector is permitted.
+  !  sequential accumulation of rows of the data matrix.
+  !  Exactly one right-hand side vector is permitted.
   !***
   ! **Library:**   SLATEC
   !***
@@ -195,9 +195,10 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ip, Ir, Jt, Mdg, Mt, Nb
-  REAL(DP) :: G(Mdg,Nb+1)
+
+  INTEGER, INTENT(IN) :: Jt, Mdg, Mt, Nb
+  INTEGER, INTENT(INOUT) :: Ip, Ir
+  REAL(DP), INTENT(INOUT) :: G(Mdg,Nb+1)
   INTEGER :: i, ie, ig, ig1, ig2, iopt, j, jg, k, kh, l, lp1, mh, mu, nbp1, nerr
   REAL(DP) :: rho, zero
   !* FIRST EXECUTABLE STATEMENT  DBNDAC
@@ -277,8 +278,7 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   ELSE
     nerr = 1
     iopt = 2
-    CALL XERMSG('DBNDAC','MDG<IR, PROBABLE ERROR.',nerr,iopt)
-    RETURN
+    ERROR STOP 'DBNDAC : MDG<IR, PROBABLE ERROR.'
   END IF
   !  ALG. STEP 24
   !  ALG. STEP 25

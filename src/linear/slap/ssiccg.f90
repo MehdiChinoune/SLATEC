@@ -1,10 +1,9 @@
 !** SSICCG
-SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
+    Rwork,Lenw,Iwork,Leniw)
   !> Incomplete Cholesky Conjugate Gradient Sparse Ax=b Solver.
-  !            Routine to solve a symmetric positive definite linear
-  !            system  Ax = b  using the incomplete Cholesky
-  !            Preconditioned Conjugate Gradient method.
+  !  Routine to solve a symmetric positive definite linear system  Ax = b
+  !  using the incomplete Cholesky Preconditioned Conjugate Gradient method.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -230,8 +229,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   900805  Changed XERRWV calls to calls to XERMSG.  (RWC)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
@@ -239,18 +237,21 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Corrected NEL to NL.  (FNF)
-  USE service, ONLY : XERMSG
+
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(SP), INTENT(INOUT) :: Tol
+  REAL(SP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  REAL(SP), INTENT(IN) :: B(N)
+  REAL(SP), INTENT(INOUT) :: A(Nelt), Rwork(Lenw), X(N)
   !     .. Local Scalars ..
   INTEGER :: locdin, locdz, locel, lociel, lociw, locjel, locp, locr, locw, locz, nl
-  CHARACTER xern1*8
+  CHARACTER(8) :: xern1
   !* FIRST EXECUTABLE STATEMENT  SSICCG
   !
   Ierr = 0
@@ -296,17 +297,17 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !         Compute the Incomplete Cholesky decomposition.
   !
-  CALL SSICS(N,Nelt,Ia,Ja,A,Isym,nl,Iwork(lociel),Iwork(locjel),Rwork(locel)&
-    ,Rwork(locdin),Rwork(locr),Ierr)
+  CALL SSICS(N,Nelt,Ia,Ja,A,Isym,nl,Iwork(lociel:lociel+N),Iwork(locjel:locjel+nl-1),&
+    Rwork(locel),Rwork(locdin),Rwork(locr),Ierr)
   IF( Ierr/=0 ) THEN
     WRITE (xern1,'(I8)') Ierr
-    CALL XERMSG('SSICCG','IC factorization broke down on step '//&
-      xern1//'.  Diagonal was set to unity and factorization proceeded.',1,1)
+    ! CALL XERMSG('SSICCG','IC factorization broke down on step '//&
+      ! xern1//'.  Diagonal was set to unity and factorization proceeded.',1,1)
     Ierr = 7
   END IF
   !
   !         Do the Preconditioned Conjugate Gradient.
-  CALL SCG(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSLLTI,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork(1),Iwork(1))
+  CALL SCG(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSLLTI,Itol,Tol,Itmax,Iter,Ierr,&
+    Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork(1),Iwork(1))
   !------------- LAST LINE OF SSICCG FOLLOWS ----------------------------
 END SUBROUTINE SSICCG

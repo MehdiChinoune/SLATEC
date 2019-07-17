@@ -1,8 +1,7 @@
 !** DS2LT
-SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
+PURE SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !> Lower Triangle Preconditioner SLAP Set Up.
-  !            Routine to store the lower triangle of a matrix stored
-  !            in the SLAP Column format.
+  !  Routine to store the lower triangle of a matrix stored in the SLAP Column format.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -93,18 +92,20 @@ SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: Isym, N, Nel, Nelt
+  INTEGER, INTENT(IN) :: Isym, N, Nelt
+  INTEGER, INTENT(INOUT) :: Nel
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), El(Nelt)
-  INTEGER :: Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Ja(Nelt)
+  INTEGER, INTENT(OUT) :: Iel(Nel), Jel(Nel)
+  REAL(DP), INTENT(IN) :: A(Nelt)
+  REAL(DP), INTENT(OUT) :: El(Nel)
   !     .. Local Scalars ..
   INTEGER :: i, icol, j, jbgn, jend
   !* FIRST EXECUTABLE STATEMENT  DS2LT

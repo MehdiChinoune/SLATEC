@@ -1,5 +1,5 @@
 !** SHEQR
-SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
+PURE SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !> Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
@@ -67,17 +67,18 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: Ijob, Info, Lda, N
+  INTEGER, INTENT(IN) :: Ijob, Lda, N
+  INTEGER, INTENT(OUT) :: Info
   !     .. Array Arguments ..
-  REAL(SP) :: A(Lda,*), Q(*)
+  REAL(SP), INTENT(INOUT) :: A(Lda,*)
+  REAL(SP), INTENT(OUT) :: Q(*)
   !     .. Local Scalars ..
   REAL(SP) :: c, s, t, t1, t2
   INTEGER :: i, iq, j, k, km1, kp1, nm1

@@ -1,8 +1,8 @@
 !** DSMTV
-SUBROUTINE DSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
+PURE SUBROUTINE DSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !> SLAP Column Format Sparse Matrix Transpose Vector Product.
-  !            Routine to calculate the sparse matrix vector product:
-  !            Y = A'*X, where ' denotes transpose.
+  !  Routine to calculate the sparse matrix vector product:
+  !  Y = A'*X, where ' denotes transpose.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -105,18 +105,18 @@ SUBROUTINE DSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: Isym, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), X(N), Y(N)
-  INTEGER :: Ia(Nelt), Ja(Nelt)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Ja(Nelt)
+  REAL(DP), INTENT(IN) :: A(Nelt), X(N)
+  REAL(DP), INTENT(OUT) :: Y(N)
   !     .. Local Scalars ..
   INTEGER :: i, ibgn, icol, iend, irow, j, jbgn, jend
   !* FIRST EXECUTABLE STATEMENT  DSMTV

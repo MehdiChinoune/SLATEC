@@ -38,8 +38,7 @@ REAL(SP) ELEMENTAL FUNCTION AI(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   USE service, ONLY : R1MACH
   REAL(SP), INTENT(IN) :: X

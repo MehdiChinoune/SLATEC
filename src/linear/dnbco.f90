@@ -1,7 +1,6 @@
 !** DNBCO
-SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
-  !> Factor a band matrix using Gaussian elimination and
-  !            estimate the condition number.
+PURE SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
+  !> Factor a band matrix using Gaussian elimination and estimate the condition number.
   !***
   ! **Library:**   SLATEC
   !***
@@ -9,8 +8,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !***
   ! **Type:**      DOUBLE PRECISION (SNBCO-S, DNBCO-D, CNBCO-C)
   !***
-  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
-  !             NONSYMMETRIC
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION, NONSYMMETRIC
   !***
   ! **Author:**  Voorhees, E. A., (LANL)
   !***
@@ -132,11 +130,12 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
   USE blas, ONLY : DAXPY
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N)
-  REAL(DP) :: Abe(Lda,2*Ml+Mu+1), Z(N)
-  REAL(DP) :: Rcond
+
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu
+  INTEGER, INTENT(OUT) :: Ipvt(N)
+  REAL(DP), INTENT(INOUT) :: Abe(Lda,2*Ml+Mu+1)
+  REAL(DP), INTENT(OUT) :: Rcond, Z(N)
   !
   REAL(DP) :: ek, t, wk, wkm, anorm, s, sm, ynorm, v(2*Ml+Mu+1)
   INTEGER :: i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
@@ -283,4 +282,5 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   IF( anorm/=0._DP ) Rcond = ynorm/anorm
   IF( anorm==0._DP ) Rcond = 0._DP
+
 END SUBROUTINE DNBCO

@@ -1,10 +1,9 @@
 !** ULSIA
-SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
+PURE SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
-  !> Solve an underdetermined linear system of equations by
-  !            performing an LQ factorization of the matrix using
-  !            Householder transformations.  Emphasis is put on detecting
-  !            possible rank deficiency.
+  !> Solve an underdetermined linear system of equations by performing an LQ
+  !  factorization of the matrix using Householder transformations.
+  !  Emphasis is put on detecting possible rank deficiency.
   !***
   ! **Library:**   SLATEC
   !***
@@ -173,16 +172,20 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
-  INTEGER :: Info, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, Mode, N, Nb, Np
-  INTEGER :: Iwork(M+N)
-  REAL(SP) :: A(Mda,N), Ae(N), B(Mdb,Nb), Re(N), Rnorm(Nb), W(5*M)
+  USE service, ONLY : R1MACH
+
+  INTEGER, INTENT(IN) :: Key, Liw, Lw, M, Mda, Mdb, Mode, N, Nb, Np
+  INTEGER, INTENT(INOUT) :: Info
+  INTEGER, INTENT(OUT) :: Krank, Ksure
+  INTEGER, INTENT(INOUT) :: Iwork(N+M)
+  REAL(SP), INTENT(INOUT) :: Ae(N), Re(N), A(Mda,N), B(Mdb,Nb), W(5*M)
+  REAL(SP), INTENT(OUT) :: Rnorm(Nb)
   INTEGER :: i, it, m1, m2, m3, m4, m5
   REAL(SP) :: eps
   !
   !* FIRST EXECUTABLE STATEMENT  ULSIA
   IF( Info<0 .OR. Info>1 ) THEN
-    CALL XERMSG('ULSIA','INFO OUT OF RANGE',2,1)
+    ERROR STOP 'ULSIA : INFO OUT OF RANGE'
     RETURN
   ELSE
     it = Info
@@ -191,45 +194,44 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
       !
       !     ERROR MESSAGES
       !
-      CALL XERMSG('ULSIA',&
-        'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
+      ! 'ULSIA : SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)'
       RETURN
     ELSEIF( M<1 ) THEN
-      CALL XERMSG('ULSIA','M<1',2,1)
+      ERROR STOP 'ULSIA : M<1'
       RETURN
     ELSEIF( N<1 ) THEN
-      CALL XERMSG('ULSIA','N<1',2,1)
+      ERROR STOP 'ULSIA : N<1'
       RETURN
     ELSE
       IF( N<M ) THEN
-        CALL XERMSG('ULSIA','N<M',2,1)
+        ERROR STOP 'ULSIA : N<M'
         RETURN
       ELSE
         IF( Mda<M ) THEN
-          CALL XERMSG('ULSIA','MDA<M',2,1)
+          ERROR STOP 'ULSIA : MDA<M'
           RETURN
         ELSE
           IF( Liw<M+N ) THEN
-            CALL XERMSG('ULSIA','LIW<M+N',2,1)
+            ERROR STOP 'ULSIA : LIW<M+N'
             RETURN
           ELSE
             IF( Mode<0 .OR. Mode>3 ) THEN
-              CALL XERMSG('ULSIA','MODE OUT OF RANGE',2,1)
+              ERROR STOP 'ULSIA : MODE OUT OF RANGE'
               RETURN
             ELSE
               IF( Nb/=0 ) THEN
                 IF( Nb<0 ) THEN
-                  CALL XERMSG('ULSIA','NB<0',2,1)
+                  ERROR STOP 'ULSIA : NB<0'
                   RETURN
                 ELSEIF( Mdb<N ) THEN
-                  CALL XERMSG('ULSIA','MDB<N',2,1)
+                  ERROR STOP 'ULSIA : MDB<N'
                   RETURN
                 ELSEIF( it/=0 ) THEN
                   GOTO 2
                 END IF
               END IF
               IF( Key<0 .OR. Key>3 ) THEN
-                CALL XERMSG('ULSIA','KEY OUT OF RANGE',2,1)
+                ERROR STOP 'ULSIA : KEY OUT OF RANGE'
                 RETURN
               ELSE
                 IF( Key==0 .AND. Lw<5*M ) GOTO 5
@@ -237,7 +239,7 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                 IF( Key==2 .AND. Lw<4*M ) GOTO 5
                 IF( Key==3 .AND. Lw<3*M ) GOTO 5
                 IF( Np<0 .OR. Np>M ) THEN
-                  CALL XERMSG('ULSIA','NP OUT OF RANGE',2,1)
+                  ERROR STOP 'ULSIA : NP OUT OF RANGE'
                   RETURN
                 ELSE
                   !
@@ -332,17 +334,18 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
               RETURN
             END IF
           END IF
-          5  CALL XERMSG('ULSIA','INSUFFICIENT WORK SPACE',8,1)
+          5  ERROR STOP 'ULSIA : INSUFFICIENT WORK SPACE'
           Info = -1
           RETURN
         END IF
-        10  CALL XERMSG('ULSIA','RE(I) < 0',2,1)
+        10  ERROR STOP 'ULSIA : RE(I) < 0'
         RETURN
       END IF
-      20  CALL XERMSG('ULSIA','RE(I) > 1',2,1)
+      20  ERROR STOP 'ULSIA : RE(I) > 1'
       RETURN
     END IF
   END IF
-  100  CALL XERMSG('ULSIA','AE(I) < 0',2,1)
+  100  ERROR STOP 'ULSIA : AE(I) < 0'
+
   RETURN
 END SUBROUTINE ULSIA

@@ -1,8 +1,8 @@
 !** SSD2S
-SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
+PURE SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !> Diagonal Scaling Preconditioner SLAP Normal Eqns Set Up.
-  !            Routine to compute the inverse of the diagonal of the
-  !            matrix A*A', where A is stored in SLAP-Column format.
+  !  Routine to compute the inverse of the diagonal of the matrix A*A',
+  !  where A is stored in SLAP-Column format.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -103,8 +103,7 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
@@ -112,10 +111,11 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: Isym, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), Dinv(N)
-  INTEGER :: Ia(Nelt), Ja(Nelt)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Ja(Nelt)
+  REAL(SP), INTENT(IN) :: A(Nelt)
+  REAL(SP), INTENT(OUT) :: Dinv(N)
   !     .. Local Scalars ..
   INTEGER :: i, k, kbgn, kend
   !* FIRST EXECUTABLE STATEMENT  SSD2S

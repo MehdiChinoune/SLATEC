@@ -1,10 +1,9 @@
 !** LLSIA
-SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
+PURE SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
-  !> Solve a linear least squares problems by performing a QR
-  !            factorization of the matrix using Householder
-  !            transformations.  Emphasis is put on detecting possible
-  !            rank deficiency.
+  !> Solve a linear least squares problems by performing a QR factorization of
+  !  the matrix using Householder transformations.
+  !  Emphasis is put on detecting possible rank deficiency.
   !***
   ! **Library:**   SLATEC
   !***
@@ -166,16 +165,20 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
-  INTEGER :: Info, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, Mode, N, Nb, Np
-  INTEGER :: Iwork(N+M)
-  REAL(SP) :: A(Mda,N), Ae(N), B(Mdb,Nb), Re(N), Rnorm(Nb), W(5*N)
+  USE service, ONLY : R1MACH
+
+  INTEGER, INTENT(IN) :: Key, Liw, Lw, M, Mda, Mdb, Mode, N, Nb, Np
+  INTEGER, INTENT(INOUT) :: Info
+  INTEGER, INTENT(OUT) :: Krank, Ksure
+  INTEGER, INTENT(INOUT) :: Iwork(N+M)
+  REAL(SP), INTENT(INOUT) :: Ae(N), Re(N), A(Mda,N), B(Mdb,Nb), W(5*N)
+  REAL(SP), INTENT(OUT) :: Rnorm(Nb)
   INTEGER :: i, it, n1, n2, n3, n4, n5
   REAL(SP) :: eps
   !
   !* FIRST EXECUTABLE STATEMENT  LLSIA
   IF( Info<0 .OR. Info>1 ) THEN
-    CALL XERMSG('LLSIA','INFO OUT OF RANGE',2,1)
+    ERROR STOP 'LLSIA : INFO OUT OF RANGE'
     RETURN
   ELSE
     it = Info
@@ -184,45 +187,44 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
       !
       !     ERROR MESSAGES
       !
-      CALL XERMSG('LLSIA',&
-        'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
+      ERROR STOP 'LLSIA : SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)'
       RETURN
     ELSEIF( M<1 ) THEN
-      CALL XERMSG('LLSIA','M<1',2,1)
+      ERROR STOP 'LLSIA : M<1'
       RETURN
     ELSEIF( N<1 ) THEN
-      CALL XERMSG('LLSIA','N<1',2,1)
+      ERROR STOP 'LLSIA : N<1'
       RETURN
     ELSE
       IF( N>M ) THEN
-        CALL XERMSG('LLSIA','N>M',2,1)
+        ERROR STOP 'LLSIA : N>M'
         RETURN
       ELSE
         IF( Mda<M ) THEN
-          CALL XERMSG('LLSIA','MDA<M',2,1)
+          ERROR STOP 'LLSIA : MDA<M'
           RETURN
         ELSE
           IF( Liw<M+N ) THEN
-            CALL XERMSG('LLSIA','LIW<M+N',2,1)
+            ERROR STOP 'LLSIA : LIW<M+N'
             RETURN
           ELSE
             IF( Mode<0 .OR. Mode>3 ) THEN
-              CALL XERMSG('LLSIA','MODE OUT OF RANGE',2,1)
+              ERROR STOP 'LLSIA : MODE OUT OF RANGE'
               RETURN
             ELSE
               IF( Nb/=0 ) THEN
                 IF( Nb<0 ) THEN
-                  CALL XERMSG('LLSIA','NB<0',2,1)
+                  ERROR STOP 'LLSIA : NB<0'
                   RETURN
                 ELSEIF( Mdb<M ) THEN
-                  CALL XERMSG('LLSIA','MDB<M',2,1)
+                  ERROR STOP 'LLSIA : MDB<M'
                   RETURN
                 ELSEIF( it/=0 ) THEN
                   GOTO 2
                 END IF
               END IF
               IF( Key<0 .OR. Key>3 ) THEN
-                CALL XERMSG('LLSIA','KEY OUT OF RANGE',2,1)
+                ERROR STOP 'LLSIA : KEY OUT OF RANGE'
                 RETURN
               ELSE
                 IF( Key==0 .AND. Lw<5*N ) GOTO 5
@@ -230,7 +232,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                 IF( Key==2 .AND. Lw<4*N ) GOTO 5
                 IF( Key==3 .AND. Lw<3*N ) GOTO 5
                 IF( Np<0 .OR. Np>N ) THEN
-                  CALL XERMSG('LLSIA','NP OUT OF RANGE',2,1)
+                  ERROR STOP 'LLSIA : NP OUT OF RANGE'
                   RETURN
                 ELSE
                   !
@@ -324,17 +326,18 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
               RETURN
             END IF
           END IF
-          5  CALL XERMSG('LLSIA','INSUFFICIENT WORK SPACE',8,1)
+          5  ERROR STOP 'LLSIA : INSUFFICIENT WORK SPACE'
           Info = -1
           RETURN
         END IF
-        10  CALL XERMSG('LLSIA','RE(I) < 0',2,1)
+        10  ERROR STOP 'LLSIA : RE(I) < 0'
         RETURN
       END IF
-      20  CALL XERMSG('LLSIA','RE(I) > 1',2,1)
+      20  ERROR STOP 'LLSIA : RE(I) > 1'
       RETURN
     END IF
   END IF
-  100  CALL XERMSG('LLSIA','AE(I) < 0',2,1)
+  100  ERROR STOP 'LLSIA : AE(I) < 0'
+
   RETURN
 END SUBROUTINE LLSIA

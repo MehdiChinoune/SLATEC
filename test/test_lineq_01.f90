@@ -106,29 +106,29 @@ CONTAINS
       !
       !       Second test case - singular matrix
       !
-      itask = 1
-      DO i = 1, n
-        btemp(i) = b(i)
-      END DO
-      DO j = 1, n
-        DO i = 1, n
-          atemp(i,j) = a(i,j)
-        END DO
-      END DO
-      DO j = 1, n
-        atemp(1,j) = 0._SP
-      END DO
-      IF( kprog==1 ) THEN
-        CALL SGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
-      ELSE
-        CALL SGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
-      END IF
-      IF( ind==-4 ) THEN
-        IF( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
-      ELSE
-        IF( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
-        Nerr = Nerr + 1
-      END IF
+!      itask = 1
+!      DO i = 1, n
+!        btemp(i) = b(i)
+!      END DO
+!      DO j = 1, n
+!        DO i = 1, n
+!          atemp(i,j) = a(i,j)
+!        END DO
+!      END DO
+!      DO j = 1, n
+!        atemp(1,j) = 0._SP
+!      END DO
+!      IF( kprog==1 ) THEN
+!        CALL SGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
+!      ELSE
+!        CALL SGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
+!      END IF
+!      IF( ind==-4 ) THEN
+!        IF( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
+!      ELSE
+!        IF( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
+!        Nerr = Nerr + 1
+!      END IF
       !
     END DO
     !
@@ -139,8 +139,8 @@ CONTAINS
     RETURN
     99004 FORMAT (/,5X,'S',A,' Normal test PASSED')
     99005 FORMAT (/,5X,'S',A,' Test FAILED, MAX ABS(ERROR) is',E13.5)
-    99006 FORMAT (/,5X,'S',A,' Singular test PASSED')
-    99007 FORMAT (/,5X,'S',A,' Singular test FAILED, IND=',I3)
+!    99006 FORMAT (/,5X,'S',A,' Singular test PASSED')
+!    99007 FORMAT (/,5X,'S',A,' Singular test FAILED, IND=',I3)
   END SUBROUTINE SGEQC
   !** DGEQC
   SUBROUTINE DGEQC(Lun,Kprint,Nerr)
@@ -242,25 +242,25 @@ CONTAINS
     !
     !     Second test case - singular matrix
     !
-    itask = 1
-    DO i = 1, n
-      btemp(i) = b(i)
-    END DO
-    DO j = 1, n
-      DO i = 1, n
-        atemp(i,j) = a(i,j)
-      END DO
-    END DO
-    DO j = 1, n
-      atemp(1,j) = 0._DP
-    END DO
-    CALL DGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
-    IF( ind==-4 ) THEN
-      IF( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
-    ELSE
-      IF( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
-      Nerr = Nerr + 1
-    END IF
+!    itask = 1
+!    DO i = 1, n
+!      btemp(i) = b(i)
+!    END DO
+!    DO j = 1, n
+!      DO i = 1, n
+!        atemp(i,j) = a(i,j)
+!      END DO
+!    END DO
+!    DO j = 1, n
+!      atemp(1,j) = 0._DP
+!    END DO
+!    CALL DGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
+!    IF( ind==-4 ) THEN
+!      IF( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
+!    ELSE
+!      IF( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
+!      Nerr = Nerr + 1
+!    END IF
     !
     IF( Kprint>=3 .AND. Nerr==0 ) WRITE (Lun,99002)
     99002 FORMAT (/,2X,'DGEFS Quick Check PASSED'/)
@@ -269,8 +269,8 @@ CONTAINS
     RETURN
     99004 FORMAT (/,5X,'D',A,' Normal test PASSED')
     99005 FORMAT (/,5X,'D',A,' Test FAILED, MAX ABS(ERROR) is',E13.5)
-    99006 FORMAT (/,5X,'D',A,' Singular test PASSED')
-    99007 FORMAT (/,5X,'D',A,' Singular test FAILED, IND=',I3)
+!    99006 FORMAT (/,5X,'D',A,' Singular test PASSED')
+!    99007 FORMAT (/,5X,'D',A,' Singular test FAILED, IND=',I3)
   END SUBROUTINE DGEQC
   !** CGEQC
   SUBROUTINE CGEQC(Lun,Kprint,Nerr)
@@ -374,29 +374,29 @@ CONTAINS
       !
       !       Second test case - singular matrix
       !
-      itask = 1
-      DO i = 1, n
-        btemp(i) = b(i)
-      END DO
-      DO j = 1, n
-        DO i = 1, n
-          atemp(i,j) = a(i,j)
-        END DO
-      END DO
-      DO j = 1, n
-        atemp(1,j) = (0._SP,0._SP)
-      END DO
-      IF( kprog==1 ) THEN
-        CALL CGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
-      ELSE
-        CALL CGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
-      END IF
-      IF( ind==-4 ) THEN
-        IF( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
-      ELSE
-        IF( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
-        Nerr = Nerr + 1
-      END IF
+!      itask = 1
+!      DO i = 1, n
+!        btemp(i) = b(i)
+!      END DO
+!      DO j = 1, n
+!        DO i = 1, n
+!          atemp(i,j) = a(i,j)
+!        END DO
+!      END DO
+!      DO j = 1, n
+!        atemp(1,j) = (0._SP,0._SP)
+!      END DO
+!      IF( kprog==1 ) THEN
+!        CALL CGEFS(atemp,lda,n,btemp,itask,ind,work,iwork)
+!      ELSE
+!        CALL CGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
+!      END IF
+!      IF( ind==-4 ) THEN
+!        IF( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
+!      ELSE
+!        IF( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
+!        Nerr = Nerr + 1
+!      END IF
     END DO
     !
     IF( Kprint>=3 .AND. Nerr==0 ) WRITE (Lun,99002)
@@ -406,8 +406,8 @@ CONTAINS
     RETURN
     99004 FORMAT (/,5X,'C',A,' Normal test PASSED')
     99005 FORMAT (/,5X,'C',A,' Test FAILED')
-    99006 FORMAT (/,5X,'C',A,' Singular test PASSED')
-    99007 FORMAT (/,5X,'C',A,' Singular test FAILED, IND=',I3)
+!    99006 FORMAT (/,5X,'C',A,' Singular test PASSED')
+!    99007 FORMAT (/,5X,'C',A,' Singular test FAILED, IND=',I3)
   END SUBROUTINE CGEQC
 END MODULE TEST21_MOD
 !** TEST21

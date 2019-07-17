@@ -1,5 +1,5 @@
 !** MPSTR
-SUBROUTINE MPSTR(X,Y)
+PURE SUBROUTINE MPSTR(X,Y)
   !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
@@ -30,11 +30,14 @@ SUBROUTINE MPSTR(X,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : t_com
-  INTEGER :: X(30), Y(30)
+  USE MPCOM, ONLY : t_com, mxr_com
+
+  INTEGER, INTENT(IN) :: X(mxr_com)
+  INTEGER, INTENT(OUT) :: Y(mxr_com)
   INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  MPSTR
   DO i = 1, t_com + 2
     Y(i) = X(i)
   END DO
+
 END SUBROUTINE MPSTR

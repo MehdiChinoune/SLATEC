@@ -1,7 +1,7 @@
 !** SPOSL
-SUBROUTINE SPOSL(A,Lda,N,B)
+PURE SUBROUTINE SPOSL(A,Lda,N,B)
   !> Solve the real symmetric positive definite linear system
-  !            using the factors computed by SPOCO or SPOFA.
+  !  using the factors computed by SPOCO or SPOFA.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
@@ -64,13 +64,13 @@ SUBROUTINE SPOSL(A,Lda,N,B)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : SAXPY
 
-  INTEGER :: Lda, N
-  REAL(SP) :: A(Lda,N), B(N)
+  INTEGER, INTENT(IN) :: Lda, N
+  REAL(SP), INTENT(IN) :: A(Lda,N)
+  REAL(SP), INTENT(INOUT) :: B(N)
   !
   REAL(SP) :: t
   INTEGER :: k, kb
@@ -91,4 +91,5 @@ SUBROUTINE SPOSL(A,Lda,N,B)
     t = -B(k)
     CALL SAXPY(k-1,t,A(1:k-1,k),1,B(1:k-1),1)
   END DO
+
 END SUBROUTINE SPOSL

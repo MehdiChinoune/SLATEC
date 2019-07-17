@@ -1,5 +1,5 @@
 !** MPMLP
-SUBROUTINE MPMLP(U,V,W,J)
+PURE SUBROUTINE MPMLP(U,V,W,J)
   !> Subsidiary to DQDOTA and DQDOTI
   !***
   ! **Library:**   SLATEC
@@ -24,11 +24,13 @@ SUBROUTINE MPMLP(U,V,W,J)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: J
-  INTEGER :: U(J), V(J), W
+  INTEGER, INTENT(IN) :: J
+  INTEGER, INTENT(IN) :: V(J), W
+  INTEGER, INTENT(INOUT) :: U(J)
   INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  MPMLP
   DO i = 1, J
     U(i) = U(i) + W*V(i)
   END DO
+
 END SUBROUTINE MPMLP

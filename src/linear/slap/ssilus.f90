@@ -1,11 +1,10 @@
 !** SSILUS
-SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
+PURE SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   !> Incomplete LU Decomposition Preconditioner SLAP Set Up.
-  !            Routine to generate the incomplete LDU decomposition of a
-  !            matrix.  The unit lower triangular factor L is stored by
-  !            rows and the unit upper triangular factor U is stored by
-  !            columns.  The inverse of the diagonal matrix D is stored.
-  !            No fill in is allowed.
+  !  Routine to generate the incomplete LDU decomposition of a matrix.
+  !  The unit lower triangular factor L is stored by rows and the unit upper
+  !  triangular factor U is stored by columns.
+  !  The inverse of the diagonal matrix D is stored. No fill in is allowed.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -157,8 +156,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
@@ -166,10 +164,13 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: Isym, N, Nelt, Nl, Nu
+  INTEGER, INTENT(IN) :: Isym, N, Nelt
+  INTEGER, INTENT(INOUT) :: Nl, Nu
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), Dinv(N), L(Nl), U(Nu)
-  INTEGER :: Ia(Nelt), Il(Nl), Iu(Nu), Ja(Nelt), Jl(Nl), Ju(Nu), Ncol(N), Nrow(N)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Ja(Nelt)
+  INTEGER, INTENT(OUT) :: Il(Nl), Iu(Nu), Jl(Nl), Ju(Nu), Ncol(N), Nrow(N)
+  REAL(SP), INTENT(IN) :: A(Nelt)
+  REAL(SP), INTENT(OUT) :: Dinv(N), L(Nl), U(Nu)
   !     .. Local Scalars ..
   REAL(SP) :: temp
   INTEGER :: i, ibgn, icol, iend, indx, indx1, indx2, indxc1, indxc2, &

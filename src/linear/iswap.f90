@@ -1,5 +1,5 @@
 !** ISWAP
-SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
+PURE SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   !> Interchange two vectors.
   !***
   ! **Library:**   SLATEC (BLAS)
@@ -48,8 +48,8 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Incx, Incy, N
-  INTEGER :: Ix(N), Iy(N)
+  INTEGER, INTENT(IN) :: Incx, Incy, N
+  INTEGER, INTENT(INOUT) :: Ix(N), Iy(N)
   INTEGER :: i, iix, iiy, m, mp1, ns, itemp1, itemp2, itemp3
   !* FIRST EXECUTABLE STATEMENT  ISWAP
   IF( N<=0 ) RETURN
@@ -111,5 +111,6 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
     Iy(i+1) = itemp2
     Iy(i+2) = itemp3
   END DO
+
   RETURN
 END SUBROUTINE ISWAP

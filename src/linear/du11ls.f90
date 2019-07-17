@@ -1,5 +1,5 @@
 !** DU11LS
-SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
+PURE SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !> Subsidiary to DLLSIA
   !***
   ! **Library:**   SLATEC
@@ -15,8 +15,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !       This routine performs a QR factorization of A
   !       using Householder transformations. Row and
   !       column pivots are chosen to reduce the growth
-  !       of round-off and to help detect possible rank
-  !       deficiency.
+  !       of round-off and to help detect possible rank deficiency.
   !
   !***
   ! **See also:**  DLLSIA
@@ -32,11 +31,13 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : XERMSG
   USE blas, ONLY : DAXPY, DSWAP
-  INTEGER :: Mda, Mode, N, Np, Krank, Ksure, M
-  INTEGER :: Ic(N), Ir(M)
-  REAL(DP) :: A(Mda,N), Db(N), Eb(N), H(N), Ub(N), W(N)
+
+  INTEGER, INTENT(IN) :: Mda, Mode, N, Np, M
+  INTEGER, INTENT(OUT) :: Krank, Ksure
+  INTEGER, INTENT(OUT) :: Ic(N), Ir(M)
+  REAL(DP), INTENT(INOUT) :: A(Mda,N), Db(N), Ub(N)
+  REAL(DP), INTENT(OUT) :: Eb(N), H(N), W(N)
   INTEGER :: i, ii, im1, imin, is, j, jm1, jmax, jp1, kk, km1, kmi, kp1, kz, l, &
     lm1, mm, nmk
   REAL(DP) :: bb, r2, rmin, summ, t, temp, tn, tt
@@ -92,7 +93,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
         CALL ISWAP(1,Ic(i),1,Ic(kk),1)
         CALL DSWAP(M,A(1,i),1,A(1,kk),1)
       ELSE
-        CALL XERMSG('DU11LS','FIRST NP COLUMNS ARE LINEARLY DEPENDENT',8,0)
+        ! 'DU11LS : FIRST NP COLUMNS ARE LINEARLY DEPENDENT'
         Krank = i - 1
         RETURN
       END IF
@@ -184,8 +185,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     IF( j<=Krank ) GOTO 200
     GOTO 500
   ELSE
-    CALL XERMSG('DU11LS','FIRST NP COLUMNS ARE LINEARLY DEPENDENT',&
-      8,0)
+    ! 'DU11LS : FIRST NP COLUMNS ARE LINEARLY DEPENDENT'
     Krank = j - 1
     RETURN
   END IF
@@ -307,4 +307,5 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
       i = i - 1
     END DO
   END IF
+
 END SUBROUTINE DU11LS

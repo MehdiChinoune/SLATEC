@@ -1,5 +1,5 @@
 !** H12
-SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
+PURE SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !> Subsidiary to HFTI, LSEI and WNNLS
   !***
   ! **Library:**   SLATEC
@@ -48,10 +48,11 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
   USE blas, ONLY : SAXPY, SSWAP
-  INTEGER :: Ice, Icv, Iue, L1, Lpivot, M, Mode, Ncv
-  REAL(SP) :: C(Icv*Ncv+M*Ice), U(Iue,M), Up
+
+  INTEGER, INTENT(IN) :: Ice, Icv, Iue, L1, Lpivot, M, Mode, Ncv
+  REAL(SP), INTENT(INOUT) :: C(Icv*Ncv+M*Ice), U(Iue,M)
+  REAL(SP), INTENT(OUT) :: Up
   INTEGER :: i, i2, i3, i4, incr, j, kl1, kl2, klp, l1m1, mml1p2
   REAL(SP) :: b, cl, clinv, one, sm, ul1m1
   !* FIRST EXECUTABLE STATEMENT  H12
@@ -64,7 +65,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
     DO j = L1, M
       cl = MAX(ABS(U(1,j)),cl)
     END DO
-    IF( cl<=0 ) GOTO 100
+    IF( cl<=0 ) RETURN
     clinv = one/cl
     sm = (U(1,Lpivot)*clinv)**2
     DO j = L1, M
@@ -77,7 +78,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
     !            ****** APPLY THE TRANSFORMATION  I+U*(U**T)/B  TO C. ******
     !
   ELSEIF( cl<=0 ) THEN
-    GOTO 100
+    RETURN
   END IF
   IF( Ncv<=0 ) RETURN
   b = Up*U(1,Lpivot)
@@ -128,5 +129,6 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       END DO
     END IF
   END IF
-  100  RETURN
-  END SUBROUTINE H12
+
+  RETURN
+END SUBROUTINE H12

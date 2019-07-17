@@ -204,7 +204,7 @@ CONTAINS
         CALL DFILL(n,xiter,0._DP)
         !
         CALL DSJAC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,2*itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL DUTERR('DSJAC ',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -214,7 +214,7 @@ CONTAINS
         CALL DFILL(n,xiter,0._DP)
         !
         CALL DSGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL DUTERR('DSGS  ',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -224,7 +224,7 @@ CONTAINS
         CALL DFILL(n,xiter,0._DP)
         !
         CALL DSILUR(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL DUTERR('DSILUR',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -235,7 +235,7 @@ CONTAINS
           CALL DFILL(n,xiter,0._DP)
           !
           CALL DSDCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-            iunit,rwork,lenw,iwork,leniw)
+            rwork,lenw,iwork,leniw)
           !
           CALL DUTERR('DSDCG ',ierr,Kprint,nfail,Lun,iter,err)
         END IF
@@ -247,7 +247,7 @@ CONTAINS
           CALL DFILL(n,xiter,0._DP)
           !
           CALL DSICCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,&
-            ierr,iunit,rwork,lenw,iwork,leniw)
+            ierr,rwork,lenw,iwork,leniw)
           !
           CALL DUTERR('DSICCG',ierr,Kprint,nfail,Lun,iter,err)
         END IF
@@ -258,7 +258,7 @@ CONTAINS
         CALL DFILL(n,xiter,0._DP)
         !
         CALL DSDCGN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL DUTERR('DSDCGN',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -268,7 +268,7 @@ CONTAINS
         CALL DFILL(n,xiter,0._DP)
         !
         CALL DSLUCN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL DUTERR('DSLUCN',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -278,7 +278,7 @@ CONTAINS
         CALL DFILL(n,xiter,0._DP)
         !
         CALL DSDBCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL DUTERR('DSDBCG',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -288,7 +288,7 @@ CONTAINS
         CALL DFILL(n,xiter,0._DP)
         !
         CALL DSLUBC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL DUTERR('DSLUBC',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -298,7 +298,7 @@ CONTAINS
         CALL DFILL(n,xiter,0._DP)
         !
         CALL DSDCGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL DUTERR('DSDCGS',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -308,7 +308,7 @@ CONTAINS
         CALL DFILL(n,xiter,0._DP)
         !
         CALL DSLUCS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
-          iunit,rwork,lenw,iwork,leniw)
+          rwork,lenw,iwork,leniw)
         !
         CALL DUTERR('DSLUCS',ierr,Kprint,nfail,Lun,iter,err)
         !
@@ -319,7 +319,7 @@ CONTAINS
           CALL DFILL(n,xiter,0._DP)
           !
           CALL DSDOMN(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
-            err,ierr,iunit,rwork,lenw,iwork,leniw)
+            err,ierr,rwork,lenw,iwork,leniw)
           !
           CALL DUTERR('DSDOMN',ierr,Kprint,nfail,Lun,iter,err)
         END DO
@@ -331,7 +331,7 @@ CONTAINS
           CALL DFILL(n,xiter,0._DP)
           !
           CALL DSLUOM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
-            err,ierr,iunit,rwork,lenw,iwork,leniw)
+            err,ierr,rwork,lenw,iwork,leniw)
           !
           CALL DUTERR('DSLUOM',ierr,Kprint,nfail,Lun,iter,err)
         END DO
@@ -344,7 +344,7 @@ CONTAINS
           itolgm = 0
           !
           CALL DSDGMR(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
-            err,ierr,iunit,rwork,lenw,iwork,leniw)
+            err,ierr,rwork,lenw,iwork,leniw)
           !
           CALL DUTERR('DSDGMR',ierr,Kprint,nfail,Lun,iter,err)
         END DO
@@ -356,7 +356,7 @@ CONTAINS
           CALL DFILL(n,xiter,0._DP)
           !
           CALL DSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,tol,itmax,iter,&
-            err,ierr,iunit,rwork,lenw,iwork,leniw)
+            err,ierr,rwork,lenw,iwork,leniw)
           !
           CALL DUTERR('DSLUGM',ierr,Kprint,nfail,Lun,iter,err)
         END DO

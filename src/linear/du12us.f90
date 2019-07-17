@@ -1,5 +1,5 @@
 !** DU12US
-SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
+PURE SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !> Subsidiary to DULSIA
   !***
   ! **Library:**   SLATEC
@@ -28,11 +28,13 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
   USE blas, ONLY : DAXPY, DSWAP
-  INTEGER :: Krank, M, Mda, Mdb, Mode, N, Nb
-  INTEGER :: Ic(N), Ir(M)
-  REAL(DP) :: A(Mda,N), B(Mdb,Nb), H(M), Rnorm(Nb), W(4*M)
+
+  INTEGER, INTENT(IN) :: Krank, M, Mda, Mdb, Mode, N, Nb
+  INTEGER, INTENT(INOUT) :: Ic(N), Ir(M)
+  REAL(DP), INTENT(IN) :: H(M), W(4*M)
+  REAL(DP), INTENT(INOUT) :: A(Mda,N), B(Mdb,Nb)
+  REAL(DP), INTENT(OUT) :: Rnorm(Nb)
   INTEGER :: i, ij, ip1, j, jb, k, kp1, mmk
   REAL(DP) :: bb, tt
   !* FIRST EXECUTABLE STATEMENT  DU12US

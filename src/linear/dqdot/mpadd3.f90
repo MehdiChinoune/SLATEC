@@ -31,9 +31,11 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : b_com, t_com, r_com
-  INTEGER :: Med, S, Re
-  INTEGER :: X(30), Y(30)
+  USE MPCOM, ONLY : b_com, t_com, r_com, mxr_com
+
+  INTEGER, INTENT(IN) :: Med, S
+  INTEGER, INTENT(INOUT) :: Re
+  INTEGER, INTENT(IN) :: X(mxr_com), Y(mxr_com)
   INTEGER :: i, i2, i2p, j, c, ted
   !* FIRST EXECUTABLE STATEMENT  MPADD3
   ted = t_com + Med
@@ -132,4 +134,5 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
     r_com(i) = Y(i+2)
     i = i - 1
   END DO
+
 END SUBROUTINE MPADD3

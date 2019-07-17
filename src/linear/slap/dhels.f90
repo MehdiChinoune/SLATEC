@@ -1,5 +1,5 @@
 !** DHELS
-SUBROUTINE DHELS(A,Lda,N,Q,B)
+PURE SUBROUTINE DHELS(A,Lda,N,Q,B)
   !> Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
@@ -58,19 +58,18 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910502  Added C***FIRST EXECUTABLE STATEMENT line.  (FNF)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-
   USE blas, ONLY : DAXPY
   !     .. Scalar Arguments ..
-  INTEGER :: Lda, N
+  INTEGER, INTENT(IN) :: Lda, N
   !     .. Array Arguments ..
-  REAL(DP) :: A(Lda,*), B(*), Q(*)
+  REAL(DP), INTENT(IN) :: A(Lda,*), Q(*)
+  REAL(DP), INTENT(INOUT) :: B(*)
   !     .. Local Scalars ..
   REAL(DP) :: c, s, t, t1, t2
   INTEGER :: iq, k, kb, kp1

@@ -736,8 +736,7 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   !   891024  Changed references from VNORM to HVNRM.  (WRB)
   !   891024  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls, change Prologue
   !           comments to agree with DDEBDF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)

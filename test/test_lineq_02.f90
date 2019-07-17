@@ -81,7 +81,7 @@ CONTAINS
     !
     !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX.
     !
-    DO kcase = 1, 2
+    DO kcase = 1, 1 !2
       DO kprog = 1, 4
         !           SET VECTOR B TO ZERO.
         DO i = 1, n
@@ -262,7 +262,7 @@ CONTAINS
     !
     !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX.
     !
-    DO kcase = 1, 2
+    DO kcase = 1, 1 !2
       DO kprog = 1, 2
         !           SET VECTOR B TO ZERO.
         DO i = 1, n
@@ -420,8 +420,10 @@ CONTAINS
       (0._SP,-1._SP), (2._SP,0._SP), (0._SP,0._SP), (0._SP,0._SP), &
       (0._SP,0._SP), (0._SP,0._SP), (3._SP,0._SP), (0._SP,1._SP), &
       (0._SP,0._SP), (0._SP,0._SP), (0._SP,-1._SP), (4._SP,0._SP) ], [4,4] )
-    COMPLEX(SP), PARAMETER :: c(4) = [ (1._SP,1._SP), (0._SP,1._SP), (0._SP,-1._SP), (1._SP,0._SP) ]
-    COMPLEX(SP), PARAMETER :: b(4) = [ (3._SP,2._SP), (-1._SP,3._SP), (0._SP,-4._SP), (5._SP,0._SP) ]
+    COMPLEX(SP), PARAMETER :: c(4) = [ (1._SP,1._SP), (0._SP,1._SP), (0._SP,-1._SP), &
+      (1._SP,0._SP) ]
+    COMPLEX(SP), PARAMETER :: b(4) = [ (3._SP,2._SP), (-1._SP,3._SP), (0._SP,-4._SP), &
+      (5._SP,0._SP) ]
     CHARACTER(4), PARAMETER :: list(4) = [ 'POFS', 'POIR', 'NBFS', 'NBIR' ]
     !* FIRST EXECUTABLE STATEMENT  CQCK
     IF( Kprint>=3 ) WRITE (Lun,99001)
@@ -455,7 +457,7 @@ CONTAINS
     !
     !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX
     !
-    DO kcase = 1, 2
+    DO kcase = 1, 1 !2
       DO kprog = 1, 4
         !           FORM BT FROM B, AT FROM A, AND ABET FROM ABE.
         DO i = 1, n

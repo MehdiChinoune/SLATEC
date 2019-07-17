@@ -1,6 +1,6 @@
 !** DSOSEQ
-SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
-    Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
+PURE SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
+    Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
   !> Subsidiary to DSOS
   !***
   ! **Library:**   SLATEC
@@ -94,21 +94,22 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   USE service, ONLY : D1MACH, I1MACH
   !
   INTERFACE
-    REAL(DP) FUNCTION FNC(X,K)
+    REAL(DP) PURE FUNCTION FNC(X,K)
       IMPORT DP
-      INTEGER :: K
-      REAL(DP) :: X(:)
+      INTEGER, INTENT(IN) :: K
+      REAL(DP), INTENT(IN) :: X(:)
     END FUNCTION FNC
   END INTERFACE
-  INTEGER :: Iflag, Iprint, Mxit, N, Nc, Ncjs, Nsri, Nsrrc, Is(N)
-  REAL(DP) :: Atolx, Fmax, Rtolx, Tolf, C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), &
-    X(N), Y(N)
+  INTEGER, INTENT(IN) :: N, Nc, Ncjs, Nsri, Nsrrc
+  INTEGER, INTENT(INOUT) :: Mxit, Is(N)
+  INTEGER, INTENT(OUT) :: Iflag
+  REAL(DP), INTENT(IN) :: Atolx, Rtolx, Tolf
+  REAL(DP), INTENT(INOUT) :: C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), X(N), Y(N)
+  REAL(DP), INTENT(OUT) :: Fmax
   INTEGER :: ic, icr, isj, isv, it, item, itry, j, jk, js, k, kd, kj, kk, km1, &
-    kn, ksv, l, loun, ls, m, mit, mm, np1
-  REAL(DP) :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, &
-    pmax, re, sruro, &
-    test, uro, xnorm, yj, yn1, &
-    yn2, yn3, ynorm, yns, zero
+    kn, ksv, l, loun, ls, m, mit, np1
+  REAL(DP) :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, pmax, re, &
+    sruro, test, uro, xnorm, yj, yn1, yn2, yn3, ynorm, yns, zero
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 430
   !        BEGIN BLOCK PERMITTING ...EXITS TO 410
@@ -343,17 +344,6 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         xnorm = MAX(xnorm,ABS(X(js)))
       END DO
       !
-      !
-      !                       PRINT INTERMEDIATE SOLUTION ITERATES AND
-      !                       RESIDUAL NORM IF DESIRED
-      !
-      IF( Iprint==(-1) ) THEN
-        mm = m - 1
-        WRITE (loun,99001) Fmax, mm, (X(j),j=1,N)
-        99001 FORMAT ('0RESIDUAL NORM =',D9.2,/1X,'SOLUTION ITERATE (',I3,')',&
-          /(1X,5D26.14))
-      END IF
-      !
       !                       TEST FOR CONVERGENCE TO A SOLUTION (RELATIVE
       !                       AND/OR ABSOLUTE ERROR COMPARISON ON SUCCESSIVE
       !                       APPROXIMATIONS OF EACH SOLUTION VARIABLE)
@@ -496,4 +486,5 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !
   !
   400  Mxit = m
+
 END SUBROUTINE DSOSEQ

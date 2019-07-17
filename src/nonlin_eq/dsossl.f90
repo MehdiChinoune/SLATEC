@@ -1,5 +1,5 @@
 !** DSOSSL
-SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
+PURE SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
   !> Subsidiary to DSOS
   !***
   ! **Library:**   SLATEC
@@ -36,8 +36,9 @@ SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
 
   !
   !
-  INTEGER :: K, L, M, N
-  REAL(DP) :: B(:), C(:), X(:)
+  INTEGER, INTENT(IN) :: K, L, M, N
+  REAL(DP), INTENT(IN) :: B(:), C(:)
+  REAL(DP), INTENT(INOUT) :: X(:)
   INTEGER :: j, j1, k1, k2, k3, km1, kn, lk
   REAL(DP) :: xmax
   !

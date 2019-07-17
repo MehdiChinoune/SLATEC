@@ -1,10 +1,9 @@
 !** SSLUBC
-SUBROUTINE SSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE SSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
+    Rwork,Lenw,Iwork,Leniw)
   !> Incomplete LU BiConjugate Gradient Sparse Ax=b Solver.
-  !            Routine to solve a linear system  Ax = b  using the
-  !            BiConjugate Gradient method with Incomplete LU
-  !            decomposition preconditioning.
+  !  Routine to solve a linear system  Ax = b  using the BiConjugate Gradient
+  !  method with Incomplete LU decomposition preconditioning.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -224,8 +223,7 @@ SUBROUTINE SSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
@@ -235,11 +233,14 @@ SUBROUTINE SSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(SP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(SP), INTENT(INOUT) :: Tol
+  REAL(SP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  REAL(SP), INTENT(IN) :: B(N)
+  REAL(SP), INTENT(INOUT) :: A(Nelt), Rwork(Lenw), X(N)
   !     .. Local Scalars ..
   INTEGER :: icol, j, jbgn, jend, locdin, locdz, locil, lociu, lociw, &
     locjl, locju, locl, locnc, locnr, locp, locpp, locr, &
@@ -317,7 +318,7 @@ SUBROUTINE SSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         Perform the incomplete LU preconditioned
   !         BiConjugate Gradient algorithm.
   CALL SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSMTV,SSLUI,SSLUTI,Itol,Tol,Itmax,&
-    Iter,Err,Ierr,Iunit,Rwork(locr),Rwork(locz),Rwork(locp),&
+    Iter,Ierr,Rwork(locr),Rwork(locz),Rwork(locp),&
     Rwork(locrr),Rwork(loczz),Rwork(locpp),Rwork(locdz),Rwork,Iwork)
   !------------- LAST LINE OF SSLUBC FOLLOWS ----------------------------
 END SUBROUTINE SSLUBC

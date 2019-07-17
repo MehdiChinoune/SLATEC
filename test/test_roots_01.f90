@@ -209,12 +209,12 @@ CONTAINS
     99008 FORMAT (/' IFLAG test FAILED.  IFLAG =',I2,', but should ','have been',I2)
   END SUBROUTINE FZTEST
   ! Single precision sinus
-  REAL(SP) FUNCTION SIN_SP(X)
+  REAL(SP) PURE FUNCTION SIN_SP(X)
     REAL(SP), INTENT(IN) :: X
     SIN_SP = SIN(X)
   END FUNCTION SIN_SP
   ! Single precision tangent
-  REAL(SP) FUNCTION TAN_SP(X)
+  REAL(SP) PURE FUNCTION TAN_SP(X)
     REAL(SP), INTENT(IN) :: X
     TAN_SP = TAN(X)
   END FUNCTION TAN_SP
@@ -328,12 +328,12 @@ CONTAINS
     99008 FORMAT (/' IFLAG test FAILED.  IFLAG =',I2,', but should ','have been',I2)
   END SUBROUTINE DFZTST
   ! Double precision sinus
-  REAL(DP) FUNCTION SIN_DP(X)
+  REAL(DP) PURE FUNCTION SIN_DP(X)
     REAL(DP), INTENT(IN) :: X
     SIN_DP = SIN(X)
   END FUNCTION SIN_DP
   ! Double precision tangent
-  REAL(DP) FUNCTION TAN_DP(X)
+  REAL(DP) PURE FUNCTION TAN_DP(X)
     REAL(DP), INTENT(IN) :: X
     TAN_DP = TAN(X)
   END FUNCTION TAN_DP
@@ -358,7 +358,7 @@ CONTAINS
     !   911010  Code reworked and simplified.  (RWC and WRB)
     USE slatec, ONLY : R1MACH, RPQR79, num_xer, control_xer
     USE common_mod, ONLY : PASS
-    REAL(SP) :: beta, tol, work(63)
+    REAL(SP) :: beta, tol
     INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun
     INTEGER :: itmp(7)
     COMPLEX(SP) :: root(7)
@@ -384,7 +384,7 @@ CONTAINS
       beta = 2._SP*beta
     END DO
     !
-    CALL RPQR79(7,coef,root,ierr,work)
+    CALL RPQR79(7,coef,root,ierr)
     !
     !     Check to see if test passed.
     !
@@ -427,41 +427,41 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
-    fatal = .FALSE.
-    num_xer = 0
-    IF( Kprint>=3 ) WRITE (Lun,99006)
-    99006 FORMAT (//' TRIGGER 2 ERROR CONDITIONS'//)
+!    kontrl = control_xer
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    fatal = .FALSE.
+!    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99006)
+!    99006 FORMAT (//' TRIGGER 2 ERROR CONDITIONS'//)
     !
     !     CALL RPQR79 with 0 degree polynomial.
     !
-    CALL RPQR79(0,coef,root,ierr,work)
-    IF( num_xer/=3 ) fatal = .TRUE.
-    num_xer = 0
+!    CALL RPQR79(0,coef,root,ierr)
+!    IF( num_xer/=3 ) fatal = .TRUE.
+!    num_xer = 0
     !
     !     CALL RPQR79 with zero leading coefficient.
     !
-    coef(1) = 0._SP
-    CALL RPQR79(2,coef,root,ierr,work)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    coef(1) = 0._SP
+!    CALL RPQR79(2,coef,root,ierr)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    control_xer = kontrl
-    IF( fatal ) THEN
-      Ipass = 0
-      IF( Kprint>=2 ) THEN
-        WRITE (Lun,99007)
-        99007 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      END IF
-    ELSEIF( Kprint>=3 ) THEN
-      WRITE (Lun,99008)
-      99008 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    END IF
+!    control_xer = kontrl
+!    IF( fatal ) THEN
+!      Ipass = 0
+!      IF( Kprint>=2 ) THEN
+!        WRITE (Lun,99007)
+!        99007 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+!      END IF
+!    ELSEIF( Kprint>=3 ) THEN
+!      WRITE (Lun,99008)
+!      99008 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+!    END IF
     !
     IF( Ipass==1 .AND. Kprint>1 ) WRITE (Lun,99009)
     99009 FORMAT (/' **************RPQR79 PASSED ALL TESTS**************')
@@ -491,12 +491,12 @@ CONTAINS
     INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun
     REAL(SP) :: tol
     INTEGER :: itest(2), itmp(7)
-    REAL(SP) :: work(144)
     COMPLEX(SP) :: root(8)
     LOGICAL :: fatal
     !
-    COMPLEX(SP), PARAMETER :: coeff1(9) = [ (1._SP,0._SP), (-7._SP,-2._SP), (8._SP,6._SP), &
-      (28._SP,8._SP), (-49._SP,-24._SP), (7._SP,2._SP), (-8._SP,-6._SP), (-28._SP,-8._SP), (48._SP,24._SP) ]
+    COMPLEX(SP), PARAMETER :: coeff1(9) = [ (1._SP,0._SP), (-7._SP,-2._SP),&
+      (8._SP,6._SP), (28._SP,8._SP), (-49._SP,-24._SP), (7._SP,2._SP),&
+      (-8._SP,-6._SP), (-28._SP,-8._SP), (48._SP,24._SP) ]
     COMPLEX(SP), PARAMETER :: coeff2(2) = [ (1._SP,1._SP), (1._SP,3._SP) ]
     COMPLEX(SP), PARAMETER :: coeff3(2) = [ (0._SP,0._SP), (1._SP,3._SP) ]
     COMPLEX(SP), PARAMETER :: chk1(8) = [ (4._SP,2._SP), (3._SP,0._SP), (-2._SP,0._SP), &
@@ -511,7 +511,7 @@ CONTAINS
     !
     !     First test.
     !
-    CALL CPQR79(8,coeff1,root,ierr,work)
+    CALL CPQR79(8,coeff1,root,ierr)
     !
     !     Check to see if test passed.
     !
@@ -549,7 +549,7 @@ CONTAINS
     !
     !     Set up next problem.
     !
-    CALL CPQR79(1,coeff2,root,ierr,work)
+    CALL CPQR79(1,coeff2,root,ierr)
     !
     !     Check to see if test passed.
     !
@@ -570,40 +570,40 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
-    fatal = .FALSE.
-    num_xer = 0
-    IF( Kprint>=3 ) WRITE (Lun,99003)
-    99003 FORMAT (//' TRIGGER 2 ERROR CONDITIONS'//)
+!    kontrl = control_xer
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    fatal = .FALSE.
+!    num_xer = 0
+!    IF( Kprint>=3 ) WRITE (Lun,99003)
+!    99003 FORMAT (//' TRIGGER 2 ERROR CONDITIONS'//)
     !
     !     CALL CPQR79 with 0 degree polynomial.
     !
-    CALL CPQR79(0,coeff2,root,ierr,work)
-    IF( num_xer/=3 ) fatal = .TRUE.
-    num_xer = 0
+!    CALL CPQR79(0,coeff2,root,ierr)
+!    IF( num_xer/=3 ) fatal = .TRUE.
+!    num_xer = 0
     !
     !     CALL CPQR79 with zero leading coefficient.
     !
-    CALL CPQR79(2,coeff3,root,ierr,work)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    CALL CPQR79(2,coeff3,root,ierr)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    control_xer = kontrl
-    IF( fatal ) THEN
-      Ipass = 0
-      IF( Kprint>=2 ) THEN
-        WRITE (Lun,99004)
-        99004 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      END IF
-    ELSEIF( Kprint>=3 ) THEN
-      WRITE (Lun,99005)
-      99005 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
-    END IF
+!    control_xer = kontrl
+!    IF( fatal ) THEN
+!      Ipass = 0
+!      IF( Kprint>=2 ) THEN
+!        WRITE (Lun,99004)
+!        99004 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+!      END IF
+!    ELSEIF( Kprint>=3 ) THEN
+!      WRITE (Lun,99005)
+!      99005 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+!    END IF
     !
     !     See if all tests passed.
     !

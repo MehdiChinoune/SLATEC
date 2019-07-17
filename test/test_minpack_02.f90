@@ -112,7 +112,7 @@ CONTAINS
       D20.5/' RETURNED VALUE OF INFO AND RESIDUAL NORM',I5,D20.5/)
   END SUBROUTINE DNSQQK
   !** DSOSFN
-  REAL(DP) FUNCTION DSOSFN(X,K)
+  REAL(DP) PURE FUNCTION DSOSFN(X,K)
     !> Function evaluator for DSOS quick check.
     !***
     ! **Library:**   SLATEC
@@ -134,8 +134,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER :: K
-    REAL(DP) :: X(:)
+    INTEGER, INTENT(IN) :: K
+    REAL(DP), INTENT(IN) :: X(:)
     !* FIRST EXECUTABLE STATEMENT  DSOSFN
     IF( K==1 ) THEN
       DSOSFN = 1._DP - X(1)
@@ -217,20 +217,19 @@ CONTAINS
     !
     !     Test improper input parameters.
     !
-    lwa = 15
-    iflag = 0
-    x(1) = -1.2_DP
-    x(2) = 1._DP
-    CALL DSOS(DSOSFN,n,x,rer,aer,tolf,iflag,wa,lwa,iw,liw)
-    icnt = 2
-    itest(icnt) = 0
-    IF( iflag==9 ) itest(icnt) = 1
-    IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) )&
-      CALL PASS(Lun,icnt,itest(icnt))
+!    lwa = 15
+!    iflag = 0
+!    x(1) = -1.2_DP
+!    x(2) = 1._DP
+!    CALL DSOS(DSOSFN,n,x,rer,aer,tolf,iflag,wa,lwa,iw,liw)
+!    icnt = 2
+!    itest(icnt) = 0
+!    IF( iflag==9 ) itest(icnt) = 1
+!    IF( Kprint>=2 .OR. (Kprint==1 .AND. itest(icnt)/=1) ) CALL PASS(Lun,icnt,itest(icnt))
     !
     !     Set IPASS.
     !
-    Ipass = itest(1)*itest(2)
+    Ipass = itest(1)
     IF( Kprint>=1 .AND. Ipass/=1 ) WRITE (Lun,99003)
     99003 FORMAT (/' **********WARNING -- DSOS FAILED SOME TESTS**********')
     IF( Kprint>=2 .AND. Ipass==1 ) WRITE (Lun,99004)

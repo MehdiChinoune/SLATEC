@@ -1,7 +1,7 @@
 !** DPIGMR
-SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
-    MSOLVE,Nmsl,Z,V,Hes,Q,Lgmr,Rpar,Ipar,Wk,Dl,Rhol,Nrmax,&
-    Bnrm,X,Xl,Itol,Tol,Nelt,Ia,Ja,A,Isym,Iunit,Iflag,Err)
+PURE SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
+    MSOLVE,Z,V,Hes,Q,Lgmr,Rpar,Ipar,Wk,Dl,Rhol,Nrmax,&
+    Bnrm,X,Xl,Itol,Tol,Nelt,Ia,Ja,A,Isym,Iflag)
   !> Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
@@ -209,36 +209,41 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910502  Removed MATVEC and MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
   USE blas, ONLY : DAXPY
+  USE DSLBLK, ONLY : soln_com
+
   INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+    PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
-      INTEGER :: N, Iwork(*)
-      REAL(DP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
-    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER, INTENT(IN) :: N, Iwork(*)
+      REAL(DP), INTENT(IN) :: R(N), Rwork(*)
+      REAL(DP), INTENT(OUT) :: Z(N)
+    END SUBROUTINE MSOLVE
+    PURE SUBROUTINE MATVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
       IMPORT DP
-      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(DP) :: X(N), R(N), A(Nelt)
-    END SUBROUTINE
+      INTEGER, INTENT(IN) :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(DP), INTENT(IN) :: X(N), A(Nelt)
+      REAL(DP), INTENT(OUT) :: Y(N)
+    END SUBROUTINE MATVEC
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(DP) :: Bnrm, Err, Rhol, Tol
-  INTEGER :: Iflag, Isym, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, &
-    Maxlp1, N, Nelt, Nmsl, Nrmax, Nrsts
+  INTEGER, INTENT(IN) :: Isym, Itol, Jpre, Jscal, Kmp, Maxl, Maxlp1, N, Nelt, Nrmax, Nrsts
+  INTEGER, INTENT(OUT) :: Iflag, Lgmr
+  REAL(DP), INTENT(IN) :: Bnrm, Tol
+  REAL(DP), INTENT(OUT) :: Rhol
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), Dl(N), Hes(Maxlp1,Maxl), Q(2*Maxl), R0(N), &
-    Rpar(*), Sr(N), Sz(N), V(N,Maxlp1), Wk(N), X(N), Xl(N), Z(N)
-  INTEGER :: Ia(Nelt), Ipar(*), Ja(Nelt)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Ipar(*), Ja(Nelt)
+  REAL(DP), INTENT(IN) :: A(Nelt), Rpar(*), Sr(N), Sz(N), X(N)
+  REAL(DP), INTENT(INOUT) :: Dl(N), R0(N), Wk(N), Xl(N)
+  REAL(DP), INTENT(OUT) :: Hes(Maxlp1,Maxl), Q(2*Maxl), V(N,Maxlp1), Z(N)
   !     .. Local Scalars ..
-  REAL(DP) :: c, dlnrm, prod, r0nrm, rho, s, snormw, tem
+  REAL(DP) :: c, dlnrm, prod, r0nrm, rho, s, snormw, tem, solnrm
   INTEGER :: i, i2, info, ip1, iter, itmax, j, k, ll, llp1
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
@@ -252,7 +257,6 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !
   Iflag = 0
   Lgmr = 0
-  Nmsl = 0
   !         Load ITMAX, the maximum number of iterations.
   itmax = (Nrmax+1)*Maxl
   !   -------------------------------------------------------------------
@@ -263,7 +267,6 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   IF( (Jpre<0) .AND. (Nrsts==0) ) THEN
     Wk(1:N) = R0(1:N)
     CALL MSOLVE(N,Wk,R0,Rpar,Ipar)
-    Nmsl = Nmsl + 1
   END IF
   IF( ((Jscal==2) .OR. (Jscal==3)) .AND. (Nrsts==0) ) THEN
     DO i = 1, N
@@ -276,11 +279,20 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   END IF
   r0nrm = NORM2(V(1:N,1))
   iter = Nrsts*Maxl
+  IF( Itol==11 ) THEN
+    Xl(1:N) = X(1:N)
+    IF( (Jscal==0) .OR. (Jscal==2) ) THEN
+      solnrm = NORM2( soln_com(1:N) )
+      Wk(1:N) = Xl(1:N) - soln_com(1:N)
+    ELSE
+      solnrm = NORM2( Sz(1:N)*soln_com(1:N) )
+    END IF
+  END IF
   !
   !         Call stopping routine ISDGMR.
   !
-  IF( ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,V(1,1),Wk,Rpar,Ipar,r0nrm, &
-    Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) RETURN
+  IF( ISDGMR(N,X,Xl,MSOLVE,Itol,Tol,iter,V(1,1),Wk,Rpar,Ipar,r0nrm, &
+    Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre,solnrm)/=0 ) RETURN
   tem = 1._DP/r0nrm
   V(1:N,1) = tem*V(1:N,1)
   !
@@ -316,7 +328,6 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     END IF
     IF( Jpre>0 ) THEN
       CALL MSOLVE(N,Wk,Z,Rpar,Ipar)
-      Nmsl = Nmsl + 1
       CALL MATVEC(N,Z,V(1,ll+1),Nelt,Ia,Ja,A,Isym)
     ELSE
       CALL MATVEC(N,Wk,V(1,ll+1),Nelt,Ia,Ja,A,Isym)
@@ -324,7 +335,6 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     IF( Jpre<0 ) THEN
       Wk(1:N) = V(1:N,ll+1)
       CALL MSOLVE(N,Wk,V(1,ll+1),Rpar,Ipar)
-      Nmsl = Nmsl + 1
     END IF
     IF( (Jscal==2) .OR. (Jscal==3) ) THEN
       DO i = 1, N
@@ -371,8 +381,9 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !         If failed and LL < MAXL, then continue iterating.
     !   -------------------------------------------------------------------
     iter = Nrsts*Maxl + Lgmr
-    IF( ISDGMR(N,X,Xl,MSOLVE,Nmsl,Itol,Tol,iter,Err,Iunit,Dl,Wk,Rpar,Ipar,Rhol, &
-      Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre)/=0 ) GOTO 200
+    IF( Itol==11 .AND. (Jscal==0) .OR. (Jscal==2) ) Wk(1:N) = Xl(1:N) - soln_com(1:N)
+    IF( ISDGMR(N,X,Xl,MSOLVE,Itol,Tol,iter,Dl,Wk,Rpar,Ipar,Rhol, &
+      Bnrm,Sz,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,snormw,prod,r0nrm,Hes,Jpre,solnrm)/=0 ) GOTO 200
     IF( ll==Maxl ) EXIT
     !   -------------------------------------------------------------------
     !         Rescale so that the norm of V(1,LL+1) is one.
@@ -430,7 +441,6 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   IF( Jpre>0 ) THEN
     Wk(1:N) = Z(1:N)
     CALL MSOLVE(N,Wk,Z,Rpar,Ipar)
-    Nmsl = Nmsl + 1
   END IF
   !------------- LAST LINE OF DPIGMR FOLLOWS ----------------------------
 END SUBROUTINE DPIGMR

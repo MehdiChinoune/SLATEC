@@ -1,5 +1,5 @@
 !** DGECO
-SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
+PURE SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !> Factor a matrix using Gaussian elimination and estimate
   !            the condition number of the matrix.
   !***
@@ -77,14 +77,14 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : DAXPY
 
-  INTEGER :: Lda, N, Ipvt(N)
-  REAL(DP) :: A(Lda,N), Z(N)
-  REAL(DP) :: Rcond
+  INTEGER, INTENT(IN) :: Lda, N
+  INTEGER, INTENT(OUT) :: Ipvt(N)
+  REAL(DP), INTENT(INOUT) :: A(Lda,N)
+  REAL(DP), INTENT(OUT) :: Rcond, Z(N)
   !
   REAL(DP) :: ek, t, wk, wkm
   REAL(DP) :: anorm, s, sm, ynorm
@@ -211,4 +211,5 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   IF( anorm/=0._DP ) Rcond = ynorm/anorm
   IF( anorm==0._DP ) Rcond = 0._DP
+
 END SUBROUTINE DGECO

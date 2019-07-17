@@ -34,9 +34,11 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  USE MPCOM, ONLY : b_com, lun_com, m_com, t_com, r_com
-  INTEGER :: Iy, Trunc
-  INTEGER :: X(30), Z(30)
+  USE MPCOM, ONLY : b_com, lun_com, m_com, t_com, r_com, mxr_com
+
+  INTEGER, INTENT(IN) :: Iy, Trunc
+  INTEGER, INTENT(IN) :: X(mxr_com)
+  INTEGER, INTENT(INOUT) :: Z(mxr_com)
   INTEGER :: i, ij, is, ix, j, j1, j2, re, rs, c, c1, c2, ri, t1, t3, t4
   !* FIRST EXECUTABLE STATEMENT  MPMUL2
   rs = X(1)
@@ -53,7 +55,6 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
         Z(2) = X(2) + 1
         RETURN
       ELSE
-        CALL MPCHK(1,4)
         WRITE (lun_com,99001)
         99001 FORMAT (' *** OVERFLOW OCCURRED IN MPMUL2 ***')
         CALL MPOVFL(Z)
@@ -128,9 +129,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   300  CALL MPNZR(rs,re,Z,Trunc)
   RETURN
   ! CAN ONLY GET HERE IF INTEGER OVERFLOW OCCURRED
-  400  CALL MPCHK(1,4)
-  WRITE (lun_com,99002)
-  99002 FORMAT (' *** INTEGER OVERFLOW IN MPMUL2, b_com TOO LARGE ***')
-  CALL MPERR
+  400 ERROR STOP ' *** INTEGER OVERFLOW IN MPMUL2, b_com TOO LARGE ***'
   GOTO 100
+
 END SUBROUTINE MPMUL2

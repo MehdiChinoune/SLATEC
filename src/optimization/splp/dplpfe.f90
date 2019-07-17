@@ -1,5 +1,5 @@
 !** DPLPFE
-SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
+PURE SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Erdnrm,Eps,Gg,Dulnrm,Dirnrm,Amat,Basmat,Csc,Wr,&
     Ww,Bl,Bu,Rz,Rg,Colnrm,Duals,Found)
   !> Subsidiary to DSPLP
@@ -37,16 +37,19 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER :: Ienter, Lbm, Lmx, Mrelas, Nvars
-  REAL(DP) :: Dirnrm, Dulnrm, Eps, Erdnrm, Gg
-  LOGICAL :: Found
-  INTEGER :: Ibasis(Nvars+Mrelas), Imat(Lmx), Ibrc(Lbm,2), Ipr(2*Mrelas), &
+  INTEGER, INTENT(IN) :: Lbm, Lmx, Mrelas, Nvars
+  INTEGER, INTENT(OUT) :: Ienter
+  REAL(DP), INTENT(IN) :: Dulnrm, Eps, Erdnrm, Gg
+  REAL(DP), INTENT(OUT) :: Dirnrm
+  LOGICAL, INTENT(OUT) :: Found
+  INTEGER, INTENT(IN) :: Ibasis(Nvars+Mrelas), Imat(Lmx), Ibrc(Lbm,2), &
     Iwr(8*Mrelas), Ind(Nvars+Mrelas), Ibb(Nvars+Mrelas)
-  REAL(DP) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Wr(Mrelas), Ww(Mrelas), &
-    Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), &
-    Colnrm(Nvars), Duals(Nvars+Mrelas)
+  INTEGER, INTENT(INOUT) :: Ipr(2*Mrelas)
+  REAL(DP), INTENT(IN) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Bl(Nvars+Mrelas), &
+    Bu(Nvars+Mrelas), Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Colnrm(Nvars)
+  REAL(DP), INTENT(OUT) :: Wr(Mrelas), Ww(Mrelas), Duals(Nvars+Mrelas)
   REAL(DP) :: cnorm, one, ratio, rcost, rmax, zero
-  INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, lpg, n20002, n20050
+  INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, lpg, n20002, n20050
   LOGICAL :: trans
   !* FIRST EXECUTABLE STATEMENT  DPLPFE
   lpg = Lmx - (Nvars+4)
@@ -107,10 +110,10 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       ELSE
         ilow = Nvars + 5
       END IF
-      il1 = IDLOC(ilow,Amat,Imat)
+      il1 = IDLOC(ilow,Imat)
       IF( il1>=Lmx-1 ) THEN
         ilow = ilow + 2
-        il1 = IDLOC(ilow,Amat,Imat)
+        il1 = IDLOC(ilow,Imat)
       END IF
       ipage = ABS(Imat(Lmx-1))
       ihi = Imat(j+4) - (ilow-il1)
@@ -121,9 +124,6 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
           Ww(Imat(i)) = Amat(i)*Csc(j)
         END DO
         IF( ihi<=Lmx-2 ) EXIT
-        ipage = ipage + 1
-        key = 1
-        CALL DPRWPG(key,ipage,lpg,Amat,Imat)
         il1 = Nvars + 5
         ihi = ihi - lpg
       END DO
@@ -154,4 +154,5 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     !     ADD-DROP (EXCHANGE) STEP, LA05CD( ).
     Duals(1:Mrelas) = Wr(1:Mrelas)
   END IF
+
 END SUBROUTINE DPLPFE

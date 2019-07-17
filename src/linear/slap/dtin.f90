@@ -1,8 +1,8 @@
 !** DTIN
 SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !> Read in SLAP Triad Format Linear System.
-  !            Routine to read in a SLAP Triad format matrix and right
-  !            hand side and solution to the system, if known.
+  !  Routine to read in a SLAP Triad format matrix and right
+  !  hand side and solution to the system, if known.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -127,8 +127,7 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
@@ -136,10 +135,12 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: Isym, Iunit, Job, N, Nelt
+  INTEGER, INTENT(IN) :: Iunit
+  INTEGER, INTENT(INOUT) :: Job
+  INTEGER, INTENT(OUT) :: Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), Rhs(N), Soln(N)
-  INTEGER :: Ia(Nelt), Ja(Nelt)
+  INTEGER, INTENT(OUT) :: Ia(:), Ja(:)
+  REAL(DP), INTENT(OUT) :: A(:), Rhs(:), Soln(:)
   !     .. Local Scalars ..
   INTEGER :: i, irhs, isoln, jobret, neltmx
   !     .. Intrinsic Functions ..

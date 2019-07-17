@@ -312,8 +312,7 @@ REAL(DP) ELEMENTAL FUNCTION DRD(X,Y,Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900510  Modify calls to XERMSG to put in standard form.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH

@@ -933,19 +933,19 @@ CONTAINS
     !
     INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
     REAL(DP), PARAMETER ::  x(N,NTEST) = RESHAPE( [ &
-      36_DP, 54_DP, -1_DP, 29_DP, 1_DP, 80_DP, 98_DP, 99_DP, 55_DP, &
-      1_DP, 2_DP, 3_DP, 4_DP, 5_DP, 6_DP, 7_DP, 8_DP, 9_DP, &
-      -9_DP, -8_DP, -7_DP, -6_DP, -5_DP, -4_DP, -3_DP, -2_DP, -1_DP, &
-      36_DP, 54_DP, -1_DP, 29_DP, 1_DP, 80_DP, 98_DP, 99_DP, 55_DP ], [N,NTEST] )
+      36._DP, 54._DP, -1._DP, 29._DP, 1._DP, 80._DP, 98._DP, 99._DP, 55._DP, &
+      1._DP, 2._DP, 3._DP, 4._DP, 5._DP, 6._DP, 7._DP, 8._DP, 9._DP, &
+      -9._DP, -8._DP, -7._DP, -6._DP, -5._DP, -4._DP, -3._DP, -2._DP, -1._DP, &
+      36._DP, 54._DP, -1._DP, 29._DP, 1._DP, 80._DP, 98._DP, 99._DP, 55._DP ], [N,NTEST] )
     INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 3, 5, 4, 1, 2, 9, 6, 7, 8, &
       9, 8, 7, 6, 5, 4, 3, 2, 1, &
       9, 8, 7, 6, 5, 4, 3, 2, 1, &
       3, 5, 4, 1, 2, 9, 6, 7, 8 ], [N,NTEST] )
     REAL(DP), PARAMETER ::  xs(N,NTEST) = RESHAPE( [ &
-      -1_DP, 1_DP, 29_DP, 36_DP, 54_DP, 55_DP, 80_DP, 98_DP, 99_DP, &
-      9_DP, 8_DP, 7_DP, 6_DP, 5_DP, 4_DP, 3_DP, 2_DP, 1_DP, &
-      -1_DP, -2_DP, -3_DP, -4_DP, -5_DP, -6_DP, -7_DP, -8_DP, -9_DP, &
-     -1_DP, 1_DP, 29_DP, 36_DP, 54_DP, 55_DP, 80_DP, 98_DP, 99_DP ], [N,NTEST] )
+      -1._DP, 1._DP, 29._DP, 36._DP, 54._DP, 55._DP, 80._DP, 98._DP, 99._DP, &
+      9._DP, 8._DP, 7._DP, 6._DP, 5._DP, 4._DP, 3._DP, 2._DP, 1._DP, &
+      -1._DP, -2._DP, -3._DP, -4._DP, -5._DP, -6._DP, -7._DP, -8._DP, -9._DP, &
+     -1._DP, 1._DP, 29._DP, 36._DP, 54._DP, 55._DP, 80._DP, 98._DP, 99._DP ], [N,NTEST] )
     !
     !* FIRST EXECUTABLE STATEMENT  DSRTQC
     IF( Kprint>=2 ) THEN

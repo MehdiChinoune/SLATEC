@@ -73,8 +73,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
   INTEGER :: Ls, M, N

@@ -1,11 +1,10 @@
 !** DSICS
-SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
+PURE SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !> Incompl. Cholesky Decomposition Preconditioner SLAP Set Up.
-  !            Routine to generate the Incomplete Cholesky decomposition,
-  !            L*D*L-trans, of a symmetric positive definite matrix, A,
-  !            which is stored in SLAP Column format.  The unit lower
-  !            triangular matrix L is stored by rows, and the inverse of
-  !            the diagonal matrix D is stored.
+  !  Routine to generate the Incomplete Cholesky decomposition, L*D*L-trans,
+  !  of a symmetric positive definite matrix, A, which is stored in SLAP Column format.
+  !  The unit lower triangular matrix L is stored by rows, and the inverse of the
+  !  diagonal matrix D is stored.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -156,20 +155,23 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   900805  Changed XERRWV calls to calls to XERMSG.  (RWC)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  USE service, ONLY : XERMSG
+
   !     .. Scalar Arguments ..
-  INTEGER :: Isym, Iwarn, N, Nel, Nelt
+  INTEGER, INTENT(IN) :: Isym, N, Nelt
+  INTEGER, INTENT(INOUT) :: Nel
+  INTEGER, INTENT(OUT) :: Iwarn
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), D(N), El(Nel), R(N)
-  INTEGER :: Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Ja(Nelt)
+  INTEGER, INTENT(OUT) :: Iel(Nel), Jel(Nel)
+  REAL(DP), INTENT(INOUT) :: A(Nelt)
+  REAL(DP), INTENT(OUT) :: D(N), El(Nel), R(N)
   !     .. Local Scalars ..
   REAL(DP) :: eltmp
   INTEGER :: i, ibgn, ic, icbgn, icend, icol, iend, ir, irbgn, irend, &
@@ -325,8 +327,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
           !
           !         If we get here, we have real problems...
           WRITE (xern1,'(I8)') irow
-          CALL XERMSG('DSICS',&
-            'A and EL data structure mismatch in row '//xern1,1,2)
+          ERROR STOP 'DSICS : A and EL data structure mismatch in row'
         END IF
       END IF
       50 CONTINUE

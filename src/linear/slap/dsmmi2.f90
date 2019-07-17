@@ -1,10 +1,9 @@
 !** DSMMI2
-SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
+PURE SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !> SLAP Backsolve for LDU Factorization of Normal Equations.
-  !            To solve a system of the form  (L*D*U)*(L*D*U)' X = B,
-  !            where L is a unit lower triangular matrix, D is a diagonal
-  !            matrix, and U is a unit upper triangular matrix and '
-  !            denotes transpose.
+  !  To solve a system of the form  (L*D*U)*(L*D*U)' X = B, where L is a unit
+  !  lower triangular matrix, D is a diagonal matrix, and U is a unit upper
+  !  triangular matrix and 'denotes transpose.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -154,8 +153,7 @@ SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
@@ -163,10 +161,11 @@ SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: N
+  INTEGER, INTENT(IN) :: N
   !     .. Array Arguments ..
-  REAL(DP) :: B(N), Dinv(N), L(*), U(*), X(N)
-  INTEGER :: Il(*), Iu(*), Jl(*), Ju(*)
+  INTEGER, INTENT(IN) :: Il(*), Iu(*), Jl(*), Ju(*)
+  REAL(DP), INTENT(IN) :: B(N), Dinv(N), L(*), U(*)
+  REAL(DP), INTENT(OUT) :: X(N)
   !     .. Local Scalars ..
   INTEGER :: i, icol, irow, j, jbgn, jend
   !* FIRST EXECUTABLE STATEMENT  DSMMI2

@@ -1,10 +1,10 @@
 !** DSDCG
-SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
+    Rwork,Lenw,Iwork,Leniw)
   !> Diagonally Scaled Conjugate Gradient Sparse Ax=b Solver.
-  !            Routine to solve a symmetric positive definite linear
-  !            system  Ax = b  using the Preconditioned Conjugate
-  !            Gradient method.  The preconditioner is diagonal scaling.
+  !  Routine to solve a symmetric positive definite linear system  Ax = b
+  !  using the Preconditioned Conjugate Gradient method.
+  !  The preconditioner is diagonal scaling.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -222,8 +222,7 @@ SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
@@ -233,11 +232,14 @@ SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(DP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, Leniw, Lenw, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(DP), INTENT(INOUT) :: Tol
+  REAL(DP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(DP) :: A(Nelt), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Ja(Nelt), Iwork(Leniw)
+  REAL(DP), INTENT(IN) :: B(N)
+  REAL(DP), INTENT(INOUT) :: A(N), X(N), Rwork(Lenw)
   !     .. Local Scalars ..
   INTEGER :: locd, locdz, lociw, locp, locr, locw, locz
   !* FIRST EXECUTABLE STATEMENT  DSDCG
@@ -274,7 +276,7 @@ SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   CALL DSDS(N,Nelt,Ja,A,Rwork(locd))
   !
   !         Do the Preconditioned Conjugate Gradient.
-  CALL DCG(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSDI,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork,Iwork)
+  CALL DCG(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSDI,Itol,Tol,Itmax,Iter,Ierr,&
+    Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork,Iwork)
   !------------- LAST LINE OF DSDCG FOLLOWS -----------------------------
 END SUBROUTINE DSDCG

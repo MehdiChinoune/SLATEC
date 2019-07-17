@@ -1,9 +1,9 @@
 !** SIR
-SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
-    Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork)
+PURE SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
+    Ierr,R,Z,Dz,Rwork,Iwork)
   !> Preconditioned Iterative Refinement Sparse Ax = b Solver.
-  !            Routine to solve a general linear system  Ax = b  using
-  !            iterative refinement with a matrix splitting.
+  !  Routine to solve a general linear system  Ax = b  using
+  !  iterative refinement with a matrix splitting.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -252,8 +252,7 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   891004  Added new reference.
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
@@ -263,24 +262,31 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   USE service, ONLY : R1MACH
+  USE SSLBLK, ONLY : soln_com
+
   INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+    PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
-      INTEGER :: N, Iwork(*)
-      REAL(SP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
-    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER, INTENT(IN) :: N, Iwork(*)
+      REAL(SP), INTENT(IN) :: R(N), Rwork(*)
+      REAL(SP), INTENT(OUT) :: Z(N)
+    END SUBROUTINE MSOLVE
+    PURE SUBROUTINE MATVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
       IMPORT SP
-      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(SP) :: X(N), R(N), A(Nelt)
-    END SUBROUTINE
+      INTEGER, INTENT(IN) :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(SP), INTENT(IN) :: X(N), A(Nelt)
+      REAL(SP), INTENT(OUT) :: Y(N)
+    END SUBROUTINE MATVEC
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(SP), INTENT(INOUT) :: Tol
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
-  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(SP), INTENT(IN) :: A(Nelt), B(N), Rwork(*)
+  REAL(SP), INTENT(INOUT) :: X(N)
+  REAL(SP), INTENT(OUT) :: Dz(N), R(N), Z(N)
   !     .. Local Scalars ..
   REAL(SP) :: bnrm, solnrm, tolmin
   INTEGER :: i, k
@@ -307,10 +313,17 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     R(i) = B(i) - R(i)
   END DO
   CALL MSOLVE(N,R,Z,Rwork,Iwork)
+  IF( Itol==1 ) THEN
+    bnrm = NORM2(B)
+  ELSEIF( Itol==2 ) THEN
+    CALL MSOLVE(N,B,Dz,Rwork,Iwork)
+    bnrm = NORM2(Dz)
+  ELSEIF( Itol==11 ) THEN
+    solnrm = NORM2(soln_com(1:N))
+    Dz(1:N) = X(1:N) - soln_com(1:N)
+  END IF
   !
-  IF( ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
-      Iunit,R,Z,Dz,Rwork,Iwork,bnrm,solnrm)==0 ) THEN
-    IF( Ierr/=0 ) RETURN
+  IF( ISSIR(N,Itol,Tol,R,Z,Dz,bnrm,solnrm)==0 ) THEN
     !
     !         ***** iteration loop *****
     !
@@ -327,10 +340,10 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
         R(i) = B(i) - R(i)
       END DO
       CALL MSOLVE(N,R,Z,Rwork,Iwork)
+      IF( Itol==11 ) Dz(1:N) = X(1:N) - soln_com(1:N)
       !
       !         check stopping criterion.
-      IF( ISSIR(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
-        Ierr,Iunit,R,Z,Dz,Rwork,Iwork,bnrm,solnrm)/=0 ) RETURN
+      IF( ISSIR(N,Itol,Tol,R,Z,Dz,bnrm,solnrm)/=0 ) RETURN
       !
     END DO
     !

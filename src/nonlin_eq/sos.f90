@@ -186,12 +186,12 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !   900510  Convert XERRWV calls to XERMSG calls, changed Prologue
   !           comments to agree with DSOS.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    REAL(SP) FUNCTION FNC(X,K)
+    REAL(SP) PURE FUNCTION FNC(X,K)
       IMPORT SP
-      INTEGER :: K
-      REAL(SP) :: X(:)
+      INTEGER, INTENT(IN) :: K
+      REAL(SP), INTENT(IN) :: X(:)
     END FUNCTION FNC
   END INTERFACE
   INTEGER :: Iflag, Liw, Lrw, Neq, Iw(Liw)
@@ -206,24 +206,20 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !
   IF( Neq<=0 ) THEN
     WRITE (xern1,'(I8)') Neq
-    CALL XERMSG('SOS','THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.&
-      & YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,1,1)
+    ERROR STOP 'SOS : THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.'
     Iflag = 9
   END IF
   !
   IF( Rtolx<0._DP .OR. Atolx<0._DP ) THEN
     WRITE (xern3,'(1PE15.6)') Atolx
     WRITE (xern4,'(1PE15.6)') Rtolx
-    CALL XERMSG('SOS','THE ERROR TOLERANCES FOR THE SOLUTION ITERATES&
-      & CANNOT BE NEGATIVE. YOU HAVE CALLED THE CODE WITH  RTOLX = '//xern3//&
-      ' AND ATOLX = '//xern4,2,1)
+    ERROR STOP 'SOS : THE ERROR TOLERANCES FOR THE SOLUTION ITERATES CANNOT BE NEGATIVE.'
     Iflag = 9
   END IF
   !
   IF( Tolf<0._DP ) THEN
     WRITE (xern3,'(1PE15.6)') Tolf
-    CALL XERMSG('SOS','THE RESIDUAL ERROR TOLERANCE MUST BE NON-NEGATIVE.&
-      & YOU HAVE CALLED THE CODE WITH TOLF = '//xern3,3,1)
+    ERROR STOP 'SOS : THE RESIDUAL ERROR TOLERANCE MUST BE NON-NEGATIVE.'
     Iflag = 9
   END IF
   !
@@ -234,9 +230,9 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
     mxit = Iw(2)
     IF( mxit<=0 ) THEN
       WRITE (xern1,'(I8)') mxit
-      CALL XERMSG('SOS','YOU HAVE TOLD THE CODE TO USE OPTIONAL IN&
+      ERROR STOP 'SOS : YOU HAVE TOLD THE CODE TO USE OPTIONAL IN&
         & PUT ITEMS BY SETTING  IFLAG=-1. HOWEVER YOU HAVE CALLED THE CODE WITH&
-        & THE MAXIMUM ALLOWABLE NUMBER OF ITERATIONS SET TO  IW(2) = '//xern1,4,1)
+        & THE MAXIMUM ALLOWABLE NUMBER OF ITERATIONS SET TO  IW(2)'
       Iflag = 9
     END IF
   END IF
@@ -244,15 +240,13 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   nc = (Neq*(Neq+1))/2
   IF( Lrw<1+6*Neq+nc ) THEN
     WRITE (xern1,'(I8)') Lrw
-    CALL XERMSG('SOS','DIMENSION OF THE RW ARRAY MUST BE AT LEAST&
-      & 1 + 6*NEQ + NEQ*(NEQ+1)/2 .  YOU HAVE CALLED THE CODE WITH LRW = '//xern1,5,1)
+    ERROR STOP 'SOS : DIMENSION OF THE RW ARRAY MUST BE AT LEAST 1+6*NEQ+NEQ*(NEQ+1)/2'
     Iflag = 9
   END IF
   !
   IF( Liw<3+Neq ) THEN
     WRITE (xern1,'(I8)') Liw
-    CALL XERMSG('SOS','DIMENSION OF THE IW ARRAY MUST BE AT LEAST&
-      & 3 + NEQ.  YOU HAVE CALLED THE CODE WITH  LIW = '//xern1,6,1)
+    ERROR STOP 'SOS : DIMENSION OF THE IW ARRAY MUST BE AT LEAST 3 + NEQ.'
     Iflag = 9
   END IF
   !
@@ -269,7 +263,7 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
     k6 = k5 + Neq
     !
     CALL SOSEQS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,mxit,ncjs,nsrrc,nsri,&
-      iprint,Rw(1),Rw(2),nc,Rw(k1),Rw(k2),Rw(k3),Rw(k4),Rw(k5),Rw(k6),Iw(4))
+      Rw(1),Rw(2),nc,Rw(k1),Rw(k2),Rw(k3),Rw(k4),Rw(k5),Rw(k6),Iw(4))
     !
     Iw(3) = mxit
   END IF

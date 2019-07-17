@@ -1,5 +1,5 @@
 !** SGEFS
-SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
+PURE SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !> Solve a general system of linear equations.
   !***
   ! **Library:**   SLATEC
@@ -107,11 +107,13 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
+  USE service, ONLY : R1MACH
   USE linpack, ONLY : SGECO, SGESL
   !
-  INTEGER :: Lda, N, Itask, Ind, Iwork(N)
-  REAL(SP) :: A(Lda,N), V(N), Work(N)
+  INTEGER, INTENT(IN) :: Lda, N, Itask
+  INTEGER, INTENT(OUT) :: Ind, Iwork(N)
+  REAL(SP), INTENT(INOUT) :: A(Lda,N), V(N)
+  REAL(SP), INTENT(OUT) :: Work(N)
   REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  SGEFS
@@ -119,21 +121,21 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('SGEFS','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
+    ERROR STOP 'SGEFS : LDA IS LESS THAN N'
     RETURN
   END IF
   !
   IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('SGEFS','N = '//xern1//' IS LESS THAN 1',-2,1)
+    ERROR STOP 'SGEFS : N IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('SGEFS','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    ERROR STOP 'SGEFS : ITASK IS LESS THAN 1'
     RETURN
   END IF
   !
@@ -147,7 +149,7 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     IF( rcond==0._SP ) THEN
       Ind = -4
-      CALL XERMSG('SGEFS','SINGULAR MATRIX A - NO SOLUTION',-4,1)
+      ERROR STOP 'SGEFS : SINGULAR MATRIX A - NO SOLUTION'
       RETURN
     END IF
     !
@@ -157,11 +159,12 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     Ind = INT( -LOG10(R1MACH(4)/rcond) )
     IF( Ind<=0 ) THEN
       Ind = -10
-      CALL XERMSG('SGEFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+      ! 'SGEFS : SOLUTION MAY HAVE NO SIGNIFICANCE'
     END IF
   END IF
   !
   !     SOLVE AFTER FACTORING
   !
   CALL SGESL(A,Lda,N,Iwork,V,0)
+
 END SUBROUTINE SGEFS

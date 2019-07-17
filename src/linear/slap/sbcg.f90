@@ -1,9 +1,9 @@
 !** SBCG
-SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
-    Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork)
+PURE SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
+    Tol,Itmax,Iter,Ierr,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork)
   !> Preconditioned BiConjugate Gradient Sparse Ax = b Solver.
-  !            Routine to solve a Non-Symmetric linear system  Ax = b
-  !            using the Preconditioned BiConjugate Gradient method.
+  !  Routine to solve a Non-Symmetric linear system  Ax = b
+  !  using the Preconditioned BiConjugate Gradient method.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -258,8 +258,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   891004  Added new reference.
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
@@ -272,35 +271,43 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE service, ONLY : R1MACH
   USE blas, ONLY : SAXPY
+  USE SSLBLK, ONLY : soln_com
+
   INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+    PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
-      INTEGER :: N, Iwork(*)
-      REAL(SP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
-    SUBROUTINE MTSOLV(N,Rr,Zz,Rwork,Iwork)
+      INTEGER, INTENT(IN) :: N, Iwork(*)
+      REAL(SP), INTENT(IN) :: R(N), Rwork(*)
+      REAL(SP), INTENT(OUT) :: Z(N)
+    END SUBROUTINE MSOLVE
+    PURE SUBROUTINE MTSOLV(N,Rr,Zz,Rwork,Iwork)
       IMPORT SP
-      INTEGER :: N, Iwork(*)
-      REAL(SP) :: Rr(N), Zz(N), Rwork(*)
-    END SUBROUTINE
-    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER, INTENT(IN) :: N, Iwork(*)
+      REAL(SP), INTENT(IN) :: Rr(N), Rwork(*)
+      REAL(SP), INTENT(OUT) :: Zz(N)
+    END SUBROUTINE MTSOLV
+    PURE SUBROUTINE MATVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
       IMPORT SP
-      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(SP) :: X(N), R(N), A(Nelt)
-    END SUBROUTINE
-    SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
+      INTEGER, INTENT(IN) :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(SP), INTENT(IN) :: X(N), A(Nelt)
+      REAL(SP), INTENT(OUT) :: Y(N)
+    END SUBROUTINE MATVEC
+    PURE SUBROUTINE MTTVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
       IMPORT SP
-      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(SP) :: X(N), Y(N), A(Nelt)
-    END SUBROUTINE
+      INTEGER, INTENT(IN) :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(SP), INTENT(IN) :: X(N), A(Nelt)
+      REAL(SP), INTENT(OUT) :: Y(N)
+    END SUBROUTINE MTTVEC
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(SP), INTENT(INOUT) :: Tol
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), X(N), &
-    Z(N), Zz(N)
-  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(SP), INTENT(IN) :: A(Nelt), B(N), Rwork(*)
+  REAL(SP), INTENT(INOUT) :: X(N)
+  REAL(SP), INTENT(OUT) :: Dz(N), P(N), Pp(N), R(N), Rr(N), Z(N), Zz(N)
   !     .. Local Scalars ..
   REAL(SP) :: ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
   INTEGER :: i, k
@@ -333,10 +340,17 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   END DO
   CALL MSOLVE(N,R,Z,Rwork,Iwork)
   CALL MTSOLV(N,Rr,Zz,Rwork,Iwork)
+  IF( Itol==1 ) THEN
+    bnrm = NORM2(B)
+  ELSEIF( Itol==2 ) THEN
+    CALL MSOLVE(N,B,Dz,Rwork,Iwork)
+    bnrm = NORM2(Dz)
+  ELSEIF( Itol==11 ) THEN
+    solnrm = NORM2(soln_com(1:N))
+    Dz(1:N) = X(1:N) - soln_com(1:N)
+  END IF
   !
-  IF( ISSBCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,Ierr,&
-      Iunit,R,Z,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)==0 ) THEN
-    IF( Ierr/=0 ) RETURN
+  IF( ISSBCG(N,Itol,Tol,R,Z,Dz,bnrm,solnrm)==0 ) THEN
     !
     !         ***** iteration loop *****
     !
@@ -376,11 +390,10 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       CALL SAXPY(N,-ak,Zz,1,Rr,1)
       CALL MSOLVE(N,R,Z,Rwork,Iwork)
       CALL MTSOLV(N,Rr,Zz,Rwork,Iwork)
+      IF( Itol==11 ) Dz(1:N) = X(1:N) - soln_com(1:N)
       !
       !         check stopping criterion.
-      IF( ISSBCG(N,B,X,MSOLVE,Itol,Tol,Iter,Err,&
-        Ierr,Iunit,R,Z,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 )&
-        RETURN
+      IF( ISSBCG(N,Itol,Tol,R,Z,Dz,bnrm,solnrm)/=0 ) RETURN
       !
     END DO
     !

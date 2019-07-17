@@ -1,7 +1,6 @@
 !** CNBCO
-SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
-  !> Factor a band matrix using Gaussian elimination and
-  !            estimate the condition number.
+PURE SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
+  !> Factor a band matrix using Gaussian elimination and estimate the condition number.
   !***
   ! **Library:**   SLATEC
   !***
@@ -9,8 +8,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !***
   ! **Type:**      COMPLEX (SNBCO-S, DNBCO-D, CNBCO-C)
   !***
-  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
-  !             NONSYMMETRIC
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION, NONSYMMETRIC
   !***
   ! **Author:**  Voorhees, E. A., (LANL)
   !***
@@ -132,11 +130,13 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
   USE blas, ONLY : SCABS1, CAXPY, SCASUM
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N)
-  COMPLEX(SP) :: Abe(Lda,2*Ml+Mu+1), Z(N)
-  REAL(SP) :: Rcond
+
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu
+  INTEGER, INTENT(OUT) :: Ipvt(N)
+  REAL(SP), INTENT(OUT) :: Rcond
+  COMPLEX(SP), INTENT(INOUT) :: Abe(Lda,2*Ml+Mu+1)
+  COMPLEX(SP), INTENT(OUT) :: Z(N)
   !
   COMPLEX(SP) :: ek, t, wk, wkm, v(2*Ml+Mu+1)
   REAL(SP) :: anorm, s, sm, ynorm
@@ -284,4 +284,5 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   IF( anorm/=0._SP ) Rcond = ynorm/anorm
   IF( anorm==0._SP ) Rcond = 0._SP
+
 END SUBROUTINE CNBCO

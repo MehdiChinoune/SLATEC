@@ -1,9 +1,9 @@
 !** SBHIN
 SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !> Read a Sparse Linear System in the Boeing/Harwell Format.
-  !            The matrix is read in and if the right hand side is also
-  !            present in the input file then it too is read in.  The
-  !            matrix is then modified to be in the SLAP Column format.
+  !  The matrix is read in and if the right hand side is also
+  !  present in the input file then it too is read in.
+  !  The matrix is then modified to be in the SLAP Column format.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -146,8 +146,7 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   881107  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   911122  Added loop to zero out RHS if user wants to read RHS, but
@@ -159,17 +158,17 @@ SUBROUTINE SBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: Isym, Iunit, Job, N, Nelt
+  INTEGER, INTENT(IN) :: Iunit
+  INTEGER, INTENT(INOUT) :: Job, Nelt
+  INTEGER, INTENT(OUT) :: Isym, N
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), Rhs(N), Soln(N)
-  INTEGER :: Ia(Nelt), Ja(Nelt)
+  INTEGER, INTENT(OUT) :: Ia(:), Ja(:)
+  REAL(SP), INTENT(OUT) :: A(:), Rhs(:), Soln(:)
   !     .. Local Scalars ..
   REAL(SP) :: temp
   INTEGER :: i, ibgn, icol, iend, itemp, j, jobret, ncol, nele, nind, &
     nline, nnvls, npls, nrhsls, nrils, nrow
-  CHARACTER code*3, pntfmt*16, rinfmt*16, nvlfmt*20, rhsfmt*20, title*80
-  !     .. Intrinsic Functions ..
-  INTRINSIC MOD
+  CHARACTER :: code*3, pntfmt*16, rinfmt*16, nvlfmt*20, rhsfmt*20, title*80
   !* FIRST EXECUTABLE STATEMENT  SBHIN
   !
   !         Read Matrices In BOEING-HARWELL format.

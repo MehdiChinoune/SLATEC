@@ -1,9 +1,9 @@
 !** DSLUOM
-SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
-    Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
+PURE SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
+    Ierr,Rwork,Lenw,Iwork,Leniw)
   !> Incomplete LU Orthomin Sparse Iterative Ax=b Solver.
-  !            Routine to solve a general linear system  Ax = b  using
-  !            the Orthomin method with Incomplete LU decomposition.
+  !  Routine to solve a general linear system  Ax = b  using
+  !  the Orthomin method with Incomplete LU decomposition.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -226,8 +226,7 @@ SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
@@ -238,11 +237,14 @@ SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !     .. Parameters ..
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
-  REAL(DP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, Leniw, Lenw, N, Nelt, Nsave
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(DP), INTENT(INOUT) :: Tol
+  REAL(DP), INTENT(OUT) :: Err
   !     .. Array Arguments ..
-  REAL(DP) :: A(N), B(N), Rwork(Lenw), X(N)
-  INTEGER :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  INTEGER, INTENT(INOUT) :: Ia(Nelt), Iwork(Leniw), Ja(Nelt)
+  REAL(DP), INTENT(IN) :: B(N)
+  REAL(DP), INTENT(INOUT) :: A(Nelt), Rwork(Lenw), X(N)
   !     .. Local Scalars ..
   INTEGER :: icol, j, jbgn, jend, locap, loccsa, locdin, locdz, &
     locema, locil, lociu, lociw, locjl, locju, locl, locnc, &
@@ -319,6 +321,6 @@ SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !
   !         Perform the incomplete LU preconditioned OrthoMin algorithm.
   CALL DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSLUI,Nsave,Itol,Tol,Itmax,Iter,&
-    Err,Ierr,Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locap),&
+    Ierr,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locap),&
     Rwork(locema),Rwork(locdz),Rwork(loccsa),Rwork,Iwork)
 END SUBROUTINE DSLUOM

@@ -1,9 +1,8 @@
 !** SGLSS
-SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
-  !> Solve a linear least squares problems by performing a QR
-  !            factorization of the matrix using Householder
-  !            transformations.  Emphasis is put on detecting possible
-  !            rank deficiency.
+PURE SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
+  !> Solve a linear least squares problems by performing a QR factorization of
+  !  the matrix using Householder transformations.
+  !  Emphasis is put on detecting possible rank deficiency.
   !***
   ! **Library:**   SLATEC
   !***
@@ -124,9 +123,11 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Info, Liw, Lw, M, Mda, Mdb, N, Nb
-  INTEGER :: Iwork(M+N)
-  REAL(SP) :: A(Mda,MIN(N,M)), B(Mdb,Nb), Rnorm(Nb), Work(2*MIN(N,M))
+  INTEGER, INTENT(IN) :: Liw, Lw, M, Mda, Mdb, N, Nb
+  INTEGER, INTENT(INOUT) :: Info
+  INTEGER, INTENT(INOUT) :: Iwork(M+N)
+  REAL(SP), INTENT(INOUT) :: A(Mda,MIN(N,M)), B(Mdb,Nb), Work(5*MIN(N,M))
+  REAL(SP), INTENT(OUT) :: Rnorm(Nb)
   INTEGER :: key, krank, ksure, mode, np
   REAL(SP) :: ae(1), re(1)
   !
@@ -151,5 +152,6 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
     Iwork,Liw,Info)
   IF( Info==-1 ) RETURN
   Info = N - krank
+
   RETURN
 END SUBROUTINE SGLSS

@@ -1,10 +1,8 @@
 !** DSLUTI
-SUBROUTINE DSLUTI(N,B,X,Rwork,Iwork)
+PURE SUBROUTINE DSLUTI(N,B,X,Rwork,Iwork)
   !> SLAP MTSOLV for LDU Factorization.
-  !            This routine acts as an interface between the SLAP generic
-  !            MTSOLV calling convention and the routine that actually
-  !                           -T
-  !            computes  (LDU)  B = X.
+  !  This routine acts as an interface between the SLAP generic
+  !  MTSOLV calling convention and the routine that actually computes  (LDU)^-T  B = X.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -41,8 +39,7 @@ SUBROUTINE DSLUTI(N,B,X,Rwork,Iwork)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
@@ -50,10 +47,11 @@ SUBROUTINE DSLUTI(N,B,X,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
 
   !     .. Scalar Arguments ..
-  INTEGER :: N
+  INTEGER, INTENT(IN) :: N
   !     .. Array Arguments ..
-  REAL(DP) :: B(N), Rwork(*), X(N)
-  INTEGER :: Iwork(*)
+  INTEGER, INTENT(IN) :: Iwork(*)
+  REAL(DP), INTENT(IN) :: B(N), Rwork(*)
+  REAL(DP), INTENT(OUT) :: X(N)
   !     .. Local Scalars ..
   INTEGER :: locdin, locil, lociu, locjl, locju, locl, locu
   !* FIRST EXECUTABLE STATEMENT  DSLUTI

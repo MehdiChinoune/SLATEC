@@ -1,5 +1,5 @@
 !** USRMAT
-SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
+PURE SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
   !> Subsidiary to SPLP
   !***
   ! **Library:**   SLATEC
@@ -22,8 +22,10 @@ SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: I, Iflag(10), Indcat, J
-  REAL(SP) :: Aij, Dattrv(:)
+  INTEGER, INTENT(OUT) :: I, Indcat, J
+  INTEGER, INTENT(INOUT) :: Iflag(4)
+  REAL(SP), INTENT(IN) :: Dattrv(:)
+  REAL(SP), INTENT(OUT) :: Aij
   INTEGER :: l
   !
   !* FIRST EXECUTABLE STATEMENT  USRMAT

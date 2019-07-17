@@ -1,5 +1,5 @@
 !** SGBFA
-SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
+PURE SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !> Factor a band matrix using Gaussian elimination.
   !***
   ! **Library:**   SLATEC (LINPACK)
@@ -98,13 +98,13 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : SAXPY
 
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
-  REAL(SP) :: Abd(Lda,N)
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu
+  INTEGER, INTENT(OUT) :: Ipvt(N), Info
+  REAL(SP), INTENT(INOUT) :: Abd(Lda,N)
   !
   REAL(SP) :: t
   INTEGER :: i, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
@@ -192,4 +192,5 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   END IF
   Ipvt(N) = N
   IF( Abd(m,N)==0._SP ) Info = N
+
 END SUBROUTINE SGBFA

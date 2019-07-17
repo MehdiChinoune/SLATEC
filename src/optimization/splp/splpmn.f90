@@ -37,22 +37,29 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
+  USE service, ONLY : IVOUT, SVOUT
   USE LA05DS, ONLY : lp_com
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
+    PURE SUBROUTINE USRMAT(I,J,Aij,Indcat,Dattrv,Iflag)
       IMPORT SP
-      INTEGER :: I, J, indcat, iflag(10)
-      REAL(SP) :: Dattrv(:), Aij
+      INTEGER, INTENT(OUT) :: I, J, Indcat
+      INTEGER, INTENT(INOUT) :: Iflag(4)
+      REAL(SP), INTENT(IN) :: Dattrv(:)
+      REAL(SP), INTENT(OUT) :: Aij
     END SUBROUTINE USRMAT
   END INTERFACE
-  INTEGER :: Info, Lbm, Lmx, Mrelas, Nvars
-  INTEGER :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas), Ibrc(Lbm,2), Imat(Lmx), &
+  INTEGER, INTENT(IN) :: Lbm, Lmx, Mrelas, Nvars
+  INTEGER, INTENT(OUT) :: Info
+  INTEGER, INTENT(INOUT) :: Ibasis(Nvars+Mrelas), Ibrc(Lbm,2), Imat(Lmx), &
     Ind(Nvars+Mrelas), Ipr(2*Mrelas), Iwr(8*Mrelas)
-  REAL(SP) :: Amat(Lmx), Basmat(Lbm), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
-    Colnrm(Nvars), Costs(Nvars), Csc(Nvars), Dattrv(:), Duals(Nvars+Mrelas), &
-    Erd(Mrelas), Erp(Mrelas), Prgopt(:), Primal(Nvars+Mrelas), Rg(Nvars+Mrelas), &
-    Rhs(Mrelas), Rprim(Mrelas), Rz(Nvars+Mrelas), Wr(Mrelas), Ww(Mrelas)
+  INTEGER, INTENT(OUT) :: Ibb(Nvars+Mrelas)
+  REAL(SP), INTENT(IN) :: Costs(Nvars), Dattrv(:), Prgopt(:)
+  REAL(SP), INTENT(INOUT) :: Amat(Lmx), Basmat(Lbm), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
+    Erp(Mrelas), Rprim(Mrelas), Ww(Mrelas)
+  REAL(SP), INTENT(OUT) :: Colnrm(Nvars), Csc(Nvars), Duals(Nvars+Mrelas), &
+    Erd(Mrelas), Primal(Nvars+Mrelas), Rg(Nvars+Mrelas), Rhs(Mrelas), Rz(Nvars+Mrelas), &
+    Wr(Mrelas)
   INTEGER :: i, ibas, ienter, ileave, iopt, ipage, iplace, itlp, j, jstrt, k, &
     key, lpg, lpr, lpr1, n20046, n20058, n20080, n20098, n20119, &
     n20172, n20206, n20247, n20252, n20271, n20276, n20283, n20290, nerr, np, &
@@ -287,8 +294,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     GOTO 3000
   ELSE
     nerr = 23
-    CALL XERMSG('SPLPMN',&
-      'IN SPLP,  A SINGULAR INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
+    ERROR STOP 'SPLPMN : IN SPLP,  A SINGULAR INITIAL BASIS WAS ENCOUNTERED.'
     Info = -nerr
     GOTO 4600
   END IF
@@ -303,8 +309,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   600 CONTINUE
   IF( .NOT. feas ) THEN
     nerr = 24
-    CALL XERMSG('SPLPMN',&
-      'IN SPLP, AN INFEASIBLE INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
+    ERROR STOP 'SPLPMN : IN SPLP, AN INFEASIBLE INITIAL BASIS WAS ENCOUNTERED.'
     Info = -nerr
     GOTO 4600
   END IF
@@ -383,20 +388,16 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Info = 1
   ELSEIF( ( .NOT. feas) .AND. ( .NOT. unbnd) ) THEN
     nerr = 1
-    CALL XERMSG('SPLPMN',&
-      'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE',nerr,iopt)
     Info = -nerr
+    ERROR STOP 'SPLPMN : IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE'
   ELSEIF( feas .AND. unbnd ) THEN
     nerr = 2
-    CALL XERMSG('SPLPMN',&
-      'IN SPLP, THE PROBLEM APPEARS TO HAVE NO FINITE SOLUTION.',nerr,iopt)
     Info = -nerr
+    ERROR STOP 'SPLPMN : IN SPLP, THE PROBLEM APPEARS TO HAVE NO FINITE SOLUTION.'
   ELSEIF( ( .NOT. feas) .AND. unbnd ) THEN
     nerr = 3
-    CALL XERMSG('SPLPMN',&
-      'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLUTION.'&
-      ,nerr,iopt)
     Info = -nerr
+    ERROR STOP 'SPLPMN : IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLUTION.'
   END IF
   !
   IF( Info==(-1) .OR. Info==(-3) ) THEN
@@ -568,7 +569,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     ELSE
       ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
       !     PROCEDURE (MAKE MOVE AND UPDATE)
-      CALL SPLPMU(Mrelas,Nvars,Lmx,Lbm,nredc,Info,ienter,ileave,iopt,npp,&
+      CALL SPLPMU(Mrelas,Nvars,Lmx,Lbm,nredc,Info,ienter,ileave,npp,&
         jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,Ibb,anorm,eps,uu,gg,&
         rprnrm,erdnrm,dulnrm,theta,costsc,xlamda,rhsnrm,Amat,&
         Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
@@ -618,7 +619,6 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END IF
   2500 lpr1 = lpr + 1
   READ (isave) (Amat(i),i=lpr1,Lmx), (Imat(i),i=lpr1,Lmx)
-  CALL PRWPGE(key,ipage,lpg,Amat,Imat)
   np = Imat(Lmx-1)
   ipage = ipage + 1
   IF( np>=0 ) GOTO 2500
@@ -626,7 +626,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   READ (isave) (Ibasis(i),i=1,nparm)
   REWIND isave
   GOTO 100
-  2600 CALL PRWPGE(key,ipage,lpg,Amat,Imat)
+  2600 CONTINUE
   lpr1 = lpr + 1
   WRITE (isave) (Amat(i),i=lpr1,Lmx), (Imat(i),i=lpr1,Lmx)
   np = Imat(Lmx-1)
@@ -635,7 +635,6 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   nparm = Nvars + Mrelas
   WRITE (isave) (Ibasis(i),i=1,nparm)
   ENDFILE isave
-  IF( Imat(Lmx-1)/=(-1) ) CALL SCLOSM(ipagef)
   RETURN
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (DECOMPOSE BASIS MATRIX)
@@ -648,7 +647,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   !     SET RELATIVE PIVOTING FACTOR FOR USE IN LA05 () PACKAGE.
   uu = 0.1_SP
-  CALL SPLPDM(Mrelas,Nvars,Lbm,nredc,Info,iopt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
+  CALL SPLPDM(Mrelas,Nvars,Lbm,nredc,Info,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,anorm,eps,uu,gg,Amat,Basmat,Csc,Wr,singlr,redbas)
   IF( Info<0 ) GOTO 4600
   SELECT CASE(npr004)
@@ -728,9 +727,8 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     END IF
   END IF
   nerr = 26
-  CALL XERMSG('SPLPMN',&
-    'IN SPLP, MOVED TO A SINGULAR POINT.  THIS SHOULD NOT HAPPEN.',nerr,iopt)
   Info = -nerr
+  ERROR STOP 'SPLPMN : IN SPLP, MOVED TO A SINGULAR POINT.  THIS SHOULD NOT HAPPEN.'
   GOTO 4600
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (CHECK FEASIBILITY)
@@ -820,9 +818,9 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   IF( savedt ) idum(1) = isave
   WRITE (xern1,'(I8)') mxitlp
   WRITE (xern2,'(I8)') idum(1)
-  CALL XERMSG('SPLPMN','IN SPLP, MAX ITERATIONS = '//xern1//&
+  PRINT*,'SPLPMN : IN SPLP, MAX ITERATIONS = '//xern1//&
     ' TAKEN.  UP-TO-DATE RESULTS SAVED ON FILE NO. '//xern2//&
-    '.  IF FILE NO. = 0, NO SAVE.',nerr,iopt)
+    '.  IF FILE NO. = 0, NO SAVE.'
   Info = -nerr
   GOTO 4600
   3500 npr005 = 3600
@@ -1008,19 +1006,9 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (RETURN TO USER)
   4600 CONTINUE
-  IF( .NOT. (savedt) ) THEN
-    IF( Imat(Lmx-1)/=(-1) ) CALL SCLOSM(ipagef)
-  ELSE
+  IF( savedt ) THEN
     ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
     !     PROCEDURE (SAVE DATA ON FILE ISAVE)
-    !
-    !     SOME PAGES MAY NOT BE WRITTEN YET.
-    IF( Amat(Lmx)==one ) THEN
-      Amat(Lmx) = zero
-      key = 2
-      ipage = ABS(Imat(Lmx-1))
-      CALL PRWPGE(key,ipage,lpg,Amat,Imat)
-    END IF
     !
     !     FORCE PAGE FILE TO BE OPENED ON RESTARTS.
     key = INT( Amat(4) )

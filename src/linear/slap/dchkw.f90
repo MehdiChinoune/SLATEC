@@ -1,8 +1,8 @@
 !** DCHKW
-SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
+PURE SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !> SLAP WORK/IWORK Array Bounds Checker.
-  !            This routine checks the work array lengths and interfaces
-  !            to the SLATEC error handler if a problem is found.
+  !  This routine checks the work array lengths and interfaces
+  !  to the SLATEC error handler if a problem is found.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -61,23 +61,22 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !   880225  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   900805  Changed XERRWV calls to calls to XERMSG.  (RWC)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
-  !   910502  Corrected XERMSG calls to satisfy Section 6.2.2 of ANSI
-  !           X3.9-1978.  (FNF)
+  !   910502  Corrected XERMSG calls to satisfy Section 6.2.2 of ANSI X3.9-1978.  (FNF)
   !   910506  Made subsidiary.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
   !   921015  Added code to initialize ITER and ERR when IERR=0.  (FNF)
-  USE service, ONLY : D1MACH, XERMSG
+  USE service, ONLY : D1MACH
   !     .. Scalar Arguments ..
-  REAL(DP) :: Err
-  INTEGER :: Ierr, Iter, Leniw, Lenw, Lociw, Locw
-  CHARACTER Name*(*)
+  INTEGER, INTENT(IN) :: Leniw, Lenw, Lociw, Locw
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(DP), INTENT(OUT) :: Err
+  CHARACTER(*), INTENT(IN) :: Name
   !     .. Local Scalars ..
-  CHARACTER xern1*8, xern2*8, xernam*8
+  CHARACTER(8) :: xern1, xern2, xernam
   !* FIRST EXECUTABLE STATEMENT  DCHKW
   !
   !         Check the Integer workspace situation.
@@ -91,9 +90,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
     xernam = Name
     WRITE (xern1,'(I8)') Lociw
     WRITE (xern2,'(I8)') Leniw
-    CALL XERMSG('DCHKW',&
-      'In '//xernam//', INTEGER work array too short.  '//&
-      'IWORK needs '//xern1//'; have allocated '//xern2,1,1)
+    ERROR STOP "IWORK INTEGER work array too short"
   END IF
   !
   !         Check the Double Precision workspace situation.
@@ -103,9 +100,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
     xernam = Name
     WRITE (xern1,'(I8)') Locw
     WRITE (xern2,'(I8)') Lenw
-    CALL XERMSG('DCHKW',&
-      'In '//xernam//', DOUBLE PRECISION work array too '//&
-      'short.  RWORK needs '//xern1//'; have allocated '//xern2,1,1)
+    ERROR STOP "RWORK DOUBLE PRECISION work array too short"
   END IF
   !------------- LAST LINE OF DCHKW FOLLOWS ----------------------------
 END SUBROUTINE DCHKW

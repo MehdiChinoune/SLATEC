@@ -35,10 +35,11 @@ SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Reals)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE LA05DS, ONLY : lcol_com, lrow_com, ncp_com
-  INTEGER :: N
-  LOGICAL :: Reals
-  INTEGER :: Irn(*), Iw(N), Ip(N)
-  REAL(SP) :: A(:)
+
+  INTEGER, INTENT(IN) :: N
+  LOGICAL, INTENT(IN) :: Reals
+  INTEGER, INTENT(INOUT) :: Irn(*), Iw(N), Ip(N)
+  REAL(SP), INTENT(INOUT) :: A(:)
   INTEGER :: ipi, j, k, kl, kn, nz
   !* FIRST EXECUTABLE STATEMENT  LA05ES
   ncp_com = ncp_com + 1
@@ -88,4 +89,5 @@ SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Reals)
   END DO
   IF( Reals ) lrow_com = kn
   IF( .NOT. Reals ) lcol_com = kn
+
 END SUBROUTINE LA05ES

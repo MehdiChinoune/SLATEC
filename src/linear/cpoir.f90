@@ -1,8 +1,7 @@
 !** CPOIR
-SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
-  !> Solve a positive definite Hermitian system of linear
-  !            equations.  Iterative refinement is used to obtain an
-  !            error estimate.
+PURE SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
+  !> Solve a positive definite Hermitian system of linear equations.
+  !  Iterative refinement is used to obtain an error estimate.
   !***
   ! **Library:**   SLATEC
   !***
@@ -112,15 +111,17 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
-  !           IF-THEN-ELSE.  (RWC)
+  !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, XERMSG
+  USE service, ONLY : R1MACH
   USE linpack, ONLY : CPOFA, CPOSL
   USE blas, ONLY : SCASUM
   !
-  INTEGER :: Lda, N, Itask, Ind
-  COMPLEX(SP) :: A(Lda,N), V(N), Work(N,N+1)
+  INTEGER, INTENT(IN) :: Lda, N, Itask
+  INTEGER, INTENT(OUT) :: Ind
+  COMPLEX(SP), INTENT(IN) :: A(Lda,N)
+  COMPLEX(SP), INTENT(INOUT) :: V(N)
+  COMPLEX(SP), INTENT(OUT) :: Work(N,N+1)
   INTEGER :: info, j
   REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
@@ -129,21 +130,21 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     Ind = -1
     WRITE (xern1,'(I8)') Lda
     WRITE (xern2,'(I8)') N
-    CALL XERMSG('CPOIR','LDA = '//xern1//' IS LESS THAN N = '//xern2,-1,1)
+    ERROR STOP 'CPOIR : LDA IS LESS THAN N'
     RETURN
   END IF
   !
   IF( N<=0 ) THEN
     Ind = -2
     WRITE (xern1,'(I8)') N
-    CALL XERMSG('CPOIR','N = '//xern1//' IS LESS THAN 1',-2,1)
+    ERROR STOP 'CPOIR : N IS LESS THAN 1'
     RETURN
   END IF
   !
   IF( Itask<1 ) THEN
     Ind = -3
     WRITE (xern1,'(I8)') Itask
-    CALL XERMSG('CPOIR','ITASK = '//xern1//' IS LESS THAN 1',-3,1)
+    ERROR STOP 'CPOIR : ITASK IS LESS THAN 1'
     RETURN
   END IF
   !
@@ -161,7 +162,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     IF( info/=0 ) THEN
       Ind = -4
-      CALL XERMSG('CPOIR','SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION',-4,1)
+      ERROR STOP 'CPOIR : SINGULAR OR NOT POSITIVE DEFINITE - NO SOLUTION'
       RETURN
     END IF
   END IF
@@ -201,6 +202,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
   IF( Ind<=0 ) THEN
     Ind = -10
-    CALL XERMSG('CPOIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
+    ! 'CPOIR : SOLUTION MAY HAVE NO SIGNIFICANCE'
   END IF
+
 END SUBROUTINE CPOIR

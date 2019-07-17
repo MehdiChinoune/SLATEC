@@ -1,10 +1,9 @@
 !** SCGS
-SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
-    Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork)
+PURE SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
+    Ierr,R,R0,P,Q,U,V1,V2,Rwork,Iwork)
   !> Preconditioned BiConjugate Gradient Squared Ax=b Solver.
-  !            Routine to solve a Non-Symmetric linear system  Ax = b
-  !            using the Preconditioned BiConjugate Gradient Squared
-  !            method.
+  !  Routine to solve a Non-Symmetric linear system  Ax = b
+  !  using the Preconditioned BiConjugate Gradient Squared method.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -240,8 +239,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
   !   890921  Removed TeX from comments.  (FNF)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   891004  Added new reference.
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
@@ -253,24 +251,31 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE service, ONLY : R1MACH
   USE blas, ONLY : SAXPY
+  USE SSLBLK, ONLY : soln_com
+
   INTERFACE
-    SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
+    PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
-      INTEGER :: N, Iwork(*)
-      REAL(SP) :: R(N), Z(N), Rwork(*)
-    END SUBROUTINE
-    SUBROUTINE MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
+      INTEGER, INTENT(IN) :: N, Iwork(*)
+      REAL(SP), INTENT(IN) :: R(N), Rwork(*)
+      REAL(SP), INTENT(OUT) :: Z(N)
+    END SUBROUTINE MSOLVE
+    PURE SUBROUTINE MATVEC(N,X,Y,Nelt,Ia,Ja,A,Isym)
       IMPORT SP
-      INTEGER :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
-      REAL(SP) :: X(N), R(N), A(Nelt)
-    END SUBROUTINE
+      INTEGER, INTENT(IN) :: N, Nelt, Isym, Ia(Nelt), Ja(Nelt)
+      REAL(SP), INTENT(IN) :: X(N), A(Nelt)
+      REAL(SP), INTENT(OUT) :: Y(N)
+    END SUBROUTINE MATVEC
   END INTERFACE
   !     .. Scalar Arguments ..
-  REAL(SP) :: Err, Tol
-  INTEGER :: Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
+  INTEGER, INTENT(IN) :: Isym, Itmax, Itol, N, Nelt
+  INTEGER, INTENT(OUT) :: Ierr, Iter
+  REAL(SP), INTENT(INOUT) :: Tol
   !     .. Array Arguments ..
-  REAL(SP) :: A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), V1(N), V2(N), X(N)
-  INTEGER :: Ia(Nelt), Iwork(*), Ja(Nelt)
+  INTEGER, INTENT(IN) :: Ia(Nelt), Iwork(*), Ja(Nelt)
+  REAL(SP), INTENT(IN) :: A(Nelt), B(N), Rwork(*)
+  REAL(SP), INTENT(INOUT) :: X(N)
+  REAL(SP), INTENT(OUT) :: P(N), Q(N), R(N), R0(N), U(N), V1(N), V2(N)
   !     .. Local Scalars ..
   REAL(SP) :: ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, solnrm, tolmin
   INTEGER :: i, k
@@ -299,10 +304,17 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     V1(i) = R(i) - B(i)
   END DO
   CALL MSOLVE(N,V1,R,Rwork,Iwork)
+  IF( Itol==1 ) THEN
+    bnrm = NORM2(B)
+  ELSEIF( Itol==2 ) THEN
+    CALL MSOLVE(N,B,V2,Rwork,Iwork)
+    bnrm = NORM2(V2)
+  ELSEIF( Itol==11 ) THEN
+    solnrm = NORM2(soln_com(1:N))
+    V2(1:N) = X(1:N) - soln_com(1:N)
+  END IF
   !
-  IF( ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Iter,Err,&
-      Ierr,Iunit,R,V2,Rwork,Iwork,ak,bk,bnrm,solnrm)==0 ) THEN
-    IF( Ierr/=0 ) RETURN
+  IF( ISSCGS(N,Itol,Tol,R,V2,bnrm,solnrm)==0 ) THEN
     !
     !         Set initial values.
     !
@@ -356,11 +368,15 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       CALL MATVEC(N,V1,V2,Nelt,Ia,Ja,A,Isym)
       CALL MSOLVE(N,V2,V1,Rwork,Iwork)
       CALL SAXPY(N,akm,V1,1,R,1)
+      IF( Itol==1 ) THEN
+        CALL MATVEC(N,X,V2,Nelt,Ia,Ja,A,Isym)
+        V2(1:N) = V2(1:N) - B(1:N)
+      ELSEIF( Itol==11 ) THEN
+        V2(1:N) = X(1:N) - soln_com(1:N)
+      END IF
       !
       !         check stopping criterion.
-      IF( ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Iter,&
-        Err,Ierr,Iunit,R,V2,Rwork,Iwork,ak,bk,bnrm,solnrm)&
-        /=0 ) GOTO 100
+      IF( ISSCGS(N,Itol,Tol,R,V2,bnrm,solnrm)/=0 ) GOTO 100
       !
       !         Update RHO.
       rhonm1 = rhon

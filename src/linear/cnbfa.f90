@@ -1,5 +1,5 @@
 !** CNBFA
-SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
+PURE SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !> Factor a band matrix by elimination.
   !***
   ! **Library:**   SLATEC
@@ -8,8 +8,7 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !***
   ! **Type:**      COMPLEX (SNBFA-S, DNBFA-D, CNBFA-C)
   !***
-  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
-  !             NONSYMMETRIC
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION, NONSYMMETRIC
   !***
   ! **Author:**  Voorhees, E. A., (LANL)
   !***
@@ -118,10 +117,11 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
   USE blas, ONLY : SCABS1, CSWAP, CAXPY, ICAMAX
-  INTEGER :: Lda, N, Ml, Mu, Ipvt(N), Info
-  COMPLEX(SP) :: Abe(Lda,2*Ml+Mu+1)
+
+  INTEGER, INTENT(IN) :: Lda, N, Ml, Mu
+  INTEGER, INTENT(OUT) :: Ipvt(N), Info
+  COMPLEX(SP), INTENT(INOUT) :: Abe(Lda,2*Ml+Mu+1)
   !
   INTEGER :: ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp
   COMPLEX(SP) :: t
@@ -181,4 +181,5 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   END IF
   Ipvt(N) = N
   IF( SCABS1(Abe(N,ml1))==0._SP ) Info = N
+
 END SUBROUTINE CNBFA

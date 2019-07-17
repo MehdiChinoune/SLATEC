@@ -1,5 +1,5 @@
 !** DRLCAL
-SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
+PURE SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !> Internal routine for DGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
@@ -69,18 +69,18 @@ SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
 
   !     .. Scalar Arguments ..
-  REAL(DP) :: Prod, R0nrm, Snormw
-  INTEGER :: Kmp, Ll, Maxl, N
+  INTEGER, INTENT(IN) :: Kmp, Ll, Maxl, N
+  REAL(DP), INTENT(IN) :: Prod, R0nrm, Snormw
   !     .. Array Arguments ..
-  REAL(DP) :: Q(2*Maxl), Rl(N), V(N,Ll+1)
+  REAL(DP), INTENT(IN) :: Q(2*Maxl), V(N,Ll+1)
+  REAL(DP), INTENT(OUT) :: Rl(N)
   !     .. Local Scalars ..
   REAL(DP) :: c, s, tem
   INTEGER :: i, i2, ip1, k, llm1, llp1

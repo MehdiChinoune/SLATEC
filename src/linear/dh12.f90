@@ -1,5 +1,5 @@
 !** DH12
-SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
+PURE SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !> Subsidiary to DHFTI, DLSEI and DWNNLS
   !***
   ! **Library:**   SLATEC
@@ -51,10 +51,11 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900911  Added DDOT to DOUBLE PRECISION statement.  (WRB)
-
   USE blas, ONLY : DAXPY, DSWAP
-  INTEGER :: Ice, Icv, Iue, L1, Lpivot, M, Mode, Ncv
-  REAL(DP) :: C(Icv*Ncv+M*Ice), U(Iue,M), Up
+
+  INTEGER, INTENT(IN) :: Ice, Icv, Iue, L1, Lpivot, M, Mode, Ncv
+  REAL(DP), INTENT(INOUT) :: C(Icv*Ncv+M*Ice), U(Iue,M)
+  REAL(DP), INTENT(OUT) :: Up
   INTEGER :: i, i2, i3, i4, incr, j, kl1, kl2, klp, l1m1, mml1p2
   REAL(DP) :: b, cl, clinv, one, ul1m1, sm
   !     BEGIN BLOCK PERMITTING ...EXITS TO 140
@@ -140,5 +141,6 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       END IF
     END IF
   END IF
+
   RETURN
 END SUBROUTINE DH12

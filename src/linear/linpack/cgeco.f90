@@ -1,7 +1,7 @@
 !** CGECO
-SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
+PURE SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !> Factor a matrix using Gaussian elimination and estimate
-  !            the condition number of the matrix.
+  !  the condition number of the matrix.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
@@ -77,14 +77,15 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTION section.
-  !           (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE blas, ONLY : CAXPY, SCABS1, SCASUM
 
-  INTEGER :: Lda, N, Ipvt(N)
-  COMPLEX(SP) :: A(Lda,N), Z(N)
-  REAL(SP) :: Rcond
+  INTEGER, INTENT(IN) :: Lda, N
+  INTEGER, INTENT(OUT) :: Ipvt(N)
+  REAL(SP), INTENT(OUT) :: Rcond
+  COMPLEX(SP), INTENT(INOUT) :: A(Lda,N)
+  COMPLEX(SP), INTENT(OUT) :: Z(N)
   !
   COMPLEX(SP) :: ek, t, wk, wkm
   REAL(SP) :: anorm, s, sm, ynorm
@@ -211,4 +212,5 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   IF( anorm/=0._SP ) Rcond = ynorm/anorm
   IF( anorm==0._SP ) Rcond = 0._SP
+
 END SUBROUTINE CGECO

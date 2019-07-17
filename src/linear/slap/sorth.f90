@@ -1,5 +1,5 @@
 !** SORTH
-SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
+PURE SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !> Internal routine for SGMRES.
   !***
   ! **Library:**   SLATEC (SLAP)
@@ -66,19 +66,19 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
-  !   890922  Numerous changes to prologue to make closer to SLATEC
-  !           standard.  (FNF)
+  !   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
   !   890929  Numerous changes to reduce SP/DP differences.  (FNF)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-
   USE blas, ONLY : SAXPY
+
   !     .. Scalar Arguments ..
-  REAL(SP) :: Snormw
-  INTEGER :: Kmp, Ldhes, Ll, N
+  INTEGER, INTENT(IN) :: Kmp, Ldhes, Ll, N
+  REAL(SP), INTENT(OUT) :: Snormw
   !     .. Array Arguments ..
-  REAL(SP) :: Hes(Ldhes,Ll), V(N,Ll), Vnew(N)
+  REAL(SP), INTENT(IN) :: V(N,Ll)
+  REAL(SP), INTENT(INOUT) :: Hes(Ldhes,Ll), Vnew(N)
   !     .. Local Scalars ..
   REAL(SP) :: arg, sumdsq, tem, vnrm
   INTEGER :: i, i0

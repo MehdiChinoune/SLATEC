@@ -1,5 +1,5 @@
 !** DPINIT
-SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
+PURE SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,Lopt)
   !> Subsidiary to DSPLP
   !***
@@ -33,12 +33,13 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  INTEGER :: Mrelas, Nvars
-  REAL(DP) :: Anorm, Costsc, Rhsnrm, Xlamda
-  INTEGER :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas), Imat(:), Ind(Nvars+Mrelas)
-  REAL(DP) :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Colnrm(Nvars), Costs(Nvars), &
-    Csc(Nvars), Primal(Nvars+Mrelas), Rhs(Mrelas)
-  LOGICAL :: Lopt(8)
+  INTEGER, INTENT(IN) :: Mrelas, Nvars
+  REAL(DP), INTENT(OUT) :: Anorm, Costsc, Xlamda, Rhsnrm
+  INTEGER, INTENT(IN) :: Imat(:), Ind(Nvars+Mrelas)
+  INTEGER, INTENT(OUT) :: Ibasis(Nvars+Mrelas), Ibb(Nvars+Mrelas)
+  REAL(DP), INTENT(IN) :: Amat(:), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Costs(Nvars)
+  REAL(DP), INTENT(OUT) :: Csc(Nvars), Primal(Nvars+Mrelas), Colnrm(Nvars), Rhs(Mrelas)
+  LOGICAL, INTENT(IN) :: Lopt(8)
   INTEGER :: i, ip, iplace, j, n20007, n20019, n20028, n20041, n20056, n20066, &
     n20070, n20074, n20078
   REAL(DP) :: aij, cmax, csum, scalr, testsc
@@ -218,5 +219,6 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     END IF
     j = j + 1
   END DO
+
   RETURN
 END SUBROUTINE DPINIT
