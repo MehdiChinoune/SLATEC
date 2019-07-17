@@ -1,4 +1,4 @@
-image: rhub/debian-gcc
+image: chinoune/my-image
 
 pipelines:
   default:
@@ -6,20 +6,16 @@ pipelines:
       - step:
           name: Debug
           script:
-           - apt update
-           - apt install -y cmake libopenblas-dev
            - mkdir build && cd build
            - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
-           - make -j
+           - make -j$(nproc)
            - make test
       - step:
           name: Release
           script:
-           - apt update
-           - apt install -y cmake libopenblas-dev
            - mkdir build && cd build
            - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Release
-           - make -j
+           - make -j$(nproc)
            - make test
       - step:
           name: gcc-trunk Debug
@@ -29,7 +25,7 @@ pipelines:
            - apt install -y cmake libopenblas-dev
            - mkdir build && cd build
            - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
-           - make -j
+           - make -j$(nproc)
            - make test
       - step:
           name: gcc-trunk Release
@@ -39,5 +35,5 @@ pipelines:
            - apt install -y cmake libopenblas-dev
            - mkdir build && cd build
            - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Release
-           - make -j
+           - make -j$(nproc)
            - make test

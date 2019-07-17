@@ -6,19 +6,13 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 container: 
-  image: debian:testing
-  options: "--name ci-container -v /usr/bin/docker:/tmp/docker:ro"
+  image: chinoune/my-image
 
 steps:
 - script: |
-    /tmp/docker exec -t -u 0 ci-container \
-      sh -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -y install sudo"
-    sudo apt install -y gfortran libopenblas-dev cmake
-  displayName: 'Installing required packages'
-- script: |
     mkdir build && cd build
     cmake .. -DCMAKE_Fortran_COMPILER=gfortran
-    make -j
+    make -j$(nproc)
   displayName: 'Building gfortran-Release'
 - script: |
     ls
@@ -29,7 +23,7 @@ steps:
     cd build
     rm -r *
     cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
-    make -j
+    make -j$(nproc)
   displayName: 'Building gfortran-Debug'
 - script: |
     cd build
