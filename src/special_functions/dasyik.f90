@@ -58,7 +58,8 @@ PURE SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !
   INTEGER, INTENT(IN) :: In, Kode
   REAL(DP), INTENT(IN) :: Flgik, Fnu, X
-  REAL(DP), INTENT(OUT) :: Arg, Ra, Y(In)
+  REAL(DP), INTENT(INOUT) :: Arg, Ra
+  REAL(DP), INTENT(OUT) :: Y(In)
   INTEGER :: j, jn, k, kk, l
   REAL(DP) :: ak, ap, coef, etx, fn, gln, s1, s2, t, tol, t2, z
   REAL(DP), PARAMETER :: con(2) = [ 3.98942280401432678E-01_DP, 1.25331413731550025E+00_DP ]

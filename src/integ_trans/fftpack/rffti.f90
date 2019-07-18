@@ -57,8 +57,7 @@ PURE SUBROUTINE RFFTI(N,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from user-callable to subsidiary
-  !           because of non-standard Fortran 77 arguments in the
-  !           call to CFFTB1.  (WRB)
+  !           because of non-standard Fortran 77 arguments in the call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER, INTENT(IN) :: N
@@ -66,7 +65,6 @@ PURE SUBROUTINE RFFTI(N,Wsave)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  RFFTI
   IF( N==1 ) RETURN
-  ifac = INT( Wsave(2*N+1:2*N+15) )
   CALL RFFTI1(N,Wsave(N+1),ifac)
   Wsave(2*N+1:2*N+15) = ifac
 

@@ -19,7 +19,7 @@ endif()
 
 if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 
-  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3" )
+  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3 -Wall -std=f2018" )
   set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Wall -Wimplicit-procedure \
     -fcheck=all -ffpe-trap=zero,overflow,invalid -fbacktrace -g -O0 -std=f2018" )
   set ( CMAKE_Fortran_FLAGS_CODECOVERAGE "--coverage -g -O0" )
@@ -28,7 +28,7 @@ elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )
 
   set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3" )
   set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -warn all -traceback \
-    -fpe0 -g -check all -stand f18 -standrad-semantics" )
+    -fpe-all=0 -g -check all -stand f18 -standrad-semantics" )
   set ( CMAKE_Fortran_FLAGS_CODECOVERAGE "-prof-gen:srcpos -prof-dir=${CMAKE_BINARY_DIR}/prof/ -g -O0" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Flang" )

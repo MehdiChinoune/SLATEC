@@ -231,6 +231,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
         noequ = 25
         noeq1 = noequ - 1
         an = 6._DP
+        d1(1) = 0._DP
         DO k = 1, noeq1
           an2 = an*an
           d(k) = -2._DP*(an2-4._DP)*(par22-an2-an2)
@@ -239,6 +240,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
           v(k+3) = as - (an2-4._DP)*ac
           an = an + 2._DP
         END DO
+        d2(noequ) = 0._DP
         an2 = an*an
         d(noequ) = -2._DP*(an2-4._DP)*(par22-an2-an2)
         v(noequ+3) = as - (an2-4._DP)*ac

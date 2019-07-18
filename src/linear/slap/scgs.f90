@@ -305,6 +305,8 @@ PURE SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   END DO
   CALL MSOLVE(N,V1,R,Rwork,Iwork)
   IF( Itol==1 ) THEN
+    CALL MATVEC(N,X,V2,Nelt,Ia,Ja,A,Isym)
+    V2(1:N) = V2(1:N) - B(1:N)
     bnrm = NORM2(B)
   ELSEIF( Itol==2 ) THEN
     CALL MSOLVE(N,B,V2,Rwork,Iwork)

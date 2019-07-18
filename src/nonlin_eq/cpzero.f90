@@ -57,7 +57,7 @@ PURE SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER, INTENT(IN) :: In
-  INTEGER, INTENT(OUT) :: Iflg
+  INTEGER, INTENT(INOUT) :: Iflg
   REAL(SP), INTENT(OUT) :: S(In)
   COMPLEX(SP), INTENT(IN) :: A(In+1)
   COMPLEX(SP), INTENT(INOUT) :: R(In), T(4*In+4)

@@ -124,6 +124,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   kflag_com = 0
   told = tn_com
   ncf = 0
+  delp = 0._SP
   IF( jstart_com>0 ) GOTO 400
   IF( jstart_com==-1 ) THEN
     !              BEGIN BLOCK PERMITTING ...EXITS TO 30

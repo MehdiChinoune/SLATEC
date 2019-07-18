@@ -22,6 +22,7 @@ PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Fnu, Tol
@@ -31,7 +32,8 @@ PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   COMPLEX(SP) :: ck, cnorm, pt, p1, p2, rz, summ
   REAL(SP) :: ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, rho, &
     rho2, scle, tfnf, tst, x
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP), ctwo = (2._SP,0._SP)
+  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP), &
+    ctwo = (2._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CMLRI
   scle = 1.E+3_SP*R1MACH(1)/Tol
   Nz = 0

@@ -66,7 +66,6 @@ PURE SUBROUTINE CFFTI(N,Wsave)
   INTEGER :: ifac(15)
   !* FIRST EXECUTABLE STATEMENT  CFFTI
   IF( N==1 ) RETURN
-  ifac = INT( Wsave(4*N+1:4*N+15) )
   CALL CFFTI1(N,Wsave(2*N+1),ifac)
   Wsave(4*N+1:4*N+15) = ifac
 

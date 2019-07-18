@@ -38,7 +38,7 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   INTEGER, INTENT(INOUT) :: Init
   REAL(SP), INTENT(IN) :: Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Zr
-  COMPLEX(SP), INTENT(OUT) :: Phi, Summ, Zeta1, Zeta2, Cwrk(16)
+  COMPLEX(SP), INTENT(INOUT) :: Phi, Summ, Zeta1, Zeta2, Cwrk(16)
   INTEGER :: i, j, k, l
   REAL(SP) :: ac, rfn, test, tstr, tsti
   COMPLEX(SP) :: cfn, crfn, s, sr, t, t2, zn

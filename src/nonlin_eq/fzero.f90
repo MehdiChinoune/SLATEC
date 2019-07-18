@@ -108,8 +108,7 @@ PURE SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   END INTERFACE
   INTEGER, INTENT(OUT) :: Iflag
   REAL(SP), INTENT(IN) :: Ae, Re
-  REAL(SP), INTENT(INOUT) :: B, C
-  REAL(SP), INTENT(OUT) :: R
+  REAL(SP), INTENT(INOUT) :: B, C, R
   INTEGER :: ic, kount
   REAL(SP) :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
   !* FIRST EXECUTABLE STATEMENT  FZERO

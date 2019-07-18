@@ -58,7 +58,8 @@ PURE SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !
   INTEGER, INTENT(IN) :: In, Kode
   REAL(SP), INTENT(IN) :: Flgik, Fnu, X
-  REAL(SP), INTENT(OUT) :: Arg, Ra, Y(In)
+  REAL(SP), INTENT(INOUT) :: Arg, Ra
+  REAL(SP), INTENT(OUT) :: Y(In)
   INTEGER :: j, jn, k, kk, l
   REAL(SP) :: ak, ap, coef, etx, fn, gln, s1, s2, t, tol, t2, z
   REAL(SP), PARAMETER :: con(2) = [ 3.98942280401432678E-01_SP, 1.25331413731550025E+00_SP ]

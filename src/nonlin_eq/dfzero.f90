@@ -109,8 +109,7 @@ PURE SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   END INTERFACE
   INTEGER, INTENT(OUT) :: Iflag
   REAL(DP), INTENT(IN) :: Ae, Re
-  REAL(DP), INTENT(INOUT) :: B, C
-  REAL(DP), INTENT(OUT) :: R
+  REAL(DP), INTENT(INOUT) :: B, C, R
   INTEGER :: ic, kount
   REAL(DP) :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
   !

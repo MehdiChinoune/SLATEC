@@ -45,7 +45,6 @@ CONTAINS
       ac(j) = CMPLX(a(j),0._SP,SP)
     END DO
     info = 0
-    w_r = [ ( [REAL(w(i)), AIMAG(w(i))], i=1,21 ) ]
     CALL CPZERO(ideg,ac,z,w(4),info,w_r)
     IF( info/=0 ) THEN
       Ipass = 0
@@ -67,7 +66,6 @@ CONTAINS
       IF( ABS(z(j)-zk(id))/ABS(zk(id))>=relerr ) Ipass = 0
     END DO
     info = 0
-    w_r = [ ( [REAL(w(i)), AIMAG(w(i))], i=1,21 ) ]
     CALL RPZERO(ideg,a,z,w(4),info,w_r)
     IF( info/=0 ) THEN
       Ipass = 0
@@ -170,7 +168,7 @@ CONTAINS
     IF( iflag/=3 ) THEN
       Ipass = 0
       fatal = .TRUE.
-      IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
+      IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 3
     END IF
     !
     !     IFLAG=4 (No sign change)
@@ -204,8 +202,7 @@ CONTAINS
     99006 FORMAT (/' ***************FZERO FAILED SOME TESTS*************')
     RETURN
     99007 FORMAT (' Accuracy test ',&
-      A/' Example problem results:  (answer = PI),  B =',F20.14,' C =',&
-      F20.14/' IFLAG =',I2)
+      A/' Example problem results:  (answer = PI),  B =',F20.14,' C =',F20.14/' IFLAG =',I2)
     99008 FORMAT (/' IFLAG test FAILED.  IFLAG =',I2,', but should ','have been',I2)
   END SUBROUTINE FZTEST
   ! Single precision sinus
@@ -289,7 +286,7 @@ CONTAINS
     IF( iflag/=3 ) THEN
       Ipass = 0
       fatal = .TRUE.
-      IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
+      IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 3
     END IF
     !
     !     IFLAG=4 (No sign change)

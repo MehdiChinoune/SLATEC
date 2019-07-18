@@ -56,7 +56,7 @@ PURE SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER, INTENT(IN) :: N
-  INTEGER, INTENT(OUT) :: Iflg
+  INTEGER, INTENT(INOUT) :: Iflg
   REAL(SP), INTENT(IN) :: A(N+1)
   REAL(SP), INTENT(OUT) :: S(N)
   COMPLEX(SP), INTENT(INOUT) :: T(6*N+6), R(N)

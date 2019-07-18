@@ -229,6 +229,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         noequ = 25
         noeq1 = noequ - 1
         an = 6._SP
+        d1(1) = 0._SP
         DO k = 1, noeq1
           an2 = an*an
           d(k) = -2._SP*(an2-4._SP)*(par22-an2-an2)
@@ -237,6 +238,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
           v(k+3) = as - (an2-4._SP)*ac
           an = an + 2._SP
         END DO
+        d2(noequ) = 0._SP
         an2 = an*an
         d(noequ) = -2._SP*(an2-4._SP)*(par22-an2-an2)
         v(noequ+3) = as - (an2-4._SP)*ac

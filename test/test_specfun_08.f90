@@ -5,8 +5,7 @@ MODULE TEST09_MOD
 CONTAINS
   !** CQCAI
   SUBROUTINE CQCAI(Lun,Kprint,Ipass)
-    !> Quick check for SLATEC subroutines
-    !            CAIRY, CBIRY
+    !> Quick check for SLATEC subroutines CAIRY, CBIRY
     !***
     ! **Library:**   SLATEC
     !***
@@ -370,8 +369,7 @@ CONTAINS
   END SUBROUTINE CQCAI
   !** CQCBH
   SUBROUTINE CQCBH(Lun,Kprint,Ipass)
-    !> Quick check for SLATEC subroutine
-    !            CBESH
+    !> Quick check for SLATEC subroutine CBESH
     !***
     ! **Library:**   SLATEC
     !***
@@ -723,8 +721,7 @@ CONTAINS
   END SUBROUTINE CQCBH
   !** CQCBI
   SUBROUTINE CQCBI(Lun,Kprint,Ipass)
-    !> Quick check for SLATEC subroutine
-    !            CBESI
+    !> Quick check for SLATEC subroutine CBESI
     !***
     ! **Library:**   SLATEC
     !***

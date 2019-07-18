@@ -319,6 +319,8 @@ CONTAINS
     iopt(1) = 99
     Ipass = 1
     itest = 0
+    ! Initialize W
+    w = 0._SP
     !
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (' TEST   IB IRHS             SR')

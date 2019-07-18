@@ -90,5 +90,6 @@ PURE SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
     st = Y(i)
     Y(i) = cinu*cscl
   END DO
+
   RETURN
 END SUBROUTINE CWRSK

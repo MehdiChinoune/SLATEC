@@ -290,7 +290,8 @@ CONTAINS
     REAL(DP), PARAMETER :: c(5,5) = RESHAPE( [ 1._DP, 10._DP, 4._DP, 8._DP, 1._DP, &
       1._DP, 10._DP, 2._DP, -1._DP, 1._DP,  1._DP, -3._DP, -3._DP, 2._DP, 1._DP, &
       1._DP, 5._DP, 5._DP, 5._DP, 1._DP,    1._DP, 4._DP, -1._DP, -3._DP, 1._DP ], [5,5] )
-    REAL(DP), PARAMETER :: d(6,5) = RESHAPE( [-74._DP, 14._DP, 66._DP,-12._DP, 3._DP, 4._DP, &
+    REAL(DP), PARAMETER :: d(6,5) = RESHAPE( &
+      [-74._DP, 14._DP, 66._DP,-12._DP, 3._DP, 4._DP, &
       80._DP, -69._DP, -72._DP, 66._DP, 8._DP, -12._DP, &
       18._DP, 21._DP, -5._DP, -30._DP, -7._DP, 4._DP, &
       -11._DP, 28._DP, 7._DP, -23._DP, -4._DP, 4._DP, &
@@ -299,7 +300,8 @@ CONTAINS
       -1._DP, 0._DP, -3._DP, 1._DP, -6._DP ], [5,2] )
     REAL(DP), PARAMETER :: bu(5,2) = RESHAPE( [ 3._DP, 2._DP, 1._DP, 3._DP, -2._DP, &
       3._DP, 4._DP, 1._DP, 5._DP, -2._DP ], [5,2] )
-    REAL(DP), PARAMETER :: rhs(6,2) = RESHAPE( [ 51._DP,-61._DP,-56._DP, 69._DP, 10._DP,-12._DP, &
+    REAL(DP), PARAMETER :: rhs(6,2) = RESHAPE( &
+      [ 51._DP,-61._DP,-56._DP, 69._DP, 10._DP,-12._DP, &
       -5._DP, -9._DP, 708._DP, 4165._DP, -13266._DP, 8409._DP ], [6,2] )
     REAL(DP), PARAMETER :: xtrue(9) = [ 1._DP, 2._DP, -1._DP, 3._DP, -4._DP, 1._DP, &
       32._DP, 30._DP, 31._DP ]
@@ -311,6 +313,8 @@ CONTAINS
     iopt(1) = 99
     Ipass = 1
     itest = 0
+    ! Initialize W
+    w = 0._DP
     !
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (' TEST   IB IRHS             SR')
