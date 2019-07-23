@@ -1,12 +1,10 @@
 !** DQAGP
-SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
+PURE SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Lenw,Last,Iwork,Work)
-  !> The routine calculates an approximation result to a given
-  !            definite integral I = Integral of F over (A,B),
-  !            hopefully satisfying following claim for accuracy
-  !            break points of the integration interval, where local
-  !            difficulties of the integrand may occur (e.g.
-  !            SINGULARITIES, DISCONTINUITIES), are provided by the user.
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = Integral of F over (A,B), hopefully satisfying following claim for accuracy
+  !  break points of the integration interval, where local difficulties of the integrand
+  !  may occur (e.g. SINGULARITIES, DISCONTINUITIES), are provided by the user.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -202,16 +200,19 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Last, Leniw, Lenw, Neval, Npts2, Iwork(Leniw)
-  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Result, Points(Npts2), Work(Lenw)
+  INTEGER, INTENT(IN) :: Leniw, Lenw, Npts2
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iwork(Leniw)
+  REAL(DP), INTENT(IN) :: A, B, Epsabs, Epsrel, Points(Npts2)
+  REAL(DP), INTENT(OUT) :: Abserr, Result, Work(Lenw)
+  !
   INTEGER :: limit, lvl, l1, l2, l3, l4
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
@@ -233,13 +234,13 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     l4 = limit + l3
     !
     CALL DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,limit,Result,Abserr,Neval,&
-      Ier,Work(1),Work(l1),Work(l2),Work(l3),Work(l4),Iwork(1),&
-      Iwork(l1),Iwork(l2),Last)
+      Ier,Work(1),Work(l1),Work(l2),Work(l3),Work(l4),Iwork(1),Iwork(l1),Iwork(l2),Last)
     !
     !         CALL ERROR HANDLER IF NECESSARY.
     !
     lvl = 0
   END IF
   IF( Ier==6 ) lvl = 1
-  IF( Ier/=0 ) CALL XERMSG('DQAGP','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier/=0 ) ERROR STOP 'DQAGP : ABNORMAL RETURN'
+  !
 END SUBROUTINE DQAGP

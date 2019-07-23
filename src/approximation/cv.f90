@@ -104,8 +104,8 @@ REAL(SP) FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  INTEGER :: Nbkpt, Nconst, Ndata, Nord
-  REAL(SP) :: Xval, Bkpt(Nbkpt), W(:)
+  INTEGER, INTENT(IN) :: Nbkpt, Nconst, Ndata, Nord
+  REAL(SP), INTENT(IN) :: Xval, Bkpt(Nbkpt), W(:)
   INTEGER :: i, ileft, ip, is, last, mdg, mdw, n
   REAL(SP) :: zero, v(40)
   !* FIRST EXECUTABLE STATEMENT  CV
@@ -118,7 +118,7 @@ REAL(SP) FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   DO WHILE( Xval>=Bkpt(ileft+1) .AND. ileft<last-1 )
     ileft = ileft + 1
   END DO
-  CALL BSPLVN(Bkpt,Nord,1,Xval,ileft,v(Nord+1))
+  CALL BSPLVN(Bkpt,Nord,1,Xval,ileft,v(Nord+1:2*Nord))
   ileft = ileft - Nord + 1
   ip = mdw*(ileft-1) + ileft + is
   n = Nbkpt - Nord

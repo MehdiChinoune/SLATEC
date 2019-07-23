@@ -1,5 +1,5 @@
 !** DWNLSM
-SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
+PURE SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     Scalee,Z,Temp,D)
   !> Subsidiary to DWNNLS
   !***
@@ -73,12 +73,15 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900510  Fixed an error message.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !   900911  Restriction on value of ALAMDA included.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : D1MACH
   USE blas, ONLY : DAXPY, DROTM, DROTMG, DSWAP
   USE linear, ONLY : DH12
-  INTEGER :: L, Ma, Mdw, Mme, Mode, N, Ipivot(N), Itype(Mme+Ma)
-  REAL(DP) :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
-    Wd(N), X(N), Z(N)
+  !
+  INTEGER, INTENT(IN) :: L, Ma, Mdw, Mme, N
+  INTEGER, INTENT(OUT) :: Mode, Ipivot(N), Itype(Mme+Ma)
+  REAL(DP), INTENT(IN) :: Prgopt(:)
+  REAL(DP), INTENT(INOUT) :: W(Mdw,N+1)
+  REAL(DP), INTENT(OUT) :: Rnorm, D(N), H(N), Scalee(Mme+Ma), Temp(N), Wd(N), X(N), Z(N)
   !
   INTEGER :: i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, jcon, jp, key, &
     krank, l1, last, link, m, me, next, niv, nlink, nopt, nsoln, ntimes
@@ -121,8 +124,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   last = 1
   link = INT( Prgopt(1) )
   IF( link<=0 .OR. link>nlink ) THEN
-    CALL XERMSG('DWNLSM',&
-      'IN DWNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
+    ERROR STOP 'DWNLSM : IN DWNNLS, THE OPTION VECTOR IS UNDEFINED'
     RETURN
   END IF
   DO
@@ -130,8 +132,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     IF( link>1 ) THEN
       ntimes = ntimes + 1
       IF( ntimes>nopt ) THEN
-        CALL XERMSG('DWNLSM',&
-          'IN DWNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.',3,1)
+        ERROR STOP 'DWNLSM : IN DWNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.'
         RETURN
       END IF
       !
@@ -150,8 +151,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !
       next = INT( Prgopt(link) )
       IF( next<=0 .OR. next>nlink ) THEN
-        CALL XERMSG('DWNLSM',&
-          'IN DWNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
+        ERROR STOP 'DWNLSM : IN DWNNLS, THE OPTION VECTOR IS UNDEFINED'
         RETURN
       END IF
       !
@@ -632,4 +632,5 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   END DO
   !
   Rnorm = SQRT(Rnorm)
+  !
 END SUBROUTINE DWNLSM

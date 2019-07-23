@@ -685,7 +685,7 @@ CONTAINS
     RETURN
   END SUBROUTINE DEG8CK
   !** DFEIN
-  REAL(DP) FUNCTION DFEIN(T)
+  REAL(DP) PURE FUNCTION DFEIN(T)
     !> Subsidiary to DEG8CK.
     !***
     ! **Library:**   SLATEC

@@ -1,8 +1,7 @@
 !** WNNLS
-SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
+PURE SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !> Solve a linearly constrained least squares problem with
-  !            equality constraints and nonnegativity constraints on
-  !            selected variables.
+  !  equality constraints and nonnegativity constraints on selected variables.
   !***
   ! **Library:**   SLATEC
   !***
@@ -235,11 +234,9 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !     User-designated
   !     Working arrays..
   !
-  !     WORK(*)      A real-valued working array of length at least
-  !                  M + 5*N.
+  !     WORK(*)      A real-valued working array of length at least M + 5*N.
   !
-  !     IWORK(*)     An integer-valued working array of length at least
-  !                  M+N.
+  !     IWORK(*)     An integer-valued working array of length at least M+N.
   !
   !***
   ! **References:**  K. H. Haskell and R. J. Hanson, An algorithm for
@@ -270,10 +267,13 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: L, Ma, Mdw, Me, Mode, N
-  INTEGER :: Iwork(Ma+Me+N)
-  REAL(SP) :: Rnorm, Prgopt(:), W(Mdw,N+1), Work(Ma+Me+5*N), X(N)
+  INTEGER, INTENT(IN) :: L, Ma, Mdw, Me, N
+  INTEGER, INTENT(OUT) :: Mode
+  INTEGER, INTENT(OUT) :: Iwork(Ma+Me+N)
+  REAL(SP), INTENT(IN) :: Prgopt(:)
+  REAL(SP), INTENT(INOUT) :: W(Mdw,N+1), Work(Ma+Me+5*N)
+  REAL(SP), INTENT(OUT) :: Rnorm, X(N)
+  !
   INTEGER :: l1, l2, l3, l4, l5, liw, lw
   CHARACTER(8) :: xern1
   !
@@ -285,7 +285,8 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
     lw = Me + Ma + 5*N
     IF( Iwork(1)<lw ) THEN
       WRITE (xern1,'(I8)') lw
-      CALL XERMSG('WNNLS','INSUFFICIENT STORAGE ALLOCATED FOR WORK(*), NEED LW = '//xern1,2,1)
+
+      ERROR STOP 'WNNLS : INSUFFICIENT STORAGE ALLOCATED FOR WORK(*).'
       Mode = 2
       RETURN
     END IF
@@ -295,20 +296,20 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
     liw = Me + Ma + N
     IF( Iwork(2)<liw ) THEN
       WRITE (xern1,'(I8)') liw
-      CALL XERMSG('WNNLS','INSUFFICIENT STORAGE ALLOCATED FOR IWORK(*), NEED LIW = '//xern1,2,1)
+      ERROR STOP 'WNNLS : INSUFFICIENT STORAGE ALLOCATED FOR IWORK(*).'
       Mode = 2
       RETURN
     END IF
   END IF
   !
   IF( Mdw<Me+Ma ) THEN
-    CALL XERMSG('WNNLS','THE VALUE MDW<ME+MA IS AN ERROR',1,1)
+    ERROR STOP 'WNNLS : THE VALUE MDW<ME+MA IS AN ERROR'
     Mode = 2
     RETURN
   END IF
   !
   IF( L<0 .OR. L>N ) THEN
-    CALL XERMSG('WNNLS','L>=0 .AND. L<=N IS REQUIRED',2,1)
+    ERROR STOP 'WNNLS : L>=0 .AND. L<=N IS REQUIRED'
     Mode = 2
     RETURN
   END IF
@@ -325,4 +326,5 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !
   CALL WNLSM(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Iwork(l1),Work(1),&
     Work(l1),Work(l2),Work(l3),Work(l4),Work(l5))
+  !
 END SUBROUTINE WNNLS

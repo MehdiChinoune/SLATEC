@@ -1,5 +1,5 @@
 !** QRFAC
-SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
+PURE SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !> Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC
@@ -84,20 +84,23 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH
-  INTEGER :: M, N, Lda, Lipvt
-  INTEGER :: Ipvt(Lipvt)
-  LOGICAL :: Pivot
-  REAL(SP) :: A(Lda,N), Sigma(N), Acnorm(N), Wa(n)
+  !
+  INTEGER, INTENT(IN) :: M, N, Lda, Lipvt
+  INTEGER, INTENT(OUT) :: Ipvt(Lipvt)
+  LOGICAL, INTENT(IN) :: Pivot
+  REAL(SP), INTENT(INOUT) :: A(Lda,N)
+  REAL(SP), INTENT(OUT) :: Sigma(N), Acnorm(N), Wa(N)
+  !
   INTEGER :: i, j, jp1, k, kmax, minmn
   REAL(SP) :: ajnorm, epsmch, summ, temp
-  REAL(SP), PARAMETER :: one = 1._SP, p05 = 5.E-2_SP, zero = 0._SP
+  REAL(SP), PARAMETER :: p05 = 5.E-2_SP
   !* FIRST EXECUTABLE STATEMENT  QRFAC
   epsmch = R1MACH(4)
   !
   !     COMPUTE THE INITIAL COLUMN NORMS AND INITIALIZE SEVERAL ARRAYS.
   !
   DO j = 1, N
-    Acnorm(j) = ENORM(M,A(1,j))
+    Acnorm(j) = NORM2(A(1:M,j))
     Sigma(j) = Acnorm(j)
     Wa(j) = Sigma(j)
     IF( Pivot ) Ipvt(j) = j
@@ -132,13 +135,13 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
     !        COMPUTE THE HOUSEHOLDER TRANSFORMATION TO REDUCE THE
     !        J-TH COLUMN OF A TO A MULTIPLE OF THE J-TH UNIT VECTOR.
     !
-    ajnorm = ENORM(M-j+1,A(j,j))
-    IF( ajnorm/=zero ) THEN
-      IF( A(j,j)<zero ) ajnorm = -ajnorm
+    ajnorm = NORM2(A(j:M,j))
+    IF( ajnorm/=0._SP ) THEN
+      IF( A(j,j)<0._SP ) ajnorm = -ajnorm
       DO i = j, M
         A(i,j) = A(i,j)/ajnorm
       END DO
-      A(j,j) = A(j,j) + one
+      A(j,j) = A(j,j) + 1._SP
       !
       !        APPLY THE TRANSFORMATION TO THE REMAINING COLUMNS
       !        AND UPDATE THE NORMS.
@@ -146,7 +149,7 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
       jp1 = j + 1
       IF( N>=jp1 ) THEN
         DO k = jp1, N
-          summ = zero
+          summ = 0._SP
           DO i = j, M
             summ = summ + A(i,j)*A(i,k)
           END DO
@@ -154,11 +157,11 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
           DO i = j, M
             A(i,k) = A(i,k) - temp*A(i,j)
           END DO
-          IF( .NOT. ( .NOT. Pivot .OR. Sigma(k)==zero) ) THEN
+          IF( .NOT. ( .NOT. Pivot .OR. Sigma(k)==0._SP) ) THEN
             temp = A(j,k)/Sigma(k)
-            Sigma(k) = Sigma(k)*SQRT(MAX(zero,one-temp**2))
+            Sigma(k) = Sigma(k)*SQRT(MAX(0._SP,1._SP-temp**2))
             IF( p05*(Sigma(k)/Wa(k))**2<=epsmch ) THEN
-              Sigma(k) = ENORM(M-j,A(jp1,k))
+              Sigma(k) = NORM2(A(j+1:M,k))
               Wa(k) = Sigma(k)
             END IF
           END IF

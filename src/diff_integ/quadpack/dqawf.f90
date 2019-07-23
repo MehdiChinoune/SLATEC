@@ -1,11 +1,10 @@
 !** DQAWF
-SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
+PURE SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     Lst,Leniw,Maxp1,Lenw,Iwork,Work)
-  !> The routine calculates an approximation result to a given
-  !            Fourier integral I=Integral of F(X)*W(X) over (A,INFINITY)
-  !            where W(X) = COS(OMEGA*X) or W(X) = SIN(OMEGA*X).
-  !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=EPSABS.
+  !> The routine calculates an approximation result to a given Fourier integral
+  !  I=Integral of F(X)*W(X) over (A,INFINITY) where W(X) = COS(OMEGA*X) or
+  !  W(X) = SIN(OMEGA*X). Hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=EPSABS.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -207,16 +206,19 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Integr, Leniw, Lenw, Limlst, Lst, Maxp1, Neval, Iwork(Leniw)
-  REAL(DP) :: A, Abserr, Epsabs, Omega, Result, Work(Lenw)
+  INTEGER, INTENT(IN) :: Integr, Leniw, Limlst, Lenw, Maxp1
+  INTEGER, INTENT(OUT) :: Ier, Lst, Neval, Iwork(Leniw)
+  REAL(DP), INTENT(IN) :: A, Epsabs, Omega
+  REAL(DP), INTENT(OUT) :: Abserr, Result, Work(Lenw)
+  !
   INTEGER :: limit, ll2, lvl, l1, l2, l3, l4, l5, l6
   !
   !         CHECK VALIDITY OF LIMLST, LENIW, MAXP1 AND LENW.
@@ -248,5 +250,6 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     lvl = 0
   END IF
   IF( Ier==6 ) lvl = 1
-  IF( Ier/=0 ) CALL XERMSG('DQAWF','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier/=0 ) ERROR STOP 'DQAWF : ABNORMAL RETURN'
+  !
 END SUBROUTINE DQAWF

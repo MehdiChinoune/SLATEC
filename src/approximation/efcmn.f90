@@ -30,13 +30,15 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  USE service, ONLY : XERMSG
   USE linear, ONLY : BNDSOL, BNDACC
   USE data_handling, ONLY : SSORT
-  INTEGER :: Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
-  REAL(SP) :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(Nbkpt), Coeff(Nbkpt-Nord+1), &
-    G(Mdg,Nord+1), Ptemp(MAX(Nbkpt,Ndata)), Sddata(Ndata), W(Mdw,Nord+1), &
-    Xdata(Ndata), Xtemp(MAX(Nbkpt,Ndata)), Ydata(Ndata)
+  !
+  INTEGER, INTENT(IN) :: Lw, Mdein, Mdg, Mdw, Nbkpt, Ndata, Nord
+  INTEGER, INTENT(OUT) :: Mdeout
+  REAL(SP), INTENT(IN) :: Bkptin(Nbkpt), Sddata(Ndata), Xdata(Ndata), Ydata(Ndata)
+  REAL(SP), INTENT(INOUT) :: Bf(Nord,Nord), G(Mdg,Nord+1), W(Mdw,Nord+1)
+  REAL(SP), INTENT(OUT) :: Bkpt(Nbkpt), Coeff(Nbkpt-Nord+1), Ptemp(MAX(Nbkpt,Ndata)), &
+    Xtemp(MAX(Nbkpt,Ndata))
   !
   REAL(SP) :: dummy(1), rnorm, xmax, xmin, xval
   INTEGER :: i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1
@@ -55,20 +57,18 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   Coeff(1:n) = 0._SP
   Mdeout = -1
   IF( Nord<1 .OR. Nord>20 ) THEN
-    CALL XERMSG('EFCMN',&
-      'IN EFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',3,1)
+    ERROR STOP 'EFCMN : IN EFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.'
     RETURN
   END IF
   !
   IF( Nbkpt<2*Nord ) THEN
-    CALL XERMSG('EFCMN',&
-      'IN EFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',4,1)
+    ERROR STOP 'EFCMN : IN EFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE &
+      &B-SPLINE ORDER.'
     RETURN
   END IF
   !
   IF( Ndata<0 ) THEN
-    CALL XERMSG('EFCMN',&
-      'IN EFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',5,1)
+    ERROR STOP 'EFCMN : IN EFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.'
     RETURN
   END IF
   !
@@ -77,15 +77,14 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   IF( Lw<nb ) THEN
     WRITE (xern1,'(I8)') nb
     WRITE (xern2,'(I8)') Lw
-    CALL XERMSG('EFCMN',&
-      'IN EFC, INSUFFICIENT STORAGE FOR W(*).  CHECK FORMULA THAT READS LW>= ... .  NEED = '&
-      //xern1//' GIVEN = '//xern2,6,1)
+    ERROR STOP 'EFCMN : IN EFC, INSUFFICIENT STORAGE FOR W(*). &
+      &CHECK FORMULA THAT READS LW>= ... .'
     Mdeout = -1
     RETURN
   END IF
   !
   IF( Mdein/=1 .AND. Mdein/=2 ) THEN
-    CALL XERMSG('EFCMN','IN EFC, INPUT VALUE OF MDEIN MUST BE 1-2.',7,1)
+    ERROR STOP 'EFCMN : IN EFC, INPUT VALUE OF MDEIN MUST BE 1-2.'
     RETURN
   END IF
   !
@@ -166,7 +165,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     !
     !        Obtain B-spline function value.
     !
-    CALL BSPLVN(Bkpt,Nord,1,xval,ileft,Bf)
+    CALL BSPLVN(Bkpt,Nord,1,xval,ileft,Bf(:,1))
     !
     !        Move row into place.
     !
@@ -230,4 +229,5 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   CALL BNDSOL(1,G,Mdg,Nord,ip,ir,Coeff,n,rnorm)
   Mdeout = 1
+  !
 END SUBROUTINE EFCMN

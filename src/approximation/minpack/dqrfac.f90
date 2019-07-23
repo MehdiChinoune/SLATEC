@@ -1,5 +1,5 @@
 !** DQRFAC
-SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
+PURE SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !> Subsidiary to DNLS1, DNLS1E, DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC
@@ -33,11 +33,9 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !
   !     where
   !
-  !       M is a positive integer input variable set to the number
-  !         of rows of A.
+  !       M is a positive integer input variable set to the number of rows of A.
   !
-  !       N is a positive integer input variable set to the number
-  !         of columns of A.
+  !       N is a positive integer input variable set to the number of columns of A.
   !
   !       A is an M by N array. On input A contains the matrix for
   !         which the QR factorization is to be computed. On output
@@ -86,20 +84,23 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
-  INTEGER :: M, N, Lda, Lipvt
-  INTEGER :: Ipvt(Lipvt)
-  LOGICAL :: Pivot
-  REAL(DP) :: A(Lda,N), Sigma(N), Acnorm(N), Wa(N)
+  !
+  INTEGER, INTENT(IN) :: M, N, Lda, Lipvt
+  INTEGER, INTENT(OUT) :: Ipvt(Lipvt)
+  LOGICAL, INTENT(IN) :: Pivot
+  REAL(DP), INTENT(INOUT) :: A(Lda,N)
+  REAL(DP), INTENT(OUT) :: Sigma(N), Acnorm(N), Wa(N)
+  !
   INTEGER :: i, j, jp1, k, kmax, minmn
   REAL(DP) :: ajnorm, epsmch, summ, temp
-  REAL(DP), PARAMETER :: one = 1._DP, p05 = 5.0E-2_DP, zero = 0._DP
+  REAL(DP), PARAMETER :: p05 = 5.0E-2_DP
   !* FIRST EXECUTABLE STATEMENT  DQRFAC
   epsmch = D1MACH(4)
   !
   !     COMPUTE THE INITIAL COLUMN NORMS AND INITIALIZE SEVERAL ARRAYS.
   !
   DO j = 1, N
-    Acnorm(j) = DENORM(M,A(1,j))
+    Acnorm(j) = NORM2(A(1:M,j))
     Sigma(j) = Acnorm(j)
     Wa(j) = Sigma(j)
     IF( Pivot ) Ipvt(j) = j
@@ -134,13 +135,13 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
     !        COMPUTE THE HOUSEHOLDER TRANSFORMATION TO REDUCE THE
     !        J-TH COLUMN OF A TO A MULTIPLE OF THE J-TH UNIT VECTOR.
     !
-    ajnorm = DENORM(M-j+1,A(j,j))
-    IF( ajnorm/=zero ) THEN
-      IF( A(j,j)<zero ) ajnorm = -ajnorm
+    ajnorm = NORM2(A(j:M,j))
+    IF( ajnorm/=0._DP ) THEN
+      IF( A(j,j)<0._DP ) ajnorm = -ajnorm
       DO i = j, M
         A(i,j) = A(i,j)/ajnorm
       END DO
-      A(j,j) = A(j,j) + one
+      A(j,j) = A(j,j) + 1._DP
       !
       !        APPLY THE TRANSFORMATION TO THE REMAINING COLUMNS
       !        AND UPDATE THE NORMS.
@@ -148,7 +149,7 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
       jp1 = j + 1
       IF( N>=jp1 ) THEN
         DO k = jp1, N
-          summ = zero
+          summ = 0._DP
           DO i = j, M
             summ = summ + A(i,j)*A(i,k)
           END DO
@@ -156,11 +157,11 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
           DO i = j, M
             A(i,k) = A(i,k) - temp*A(i,j)
           END DO
-          IF( .NOT. ( .NOT. Pivot .OR. Sigma(k)==zero) ) THEN
+          IF( .NOT. ( .NOT. Pivot .OR. Sigma(k)==0._DP) ) THEN
             temp = A(j,k)/Sigma(k)
-            Sigma(k) = Sigma(k)*SQRT(MAX(zero,one-temp**2))
+            Sigma(k) = Sigma(k)*SQRT(MAX(0._DP,1._DP-temp**2))
             IF( p05*(Sigma(k)/Wa(k))**2<=epsmch ) THEN
-              Sigma(k) = DENORM(M-j,A(jp1,k))
+              Sigma(k) = NORM2(A(j+1:M,k))
               Wa(k) = Sigma(k)
             END IF
           END IF

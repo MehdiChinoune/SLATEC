@@ -69,6 +69,7 @@ PURE SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Err,Ans,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
   USE service, ONLY : D1MACH, I1MACH
+  USE interpolation, ONLY : DPPVAL
   !
   INTERFACE
     PURE REAL(DP) FUNCTION FUN(X)

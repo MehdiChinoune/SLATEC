@@ -1,12 +1,11 @@
 !** QAGPE
-SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
+PURE SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,Last)
-  !> Approximate a given definite integral I = Integral of F
-  !            over (A,B), hopefully satisfying the accuracy claim:
-  !                  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
-  !            Break points of the integration interval, where local
-  !            difficulties of the integrand may occur (e.g. singularities
-  !            or discontinuities) are provided by the user.
+  !> Approximate a given definite integral I = Integral of F over (A,B),
+  !  hopefully satisfying the accuracy claim:
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !  Break points of the integration interval, where local difficulties of the integrand
+  !  may occur (e.g. singularities or discontinuities) are provided by the user.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -205,21 +204,26 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+  !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Last, Limit, Neval, Npts2
-  INTEGER :: Iord(Limit), Level(Limit), Ndin(Npts2)
-  REAL(SP) :: A, Abserr, Epsabs, Epsrel, Result
-  REAL(SP) :: Alist(Limit), Blist(Limit), Elist(Limit), Points(Npts2), Pts(Npts2), &
+  INTEGER, INTENT(IN) :: Limit, Npts2
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval
+  INTEGER, INTENT(OUT) :: Iord(Limit), Level(Limit), Ndin(Npts2)
+  REAL(SP), INTENT(IN) :: A, B, Epsabs, Epsrel
+  REAL(SP), INTENT(OUT) :: Abserr, Result
+  REAL(SP), INTENT(IN) :: Points(Npts2)
+  REAL(SP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Pts(Npts2), &
     Rlist(Limit)
+  !
   INTEGER :: i, id, ierro, ind1, ind2, ip1, iroff1, iroff2, iroff3, j, jlow, &
     jupbnd, k, ksgn, ktmin, levcur, levmax, maxerr, nintt, nintp1, npts, nres, &
     nrmax, numrl2
-  REAL(SP) :: abseps, area, area1, area12, area2, a1, a2, B, b1, b2, correc, defabs, &
+  REAL(SP) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defabs, &
     defab1, defab2, dres, epmach, erlarg, erlast, errbnd, errmax, error1, erro12, &
     error2, errsum, ertest, oflow, resa, resabs, reseps, res3la(3), rlist2(52), &
     signn, temp, uflow
@@ -591,5 +595,6 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   300 CONTINUE
   IF( Ier>2 ) Ier = Ier - 1
   Result = Result*signn
+  !
   RETURN
 END SUBROUTINE QAGPE

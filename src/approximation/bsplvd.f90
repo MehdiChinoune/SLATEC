@@ -28,12 +28,13 @@ SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: Ileft, K, Nderiv
-  REAL(SP) :: T(:), Vnikx(K,K), X
+  INTEGER, INTENT(IN) :: Ileft, K, Nderiv
+  REAL(SP), INTENT(IN) :: T(:), X
+  REAL(SP), INTENT(INOUT) :: Vnikx(K,K)
   INTEGER :: i, ideriv, idervm, ipkmd, j, jlow, jm1, kmd, l, m
   REAL(SP) :: a(20,20), diff, fkmd, v
   !* FIRST EXECUTABLE STATEMENT  BSPLVD
-  CALL BSPLVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv,Nderiv))
+  CALL BSPLVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv:K,Nderiv))
   IF( Nderiv>1 ) THEN
     ideriv = Nderiv
     DO i = 2, Nderiv
@@ -85,4 +86,5 @@ SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
       END DO
     END DO
   END IF
+  !
 END SUBROUTINE BSPLVD

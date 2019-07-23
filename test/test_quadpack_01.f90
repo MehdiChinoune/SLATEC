@@ -57,54 +57,54 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    limit = 1
-    lenw = limit*4
-    b = pi*2._SP
-    CALL QAG(F2G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
+!    limit = 1
+!    lenw = limit*4
+!    b = pi*2._SP
+!    CALL QAG(F2G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 1
     !
-    uflow = R1MACH(1)
-    limit = 100
-    lenw = limit*4
-    CALL QAG(F2G,a,b,uflow,0._SP,key,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,2)
+!    uflow = R1MACH(1)
+!    limit = 100
+!    lenw = limit*4
+!    CALL QAG(F2G,a,b,uflow,0._SP,key,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 3 OR 1
     !
-    b = 1._SP
-    CALL QAG(F3G,a,b,epsabs,epsrel,1,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==3 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,2)
+!    b = 1._SP
+!    CALL QAG(F3G,a,b,epsabs,epsrel,1,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==3 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 6
     !
-    lenw = 1
-    CALL QAG(F1G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    lenw = 1
+!    CALL QAG(F1G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -168,73 +168,72 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL QAGI(T1,bound,inf,epsabs,epsrel,result,abserr,neval,ier,1,4,last,&
-      iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    CALL QAGI(T1,bound,inf,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-    uflow = R1MACH(1)
-    CALL QAGI(T2,bound,inf,uflow,0._SP,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
+!    uflow = R1MACH(1)
+!    CALL QAGI(T2,bound,inf,uflow,0._SP,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 3 OR 4 OR 1
     !
-    CALL QAGI(T3,bound,inf,uflow,0._SP,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,3)
+!    CALL QAGI(T3,bound,inf,uflow,0._SP,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 4 OR 3 OR 1
     !
-    CALL QAGI(T4,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 3
-    ierv(3) = 1
-    ierv(4) = 2
-    ip = 0
-    IF( ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==2 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,4)
+!    CALL QAGI(T4,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 3
+!    ierv(3) = 1
+!    ierv(4) = 2
+!    ip = 0
+!    IF( ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==2 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 5
     !
-    oflow = R1MACH(2)
-    CALL QAGI(T5,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==5 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
+!    oflow = R1MACH(2)
+!    CALL QAGI(T5,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==5 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    CALL QAGI(T1,bound,inf,epsabs,0._SP,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    CALL QAGI(T1,bound,inf,epsabs,0._SP,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -303,81 +302,81 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    leniw = 10
-    lenw = leniw*2 - npts2
-    CALL QAGP(F1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    leniw = 10
+!    lenw = leniw*2 - npts2
+!    CALL QAGP(F1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2, 4, 1 OR 3
     !
-    npts2 = 3
-    points(1) = 0.1_SP
-    leniw = limit*2 + npts2
-    lenw = limit*4 + npts2
-    uflow = R1MACH(1)
-    a = 0.1_SP
-    CALL QAGP(F2P,a,b,npts2,points,uflow,0._SP,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ierv(4) = 3
-    ip = 0
-    IF( ier==2 .OR. ier==4 .OR. ier==1 .OR. ier==3 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,4)
+!    npts2 = 3
+!    points(1) = 0.1_SP
+!    leniw = limit*2 + npts2
+!    lenw = limit*4 + npts2
+!    uflow = R1MACH(1)
+!    a = 0.1_SP
+!    CALL QAGP(F2P,a,b,npts2,points,uflow,0._SP,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ierv(4) = 3
+!    ip = 0
+!    IF( ier==2 .OR. ier==4 .OR. ier==1 .OR. ier==3 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    npts2 = 2
-    leniw = limit*2 + npts2
-    lenw = limit*4 + npts2
-    a = 0._SP
-    b = 5._SP
-    CALL QAGP(F3P,a,b,npts2,points,uflow,0._SP,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ierv(4) = 2
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
+!    npts2 = 2
+!    leniw = limit*2 + npts2
+!    lenw = limit*4 + npts2
+!    a = 0._SP
+!    b = 5._SP
+!    CALL QAGP(F3P,a,b,npts2,points,uflow,0._SP,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ierv(4) = 2
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 5
     !
-    b = 1._SP
-    CALL QAGP(F4P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==5 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    oflow = R1MACH(2)
-    CALL CPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
+!    b = 1._SP
+!    CALL QAGP(F4P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==5 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    oflow = R1MACH(2)
+!    CALL CPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    npts2 = 5
-    leniw = limit*2 + npts2
-    lenw = limit*4 + npts2
-    points(1) = p1
-    points(2) = p2
-    points(3) = 0.3E+01
-    CALL QAGP(F1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    npts2 = 5
+!    leniw = limit*2 + npts2
+!    lenw = limit*4 + npts2
+!    points(1) = p1
+!    points(2) = p2
+!    points(3) = 0.3E+01
+!    CALL QAGP(F1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -442,80 +441,80 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL QAGS(F1S,a,b,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    CALL QAGS(F1S,a,b,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-    uflow = R1MACH(1)
-    a = 0.1_SP
-    CALL QAGS(F2S,a,b,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
+!    uflow = R1MACH(1)
+!    a = 0.1_SP
+!    CALL QAGS(F2S,a,b,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    a = 0._SP
-    b = 5._SP
-    CALL QAGS(F3S,a,b,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ierv(4) = 2
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
+!    a = 0._SP
+!    b = 5._SP
+!    CALL QAGS(F3S,a,b,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ierv(4) = 2
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 4, OR 5 OR 3 OR 1 OR 0
     !
-    b = 1._SP
-    epsrel = 1.E-4_SP
-    CALL QAGS(F4S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    !      IER=4
-    ierv(1) = ier
-    ierv(2) = 5
-    ierv(3) = 3
-    ierv(4) = 1
-    ierv(5) = 0
-    ip = 0
-    IF( ier==5 .OR. ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,5)
+!    b = 1._SP
+!    epsrel = 1.E-4_SP
+!    CALL QAGS(F4S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    !      IER=4
+!    ierv(1) = ier
+!    ierv(2) = 5
+!    ierv(3) = 3
+!    ierv(4) = 1
+!    ierv(5) = 0
+!    ip = 0
+!    IF( ier==5 .OR. ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,5)
     !
     ! TEST ON IER = 5
     !
-    oflow = R1MACH(2)
-    CALL QAGS(F5S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==5 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
+!    oflow = R1MACH(2)
+!    CALL QAGS(F5S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==5 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    CALL QAGS(F1S,a,b,epsabs,0._SP,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    CALL QAGS(F1S,a,b,epsabs,0._SP,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -577,47 +576,47 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    CALL QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 1
     !
-    uflow = R1MACH(1)
-    CALL QAWC(F0C,a,b,c,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
+!    uflow = R1MACH(1)
+!    CALL QAWC(F0C,a,b,c,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 3 OR 1
     !
-    CALL QAWC(F1C,0._SP,b,c,uflow,0._SP,result,abserr,neval,ier,limit,&
-      lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==3 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
+!    CALL QAWC(F1C,0._SP,b,c,uflow,0._SP,result,abserr,neval,ier,limit,&
+!      lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==3 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 6
     !
-    epsabs = 0._SP
-    epsrel = 0._SP
-    CALL QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    epsabs = 0._SP
+!    epsrel = 0._SP
+!    CALL QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -680,57 +679,57 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    limlst = 3
-    leniw = 403
-    lenw = leniw*2 + maxp1*25
-    CALL QAWF(F0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
-      leniw,maxp1,lenw,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    limlst = 3
+!    leniw = 403
+!    lenw = leniw*2 + maxp1*25
+!    CALL QAWF(F0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
+!      leniw,maxp1,lenw,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 3 OR 4 OR 1
     !
-    limlst = 50
-    leniw = limit*2 + limlst
-    lenw = leniw*2 + maxp1*25
-    uflow = R1MACH(1)
-    CALL QAWF(F1F,a,0._SP,1,uflow,result,abserr,neval,ier,limlst,lst,leniw,&
-      maxp1,lenw,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,3)
+!    limlst = 50
+!    leniw = limit*2 + limlst
+!    lenw = leniw*2 + maxp1*25
+!    uflow = R1MACH(1)
+!    CALL QAWF(F1F,a,0._SP,1,uflow,result,abserr,neval,ier,limlst,lst,leniw,&
+!      maxp1,lenw,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 6
     !
-    limlst = 50
-    leniw = 20
-    CALL QAWF(F0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
-      leniw,maxp1,lenw,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    limlst = 50
+!    leniw = 20
+!    CALL QAWF(F0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
+!      leniw,maxp1,lenw,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 7
     !
-    limlst = 50
-    leniw = 52
-    lenw = leniw*2 + maxp1*25
-    CALL QAWF(F0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
-      leniw,maxp1,lenw,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==7 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,7,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    limlst = 50
+!    leniw = 52
+!    lenw = leniw*2 + maxp1*25
+!    CALL QAWF(F0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
+!      leniw,maxp1,lenw,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==7 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,7,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -795,69 +794,69 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    leniw = 2
-    lenw = leniw*2 + maxp1*25
-    CALL QAWO(F0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    leniw = 2
+!    lenw = leniw*2 + maxp1*25
+!    CALL QAWO(F0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-    uflow = R1MACH(1)
-    leniw = 400
-    lenw = leniw*2 + maxp1*25
-    CALL QAWO(F0O,a,b,omega,integr,uflow,0._SP,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,3)
+!    uflow = R1MACH(1)
+!    leniw = 400
+!    lenw = leniw*2 + maxp1*25
+!    CALL QAWO(F0O,a,b,omega,integr,uflow,0._SP,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 3 OR 4 OR 1
     !
-    b = 5._SP
-    omega = 0._SP
-    integr = 1
-    CALL QAWO(F1O,a,b,omega,integr,uflow,0._SP,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,3)
+!    b = 5._SP
+!    omega = 0._SP
+!    integr = 1
+!    CALL QAWO(F1O,a,b,omega,integr,uflow,0._SP,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 5
     !
-    b = 1._SP
-    oflow = R1MACH(2)
-    CALL QAWO(F2O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==5 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
+!    b = 1._SP
+!    oflow = R1MACH(2)
+!    CALL QAWO(F2O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==5 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    integr = 3
-    CALL QAWO(F0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    integr = 3
+!    CALL QAWO(F0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -921,47 +920,47 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL QAWS(F0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,ier,&
-      2,8,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    CALL QAWS(F0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,ier,&
+!      2,8,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 1
     !
-    uflow = R1MACH(1)
-    CALL QAWS(F0WS,a,b,alfa,beta,integr,uflow,0._SP,result,abserr,neval,ier,&
-      limit,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
+!    uflow = R1MACH(1)
+!    CALL QAWS(F0WS,a,b,alfa,beta,integr,uflow,0._SP,result,abserr,neval,ier,&
+!      limit,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 3 OR 1
     !
-    CALL QAWS(F1WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,ier,&
-      limit,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==3 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
+!    CALL QAWS(F1WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,ier,&
+!      limit,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==3 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 6
     !
-    integr = 0
-    CALL QAWS(F1WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,ier,&
-      limit,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL CPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    integr = 0
+!    CALL QAWS(F1WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,ier,&
+!      limit,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL CPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -1019,23 +1018,23 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL QNG(F2N,a,b,uflow,0._SP,result,abserr,neval,ier)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    IF( Kprint/=0 ) CALL CPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
+!    CALL QNG(F2N,a,b,uflow,0._SP,result,abserr,neval,ier)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    IF( Kprint/=0 ) CALL CPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    epsabs = 0._SP
-    epsrel = 0._SP
-    CALL QNG(F1N,a,b,epsabs,0._SP,result,abserr,neval,ier)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    IF( Kprint/=0 ) CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    epsabs = 0._SP
+!    epsrel = 0._SP
+!    CALL QNG(F1N,a,b,epsabs,0._SP,result,abserr,neval,ier)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._SP .AND. abserr==0._SP .AND. neval==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    IF( Kprint/=0 ) CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -1046,7 +1045,7 @@ CONTAINS
     END IF
   END SUBROUTINE CQNG
   !** F0C
-  REAL(SP) FUNCTION F0C(X)
+  REAL(SP) PURE FUNCTION F0C(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1059,12 +1058,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F0C
     F0C = 1._SP/(X*X+1.E-4_SP)
   END FUNCTION F0C
   !** F0F
-  REAL(SP) FUNCTION F0F(X)
+  REAL(SP) PURE FUNCTION F0F(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1077,13 +1076,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F0F
     F0F = 0._SP
     IF( X/=0._SP ) F0F = SIN(0.5E+02_SP*X)/(X*SQRT(X))
   END FUNCTION F0F
   !** F0O
-  REAL(SP) FUNCTION F0O(X)
+  REAL(SP) PURE FUNCTION F0O(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1096,12 +1095,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F0O
     F0O = (2._SP*SIN(X))**14
   END FUNCTION F0O
   !** F0S
-  REAL(SP) FUNCTION F0S(X)
+  REAL(SP) PURE FUNCTION F0S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1114,13 +1113,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F0S
     F0S = 0._SP
     IF( X/=0.0 ) F0S = 1._SP/SQRT(X)
   END FUNCTION F0S
   !** F0WS
-  REAL(SP) FUNCTION F0WS(X)
+  REAL(SP) PURE FUNCTION F0WS(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1133,12 +1132,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F0WS
     F0WS = SIN(10._SP*X)
   END FUNCTION F0WS
   !** F1C
-  REAL(SP) FUNCTION F1C(X)
+  REAL(SP) PURE FUNCTION F1C(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1151,13 +1150,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F1C
     F1C = 0._SP
     IF( X/=0.33_SP ) F1C = (X-0.5_SP)*ABS(X-0.33_SP)**(-0.9_SP)
   END FUNCTION F1C
   !** F1F
-  REAL(SP) FUNCTION F1F(X)
+  REAL(SP) PURE FUNCTION F1F(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1170,7 +1169,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X, x1, y
+    REAL(SP), INTENT(IN) :: X
+    REAL(SP) :: x1, y
     !* FIRST EXECUTABLE STATEMENT  F1F
     x1 = X + 1._SP
     F1F = 5._SP/x1/x1
@@ -1178,7 +1178,7 @@ CONTAINS
     IF( y>3.1415926535897932 ) F1F = 0._SP
   END FUNCTION F1F
   !** F1G
-  REAL(SP) FUNCTION F1G(X)
+  REAL(SP) PURE FUNCTION F1G(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1191,13 +1191,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     REAL(SP), PARAMETER :: pi = 3.1415926535897932_SP
     !* FIRST EXECUTABLE STATEMENT  F1G
     F1G = 2._SP/(2._SP+SIN(10._SP*pi*X))
   END FUNCTION F1G
   !** F1N
-  REAL(SP) FUNCTION F1N(X)
+  REAL(SP) PURE FUNCTION F1N(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1210,12 +1210,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F1N
     F1N = 1._SP/(X**4+X**2+1._SP)
   END FUNCTION F1N
   !** F1O
-  REAL(SP) FUNCTION F1O(X)
+  REAL(SP) PURE FUNCTION F1O(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1228,13 +1228,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F1O
     F1O = 1._SP
     IF( X>3.1415926535897932 ) F1O = 0._SP
   END FUNCTION F1O
   !** F1P
-  REAL(SP) FUNCTION F1P(X)
+  REAL(SP) PURE FUNCTION F1P(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1247,7 +1247,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: alfa1, alfa2, X, d1, d2
+    REAL(SP), INTENT(IN) :: X
+    REAL(SP) :: alfa1, alfa2, d1, d2
     !  P1 = 1/7, P2 = 2/3
     REAL(SP), PARAMETER :: p1 = 0.1428571428571428_SP
     REAL(SP), PARAMETER :: p2 = 0.6666666666666667_SP
@@ -1260,7 +1261,7 @@ CONTAINS
     IF( d1/=0._SP .AND. d2/=0._SP ) F1P = d1**alfa1 + d2**alfa2
   END FUNCTION F1P
   !** F1S
-  REAL(SP) FUNCTION F1S(X)
+  REAL(SP) PURE FUNCTION F1S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1273,12 +1274,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F1S
     F1S = 2._SP/(2._SP+SIN(0.314159E+02_SP*X))
   END FUNCTION F1S
   !** F1WS
-  REAL(SP) FUNCTION F1WS(X)
+  REAL(SP) PURE FUNCTION F1WS(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1291,12 +1292,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F1WS
     F1WS = ABS(X-0.33_SP)**(-0.999_SP)
   END FUNCTION F1WS
   !** F2G
-  REAL(SP) FUNCTION F2G(X)
+  REAL(SP) PURE FUNCTION F2G(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1309,12 +1310,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F2G
     F2G = X*SIN(0.3E+02_SP*X)*COS(0.5E+02_SP*X)
   END FUNCTION F2G
   !** F2N
-  REAL(SP) FUNCTION F2N(X)
+  REAL(SP) PURE FUNCTION F2N(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1327,12 +1328,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F2N
     F2N = X**(-0.9_SP)
   END FUNCTION F2N
   !** F2O
-  REAL(SP) FUNCTION F2O(X)
+  REAL(SP) PURE FUNCTION F2O(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1345,13 +1346,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F2O
     F2O = 0._SP
     IF( X/=0._SP ) F2O = 1._SP/(X*X*SQRT(X))
   END FUNCTION F2O
   !** F2P
-  REAL(SP) FUNCTION F2P(X)
+  REAL(SP) PURE FUNCTION F2P(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1364,12 +1365,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F2P
     F2P = SIN(0.314159E+03_SP*X)/(0.314159E+01_SP*X)
   END FUNCTION F2P
   !** F2S
-  REAL(SP) FUNCTION F2S(X)
+  REAL(SP) PURE FUNCTION F2S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1382,13 +1383,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F2S
     F2S = 100._SP
     IF( X/=0._SP ) F2S = SIN(0.314159E+03_SP*X)/(0.314159E+01_SP*X)
   END FUNCTION F2S
   !** F3G
-  REAL(SP) FUNCTION F3G(X)
+  REAL(SP) PURE FUNCTION F3G(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1401,12 +1402,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F3G
     F3G = ABS(X-0.33_SP)**(-0.9_SP)
   END FUNCTION F3G
   !** F3P
-  REAL(SP) FUNCTION F3P(X)
+  REAL(SP) PURE FUNCTION F3P(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1419,13 +1420,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F3P
     F3P = 1._SP
     IF( X>3.1415926535897932 ) F3P = 0._SP
   END FUNCTION F3P
   !** F3S
-  REAL(SP) FUNCTION F3S(X)
+  REAL(SP) PURE FUNCTION F3S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1438,13 +1439,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F3S
     F3S = 1._SP
     IF( X>3.1415926535897932 ) F3S = 0._SP
   END FUNCTION F3S
   !** F4P
-  REAL(SP) FUNCTION F4P(X)
+  REAL(SP) PURE FUNCTION F4P(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1457,13 +1458,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F4P
     F4P = 0._SP
     IF( X>0.0 ) F4P = 1._SP/(X*SQRT(X))
   END FUNCTION F4P
   !** F4S
-  REAL(SP) FUNCTION F4S(X)
+  REAL(SP) PURE FUNCTION F4S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1476,7 +1477,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F4S
     IF( X==.33_SP ) THEN
       F4S = 0._SP
@@ -1487,7 +1488,7 @@ CONTAINS
     RETURN
   END FUNCTION F4S
   !** F5S
-  REAL(SP) FUNCTION F5S(X)
+  REAL(SP) PURE FUNCTION F5S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1500,13 +1501,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: X
+    REAL(SP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  F5S
     F5S = 0._SP
     IF( X/=0.0 ) F5S = 1._SP/(X*SQRT(X))
   END FUNCTION F5S
   !** T0
-  REAL(SP) FUNCTION T0(X)
+  REAL(SP) PURE FUNCTION T0(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1519,7 +1520,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: a, b, X, x1, y
+    REAL(SP), INTENT(IN) :: X
+    REAL(SP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  T0
     a = 0._SP
     b = 1._SP
@@ -1528,7 +1530,7 @@ CONTAINS
     T0 = (b-a)*F0S(y)/x1/x1
   END FUNCTION T0
   !** T1
-  REAL(SP) FUNCTION T1(X)
+  REAL(SP) PURE FUNCTION T1(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1541,7 +1543,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: a, b, X, x1, y
+    REAL(SP), INTENT(IN) :: X
+    REAL(SP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  T1
     a = 0._SP
     b = 1._SP
@@ -1550,7 +1553,7 @@ CONTAINS
     T1 = (b-a)*F1S(y)/x1/x1
   END FUNCTION T1
   !** T2
-  REAL(SP) FUNCTION T2(X)
+  REAL(SP) PURE FUNCTION T2(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1563,7 +1566,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: a, b, X, x1, y
+    REAL(SP), INTENT(IN) :: X
+    REAL(SP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  T2
     a = 0.1_SP
     b = 1._SP
@@ -1572,7 +1576,7 @@ CONTAINS
     T2 = (b-a)*F2S(y)/x1/x1
   END FUNCTION T2
   !** T3
-  REAL(SP) FUNCTION T3(X)
+  REAL(SP) PURE FUNCTION T3(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1585,7 +1589,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: a, b, X, x1, y
+    REAL(SP), INTENT(IN) :: X
+    REAL(SP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  T3
     a = 0._SP
     b = 5._SP
@@ -1594,7 +1599,7 @@ CONTAINS
     T3 = (b-a)*F3S(y)/x1/x1
   END FUNCTION T3
   !** T4
-  REAL(SP) FUNCTION T4(X)
+  REAL(SP) PURE FUNCTION T4(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1607,7 +1612,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: a, b, X, x1, y
+    REAL(SP), INTENT(IN) :: X
+    REAL(SP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  T4
     a = 0._SP
     b = 1._SP
@@ -1616,7 +1622,7 @@ CONTAINS
     T4 = (b-a)*F4S(y)/x1/x1
   END FUNCTION T4
   !** T5
-  REAL(SP) FUNCTION T5(X)
+  REAL(SP) PURE FUNCTION T5(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1629,7 +1635,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(SP) :: a, b, X, x1, y
+    REAL(SP), INTENT(IN) :: X
+    REAL(SP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  T5
     a = 0._SP
     b = 1._SP

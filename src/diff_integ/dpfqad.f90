@@ -1,8 +1,7 @@
 !** DPFQAD
-SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
-  !> Compute the integral on (X1,X2) of a product of a
-  !            function F and the ID-th derivative of a B-spline,
-  !            (PP-representation).
+PURE SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
+  !> Compute the integral on (X1,X2) of a product of a function F and
+  !  the ID-th derivative of a B-spline, (PP-representation).
   !***
   ! **Library:**   SLATEC
   !***
@@ -75,8 +74,8 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
-  USE interpolation, ONLY : DPPGQ8, DINTRV
+  USE service, ONLY : D1MACH
+  USE interpolation, ONLY : DINTRV
   !
   INTERFACE
     PURE REAL(DP) FUNCTION F(X)
@@ -84,8 +83,12 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
       REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Id, Ierr, K, Ldc, Lxi
-  REAL(DP) :: Quad, Tol, X1, X2, C(Ldc,Lxi), Xi(Lxi+1)
+  INTEGER, INTENT(IN) :: Id, K, Ldc, Lxi
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: X1, X2, C(Ldc,Lxi), Xi(Lxi+1)
+  REAL(DP), INTENT(INOUT) :: Tol
+  REAL(DP), INTENT(OUT) :: Quad
+  !
   INTEGER :: iflg, ilo, il1, il2, inppv, left, mf1, mf2
   REAL(DP) :: a, aa, ans, b, bb, q, ta, tb, wtol
   !
@@ -93,16 +96,16 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   Ierr = 1
   Quad = 0._DP
   IF( K<1 ) THEN
-    CALL XERMSG('DPFQAD','K DOES NOT SATISFY K>=1',2,1)
+    ERROR STOP 'DPFQAD : K DOES NOT SATISFY K>=1'
     RETURN
   ELSEIF( Ldc<K ) THEN
-    CALL XERMSG('DPFQAD','LDC DOES NOT SATISFY LDC>=K',2,1)
+    ERROR STOP 'DPFQAD : LDC DOES NOT SATISFY LDC>=K'
     RETURN
   ELSEIF( Id<0 .OR. Id>=K ) THEN
-    CALL XERMSG('DPFQAD','ID DOES NOT SATISFY 0<=ID<K',2,1)
+    ERROR STOP 'DPFQAD : ID DOES NOT SATISFY 0<=ID<K'
     RETURN
   ELSEIF( Lxi<1 ) THEN
-    CALL XERMSG('DPFQAD','LXI DOES NOT SATISFY LXI>=1',2,1)
+    ERROR STOP 'DPFQAD : LXI DOES NOT SATISFY LXI>=1'
     RETURN
   ELSE
     wtol = D1MACH(4)
@@ -133,6 +136,7 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
     END IF
   END IF
   !
-  CALL XERMSG('DPFQAD','TOL IS LESS DTOL OR GREATER THAN 0.1',2,1)
+  ERROR STOP 'DPFQAD : TOL IS LESS DTOL OR GREATER THAN 0.1'
+  !
   RETURN
 END SUBROUTINE DPFQAD

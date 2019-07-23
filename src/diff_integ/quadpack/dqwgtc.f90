@@ -1,7 +1,7 @@
 !** DQWGTC
-REAL(DP) FUNCTION DQWGTC(X,C,P2,P3,P4,Kp)
-  !> This function subprogram is used together with the
-  !            routine DQAWC and defines the WEIGHT function.
+REAL(DP) PURE FUNCTION DQWGTC(X,C,P2,P3,P4,Kp)
+  !> This function subprogram is used together with the routine
+  !  DQAWC and defines the WEIGHT function.
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,8 +27,9 @@ REAL(DP) FUNCTION DQWGTC(X,C,P2,P3,P4,Kp)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  REAL(DP) :: C, P2, P3, P4, X
-  INTEGER :: Kp
+  INTEGER, INTENT(IN) :: Kp
+  REAL(DP), INTENT(IN) :: C, P2, P3, P4, X
   !* FIRST EXECUTABLE STATEMENT  DQWGTC
   DQWGTC = 1._DP/(X-C)
+  !
 END FUNCTION DQWGTC

@@ -56,54 +56,54 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    limit = 1
-    lenw = limit*4
-    b = pi*2._DP
-    CALL DQAG(DF2G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
+!    limit = 1
+!    lenw = limit*4
+!    b = pi*2._DP
+!    CALL DQAG(DF2G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 1
     !
-    uflow = D1MACH(1)
-    limit = 100
-    lenw = limit*4
-    CALL DQAG(DF2G,a,b,uflow,0._DP,key,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,2)
+!    uflow = D1MACH(1)
+!    limit = 100
+!    lenw = limit*4
+!    CALL DQAG(DF2G,a,b,uflow,0._DP,key,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 3 OR 1
     !
-    b = 1._DP
-    CALL DQAG(DF3G,a,b,epsabs,epsrel,1,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==3 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,2)
+!    b = 1._DP
+!    CALL DQAG(DF3G,a,b,epsabs,epsrel,1,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==3 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 6
     !
-    lenw = 1
-    CALL DQAG(DF1G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    lenw = 1
+!    CALL DQAG(DF1G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -167,74 +167,74 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL DQAGI(DT1,bound,inf,epsabs,epsrel,result,abserr,neval,ier,1,4,last,&
-      iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    CALL DQAGI(DT1,bound,inf,epsabs,epsrel,result,abserr,neval,ier,1,4,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-    uflow = D1MACH(1)
-    CALL DQAGI(DT2,bound,inf,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
+!    uflow = D1MACH(1)
+!    CALL DQAGI(DT2,bound,inf,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    CALL DQAGI(DT3,bound,inf,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ierv(4) = 2
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
+!    CALL DQAGI(DT3,bound,inf,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ierv(4) = 2
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 4 OR 3 OR 1 OR 0
     !
-    CALL DQAGI(DT4,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 3
-    ierv(3) = 1
-    ierv(4) = 0
-    ip = 0
-    IF( ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,4)
+!    CALL DQAGI(DT4,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 3
+!    ierv(3) = 1
+!    ierv(4) = 0
+!    ip = 0
+!    IF( ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 5
     !
-    oflow = D1MACH(2)
-    CALL DQAGI(DT5,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==5 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
+!    oflow = D1MACH(2)
+!    CALL DQAGI(DT5,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==5 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    CALL DQAGI(DT1,bound,inf,epsabs,0._DP,result,abserr,neval,ier,limit,&
-      lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    CALL DQAGI(DT1,bound,inf,epsabs,0._DP,result,abserr,neval,ier,limit,&
+!      lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -303,81 +303,81 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    leniw = 10
-    lenw = leniw*2 - npts2
-    CALL DQAGP(DF1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    leniw = 10
+!    lenw = leniw*2 - npts2
+!    CALL DQAGP(DF1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2, 4, 1 OR 3
     !
-    npts2 = 3
-    points(1) = 0.1_DP
-    leniw = limit*2 + npts2
-    lenw = limit*4 + npts2
-    uflow = D1MACH(1)
-    a = 0.1_DP
-    CALL DQAGP(DF2P,a,b,npts2,points,uflow,0._DP,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ierv(4) = 3
-    ip = 0
-    IF( ier==2 .OR. ier==4 .OR. ier==1 .OR. ier==3 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,4)
+!    npts2 = 3
+!    points(1) = 0.1_DP
+!    leniw = limit*2 + npts2
+!    lenw = limit*4 + npts2
+!    uflow = D1MACH(1)
+!    a = 0.1_DP
+!    CALL DQAGP(DF2P,a,b,npts2,points,uflow,0._DP,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ierv(4) = 3
+!    ip = 0
+!    IF( ier==2 .OR. ier==4 .OR. ier==1 .OR. ier==3 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    npts2 = 2
-    leniw = limit*2 + npts2
-    lenw = limit*4 + npts2
-    a = 0._DP
-    b = 5._DP
-    CALL DQAGP(DF3P,a,b,npts2,points,uflow,0._DP,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ierv(4) = 2
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
+!    npts2 = 2
+!    leniw = limit*2 + npts2
+!    lenw = limit*4 + npts2
+!    a = 0._DP
+!    b = 5._DP
+!    CALL DQAGP(DF3P,a,b,npts2,points,uflow,0._DP,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ierv(4) = 2
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 5
     !
-    b = 1._DP
-    CALL DQAGP(DF4P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==5 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    oflow = D1MACH(2)
-    CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
+!    b = 1._DP
+!    CALL DQAGP(DF4P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==5 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    oflow = D1MACH(2)
+!    CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    npts2 = 5
-    leniw = limit*2 + npts2
-    lenw = limit*4 + npts2
-    points(1) = p1
-    points(2) = p2
-    points(3) = 0.3E+01_DP
-    CALL DQAGP(DF1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    npts2 = 5
+!    leniw = limit*2 + npts2
+!    lenw = limit*4 + npts2
+!    points(1) = p1
+!    points(2) = p2
+!    points(3) = 0.3E+01_DP
+!    CALL DQAGP(DF1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -443,78 +443,78 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL DQAGS(DF1S,a,b,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    CALL DQAGS(DF1S,a,b,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,1,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-    uflow = D1MACH(1)
-    a = 0.1_DP
-    CALL DQAGS(DF2S,a,b,uflow,0._DP,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
+!    uflow = D1MACH(1)
+!    a = 0.1_DP
+!    CALL DQAGS(DF2S,a,b,uflow,0._DP,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,2,Kprint,ip,exact2,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    a = 0._DP
-    b = 5._DP
-    CALL DQAGS(DF3S,a,b,uflow,0._DP,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ierv(4) = 2
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
+!    a = 0._DP
+!    b = 5._DP
+!    CALL DQAGS(DF3S,a,b,uflow,0._DP,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ierv(4) = 2
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,3,Kprint,ip,exact3,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 4, OR 5 OR 3 OR 1 OR 0
     !
-    b = 1._DP
-    CALL DQAGS(DF4S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ierv(2) = 5
-    ierv(3) = 3
-    ierv(4) = 1
-    ierv(5) = 0
-    ip = 0
-    IF( ier==5 .OR. ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,5)
+!    b = 1._DP
+!    CALL DQAGS(DF4S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 5
+!    ierv(3) = 3
+!    ierv(4) = 1
+!    ierv(5) = 0
+!    ip = 0
+!    IF( ier==5 .OR. ier==4 .OR. ier==3 .OR. ier==1 .OR. ier==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,4,Kprint,ip,exact4,result,abserr,neval,ierv,5)
     !
     ! TEST ON IER = 5
     !
-    oflow = D1MACH(2)
-    CALL DQAGS(DF5S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
-      iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==5 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
+!    oflow = D1MACH(2)
+!    CALL DQAGS(DF5S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==5 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    CALL DQAGS(DF1S,a,b,epsabs,0._DP,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    CALL DQAGS(DF1S,a,b,epsabs,0._DP,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -576,48 +576,48 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL DQAWC(DF0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,1,4,last,&
-      iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    CALL DQAWC(DF0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,1,4,last,&
+!      iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 1
     !
-    uflow = D1MACH(1)
-    CALL DQAWC(DF0C,a,b,c,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
+!    uflow = D1MACH(1)
+!    CALL DQAWC(DF0C,a,b,c,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 3 OR 1
     !
-    CALL DQAWC(DF1C,0._DP,b,c,uflow,0._DP,result,abserr,neval,ier,limit,&
-      lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==3 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
+!    CALL DQAWC(DF1C,0._DP,b,c,uflow,0._DP,result,abserr,neval,ier,limit,&
+!      lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==3 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 6
     !
-    epsabs = 0._DP
-    epsrel = 0._DP
-    CALL DQAWC(DF0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
-      last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    epsabs = 0._DP
+!    epsrel = 0._DP
+!    CALL DQAWC(DF0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
+!      last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -680,58 +680,58 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    limlst = 3
-    leniw = 403
-    lenw = leniw*2 + maxp1*25
-    CALL DQAWF(DF0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
-      leniw,maxp1,lenw,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    limlst = 3
+!    leniw = 403
+!    lenw = leniw*2 + maxp1*25
+!    CALL DQAWF(DF0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
+!      leniw,maxp1,lenw,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    limlst = 50
-    leniw = limit*2 + limlst
-    lenw = leniw*2 + maxp1*25
-    uflow = D1MACH(1)
-    CALL DQAWF(DF1F,a,0._DP,1,uflow,result,abserr,neval,ier,limlst,lst,&
-      leniw,maxp1,lenw,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ierv(4) = 2
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,4)
+!    limlst = 50
+!    leniw = limit*2 + limlst
+!    lenw = leniw*2 + maxp1*25
+!    uflow = D1MACH(1)
+!    CALL DQAWF(DF1F,a,0._DP,1,uflow,result,abserr,neval,ier,limlst,lst,&
+!      leniw,maxp1,lenw,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ierv(4) = 2
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 6
     !
-    limlst = 50
-    leniw = 20
-    CALL DQAWF(DF0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
-      leniw,maxp1,lenw,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    limlst = 50
+!    leniw = 20
+!    CALL DQAWF(DF0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
+!      leniw,maxp1,lenw,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 7
     !
-    limlst = 50
-    leniw = 52
-    lenw = leniw*2 + maxp1*25
-    CALL DQAWF(DF0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
-      leniw,maxp1,lenw,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==7 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,7,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    limlst = 50
+!    leniw = 52
+!    lenw = leniw*2 + maxp1*25
+!    CALL DQAWF(DF0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
+!      leniw,maxp1,lenw,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==7 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,7,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -796,70 +796,70 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    leniw = 2
-    lenw = leniw*2 + maxp1*25
-    CALL DQAWO(DF0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    leniw = 2
+!    lenw = leniw*2 + maxp1*25
+!    CALL DQAWO(DF0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-    uflow = D1MACH(1)
-    leniw = 400
-    lenw = leniw*2 + maxp1*25
-    CALL DQAWO(DF0O,a,b,omega,integr,uflow,0._DP,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,3)
+!    uflow = D1MACH(1)
+!    leniw = 400
+!    lenw = leniw*2 + maxp1*25
+!    CALL DQAWO(DF0O,a,b,omega,integr,uflow,0._DP,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==4 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,3)
     !
     ! TEST ON IER = 3 OR 4 OR 1 OR 2
     !
-    b = 5._DP
-    omega = 0._DP
-    integr = 1
-    CALL DQAWO(DF1O,a,b,omega,integr,uflow,0._DP,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 4
-    ierv(3) = 1
-    ierv(4) = 2
-    ip = 0
-    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,4)
+!    b = 5._DP
+!    omega = 0._DP
+!    integr = 1
+!    CALL DQAWO(DF1O,a,b,omega,integr,uflow,0._DP,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 4
+!    ierv(3) = 1
+!    ierv(4) = 2
+!    ip = 0
+!    IF( ier==3 .OR. ier==4 .OR. ier==1 .OR. ier==2 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,3,Kprint,ip,pi,result,abserr,neval,ierv,4)
     !
     ! TEST ON IER = 5
     !
-    b = 1._DP
-    oflow = D1MACH(2)
-    CALL DQAWO(DF2O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==5 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
+!    b = 1._DP
+!    oflow = D1MACH(2)
+!    CALL DQAWO(DF2O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==5 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    integr = 3
-    CALL DQAWO(DF0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
-      leniw,maxp1,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
-      last==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    integr = 3
+!    CALL DQAWO(DF0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
+!      leniw,maxp1,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 .AND. &
+!      last==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -923,47 +923,47 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL DQAWS(DF0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,&
-      ier,2,8,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    CALL DQAWS(DF0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,&
+!      ier,2,8,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,1,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 2 OR 1
     !
-    uflow = D1MACH(1)
-    CALL DQAWS(DF0WS,a,b,alfa,beta,integr,uflow,0._DP,result,abserr,neval,&
-      ier,limit,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==2 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
+!    uflow = D1MACH(1)
+!    CALL DQAWS(DF0WS,a,b,alfa,beta,integr,uflow,0._DP,result,abserr,neval,&
+!      ier,limit,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==2 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,2,Kprint,ip,exact0,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 3 OR 1
     !
-    CALL DQAWS(DF1WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,&
-      ier,limit,lenw,last,iwork,work)
-    ierv(1) = ier
-    ierv(2) = 1
-    ip = 0
-    IF( ier==3 .OR. ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
+!    CALL DQAWS(DF1WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,&
+!      ier,limit,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ierv(2) = 1
+!    ip = 0
+!    IF( ier==3 .OR. ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,3,Kprint,ip,exact1,result,abserr,neval,ierv,2)
     !
     ! TEST ON IER = 6
     !
-    integr = 0
-    CALL DQAWS(DF1WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,&
-      ier,limit,lenw,last,iwork,work)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
+!    integr = 0
+!    CALL DQAWS(DF1WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,&
+!      ier,limit,lenw,last,iwork,work)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    CALL DPRIN(Lun,6,Kprint,ip,exact0,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -1022,23 +1022,23 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL DQNG(DF2N,a,b,uflow,0._DP,result,abserr,neval,ier)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==1 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    IF( Kprint/=0 ) CALL DPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
+!    CALL DQNG(DF2N,a,b,uflow,0._DP,result,abserr,neval,ier)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==1 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    IF( Kprint/=0 ) CALL DPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
-    epsabs = 0._DP
-    epsrel = 0._DP
-    CALL DQNG(DF1N,a,b,epsabs,0._DP,result,abserr,neval,ier)
-    ierv(1) = ier
-    ip = 0
-    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 ) ip = 1
-    IF( ip==0 ) Ipass = 0
-    IF( Kprint/=0 ) CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
+!    epsabs = 0._DP
+!    epsrel = 0._DP
+!    CALL DQNG(DF1N,a,b,epsabs,0._DP,result,abserr,neval,ier)
+!    ierv(1) = ier
+!    ip = 0
+!    IF( ier==6 .AND. result==0._DP .AND. abserr==0._DP .AND. neval==0 ) ip = 1
+!    IF( ip==0 ) Ipass = 0
+!    IF( Kprint/=0 ) CALL DPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF( Kprint>=1 ) THEN
       IF( Ipass==0 ) THEN
@@ -1049,7 +1049,7 @@ CONTAINS
     END IF
   END SUBROUTINE CDQNG
   !** DF0C
-  REAL(DP) FUNCTION DF0C(X)
+  REAL(DP) PURE FUNCTION DF0C(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1062,12 +1062,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0C
     DF0C = 1._DP/(X*X+1.E-4_DP)
   END FUNCTION DF0C
   !** DF0F
-  REAL(DP) FUNCTION DF0F(X)
+  REAL(DP) PURE FUNCTION DF0F(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1080,13 +1080,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0F
     DF0F = 0._DP
     IF( X/=0._DP ) DF0F = SIN(0.5E+02_DP*X)/(X*SQRT(X))
   END FUNCTION DF0F
   !** DF0O
-  REAL(DP) FUNCTION DF0O(X)
+  REAL(DP) PURE FUNCTION DF0O(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1099,12 +1099,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0O
     DF0O = (2._DP*SIN(X))**14
   END FUNCTION DF0O
   !** DF0S
-  REAL(DP) FUNCTION DF0S(X)
+  REAL(DP) PURE FUNCTION DF0S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1117,13 +1117,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0S
     DF0S = 0._DP
     IF( X/=0._DP ) DF0S = 1._DP/SQRT(X)
   END FUNCTION DF0S
   !** DF0WS
-  REAL(DP) FUNCTION DF0WS(X)
+  REAL(DP) PURE FUNCTION DF0WS(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1136,12 +1136,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF0WS
     DF0WS = SIN(0.1E+02_DP*X)
   END FUNCTION DF0WS
   !** DF1C
-  REAL(DP) FUNCTION DF1C(X)
+  REAL(DP) PURE FUNCTION DF1C(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1154,13 +1154,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1C
     DF1C = 0._DP
     IF( X/=0.33_DP ) DF1C = (X-0.5_DP)*ABS(X-0.33_DP)**(-0.9_DP)
   END FUNCTION DF1C
   !** DF1F
-  REAL(DP) FUNCTION DF1F(X)
+  REAL(DP) PURE FUNCTION DF1F(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1173,7 +1173,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X, x1, y
+    REAL(DP), INTENT(IN) :: X
+    REAL(DP) :: x1, y
     !* FIRST EXECUTABLE STATEMENT  DF1F
     x1 = X + 1._DP
     DF1F = 5._DP/x1/x1
@@ -1181,7 +1182,7 @@ CONTAINS
     IF( y>3.1415926535897932_DP ) DF1F = 0._DP
   END FUNCTION DF1F
   !** DF1G
-  REAL(DP) FUNCTION DF1G(X)
+  REAL(DP) PURE FUNCTION DF1G(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1194,13 +1195,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     REAL(DP), PARAMETER :: pi = 3.1415926535897932_DP
     !* FIRST EXECUTABLE STATEMENT  DF1G
     DF1G = 2._DP/(2._DP+SIN(10._DP*pi*X))
   END FUNCTION DF1G
   !** DF1N
-  REAL(DP) FUNCTION DF1N(X)
+  REAL(DP) PURE FUNCTION DF1N(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1213,12 +1214,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1N
     DF1N = 1._DP/(X**4+X**2+1._DP)
   END FUNCTION DF1N
   !** DF1O
-  REAL(DP) FUNCTION DF1O(X)
+  REAL(DP) PURE FUNCTION DF1O(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1231,13 +1232,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1O
     DF1O = 1._DP
     IF( X>0.31415926535897932E+01_DP ) DF1O = 0._DP
   END FUNCTION DF1O
   !** DF1P
-  REAL(DP) FUNCTION DF1P(X)
+  REAL(DP) PURE FUNCTION DF1P(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1250,7 +1251,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: alfa1, alfa2, X, d1, d2
+    REAL(DP), INTENT(IN) :: X
+    REAL(DP) :: alfa1, alfa2, d1, d2
     !* FIRST EXECUTABLE STATEMENT  DF1P
     !  P1 = 1/7, P2 = 2/3
     REAL(DP), PARAMETER :: p1 = 0.1428571428571428_DP
@@ -1263,7 +1265,7 @@ CONTAINS
     IF( d1/=0._DP .AND. d2/=0._DP ) DF1P = d1**alfa1 + d2**alfa2
   END FUNCTION DF1P
   !** DF1S
-  REAL(DP) FUNCTION DF1S(X)
+  REAL(DP) PURE FUNCTION DF1S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1276,12 +1278,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1S
     DF1S = 2._DP/(2._DP+SIN(0.314159E+02_DP*X))
   END FUNCTION DF1S
   !** DF1WS
-  REAL(DP) FUNCTION DF1WS(X)
+  REAL(DP) PURE FUNCTION DF1WS(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1294,13 +1296,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF1WS
     DF1WS = 0.00_DP
     IF( X-0.33_DP/=0._DP ) DF1WS = ABS(X-0.33_DP)**(-0.999_DP)
   END FUNCTION DF1WS
   !** DF2G
-  REAL(DP) FUNCTION DF2G(X)
+  REAL(DP) PURE FUNCTION DF2G(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1313,12 +1315,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2G
     DF2G = X*SIN(0.3E+02_DP*X)*COS(0.5E+02_DP*X)
   END FUNCTION DF2G
   !** DF2N
-  REAL(DP) FUNCTION DF2N(X)
+  REAL(DP) PURE FUNCTION DF2N(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1331,12 +1333,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2N
     DF2N = X**(-0.9_DP)
   END FUNCTION DF2N
   !** DF2O
-  REAL(DP) FUNCTION DF2O(X)
+  REAL(DP) PURE FUNCTION DF2O(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1349,13 +1351,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2O
     DF2O = 0._DP
     IF( X/=0._DP ) DF2O = 1._DP/(X*X*SQRT(X))
   END FUNCTION DF2O
   !** DF2P
-  REAL(DP) FUNCTION DF2P(X)
+  REAL(DP) PURE FUNCTION DF2P(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1368,12 +1370,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2P
     DF2P = SIN(0.314159E+03_DP*X)/(0.314159E+01_DP*X)
   END FUNCTION DF2P
   !** DF2S
-  REAL(DP) FUNCTION DF2S(X)
+  REAL(DP) PURE FUNCTION DF2S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1386,13 +1388,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF2S
     DF2S = 0.1E+03_DP
     IF( X/=0._DP ) DF2S = SIN(0.314159E+03_DP*X)/(0.314159E+01_DP*X)
   END FUNCTION DF2S
   !** DF3G
-  REAL(DP) FUNCTION DF3G(X)
+  REAL(DP) PURE FUNCTION DF3G(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1405,12 +1407,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3G
     DF3G = ABS(X-0.33_DP)**(-.90_DP)
   END FUNCTION DF3G
   !** DF3P
-  REAL(DP) FUNCTION DF3P(X)
+  REAL(DP) PURE FUNCTION DF3P(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1423,13 +1425,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3P
     DF3P = 1._DP
     IF( X>0.31415926535897932E+01_DP ) DF3P = 0._DP
   END FUNCTION DF3P
   !** DF3S
-  REAL(DP) FUNCTION DF3S(X)
+  REAL(DP) PURE FUNCTION DF3S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1442,13 +1444,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF3S
     DF3S = 1._DP
     IF( X>0.31415926535897932E+01_DP ) DF3S = 0._DP
   END FUNCTION DF3S
   !** DF4P
-  REAL(DP) FUNCTION DF4P(X)
+  REAL(DP) PURE FUNCTION DF4P(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1461,13 +1463,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF4P
     DF4P = 0._DP
     IF( X>0._DP ) DF4P = 1._DP/(X*SQRT(X))
   END FUNCTION DF4P
   !** DF4S
-  REAL(DP) FUNCTION DF4S(X)
+  REAL(DP) PURE FUNCTION DF4S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1480,13 +1482,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF4S
     DF4S = 0.00_DP
     IF( X-0.33_DP/=0._DP ) DF4S = ABS(X-0.33_DP)**(-0.999_DP)
   END FUNCTION DF4S
   !** DF5S
-  REAL(DP) FUNCTION DF5S(X)
+  REAL(DP) PURE FUNCTION DF5S(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1499,13 +1501,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: X
+    REAL(DP), INTENT(IN) :: X
     !* FIRST EXECUTABLE STATEMENT  DF5S
     DF5S = 0._DP
     IF( X/=0._DP ) DF5S = 1._DP/(X*SQRT(X))
   END FUNCTION DF5S
   !** DT0
-  REAL(DP) FUNCTION DT0(X)
+  REAL(DP) PURE FUNCTION DT0(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1518,7 +1520,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: a, b, X, x1, y
+    REAL(DP), INTENT(IN) :: X
+    REAL(DP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT0
     a = 0._DP
     b = 1._DP
@@ -1527,7 +1530,7 @@ CONTAINS
     DT0 = (b-a)*DF0S(y)/x1/x1
   END FUNCTION DT0
   !** DT1
-  REAL(DP) FUNCTION DT1(X)
+  REAL(DP) PURE FUNCTION DT1(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1540,7 +1543,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: a, b, X, x1, y
+    REAL(DP), INTENT(IN) :: X
+    REAL(DP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT1
     a = 0._DP
     b = 1._DP
@@ -1549,7 +1553,7 @@ CONTAINS
     DT1 = (b-a)*DF1S(y)/x1/x1
   END FUNCTION DT1
   !** DT2
-  REAL(DP) FUNCTION DT2(X)
+  REAL(DP) PURE FUNCTION DT2(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1562,7 +1566,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: a, b, X, x1, y
+    REAL(DP), INTENT(IN) :: X
+    REAL(DP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT2
     a = 0.1_DP
     b = 1._DP
@@ -1571,7 +1576,7 @@ CONTAINS
     DT2 = (b-a)*DF2S(y)/x1/x1
   END FUNCTION DT2
   !** DT3
-  REAL(DP) FUNCTION DT3(X)
+  REAL(DP) PURE FUNCTION DT3(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1584,7 +1589,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: a, b, X, x1, y
+    REAL(DP), INTENT(IN) :: X
+    REAL(DP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT3
     a = 0._DP
     b = 5._DP
@@ -1593,7 +1599,7 @@ CONTAINS
     DT3 = (b-a)*DF3S(y)/x1/x1
   END FUNCTION DT3
   !** DT4
-  REAL(DP) FUNCTION DT4(X)
+  REAL(DP) PURE FUNCTION DT4(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1606,7 +1612,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: a, b, X, x1, y
+    REAL(DP), INTENT(IN) :: X
+    REAL(DP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT4
     a = 0._DP
     b = 1._DP
@@ -1615,7 +1622,7 @@ CONTAINS
     DT4 = (b-a)*DF4S(y)/x1/x1
   END FUNCTION DT4
   !** DT5
-  REAL(DP) FUNCTION DT5(X)
+  REAL(DP) PURE FUNCTION DT5(X)
     !> Subsidiary to
     !***
     ! **Library:**   SLATEC
@@ -1628,7 +1635,8 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL(DP) :: a, b, X, x1, y
+    REAL(DP), INTENT(IN) :: X
+    REAL(DP) :: a, b, x1, y
     !* FIRST EXECUTABLE STATEMENT  DT5
     a = 0._DP
     b = 1._DP

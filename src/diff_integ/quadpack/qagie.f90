@@ -1,12 +1,12 @@
 !** QAGIE
-SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
+PURE SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  !> The routine calculates an approximation result to a given
-  !            integral   I = Integral of F over (BOUND,+INFINITY)
-  !                    or I = Integral of F over (-INFINITY,BOUND)
-  !                    or I = Integral of F over (-INFINITY,+INFINITY),
-  !                    hopefully satisfying following claim for accuracy
-  !                    ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
+  !> The routine calculates an approximation result to a given integral
+  !  I = Integral of F over (BOUND,+INFINITY)
+  !  or I = Integral of F over (-INFINITY,BOUND)
+  !  or I = Integral of F over (-INFINITY,+INFINITY),
+  !  hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -168,14 +168,17 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Inf, Last, Limit, Neval, Iord(Limit)
-  REAL(SP) :: Abserr, Bound, Epsabs, Epsrel, Result
-  REAL(SP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Inf, Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iord(Limit)
+  REAL(SP), INTENT(IN) :: Bound, Epsabs, Epsrel
+  REAL(SP), INTENT(OUT) :: Abserr, Result
+  REAL(SP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
   nres, nrmax, numrl2
   REAL(SP) :: abseps, area, area1, area12, area2, a1, a2, boun, b1, b2, correc, &
@@ -483,5 +486,6 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   300  Neval = 30*Last - 15
   IF( Inf==2 ) Neval = 2*Neval
   IF( Ier>2 ) Ier = Ier - 1
+  !
   RETURN
 END SUBROUTINE QAGIE

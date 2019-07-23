@@ -1,8 +1,7 @@
 !** PFQAD
-SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
-  !> Compute the integral on (X1,X2) of a product of a function
-  !            F and the ID-th derivative of a B-spline,
-  !            (PP-representation).
+PURE SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
+  !> Compute the integral on (X1,X2) of a product of a function F and the
+  !  ID-th derivative of a B-spline, (PP-representation).
   !***
   ! **Library:**   SLATEC
   !***
@@ -71,8 +70,8 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
-  USE interpolation, ONLY : PPGQ8, INTRV
+  USE service, ONLY : R1MACH
+  USE interpolation, ONLY : INTRV
   !
   INTERFACE
     PURE REAL(SP) FUNCTION F(X)
@@ -80,25 +79,29 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
       REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Id, Ierr, K, Ldc, Lxi
-  REAL(SP) :: Quad, Tol, C(Ldc,Lxi), Xi(Lxi+1)
+  INTEGER, INTENT(IN) :: Id, K, Ldc, Lxi
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: C(Ldc,Lxi), Xi(Lxi+1), X1, X2
+  REAL(SP), INTENT(INOUT) :: Tol
+  REAL(SP), INTENT(OUT) :: Quad
+  !
   INTEGER :: iflg, ilo, il1, il2, inppv, left, mf1, mf2
-  REAL(SP) :: a, aa, ans, b, bb, q, ta, tb, wtol, X1, X2
+  REAL(SP) :: a, aa, ans, b, bb, q, ta, tb, wtol
   !
   !* FIRST EXECUTABLE STATEMENT  PFQAD
   Ierr = 1
   Quad = 0._SP
   IF( K<1 ) THEN
-    CALL XERMSG('PFQAD','K DOES NOT SATISFY K>=1',2,1)
+    ERROR STOP 'PFQAD : K DOES NOT SATISFY K>=1'
     RETURN
   ELSEIF( Ldc<K ) THEN
-    CALL XERMSG('PFQAD','LDC DOES NOT SATISFY LDC>=K',2,1)
+    ERROR STOP 'PFQAD : LDC DOES NOT SATISFY LDC>=K'
     RETURN
   ELSEIF( Id<0 .OR. Id>=K ) THEN
-    CALL XERMSG('PFQAD','ID DOES NOT SATISFY 0<=ID<K',2,1)
+    ERROR STOP 'PFQAD : ID DOES NOT SATISFY 0<=ID<K'
     RETURN
   ELSEIF( Lxi<1 ) THEN
-    CALL XERMSG('PFQAD','LXI DOES NOT SATISFY LXI>=1',2,1)
+    ERROR STOP 'PFQAD : LXI DOES NOT SATISFY LXI>=1'
     RETURN
   ELSE
     wtol = R1MACH(4)
@@ -128,7 +131,7 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
     END IF
   END IF
   !
-  CALL XERMSG('PFQAD',&
-    'TOL IS LESS THAN THE SINGLE PRECISION TOLERANCE OR GREATER THAN 0.1',2,1)
+  ERROR STOP 'PFQAD : TOL IS LESS THAN THE SINGLE PRECISION TOLERANCE OR GREATER THAN 0.1'
+  !
   RETURN
 END SUBROUTINE PFQAD

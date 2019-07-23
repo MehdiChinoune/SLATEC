@@ -1,8 +1,7 @@
 !** DQK61
-SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
-  !> To compute I = Integral of F over (A,B) with error
-  !                           estimate
-  !                       J = Integral of ABS(F) over (A,B)
+PURE SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
+  !> To compute I = Integral of F over (A,B) with error estimate
+  !  J = Integral of ABS(F) over (A,B)
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -69,12 +68,14 @@ SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  REAL(DP) :: A, Abserr, B, Resabs, Resasc, Result
+  REAL(DP), INTENT(IN) :: A, B
+  REAL(DP), INTENT(OUT) :: Abserr, Resabs, Resasc, Result
+  !
   INTEGER :: j, jtw, jtwm1
   REAL(DP) :: dabsc, centr, dhlgth, epmach, fc, fsum, fval1, fval2, fv1(30), &
     fv2(30), hlgth, resg, resk, reskh, uflow
@@ -184,6 +185,7 @@ SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(jtw)*fsum
     Resabs = Resabs + wgk(jtw)*(ABS(fval1)+ABS(fval2))
   END DO
+  !
   DO j = 1, 15
     jtwm1 = j*2 - 1
     dabsc = hlgth*xgk(jtwm1)
@@ -206,6 +208,6 @@ SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
   Abserr = ABS((resk-resg)*hlgth)
   IF( Resasc/=0._DP .AND. Abserr/=0._DP )&
     Abserr = Resasc*MIN(1._DP,(0.2E+03_DP*Abserr/Resasc)**1.5_DP)
-  IF( Resabs>uflow/(0.5E+02_DP*epmach) ) Abserr = MAX((epmach*0.5E+02_DP)*Resabs,&
-    Abserr)
+  IF( Resabs>uflow/(0.5E+02_DP*epmach) ) Abserr = MAX((epmach*0.5E+02_DP)*Resabs,Abserr)
+  !
 END SUBROUTINE DQK61

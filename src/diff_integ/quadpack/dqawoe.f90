@@ -1,12 +1,10 @@
 !** DQAWOE
-SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
+PURE SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
     Abserr,Neval,Ier,Last,Alist,Blist,Rlist,Elist,Iord,Nnlog,Momcom,Chebmo)
   !> Calculate an approximation to a given definite integral
-  !            I = Integral of F(X)*W(X) over (A,B), where
-  !                     W(X) = COS(OMEGA*X)
-  !                 or  W(X)=SIN(OMEGA*X),
-  !            hopefully satisfying the following claim for accuracy
-  !                 ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !  I = Integral of F(X)*W(X) over (A,B), where W(X) = COS(OMEGA*X) or
+  !  W(X)=SIN(OMEGA*X), hopefully satisfying the following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -221,15 +219,20 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Icall, Ier, Integr, Last, Limit, Maxp1, Momcom, Neval
-  INTEGER :: Iord(Limit), Nnlog(Limit)
-  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result
-  REAL(DP) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Icall, Integr, Limit, Maxp1
+  INTEGER, INTENT(INOUT) :: Momcom
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval
+  INTEGER, INTENT(OUT) :: Iord(Limit), Nnlog(Limit)
+  REAL(DP), INTENT(IN) :: A, B, Epsabs, Epsrel, Omega
+  REAL(DP), INTENT(OUT) :: Abserr, Result
+  REAL(DP), INTENT(INOUT) :: Chebmo(Maxp1,25)
+  REAL(DP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
     nev, nres, nrmax, nrmom, numrl2
   REAL(DP) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defab1, &
@@ -575,5 +578,6 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
     IF( Ier>2 ) Ier = Ier - 1
     IF( Integr==2 .AND. Omega<0._DP ) Result = -Result
   END IF
+  !
   RETURN
 END SUBROUTINE DQAWOE

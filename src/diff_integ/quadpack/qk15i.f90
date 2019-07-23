@@ -1,10 +1,9 @@
 !** QK15I
-SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
-  !> The original (infinite integration range is mapped
-  !            onto the interval (0,1) and (A,B) is a part of (0,1).
-  !            it is the purpose to compute
-  !            I = Integral of transformed integrand over (A,B),
-  !            J = Integral of ABS(Transformed Integrand) over (A,B).
+PURE SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
+  !> The original (infinite integration range is mapped onto the
+  !  interval (0,1) and (A,B) is a part of (0,1). it is the purpose to compute
+  !  I = Integral of transformed integrand over (A,B),
+  !  J = Integral of ABS(Transformed Integrand) over (A,B).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -88,15 +87,17 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Inf
-  REAL(SP) :: A, B, Boun, Resabs, Resasc, Result
+  INTEGER, INTENT(IN) :: Inf
+  REAL(SP), INTENT(IN) :: A, B, Boun
+  REAL(SP), INTENT(OUT) :: Abserr, Resabs, Resasc, Result
+  !
   INTEGER :: j
-  REAL(SP) :: absc, absc1, absc2, Abserr, centr, dinf, epmach, fc, fsum, fval1, &
+  REAL(SP) :: absc, absc1, absc2, centr, dinf, epmach, fc, fsum, fval1, &
     fval2, fv1(7), fv2(7), hlgth, resg, resk, reskh, tabsc1, tabsc2, uflow
   !
   !           THE ABSCISSAE AND WEIGHTS ARE SUPPLIED FOR THE INTERVAL
@@ -193,6 +194,6 @@ SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   Abserr = ABS((resk-resg)*hlgth)
   IF( Resasc/=0._SP .AND. Abserr/=0._SP )&
     Abserr = Resasc*MIN(1._SP,(200._SP*Abserr/Resasc)**1.5_SP)
-  IF( Resabs>uflow/(50._SP*epmach) ) Abserr = MAX((epmach*50._SP)*Resabs,&
-    Abserr)
+  IF( Resabs>uflow/(50._SP*epmach) ) Abserr = MAX((epmach*50._SP)*Resabs,Abserr)
+  !
 END SUBROUTINE QK15I

@@ -90,97 +90,97 @@ CONTAINS
     !     Test error returns.
     !
     kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    num_xer = 0
     !
-    IF( Kprint>=3 ) THEN
-      WRITE (Lun,99004)
-      99004 FORMAT (/' Test error returns from AVINT'/' 4 error messages expected'/)
-    END IF
-    DO i = 1, 20
-      x(i) = (i-1)/19._SP - 0.01_SP
-      IF( i/=1 ) y(i) = x(i)/(EXP(x(i))-1._SP)
-    END DO
+!    IF( Kprint>=3 ) THEN
+!      WRITE (Lun,99004)
+!      99004 FORMAT (/' Test error returns from AVINT'/' 4 error messages expected'/)
+!    END IF
+!    DO i = 1, 20
+!      x(i) = (i-1)/19._SP - 0.01_SP
+!      IF( i/=1 ) y(i) = x(i)/(EXP(x(i))-1._SP)
+!    END DO
     !
     !     Test IERR = 1 error return.
     !
-    y(1) = 1._SP
-    CALL AVINT(x,y,20,0._SP,1._SP,ans,ierr)
-    IF( ierr/=1 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 1
-    END IF
-    num_xer = 0
+!    y(1) = 1._SP
+!    CALL AVINT(x,y,20,0._SP,1._SP,ans,ierr)
+!    IF( ierr/=1 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 1
+!    END IF
+!    num_xer = 0
     !
     !     Test IERR = 2 error return.
     !
-    CALL AVINT(x,y,20,1._SP,0._SP,ans,ierr)
-    IF( ierr/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 2
-    END IF
-    IF( ans/=0._SP ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=3 ) WRITE (Lun,99011)
-    END IF
-    num_xer = 0
+!    CALL AVINT(x,y,20,1._SP,0._SP,ans,ierr)
+!    IF( ierr/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 2
+!    END IF
+!    IF( ans/=0._SP ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=3 ) WRITE (Lun,99011)
+!    END IF
+!    num_xer = 0
     !
     !     Test IERR = 5 error return.
     !
-    CALL AVINT(x,y,1,0._SP,1._SP,ans,ierr)
-    IF( ierr/=5 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 5
-    END IF
-    IF( ans/=0._SP ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=3 ) WRITE (Lun,99011)
-    END IF
-    num_xer = 0
+!    CALL AVINT(x,y,1,0._SP,1._SP,ans,ierr)
+!    IF( ierr/=5 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 5
+!    END IF
+!    IF( ans/=0._SP ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=3 ) WRITE (Lun,99011)
+!    END IF
+!    num_xer = 0
     !
     !     Test IERR = 4 error return.
     !
-    x(1) = 1._SP/19._SP
-    x(2) = 0._SP
-    CALL AVINT(x,y,20,0._SP,1._SP,ans,ierr)
-    IF( ierr/=4 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 4
-    END IF
-    IF( ans/=0._SP ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=3 ) WRITE (Lun,99011)
-    END IF
-    num_xer = 0
+!    x(1) = 1._SP/19._SP
+!    x(2) = 0._SP
+!    CALL AVINT(x,y,20,0._SP,1._SP,ans,ierr)
+!    IF( ierr/=4 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 4
+!    END IF
+!    IF( ans/=0._SP ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=3 ) WRITE (Lun,99011)
+!    END IF
+!    num_xer = 0
     !
     !     Test IERR = 3 error return.
     !
-    x(1) = 0._SP
-    x(2) = 1._SP/19._SP
-    CALL AVINT(x,y,20,0._SP,.01_SP,ans,ierr)
-    IF( ierr/=3 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 3
-    END IF
-    IF( ans/=0._SP ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=3 ) WRITE (Lun,99011)
-    END IF
-    num_xer = 0
+!    x(1) = 0._SP
+!    x(2) = 1._SP/19._SP
+!    CALL AVINT(x,y,20,0._SP,.01_SP,ans,ierr)
+!    IF( ierr/=3 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=3 ) WRITE (Lun,99010) ierr, 3
+!    END IF
+!    IF( ans/=0._SP ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=3 ) WRITE (Lun,99011)
+!    END IF
+!    num_xer = 0
     !
     !     Reset XERMSG control variables and write summary.
     !
@@ -276,52 +276,52 @@ CONTAINS
     !     Test error returns.
     !
     kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
     !
-    IF( Kprint>=3 ) WRITE (Lun,FMT=99005)
+!    IF( Kprint>=3 ) WRITE (Lun,FMT=99005)
     !
     !     Test with a discontinuous integrand and a tight error tolerance.
     !
-    a = 0._SP
-    b = 1._SP
-    cor = 2._SP
-    err = 100._SP*R1MACH(4)
-    req = err
-    CALL GAUS8(FQD1,a,b,err,ans,ierr)
+!    a = 0._SP
+!    b = 1._SP
+!    cor = 2._SP
+!    err = 100._SP*R1MACH(4)
+!    req = err
+!    CALL GAUS8(FQD1,a,b,err,ans,ierr)
     !
     !     See if test passed.
     !
-    IF( ierr==2 ) THEN
-      IF( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
-    ELSE
-      IF( Kprint>=2 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
+!    IF( ierr==2 ) THEN
+!      IF( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
+!    ELSE
+!      IF( Kprint>=2 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
     !
     !     Test GAUS8 with A and B nearly equal.
     !
-    a = 2._SP
-    b = a*(1._SP+R1MACH(4))
-    cor = 0._SP
-    err = tol
+!    a = 2._SP
+!    b = a*(1._SP+R1MACH(4))
+!    cor = 0._SP
+!    err = tol
     !
-    CALL GAUS8(FQD1,a,b,err,ans,ierr)
+!    CALL GAUS8(FQD1,a,b,err,ans,ierr)
     !
     !     Check to see if test passed.
     !
-    IF( ierr==-1 .AND. ans==0._SP ) THEN
-      IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED'
-    ELSE
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
-    END IF
+!    IF( ierr==-1 .AND. ans==0._SP ) THEN
+!      IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED'
+!    ELSE
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
+!    END IF
     !
     control_xer = kontrl
     IF( fatal ) THEN
@@ -419,52 +419,52 @@ CONTAINS
     !     Test error returns.
     !
     kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
     !
-    IF( Kprint>=3 ) WRITE (Lun,FMT=99005)
+!    IF( Kprint>=3 ) WRITE (Lun,FMT=99005)
     !
     !     Test with a discontinuous integrand and a tight error tolerance.
     !
-    a = 0._SP
-    b = 1._SP
-    cor = 2._SP
-    err = 100._SP*R1MACH(4)
-    req = err
-    CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
+!    a = 0._SP
+!    b = 1._SP
+!    cor = 2._SP
+!    err = 100._SP*R1MACH(4)
+!    req = err
+!    CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
     !
     !     See if test passed.
     !
-    IF( ierr==2 ) THEN
-      IF( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
-    ELSE
-      IF( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, err, cor
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
+!    IF( ierr==2 ) THEN
+!      IF( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
+!    ELSE
+!      IF( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, err, cor
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
     !
     !     Test QNC79 with A and B nearly equal.
     !
-    a = 2._SP
-    b = a*(1._SP+R1MACH(4))
-    cor = 0._SP
-    err = tol
+!    a = 2._SP
+!    b = a*(1._SP+R1MACH(4))
+!    cor = 0._SP
+!    err = tol
     !
-    CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
+!    CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
     !
     !     Check to see if test passed.
     !
-    IF( ierr==-1 .AND. ans==0._SP ) THEN
-      IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED'
-    ELSE
-      Ipass = 0
-      fatal = .TRUE.
-      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
-    END IF
+!    IF( ierr==-1 .AND. ans==0._SP ) THEN
+!      IF( Kprint>=3 ) WRITE (Lun,99007) 'PASSED'
+!    ELSE
+!      Ipass = 0
+!      fatal = .TRUE.
+!      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
+!    END IF
     !
     control_xer = kontrl
     IF( fatal ) THEN
@@ -494,7 +494,7 @@ CONTAINS
     99009 FORMAT (/' ***************QNC79 FAILED SOME TESTS***************')
   END SUBROUTINE QN79QX
   !** FQD1
-  REAL(SP) FUNCTION FQD1(X)
+  REAL(SP) PURE FUNCTION FQD1(X)
     !> Function evaluator for QNC79 and GAUS8 quick checks.
     !***
     ! **Library:**   SLATEC
@@ -519,7 +519,7 @@ CONTAINS
     IF( X>0._SP ) FQD1 = 1._SP/SQRT(X)
   END FUNCTION FQD1
   !** FQD2
-  REAL(SP) FUNCTION FQD2(X)
+  REAL(SP) PURE FUNCTION FQD2(X)
     !> Function evaluator for QNC79 and GAUS8 quick checks.
     !***
     ! **Library:**   SLATEC

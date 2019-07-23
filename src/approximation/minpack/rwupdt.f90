@@ -1,5 +1,5 @@
 !** RWUPDT
-SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
+PURE SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
   !> Subsidiary to SNLS1 and SNLS1E
   !***
   ! **Library:**   SLATEC
@@ -70,12 +70,15 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: N, Ldr
-  REAL(SP) :: Alpha
-  REAL(SP) :: R(Ldr,N), W(N), B(N), Coss(N), Sinn(N)
+  INTEGER, INTENT(IN) :: N, Ldr
+  REAL(SP), INTENT(INOUT) :: Alpha
+  REAL(SP), INTENT(IN) :: W(N)
+  REAL(SP), INTENT(INOUT) :: R(Ldr,N), B(N)
+  REAL(SP), INTENT(OUT) :: Coss(N), Sinn(N)
+  !
   INTEGER :: i, j, jm1
   REAL(SP) :: cotan, rowj, tann, temp
-  REAL(SP), PARAMETER :: one = 1._SP, p5 = 5.E-1_SP, p25 = 2.5E-1, zero = 0._SP
+  REAL(SP), PARAMETER :: p5 = 5.E-1_SP, p25 = 2.5E-1
   !* FIRST EXECUTABLE STATEMENT  RWUPDT
   DO j = 1, N
     rowj = W(j)
@@ -94,9 +97,9 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Coss,Sinn)
     !
     !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES W(J).
     !
-    Coss(j) = one
-    Sinn(j) = zero
-    IF( rowj/=zero ) THEN
+    Coss(j) = 1._SP
+    Sinn(j) = 0._SP
+    IF( rowj/=0._SP ) THEN
       IF( ABS(R(j,j))>=ABS(rowj) ) THEN
         tann = rowj/R(j,j)
         Coss(j) = p5/SQRT(p25+p25*tann**2)

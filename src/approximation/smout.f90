@@ -60,9 +60,11 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : I1MACH
-  INTEGER :: Idigit, Lda, M, N
-  REAL(SP) :: A(Lda,N)
-  CHARACTER :: Ifmt*(*)
+  !
+  INTEGER, INTENT(IN) :: Idigit, Lda, M, N
+  REAL(SP), INTENT(IN) :: A(Lda,N)
+  CHARACTER(*), INTENT(IN) :: Ifmt
+  !
   INTEGER :: i, j, k1, k2, lout, ndigit
   CHARACTER(3), PARAMETER :: icol = 'COL'
   !* FIRST EXECUTABLE STATEMENT  SMOUT
@@ -168,4 +170,5 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   99006 FORMAT (1X,'ROW',I4,2X,1P,8E14.5)
   99007 FORMAT (1X,'ROW',I4,2X,1P,6E18.9)
   99008 FORMAT (1X,'ROW',I4,2X,1P,5E22.13)
+  !
 END SUBROUTINE SMOUT

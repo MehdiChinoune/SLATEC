@@ -1,5 +1,5 @@
 !** DWNLIT
-SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
+PURE SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !> Subsidiary to DWNNLS
   !***
   ! **Library:**   SLATEC
@@ -36,9 +36,14 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !   900604  DP version created from SP version. .  (RWC)
   USE blas, ONLY : DROTM, DROTMG, DSWAP
   USE linear, ONLY : DH12
-  INTEGER :: L, M, Mdw, N, Idope(3), Ipivot(N), Itype(M)
-  REAL(DP) :: Dope(3), H(N), Rnorm, Scalee(M), W(Mdw,M)
-  LOGICAL :: Done
+  !
+  INTEGER, INTENT(IN) :: L, M, Mdw, N
+  INTEGER, INTENT(INOUT) :: Idope(3), Ipivot(N)
+  INTEGER, INTENT(OUT) :: Itype(M)
+  REAL(DP), INTENT(IN) :: Dope(3)
+  REAL(DP), INTENT(INOUT) :: H(N), Scalee(M), W(Mdw,M)
+  REAL(DP), INTENT(OUT) :: Rnorm
+  LOGICAL, INTENT(INOUT) :: Done
   !
   INTEGER :: i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, me, mend, niv, nsoln
   REAL(DP) :: alsq, amax, eanorm, factor, hbar, rn, sparam(5), t, tau
@@ -276,4 +281,5 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   Idope(1) = me
   Idope(2) = krank
   Idope(3) = niv
+  !
 END SUBROUTINE DWNLIT

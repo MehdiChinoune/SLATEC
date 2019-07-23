@@ -1,12 +1,10 @@
 !** QAWO
-SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
+PURE SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Maxp1,Lenw,Last,Iwork,Work)
   !> Calculate an approximation to a given definite integral
-  !             I = Integral of F(X)*W(X) over (A,B), where
-  !                   W(X) = COS(OMEGA*X)
-  !                or W(X) = SIN(OMEGA*X),
-  !            hopefully satisfying the following claim for accuracy
-  !                ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !  I= Integral of F(X)*W(X) over (A,B), where W(X) = COS(OMEGA*X) or
+  !  W(X) = SIN(OMEGA*X), hopefully satisfying the following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -203,16 +201,19 @@ SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Integr, Leniw, Last, Lenw, limit, Maxp1, Neval, Iwork(Leniw)
-  REAL(SP) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result, Work(Lenw)
-  INTEGER :: lvl, l1, l2, l3, l4, momcom
+  INTEGER, INTENT(IN) :: Integr, Leniw, Lenw, Maxp1
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iwork(Leniw)
+  REAL(SP), INTENT(IN) :: A, B, Epsabs, Epsrel, Omega
+  REAL(SP), INTENT(OUT) :: Abserr, Result, Work(Lenw)
+  !
+  INTEGER :: lvl, l1, l2, l3, l4, momcom, limit
   !
   !         CHECK VALIDITY OF LENIW, MAXP1 AND LENW.
   !
@@ -240,5 +241,6 @@ SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     lvl = 0
   END IF
   IF( Ier==6 ) lvl = 1
-  IF( Ier/=0 ) CALL XERMSG('QAWO','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier/=0 ) ERROR STOP 'QAWO : ABNORMAL RETURN'
+  !
 END SUBROUTINE QAWO

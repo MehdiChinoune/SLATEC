@@ -1,12 +1,10 @@
 !** QAGP
-SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
+PURE SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Lenw,Last,Iwork,Work)
-  !> The routine calculates an approximation result to a given
-  !            definite integral I = Integral of F over (A,B),
-  !            hopefully satisfying following claim for accuracy
-  !            break points of the integration interval, where local
-  !            difficulties of the integrand may occur(e.g. SINGULARITIES,
-  !            DISCONTINUITIES), are provided by the user.
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = Integral of F over (A,B), hopefully satisfying following claim for accuracy
+  !  break points of the integration interval, where local difficulties of the integrand
+  !  may occur(e.g. SINGULARITIES, DISCONTINUITIES), are provided by the user.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -202,15 +200,18 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Leniw, Lenw, Neval, Npts2, Last, Iwork(Leniw)
-  REAL(SP) :: A, Abserr, B, Epsabs, Epsrel, Result, Points(Npts2), Work(Lenw)
+  INTEGER, INTENT(IN) :: Leniw, Lenw, Npts2
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iwork(Leniw)
+  REAL(SP), INTENT(IN) :: A, B, Epsabs, Epsrel, Points(Npts2)
+  REAL(SP), INTENT(OUT) :: Abserr, Result, Work(Lenw)
+  !
   INTEGER :: l4, limit, lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
@@ -232,13 +233,13 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     l4 = limit + l3
     !
     CALL QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,limit,Result,Abserr,Neval,&
-      Ier,Work(1),Work(l1),Work(l2),Work(l3),Work(l4),Iwork(1),&
-      Iwork(l1),Iwork(l2),Last)
+      Ier,Work(1),Work(l1),Work(l2),Work(l3),Work(l4),Iwork(1),Iwork(l1),Iwork(l2),Last)
     !
     !         CALL ERROR HANDLER IF NECESSARY.
     !
     lvl = 0
   END IF
   IF( Ier==6 ) lvl = 1
-  IF( Ier/=0 ) CALL XERMSG('QAGP','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier/=0 ) ERROR STOP 'QAGP : ABNORMAL RETURN'
+  !
 END SUBROUTINE QAGP

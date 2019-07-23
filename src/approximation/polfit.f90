@@ -1,7 +1,6 @@
 !** POLFIT
-SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
-  !> Fit discrete data in a least squares sense by polynomials
-  !            in one variable.
+PURE SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
+  !> Fit discrete data in a least squares sense by polynomials in one variable.
   !***
   ! **Library:**   SLATEC
   !***
@@ -128,10 +127,13 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Ierr, Maxdeg, N, Ndeg
-  REAL(SP) :: Eps
-  REAL(SP) :: A(3*(N+Maxdeg+1)), R(N), W(N), X(N), Y(N)
+  INTEGER, INTENT(IN) :: Maxdeg, N
+  INTEGER, INTENT(OUT) :: Ierr, Ndeg
+  REAL(SP), INTENT(INOUT) :: Eps
+  REAL(SP), INTENT(IN) :: X(N), Y(N)
+  REAL(SP), INTENT(INOUT) :: A(3*(N+Maxdeg+1)), W(N)
+  REAL(SP), INTENT(OUT) :: R(:)
+  !
   REAL(SP) :: degf, den, etst, f, fcrit, sig, sigj, sigjm1, sigpas, temp, w1, w11, &
     xm, yp(1)
   INTEGER :: i, idegf, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, k3pi, k4, k4pi, &
@@ -365,7 +367,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   sig = sigpas
   GOTO 900
   700  Ierr = 2
-  CALL XERMSG('POLFIT','INVALID INPUT PARAMETER.',2,1)
+  ERROR STOP 'POLFIT : INVALID INPUT PARAMETER.'
   RETURN
   800  Ierr = 4
   Ndeg = jpas
@@ -383,5 +385,6 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     END DO
   END IF
   Eps = SQRT(sig/xm)
+  !
   RETURN
 END SUBROUTINE POLFIT

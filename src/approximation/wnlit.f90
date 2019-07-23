@@ -1,5 +1,5 @@
 !** WNLIT
-SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
+PURE SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !> Subsidiary to WNNLS
   !***
   ! **Library:**   SLATEC
@@ -35,9 +35,14 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   !   900328  Added TYPE section.  (WRB)
   USE blas, ONLY : SROTM, SROTMG, SSWAP
   USE linear, ONLY : H12
-  INTEGER :: L, M, Mdw, N, Idope(3), Ipivot(N), Itype(M)
-  REAL(SP) :: Rnorm, Dope(3), H(N), Scalee(M), W(Mdw,M)
-  LOGICAL :: Done
+  !
+  INTEGER, INTENT(IN) :: L, M, Mdw, N
+  INTEGER, INTENT(INOUT) :: Idope(3), Ipivot(N)
+  INTEGER, INTENT(OUT) :: Itype(M)
+  REAL(SP), INTENT(IN) :: Dope(3)
+  REAL(SP), INTENT(INOUT) :: H(N), Scalee(M), W(Mdw,M)
+  REAL(SP), INTENT(OUT) :: Rnorm
+  LOGICAL, INTENT(INOUT) :: Done
   !
   INTEGER :: i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, &
     me, mend, niv, nsoln
@@ -276,4 +281,5 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scalee,Rnorm,Idope,Dope,Done)
   Idope(1) = me
   Idope(2) = krank
   Idope(3) = niv
+  !
 END SUBROUTINE WNLIT

@@ -1,11 +1,9 @@
 !** DQPSRT
-SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
-  !> This routine maintains the descending ordering in the
-  !            list of the local error estimated resulting from the
-  !            interval subdivision process. At each call two error
-  !            estimates are inserted using the sequential search
-  !            method, top-down for the largest error estimate and
-  !            bottom-up for the smallest error estimate.
+PURE SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
+  !> This routine maintains the descending ordering in the list of the local
+  !  error estimated resulting from the interval subdivision process.
+  !  At each call two error estimates are inserted using the sequential search method,
+  !  top-down for the largest error estimate and bottom-up for the smallest error estimate.
   !***
   ! **Library:**   SLATEC
   !***
@@ -28,8 +26,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !
   !           PARAMETERS (MEANING AT OUTPUT)
   !              LIMIT  - Integer
-  !                       Maximum number of error estimates the list
-  !                       can contain
+  !                       Maximum number of error estimates the list can contain
   !
   !              LAST   - Integer
   !                       Number of error estimates currently in the list
@@ -43,8 +40,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !                       ERMAX = ELIST(MAXERR)
   !
   !              ELIST  - Double precision
-  !                       Vector of dimension LAST containing
-  !                       the error estimates
+  !                       Vector of dimension LAST containing the error estimates
   !
   !              IORD   - Integer
   !                       Vector of dimension LAST, the first K elements
@@ -71,8 +67,11 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER :: Last, Limit, Maxerr, Nrmax, Iord(Last)
-  REAL(DP) :: Ermax, Elist(Last)
+  INTEGER, INTENT(IN) :: Last, Limit
+  INTEGER, INTENT(INOUT) :: Nrmax, Iord(Last), Maxerr
+  REAL(DP), INTENT(IN) :: Elist(Last)
+  REAL(DP), INTENT(OUT) :: Ermax
+  !
   INTEGER :: i, ibeg, ido, isucc, j, jbnd, jupbn, k
   REAL(DP) :: errmax, errmin
   !
@@ -147,4 +146,5 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !
   300  Maxerr = Iord(Nrmax)
   Ermax = Elist(Maxerr)
+  !
 END SUBROUTINE DQPSRT

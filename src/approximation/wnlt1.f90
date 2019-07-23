@@ -1,5 +1,5 @@
 !** WNLT1
-SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
+PURE SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
   !> Subsidiary to WNLIT
   !***
   ! **Library:**   SLATEC
@@ -22,10 +22,12 @@ SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
 
   !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
-  !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
-  INTEGER :: I, Imax, Ir, Lend, Mdw, Mend
-  REAL(SP) :: Hbar, H(:), Scalee(Mend), W(Mdw,Mend)
-  LOGICAL :: Recalc
+  !   890620  Code extracted from WNLIT and made a subroutine.  (RWC)
+  INTEGER, INTENT(IN) :: I, Ir, Lend, Mdw, Mend
+  INTEGER, INTENT(INOUT) :: Imax
+  REAL(SP), INTENT(IN) :: Scalee(Mend), W(Mdw,Mend)
+  REAL(SP), INTENT(INOUT) :: Hbar, H(:)
+  LOGICAL, INTENT(INOUT) :: Recalc
   !
   INTEGER :: j, k
   !
@@ -59,4 +61,5 @@ SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scalee,W)
     Imax = MAXLOC(H(I:Lend),1) + I - 1
     Hbar = H(Imax)
   END IF
+  !
 END SUBROUTINE WNLT1

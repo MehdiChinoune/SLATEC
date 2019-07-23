@@ -1,10 +1,9 @@
 !** DQAG
-SUBROUTINE DQAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,&
+PURE SUBROUTINE DQAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,&
     Lenw,Last,Iwork,Work)
-  !> The routine calculates an approximation result to a given
-  !            definite integral I = integral of F over (A,B),
-  !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)LE.MAX(EPSABS,EPSREL*ABS(I)).
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = integral of F over (A,B), hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)LE.MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -12,9 +11,8 @@ SUBROUTINE DQAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,&
   !***
   ! **Type:**      DOUBLE PRECISION (QAG-S, DQAG-D)
   !***
-  ! **Keywords:**  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES,
-  !             GENERAL-PURPOSE, GLOBALLY ADAPTIVE, INTEGRAND EXAMINATOR,
-  !             QUADPACK, QUADRATURE
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES, GENERAL-PURPOSE,
+  !             GLOBALLY ADAPTIVE, INTEGRAND EXAMINATOR, QUADPACK, QUADRATURE
   !***
   ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
@@ -165,15 +163,18 @@ SUBROUTINE DQAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Key, Last, Lenw, Limit, Neval, Iwork(Limit)
-  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Result, Work(Lenw)
+  INTEGER, INTENT(IN) :: Key, Lenw, Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iwork(Limit)
+  REAL(DP), INTENT(IN) :: A, B, Epsabs, Epsrel
+  REAL(DP), INTENT(OUT) :: Abserr, Result, Work(Lenw)
+  !
   INTEGER :: lvl, l1, l2, l3
   !* FIRST EXECUTABLE STATEMENT  DQAG
   Ier = 6
@@ -198,5 +199,6 @@ SUBROUTINE DQAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,&
   END IF
   !
   IF( Ier==6 ) lvl = 1
-  IF( Ier/=0 ) CALL XERMSG('DQAG','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier/=0 ) ERROR STOP 'DQAG : ABNORMAL RETURN'
+  !
 END SUBROUTINE DQAG

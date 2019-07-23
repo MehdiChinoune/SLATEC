@@ -1,8 +1,7 @@
 !** DCOV
-SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
-  !> Calculate the covariance matrix for a nonlinear data
-  !            fitting problem.  It is intended to be used after a
-  !            successful return from either DNLS1 or DNLS1E.
+PURE SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
+  !> Calculate the covariance matrix for a nonlinear data fitting problem.
+  !  It is intended to be used after a successful return from either DNLS1 or DNLS1E.
   !***
   ! **Library:**   SLATEC
   !***
@@ -10,8 +9,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !***
   ! **Type:**      DOUBLE PRECISION (SCOV-S, DCOV-D)
   !***
-  ! **Keywords:**  COVARIANCE MATRIX, NONLINEAR DATA FITTING,
-  !             NONLINEAR LEAST SQUARES
+  ! **Keywords:**  COVARIANCE MATRIX, NONLINEAR DATA FITTING, NONLINEAR LEAST SQUARES
   !***
   ! **Author:**  Hiebert, K. L., (SNLA)
   !***
@@ -96,11 +94,10 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !         If IOPT=1, the code will approximate the Jacobian by forward
   !         differencing.
   !
-  !       M is a positive integer input variable set to the number of
-  !         functions.
+  !       M is a positive integer input variable set to the number of functions.
   !
-  !       N is a positive integer input variable set to the number of
-  !         variables.  N must not exceed M.
+  !       N is a positive integer input variable set to the number of variables.
+  !         N must not exceed M.
   !
   !       X is an array of length N.  On input X must contain the value
   !         at which the covariance matrix is to be evaluated.  This is
@@ -159,20 +156,23 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED 850601-1100
   !     REVISED YYMMDD HHMM
   !
-  USE service, ONLY : XERMSG
   INTERFACE
-    SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+    PURE SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
       IMPORT DP
-      INTEGER :: Ldfjac, M, N, Iflag
-      REAL(DP) :: X(N), Fvec(M), Fjac(:,:)
+      INTEGER, INTENT(IN) :: Ldfjac, M, N, Iflag
+      REAL(DP), INTENT(IN) :: X(N)
+      REAL(DP), INTENT(INOUT) :: Fvec(M)
+      REAL(DP), INTENT(OUT) :: Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
-  INTEGER :: Info, Iopt, Ldr, M, N
-  REAL(DP) :: X(N), R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
+  INTEGER, INTENT(IN) :: Iopt, Ldr, M, N
+  INTEGER, INTENT(OUT) :: Info
+  REAL(DP), INTENT(IN) :: X(N)
+  REAL(DP), INTENT(OUT) :: R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
+  !
   INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
   REAL(DP) :: sigma, temp
   LOGICAL :: sing
-  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   !* FIRST EXECUTABLE STATEMENT  DCOV
   sing = .FALSE.
   iflag = 0
@@ -183,8 +183,8 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
     iflag = 1
     CALL FCN(iflag,M,N,X,Fvec,R,Ldr)
     IF( iflag>=0 ) THEN
-      temp = DENORM(M,Fvec)
-      sigma = one
+      temp = NORM2(Fvec)
+      sigma = 1._DP
       IF( M/=N ) sigma = temp*temp/(M-N)
       !
       !     CALCULATE THE JACOBIAN
@@ -194,9 +194,9 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         !     ROW AT A TIME AND STORED IN THE UPPER TRIANGLE OF R.
         !     ( (Q TRANSPOSE)*FVEC IS ALSO CALCULATED BUT NOT USED.)
         DO j = 1, N
-          Wa2(j) = zero
+          Wa2(j) = 0._DP
           DO i = 1, N
-            R(i,j) = zero
+            R(i,j) = 0._DP
           END DO
         END DO
         iflag = 3
@@ -213,7 +213,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         IF( Iopt==1 ) THEN
           !
           !     CODE APPROXIMATES THE JACOBIAN
-          CALL DFDJC3(FCN,M,N,X,Fvec,R,Ldr,iflag,zero,Wa4)
+          CALL DFDJC3(FCN,M,N,X,Fvec,R,Ldr,iflag,0._DP,Wa4)
         ELSE
           !
           !     USER SUPPLIES THE JACOBIAN
@@ -231,7 +231,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
       !
       !     CHECK IF R IS SINGULAR.
       DO i = 1, N
-        IF( R(i,i)==zero ) sing = .TRUE.
+        IF( R(i,i)==0._DP ) sing = .TRUE.
       END DO
       IF( .NOT. (sing) ) THEN
         !
@@ -243,8 +243,8 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
             !
             !     INITIALIZE THE RIGHT-HAND SIDE (WA1(*)) AS THE K-TH COLUMN OF THE
             !     IDENTITY MATRIX.
-            Wa1 = zero
-            Wa1(k,1) = one
+            Wa1 = 0._DP
+            Wa1(k,1) = 1._DP
             !
             R(k,k) = Wa1(k,1)/R(k,k)
             kp1 = k + 1
@@ -258,13 +258,13 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
             END DO
           END DO
         END IF
-        R(N,N) = one/R(N,N)
+        R(N,N) = 1._DP/R(N,N)
         !
         !     CALCULATE R-INVERSE * (R TRANSPOSE) INVERSE AND STORE IN THE UPPER
         !     TRIANGLE OF R.
         DO i = 1, N
           DO j = i, N
-            temp = zero
+            temp = 0._DP
             DO k = j, N
               temp = temp + R(i,k)*R(j,k)
             END DO
@@ -280,9 +280,9 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   IF( M<=0 .OR. N<=0 ) Info = 0
   IF( iflag<0 ) Info = iflag
   IF( sing ) Info = 2
-  IF( Info<0 ) CALL XERMSG('DCOV',&
-    'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
-  IF( Info==0 ) CALL XERMSG('DCOV','INVALID INPUT PARAMETER.',2,1)
-  IF( Info==2 ) CALL XERMSG('DCOV',&
-    'SINGULAR JACOBIAN MATRIX, COVARIANCE MATRIX CANNOT BE CALCULATED.',1,1)
+  IF( Info<0 ) ERROR STOP 'DCOV : EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.'
+  IF( Info==0 ) ERROR STOP 'DCOV : INVALID INPUT PARAMETER.'
+  IF( Info==2 ) ERROR STOP 'DCOV : SINGULAR JACOBIAN MATRIX, COVARIANCE MATRIX &
+    &CANNOT BE CALCULATED.'
+  !
 END SUBROUTINE DCOV

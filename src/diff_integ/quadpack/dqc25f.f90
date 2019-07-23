@@ -1,12 +1,10 @@
 !** DQC25F
-SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
+PURE SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
     Neval,Resabs,Resasc,Momcom,Chebmo)
-  !> To compute the integral I=Integral of F(X) over (A,B)
-  !            Where W(X) = COS(OMEGA*X) or W(X)=SIN(OMEGA*X) and to
-  !            compute J = Integral of ABS(F) over (A,B). For small value
-  !            of OMEGA or small intervals (A,B) the 15-point GAUSS-KRONRO
-  !            Rule is used. Otherwise a generalized CLENSHAW-CURTIS
-  !            method is used.
+  !> To compute the integral I=Integral of F(X) over (A,B) Where W(X) = COS(OMEGA*X)
+  !  or W(X)=SIN(OMEGA*X) and to compute J = Integral of ABS(F) over (A,B).
+  !  For small value of OMEGA or small intervals (A,B) the 15-point GAUSS-KRONRO
+  !  Rule is used. Otherwise a generalized CLENSHAW-CURTIS method is used.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -117,13 +115,18 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   USE lapack, ONLY : DGTSV
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Integr, Ksave, Momcom, Neval, Maxp1, Nrmom
-  REAL(DP) :: A, Abserr, B, Chebmo(Maxp1,25), Omega, Resabs, Resasc, Result
+  INTEGER, INTENT(IN) :: Integr, Ksave, Maxp1, Nrmom
+  INTEGER, INTENT(INOUT) :: Momcom
+  INTEGER, INTENT(OUT) :: Neval
+  REAL(DP), INTENT(IN) :: A, B, Omega
+  REAL(DP), INTENT(INOUT) :: Chebmo(Maxp1,25)
+  REAL(DP), INTENT(OUT) :: Abserr, Resabs, Resasc, Result
+  !
   INTEGER :: i, iers, isym, j, k, m, noequ, noeq1
   REAL(DP) :: ac, an, an2, as, asap, ass, centr, cheb12(13), cheb24(25), conc, &
     cons, cospar, d(25), d1(25), d2(25), estc, ests, fval(25), hlgth, oflow, &
@@ -371,4 +374,5 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
     CALL DQK15W(F,DQWGTF,Omega,p2,p3,p4,Integr,A,B,Result,Abserr,Resabs,Resasc)
     Neval = 15
   END IF
+  !
 END SUBROUTINE DQC25F

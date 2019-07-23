@@ -1,11 +1,10 @@
 !** DQELG
-SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
-  !> The routine determines the limit of a given sequence of
-  !            approximations, by means of the Epsilon algorithm of
-  !            P.Wynn. An estimate of the absolute error is also given.
-  !            The condensed Epsilon table is computed. Only those
-  !            elements needed for the computation of the next diagonal
-  !            are preserved.
+PURE SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
+  !> The routine determines the limit of a given sequence of approximations,
+  !  by means of the Epsilon algorithm of P.Wynn.
+  !  An estimate of the absolute error is also given.
+  !  The condensed Epsilon table is computed. Only those elements needed for
+  !  the computation of the next diagonal are preserved.
   !***
   ! **Library:**   SLATEC
   !***
@@ -35,8 +34,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !                       Vector of dimension 52 containing the elements
   !                       of the two lower diagonals of the triangular
   !                       epsilon table. The elements are numbered
-  !                       starting at the right-hand corner of the
-  !                       triangle.
+  !                       starting at the right-hand corner of the triangle.
   !
   !              RESULT - Double precision
   !                       Resulting approximation to the integral
@@ -46,8 +44,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !                       RESULT and the 3 previous results
   !
   !              RES3LA - Double precision
-  !                       Vector of dimension 3 containing the last 3
-  !                       results
+  !                       Vector of dimension 3 containing the last 3 results
   !
   !              NRES   - Integer
   !                       Number of calls to the routine
@@ -66,10 +63,13 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
   !
-  REAL(DP) :: Abserr, delta1, delta2, delta3, epmach, &
-    epsinf, Epstab(52), error, err1, err2, err3, e0, e1, &
-    e1abs, e2, e3, oflow, res, Result, Res3la(3), ss, tol1, tol2, tol3
-  INTEGER :: i, ib, ib2, ie, indx, k1, k2, k3, limexp, N, newelm, Nres, num
+  INTEGER, INTENT(INOUT) :: N, Nres
+  REAL(DP), INTENT(INOUT) :: Epstab(52), Res3la(3)
+  REAL(DP), INTENT(OUT) :: Abserr, Result
+  !
+  INTEGER :: i, ib, ib2, ie, indx, k1, k2, k3, limexp, newelm, num
+  REAL(DP) :: delta1, delta2, delta3, epmach, epsinf, error, err1, err2, err3, &
+    e0, e1, e1abs, e2, e3, oflow, res, ss, tol1, tol2, tol3
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------
@@ -205,4 +205,5 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
     END IF
   END IF
   100  Abserr = MAX(Abserr,5._DP*epmach*ABS(Result))
+  !
 END SUBROUTINE DQELG

@@ -1,8 +1,7 @@
 !** DCKDER
-SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
-  !> Check the gradients of M nonlinear functions in N
-  !            variables, evaluated at a point X, for consistency
-  !            with the functions themselves.
+PURE SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
+  !> Check the gradients of M nonlinear functions in N variables, evaluated
+  !  at a point X, for consistency with the functions themselves.
   !***
   ! **Library:**   SLATEC
   !***
@@ -49,11 +48,9 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !
   !     where
   !
-  !       M is a positive integer input variable set to the number
-  !         of functions.
+  !       M is a positive integer input variable set to the number of functions.
   !
-  !       N is a positive integer input variable set to the number
-  !         of variables.
+  !       N is a positive integer input variable set to the number of variables.
   !
   !       X is an input array of length N.
   !
@@ -91,8 +88,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !***
   ! **References:**  M. J. D. Powell, A hybrid method for nonlinear equa-
   !                 tions. In Numerical Methods for Nonlinear Algebraic
-  !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach,
-  !                 1988.
+  !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach, 1988.
   !***
   ! **Routines called:**  D1MACH
 
@@ -105,11 +101,13 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : D1MACH
-  INTEGER :: Ldfjac, M, Mode, N
-  REAL(DP) :: Err(M), Fjac(Ldfjac,N), Fvec(M), Fvecp(M), X(N), Xp(N)
+  !
+  INTEGER, INTENT(IN) :: Ldfjac, M, Mode, N
+  REAL(DP), INTENT(IN) :: Fjac(Ldfjac,N), Fvec(M), Fvecp(M), X(N)
+  REAL(DP), INTENT(OUT) :: Err(M), Xp(N)
+  !
   INTEGER :: i, j
   REAL(DP) :: eps, epsf, epslog, epsmch, temp
-  REAL(DP), PARAMETER :: factor = 1.0D2, one = 1._DP, zero = 0._DP
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !
@@ -122,26 +120,26 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     !
     !        MODE = 2.
     !
-    epsf = factor*epsmch
+    epsf = 100._DP*epsmch
     epslog = LOG10(eps)
     DO i = 1, M
-      Err(i) = zero
+      Err(i) = 0._DP
     END DO
     DO j = 1, N
       temp = ABS(X(j))
-      IF( temp==zero ) temp = one
+      IF( temp==0._DP ) temp = 1._DP
       DO i = 1, M
         Err(i) = Err(i) + temp*Fjac(i,j)
       END DO
     END DO
     DO i = 1, M
-      temp = one
-      IF( Fvec(i)/=zero .AND. Fvecp(i)/=zero .AND. ABS(Fvecp(i)-Fvec(i))&
+      temp = 1._DP
+      IF( Fvec(i)/=0._DP .AND. Fvecp(i)/=0._DP .AND. ABS(Fvecp(i)-Fvec(i))&
         >=epsf*ABS(Fvec(i)) ) temp = eps*ABS((Fvecp(i)-Fvec(i))/eps-Err(i))&
         /(ABS(Fvec(i))+ABS(Fvecp(i)))
-      Err(i) = one
+      Err(i) = 1._DP
       IF( temp>epsmch .AND. temp<eps ) Err(i) = (LOG10(temp)-epslog)/epslog
-      IF( temp>=eps ) Err(i) = zero
+      IF( temp>=eps ) Err(i) = 0._DP
     END DO
   ELSE
     !
@@ -149,7 +147,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     !
     DO j = 1, N
       temp = eps*ABS(X(j))
-      IF( temp==zero ) temp = eps
+      IF( temp==0._DP ) temp = eps
       Xp(j) = X(j) + temp
     END DO
   END IF

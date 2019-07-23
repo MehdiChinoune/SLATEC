@@ -1,10 +1,9 @@
 !** DQC25S
-SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
+PURE SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     Integr,Nev)
-  !> To compute I = Integral of F*W over (BL,BR), with error
-  !            estimate, where the weight function W has a singular
-  !            behaviour of ALGEBRAICO-LOGARITHMIC type at the points
-  !            A and/or B. (BL,BR) is a part of (A,B).
+  !> To compute I = Integral of F*W over (BL,BR), with error estimate,
+  !  where the weight function W has a singular behaviour of ALGEBRAICO-LOGARITHMIC
+  !  type at the points A and/or B. (BL,BR) is a part of (A,B).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -96,14 +95,16 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
 
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Integr, Nev
-  REAL(DP) :: A, Abserr, Alfa, B, Beta, Bl, Br, Resasc, Result, Rg(25), Rh(25), &
-    Ri(25), Rj(25)
+  INTEGER, INTENT(IN) :: Integr
+  INTEGER, INTENT(OUT) :: Nev
+  REAL(DP), INTENT(IN) :: A, Alfa, B, Beta, Bl, Br
+  REAL(DP), INTENT(OUT) :: Abserr, Resasc, Result, Rg(25), Rh(25), Ri(25), Rj(25)
+  !
   INTEGER :: i, isym
   REAL(DP) :: centr, cheb12(13), cheb24(25), dc, factor, fix, fval(25), hlgth, &
     resabs, res12, res24, u
@@ -351,4 +352,5 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     CALL DQK15W(F,DQWGTS,A,B,Alfa,Beta,Integr,Bl,Br,Result,Abserr,resabs,Resasc)
     Nev = 15
   END IF
+  !
 END SUBROUTINE DQC25S

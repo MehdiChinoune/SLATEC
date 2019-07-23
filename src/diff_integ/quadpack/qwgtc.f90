@@ -1,7 +1,7 @@
 !** QWGTC
-REAL(SP) FUNCTION QWGTC(X,C,P2,P3,P4,Kp)
-  !> This function subprogram is used together with the
-  !            routine QAWC and defines the WEIGHT function.
+REAL(SP) PURE FUNCTION QWGTC(X,C,P2,P3,P4,Kp)
+  !> This function subprogram is used together with the routine
+  !  QAWC and defines the WEIGHT function.
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,8 +27,9 @@ REAL(SP) FUNCTION QWGTC(X,C,P2,P3,P4,Kp)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  REAL(SP) :: C, P2, P3, P4, X
-  INTEGER :: Kp
+  INTEGER, INTENT(IN) :: Kp
+  REAL(SP), INTENT(IN) :: C, P2, P3, P4, X
   !* FIRST EXECUTABLE STATEMENT  QWGTC
   QWGTC = 1._SP/(X-C)
+  !
 END FUNCTION QWGTC

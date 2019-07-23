@@ -56,15 +56,16 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !* REVISION HISTORY  (YYMMDD)
   !   821220  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
-  !   891107  Added comma after 1P edit descriptor in FORMAT
-  !           statements.  (WRB)
+  !   891107  Added comma after 1P edit descriptor in FORMAT statements.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
   USE service, ONLY : I1MACH
-  INTEGER :: Idigit, Lda, M, N
-  REAL(DP) :: A(Lda,N)
-  CHARACTER(*) Ifmt
+  !
+  INTEGER, INTENT(IN) :: Idigit, Lda, M, N
+  REAL(DP), INTENT(IN) :: A(Lda,N)
+  CHARACTER(*), INTENT(IN) :: Ifmt
+  !
   INTEGER :: i, j, k1, k2, lout, ndigit
   CHARACTER(3), PARAMETER :: icol = 'COL'
   !* FIRST EXECUTABLE STATEMENT  DMOUT
@@ -196,4 +197,5 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   99008 FORMAT (1X,'ROW',I4,2X,1P,4D28.19)
   99009 FORMAT (1X,'ROW',I4,2X,1P,3D36.27)
   99010 FORMAT (1X,'ROW',I4,2X,1P,10D12.3)
+  !
 END SUBROUTINE DMOUT

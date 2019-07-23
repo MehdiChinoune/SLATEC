@@ -1,12 +1,11 @@
 !** QAWSE
-SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
+PURE SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Iord,Last)
-  !> The routine calculates an approximation result to a given
-  !            definite integral I = Integral of F*W over (A,B),
-  !            (where W shows a singular behaviour at the end points,
-  !            see parameter INTEGR).
-  !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = Integral of F*W over (A,B),
+  !  (where W shows a singular behaviour at the end points, see parameter INTEGR).
+  !  Hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -178,14 +177,17 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Integr, Last, Limit, Neval, Iord(Limit)
-  REAL(SP) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result
-  REAL(SP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Integr, Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iord(Limit)
+  REAL(SP), INTENT(IN) :: A, Alfa, B, Beta, Epsabs, Epsrel
+  REAL(SP), INTENT(OUT) :: Abserr, Result
+  REAL(SP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: iroff1, iroff2, k, maxerr, nev, nrmax
   REAL(SP) :: area, area1, area12, area2, a1, a2, b1, b2, centre, epmach, errbnd, &
     errmax, error1, erro12, error2, errsum, resas1, resas2, rg(25), rh(25), &
@@ -394,4 +396,5 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
       Abserr = errsum
     END IF
   END IF
+  !
 END SUBROUTINE QAWSE

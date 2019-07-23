@@ -1,7 +1,6 @@
 !** DPOLFT
-SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
-  !> Fit discrete data in a least squares sense by polynomials
-  !            in one variable.
+PURE SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
+  !> Fit discrete data in a least squares sense by polynomials in one variable.
   !***
   ! **Library:**   SLATEC
   !***
@@ -130,10 +129,13 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   900911  Added variable YP to DOUBLE PRECISION declaration.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: N, Ierr, Maxdeg, Ndeg
-  REAL(DP) :: Eps
-  REAL(DP) :: A(3*(N+Maxdeg+1)), R(N), X(N), Y(N), W(N)
+  INTEGER, INTENT(IN) :: Maxdeg, N
+  INTEGER, INTENT(OUT) :: Ierr, Ndeg
+  REAL(DP), INTENT(INOUT) :: Eps
+  REAL(DP), INTENT(IN) :: X(N), Y(N)
+  REAL(DP), INTENT(INOUT) :: A(3*(N+Maxdeg+1)), W(N)
+  REAL(DP), INTENT(OUT) :: R(:)
+  !
   INTEGER :: i, idegf, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, k3pi, k4, k4pi, k5, &
     k5pi, ksig, m, mop1, nder, nfail
   REAL(DP) :: temd1, temd2, degf, den, etst, f, fcrit, sig, sigj, sigjm1, sigpas, &
@@ -366,7 +368,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   sig = sigpas
   GOTO 900
   700  Ierr = 2
-  CALL XERMSG('DPOLFT','INVALID INPUT PARAMETER.',2,1)
+  ERROR STOP 'DPOLFT : INVALID INPUT PARAMETER.'
   RETURN
   800  Ierr = 4
   Ndeg = jpas
@@ -384,5 +386,6 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     END DO
   END IF
   Eps = SQRT(sig/xm)
+  !
   RETURN
 END SUBROUTINE DPOLFT

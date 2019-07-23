@@ -1,12 +1,11 @@
 !** QAWS
-SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
+PURE SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     Ier,Limit,Lenw,Last,Iwork,Work)
-  !> The routine calculates an approximation result to a given
-  !            definite integral I = Integral of F*W over (A,B),
-  !            (where W shows a singular behaviour at the end points
-  !            see parameter INTEGR).
-  !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = Integral of F*W over (A,B),
+  !  (where W shows a singular behaviour at the end points see parameter INTEGR).
+  !  Hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -182,15 +181,18 @@ SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Integr, Lenw, Limit, Last, Neval, Iwork(Limit)
-  REAL(SP) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result, Work(Lenw)
+  INTEGER, INTENT(IN) :: Integr, Lenw, Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iwork(Limit)
+  REAL(SP), INTENT(IN) :: A, Alfa, B, Beta, Epsabs, Epsrel
+  REAL(SP), INTENT(OUT) :: Abserr, Result, Work(Lenw)
+  !
   INTEGER :: lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
@@ -217,5 +219,6 @@ SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     lvl = 0
   END IF
   IF( Ier==6 ) lvl = 1
-  IF( Ier/=0 ) CALL XERMSG('QAWS','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier/=0 ) ERROR STOP 'QAWS : ABNORMAL RETURN'
+  !
 END SUBROUTINE QAWS

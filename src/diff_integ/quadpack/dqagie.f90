@@ -1,12 +1,12 @@
 !** DQAGIE
-SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
+PURE SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  !> The routine calculates an approximation result to a given
-  !            integral   I = Integral of F over (BOUND,+INFINITY)
-  !            or I = Integral of F over (-INFINITY,BOUND)
-  !            or I = Integral of F over (-INFINITY,+INFINITY),
-  !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
+  !> The routine calculates an approximation result to a given integral
+  !  I = Integral of F over (BOUND,+INFINITY)
+  !  or I = Integral of F over (-INFINITY,BOUND)
+  !  or I = Integral of F over (-INFINITY,+INFINITY),
+  !  hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -166,15 +166,19 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
+  !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Inf, Last, Limit, Neval, Iord(Limit)
-  REAL(DP) :: Abserr, Bound, Epsabs, Epsrel, Result
-  REAL(DP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Inf, Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iord(Limit)
+  REAL(DP), INTENT(IN) :: Bound, Epsabs, Epsrel
+  REAL(DP), INTENT(OUT) :: Abserr, Result
+  REAL(DP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
     nres, nrmax, numrl2
   REAL(DP) :: abseps, area, area1, area12, area2, a1, a2, boun, b1, b2, correc, &
@@ -478,5 +482,6 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   300  Neval = 30*Last - 15
   IF( Inf==2 ) Neval = 2*Neval
   IF( Ier>2 ) Ier = Ier - 1
+  !
   RETURN
 END SUBROUTINE DQAGIE

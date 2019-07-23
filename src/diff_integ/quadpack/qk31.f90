@@ -1,8 +1,7 @@
 !** QK31
-SUBROUTINE QK31(F,A,B,Result,Abserr,Resabs,Resasc)
-  !> To compute I = Integral of F over (A,B) with error
-  !                           estimate
-  !                       J = Integral of ABS(F) over (A,B)
+PURE SUBROUTINE QK31(F,A,B,Result,Abserr,Resabs,Resasc)
+  !> To compute I = Integral of F over (A,B) with error estimate
+  !  J = Integral of ABS(F) over (A,B)
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -68,13 +67,16 @@ SUBROUTINE QK31(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+  !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  REAL(SP) :: A, Abserr, B, Resabs, Resasc, Result
+  REAL(SP), INTENT(IN) :: A, B
+  REAL(SP), INTENT(OUT) :: Abserr, Resabs, Resasc, Result
+  !
   INTEGER :: j, jtw, jtwm1
   REAL(SP) :: absc, centr, dhlgth, epmach, fc, fsum, fval1, fval2, fv1(15), &
     fv2(15), hlgth, resg, resk, reskh, uflow
@@ -175,6 +177,6 @@ SUBROUTINE QK31(F,A,B,Result,Abserr,Resabs,Resasc)
   Abserr = ABS((resk-resg)*hlgth)
   IF( Resasc/=0._SP .AND. Abserr/=0._SP )&
     Abserr = Resasc*MIN(1._SP,(200._SP*Abserr/Resasc)**1.5_SP)
-  IF( Resabs>uflow/(50._SP*epmach) ) Abserr = MAX((epmach*50._SP)*Resabs,&
-    Abserr)
+  IF( Resabs>uflow/(50._SP*epmach) ) Abserr = MAX((epmach*50._SP)*Resabs,Abserr)
+  !
 END SUBROUTINE QK31

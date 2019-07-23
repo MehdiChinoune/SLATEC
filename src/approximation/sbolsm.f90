@@ -1,6 +1,5 @@
 !** SBOLSM
-SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
-    Scl,Ibasis,Ibb)
+SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasis,Ibb)
   !> Subsidiary to SBOCLS and SBOLS
   !***
   ! **Library:**   SLATEC
@@ -420,12 +419,15 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
   !
-  USE service, ONLY : XERMSG, R1MACH, SVOUT, IVOUT
+  USE service, ONLY : R1MACH, SVOUT, IVOUT
   USE blas, ONLY : SAXPY, SROT, SROTG, SSWAP
-  INTEGER :: Mdw, Minput, Mode, Ncols
-  INTEGER :: Ibasis(Ncols), Ibb(Ncols), Ind(Ncols), Iopt(*)
-  REAL(SP) :: Rnorm, W(Mdw,Ncols+1), Bl(Ncols), Bu(Ncols), X(2*Ncols+7), Rw(Ncols), &
-    Ww(Ncols), Scl(Ncols)
+  !
+  INTEGER, INTENT(IN) :: Mdw, Minput, Ncols
+  INTEGER, INTENT(OUT) :: Mode
+  INTEGER, INTENT(IN) :: Ind(Ncols)
+  INTEGER, INTENT(INOUT) :: Ibasis(Ncols), Ibb(Ncols), Iopt(*)
+  REAL(SP), INTENT(INOUT) :: Bl(Ncols), Bu(Ncols), Scl(Ncols), X(2*Ncols+7), W(Mdw,Ncols+1)
+  REAL(SP), INTENT(OUT) :: Rnorm, Rw(Ncols), Ww(Ncols)
   INTEGER :: i, igopr, ioff, ip, iprint, itemp, iter, itmax, j, jbig, jcol, jdrop, &
     jdrop1, jdrop2, jlarge, jmag, jp, lds, lgopr, lp, mrows, mval, nsetb, i2(1), jbig2(1)
   REAL(SP) :: alpha, beta, bou, colabv, colblo, cl1, cl2, cl3, big, fac, sc, ss, &
@@ -442,16 +444,14 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   IF( Minput<=0 ) THEN
     WRITE (xern1,'(I8)') Minput
-    CALL XERMSG('SBOLSM','THE NUMBER OF ROWS = '//xern1//&
-      ' MUST BE POSITIVE.',31,1)
+    ERROR STOP 'SBOLSM : THE NUMBER OF ROWS MUST BE POSITIVE.'
     Mode = -31
     RETURN
   END IF
   !
   IF( Ncols<=0 ) THEN
     WRITE (xern1,'(I8)') Ncols
-    CALL XERMSG('SBOLSM','THE NUMBER OF COLUMNS = '//xern1//&
-      ' MUST BE POSITIVE.',32,1)
+    ERROR STOP 'SBOLSM : THE NUMBER OF COLUMNS MUST BE POSITIVE.'
     Mode = -32
     RETURN
   END IF
@@ -459,8 +459,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   IF( Mdw<Minput ) THEN
     WRITE (xern1,'(I8)') Mdw
     WRITE (xern2,'(I8)') Minput
-    CALL XERMSG('SBOLSM','THE ROW DIMENSION OF W(,) = '//xern1//&
-      ' MUST BE >= THE NUMBER OF ROWS = '//xern2,33,1)
+    ERROR STOP 'SBOLSM : THE ROW DIMENSION OF W(,)  MUST BE >= THE NUMBER OF ROWS'
     Mode = -33
     RETURN
   END IF
@@ -471,8 +470,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF( Ind(j)<1 .OR. Ind(j)>4 ) THEN
       WRITE (xern1,'(I8)') j
       WRITE (xern2,'(I8)') Ind(j)
-      CALL XERMSG('SBOLSM','FOR J = '//xern1//&
-        ' THE CONSTRAINT INDICATOR MUST BE 1-4',34,1)
+      ERROR STOP 'SBOLSM : IND(J) THE CONSTRAINT INDICATOR MUST BE 1-4'
       Mode = -34
       RETURN
     END IF
@@ -484,9 +482,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         WRITE (xern1,'(I8)') j
         WRITE (xern3,'(1PE15.6)') Bl(j)
         WRITE (xern4,'(1PE15.6)') Bu(j)
-        CALL XERMSG('SBOLSM','FOR J = '//xern1//&
-          ' THE LOWER BOUND = '//xern3//&
-          ' IS > THE UPPER BOUND = '//xern4,35,1)
+        ERROR STOP 'SBOLSM : BL(J) IS > BU(J)'
         Mode = -35
         RETURN
       END IF
@@ -499,8 +495,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF( Ibasis(j)<1 .OR. Ibasis(j)>Ncols ) THEN
       WRITE (xern1,'(I8)') Ibasis(j)
       WRITE (xern2,'(I8)') Ncols
-      CALL XERMSG('SBOLSM','THE INPUT ORDER OF COLUMNS = '//xern1//&
-        ' IS NOT BETWEEN 1 AND NCOLS = '//xern2,36,1)
+      ERROR STOP 'SBOLSM : THE INPUT ORDER OF COLUMNS IS NOT BETWEEN 1 AND NCOLS'
       Mode = -36
       RETURN
     END IF
@@ -508,9 +503,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF( Ibb(j)<=0 ) THEN
       WRITE (xern1,'(I8)') j
       WRITE (xern2,'(I8)') Ibb(j)
-      CALL XERMSG('SBOLSM',&
-        'THE BOUND POLARITY FLAG IN COMPONENT J = '//xern1//&
-        ' MUST BE POSITIVE.$$NOW = '//xern2,37,1)
+      ERROR STOP 'SBOLSM : THE BOUND POLARITY FLAG IN IBB(J) MUST BE POSITIVE'
       Mode = -37
       RETURN
     END IF
@@ -630,9 +623,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF( ioff<=0 ) THEN
           WRITE (xern1,'(I8)') ioff
           WRITE (xern2,'(I8)') Ncols
-          CALL XERMSG('SBOLSM','THE OFFSET = '//xern1//&
-            ' BEYOND POSITION NCOLS = '//xern2//&
-            ' MUST BE POSITIVE FOR OPTION NUMBER 2.',24,1)
+          ERROR STOP 'SBOLSM : THE OFFSET BEYOND POSITION NCOLS MUST BE POSITIVE &
+            &FOR OPTION NUMBER 2.'
           Mode = -24
           RETURN
         END IF
@@ -641,9 +633,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF( tolind<R1MACH(4) ) THEN
           WRITE (xern3,'(1PE15.6)') tolind
           WRITE (xern4,'(1PE15.6)') R1MACH(4)
-          CALL XERMSG('SBOLSM',&
-            'THE TOLERANCE FOR RANK DETERMINATION = '//xern3//&
-            ' IS LESS THAN MACHINE PRECISION = '//xern4,25,0)
+          ERROR STOP 'SBOLSM : THE TOLERANCE FOR RANK DETERMINATION IS LESS THAN &
+            &MACHINE PRECISION'
           Mode = -25
         END IF
       END IF
@@ -658,9 +649,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF( ioff<=0 ) THEN
           WRITE (xern1,'(I8)') ioff
           WRITE (xern2,'(I8)') Ncols
-          CALL XERMSG('SBOLSM','THE OFFSET = '//xern1//&
-            ' BEYOND POSITION NCOLS = '//xern2//&
-            ' MUST BE POSITIVE FOR OPTION NUMBER 3.',26,1)
+          ERROR STOP 'SBOLSM : THE OFFSET BEYOND POSITION NCOLS MUST BE POSITIVE &
+            &FOR OPTION NUMBER 3.'
           Mode = -26
           RETURN
         END IF
@@ -668,8 +658,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         tolsze = X(Ncols+ioff)
         IF( tolsze<=ZERO ) THEN
           WRITE (xern3,'(1PE15.6)') tolsze
-          CALL XERMSG('SBOLSM','THE RECIPROCAL OF THE BLOW-UP FACTOR&
-            & FOR REJECTING VARIABLES MUST BE POSITIVE.$$NOW = '//xern3,27,1)
+          ERROR STOP 'SBOLSM : THE RECIPROCAL OF THE BLOW-UP FACTOR&
+            & FOR REJECTING VARIABLES MUST BE POSITIVE.'
           Mode = -27
           RETURN
         END IF
@@ -683,9 +673,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         itmax = Iopt(lp+2)
         IF( itmax<=0 ) THEN
           WRITE (xern1,'(I8)') itmax
-          CALL XERMSG('SBOLSM',&
-            'THE MAXIMUM NUMBER OF ITERATIONS = '//xern1//&
-            ' MUST BE POSITIVE.',28,1)
+          ERROR STOP 'SBOLSM : THE MAXIMUM NUMBER OF ITERATIONS MUST BE POSITIVE.'
           Mode = -28
           RETURN
         END IF
@@ -700,9 +688,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF( ioff<=0 ) THEN
           WRITE (xern1,'(I8)') ioff
           WRITE (xern2,'(I8)') Ncols
-          CALL XERMSG('SBOLSM','THE OFFSET = '//xern1//&
-            ' BEYOND POSITION NCOLS = '//xern2//&
-            ' MUST BE POSITIVE FOR OPTION NUMBER 5.',29,1)
+          ERROR STOP 'SBOLSM : THE OFFSET BEYOND POSITION NCOLS MUST BE POSITIVE &
+            &FOR OPTION NUMBER 5.'
           Mode = -29
           RETURN
         END IF
@@ -710,9 +697,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         fac = X(Ncols+ioff)
         IF( fac<ZERO ) THEN
           WRITE (xern3,'(1PE15.6)') fac
-          CALL XERMSG('SBOLSM',&
-            'THE FACTOR (NCOLS/MINPUT) WHERE PRE-TRIANGULARIZING IS PERFORMED MUST&
-            & BE NON-NEGATIVE.$$NOW = '//xern3,30,0)
+          ERROR STOP 'SBOLSM : THE FACTOR (NCOLS/MINPUT) WHERE PRE-TRIANGULARIZING &
+            &IS PERFORMED MUST BE NON-NEGATIVE'
           Mode = -30
           RETURN
         END IF
@@ -735,10 +721,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         WRITE (xern1,'(I8)') mval
         WRITE (xern2,'(I8)') Minput
         WRITE (xern3,'(1PE15.6)') wt
-        CALL XERMSG('SBOLSM',&
-          'THE ROW SEPARATOR TO APPLY WEIGHTING ('//xern1//&
-          ') MUST LIE BETWEEN 0 AND MINPUT = '//xern2//&
-          '.$$WEIGHT = '//xern3//' MUST BE POSITIVE.',38,0)
+        ERROR STOP 'SBOLSM : THE ROW SEPARATOR TO APPLY WEIGHTING &
+          &MUST LIE BETWEEN 0 AND MINPUT. WEIGHT MUST BE POSITIVE.'
         Mode = -38
         RETURN
       END IF
@@ -751,8 +735,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       lds = 2
     ELSE
       WRITE (xern1,'(I8)') ip
-      CALL XERMSG('SBOLSM','THE OPTION NUMBER = '//xern1//&
-        ' IS NOT DEFINED.',23,1)
+      ERROR STOP 'SBOLSM : THE OPTION NUMBER IS NOT DEFINED.'
       Mode = -23
       RETURN
     END IF
@@ -761,8 +744,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   100  iter = iter + 1
   IF( iter>itmax ) THEN
     WRITE (xern1,'(I8)') itmax
-    CALL XERMSG('SBOLSM','MORE THAN ITMAX = '//xern1//&
-      ' ITERATIONS SOLVING BOUNDED LEAST SQUARES PROBLEM.',22,1)
+    ERROR STOP 'SBOLSM : MORE THAN ITMAX ITERATIONS SOLVING BOUNDED LEAST SQUARES PROBLEM.'
     Mode = -22
     !
     !        Rescale and translate variables.
@@ -925,8 +907,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         !
         Ww(nsetb) = big
         nsetb = nsetb - 1
-        IF( iprint>0 ) CALL IVOUT(0,i2,&
-          '('' VARIABLE HAS BAD DIRECTION, NOT USED.'')',-4)
+        IF( iprint>0 ) CALL IVOUT(0,i2,'('' VARIABLE HAS BAD DIRECTION, NOT USED.'')',-4)
         CYCLE
       END IF
     END IF

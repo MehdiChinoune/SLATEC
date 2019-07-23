@@ -1,5 +1,5 @@
 !** D1MPYQ
-SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
+PURE SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   !> Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC
@@ -60,11 +60,12 @@ SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: Lda, M, N
-  REAL(DP) :: A(Lda,N), V(N), W(N)
+  INTEGER, INTENT(IN) :: Lda, M, N
+  REAL(DP), INTENT(IN) :: V(N), W(N)
+  REAL(DP), INTENT(INOUT) :: A(Lda,N)
+  !
   INTEGER :: i, j, nm1, nmj
   REAL(DP) :: coss, sinn, temp
-  REAL(DP), PARAMETER :: one = 1._DP
   !
   !     APPLY THE FIRST SET OF GIVENS ROTATIONS TO A.
   !
@@ -73,10 +74,10 @@ SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   IF( nm1>=1 ) THEN
     DO nmj = 1, nm1
       j = N - nmj
-      IF( ABS(V(j))>one ) coss = one/V(j)
-      IF( ABS(V(j))>one ) sinn = SQRT(one-coss**2)
-      IF( ABS(V(j))<=one ) sinn = V(j)
-      IF( ABS(V(j))<=one ) coss = SQRT(one-sinn**2)
+      IF( ABS(V(j))>1._DP ) coss = 1._DP/V(j)
+      IF( ABS(V(j))>1._DP ) sinn = SQRT(1._DP-coss**2)
+      IF( ABS(V(j))<=1._DP ) sinn = V(j)
+      IF( ABS(V(j))<=1._DP ) coss = SQRT(1._DP-sinn**2)
       DO i = 1, M
         temp = coss*A(i,j) - sinn*A(i,N)
         A(i,N) = sinn*A(i,j) + coss*A(i,N)
@@ -87,10 +88,10 @@ SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
     !     APPLY THE SECOND SET OF GIVENS ROTATIONS TO A.
     !
     DO j = 1, nm1
-      IF( ABS(W(j))>one ) coss = one/W(j)
-      IF( ABS(W(j))>one ) sinn = SQRT(one-coss**2)
-      IF( ABS(W(j))<=one ) sinn = W(j)
-      IF( ABS(W(j))<=one ) coss = SQRT(one-sinn**2)
+      IF( ABS(W(j))>1._DP ) coss = 1._DP/W(j)
+      IF( ABS(W(j))>1._DP ) sinn = SQRT(1._DP-coss**2)
+      IF( ABS(W(j))<=1._DP ) sinn = W(j)
+      IF( ABS(W(j))<=1._DP ) coss = SQRT(1._DP-sinn**2)
       DO i = 1, M
         temp = coss*A(i,j) + sinn*A(i,N)
         A(i,N) = -sinn*A(i,j) + coss*A(i,N)

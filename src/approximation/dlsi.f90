@@ -1,5 +1,5 @@
 !** DLSI
-SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
+PURE SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !> Subsidiary to DLSEI
   !***
   ! **Library:**   SLATEC
@@ -62,8 +62,12 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   USE service, ONLY : D1MACH
   USE blas, ONLY : DSWAP, DAXPY
   USE linear, ONLY : DH12, DHFTI
-  INTEGER :: Ma, Mdw, Mg, Mode, N, Ip(Mg+2*N+1)
-  REAL(DP) :: Rnorm, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
+  !
+  INTEGER, INTENT(IN) :: Ma, Mdw, Mg, N
+  INTEGER, INTENT(OUT) :: Mode, Ip(Mg+2*N+1)
+  REAL(DP), INTENT(IN) :: Prgopt(:)
+  REAL(DP), INTENT(INOUT) :: W(Mdw,N+1)
+  REAL(DP), INTENT(OUT) :: Rnorm, Ws(*), X(N)
   !
   REAL(DP) :: anorm, fac, gam, rb, tau, tol, xnorm, temp(1)
   INTEGER :: i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
@@ -337,4 +341,5 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !
   Ip(1) = krank
   Ip(2) = N + MAX(m,N) + (Mg+2)*(N+7)
+  !
 END SUBROUTINE DLSI

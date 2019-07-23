@@ -1,5 +1,5 @@
 !** DFDJC1
-SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
+PURE SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !> Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC
@@ -93,19 +93,22 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
+  !
   INTERFACE
-    SUBROUTINE FCN(N,X,Fvec,iflag)
+    PURE SUBROUTINE FCN(N,X,Fvec,iflag)
       IMPORT DP
-      INTEGER :: N, Iflag
-      REAL(DP) :: X(N), Fvec(N)
+      INTEGER, INTENT(IN) :: N, Iflag
+      REAL(DP), INTENT(IN) :: X(N)
+      REAL(DP), INTENT(OUT) :: Fvec(N)
     END SUBROUTINE FCN
   END INTERFACE
-  INTEGER :: Iflag, Ldfjac, Ml, Mu, N
-  REAL(DP) :: Epsfcn
-  REAL(DP) :: Fjac(Ldfjac,N), Fvec(N), Wa1(N), Wa2(N), X(N)
+  INTEGER, INTENT(IN) :: Iflag, Ldfjac, Ml, Mu, N
+  REAL(DP), INTENT(IN) :: Epsfcn
+  REAL(DP), INTENT(IN) :: Fvec(N), X(N)
+  REAL(DP), INTENT(OUT) :: Fjac(Ldfjac,N), Wa1(N), Wa2(N)
+  !
   INTEGER :: i, j, k, msum
-  REAL(DP) :: eps, epsmch, h, temp
-  REAL(DP), PARAMETER :: zero = 0._DP
+  REAL(DP) :: eps, epsmch, h, temp, x_temp(N)
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !
@@ -114,6 +117,7 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !
   eps = SQRT(MAX(Epsfcn,epsmch))
   msum = Ml + Mu + 1
+  x_temp = X
   IF( msum<N ) THEN
     !
     !        COMPUTATION OF BANDED APPROXIMATE JACOBIAN.
@@ -122,17 +126,17 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
       DO j = k, N, msum
         Wa2(j) = X(j)
         h = eps*ABS(Wa2(j))
-        IF( h==zero ) h = eps
-        X(j) = Wa2(j) + h
+        IF( h==0._DP ) h = eps
+        x_temp(j) = Wa2(j) + h
       END DO
-      CALL FCN(N,X,Wa1,Iflag)
+      CALL FCN(N,x_temp,Wa1,Iflag)
       IF( Iflag<0 ) EXIT
       DO j = k, N, msum
-        X(j) = Wa2(j)
+        x_temp(j) = Wa2(j)
         h = eps*ABS(Wa2(j))
-        IF( h==zero ) h = eps
+        IF( h==0._DP ) h = eps
         DO i = 1, N
-          Fjac(i,j) = zero
+          Fjac(i,j) = 0._DP
           IF( i>=j-Mu .AND. i<=j+Ml ) Fjac(i,j) = (Wa1(i)-Fvec(i))/h
         END DO
       END DO
@@ -144,11 +148,11 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
     DO j = 1, N
       temp = X(j)
       h = eps*ABS(temp)
-      IF( h==zero ) h = eps
-      X(j) = temp + h
-      CALL FCN(N,X,Wa1,Iflag)
+      IF( h==0._DP ) h = eps
+      x_temp(j) = temp + h
+      CALL FCN(N,x_temp,Wa1,Iflag)
       IF( Iflag<0 ) EXIT
-      X(j) = temp
+      x_temp(j) = temp
       DO i = 1, N
         Fjac(i,j) = (Wa1(i)-Fvec(i))/h
       END DO

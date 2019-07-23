@@ -1,10 +1,9 @@
 !** DQK15I
-SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
-  !> The original (infinite integration range is mapped
-  !            onto the interval (0,1) and (A,B) is a part of (0,1).
-  !            it is the purpose to compute
-  !            I = Integral of transformed integrand over (A,B),
-  !            J = Integral of ABS(Transformed Integrand) over (A,B).
+PURE SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
+  !> The original (infinite integration range is mapped onto the
+  !  interval (0,1) and (A,B) is a part of (0,1). it is the purpose to compute
+  !  I = Integral of transformed integrand over (A,B),
+  !  J = Integral of ABS(Transformed Integrand) over (A,B).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -88,13 +87,15 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Inf
-  REAL(DP) :: A, Abserr, B, Boun, Resabs, Resasc, Result
+  INTEGER, INTENT(IN) :: Inf
+  REAL(DP), INTENT(IN) :: A, B, Boun
+  REAL(DP), INTENT(OUT) :: Abserr, Resabs, Resasc, Result
+  !
   INTEGER :: j
   REAL(DP) :: absc, absc1, absc2, centr, dinf, epmach, fc, fsum, fval1, fval2, &
     fv1(7), fv2(7), hlgth, resg, resk, reskh, tabsc1, tabsc2, uflow
@@ -192,6 +193,6 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   Abserr = ABS((resk-resg)*hlgth)
   IF( Resasc/=0._DP .AND. Abserr/=0._DP )&
     Abserr = Resasc*MIN(1._DP,(0.2E+03_DP*Abserr/Resasc)**1.5_DP)
-  IF( Resabs>uflow/(0.5E+02_DP*epmach) ) Abserr = MAX((epmach*0.5E+02_DP)*Resabs,&
-    Abserr)
+  IF( Resabs>uflow/(0.5E+02_DP*epmach) ) Abserr = MAX((epmach*0.5E+02_DP)*Resabs,Abserr)
+  !
 END SUBROUTINE DQK15I

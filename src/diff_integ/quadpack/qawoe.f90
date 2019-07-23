@@ -1,13 +1,10 @@
 !** QAWOE
-SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
-    Result,Abserr,Neval,Ier,Last,Alist,Blist,Rlist,Elist,&
-    Iord,Nnlog,Momcom,Chebmo)
+PURE SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,&
+    Abserr,Neval,Ier,Last,Alist,Blist,Rlist,Elist,Iord,Nnlog,Momcom,Chebmo)
   !> Calculate an approximation to a given definite integral
-  !               I = Integral of F(X)*W(X) over (A,B), where
-  !                  W(X) = COS(OMEGA*X)
-  !               or W(X) = SIN(OMEGA*X),
-  !            hopefully satisfying the following claim for accuracy
-  !               ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !  I = Integral of F(X)*W(X) over (A,B), where W(X) = COS(OMEGA*X) or
+  !  W(X)=SIN(OMEGA*X), hopefully satisfying the following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -222,15 +219,20 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Icall, Ier, Integr, Last, Limit, Maxp1, Momcom, Neval
-  INTEGER :: Iord(Limit), Nnlog(Limit)
-  REAL(SP) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result
-  REAL(SP) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Icall, Integr, Limit, Maxp1
+  INTEGER, INTENT(INOUT) :: Momcom
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval
+  INTEGER, INTENT(OUT) :: Iord(Limit), Nnlog(Limit)
+  REAL(SP), INTENT(IN) :: A, B, Epsabs, Epsrel, Omega
+  REAL(SP), INTENT(OUT) :: Abserr, Result
+  REAL(SP), INTENT(INOUT) :: Chebmo(Maxp1,25)
+  REAL(SP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
     nev, nres, nrmax, nrmom, numrl2
   REAL(SP) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defab1, &
@@ -580,5 +582,6 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
     IF( Ier>2 ) Ier = Ier - 1
     IF( Integr==2 .AND. Omega<0._SP ) Result = -Result
   END IF
+  !
   RETURN
 END SUBROUTINE QAWOE

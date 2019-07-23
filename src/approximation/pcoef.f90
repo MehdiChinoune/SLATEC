@@ -1,5 +1,5 @@
 !** PCOEF
-SUBROUTINE PCOEF(L,C,Tc,A)
+PURE SUBROUTINE PCOEF(L,C,Tc,A)
   !> Convert the POLFIT coefficients to Taylor series form.
   !***
   ! **Library:**   SLATEC
@@ -63,8 +63,11 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: L
-  REAL(SP) :: C, A(:), Tc(ABS(L)+1)
+  INTEGER, INTENT(IN) :: L
+  REAL(SP), INTENT(IN) :: C
+  REAL(SP), INTENT(INOUT) :: A(:)
+  REAL(SP), INTENT(OUT) :: Tc(ABS(L)+1)
+  !
   REAL(SP) :: fac, save
   INTEGER :: i, ll, llp1, llp2, new, nr
   !* FIRST EXECUTABLE STATEMENT  PCOEF
@@ -88,4 +91,5 @@ SUBROUTINE PCOEF(L,C,Tc,A)
       Tc(new) = save
     END DO
   END IF
+  !
 END SUBROUTINE PCOEF

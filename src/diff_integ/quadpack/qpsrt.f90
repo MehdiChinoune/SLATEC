@@ -1,7 +1,6 @@
 !** QPSRT
-SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
-  !> Subsidiary to QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE and
-  !            QAWSE
+PURE SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
+  !> Subsidiary to QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE and QAWSE
   !***
   ! **Library:**   SLATEC
   !***
@@ -31,12 +30,10 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !
   !           PARAMETERS (MEANING AT OUTPUT)
   !              LIMIT  - INTEGER
-  !                       Maximum number of error estimates the list
-  !                       can contain
+  !                       Maximum number of error estimates the list can contain
   !
   !              LAST   - INTEGER
-  !                       Number of error estimates currently
-  !                       in the list
+  !                       Number of error estimates currently in the list
   !
   !              MAXERR - INTEGER
   !                       MAXERR points to the NRMAX-th largest error
@@ -47,8 +44,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !                       ERMAX = ELIST(MAXERR)
   !
   !              ELIST  - REAL
-  !                       Vector of dimension LAST containing
-  !                       the error estimates
+  !                       Vector of dimension LAST containing the error estimates
   !
   !              IORD   - INTEGER
   !                       Vector of dimension LAST, the first K
@@ -74,8 +70,11 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  INTEGER :: Last, Limit, Maxerr, Nrmax, Iord(Last)
-  REAL(SP) :: Ermax, Elist(Last)
+  INTEGER, INTENT(IN) :: Last, Limit
+  INTEGER, INTENT(INOUT) :: Nrmax, Iord(Last), Maxerr
+  REAL(SP), INTENT(IN) :: Elist(Last)
+  REAL(SP), INTENT(OUT) :: Ermax
+  !
   INTEGER :: i, ibeg, ido, isucc, j, jbnd, jupbn, k
   REAL(SP) :: errmax, errmin
   !
@@ -152,4 +151,5 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !
   300  Maxerr = Iord(Nrmax)
   Ermax = Elist(Maxerr)
+  !
 END SUBROUTINE QPSRT

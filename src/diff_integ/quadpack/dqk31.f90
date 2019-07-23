@@ -1,8 +1,7 @@
 !** DQK31
-SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
-  !> To compute I = Integral of F over (A,B) with error
-  !                           estimate
-  !                       J = Integral of ABS(F) over (A,B)
+PURE SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
+  !> To compute I = Integral of F over (A,B) with error estimate
+  !  J = Integral of ABS(F) over (A,B)
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -68,13 +67,16 @@ SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
+  !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  REAL(DP) :: A, Abserr, B, Resabs, Resasc, Result
+  REAL(DP), INTENT(IN) :: A, B
+  REAL(DP), INTENT(OUT) :: Abserr, Resabs, Resasc, Result
+  !
   INTEGER :: j, jtw, jtwm1
   REAL(DP) :: absc, centr, dhlgth, epmach, fc, fsum, fval1, fval2, fv1(15), &
     fv2(15), hlgth, resg, resk, reskh, uflow
@@ -187,6 +189,6 @@ SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   Abserr = ABS((resk-resg)*hlgth)
   IF( Resasc/=0._DP .AND. Abserr/=0._DP )&
     Abserr = Resasc*MIN(1._DP,(0.2E+03_DP*Abserr/Resasc)**1.5_DP)
-  IF( Resabs>uflow/(0.5E+02_DP*epmach) ) Abserr = MAX((epmach*0.5E+02_DP)*Resabs,&
-    Abserr)
+  IF( Resabs>uflow/(0.5E+02_DP*epmach) ) Abserr = MAX((epmach*0.5E+02_DP)*Resabs,Abserr)
+  !
 END SUBROUTINE DQK31

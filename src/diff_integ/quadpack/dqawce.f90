@@ -1,11 +1,10 @@
 !** DQAWCE
-SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
+PURE SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  !> The routine calculates an approximation result to a
-  !            CAUCHY PRINCIPAL VALUE I = Integral of F*W over (A,B)
-  !            (W(X) = 1/(X-C), (C/=A, C/=B), hopefully satisfying
-  !            following claim for accuracy
-  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
+  !> The routine calculates an approximation result to a CAUCHY PRINCIPAL VALUE
+  !  I = Integral of F*W over (A,B) (W(X) = 1/(X-C), (C/=A, C/=B),
+  !  hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -157,14 +156,17 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Last, Limit, Neval, Iord(Limit)
-  REAL(DP) :: A, Abserr, B, C, Epsabs, Epsrel, Result
-  REAL(DP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iord(Limit)
+  REAL(DP), INTENT(IN) :: A, B, C, Epsabs, Epsrel
+  REAL(DP), INTENT(OUT) :: Abserr, Result
+  REAL(DP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: iroff1, iroff2, k, krule, maxerr, nev, nrmax
   REAL(DP) :: aa, area, area1, area12, area2, a1, a2, bb, b1, b2, epmach, errbnd, &
     errmax, error1, erro12, error2, errsum, uflow
@@ -346,4 +348,5 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     END IF
     IF( aa==B ) Result = -Result
   END IF
+  !
 END SUBROUTINE DQAWCE

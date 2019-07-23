@@ -1,12 +1,10 @@
 !** QAWFE
-SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
+PURE SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     Neval,Ier,Rslst,Erlst,Ierlst,Lst,Alist,Blist,Rlist,Elist,Iord,Nnlog,Chebmo)
-  !> The routine calculates an approximation result to a
-  !            given Fourier integral
-  !            I = Integral of F(X)*W(X) over (A,INFINITY)
-  !             where W(X) = COS(OMEGA*X) or W(X) = SIN(OMEGA*X),
-  !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=EPSABS.
+  !> The routine calculates an approximation result to a given Fourier integral
+  !  I = Integral of F(X)*W(X) over (A,INFINITY) where W(X)=COS(OMEGA*X) or
+  !  W(X)=SIN(OMEGA*X), hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=EPSABS.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -197,8 +195,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !
   !            CHEBMO - Real
   !                     Array of dimension at least (MAXP1,25), providing
-  !                     space for the Chebyshev moments needed within the
-  !                     cycles
+  !                     space for the Chebyshev moments needed within the cycles
   !
   !***
   ! **References:**  (NONE)
@@ -214,16 +211,19 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Integr, Lst, Limit, Limlst, Maxp1, Neval
-  INTEGER :: Ierlst(Limlst), Iord(Limit), Nnlog(Limit)
-  REAL(SP) :: A, Abserr, Epsabs, Omega, Result
-  REAL(SP) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), &
+  INTEGER, INTENT(IN) :: Integr, Limit, Limlst, Maxp1
+  INTEGER, INTENT(OUT) :: Ier, Lst, Neval
+  INTEGER, INTENT(OUT) :: Iord(Limit), Ierlst(Limlst), Nnlog(Limit)
+  REAL(SP), INTENT(IN) :: A, Epsabs, Omega
+  REAL(SP), INTENT(OUT) :: Abserr, Result
+  REAL(SP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Chebmo(Maxp1,25), Elist(Limit), &
     Erlst(Limlst), Rlist(Limit), Rslst(Limlst)
+  !
   INTEGER :: ktmin, l, last, ll, momcom, nev, nres, numrl2
   REAL(SP) :: abseps, correc, cycle, c1, c2, dl, drl, ep, eps, epsa, errsum, fact, &
     p1, psum(52), reseps, res3la(3), uflow
@@ -383,5 +383,6 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     50  Result = psum(numrl2)
     Abserr = errsum + drl
   END IF
+  !
   RETURN
 END SUBROUTINE QAWFE

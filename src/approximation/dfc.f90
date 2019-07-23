@@ -2,10 +2,9 @@
 SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,W,Iw)
   !> Fit a piecewise polynomial curve to discrete data.
-  !            The piecewise polynomials are represented as B-splines.
-  !            The fitting is done in a weighted least squares sense.
-  !            Equality and inequality constraints can be imposed on the
-  !            fitted curve.
+  !  The piecewise polynomials are represented as B-splines.
+  !  The fitting is done in a weighted least squares sense.
+  !  Equality and inequality constraints can be imposed on the fitted curve.
   !***
   ! **Library:**   SLATEC
   !***
@@ -364,8 +363,7 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !***
   ! **References:**  R. J. Hanson, Constrained least squares curve fitting
   !                 to discrete data using B-splines, a users guide,
-  !                 Report SAND78-1291, Sandia Laboratories, December
-  !                 1978.
+  !                 Report SAND78-1291, Sandia Laboratories, December 1978.
   !***
   ! **Routines called:**  DFCMN
 
@@ -379,23 +377,24 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !   900607  Editorial changes to Prologue to make Prologues for EFC,
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: Mode, Nbkpt, Nconst, Ndata, Nord, Nderiv(Nconst), Iw(:)
-  REAL(DP) :: Bkpt(Nbkpt), Coeff(:), Sddata(Ndata), W(*), Xconst(Nconst), &
-    Xdata(Ndata), Yconst(Nconst), Ydata(Ndata)
+  INTEGER, INTENT(IN) :: Nbkpt, Nconst, Ndata, Nord, Nderiv(Nconst)
+  INTEGER, INTENT(INOUT) :: Mode, Iw(:)
+  REAL(DP), INTENT(IN) :: Bkpt(Nbkpt), Sddata(Ndata), Xconst(Nconst), Xdata(Ndata), &
+    Yconst(Nconst), Ydata(Ndata)
+  REAL(DP), INTENT(INOUT) :: W(*)
+  REAL(DP), INTENT(OUT) :: Coeff(:)
   !
   INTEGER :: i1, i2, i3, i4, i5, i6, i7, mdg, mdw
   !
   !* FIRST EXECUTABLE STATEMENT  DFC
   IF( Nord<1 .OR. Nord>20 ) THEN
-    CALL XERMSG('FCMN',&
-      'IN FC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',2,1)
+    ERROR STOP 'FCMN : IN FC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.'
     Mode = -1
     RETURN
     !
   ELSEIF( Nbkpt<2*Nord ) THEN
-    CALL XERMSG('FCMN',&
-      'IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
+    ERROR STOP 'FCMN : IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE &
+      &B-SPLINE ORDER.'
     Mode = -1
     RETURN
   END IF
@@ -426,4 +425,5 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   i7 = i6 + mdw*(Nbkpt-Nord+1)
   CALL DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,Yconst,&
     Nderiv,Mode,Coeff,W(i5),W(i2),W(i3),W(i4),W(i1),mdg,W(i6),mdw,W(i7),Iw)
+  !
 END SUBROUTINE DFC

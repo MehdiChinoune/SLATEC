@@ -1,5 +1,5 @@
 !** DWNLT2
-LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
+LOGICAL PURE FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
   !> Subsidiary to WNLIT
   !***
   ! **Library:**   SLATEC
@@ -36,11 +36,11 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
 
   !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
-  !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
+  !   890620  Code extracted from WNLIT and made a subroutine.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
 
-  INTEGER :: Ir, Me, Mend
-  REAL(DP) :: Factor, Tau, Scalee(Mend), Wic(:)
+  INTEGER, INTENT(IN) :: Ir, Me, Mend
+  REAL(DP), INTENT(IN) :: Factor, Tau, Scalee(Mend), Wic(:)
   !
   INTEGER :: j
   REAL(DP) :: rn, sn, t
@@ -60,4 +60,5 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scalee,Wic)
     END IF
   END DO
   DWNLT2 = rn>sn*Tau**2
+  !
 END FUNCTION DWNLT2

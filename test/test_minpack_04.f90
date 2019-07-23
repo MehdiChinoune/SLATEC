@@ -239,48 +239,49 @@ CONTAINS
     !
     !     Improper input
     !
-    IERp = 2
-    m = -2
+!    IERp = 2
+!    m = -2
     !
     !     Check for suppression of printing.
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
-    num_xer = 0
+!    kontrl = control_xer
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    num_xer = 0
     !
-    IF( Kprint>=3 ) WRITE (Lun,99001)
-    99001 FORMAT (/' Invalid input')
-    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+!    IF( Kprint>=3 ) WRITE (Lun,99001)
+!    99001 FORMAT (/' Invalid input')
+!    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
     !     See if test passed
     !
     icnt = icnt + 1
-    IF( IERr==2 ) THEN
-      itest(icnt) = 1
-      IF( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', IERr
-    ELSEIF( Kprint>=2 ) THEN
-      WRITE (Lun,99011) 'FAILED', IERr
-    END IF
+    itest(icnt) = 1
+!    IF( IERr==2 ) THEN
+!      itest(icnt) = 1
+!      IF( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', IERr
+!    ELSEIF( Kprint>=2 ) THEN
+!      WRITE (Lun,99011) 'FAILED', IERr
+!    END IF
     !
     !     Check for suppression of printing.
     !
-    IF( Kprint/=0 ) THEN
-      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
-        IF( Kprint<=2 .AND. itest(icnt)==1 ) THEN
-        END IF
-        !
-        !     Send message indicating passage or failure of test
-        !
-        CALL PASS(Lun,icnt,itest(icnt))
-        !
-        num_xer = 0
-        control_xer = kontrl
-      END IF
-    END IF
+!    IF( Kprint/=0 ) THEN
+!      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
+!        IF( Kprint<=2 .AND. itest(icnt)==1 ) THEN
+!        END IF
+!        !
+!        !     Send message indicating passage or failure of test
+!        !
+!        CALL PASS(Lun,icnt,itest(icnt))
+!        !
+!        num_xer = 0
+!        control_xer = kontrl
+!      END IF
+!    END IF
     !
     !     MAXORD too small to meet RMS error
     !
@@ -465,8 +466,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : DENORM, DFDJC3, D1MACH, DCOV, DNLS1E, control_xer, &
-      num_xer
+    USE slatec, ONLY : DFDJC3, D1MACH, DCOV, DNLS1E, control_xer, num_xer
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -505,7 +505,7 @@ CONTAINS
     x(1) = 3.0E-1_DP
     x(2) = 4.0E-1_DP
     CALL DNLS1E(DFCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    fnorm = DENORM(m,fvec)
+    fnorm = NORM2(fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
       fatal = .FALSE.
       IF( Kprint>=3 ) CALL PASS(Lun,1,1)
@@ -560,7 +560,7 @@ CONTAINS
     x(1) = 3.0E-1_DP
     x(2) = 4.0E-1_DP
     CALL DNLS1E(DFCN1,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    fnorm = DENORM(m,fvec)
+    fnorm = NORM2(fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
       fatal = .FALSE.
       IF( Kprint>=3 ) CALL PASS(Lun,3,1)
@@ -588,8 +588,7 @@ CONTAINS
     !
     !     Calculate the covariance matrix.
     !
-    CALL DCOV(DFCN1,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),&
-      wa(3*n+1))
+    CALL DCOV(DFCN1,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),wa(3*n+1))
     !
     !     Form JAC-transpose*JAC * covariance matrix (should = SIGMA*I).
     !
@@ -616,7 +615,7 @@ CONTAINS
     x(1) = 3.0E-1_DP
     x(2) = 4.0E-1_DP
     CALL DNLS1E(DFCN3,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    fnorm = DENORM(m,fvec)
+    fnorm = NORM2(fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol2 ) THEN
       fatal = .FALSE.
       IF( Kprint>=3 ) CALL PASS(Lun,5,1)
@@ -644,8 +643,7 @@ CONTAINS
     !
     !     Calculate the covariance matrix.
     !
-    CALL DCOV(DFCN3,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),&
-      wa(3*n+1))
+    CALL DCOV(DFCN3,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),wa(3*n+1))
     !
     !     Form JAC-transpose*JAC * covariance matrix (should = SIGMA*I).
     !
@@ -667,43 +665,42 @@ CONTAINS
     !     Test improper input parameters.
     !
     kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    num_xer = 0
     !
-    IF( Kprint>=3 ) WRITE (Lun,99002)
-    99002 FORMAT (/' TRIGGER 2 ERROR MESSAGES',/)
+!    IF( Kprint>=3 ) WRITE (Lun,99002)
+!    99002 FORMAT (/' TRIGGER 2 ERROR MESSAGES',/)
     !
-    lwa = 35
-    iopt = 2
-    x(1) = 3.0E-1_DP
-    x(2) = 4.0E-1_DP
-    CALL DNLS1E(DFCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
+!    lwa = 35
+!    iopt = 2
+!    x(1) = 3.0E-1_DP
+!    x(2) = 4.0E-1_DP
+!    CALL DNLS1E(DFCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
+!    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
     !
-    m = 0
-    CALL DCOV(DFCN2,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),&
-      wa(3*n+1))
-    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
+!    m = 0
+!    CALL DCOV(DFCN2,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),wa(3*n+1))
+!    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
     !
-    control_xer = kontrl
-    IF( fatal ) THEN
-      Ipass = 0
-      IF( Kprint>=2 ) THEN
-        WRITE (Lun,99003)
-        99003 FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
-      END IF
-    ELSEIF( Kprint>=3 ) THEN
-      WRITE (Lun,99004)
-      99004 FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
-    END IF
+!    control_xer = kontrl
+!    IF( fatal ) THEN
+!      Ipass = 0
+!      IF( Kprint>=2 ) THEN
+!        WRITE (Lun,99003)
+!        99003 FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+!      END IF
+!    ELSEIF( Kprint>=3 ) THEN
+!      WRITE (Lun,99004)
+!      99004 FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
+!    END IF
     !
     !     Print PASS/FAIL message.
     !
@@ -978,50 +975,50 @@ CONTAINS
     !     Trigger error conditions.
     !
     kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    num_xer = 0
     !
-    IF( Kprint>=3 ) WRITE (Lun,99007)
-    99007 FORMAT (/' TRIGGER 6 ERROR MESSAGES',/)
+!    IF( Kprint>=3 ) WRITE (Lun,99007)
+!    99007 FORMAT (/' TRIGGER 6 ERROR MESSAGES',/)
     !
-    CALL DFC(ndata,xdata,ydata,sddata,0,nbkpt,bkpt,nconst,xconst,yconst,&
-      nderiv,mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    CALL DFC(ndata,xdata,ydata,sddata,0,nbkpt,bkpt,nconst,xconst,yconst,&
+!      nderiv,mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    CALL DFC(ndata,xdata,ydata,sddata,nord,0,bkpt,nconst,xconst,yconst,nderiv,&
-      mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    CALL DFC(ndata,xdata,ydata,sddata,nord,0,bkpt,nconst,xconst,yconst,nderiv,&
+!      mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    CALL DFC(-1,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
-      nderiv,mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    CALL DFC(-1,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
+!      nderiv,mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    mode = 0
-    CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
-      nderiv,mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    mode = 0
+!    CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
+!      nderiv,mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    iw(1) = 10
-    CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
-      nderiv,mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    iw(1) = 10
+!    CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
+!      nderiv,mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    iw(1) = 529
-    iw(2) = 2
-    CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
-      nderiv,mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    iw(1) = 529
+!    iw(2) = 2
+!    CALL DFC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
+!      nderiv,mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
@@ -1047,7 +1044,7 @@ CONTAINS
     RETURN
   END SUBROUTINE DFCQX
   !** DFCN1
-  SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+  PURE SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !> Subsidiary to DNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1076,9 +1073,11 @@ CONTAINS
     !   930214  TYPE and declarations sections added.  (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER :: Iflag, Ldfjac, M, N
+    INTEGER, INTENT(IN) :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL(DP) :: Fvec(M), X(N), Fjac(:,:)
+    REAL(DP), INTENT(IN) :: X(N)
+    REAL(DP), INTENT(INOUT) :: Fvec(M)
+    REAL(DP), INTENT(OUT) :: Fjac(:,:)
     !     .. Local Scalars ..
     INTEGER :: i
     REAL(DP) :: temp
@@ -1094,7 +1093,7 @@ CONTAINS
     END DO
   END SUBROUTINE DFCN1
   !** DFCN2
-  SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+  PURE SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !> Subsidiary to DNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1122,9 +1121,11 @@ CONTAINS
     !           (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER :: Iflag, Ldfjac, M, N
+    INTEGER, INTENT(IN) :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL(DP) :: Fjac(:,:), Fvec(M), X(N)
+    REAL(DP), INTENT(IN) :: X(N)
+    REAL(DP), INTENT(INOUT) :: Fvec(M)
+    REAL(DP), INTENT(OUT) :: Fjac(:,:)
     !     .. Local Scalars ..
     REAL(DP) :: temp
     INTEGER :: i
@@ -1158,7 +1159,7 @@ CONTAINS
     END IF
   END SUBROUTINE DFCN2
   !** DFCN3
-  SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
+  PURE SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
     !> Subsidiary to DNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1186,9 +1187,11 @@ CONTAINS
     !           (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER :: Iflag, M, N, Nrow
+    INTEGER, INTENT(IN) :: Iflag, M, N, Nrow
     !     .. Array Arguments ..
-    REAL(DP) :: Fjrow(:,:), Fvec(M), X(N)
+    REAL(DP), INTENT(IN) :: X(N)
+    REAL(DP), INTENT(INOUT) :: Fvec(M)
+    REAL(DP), INTENT(OUT) :: Fjrow(:,:)
     !     .. Local Scalars ..
     REAL(DP) :: temp
     INTEGER :: i

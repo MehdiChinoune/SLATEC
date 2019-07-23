@@ -1,9 +1,8 @@
 !** DQNG
-SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
-  !> The routine calculates an approximation result to a
-  !            given definite integral I = integral of F over (A,B),
-  !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+PURE SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = integral of F over (A,B), hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -91,16 +90,18 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Neval
-  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Result
+  INTEGER, INTENT(OUT) :: Ier, Neval
+  REAL(DP), INTENT(IN) :: A, B, Epsabs, Epsrel
+  REAL(DP), INTENT(OUT) :: Abserr, Result
+  !
   INTEGER :: ipx, k, l
   REAL(DP) :: absc, centr, dhlgth, epmach, fcentr, fval, fval1, fval2, fv1(5), &
     fv2(5), fv3(5), fv4(5), hlgth, res10, res21, res43, res87, resabs, resasc, &
@@ -333,6 +334,7 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
       IF( Ier==0 ) RETURN
     END DO
   END IF
-  CALL XERMSG('DQNG','ABNORMAL RETURN',Ier,0)
+  ERROR STOP 'DQNG : ABNORMAL RETURN'
+  !
   RETURN
 END SUBROUTINE DQNG

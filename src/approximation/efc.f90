@@ -1,8 +1,8 @@
 !** EFC
 SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   !> Fit a piecewise polynomial curve to discrete data.
-  !            The piecewise polynomials are represented as B-splines.
-  !            The fitting is done in a weighted least squares sense.
+  !  The piecewise polynomials are represented as B-splines.
+  !  The fitting is done in a weighted least squares sense.
   !***
   ! **Library:**   SLATEC
   !***
@@ -236,9 +236,11 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   !                         WRITTEN BY R. HANSON, SANDIA NATL. LABS.,
   !                         ALB., N. M., AUGUST-SEPTEMBER, 1980.
   !
-  INTEGER :: Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
-  REAL(SP) :: Bkpt(Nbkpt), Coeff(Nbkpt-Nord), Sddata(Ndata), W(Lw), Xdata(Ndata), &
-    Ydata(Ndata)
+  INTEGER, INTENT(IN) :: Lw, Mdein, Nbkpt, Ndata, Nord
+  INTEGER, INTENT(OUT) :: Mdeout
+  REAL(SP), INTENT(IN) :: Bkpt(Nbkpt), Sddata(Ndata), Xdata(Ndata), Ydata(Ndata)
+  REAL(SP), INTENT(INOUT) :: W(Lw)
+  REAL(SP), INTENT(OUT) :: Coeff(Nbkpt-Nord+1)
   !
   INTEGER :: lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw
   !
@@ -266,4 +268,5 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   lbf = lbkpt + Nbkpt
   CALL EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,&
     W(lbf),W(lxtemp),W(lptemp),W(lbkpt),W(lg),mdg,W(lww),mdw,Lw)
+  !
 END SUBROUTINE EFC

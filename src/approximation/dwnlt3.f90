@@ -1,5 +1,5 @@
 !** DWNLT3
-SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
+PURE SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !> Subsidiary to WNLIT
   !***
   ! **Library:**   SLATEC
@@ -22,11 +22,13 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
 
   !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
-  !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
+  !   890620  Code extracted from WNLIT and made a subroutine.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   USE blas, ONLY : DSWAP
-  INTEGER :: I, Imax, M, Mdw, Ipivot(:)
-  REAL(DP) :: H(:), W(Mdw,M)
+  !
+  INTEGER, INTENT(IN) :: I, Imax, M, Mdw
+  INTEGER, INTENT(INOUT) :: Ipivot(:)
+  REAL(DP), INTENT(INOUT) :: H(:), W(Mdw,M)
   !
   INTEGER :: itemp
   REAL(DP) :: t
@@ -43,4 +45,5 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
     H(Imax) = H(I)
     H(I) = t
   END IF
+  !
 END SUBROUTINE DWNLT3

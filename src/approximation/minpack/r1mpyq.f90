@@ -1,5 +1,5 @@
 !** R1MPYQ
-SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
+PURE SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
   !> Subsidiary to SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC
@@ -59,20 +59,21 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: M, N, Lda
-  REAL(SP) :: A(Lda,N), V(N), W(N)
+  INTEGER, INTENT(IN) :: M, N, Lda
+  REAL(SP), INTENT(IN) :: V(N), W(N)
+  REAL(SP), INTENT(INOUT) :: A(Lda,N)
+  !
   INTEGER :: i, j, nmj, nm1
   REAL(SP) :: coss, sinn, temp
-  REAL(SP), PARAMETER :: one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  R1MPYQ
   nm1 = N - 1
   IF( nm1>=1 ) THEN
     DO nmj = 1, nm1
       j = N - nmj
-      IF( ABS(V(j))>one ) coss = one/V(j)
-      IF( ABS(V(j))>one ) sinn = SQRT(one-coss**2)
-      IF( ABS(V(j))<=one ) sinn = V(j)
-      IF( ABS(V(j))<=one ) coss = SQRT(one-sinn**2)
+      IF( ABS(V(j))>1._SP ) coss = 1._SP/V(j)
+      IF( ABS(V(j))>1._SP ) sinn = SQRT(1._SP-coss**2)
+      IF( ABS(V(j))<=1._SP ) sinn = V(j)
+      IF( ABS(V(j))<=1._SP ) coss = SQRT(1._SP-sinn**2)
       DO i = 1, M
         temp = coss*A(i,j) - sinn*A(i,N)
         A(i,N) = sinn*A(i,j) + coss*A(i,N)
@@ -83,10 +84,10 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
     !     APPLY THE SECOND SET OF GIVENS ROTATIONS TO A.
     !
     DO j = 1, nm1
-      IF( ABS(W(j))>one ) coss = one/W(j)
-      IF( ABS(W(j))>one ) sinn = SQRT(one-coss**2)
-      IF( ABS(W(j))<=one ) sinn = W(j)
-      IF( ABS(W(j))<=one ) coss = SQRT(one-sinn**2)
+      IF( ABS(W(j))>1._SP ) coss = 1._SP/W(j)
+      IF( ABS(W(j))>1._SP ) sinn = SQRT(1._SP-coss**2)
+      IF( ABS(W(j))<=1._SP ) sinn = W(j)
+      IF( ABS(W(j))<=1._SP ) coss = SQRT(1._SP-sinn**2)
       DO i = 1, M
         temp = coss*A(i,j) + sinn*A(i,N)
         A(i,N) = -sinn*A(i,j) + coss*A(i,N)

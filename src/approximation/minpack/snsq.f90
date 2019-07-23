@@ -1,8 +1,8 @@
 !** SNSQ
-SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
+PURE SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,R,Lr,Qtf,Wa1,Wa2,Wa3,Wa4)
-  !> Find a zero of a system of a N nonlinear functions in N
-  !            variables by a modification of the Powell hybrid method.
+  !> Find a zero of a system of a N nonlinear functions in N variables
+  !  by a modification of the Powell hybrid method.
   !***
   ! **Library:**   SLATEC
   !***
@@ -425,30 +425,36 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
+  !
   INTERFACE
-    SUBROUTINE FCN(N,X,Fvec,iflag)
+    PURE SUBROUTINE FCN(N,X,Fvec,iflag)
       IMPORT SP
-      INTEGER :: N, Iflag
-      REAL(SP) :: X(N), Fvec(N)
+      INTEGER, INTENT(IN) :: N, Iflag
+      REAL(SP), INTENT(IN) :: X(N)
+      REAL(SP), INTENT(OUT) :: Fvec(N)
     END SUBROUTINE FCN
-    SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
+    PURE SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
       IMPORT SP
-      INTEGER :: N, Ldfjac, Iflag
-      REAL(SP) :: X(N), Fvec(N),Fjac(Ldfjac,N)
+      INTEGER, INTENT(IN) :: N, Ldfjac, Iflag
+      REAL(SP), INTENT(IN) :: X(N), Fvec(N)
+      REAL(SP), INTENT(OUT) :: Fjac(Ldfjac,N)
     END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Iopt, N, Maxfev, Ml, Mu, Mode, Nprint, Info, Nfev, Ldfjac, Lr, Njev
-  REAL(SP) :: Xtol, Epsfcn, Factor
-  REAL(SP) :: X(N), Fvec(N), Diag(N), Fjac(Ldfjac,N), R(Lr), Qtf(N), Wa1(N), &
-    Wa2(N), Wa3(N), Wa4(N)
+  INTEGER, INTENT(IN) :: Iopt, N, Maxfev, Ml, Mu, Mode, Nprint, Ldfjac, Lr
+  INTEGER, INTENT(OUT) :: Info, Nfev, Njev
+  REAL(SP), INTENT(IN) :: Xtol, Epsfcn, Factor
+  REAL(SP), INTENT(INOUT) :: X(N), Diag(N)
+  REAL(SP), INTENT(OUT) :: Fvec(N), Fjac(Ldfjac,N), Qtf(N), R(Lr), Wa1(N), Wa2(N), &
+    Wa3(N), Wa4(N)
+  !
   INTEGER :: i, iflag, iter, j, jm1, l, ncfail, ncsuc, nslow1, nslow2
   INTEGER :: iwa(1)
   LOGICAL :: jeval, sing
   REAL(SP) :: actred, delta, epsmch, fnorm, fnorm1, pnorm, prered, ratio, summ, &
     temp, xnorm
-  REAL(SP), PARAMETER ::one = 1._SP, p1 = 1.E-1_SP, p5 = 5.E-1_SP, p001 = 1.E-3_SP, &
-    p0001 = 1.E-4_SP, zero = 0._SP
+  REAL(SP), PARAMETER :: p1 = 1.E-1_SP, p5 = 5.E-1_SP, p001 = 1.E-3_SP, &
+    p0001 = 1.E-4_SP
   !
   !* FIRST EXECUTABLE STATEMENT  SNSQ
   epsmch = R1MACH(4)
@@ -460,11 +466,11 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !
   !     CHECK THE INPUT PARAMETERS FOR ERRORS.
   !
-  IF( Iopt<1 .OR. Iopt>2 .OR. N<=0 .OR. Xtol<zero .OR. Maxfev<=0 .OR. Ml<0 .OR. &
-    Mu<0 .OR. Factor<=zero .OR. Ldfjac<N .OR. Lr<(N*(N+1))/2 ) GOTO 300
+  IF( Iopt<1 .OR. Iopt>2 .OR. N<=0 .OR. Xtol<0._SP .OR. Maxfev<=0 .OR. Ml<0 .OR. &
+    Mu<0 .OR. Factor<=0._SP .OR. Ldfjac<N .OR. Lr<(N*(N+1))/2 ) GOTO 300
   IF( Mode==2 ) THEN
     DO j = 1, N
-      IF( Diag(j)<=zero ) GOTO 300
+      IF( Diag(j)<=0._SP ) GOTO 300
     END DO
   END IF
   !
@@ -475,7 +481,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   CALL FCN(N,X,Fvec,iflag)
   Nfev = 1
   IF( iflag<0 ) GOTO 300
-  fnorm = ENORM(N,Fvec)
+  fnorm = NORM2(Fvec)
   !
   !     INITIALIZE ITERATION COUNTER AND MONITORS.
   !
@@ -519,7 +525,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     IF( Mode/=2 ) THEN
       DO j = 1, N
         Diag(j) = Wa2(j)
-        IF( Wa2(j)==zero ) Diag(j) = one
+        IF( Wa2(j)==0._SP ) Diag(j) = 1._SP
       END DO
     END IF
     !
@@ -529,9 +535,9 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     DO j = 1, N
       Wa3(j) = Diag(j)*X(j)
     END DO
-    xnorm = ENORM(N,Wa3)
+    xnorm = NORM2(Wa3)
     delta = Factor*xnorm
-    IF( delta==zero ) delta = Factor
+    IF( delta==0._SP ) delta = Factor
   END IF
   !
   !        FORM (Q TRANSPOSE)*FVEC AND STORE IN QTF.
@@ -540,8 +546,8 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Qtf(i) = Fvec(i)
   END DO
   DO j = 1, N
-    IF( Fjac(j,j)/=zero ) THEN
-      summ = zero
+    IF( Fjac(j,j)/=0._SP ) THEN
+      summ = 0._SP
       DO i = j, N
         summ = summ + Fjac(i,j)*Qtf(i)
       END DO
@@ -565,7 +571,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
       END DO
     END IF
     R(l) = Wa1(j)
-    IF( Wa1(j)==zero ) sing = .TRUE.
+    IF( Wa1(j)==0._SP ) sing = .TRUE.
   END DO
   !
   !        ACCUMULATE THE ORTHOGONAL FACTOR IN FJAC.
@@ -603,7 +609,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Wa2(j) = X(j) + Wa1(j)
     Wa3(j) = Diag(j)*Wa1(j)
   END DO
-  pnorm = ENORM(N,Wa3)
+  pnorm = NORM2(Wa3)
   !
   !           ON THE FIRST ITERATION, ADJUST THE INITIAL STEP BOUND.
   !
@@ -615,33 +621,33 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   CALL FCN(N,Wa2,Wa4,iflag)
   Nfev = Nfev + 1
   IF( iflag>=0 ) THEN
-    fnorm1 = ENORM(N,Wa4)
+    fnorm1 = NORM2(Wa4)
     !
     !           COMPUTE THE SCALED ACTUAL REDUCTION.
     !
-    actred = -one
-    IF( fnorm1<fnorm ) actred = one - (fnorm1/fnorm)**2
+    actred = -1._SP
+    IF( fnorm1<fnorm ) actred = 1._SP - (fnorm1/fnorm)**2
     !
     !           COMPUTE THE SCALED PREDICTED REDUCTION.
     !
     l = 1
     DO i = 1, N
-      summ = zero
+      summ = 0._SP
       DO j = i, N
         summ = summ + R(l)*Wa1(j)
         l = l + 1
       END DO
       Wa3(i) = Qtf(i) + summ
     END DO
-    temp = ENORM(N,Wa3)
-    prered = zero
-    IF( temp<fnorm ) prered = one - (temp/fnorm)**2
+    temp = NORM2(Wa3)
+    prered = 0._SP
+    IF( temp<fnorm ) prered = 1._SP - (temp/fnorm)**2
     !
     !           COMPUTE THE RATIO OF THE ACTUAL TO THE PREDICTED
     !           REDUCTION.
     !
-    ratio = zero
-    IF( prered>zero ) ratio = actred/prered
+    ratio = 0._SP
+    IF( prered>0._SP ) ratio = actred/prered
     !
     !           UPDATE THE STEP BOUND.
     !
@@ -649,7 +655,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
       ncfail = 0
       ncsuc = ncsuc + 1
       IF( ratio>=p5 .OR. ncsuc>1 ) delta = MAX(delta,pnorm/p5)
-      IF( ABS(ratio-one)<=p1 ) delta = pnorm/p5
+      IF( ABS(ratio-1._SP)<=p1 ) delta = pnorm/p5
     ELSE
       ncsuc = 0
       ncfail = ncfail + 1
@@ -667,7 +673,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
         Wa2(j) = Diag(j)*X(j)
         Fvec(j) = Wa4(j)
       END DO
-      xnorm = ENORM(N,Wa2)
+      xnorm = NORM2(Wa2)
       fnorm = fnorm1
       iter = iter + 1
     END IF
@@ -681,7 +687,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     !
     !           TEST FOR CONVERGENCE.
     !
-    IF( delta<=Xtol*xnorm .OR. fnorm==zero ) Info = 1
+    IF( delta<=Xtol*xnorm .OR. fnorm==0._SP ) Info = 1
     IF( Info==0 ) THEN
       !
       !           TESTS FOR TERMINATION AND STRINGENT TOLERANCES.
@@ -700,7 +706,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
         !           AND UPDATE QTF IF NECESSARY.
         !
         DO j = 1, N
-          summ = zero
+          summ = 0._SP
           DO i = 1, N
             summ = summ + Fjac(i,j)*Wa4(i)
           END DO
@@ -732,15 +738,11 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   IF( iflag<0 ) Info = iflag
   iflag = 0
   IF( Nprint>0 ) CALL FCN(N,X,Fvec,iflag)
-  IF( Info<0 ) CALL XERMSG('SNSQ',&
-    'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
-  IF( Info==0 ) CALL XERMSG('SNSQ','INVALID INPUT PARAMETER.',2,1)
-  IF( Info==2 ) CALL XERMSG('SNSQ',&
-    'TOO MANY FUNCTION EVALUATIONS.',9,1)
-  IF( Info==3 ) CALL XERMSG('SNSQ',&
-    'XTOL TOO SMALL. NO FURTHER IMPROVEMENT POSSIBLE.',3,1)
-  IF( Info>4 ) CALL XERMSG('SNSQ',&
-    'ITERATION NOT MAKING GOOD PROGRESS.',1,1)
+  IF( Info<0 ) ERROR STOP 'SNSQ : EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.'
+  IF( Info==0 ) ERROR STOP 'SNSQ : INVALID INPUT PARAMETER.'
+  IF( Info==2 ) ERROR STOP 'SNSQ : TOO MANY FUNCTION EVALUATIONS.'
+  IF( Info==3 ) ERROR STOP 'SNSQ : XTOL TOO SMALL. NO FURTHER IMPROVEMENT POSSIBLE.'
+  IF( Info>4 ) ERROR STOP 'SNSQ : ITERATION NOT MAKING GOOD PROGRESS.'
   !
   !     LAST CARD OF SUBROUTINE SNSQ.
   !

@@ -1,5 +1,5 @@
 !** WNLSM
-SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
+PURE SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     Scalee,Z,Temp,D)
   !> Subsidiary to WNNLS
   !***
@@ -69,12 +69,15 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
   USE blas, ONLY : SAXPY, SROTM, SROTMG, SSWAP
   USE linear, ONLY : H12
-  INTEGER :: L, Ma, Mdw, Mme, Mode, N, Ipivot(N), Itype(Mme+Ma)
-  REAL(SP) :: Rnorm, D(N), H(N), Prgopt(:), Scalee(Mme+Ma), Temp(N), W(Mdw,N+1), &
-    Wd(N), X(N), Z(N)
+  !
+  INTEGER, INTENT(IN) :: L, Ma, Mdw, Mme, N
+  INTEGER, INTENT(OUT) :: Mode, Ipivot(N), Itype(Mme+Ma)
+  REAL(SP), INTENT(IN) :: Prgopt(:)
+  REAL(SP), INTENT(INOUT) :: W(Mdw,N+1)
+  REAL(SP), INTENT(OUT) :: Rnorm, D(N), H(N), Scalee(Mme+Ma), Temp(N), Wd(N), X(N), Z(N)
   !
   INTEGER :: i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, jcon, jp, key, &
     krank, l1, last, link, m, me, next, niv, nlink, nopt, nsoln, ntimes
@@ -117,7 +120,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   last = 1
   link = INT( Prgopt(1) )
   IF( link<=0 .OR. link>nlink ) THEN
-    CALL XERMSG('WNLSM','WNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
+    ERROR STOP 'WNLSM : WNNLS, THE OPTION VECTOR IS UNDEFINED'
     RETURN
   END IF
   DO
@@ -125,8 +128,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     IF( link>1 ) THEN
       ntimes = ntimes + 1
       IF( ntimes>nopt ) THEN
-        CALL XERMSG('WNLSM',&
-          'WNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.',3, 1)
+        ERROR STOP 'WNLSM : WNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.'
         RETURN
       END IF
       !
@@ -145,8 +147,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !
       next = INT( Prgopt(link) )
       IF( next<=0 .OR. next>nlink ) THEN
-        CALL XERMSG('WNLSM',&
-          'WNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
+        ERROR STOP 'WNLSM : WNNLS, THE OPTION VECTOR IS UNDEFINED'
         RETURN
       END IF
       !
@@ -620,4 +621,5 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   END DO
   !
   Rnorm = SQRT(Rnorm)
+  !
 END SUBROUTINE WNLSM

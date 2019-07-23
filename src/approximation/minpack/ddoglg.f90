@@ -1,5 +1,5 @@
 !** DDOGLG
-SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
+PURE SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !> Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC
@@ -66,12 +66,14 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
-  INTEGER :: Lr, N
-  REAL(DP) :: Delta
-  REAL(DP) :: Diag(N), Qtb(N), R(Lr), Wa1(N), Wa2(N), X(N)
+  !
+  INTEGER, INTENT(IN) :: Lr, N
+  REAL(DP), INTENT(IN) :: Delta
+  REAL(DP), INTENT(IN) :: Diag(N), Qtb(N), R(Lr)
+  REAL(DP), INTENT(OUT) :: Wa1(N), Wa2(N), X(N)
+  !
   INTEGER :: i, j, jj, jp1, k, l
   REAL(DP) :: alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
-  REAL(DP), PARAMETER :: one = 1._DP, zero = 0._DP
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !
@@ -86,7 +88,7 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     jp1 = j + 1
     jj = jj - k
     l = jj + 1
-    summ = zero
+    summ = 0._DP
     IF( N>=jp1 ) THEN
       DO i = jp1, N
         summ = summ + R(l)*X(i)
@@ -94,14 +96,14 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       END DO
     END IF
     temp = R(jj)
-    IF( temp==zero ) THEN
+    IF( temp==0._DP ) THEN
       l = j
       DO i = 1, j
         temp = MAX(temp,ABS(R(l)))
         l = l + N - i
       END DO
       temp = epsmch*temp
-      IF( temp==zero ) temp = epsmch
+      IF( temp==0._DP ) temp = epsmch
     END IF
     X(j) = (Qtb(j)-summ)/temp
   END DO
@@ -109,10 +111,10 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !     TEST WHETHER THE GAUSS-NEWTON DIRECTION IS ACCEPTABLE.
   !
   DO j = 1, N
-    Wa1(j) = zero
+    Wa1(j) = 0._DP
     Wa2(j) = Diag(j)*X(j)
   END DO
-  qnorm = DENORM(N,Wa2)
+  qnorm = NORM2(Wa2)
   IF( qnorm>Delta ) THEN
     !
     !     THE GAUSS-NEWTON DIRECTION IS NOT ACCEPTABLE.
@@ -131,10 +133,10 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     !     CALCULATE THE NORM OF THE SCALED GRADIENT AND TEST FOR
     !     THE SPECIAL CASE IN WHICH THE SCALED GRADIENT IS ZERO.
     !
-    gnorm = DENORM(N,Wa1)
-    sgnorm = zero
+    gnorm = NORM2(Wa1)
+    sgnorm = 0._DP
     alpha = Delta/qnorm
-    IF( gnorm/=zero ) THEN
+    IF( gnorm/=0._DP ) THEN
       !
       !     CALCULATE THE POINT ALONG THE SCALED GRADIENT
       !     AT WHICH THE QUADRATIC IS MINIMIZED.
@@ -144,38 +146,38 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       END DO
       l = 1
       DO j = 1, N
-        summ = zero
+        summ = 0._DP
         DO i = j, N
           summ = summ + R(l)*Wa1(i)
           l = l + 1
         END DO
         Wa2(j) = summ
       END DO
-      temp = DENORM(N,Wa2)
+      temp = NORM2(Wa2)
       sgnorm = (gnorm/temp)/temp
       !
       !     TEST WHETHER THE SCALED GRADIENT DIRECTION IS ACCEPTABLE.
       !
-      alpha = zero
+      alpha = 0._DP
       IF( sgnorm<Delta ) THEN
         !
         !     THE SCALED GRADIENT DIRECTION IS NOT ACCEPTABLE.
         !     FINALLY, CALCULATE THE POINT ALONG THE DOGLEG
         !     AT WHICH THE QUADRATIC IS MINIMIZED.
         !
-        bnorm = DENORM(N,Qtb)
+        bnorm = NORM2(Qtb)
         temp = (bnorm/gnorm)*(bnorm/qnorm)*(sgnorm/Delta)
         temp = temp - (Delta/qnorm)*(sgnorm/Delta)&
-          **2 + SQRT((temp-(Delta/qnorm))**2+(one-(Delta/qnorm)**2)&
-          *(one-(sgnorm/Delta)**2))
-        alpha = ((Delta/qnorm)*(one-(sgnorm/Delta)**2))/temp
+          **2 + SQRT((temp-(Delta/qnorm))**2+(1._DP-(Delta/qnorm)**2)&
+          *(1._DP-(sgnorm/Delta)**2))
+        alpha = ((Delta/qnorm)*(1._DP-(sgnorm/Delta)**2))/temp
       END IF
     END IF
     !
     !     FORM APPROPRIATE CONVEX COMBINATION OF THE GAUSS-NEWTON
     !     DIRECTION AND THE SCALED GRADIENT DIRECTION.
     !
-    temp = (one-alpha)*MIN(sgnorm,Delta)
+    temp = (1._DP-alpha)*MIN(sgnorm,Delta)
     DO j = 1, N
       X(j) = temp*Wa1(j) + alpha*X(j)
     END DO

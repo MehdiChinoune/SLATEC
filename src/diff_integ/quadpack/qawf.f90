@@ -1,12 +1,10 @@
 !** QAWF
-SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
+PURE SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     Lst,Leniw,Maxp1,Lenw,Iwork,Work)
-  !> The routine calculates an approximation result to a given
-  !            Fourier integral
-  !            I = Integral of F(X)*W(X) over (A,INFINITY)
-  !            where W(X) = COS(OMEGA*X) or W(X) = SIN(OMEGA*X).
-  !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=EPSABS.
+  !> The routine calculates an approximation result to a given Fourier integral
+  !  I=Integral of F(X)*W(X) over (A,INFINITY) where W(X) = COS(OMEGA*X) or
+  !  W(X) = SIN(OMEGA*X). Hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=EPSABS.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -208,16 +206,19 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Integr, Leniw, limit, Limlst, Lenw, Lst, Maxp1, Neval, Iwork(Leniw)
-  REAL(SP) :: A, Abserr, Epsabs, Omega, Result, Work(Lenw)
-  INTEGER :: lvl, l1, l2, l3, l4, l5, l6, ll2
+  INTEGER, INTENT(IN) :: Integr, Leniw, Limlst, Lenw, Maxp1
+  INTEGER, INTENT(OUT) :: Ier, Lst, Neval, Iwork(Leniw)
+  REAL(SP), INTENT(IN) :: A, Epsabs, Omega
+  REAL(SP), INTENT(OUT) :: Abserr, Result, Work(Lenw)
+  !
+  INTEGER :: lvl, l1, l2, l3, l4, l5, l6, ll2, limit
   !
   !         CHECK VALIDITY OF LIMLST, LENIW, MAXP1 AND LENW.
   !
@@ -248,5 +249,6 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     lvl = 0
   END IF
   IF( Ier==6 ) lvl = 1
-  IF( Ier/=0 ) CALL XERMSG('QAWF','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier/=0 ) ERROR STOP 'QAWF : ABNORMAL RETURN'
+  !
 END SUBROUTINE QAWF

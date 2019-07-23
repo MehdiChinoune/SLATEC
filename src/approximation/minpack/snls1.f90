@@ -1,9 +1,8 @@
 !** SNLS1
-SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
+PURE SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,Ipvt,Qtf,Wa1,Wa2,Wa3,Wa4)
-  !> Minimize the sum of the squares of M nonlinear functions
-  !            in N variables by a modification of the Levenberg-Marquardt
-  !            algorithm.
+  !> Minimize the sum of the squares of M nonlinear functions in N variables
+  !  by a modification of the Levenberg-Marquardt algorithm.
   !***
   ! **Library:**   SLATEC
   !***
@@ -608,19 +607,25 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
+  !
   INTERFACE
-    SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+    PURE SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
       IMPORT SP
-      INTEGER :: Ldfjac, M, N, Iflag
-      REAL(SP) :: X(N), Fvec(M), Fjac(:,:)
+      INTEGER, INTENT(IN) :: Ldfjac, M, N, Iflag
+      REAL(SP), INTENT(IN) :: X(N)
+      REAL(SP), INTENT(INOUT) :: Fvec(M)
+      REAL(SP), INTENT(OUT) :: Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
-  INTEGER :: Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
-  INTEGER :: Ipvt(N)
-  REAL(SP) :: Ftol, Xtol, Gtol, Factor, Epsfcn
-  REAL(SP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Diag(N), Qtf(N), Wa1(N), Wa2(N), &
+  INTEGER, INTENT(IN) :: Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint
+  INTEGER, INTENT(OUT) :: Info, Nfev, Njev
+  INTEGER, INTENT(OUT) :: Ipvt(N)
+  REAL(SP), INTENT(IN) :: Ftol, Xtol, Gtol, Factor, Epsfcn
+  REAL(SP), INTENT(INOUT) :: X(N), Diag(N)
+  REAL(SP), INTENT(OUT) ::  Fvec(M), Fjac(Ldfjac,N), Qtf(N), Wa1(N), Wa2(N), &
     Wa3(N,1), Wa4(M)
+  !
   INTEGER :: ijunk, nrow, i, iflag, iter, j, l, modech
   REAL(SP) :: actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, pnorm, prered, &
     ratio, summ, temp, temp1, temp2, xnorm, err(1)
@@ -629,8 +634,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   CHARACTER(16) :: xern3
   !
   REAL(SP), PARAMETER :: chklim = .1_SP
-  REAL(SP), PARAMETER :: one = 1._SP, p1 = 1.E-1_SP, p5 = 5.E-1_SP, p25 = 2.5E-1, &
-    p75 = 7.5E-1, p0001 = 1.E-4_SP, zero = 0._SP
+  REAL(SP), PARAMETER :: p1 = 1.E-1_SP, p5 = 5.E-1_SP, p25 = 2.5E-1, &
+    p75 = 7.5E-1, p0001 = 1.E-4_SP
   !
   !* FIRST EXECUTABLE STATEMENT  SNLS1
   epsmch = R1MACH(4)
@@ -643,12 +648,12 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !
   !     CHECK THE INPUT PARAMETERS FOR ERRORS.
   !
-  IF( Iopt<1 .OR. Iopt>3 .OR. N<=0 .OR. M<N .OR. Ldfjac<N .OR. Ftol<zero .OR. &
-    Xtol<zero .OR. Gtol<zero .OR. Maxfev<=0 .OR. Factor<=zero ) GOTO 200
+  IF( Iopt<1 .OR. Iopt>3 .OR. N<=0 .OR. M<N .OR. Ldfjac<N .OR. Ftol<0._SP .OR. &
+    Xtol<0._SP .OR. Gtol<0._SP .OR. Maxfev<=0 .OR. Factor<=0._SP ) GOTO 200
   IF( Iopt<3 .AND. Ldfjac<M ) GOTO 200
   IF( Mode==2 ) THEN
     DO j = 1, N
-      IF( Diag(j)<=zero ) GOTO 200
+      IF( Diag(j)<=0._SP ) GOTO 200
     END DO
   END IF
   !
@@ -660,11 +665,11 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
   Nfev = 1
   IF( iflag<0 ) GOTO 200
-  fnorm = ENORM(M,Fvec)
+  fnorm = NORM2(Fvec)
   !
   !     INITIALIZE LEVENBERG-MARQUARDT PARAMETER AND ITERATION COUNTER.
   !
-  par = zero
+  par = 0._SP
   iter = 1
   !
   !     BEGINNING OF THE OUTER LOOP.
@@ -690,9 +695,9 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     !        N COMPONENTS IN QTF.
     !
     DO j = 1, N
-      Qtf(j) = zero
+      Qtf(j) = 0._SP
       DO i = 1, N
-        Fjac(i,j) = zero
+        Fjac(i,j) = 0._SP
       END DO
     END DO
     DO i = 1, M
@@ -726,8 +731,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         IF( err(1)<chklim ) THEN
           WRITE (xern1,'(I8)') i
           WRITE (xern3,'(1PE15.6)') err
-          CALL XERMSG('SNLS1','DERIVATIVE OF FUNCTION '//xern1//&
-            ' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
+          ! CALL XERMSG('SNLS1','DERIVATIVE OF FUNCTION '//xern1//&
+            ! ' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
         END IF
       END IF
       !
@@ -741,15 +746,15 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     !
     sing = .FALSE.
     DO j = 1, N
-      IF( Fjac(j,j)==zero ) sing = .TRUE.
+      IF( Fjac(j,j)==0._SP ) sing = .TRUE.
       Ipvt(j) = j
-      Wa2(j) = ENORM(j,Fjac(1,j))
+      Wa2(j) = NORM2(Fjac(1:j,j))
     END DO
     IF( sing ) THEN
       CALL QRFAC(N,N,Fjac,Ldfjac,.TRUE.,Ipvt,N,Wa1,Wa2,Wa3)
       DO j = 1, N
-        IF( Fjac(j,j)/=zero ) THEN
-          summ = zero
+        IF( Fjac(j,j)/=0._SP ) THEN
+          summ = 0._SP
           DO i = j, N
             summ = summ + Fjac(i,j)*Qtf(i)
           END DO
@@ -802,8 +807,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           IF( err(1)<chklim ) THEN
             WRITE (xern1,'(I8)') i
             WRITE (xern3,'(1PE15.6)') err
-            CALL XERMSG('SNLS1','DERIVATIVE OF FUNCTION '//&
-              xern1//' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
+            ! CALL XERMSG('SNLS1','DERIVATIVE OF FUNCTION '//&
+              ! xern1//' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
           END IF
         END DO
         !
@@ -822,8 +827,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       Wa4(i) = Fvec(i)
     END DO
     DO j = 1, N
-      IF( Fjac(j,j)/=zero ) THEN
-        summ = zero
+      IF( Fjac(j,j)/=0._SP ) THEN
+        summ = 0._SP
         DO i = j, M
           summ = summ + Fjac(i,j)*Wa4(i)
         END DO
@@ -844,7 +849,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     IF( Mode/=2 ) THEN
       DO j = 1, N
         Diag(j) = Wa2(j)
-        IF( Wa2(j)==zero ) Diag(j) = one
+        IF( Wa2(j)==0._SP ) Diag(j) = 1._SP
       END DO
     END IF
     !
@@ -854,19 +859,19 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     DO j = 1, N
       Wa3(j,1) = Diag(j)*X(j)
     END DO
-    xnorm = ENORM(N,Wa3)
+    xnorm = NORM2(Wa3)
     delta = Factor*xnorm
-    IF( delta==zero ) delta = Factor
+    IF( delta==0._SP ) delta = Factor
   END IF
   !
   !        COMPUTE THE NORM OF THE SCALED GRADIENT.
   !
-  gnorm = zero
-  IF( fnorm/=zero ) THEN
+  gnorm = 0._SP
+  IF( fnorm/=0._SP ) THEN
     DO j = 1, N
       l = Ipvt(j)
-      IF( Wa2(l)/=zero ) THEN
-        summ = zero
+      IF( Wa2(l)/=0._SP ) THEN
+        summ = 0._SP
         DO i = 1, j
           summ = summ + Fjac(i,j)*(Qtf(i)/fnorm)
         END DO
@@ -903,7 +908,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         Wa2(j) = X(j) + Wa1(j)
         Wa3(j,1) = Diag(j)*Wa1(j)
       END DO
-      pnorm = ENORM(N,Wa3)
+      pnorm = NORM2(Wa3)
       !
       !           ON THE FIRST ITERATION, ADJUST THE INITIAL STEP BOUND.
       !
@@ -915,25 +920,25 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       CALL FCN(iflag,M,N,Wa2,Wa4,Fjac,ijunk)
       Nfev = Nfev + 1
       IF( iflag<0 ) EXIT
-      fnorm1 = ENORM(M,Wa4)
+      fnorm1 = NORM2(Wa4)
       !
       !           COMPUTE THE SCALED ACTUAL REDUCTION.
       !
-      actred = -one
-      IF( p1*fnorm1<fnorm ) actred = one - (fnorm1/fnorm)**2
+      actred = -1._SP
+      IF( p1*fnorm1<fnorm ) actred = 1._SP - (fnorm1/fnorm)**2
       !
       !           COMPUTE THE SCALED PREDICTED REDUCTION AND
       !           THE SCALED DIRECTIONAL DERIVATIVE.
       !
       DO j = 1, N
-        Wa3(j,1) = zero
+        Wa3(j,1) = 0._SP
         l = Ipvt(j)
         temp = Wa1(l)
         DO i = 1, j
           Wa3(i,1) = Wa3(i,1) + Fjac(i,j)*temp
         END DO
       END DO
-      temp1 = ENORM(N,Wa3)/fnorm
+      temp1 = NORM2(Wa3)/fnorm
       temp2 = (SQRT(par)*pnorm)/fnorm
       prered = temp1**2 + temp2**2/p5
       dirder = -(temp1**2+temp2**2)
@@ -941,18 +946,18 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       !           COMPUTE THE RATIO OF THE ACTUAL TO THE PREDICTED
       !           REDUCTION.
       !
-      ratio = zero
-      IF( prered/=zero ) ratio = actred/prered
+      ratio = 0._SP
+      IF( prered/=0._SP ) ratio = actred/prered
       !
       !           UPDATE THE STEP BOUND.
       !
       IF( ratio<=p25 ) THEN
-        IF( actred>=zero ) temp = p5
-        IF( actred<zero ) temp = p5*dirder/(dirder+p5*actred)
+        IF( actred>=0._SP ) temp = p5
+        IF( actred<0._SP ) temp = p5*dirder/(dirder+p5*actred)
         IF( p1*fnorm1>=fnorm .OR. temp<p1 ) temp = p1
         delta = temp*MIN(delta,pnorm/p1)
         par = par/temp
-      ELSEIF( par==zero .OR. ratio>=p75 ) THEN
+      ELSEIF( par==0._SP .OR. ratio>=p75 ) THEN
         delta = pnorm/p5
         par = p5*par
       END IF
@@ -970,22 +975,22 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         DO i = 1, M
           Fvec(i) = Wa4(i)
         END DO
-        xnorm = ENORM(N,Wa2)
+        xnorm = NORM2(Wa2)
         fnorm = fnorm1
         iter = iter + 1
       END IF
       !
       !           TESTS FOR CONVERGENCE.
       !
-      IF( ABS(actred)<=Ftol .AND. prered<=Ftol .AND. p5*ratio<=one ) Info = 1
+      IF( ABS(actred)<=Ftol .AND. prered<=Ftol .AND. p5*ratio<=1._SP ) Info = 1
       IF( delta<=Xtol*xnorm ) Info = 2
-      IF( ABS(actred)<=Ftol .AND. prered<=Ftol .AND. p5*ratio<=one .AND. Info==2 ) Info = 3
+      IF( ABS(actred)<=Ftol .AND. prered<=Ftol .AND. p5*ratio<=1._SP .AND. Info==2 ) Info = 3
       IF( Info/=0 ) EXIT
       !
       !           TESTS FOR TERMINATION AND STRINGENT TOLERANCES.
       !
       IF( Nfev>=Maxfev ) Info = 5
-      IF( ABS(actred)<=epsmch .AND. prered<=epsmch .AND. p5*ratio<=one ) Info = 6
+      IF( ABS(actred)<=epsmch .AND. prered<=epsmch .AND. p5*ratio<=1._SP ) Info = 6
       IF( delta<=epsmch*xnorm ) Info = 7
       IF( gnorm<=epsmch ) Info = 8
       IF( Info/=0 ) EXIT
@@ -1005,15 +1010,11 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   IF( iflag<0 ) Info = iflag
   iflag = 0
   IF( Nprint>0 ) CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
-  IF( Info<0 ) CALL XERMSG('SNLS1',&
-    'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
-  IF( Info==0 ) CALL XERMSG('SNLS1','INVALID INPUT PARAMETER.',2,1)
-  IF( Info==4 ) CALL XERMSG('SNLS1',&
-    'THIRD CONVERGENCE CONDITION, CHECK RESULTS BEFORE ACCEPTING.' ,1,1)
-  IF( Info==5 ) CALL XERMSG('SNLS1',&
-    'TOO MANY FUNCTION EVALUATIONS.',9,1)
-  IF( Info>=6 ) CALL XERMSG('SNLS1',&
-    'TOLERANCES TOO SMALL, NO FURTHER IMPROVEMENT POSSIBLE.',3,1)
+  IF( Info<0 ) ERROR STOP 'SNLS1 : EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.'
+  IF( Info==0 ) ERROR STOP 'SNLS1 : INVALID INPUT PARAMETER.'
+  IF( Info==4 ) ERROR STOP 'SNLS1 : THIRD CONVERGENCE CONDITION, CHECK RESULTS BEFORE ACCEPTING.'
+  IF( Info==5 ) ERROR STOP 'SNLS1 : TOO MANY FUNCTION EVALUATIONS.'
+  IF( Info>=6 ) ERROR STOP 'SNLS1 : TOLERANCES TOO SMALL, NO FURTHER IMPROVEMENT POSSIBLE.'
   !
   !     LAST CARD OF SUBROUTINE SNLS1.
   !

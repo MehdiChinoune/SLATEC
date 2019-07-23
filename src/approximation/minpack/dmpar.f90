@@ -1,5 +1,5 @@
 !** DMPAR
-SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
+PURE SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !> Subsidiary to DNLS1 and DNLS1E
   !***
   ! **Library:**   SLATEC
@@ -105,13 +105,18 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
-  INTEGER :: N, Ldr
-  INTEGER :: Ipvt(N)
-  REAL(DP) :: Delta, Par
-  REAL(DP) :: R(Ldr,N), Diag(N), Qtb(N), X(N), Sigma(N), Wa1(N), Wa2(N)
+  !
+  INTEGER, INTENT(IN) :: N, Ldr
+  INTEGER, INTENT(IN) :: Ipvt(N)
+  REAL(DP), INTENT(IN) :: Delta
+  REAL(DP), INTENT(INOUT) :: Par
+  REAL(DP), INTENT(IN) :: Diag(N), Qtb(N)
+  REAL(DP), INTENT(INOUT) :: R(Ldr,N)
+  REAL(DP), INTENT(OUT) :: X(N), Sigma(N), Wa1(N), Wa2(N)
+  !
   INTEGER :: i, iter, j, jm1, jp1, k, l, nsing
   REAL(DP) :: dxnorm, dwarf, fp, gnorm, parc, parl, paru, summ, temp
-  REAL(DP), PARAMETER :: p1 = 1.0E-1_DP, p001 = 1.0E-3_DP, zero = 0._DP
+  REAL(DP), PARAMETER :: p1 = 1.0E-1_DP, p001 = 1.0E-3_DP
   !* FIRST EXECUTABLE STATEMENT  DMPAR
   dwarf = D1MACH(1)
   !
@@ -121,8 +126,8 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   nsing = N
   DO j = 1, N
     Wa1(j) = Qtb(j)
-    IF( R(j,j)==zero .AND. nsing==N ) nsing = j - 1
-    IF( nsing<N ) Wa1(j) = zero
+    IF( R(j,j)==0._DP .AND. nsing==N ) nsing = j - 1
+    IF( nsing<N ) Wa1(j) = 0._DP
   END DO
   IF( nsing>=1 ) THEN
     DO k = 1, nsing
@@ -150,27 +155,27 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   DO j = 1, N
     Wa2(j) = Diag(j)*X(j)
   END DO
-  dxnorm = DENORM(N,Wa2)
+  dxnorm = NORM2(Wa2)
   fp = dxnorm - Delta
   IF( fp<=p1*Delta ) THEN
     !
     !     TERMINATION.
     !
-    IF( iter==0 ) Par = zero
+    IF( iter==0 ) Par = 0._DP
   ELSE
     !
     !     IF THE JACOBIAN IS NOT RANK DEFICIENT, THE NEWTON
     !     STEP PROVIDES A LOWER BOUND, PARL, FOR THE ZERO OF
     !     THE FUNCTION. OTHERWISE SET THIS BOUND TO ZERO.
     !
-    parl = zero
+    parl = 0._DP
     IF( nsing>=N ) THEN
       DO j = 1, N
         l = Ipvt(j)
         Wa1(j) = Diag(l)*(Wa2(l)/dxnorm)
       END DO
       DO j = 1, N
-        summ = zero
+        summ = 0._DP
         jm1 = j - 1
         IF( jm1>=1 ) THEN
           DO i = 1, jm1
@@ -179,30 +184,30 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
         END IF
         Wa1(j) = (Wa1(j)-summ)/R(j,j)
       END DO
-      temp = DENORM(N,Wa1)
+      temp = NORM2(Wa1)
       parl = ((fp/Delta)/temp)/temp
     END IF
     !
     !     CALCULATE AN UPPER BOUND, PARU, FOR THE ZERO OF THE FUNCTION.
     !
     DO j = 1, N
-      summ = zero
+      summ = 0._DP
       DO i = 1, j
         summ = summ + R(i,j)*Qtb(i)
       END DO
       l = Ipvt(j)
       Wa1(j) = summ/Diag(l)
     END DO
-    gnorm = DENORM(N,Wa1)
+    gnorm = NORM2(Wa1)
     paru = gnorm/Delta
-    IF( paru==zero ) paru = dwarf/MIN(Delta,p1)
+    IF( paru==0._DP ) paru = dwarf/MIN(Delta,p1)
     !
     !     IF THE INPUT PAR LIES OUTSIDE OF THE INTERVAL (PARL,PARU),
     !     SET PAR TO THE CLOSER ENDPOINT.
     !
     Par = MAX(Par,parl)
     Par = MIN(Par,paru)
-    IF( Par==zero ) Par = gnorm/dxnorm
+    IF( Par==0._DP ) Par = gnorm/dxnorm
     DO
       !
       !     BEGINNING OF AN ITERATION.
@@ -211,7 +216,7 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
       !
       !        EVALUATE THE FUNCTION AT THE CURRENT VALUE OF PAR.
       !
-      IF( Par==zero ) Par = MAX(dwarf,p001*paru)
+      IF( Par==0._DP ) Par = MAX(dwarf,p001*paru)
       temp = SQRT(Par)
       DO j = 1, N
         Wa1(j) = temp*Diag(j)
@@ -220,7 +225,7 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
       DO j = 1, N
         Wa2(j) = Diag(j)*X(j)
       END DO
-      dxnorm = DENORM(N,Wa2)
+      dxnorm = NORM2(Wa2)
       temp = fp
       fp = dxnorm - Delta
       !
@@ -228,9 +233,9 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
       !        OF PAR. ALSO TEST FOR THE EXCEPTIONAL CASES WHERE PARL
       !        IS ZERO OR THE NUMBER OF ITERATIONS HAS REACHED 10.
       !
-      IF( ABS(fp)<=p1*Delta .OR. parl==zero .AND. fp<=temp .AND. temp<zero .OR. &
+      IF( ABS(fp)<=p1*Delta .OR. parl==0._DP .AND. fp<=temp .AND. temp<0._DP .OR. &
           iter==10 ) THEN
-        IF( iter==0 ) Par = zero
+        IF( iter==0 ) Par = 0._DP
         EXIT
       ELSE
         !
@@ -250,13 +255,13 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
             END DO
           END IF
         END DO
-        temp = DENORM(N,Wa1)
+        temp = NORM2(Wa1)
         parc = ((fp/Delta)/temp)/temp
         !
         !        DEPENDING ON THE SIGN OF THE FUNCTION, UPDATE PARL OR PARU.
         !
-        IF( fp>zero ) parl = MAX(parl,Par)
-        IF( fp<zero ) paru = MIN(paru,Par)
+        IF( fp>0._DP ) parl = MAX(parl,Par)
+        IF( fp<0._DP ) paru = MIN(paru,Par)
         !
         !        COMPUTE AN IMPROVED ESTIMATE FOR PAR.
         !

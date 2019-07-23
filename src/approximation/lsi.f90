@@ -1,5 +1,5 @@
 !** LSI
-SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
+PURE SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !> Subsidiary to LSEI
   !***
   ! **Library:**   SLATEC
@@ -61,8 +61,12 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   USE service, ONLY : R1MACH
   USE blas, ONLY : SAXPY, SSWAP
   USE linear, ONLY : H12, HFTI
-  INTEGER :: Ma, Mdw, Mg, Mode, N, Ip(Mg+2*N+1)
-  REAL(SP) :: Rnorm, Prgopt(:), W(Mdw,N+1), Ws(*), X(N)
+  !
+  INTEGER, INTENT(IN) :: Ma, Mdw, Mg, N
+  INTEGER, INTENT(OUT) :: Mode, Ip(Mg+2*N+1)
+  REAL(SP), INTENT(IN) :: Prgopt(:)
+  REAL(SP), INTENT(INOUT) :: W(Mdw,N+1)
+  REAL(SP), INTENT(OUT) :: Rnorm, Ws(*), X(N)
   !
   REAL(SP) :: anorm, fac, gam, rb,tau, tol, xnorm, temp(1)
   INTEGER :: i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
@@ -336,4 +340,5 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !
   Ip(1) = krank
   Ip(2) = N + MAX(m,N) + (Mg+2)*(N+7)
+  !
 END SUBROUTINE LSI

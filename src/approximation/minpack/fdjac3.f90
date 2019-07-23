@@ -1,5 +1,5 @@
 !** FDJAC3
-SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
+PURE SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !> Subsidiary to SNLS1 and SNLS1E
   !***
   ! **Library:**   SLATEC
@@ -82,19 +82,25 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH
+  !
   INTERFACE
-    SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+    PURE SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
       IMPORT SP
-      INTEGER :: Ldfjac, M, N, Iflag
-      REAL(SP) :: X(N), Fvec(M), Fjac(:,:)
+      INTEGER, INTENT(IN) :: Ldfjac, M, N, Iflag
+      REAL(SP), INTENT(IN) :: X(N)
+      REAL(SP), INTENT(INOUT) :: Fvec(M)
+      REAL(SP), INTENT(OUT) :: Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
-  INTEGER :: M, N, Ldfjac, Iflag
-  REAL(SP) :: Epsfcn
-  REAL(SP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Wa(M)
+  INTEGER, INTENT(IN) :: M, N, Ldfjac
+  INTEGER, INTENT(OUT) :: Iflag
+  REAL(SP), INTENT(IN) :: Epsfcn
+  REAL(SP), INTENT(IN) :: Fvec(M)
+  REAL(SP), INTENT(IN) :: X(N)
+  REAL(SP), INTENT(OUT) :: Fjac(Ldfjac,N), Wa(M)
+  !
   INTEGER :: i, j
-  REAL(SP) :: eps, epsmch, h, temp
-  REAL(SP), PARAMETER :: zero = 0._SP
+  REAL(SP) :: eps, epsmch, h, temp, x_temp(N)
   !* FIRST EXECUTABLE STATEMENT  FDJAC3
   epsmch = R1MACH(4)
   !
@@ -102,14 +108,15 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !      SET IFLAG=1 TO INDICATE THAT FUNCTION VALUES
   !           ARE TO BE RETURNED BY FCN.
   Iflag = 1
+  x_temp = X
   DO j = 1, N
     temp = X(j)
     h = eps*ABS(temp)
-    IF( h==zero ) h = eps
-    X(j) = temp + h
-    CALL FCN(Iflag,M,N,X,Wa,Fjac,Ldfjac)
+    IF( h==0._SP ) h = eps
+    x_temp(j) = temp + h
+    CALL FCN(Iflag,M,N,x_temp,Wa,Fjac,Ldfjac)
     IF( Iflag<0 ) EXIT
-    X(j) = temp
+    x_temp(j) = temp
     DO i = 1, M
       Fjac(i,j) = (Wa(i)-Fvec(i))/h
     END DO

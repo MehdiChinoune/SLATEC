@@ -1,7 +1,7 @@
 !** DAVINT
-SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
-  !> Integrate a function tabulated at arbitrarily spaced
-  !            abscissas using overlapping parabolas.
+PURE SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
+  !> Integrate a function tabulated at arbitrarily spaced abscissas using
+  !  overlapping parabolas.
   !***
   ! **Library:**   SLATEC
   !***
@@ -76,10 +76,12 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
+
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: Xlo, Xup, X(N), Y(N)
+  REAL(DP), INTENT(OUT) :: Ans
   !
-  INTEGER :: Ierr, N
-  REAL(DP) :: Ans, Xlo, Xup, X(N), Y(N)
   INTEGER :: i, inlft, inrt, istart, istop
   REAL(DP) :: a, b, c, ca, cb, cc, fl, fr, r3, rp5, slope, summ, syl, syl2, syl3, &
     syu, syu2, syu3, term1, term2, term3, x1, x12, x13, x2, x23, x3
@@ -91,8 +93,8 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   IF( Xlo>Xup ) THEN
     Ierr = 2
     !     ......EXIT
-    CALL XERMSG('DAVINT',&
-      'THE UPPER LIMIT OF INTEGRATION WAS NOT GREATER THAN THE LOWER LIMIT.',4,1)
+    ERROR STOP 'DAVINT : THE UPPER LIMIT OF INTEGRATION WAS NOT GREATER THAN &
+      &THE LOWER LIMIT.'
   ELSEIF( Xlo/=Xup ) THEN
     IF( N>=2 ) THEN
       DO i = 2, N
@@ -112,8 +114,8 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         RETURN
       ELSEIF( X(N-2)<Xlo ) THEN
         Ierr = 3
-        CALL XERMSG('DAVINT',&
-          'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
+        ERROR STOP 'DAVINT : THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN &
+          &THE LIMITS OF INTEGRATION.'
         !     ...............EXIT
         RETURN
       ELSEIF( X(3)<=Xup ) THEN
@@ -178,27 +180,27 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         ELSE
           Ierr = 3
           !     ...............EXIT
-          CALL XERMSG('DAVINT',&
-            'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
+          ERROR STOP 'DAVINT : THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN &
+            &THE LIMITS OF INTEGRATION.'
         END IF
         RETURN
       ELSE
         Ierr = 3
-        CALL XERMSG('DAVINT',&
-          'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
+        ERROR STOP 'DAVINT : THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN &
+          &THE LIMITS OF INTEGRATION.'
         !     ...............EXIT
         RETURN
       END IF
     ELSE
       Ierr = 5
-      CALL XERMSG('DAVINT',&
-        'LESS THAN TWO FUNCTION VALUES WERE SUPPLIED.',4,1)
+      ERROR STOP 'DAVINT : LESS THAN TWO FUNCTION VALUES WERE SUPPLIED.'
       !     ...............EXIT
       RETURN
     END IF
     50  Ierr = 4
-    CALL XERMSG('DAVINT',&
-      'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE X(I-1) < X(I) FOR ALL I.',4,1)
+    ERROR STOP 'DAVINT : THE ABSCISSAS WERE NOT STRICTLY INCREASING. &
+      &MUST HAVE X(I-1) < X(I) FOR ALL I.'
   END IF
+  !
   RETURN
 END SUBROUTINE DAVINT

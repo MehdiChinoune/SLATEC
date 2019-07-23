@@ -1,9 +1,8 @@
 !** QMOMO
-SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
-  !> This routine computes modified Chebyshev moments.  The K-th
-  !            modified Chebyshev moment is defined as the integral over
-  !            (-1,1) of W(X)*T(K,X), where T(K,X) is the Chebyshev
-  !            polynomial of degree K.
+PURE SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
+  !> This routine computes modified Chebyshev moments. The K-th modified Chebyshev
+  !  moment is defined as the integral over (-1,1) of W(X)*T(K,X),
+  !  where T(K,X) is the Chebyshev polynomial of degree K.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -73,9 +72,12 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL(SP) :: Alfa, alfp1, alfp2, an, anm1, Beta, betp1, betp2, ralf, &
-    rbet, Rg(25), Rh(25), Ri(25), Rj(25)
-  INTEGER :: i, im1, Integr
+  INTEGER, INTENT(IN) :: Integr
+  REAL(SP), INTENT(IN) :: Alfa, Beta
+  REAL(SP), INTENT(OUT) :: Rg(25), Rh(25), Ri(25), Rj(25)
+  !
+  INTEGER :: i, im1
+  REAL(SP) :: alfp1, alfp2, an, anm1, betp1, betp2, ralf, rbet
   !* FIRST EXECUTABLE STATEMENT  QMOMO
   alfp1 = Alfa + 1._SP
   betp1 = Beta + 1._SP
@@ -138,4 +140,5 @@ SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   DO i = 2, 25, 2
     Rj(i) = -Rj(i)
   END DO
+  !
 END SUBROUTINE QMOMO

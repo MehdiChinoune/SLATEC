@@ -1,5 +1,5 @@
 !** DPCOEF
-SUBROUTINE DPCOEF(L,C,Tc,A)
+PURE SUBROUTINE DPCOEF(L,C,Tc,A)
   !> Convert the DPOLFT coefficients to Taylor series form.
   !***
   ! **Library:**   SLATEC
@@ -63,8 +63,11 @@ SUBROUTINE DPCOEF(L,C,Tc,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   !
-  INTEGER :: L
-  REAL(DP) :: C, A(:), Tc(ABS(L)+1)
+  INTEGER, INTENT(IN) :: L
+  REAL(DP), INTENT(IN) :: C
+  REAL(DP), INTENT(INOUT) :: A(:)
+  REAL(DP), INTENT(OUT) :: Tc(ABS(L)+1)
+  !
   INTEGER :: i, ll, llp1, llp2, new, nr
   REAL(DP) :: fac, save
   !* FIRST EXECUTABLE STATEMENT  DPCOEF
@@ -88,4 +91,5 @@ SUBROUTINE DPCOEF(L,C,Tc,A)
       Tc(new) = save
     END DO
   END IF
+  !
 END SUBROUTINE DPCOEF

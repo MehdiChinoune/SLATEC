@@ -1,5 +1,5 @@
 !** DQFORM
-SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
+PURE SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !> Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC
@@ -48,11 +48,12 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: Ldq, M, N
-  REAL(DP) :: Q(Ldq,M), Wa(M)
+  INTEGER, INTENT(IN) :: Ldq, M, N
+  REAL(DP), INTENT(INOUT) :: Q(Ldq,M)
+  REAL(DP), INTENT(OUT) :: Wa(M)
+  !
   INTEGER :: i, j, jm1, k, l, minmn, np1
   REAL(DP) :: summ, temp
-  REAL(DP), PARAMETER :: one = 1._DP, zero = 0._DP
   !
   !     ZERO OUT UPPER TRIANGLE OF Q IN THE FIRST MIN(M,N) COLUMNS.
   !
@@ -62,7 +63,7 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
     DO j = 2, minmn
       jm1 = j - 1
       DO i = 1, jm1
-        Q(i,j) = zero
+        Q(i,j) = 0._DP
       END DO
     END DO
   END IF
@@ -73,9 +74,9 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   IF( M>=np1 ) THEN
     DO j = np1, M
       DO i = 1, M
-        Q(i,j) = zero
+        Q(i,j) = 0._DP
       END DO
-      Q(j,j) = one
+      Q(j,j) = 1._DP
     END DO
   END IF
   !
@@ -85,12 +86,12 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
     k = minmn - l + 1
     DO i = k, M
       Wa(i) = Q(i,k)
-      Q(i,k) = zero
+      Q(i,k) = 0._DP
     END DO
-    Q(k,k) = one
-    IF( Wa(k)/=zero ) THEN
+    Q(k,k) = 1._DP
+    IF( Wa(k)/=0._DP ) THEN
       DO j = k, M
-        summ = zero
+        summ = 0._DP
         DO i = k, M
           summ = summ + Q(i,j)*Wa(i)
         END DO

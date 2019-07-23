@@ -1,5 +1,5 @@
 !** QFORM
-SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
+PURE SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !> Subsidiary to SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC
@@ -48,18 +48,18 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: M, N, Ldq
-  REAL(SP) :: Q(Ldq,M), Wa(M)
+  INTEGER, INTENT(IN) :: M, N, Ldq
+  REAL(SP), INTENT(INOUT) :: Q(Ldq,M)
+  REAL(SP), INTENT(OUT) :: Wa(M)
   INTEGER :: i, j, jm1, k, l, minmn, np1
   REAL(SP) :: summ, temp
-  REAL(SP), PARAMETER :: one = 1._SP, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  QFORM
   minmn = MIN(M,N)
   IF( minmn>=2 ) THEN
     DO j = 2, minmn
       jm1 = j - 1
       DO i = 1, jm1
-        Q(i,j) = zero
+        Q(i,j) = 0._SP
       END DO
     END DO
   END IF
@@ -70,9 +70,9 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   IF( M>=np1 ) THEN
     DO j = np1, M
       DO i = 1, M
-        Q(i,j) = zero
+        Q(i,j) = 0._SP
       END DO
-      Q(j,j) = one
+      Q(j,j) = 1._SP
     END DO
   END IF
   !
@@ -82,12 +82,12 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
     k = minmn - l + 1
     DO i = k, M
       Wa(i) = Q(i,k)
-      Q(i,k) = zero
+      Q(i,k) = 0._SP
     END DO
-    Q(k,k) = one
-    IF( Wa(k)/=zero ) THEN
+    Q(k,k) = 1._SP
+    IF( Wa(k)/=0._SP ) THEN
       DO j = k, M
-        summ = zero
+        summ = 0._SP
         DO i = k, M
           summ = summ + Q(i,j)*Wa(i)
         END DO

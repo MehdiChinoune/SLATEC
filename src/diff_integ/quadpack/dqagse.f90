@@ -1,10 +1,9 @@
 !** DQAGSE
-SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
+PURE SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     Blist,Rlist,Elist,Iord,Last)
-  !> The routine calculates an approximation result to a given
-  !            definite integral I = Integral of F over (A,B),
-  !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = Integral of F over (A,B), hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -166,14 +165,17 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Last, Limit, Neval, Iord(Limit)
-  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Result
-  REAL(DP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iord(Limit)
+  REAL(DP), INTENT(IN) :: A, B, Epsabs, Epsrel
+  REAL(DP), INTENT(OUT) :: Abserr, Result
+  REAL(DP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: id, ierro, iroff1, iroff2, iroff3, jupbnd, k, ksgn, ktmin, maxerr, &
     nres, nrmax, numrl2
   REAL(DP) :: abseps, area, area1, area12, area2, a1, a2, b1, b2, correc, defabs, &
@@ -481,5 +483,6 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     IF( Ier>2 ) Ier = Ier - 1
     Neval = 42*Last - 21
   END IF
+  !
   RETURN
 END SUBROUTINE DQAGSE

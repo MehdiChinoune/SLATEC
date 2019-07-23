@@ -1,8 +1,7 @@
 !** SBOLS
 SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
-  !> Solve the problem
-  !                 E*X = F (in the least  squares  sense)
-  !            with bounds on selected X values.
+  !> Solve the problem E*X = F (in the least  squares  sense)
+  !  with bounds on selected X values.
   !***
   ! **Library:**   SLATEC
   !***
@@ -427,14 +426,20 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /SROTG/ TO /DROTG/, /SROT/ TO /DROT/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  USE service, ONLY : XERMSG
   USE blas, ONLY : SROT, SROTG
-  INTEGER :: Mdw, Mode, Mrows, Ncols
-  INTEGER :: Ind(Ncols), Iw(2*Ncols), Iopt(*)
-  REAL(SP) :: Rnorm, W(Mdw,Ncols+1), Bl(Ncols), Bu(Ncols), X(2*Ncols), Rw(5*Ncols)
+  !
+  INTEGER, INTENT(IN) :: Mdw, Ncols
+  INTEGER, INTENT(INOUT) :: Mrows
+  INTEGER, INTENT(OUT) :: Mode
+  INTEGER, INTENT(IN) :: Ind(Ncols)
+  INTEGER, INTENT(INOUT) :: Iopt(*)
+  INTEGER, INTENT(OUT) :: Iw(2*Ncols)
+  REAL(SP), INTENT(IN) :: Bl(Ncols), Bu(Ncols)
+  REAL(SP), INTENT(INOUT) :: W(Mdw,Ncols+1), X(2*Ncols)
+  REAL(SP), INTENT(OUT) :: Rnorm, Rw(5*Ncols)
   INTEGER :: i, ibig, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
     llx, lmdw, lndw, locdim, lp, mnew, nerr
-  REAL(SP) :: sc, ss, one, zero
+  REAL(SP) :: sc, ss, one
   LOGICAL :: checkl
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
@@ -450,7 +455,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     SEE THAT MDW IS >0. GROSS CHECK ONLY.
     IF( Mdw<=0 ) THEN
       WRITE (xern1,'(I8)') Mdw
-      CALL XERMSG('SBOLS','MDW = '//xern1//' MUST BE POSITIVE.',2,1)
+      ERROR STOP 'SBOLS : MDW MUST BE POSITIVE.'
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -458,8 +463,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     SEE THAT NUMBER OF UNKNOWNS IS POSITIVE.
     IF( Ncols<=0 ) THEN
       WRITE (xern1,'(I8)') Ncols
-      CALL XERMSG('SBOLS','NCOLS = '//xern1//&
-        ' THE NO. OF VARIABLES MUST BE POSITIVE.',3,1)
+      ERROR STOP 'SBOLS : NCOLS THE NO. OF VARIABLES MUST BE POSITIVE.'
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -469,8 +473,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
       IF( Ind(j)<1 .OR. Ind(j)>4 ) THEN
         WRITE (xern1,'(I8)') j
         WRITE (xern2,'(I8)') Ind(j)
-        CALL XERMSG('SBOLS','IND('//xern1//') = '//xern2//&
-          ' MUST BE 1-4.',4,1)
+        ERROR STOP 'SBOLS : IND(J) MUST BE 1-4.'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
@@ -483,8 +486,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           WRITE (xern1,'(I8)') j
           WRITE (xern3,'(1PE15.6)') Bl(j)
           WRITE (xern4,'(1PE15.6)') Bu(j)
-          CALL XERMSG('SBOLS','BOUND BL('//xern1//') = '//xern3//&
-            ' IS > BU('//xern1//') = '//xern4,5,1)
+          ERROR STOP 'SBOLS : BOUND BL(J) = IS > BU(J)'
           !     DO(RETURN TO USER PROGRAM UNIT)
           GOTO 100
         END IF
@@ -493,7 +495,6 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
-    zero = 0._SP
     one = 1._SP
     checkl = .FALSE.
     lenx = Ncols
@@ -520,56 +521,49 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           IF( lmdw<Mrows ) THEN
             WRITE (xern1,'(I8)') lmdw
             WRITE (xern2,'(I8)') Mrows
-            CALL XERMSG('SBOLS','THE ROW DIMENSION OF W(,) = '//&
-              xern1//' MUST BE >= THE NUMBER OF ROWS = '//xern2,11,1)
+            ERROR STOP 'SBOLS : THE ROW DIMENSION OF W(,) MUST BE >= THE NUMBER OF ROWS'
             GOTO 100
           END IF
           IF( lndw<Ncols+1 ) THEN
             WRITE (xern1,'(I8)') lndw
             WRITE (xern2,'(I8)') Ncols + 1
-            CALL XERMSG('SBOLS','THE COLUMN DIMENSION OF W(,) = '//&
-              xern1//' MUST BE >= NCOLS+1 = '//xern2,12,1)
+            ERROR STOP 'SBOLS : THE COLUMN DIMENSION OF W(,) MUST BE >= NCOLS+1'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
           IF( llb<Ncols ) THEN
             WRITE (xern1,'(I8)') llb
             WRITE (xern2,'(I8)') Ncols
-            CALL XERMSG('SBOLS',&
-              'THE DIMENSIONS OF THE ARRAYS BL(), BU(), AND IND() = '&
-              //xern1//' MUST BE >= NCOLS = '//xern2,13,1)
+            ERROR STOP 'SBOLS : THE DIMENSIONS OF THE ARRAYS BL(), BU(), AND IND() &
+              &MUST BE >= NCOLS'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
           IF( llx<lenx ) THEN
             WRITE (xern1,'(I8)') llx
             WRITE (xern2,'(I8)') lenx
-            CALL XERMSG('SBOLS','THE DIMENSION OF X() = '//xern1//&
-              ' MUST BE >= THE REQUIRED LENGTH = '//xern2,14,1)
+            ERROR STOP 'SBOLS : THE DIMENSION OF X() MUST BE >= THE REQUIRED LENGTH'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
           IF( llrw<5*Ncols ) THEN
             WRITE (xern1,'(I8)') llrw
             WRITE (xern2,'(I8)') 5*Ncols
-            CALL XERMSG('SBOLS','THE DIMENSION OF RW() = '//xern1//&
-              ' MUST BE >= 5*NCOLS = '//xern2,15,1)
+            ERROR STOP 'SBOLS : THE DIMENSION OF RW() MUST BE >= 5*NCOLS'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
           IF( lliw<2*Ncols ) THEN
             WRITE (xern1,'(I8)') lliw
             WRITE (xern2,'(I8)') 2*Ncols
-            CALL XERMSG('SBOLS','THE DIMENSION OF IW() = '//xern1//&
-              ' MUST BE >= 2*NCOLS = '//xern2,16,1)
+            ERROR STOP 'SBOLS : THE DIMENSION OF IW() MUST BE >= 2*NCOLS'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
           IF( liopt<lp+1 ) THEN
             WRITE (xern1,'(I8)') liopt
             WRITE (xern2,'(I8)') lp + 1
-            CALL XERMSG('SBOLS','THE DIMENSION OF IOPT() = '//&
-              xern1//' MUST BE >= THE REQD. LEN = '//xern2,17,1)
+            ERROR STOP 'SBOLS : THE DIMENSION OF IOPT() MUST BE >= THE REQD. LEN'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
@@ -646,8 +640,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !     SEE THAT ISCALE IS 1 THRU 3.
           IF( iscale<1 .OR. iscale>3 ) THEN
             WRITE (xern1,'(I8)') iscale
-            CALL XERMSG('SBOLS','ISCALE OPTION = '//xern1//&
-              ' MUST BE 1-3',7,1)
+            ERROR STOP 'SBOLS : ISCALE OPTION MUST BE 1-3'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
@@ -662,20 +655,18 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           iscale = 4
           IF( Iopt(lp+2)<=0 ) THEN
             WRITE (xern1,'(I8)') Iopt(lp+2)
-            CALL XERMSG('SBOLS','OFFSET PAST X(NCOLS) ('//xern1//&
-              ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',8,1)
+            ERROR STOP 'SBOLS : OFFSET PAST X(NCOLS)  FOR USER-PROVIDED COLUMN &
+              &SCALING MUST BE POSITIVE.'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
           Rw(1:Ncols) = X(Ncols+Iopt(lp+2):2*Ncols+Iopt(lp+2)-1)
           lenx = lenx + Ncols
           DO j = 1, Ncols
-            IF( Rw(j)<=zero ) THEN
+            IF( Rw(j)<=0._SP ) THEN
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
-              CALL XERMSG('SBOLS',&
-                'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '&
-                //xern1//' NOW = '//xern3,9,1)
+              ERROR STOP 'SBOLS : EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.'
               !     DO(RETURN TO USER PROGRAM UNIT)
               GOTO 100
             END IF
@@ -704,8 +695,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         !     NO VALID OPTION NUMBER WAS NOTED. THIS IS AN ERROR CONDITION.
       ELSE
         WRITE (xern1,'(I8)') jp
-        CALL XERMSG('SBOLS','THE OPTION NUMBER = '//xern1//&
-          ' IS NOT DEFINED.',6,1)
+        ERROR STOP 'SBOLS : THE OPTION NUMBER IS NOT DEFINED.'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
@@ -724,8 +714,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     IF( mnew<0 .OR. mnew>Mdw ) THEN
       WRITE (xern1,'(I8)') mnew
       WRITE (xern2,'(I8)') Mdw
-      CALL XERMSG('SBOLS','NO. OF ROWS = '//xern1//&
-        ' MUST BE >= 0 .AND. <= MDW = '//xern2,10,1)
+      ERROR STOP 'SBOLS : NO. OF ROWS MUST BE >= 0 .AND. <= MDW'
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -736,7 +725,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
         !     PIVOT FOR INCREASED STABILITY.
         CALL SROTG(W(ibig,j),W(i,j),sc,ss)
         CALL SROT(Ncols+1-j,W(ibig,j+1),Mdw,W(i,j+1),Mdw,sc,ss)
-        W(i,j) = zero
+        W(i,j) = 0._SP
       END DO
     END DO
     Mrows = MIN(Ncols+1,mnew)
@@ -757,7 +746,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !     COL. HAS MAX. NORM EQUAL TO ONE.
           ibig = MAXLOC(W(1:Mrows,j),1)
           Rw(j) = ABS(W(ibig,j))
-          IF( Rw(j)==zero ) THEN
+          IF( Rw(j)==0._SP ) THEN
             Rw(j) = one
           ELSE
             Rw(j) = one/Rw(j)
@@ -768,7 +757,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !     THIS CHOICE OF SCALING MAKES EACH NONZERO COLUMN
           !     HAVE EUCLIDEAN LENGTH EQUAL TO ONE.
           Rw(j) = NORM2(W(1:Mrows,j))
-          IF( Rw(j)==zero ) THEN
+          IF( Rw(j)==0._SP ) THEN
             Rw(j) = one
           ELSE
             Rw(j) = one/Rw(j)

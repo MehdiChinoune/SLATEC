@@ -1,8 +1,7 @@
 !** DNSQE
-SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
-  !> An easy-to-use code to find a zero of a system of N
-  !            nonlinear functions in N variables by a modification of
-  !            the Powell hybrid method.
+PURE SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
+  !> An easy-to-use code to find a zero of a system of N nonlinear functions
+  !  in N variables by a modification of the Powell hybrid method.
   !***
   ! **Library:**   SLATEC
   !***
@@ -339,25 +338,30 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    SUBROUTINE FCN(N,X,Fvec,iflag)
+    PURE SUBROUTINE FCN(N,X,Fvec,iflag)
       IMPORT DP
-      INTEGER :: N, Iflag
-      REAL(DP) :: X(N), Fvec(N)
+      INTEGER, INTENT(IN) :: N, Iflag
+      REAL(DP), INTENT(IN) :: X(N)
+      REAL(DP), INTENT(OUT) :: Fvec(N)
     END SUBROUTINE FCN
-    SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
+    PURE SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
       IMPORT DP
-      INTEGER :: N, Ldfjac, Iflag
-      REAL(DP) :: X(N), Fvec(N),Fjac(Ldfjac,N)
+      INTEGER, INTENT(IN) :: N, Ldfjac, Iflag
+      REAL(DP), INTENT(IN) :: X(N), Fvec(N)
+      REAL(DP), INTENT(OUT) :: Fjac(Ldfjac,N)
     END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Info, Iopt, Lwa, N, Nprint
-  REAL(DP) :: Tol
-  REAL(DP) :: Fvec(N), Wa(Lwa), X(N)
+  INTEGER, INTENT(IN) :: Iopt, N, Nprint, Lwa
+  INTEGER, INTENT(OUT) :: Info
+  REAL(DP), INTENT(IN) :: Tol
+  REAL(DP), INTENT(INOUT) :: X(N)
+  REAL(DP), INTENT(OUT) :: Fvec(N), Wa(Lwa)
+  !
   INTEGER :: indexx, j, lr, maxfev, ml, mode, mu, nfev, njev
   REAL(DP) :: epsfcn, xtol
-  REAL(DP), PARAMETER :: factor = 1.0D2, one = 1._DP, zero = 0._DP
+  REAL(DP), PARAMETER :: factor = 1.0D2
   !     BEGIN BLOCK PERMITTING ...EXITS TO 20
   !* FIRST EXECUTABLE STATEMENT  DNSQE
   Info = 0
@@ -365,20 +369,17 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !        CHECK THE INPUT PARAMETERS FOR ERRORS.
   !
   !     ...EXIT
-  IF( Iopt>=1 .AND. Iopt<=2 .AND. N>0 .AND. Tol>=zero .AND. Lwa>=(3*N**2+13*N)/2 )&
-      THEN
-    !
-    !        CALL DNSQ.
-    !
+  IF( Iopt>=1 .AND. Iopt<=2 .AND. N>0 .AND. Tol>=0._DP .AND. Lwa>=(3*N**2+13*N)/2 ) THEN
+    !  CALL DNSQ.
     maxfev = 100*(N+1)
     IF( Iopt==2 ) maxfev = 2*maxfev
     xtol = Tol
     ml = N - 1
     mu = N - 1
-    epsfcn = zero
+    epsfcn = 0._DP
     mode = 2
     DO j = 1, N
-      Wa(j) = one
+      Wa(j) = 1._DP
     END DO
     lr = (N*(N+1))/2
     indexx = 6*N + lr
@@ -387,7 +388,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
       Wa(2*N+1),Wa(3*N+1),Wa(4*N+1),Wa(5*N+1))
     IF( Info==5 ) Info = 4
   END IF
-  IF( Info==0 ) CALL XERMSG('DNSQE','INVALID INPUT PARAMETER.',2,1)
+  IF( Info==0 ) ERROR STOP 'DNSQE : INVALID INPUT PARAMETER.'
   !
   !     LAST CARD OF SUBROUTINE DNSQE.
   !

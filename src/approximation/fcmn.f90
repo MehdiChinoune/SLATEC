@@ -28,14 +28,17 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  USE service, ONLY : XERMSG
   USE blas, ONLY : SAXPY
   USE linear, ONLY : BNDSOL, BNDACC
   USE data_handling, ONLY : SSORT
-  INTEGER :: Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nord, Iwork(:), Nderiv(Nconst)
-  REAL(SP) :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(:), Coeff(:), G(Mdg,Nord+1), &
-    Ptemp(MAX(Nbkpt,Ndata)), Sddata(Ndata), W(Mdw,Nbkpt-Nord+1), Work(*), &
-    Xconst(Nconst), Xdata(Ndata), Xtemp(MAX(Nbkpt,Ndata)), Yconst(Nconst), Ydata(Ndata)
+  !
+  INTEGER, INTENT(IN) :: Mdg, Mdw, Nbkpt, Nconst, Ndata, Nord, Nderiv(Nconst)
+  INTEGER, INTENT(INOUT) :: Mode, Iwork(:)
+  REAL(SP), INTENT(IN) :: Bkptin(:), Sddata(Ndata), Xconst(Nconst), Xdata(Ndata), &
+    Yconst(Nconst), Ydata(Ndata)
+  REAL(SP), INTENT(INOUT) :: Bf(Nord,Nord), G(Mdg,Nord+1), Work(*)
+  REAL(SP), INTENT(OUT) :: Bkpt(Nbkpt), Coeff(:), Ptemp(MAX(Nbkpt,Ndata)), &
+    Xtemp(MAX(Nbkpt,Ndata)), W(Mdw,Nbkpt-Nord+1)
   REAL(SP) :: dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
   INTEGER :: i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, itype, iw1, iw2, &
     l, lw, mt, n, nb, neqcon, nincon, nordm1, nordp1, np1
@@ -48,21 +51,19 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   dummy = 0.
   IF( Nord<1 .OR. Nord>20 ) THEN
-    CALL XERMSG('FCMN',&
-      'IN FC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',2,1)
+    ERROR STOP 'FCMN : IN FC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.'
     Mode = -1
     RETURN
     !
   ELSEIF( Nbkpt<2*Nord ) THEN
-    CALL XERMSG('FCMN',&
-      'IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
+    ERROR STOP 'FCMN : IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE &
+      &B-SPLINE ORDER.'
     Mode = -1
     RETURN
   END IF
   !
   IF( Ndata<0 ) THEN
-    CALL XERMSG('FCMN',&
-      'IN FC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',2,1)
+    ERROR STOP 'FCMN : IN FC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.'
     Mode = -1
     RETURN
   END IF
@@ -77,8 +78,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   IF( iw1<nb ) THEN
     WRITE (xern1,'(I8)') nb
-    CALL XERMSG('FCMN',&
-      'IN FC, INSUFFICIENT STORAGE FOR W(*).  CHECK NB = '//xern1,2,1)
+    ERROR STOP 'FCMN : IN FC, INSUFFICIENT STORAGE FOR W(*).'
     Mode = -1
     RETURN
   END IF
@@ -100,7 +100,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     var = .TRUE.
     new = .FALSE.
   ELSE
-    CALL XERMSG('FCMN','IN FC, INPUT VALUE OF MODE MUST BE 1-4.',2,1)
+    ERROR STOP 'FCMN : IN FC, INPUT VALUE OF MODE MUST BE 1-4.'
     Mode = -1
     RETURN
   END IF
@@ -235,7 +235,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       !           Obtain B-spline function value.
       !
-      CALL BSPLVN(Bkpt,Nord,1,xval,ileft,Bf)
+      CALL BSPLVN(Bkpt,Nord,1,xval,ileft,Bf(:,1))
       !
       !           Move row into place.
       !
@@ -282,16 +282,14 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   IF( iw1<lw ) THEN
     WRITE (xern1,'(I8)') lw
-    CALL XERMSG('FCMN',&
-      'IN FC, INSUFFICIENT STORAGE FOR W(*).  CHECK LW = '//xern1,2,1)
+    ERROR STOP 'FCMN : IN FC, INSUFFICIENT STORAGE FOR W(*).'
     Mode = -1
     RETURN
   END IF
   !
   IF( iw2<intw1 ) THEN
     WRITE (xern1,'(I8)') intw1
-    CALL XERMSG('FCMN',&
-      'IN FC, INSUFFICIENT STORAGE FOR IW(*).  CHECK IW1 = '//xern1,2,1)
+    ERROR STOP 'FCMN : IN FC, INSUFFICIENT STORAGE FOR IW(*).'
     Mode = -1
     RETURN
   END IF
@@ -377,4 +375,5 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !     Solve constrained least squares equations.
   !
   CALL LSEI(W,Mdw,neqcon,np1,nincon,n,prgopt,Coeff,rnorme,rnorml,Mode,Work,Iwork)
+  !
 END SUBROUTINE FCMN

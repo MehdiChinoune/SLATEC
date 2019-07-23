@@ -1,8 +1,7 @@
 !** SCOV
-SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
-  !> Calculate the covariance matrix for a nonlinear data
-  !            fitting problem.  It is intended to be used after a
-  !            successful return from either SNLS1 or SNLS1E.
+PURE SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
+  !> Calculate the covariance matrix for a nonlinear data fitting problem.
+  !  It is intended to be used after a successful return from either SNLS1 or SNLS1E.
   !***
   ! **Library:**   SLATEC
   !***
@@ -10,8 +9,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !***
   ! **Type:**      SINGLE PRECISION (SCOV-S, DCOV-D)
   !***
-  ! **Keywords:**  COVARIANCE MATRIX, NONLINEAR DATA FITTING,
-  !             NONLINEAR LEAST SQUARES
+  ! **Keywords:**  COVARIANCE MATRIX, NONLINEAR DATA FITTING, NONLINEAR LEAST SQUARES
   !***
   ! **Author:**  Hiebert, K. L., (SNLA)
   !***
@@ -90,11 +88,10 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !         If IOPT=1, the code will approximate the Jacobian by forward
   !         differencing.
   !
-  !       M is a positive integer input variable set to the number of
-  !         functions.
+  !       M is a positive integer input variable set to the number of functions.
   !
-  !       N is a positive integer input variable set to the number of
-  !         variables.  N must not exceed M.
+  !       N is a positive integer input variable set to the number of variables.
+  !         N must not exceed M.
   !
   !       X is an array of length N.  On input X must contain the value
   !         at which the covariance matrix is to be evaluated.  This is
@@ -151,20 +148,24 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED 820707-1100
   !     REVISED YYMMDD HHMM
   !
-  USE service, ONLY : XERMSG
   INTERFACE
-    SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+    PURE SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
       IMPORT SP
-      INTEGER :: Ldfjac, M, N, Iflag
-      REAL(SP) :: X(N), Fvec(M), Fjac(:,:)
+      INTEGER, INTENT(IN) :: Ldfjac, M, N, Iflag
+      REAL(SP), INTENT(IN) :: X(N)
+      REAL(SP), INTENT(INOUT) :: Fvec(M)
+      REAL(SP), INTENT(OUT) :: Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
-  INTEGER :: Info, Iopt, Ldr, M, N
-  REAL(SP) :: X(N), R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
+  INTEGER, INTENT(IN) :: Iopt, Ldr, M, N
+  INTEGER, INTENT(OUT) :: Info
+  REAL(SP), INTENT(IN) :: X(N)
+  REAL(SP), INTENT(OUT) :: R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
+  !
   INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
   REAL(SP) :: sigma, temp
   LOGICAL :: sing
-  REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP
+  REAL(SP), PARAMETER :: one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  SCOV
   sing = .FALSE.
   iflag = 0
@@ -175,7 +176,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
     iflag = 1
     CALL FCN(iflag,M,N,X,Fvec,R,Ldr)
     IF( iflag>=0 ) THEN
-      temp = ENORM(M,Fvec)
+      temp = NORM2(Fvec)
       sigma = one
       IF( M/=N ) sigma = temp*temp/(M-N)
       !
@@ -186,9 +187,9 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         !     ROW AT A TIME AND STORED IN THE UPPER TRIANGLE OF R.
         !     ( (Q TRANSPOSE)*FVEC IS ALSO CALCULATED BUT NOT USED.)
         DO j = 1, N
-          Wa2(j) = zero
+          Wa2(j) = 0._SP
           DO i = 1, N
-            R(i,j) = zero
+            R(i,j) = 0._SP
           END DO
         END DO
         iflag = 3
@@ -205,7 +206,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         IF( Iopt==1 ) THEN
           !
           !     CODE APPROXIMATES THE JACOBIAN
-          CALL FDJAC3(FCN,M,N,X,Fvec,R,Ldr,iflag,zero,Wa4)
+          CALL FDJAC3(FCN,M,N,X,Fvec,R,Ldr,iflag,0._SP,Wa4)
         ELSE
           !
           !     USER SUPPLIES THE JACOBIAN
@@ -223,7 +224,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
       !
       !     CHECK IF R IS SINGULAR.
       DO i = 1, N
-        IF( R(i,i)==zero ) sing = .TRUE.
+        IF( R(i,i)==0._SP ) sing = .TRUE.
       END DO
       IF( .NOT. (sing) ) THEN
         !
@@ -235,7 +236,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
             !
             !     INITIALIZE THE RIGHT-HAND SIDE (WA1(*)) AS THE K-TH COLUMN OF THE
             !     IDENTITY MATRIX.
-            Wa1 = zero
+            Wa1 = 0._SP
             Wa1(k,1) = one
             !
             R(k,k) = Wa1(k,1)/R(k,k)
@@ -256,7 +257,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         !     TRIANGLE OF R.
         DO i = 1, N
           DO j = i, N
-            temp = zero
+            temp = 0._SP
             DO k = j, N
               temp = temp + R(i,k)*R(j,k)
             END DO
@@ -272,9 +273,9 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   IF( M<=0 .OR. N<=0 ) Info = 0
   IF( iflag<0 ) Info = iflag
   IF( sing ) Info = 2
-  IF( Info<0 ) CALL XERMSG('SCOV',&
-    'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
-  IF( Info==0 ) CALL XERMSG('SCOV','INVALID INPUT PARAMETER.',2,1)
-  IF( Info==2 ) CALL XERMSG('SCOV',&
-    'SINGULAR JACOBIAN MATRIX, COVARIANCE MATRIX CANNOT BE CALCULATED.',1,1)
+  IF( Info<0 ) ERROR STOP 'SCOV : EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.'
+  IF( Info==0 ) ERROR STOP 'SCOV : INVALID INPUT PARAMETER.'
+  IF( Info==2 ) ERROR STOP 'SCOV : SINGULAR JACOBIAN MATRIX, COVARIANCE MATRIX &
+    &CANNOT BE CALCULATED.'
+  !
 END SUBROUTINE SCOV

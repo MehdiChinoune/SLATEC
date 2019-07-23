@@ -1,9 +1,8 @@
 !** DGAUS8
-SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
-  !> Integrate a real function of one variable over a finite
-  !            interval using an adaptive 8-point Legendre-Gauss
-  !            algorithm.  Intended primarily for high accuracy
-  !            integration or integration of smooth functions.
+PURE SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
+  !> Integrate a real function of one variable over a finite interval using an
+  !  adaptive 8-point Legendre-Gauss algorithm.
+  !  Intended primarily for high accuracy integration or integration of smooth functions.
   !***
   ! **Library:**   SLATEC
   !***
@@ -82,16 +81,22 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH, I1MACH
+  USE service, ONLY : D1MACH, I1MACH
+  !
   INTERFACE
-    REAL(DP) FUNCTION FUN(X)
+    REAL(DP) PURE FUNCTION FUN(X)
       IMPORT DP
       REAL(DP), INTENT(IN) :: X
-    END FUNCTION
+    END FUNCTION FUN
   END INTERFACE
-  INTEGER :: Ierr, k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
-  REAL(DP) :: A, aa(60), ae, anib, Ans, area, B, c, ce, ee, ef, &
-    eps, Err, est, gl, glr, gr(60), hh(60), tol, vl(60), vr
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(DP), INTENT(IN) :: A, B
+  REAL(DP), INTENT(INOUT) :: Err
+  REAL(DP), INTENT(OUT) :: Ans
+  !
+  INTEGER :: k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
+  REAL(DP) :: ae, anib, area, c, ce, ee, ef, eps, est, gl, glr, tol, vr
+  REAL(DP) :: aa(60), gr(60), hh(60), vl(60)
   REAL(DP), PARAMETER :: x1 = 1.83434642495649805E-01_DP, x2 = 5.25532409916328986E-01_DP, &
     x3 =7.96666477413626740E-01_DP , x4 = 9.60289856497536232E-01_DP
   REAL(DP), PARAMETER :: w1 = 3.62683783378361983E-01_DP, w2 = 3.13706645877887287E-01_DP, &
@@ -128,9 +133,8 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
             lmx = MIN(nlmx,nbits-nib-7)
             IF( lmx<1 ) THEN
               Ierr = -1
-              CALL XERMSG('DGAUS8',&
-                'A and B are too nearly equal to allow normal integration.&
-                & $$ANS is set to zero and IERR to -1.',1,-1)
+              ! 'DGAUS8 : A and B are too nearly equal to allow normal integration.&
+                ! & ANS is set to zero and IERR to -1.',1,-1)
               IF( Err<0._DP ) Err = ce
               RETURN
             ELSE
@@ -212,8 +216,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
     Ans = vr
     IF( (mxl/=0) .AND. (ABS(ce)>2._DP*tol*area) ) THEN
       Ierr = 2
-      CALL XERMSG('DGAUS8',&
-        'ANS is probably insufficiently accurate.',3,1)
+      ERROR STOP 'DGAUS8 : ANS is probably insufficiently accurate.'
     END IF
     IF( Err<0._DP ) Err = ce
     RETURN
@@ -222,9 +225,10 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   lr(l) = 1
   aa(l) = aa(l) + 4._DP*hh(l)
   GOTO 100
+  !
   RETURN
 CONTAINS
-  REAL(DP) FUNCTION G8(x,h)
+  REAL(DP) ELEMENTAL FUNCTION G8(x,h)
     REAL(DP), INTENT(IN) :: x, h
     G8 = h*((w1*(FUN(x-x1*h)+FUN(x+x1*h))+w2*(FUN(x-x2*h)+FUN(x+x2*h)))&
       +(w3*(FUN(x-x3*h)+FUN(x+x3*h))+w4*(FUN(x-x4*h)+FUN(x+x4*h))))

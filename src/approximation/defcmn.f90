@@ -30,13 +30,15 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
-  USE service, ONLY : XERMSG
   USE linear, ONLY : DBNDSL, DBNDAC
   USE data_handling, ONLY : DSORT
-  INTEGER :: Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
-  REAL(DP) :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(Nbkpt), Coeff(Nbkpt-Nord+1), &
-    G(Mdg,Nord+1), Ptemp(MAX(Nbkpt,Ndata)), Sddata(Ndata), W(Mdw,Nord+1), &
-    Xdata(Ndata), Xtemp(MAX(Nbkpt,Ndata)), Ydata(Ndata)
+
+  INTEGER, INTENT(IN) :: Lw, Mdein, Mdg, Mdw, Nbkpt, Ndata, Nord
+  INTEGER, INTENT(OUT) :: Mdeout
+  REAL(DP), INTENT(IN) :: Bkptin(Nbkpt), Sddata(Ndata), Xdata(Ndata), Ydata(Ndata)
+  REAL(DP), INTENT(INOUT) :: Bf(Nord,Nord), G(Mdg,Nord+1), W(Mdw,Nord+1)
+  REAL(DP), INTENT(OUT) :: Bkpt(Nbkpt), Coeff(Nbkpt-Nord+1), Ptemp(MAX(Nbkpt,Ndata)), &
+    Xtemp(MAX(Nbkpt,Ndata))
   !
   REAL(DP) :: dummy(1), rnorm, xmax, xmin, xval
   INTEGER :: i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1
@@ -55,20 +57,18 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   Coeff(1:n) = 0._DP
   Mdeout = -1
   IF( Nord<1 .OR. Nord>20 ) THEN
-    CALL XERMSG('DEFCMN',&
-      'IN DEFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',3,1)
+    ERROR STOP 'DEFCMN : IN DEFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.'
     RETURN
   END IF
   !
   IF( Nbkpt<2*Nord ) THEN
-    CALL XERMSG('DEFCMN',&
-      'IN DEFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',4,1)
+    ERROR STOP 'DEFCMN : IN DEFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE &
+      &THE B-SPLINE ORDER.'
     RETURN
   END IF
   !
   IF( Ndata<0 ) THEN
-    CALL XERMSG('DEFCMN',&
-      'IN DEFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',5,1)
+    ERROR STOP 'DEFCMN : IN DEFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.'
     RETURN
   END IF
   !
@@ -77,16 +77,14 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   IF( Lw<nb ) THEN
     WRITE (xern1,'(I8)') nb
     WRITE (xern2,'(I8)') Lw
-    CALL XERMSG('DEFCMN','IN DEFC, INSUFFICIENT STORAGE FOR W(*).&
-      & CHECK FORMULA THAT READS LW>= ... .  NEED = '&
-      //xern1//' GIVEN = '//xern2,6,1)
     Mdeout = -1
+    ERROR STOP 'DEFCMN : IN DEFC, INSUFFICIENT STORAGE FOR W(*).& CHECK FORMULA &
+      &THAT READS LW>= ... .'
     RETURN
   END IF
   !
   IF( Mdein/=1 .AND. Mdein/=2 ) THEN
-    CALL XERMSG('DEFCMN',&
-      'IN DEFC, INPUT VALUE OF MDEIN MUST BE 1-2.',7,1)
+    ERROR STOP 'DEFCMN : IN DEFC, INPUT VALUE OF MDEIN MUST BE 1-2.'
     RETURN
   END IF
   !
@@ -167,7 +165,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     !
     !        Obtain B-spline function value.
     !
-    CALL DFSPVN(Bkpt,Nord,1,xval,ileft,Bf)
+    CALL DFSPVN(Bkpt,Nord,1,xval,ileft,Bf(:,1))
     !
     !        Move row into place.
     !
@@ -231,4 +229,5 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   CALL DBNDSL(1,G,Mdg,Nord,ip,ir,Coeff,n,rnorm)
   Mdeout = 1
+  !
 END SUBROUTINE DEFCMN

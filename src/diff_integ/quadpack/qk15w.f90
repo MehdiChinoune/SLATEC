@@ -1,8 +1,7 @@
 !** QK15W
-SUBROUTINE QK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
-  !> To compute I = Integral of F*W over (A,B), with error
-  !                           estimate
-  !                       J = Integral of ABS(F*W) over (A,B)
+PURE SUBROUTINE QK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
+  !> To compute I = Integral of F*W over (A,B), with error estimate
+  !  J = Integral of ABS(F*W) over (A,B)
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -79,21 +78,23 @@ SUBROUTINE QK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
-    REAL(SP) FUNCTION W(X,P1,P2,P3,P4,Kp)
+    REAL(SP) PURE FUNCTION W(X,P1,P2,P3,P4,Kp)
       IMPORT SP
-      REAL(SP) :: X, P1, P2, P3, P4
-      INTEGER :: Kp
+      REAL(SP), INTENT(IN) :: X, P1, P2, P3, P4
+      INTEGER, INTENT(IN) :: Kp
     END FUNCTION
   END INTERFACE
+  INTEGER, INTENT(IN) :: Kp
+  REAL(SP), INTENT(IN) :: A, B, P1, P2, P3, P4
+  REAL(SP), INTENT(OUT) :: Abserr, Resabs, Resasc, Result
   !
-  REAL(SP) :: A, absc, absc1, absc2, Abserr, B, centr, dhlgth, epmach, fc, fsum, fval1, &
-    fval2, fv1(7), fv2(7), hlgth, P1, P2, P3, P4, Resabs, Resasc, resg, resk, reskh, &
-    Result, uflow
-  INTEGER :: j, jtw, jtwm1, Kp
+  INTEGER :: j, jtw, jtwm1
+  REAL(SP) :: absc, absc1, absc2, centr, dhlgth, epmach, fc, fsum, fval1, &
+    fval2, fv1(7), fv2(7), hlgth, resg, resk, reskh, uflow
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR
@@ -189,6 +190,6 @@ SUBROUTINE QK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   Abserr = ABS((resk-resg)*hlgth)
   IF( Resasc/=0._SP .AND. Abserr/=0._SP )&
     Abserr = Resasc*MIN(1._SP,(200._SP*Abserr/Resasc)**1.5_SP)
-  IF( Resabs>uflow/(50._SP*epmach) ) Abserr = MAX((epmach*50._SP)*Resabs,&
-    Abserr)
+  IF( Resabs>uflow/(50._SP*epmach) ) Abserr = MAX((epmach*50._SP)*Resabs,Abserr)
+  !
 END SUBROUTINE QK15W

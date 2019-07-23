@@ -1,5 +1,5 @@
 !** QRSOLV
-SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
+PURE SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !> Subsidiary to SNLS1 and SNLS1E
   !***
   ! **Library:**   SLATEC
@@ -87,12 +87,15 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: N, Ldr
-  INTEGER :: Ipvt(N)
-  REAL(SP) :: R(Ldr,N), Diag(N), Qtb(N), X(N), Sigma(N), Wa(N)
+  INTEGER, INTENT(IN) :: N, Ldr
+  INTEGER, INTENT(IN) :: Ipvt(N)
+  REAL(SP), INTENT(IN) :: Diag(N), Qtb(N)
+  REAL(SP), INTENT(INOUT) :: R(Ldr,N)
+  REAL(SP), INTENT(OUT) :: X(N), Sigma(N), Wa(N)
+  !
   INTEGER :: i, j, jp1, k, kp1, l, nsing
   REAL(SP) :: coss, cotan, qtbpj, sinn, summ, tann, temp
-  REAL(SP), PARAMETER :: p5 = 5.E-1_SP, p25 = 2.5E-1, zero = 0._SP
+  REAL(SP), PARAMETER :: p5 = 5.E-1_SP, p25 = 2.5E-1
   !* FIRST EXECUTABLE STATEMENT  QRSOLV
   DO j = 1, N
     DO i = j, N
@@ -110,9 +113,9 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
     !        DIAGONAL ELEMENT USING P FROM THE QR FACTORIZATION.
     !
     l = Ipvt(j)
-    IF( Diag(l)/=zero ) THEN
+    IF( Diag(l)/=0._SP ) THEN
       DO k = j, N
-        Sigma(k) = zero
+        Sigma(k) = 0._SP
       END DO
       Sigma(j) = Diag(l)
       !
@@ -120,13 +123,13 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
       !        MODIFY ONLY A SINGLE ELEMENT OF (Q TRANSPOSE)*B
       !        BEYOND THE FIRST N, WHICH IS INITIALLY ZERO.
       !
-      qtbpj = zero
+      qtbpj = 0._SP
       DO k = j, N
         !
         !           DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
         !           APPROPRIATE ELEMENT IN THE CURRENT ROW OF D.
         !
-        IF( Sigma(k)/=zero ) THEN
+        IF( Sigma(k)/=0._SP ) THEN
           IF( ABS(R(k,k))>=ABS(Sigma(k)) ) THEN
             tann = Sigma(k)/R(k,k)
             coss = p5/SQRT(p25+p25*tann**2)
@@ -171,13 +174,13 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !
   nsing = N
   DO j = 1, N
-    IF( Sigma(j)==zero .AND. nsing==N ) nsing = j - 1
-    IF( nsing<N ) Wa(j) = zero
+    IF( Sigma(j)==0._SP .AND. nsing==N ) nsing = j - 1
+    IF( nsing<N ) Wa(j) = 0._SP
   END DO
   IF( nsing>=1 ) THEN
     DO k = 1, nsing
       j = nsing - k + 1
-      summ = zero
+      summ = 0._SP
       jp1 = j + 1
       IF( nsing>=jp1 ) THEN
         DO i = jp1, nsing

@@ -1,8 +1,7 @@
 !** DNLS1E
-SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
-  !> An easy-to-use code which minimizes the sum of the squares
-  !            of M nonlinear functions in N variables by a modification
-  !            of the Levenberg-Marquardt algorithm.
+PURE SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
+  !> An easy-to-use code which minimizes the sum of the squares of M nonlinear functions
+  !  in N variables by a modification of the Levenberg-Marquardt algorithm.
   !***
   ! **Library:**   SLATEC
   !***
@@ -108,11 +107,10 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !         If IOPT=1, the code will approximate the Jacobian by forward
   !         differencing.
   !
-  !       M is a positive integer input variable set to the number of
-  !         functions.
+  !       M is a positive integer input variable set to the number of functions.
   !
-  !       N is a positive integer input variable set to the number of
-  !         variables.  N must not exceed M.
+  !       N is a positive integer input variable set to the number of variables.
+  !         N must not exceed M.
   !
   !       X is an array of length N.  On input, X must contain an initial
   !         estimate of the solution vector.  On output, X contains the
@@ -498,38 +496,41 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+    PURE SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
       IMPORT DP
-      INTEGER :: Ldfjac, M, N, Iflag
-      REAL(DP) :: X(N), Fvec(M), Fjac(:,:)
+      INTEGER, INTENT(IN) :: Ldfjac, M, N, Iflag
+      REAL(DP), INTENT(IN) :: X(N)
+      REAL(DP), INTENT(INOUT) :: Fvec(M)
+      REAL(DP), INTENT(OUT) :: Fjac(:,:)
     END SUBROUTINE FCN
   END INTERFACE
-  INTEGER :: M, N, Nprint, Info, Lwa, Iopt
-  INTEGER :: Iw(N)
-  REAL(DP) :: Tol
-  REAL(DP) :: X(N), Fvec(M), Wa(Lwa)
+  INTEGER, INTENT(IN) :: M, N, Nprint, Lwa, Iopt
+  INTEGER, INTENT(OUT) :: Info
+  INTEGER, INTENT(OUT) :: Iw(N)
+  REAL(DP), INTENT(IN) :: Tol
+  REAL(DP), INTENT(INOUT) :: X(N)
+  REAL(DP), INTENT(OUT) :: Fvec(M), Wa(Lwa)
+  !
+  !
   INTEGER :: indexx, maxfev, mode, nfev, njev
   REAL(DP) :: ftol, gtol, xtol, epsfcn
-  REAL(DP), PARAMETER :: factor = 1.0D2, zero = 0._DP
+  REAL(DP), PARAMETER :: factor = 1.0D2
   !* FIRST EXECUTABLE STATEMENT  DNLS1E
   Info = 0
   !
   !     CHECK THE INPUT PARAMETERS FOR ERRORS.
   !
-  IF( Iopt>=1 .AND. Iopt<=3 .AND. N>0 .AND. M>=N .AND. Tol>=zero .AND. Lwa>=N*(N+5)&
-      +M ) THEN
+  IF( Iopt>=1 .AND. Iopt<=3 .AND. N>0 .AND. M>=N .AND. Tol>=0._DP .AND. Lwa>=N*(N+5)+M ) THEN
     IF( Iopt>=3 .OR. Lwa>=N*(M+5)+M ) THEN
-      !
-      !     CALL DNLS1.
-      !
+      !  CALL DNLS1.
       maxfev = 100*(N+1)
       IF( Iopt==1 ) maxfev = 2*maxfev
       ftol = Tol
       xtol = Tol
-      gtol = zero
-      epsfcn = zero
+      gtol = 0._DP
+      epsfcn = 0._DP
       mode = 1
       indexx = 5*N + M
       CALL DNLS1(FCN,Iopt,M,N,X,Fvec,Wa(indexx+1),M,ftol,xtol,gtol,maxfev,&
@@ -538,7 +539,7 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
       IF( Info==8 ) Info = 4
     END IF
   END IF
-  IF( Info==0 ) CALL XERMSG('DNLS1E','INVALID INPUT PARAMETER.',2,1)
+  IF( Info==0 ) ERROR STOP 'DNLS1E : INVALID INPUT PARAMETER.'
   !
   !     LAST CARD OF SUBROUTINE DNLS1E.
   !

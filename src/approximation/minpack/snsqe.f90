@@ -1,8 +1,7 @@
 !** SNSQE
-SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
-  !> An easy-to-use code to find a zero of a system of N
-  !            nonlinear functions in N variables by a modification of
-  !            the Powell hybrid method.
+PURE SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
+  !> An easy-to-use code to find a zero of a system of N nonlinear functions
+  !  in N variables by a modification of the Powell hybrid method.
   !***
   ! **Library:**   SLATEC
   !***
@@ -342,44 +341,46 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    SUBROUTINE FCN(N,X,Fvec,iflag)
+    PURE SUBROUTINE FCN(N,X,Fvec,iflag)
       IMPORT SP
-      INTEGER :: N, Iflag
-      REAL(SP) :: X(N), Fvec(N)
+      INTEGER, INTENT(IN) :: N, Iflag
+      REAL(SP), INTENT(IN) :: X(N)
+      REAL(SP), INTENT(OUT) :: Fvec(N)
     END SUBROUTINE FCN
-    SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
+    PURE SUBROUTINE JAC(N,X,Fvec,Fjac,Ldfjac,Iflag)
       IMPORT SP
-      INTEGER :: N, Ldfjac, Iflag
-      REAL(SP) :: X(N), Fvec(N),Fjac(Ldfjac,N)
+      INTEGER, INTENT(IN) :: N, Ldfjac, Iflag
+      REAL(SP), INTENT(IN) :: X(N), Fvec(N)
+      REAL(SP), INTENT(OUT) :: Fjac(Ldfjac,N)
     END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Iopt, N, Nprint, Info, Lwa
-  REAL(SP) :: Tol
-  REAL(SP) :: X(N), Fvec(N), Wa(Lwa)
+  INTEGER, INTENT(IN) :: Iopt, N, Nprint, Lwa
+  INTEGER, INTENT(OUT) :: Info
+  REAL(SP), INTENT(IN) :: Tol
+  REAL(SP), INTENT(INOUT) :: X(N)
+  REAL(SP), INTENT(OUT) :: Fvec(N), Wa(Lwa)
+  !
   INTEGER :: indexx, j, lr, maxfev, ml, mode, mu, nfev, njev
   REAL(SP) :: epsfcn, xtol
-  REAL(SP), PARAMETER :: factor = 1.0E2, one = 1._SP, zero = 0._SP
+  REAL(SP), PARAMETER :: factor = 1.0E2
   !* FIRST EXECUTABLE STATEMENT  SNSQE
   Info = 0
   !
   !     CHECK THE INPUT PARAMETERS FOR ERRORS.
   !
-  IF( Iopt>=1 .AND. Iopt<=2 .AND. N>0 .AND. Tol>=zero .AND. Lwa>=(3*N**2+13*N)/2 )&
-      THEN
-    !
-    !     CALL SNSQ.
-    !
+  IF( Iopt>=1 .AND. Iopt<=2 .AND. N>0 .AND. Tol>=0._SP .AND. Lwa>=(3*N**2+13*N)/2 ) THEN
+    !  CALL SNSQ.
     maxfev = 100*(N+1)
     IF( Iopt==2 ) maxfev = 2*maxfev
     xtol = Tol
     ml = N - 1
     mu = N - 1
-    epsfcn = zero
+    epsfcn = 0._SP
     mode = 2
     DO j = 1, N
-      Wa(j) = one
+      Wa(j) = 1._SP
     END DO
     lr = (N*(N+1))/2
     indexx = 6*N + lr
@@ -388,7 +389,7 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
       Wa(2*N+1),Wa(3*N+1),Wa(4*N+1),Wa(5*N+1))
     IF( Info==5 ) Info = 4
   END IF
-  IF( Info==0 ) CALL XERMSG('SNSQE','INVALID INPUT PARAMETER.',2,1)
+  IF( Info==0 ) ERROR STOP 'SNSQE : INVALID INPUT PARAMETER.'
   !
   !     LAST CARD OF SUBROUTINE SNSQE.
   !

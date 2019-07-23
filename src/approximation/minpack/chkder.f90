@@ -1,8 +1,7 @@
 !** CHKDER
-SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
-  !> Check the gradients of M nonlinear functions in N
-  !            variables, evaluated at a point X, for consistency
-  !            with the functions themselves.
+PURE SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
+  !> Check the gradients of M nonlinear functions in N variables, evaluated
+  !  at a point X, for consistency with the functions themselves.
   !***
   ! **Library:**   SLATEC
   !***
@@ -49,11 +48,9 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !
   !     where
   !
-  !       M is a positive integer input variable set to the number
-  !         of functions.
+  !       M is a positive integer input variable set to the number of functions.
   !
-  !       N is a positive integer input variable set to the number
-  !         of variables.
+  !       N is a positive integer input variable set to the number of variables.
   !
   !       X is an input array of length N.
   !
@@ -74,8 +71,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !         FVECP must contain the functions evaluated at XP.
   !
   !       MODE is an integer input variable set to 1 on the first call
-  !         and 2 on the second. Other values of MODE are equivalent
-  !         to MODE = 1.
+  !         and 2 on the second. Other values of MODE are equivalent to MODE = 1.
   !
   !       ERR is an array of length M. On output when MODE = 2,
   !         ERR contains measures of correctness of the respective
@@ -91,8 +87,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !***
   ! **References:**  M. J. D. Powell, A hybrid method for nonlinear equa-
   !                 tions. In Numerical Methods for Nonlinear Algebraic
-  !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach,
-  !                 1988.
+  !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach, 1988.
   !***
   ! **Routines called:**  R1MACH
 
@@ -105,11 +100,13 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE service, ONLY : R1MACH
-  INTEGER :: M, N, Ldfjac, Mode
-  REAL(SP) :: X(N), Fvec(M), Fjac(Ldfjac,N), Xp(N), Fvecp(M), Err(M)
+  !
+  INTEGER, INTENT(IN) :: M, N, Ldfjac, Mode
+  REAL(SP), INTENT(IN) :: X(N), Fvec(M), Fjac(Ldfjac,N), Fvecp(M)
+  REAL(SP), INTENT(OUT) :: Xp(N), Err(M)
+  !
   INTEGER :: i, j
   REAL(SP) :: eps, epsf, epslog, epsmch, temp
-  REAL(SP), PARAMETER :: factor = 1.0E2, one = 1._SP, zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  CHKDER
   epsmch = R1MACH(4)
   !
@@ -119,26 +116,26 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     !
     !        MODE = 2.
     !
-    epsf = factor*epsmch
+    epsf = 100._SP*epsmch
     epslog = LOG10(eps)
     DO i = 1, M
-      Err(i) = zero
+      Err(i) = 0._SP
     END DO
     DO j = 1, N
       temp = ABS(X(j))
-      IF( temp==zero ) temp = one
+      IF( temp==0._SP ) temp = 1._SP
       DO i = 1, M
         Err(i) = Err(i) + temp*Fjac(i,j)
       END DO
     END DO
     DO i = 1, M
-      temp = one
-      IF( Fvec(i)/=zero .AND. Fvecp(i)/=zero .AND. ABS(Fvecp(i)-Fvec(i))&
+      temp = 1._SP
+      IF( Fvec(i)/=0._SP .AND. Fvecp(i)/=0._SP .AND. ABS(Fvecp(i)-Fvec(i))&
         >=epsf*ABS(Fvec(i)) ) temp = eps*ABS((Fvecp(i)-Fvec(i))/eps-Err(i))&
         /(ABS(Fvec(i))+ABS(Fvecp(i)))
-      Err(i) = one
+      Err(i) = 1._SP
       IF( temp>epsmch .AND. temp<eps ) Err(i) = (LOG10(temp)-epslog)/epslog
-      IF( temp>=eps ) Err(i) = zero
+      IF( temp>=eps ) Err(i) = 0._SP
     END DO
   ELSE
     !
@@ -146,7 +143,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     !
     DO j = 1, N
       temp = eps*ABS(X(j))
-      IF( temp==zero ) temp = eps
+      IF( temp==0._SP ) temp = eps
       Xp(j) = X(j) + temp
     END DO
   END IF

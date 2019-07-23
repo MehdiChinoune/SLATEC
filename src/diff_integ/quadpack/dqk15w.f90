@@ -1,8 +1,7 @@
 !** DQK15W
-SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
-  !> To compute I = Integral of F*W over (A,B), with error
-  !                           estimate
-  !                       J = Integral of ABS(F*W) over (A,B)
+PURE SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
+  !> To compute I = Integral of F*W over (A,B), with error estimate
+  !  J = Integral of ABS(F*W) over (A,B)
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -79,21 +78,23 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
-    REAL(DP) FUNCTION W(X,P1,P2,P3,P4,Kp)
+    REAL(DP) PURE FUNCTION W(X,P1,P2,P3,P4,Kp)
       IMPORT DP
-      REAL(DP) :: X, P1, P2, P3, P4
-      INTEGER :: Kp
-    END FUNCTION
+      REAL(DP), INTENT(IN) :: X, P1, P2, P3, P4
+      INTEGER, INTENT(IN) :: Kp
+    END FUNCTION W
   END INTERFACE
+  INTEGER, INTENT(IN) :: Kp
+  REAL(DP), INTENT(IN) :: A, B, P1, P2, P3, P4
+  REAL(DP), INTENT(OUT) :: Abserr, Resabs, Resasc, Result
   !
-  REAL(DP) :: A, absc, absc1, absc2, Abserr, B, centr, dhlgth, epmach, fc, fsum, &
-    fval1, fval2, fv1(7), fv2(7), hlgth, P1, P2, P3, P4, Resabs, Resasc, &
-    resg, resk, reskh, Result, uflow
-  INTEGER :: j, jtw, jtwm1, Kp
+  INTEGER :: j, jtw, jtwm1
+  REAL(DP) :: absc, absc1, absc2, centr, dhlgth, epmach, fc, fsum, fval1, fval2, &
+    fv1(7), fv2(7), hlgth, resg, resk, reskh, uflow
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR
@@ -189,6 +190,6 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   Abserr = ABS((resk-resg)*hlgth)
   IF( Resasc/=0._DP .AND. Abserr/=0._DP )&
     Abserr = Resasc*MIN(1._DP,(0.2E+03_DP*Abserr/Resasc)**1.5_DP)
-  IF( Resabs>uflow/(0.5E+02_DP*epmach) ) Abserr = MAX((epmach*0.5E+02_DP)*Resabs,&
-    Abserr)
+  IF( Resabs>uflow/(0.5E+02_DP*epmach) ) Abserr = MAX((epmach*0.5E+02_DP)*Resabs,Abserr)
+  !
 END SUBROUTINE DQK15W

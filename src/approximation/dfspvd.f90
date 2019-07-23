@@ -30,12 +30,13 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: Ileft, K, Nderiv
-  REAL(DP) :: T(:), Vnikx(K,K), X
+  INTEGER, INTENT(IN) :: Ileft, K, Nderiv
+  REAL(DP), INTENT(IN) :: T(:), X
+  REAL(DP), INTENT(INOUT) :: Vnikx(K,K)
   INTEGER :: i, ideriv, idervm, ipkmd, j, jlow, jm1, kmd, l, m
   REAL(DP) :: a(20,20), diff, fkmd, v
   !* FIRST EXECUTABLE STATEMENT  DFSPVD
-  CALL DFSPVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv,Nderiv))
+  CALL DFSPVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv:K,Nderiv))
   IF( Nderiv>1 ) THEN
     ideriv = Nderiv
     DO i = 2, Nderiv
@@ -44,7 +45,7 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
         Vnikx(j-1,idervm) = Vnikx(j,ideriv)
       END DO
       ideriv = idervm
-      CALL DFSPVN(T,0,2,X,Ileft,Vnikx(ideriv,ideriv))
+      CALL DFSPVN(T,0,2,X,Ileft,Vnikx(ideriv:ideriv,ideriv))
     END DO
     !
     DO i = 1, K
@@ -87,4 +88,5 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
       END DO
     END DO
   END IF
+  !
 END SUBROUTINE DFSPVD

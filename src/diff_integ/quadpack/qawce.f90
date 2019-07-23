@@ -1,11 +1,10 @@
 !** QAWCE
-SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
+PURE SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  !> The routine calculates an approximation result to a
-  !            CAUCHY PRINCIPAL VALUE I = Integral of F*W over (A,B)
-  !            (W(X) = 1/(X-C), (C/=A, C/=B), hopefully satisfying
-  !            following claim for accuracy
-  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
+  !> The routine calculates an approximation result to a CAUCHY PRINCIPAL VALUE
+  !  I = Integral of F*W over (A,B) (W(X) = 1/(X-C), (C/=A, C/=B),
+  !  hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I))
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -155,15 +154,19 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+  !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Last, Limit, Neval, Iord(Limit)
-  REAL(SP) :: A, Abserr, B, C, Epsabs, Epsrel, Result
-  REAL(SP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iord(Limit)
+  REAL(SP), INTENT(IN) :: A, B, C, Epsabs, Epsrel
+  REAL(SP), INTENT(OUT) :: Abserr, Result
+  REAL(SP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: iroff1, iroff2, k, krule, maxerr, nev, nrmax
   REAL(SP) :: aa, area, area1, area12, area2, a1, a2, bb, b1, b2, epmach, erro12, &
     errbnd, errmax, error1, error2, errsum, uflow
@@ -347,4 +350,5 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     END IF
     IF( aa==B ) Result = -Result
   END IF
+  !
 END SUBROUTINE QAWCE

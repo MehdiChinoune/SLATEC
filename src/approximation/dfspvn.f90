@@ -25,8 +25,9 @@ SUBROUTINE DFSPVN(T,Jhigh,Indexx,X,Ileft,Vnikx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: Ileft, Indexx, Jhigh
-  REAL(DP) :: T(:), Vnikx(*), X
+  INTEGER, INTENT(IN) :: Ileft, Indexx, Jhigh
+  REAL(DP), INTENT(IN) :: T(:), X
+  REAL(DP), INTENT(INOUT) :: Vnikx(*)
   REAL(DP) :: vm, vmprev
   INTEGER :: imjp1, ipj, jp1, jp1ml, l
   INTEGER, SAVE :: j = 1

@@ -1,5 +1,5 @@
 !** R1UPDT
-SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
+PURE SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   !> Subsidiary to SNSQ and SNSQE
   !***
   ! **Library:**   SLATEC
@@ -75,12 +75,16 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : R1MACH
-  INTEGER :: M, N, Ls
-  LOGICAL :: Sing
-  REAL(SP) :: S(Ls), U(M), V(N), W(M)
+  !
+  INTEGER, INTENT(IN) :: M, N, Ls
+  REAL(SP), INTENT(IN) :: U(M)
+  REAL(SP), INTENT(INOUT) :: S(Ls), V(N)
+  REAL(SP), INTENT(OUT) :: W(M)
+  LOGICAL, INTENT(OUT) :: Sing
+  !
   INTEGER :: i, j, jj, l, nmj, nm1
   REAL(SP) :: coss, cotan, giant, sinn, tann, tau, temp
-  REAL(SP), PARAMETER :: one = 1._SP, p5 = 5.E-1_SP, p25 = 2.5E-1, zero = 0._SP
+  REAL(SP), PARAMETER :: p5 = 5.E-1_SP, p25 = 2.5E-1
   !* FIRST EXECUTABLE STATEMENT  R1UPDT
   giant = R1MACH(2)
   !
@@ -104,8 +108,8 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
     DO nmj = 1, nm1
       j = N - nmj
       jj = jj - (M-j+1)
-      W(j) = zero
-      IF( V(j)/=zero ) THEN
+      W(j) = 0._SP
+      IF( V(j)/=0._SP ) THEN
         !
         !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
         !        J-TH ELEMENT OF V.
@@ -119,8 +123,8 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
           cotan = V(N)/V(j)
           sinn = p5/SQRT(p25+p25*cotan**2)
           coss = sinn*cotan
-          tau = one
-          IF( ABS(coss)*giant>one ) tau = one/coss
+          tau = 1._SP
+          IF( ABS(coss)*giant>1._SP ) tau = 1._SP/coss
         END IF
         !
         !        APPLY THE TRANSFORMATION TO V AND STORE THE INFORMATION
@@ -153,7 +157,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   Sing = .FALSE.
   IF( nm1>=1 ) THEN
     DO j = 1, nm1
-      IF( W(j)/=zero ) THEN
+      IF( W(j)/=0._SP ) THEN
         !
         !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
         !        J-TH ELEMENT OF THE SPIKE.
@@ -167,8 +171,8 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
           cotan = S(jj)/W(j)
           sinn = p5/SQRT(p25+p25*cotan**2)
           coss = sinn*cotan
-          tau = one
-          IF( ABS(coss)*giant>one ) tau = one/coss
+          tau = 1._SP
+          IF( ABS(coss)*giant>1._SP ) tau = 1._SP/coss
         END IF
         !
         !        APPLY THE TRANSFORMATION TO S AND REDUCE THE SPIKE IN W.
@@ -189,7 +193,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
       !
       !        TEST FOR ZERO DIAGONAL ELEMENTS IN THE OUTPUT S.
       !
-      IF( S(jj)==zero ) Sing = .TRUE.
+      IF( S(jj)==0._SP ) Sing = .TRUE.
       jj = jj + (M-j+1)
     END DO
   END IF
@@ -201,7 +205,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
     S(l) = W(i)
     l = l + 1
   END DO
-  IF( S(jj)==zero ) Sing = .TRUE.
+  IF( S(jj)==0._SP ) Sing = .TRUE.
   !
   !     LAST CARD OF SUBROUTINE R1UPDT.
   !

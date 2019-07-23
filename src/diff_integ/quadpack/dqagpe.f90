@@ -1,12 +1,11 @@
 !** DQAGPE
-SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
+PURE SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,Last)
-  !> Approximate a given definite integral I = Integral of F
-  !            over (A,B), hopefully satisfying the accuracy claim:
-  !                 ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
-  !            Break points of the integration interval, where local
-  !            difficulties of the integrand may occur (e.g. singularities
-  !            or discontinuities) are provided by the user.
+  !> Approximate a given definite integral I = Integral of F over (A,B),
+  !  hopefully satisfying the accuracy claim:
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !  Break points of the integration interval, where local difficulties of the integrand
+  !  may occur (e.g. singularities or discontinuities) are provided by the user.
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -205,17 +204,22 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : D1MACH
+  !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Last, Limit, Neval, Npts2
-  INTEGER :: Iord(Limit), Level(Limit), Ndin(Npts2)
-  REAL(DP) :: A, Abserr, B, Epsabs, Epsrel, Result
-  REAL(DP) :: Alist(Limit), Blist(Limit), Elist(Limit), Points(Npts2), Pts(Npts2), &
+  INTEGER, INTENT(IN) :: Limit, Npts2
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval
+  INTEGER, INTENT(OUT) :: Iord(Limit), Level(Limit), Ndin(Npts2)
+  REAL(DP), INTENT(IN) :: A, B, Epsabs, Epsrel
+  REAL(DP), INTENT(OUT) :: Abserr, Result
+  REAL(DP), INTENT(IN) :: Points(Npts2)
+  REAL(DP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Pts(Npts2), &
     Rlist(Limit)
+  !
   INTEGER :: i, id, ierro, ind1, ind2, ip1, iroff1, iroff2, iroff3, j, jlow, &
     jupbnd, k, ksgn, ktmin, levcur, levmax, maxerr, nintt, nintp1, npts, &
     nres, nrmax, numrl2
@@ -587,5 +591,6 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   300 CONTINUE
   IF( Ier>2 ) Ier = Ier - 1
   Result = Result*signn
+  !
   RETURN
 END SUBROUTINE DQAGPE

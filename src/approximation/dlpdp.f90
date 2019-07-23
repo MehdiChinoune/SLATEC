@@ -1,5 +1,5 @@
 !** DLPDP
-SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
+PURE SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !> Subsidiary to DLSEI
   !***
   ! **Library:**   SLATEC
@@ -52,12 +52,16 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
   !
-  INTEGER :: M, Mda, Mode, N1, N2
-  INTEGER :: Is(M+N1+N2+1)
-  REAL(DP) :: Wnorm, A(Mda,N1+N2+1), Prgopt(:), Ws((M+2)*(N1+N2+7)), X(N1+N2)
+  INTEGER, INTENT(IN) :: M, Mda, N1, N2
+  INTEGER, INTENT(OUT) :: Mode
+  INTEGER, INTENT(OUT) :: Is(M+N1+N2+1)
+  REAL(DP), INTENT(IN) :: Prgopt(:)
+  REAL(DP), INTENT(INOUT) :: A(Mda,N1+N2+1)
+  REAL(DP), INTENT(OUT) :: Wnorm, Ws((M+2)*(N1+N2+7)), X(N1+N2)
+  !
   INTEGER :: i, iw, ix, j, l, modew, n, np1
   REAL(DP) :: rnorm, sc, ynorm
-  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, fac = 0.1_DP
+  REAL(DP), PARAMETER :: one = 1._DP, fac = 0.1_DP
   !* FIRST EXECUTABLE STATEMENT  DLPDP
   n = N1 + N2
   Mode = 1
@@ -68,7 +72,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     !           SCALE NONZERO ROWS OF INEQUALITY MATRIX TO HAVE LENGTH ONE.
     DO i = 1, M
       sc = NORM2(A(i,1:n))
-      IF( sc/=zero ) THEN
+      IF( sc/=0._DP ) THEN
         sc = one/sc
         A(i,1:np1) = A(i,1:np1)*sc
       END IF
@@ -76,7 +80,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     !
     !           SCALE RT.-SIDE VECTOR TO HAVE LENGTH ONE (OR ZERO).
     ynorm = NORM2(A(1:M,np1))
-    IF( ynorm/=zero ) THEN
+    IF( ynorm/=0._DP ) THEN
       sc = one/ynorm
       A(1:M,np1) = A(1:M,np1)*sc
     END IF
@@ -85,7 +89,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     j = N1 + 1
     DO WHILE( j<=n )
       sc = NORM2(A(1:M,j))
-      IF( sc/=zero ) sc = one/sc
+      IF( sc/=0._DP ) sc = one/sc
       A(1:M,j) = A(1:M,j)*sc
       X(j) = sc
       j = j + 1
@@ -108,7 +112,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         Ws(iw+1) = A(i,np1)
         iw = iw + 1
       END DO
-      Ws(iw+1:iw+n) = zero
+      Ws(iw+1:iw+n) = 0._DP
       iw = iw + n
       Ws(iw+1) = one
       iw = iw + 1
@@ -127,7 +131,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !
       !              COMPUTE THE COMPONENTS OF THE SOLN DENOTED ABOVE BY W.
       sc = one - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
-      IF( one+fac*ABS(sc)==one .OR. rnorm<=zero ) THEN
+      IF( one+fac*ABS(sc)==one .OR. rnorm<=0._DP ) THEN
         Mode = 2
         !        .........EXIT
         RETURN
@@ -154,7 +158,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         Ws(iw+1) = A(i,np1)
         iw = iw + 1
       END DO
-      Ws(iw+1:iw+N2) = zero
+      Ws(iw+1:iw+N2) = 0._DP
       iw = iw + N2
       Ws(iw+1) = one
       iw = iw + 1
@@ -173,7 +177,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !
       !              COMPUTE THE COMPONENTS OF THE SOLN DENOTED ABOVE BY Z.
       sc = one - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
-      IF( one+fac*ABS(sc)==one .OR. rnorm<=zero ) THEN
+      IF( one+fac*ABS(sc)==one .OR. rnorm<=0._DP ) THEN
         Mode = 2
         !        .........EXIT
         RETURN
@@ -191,9 +195,10 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     Wnorm = NORM2(X(1:N1))
   ELSE
     IF( n>0 ) THEN
-      X(1:n) = zero
+      X(1:n) = 0._DP
     END IF
-    Wnorm = zero
+    Wnorm = 0._DP
   END IF
+  !
   RETURN
 END SUBROUTINE DLPDP

@@ -1,10 +1,9 @@
 !** QAG
-SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
+PURE SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
-  !> The routine calculates an approximation result to a given
-  !            definite integral I = integral of F over (A,B),
-  !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)LE.MAX(EPSABS,EPSREL*ABS(I)).
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = integral of F over (A,B), hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)LE.MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -12,9 +11,8 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !***
   ! **Type:**      SINGLE PRECISION (QAG-S, DQAG-D)
   !***
-  ! **Keywords:**  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES,
-  !             GENERAL-PURPOSE, GLOBALLY ADAPTIVE, INTEGRAND EXAMINATOR,
-  !             QUADPACK, QUADRATURE
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES, GENERAL-PURPOSE,
+  !                GLOBALLY ADAPTIVE, INTEGRAND EXAMINATOR, QUADPACK, QUADRATURE
   !***
   ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
@@ -165,15 +163,18 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Last, Ier, Key, Lenw, Limit, Neval, Iwork(Limit)
-  REAL(SP) :: A, Abserr, B, Epsabs, Epsrel, Result, Work(Lenw)
+  INTEGER, INTENT(IN) :: Key, Lenw, Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iwork(Limit)
+  REAL(SP), INTENT(IN) :: A, B, Epsabs, Epsrel
+  REAL(SP), INTENT(OUT) :: Abserr, Result, Work(Lenw)
+  !
   INTEGER :: lvl, l1, l2, l3
   !* FIRST EXECUTABLE STATEMENT  QAG
   Ier = 6
@@ -198,5 +199,6 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   END IF
   !
   IF( Ier==6 ) lvl = 1
-  IF( Ier/=0 ) CALL XERMSG('QAG','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier/=0 ) ERROR STOP 'QAG : ABNORMAL RETURN'
+  !
 END SUBROUTINE QAG

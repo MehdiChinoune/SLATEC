@@ -1,8 +1,7 @@
 !** LSEI
-SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
+pure SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !> Solve a linearly constrained least squares problem with
-  !            equality and inequality constraints, and optionally compute
-  !            a covariance matrix.
+  !  equality and inequality constraints, and optionally compute a covariance matrix.
   !***
   ! **Library:**   SLATEC
   !***
@@ -388,11 +387,16 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : R1MACH
   USE blas, ONLY : SAXPY, SSWAP
   USE linear, ONLY : H12
-  INTEGER :: Ma, Mdw, Me, Mg, Mode, N, Ip(Mg+2*N+2)
-  REAL(SP) :: Prgopt(:), Rnorme, Rnorml, W(Mdw,N+1), Ws(*), X(N)
+  !
+  INTEGER, INTENT(IN) :: Ma, Mdw, Me, Mg, N
+  INTEGER, INTENT(INOUT) :: Ip(Mg+2*N+2)
+  INTEGER, INTENT(OUT) :: Mode
+  REAL(SP), INTENT(IN) :: Prgopt(:)
+  REAL(SP), INTENT(INOUT) :: W(Mdw,N+1), Ws(*)
+  REAL(SP), INTENT(OUT) :: Rnorme, Rnorml, X(N)
   !
   REAL(SP) :: enorm, fnorm, gam, rb, rn, rnmax, sizee, sn, snmax, t, tau, uj, up, vj, &
     xnorm, xnrme
@@ -417,9 +421,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     WRITE (xern2,'(I8)') Me
     WRITE (xern3,'(I8)') Ma
     WRITE (xern4,'(I8)') Mg
-    CALL XERMSG('LSEI', &
-      'ALL OF THE VARIABLES N, ME, MA, MG MUST BE >= 0$$ENTERED ROUTINE WITH$$N  = '//&
-      xern1//'$$ME = '//xern2//'$$MA = '//xern3//'$$MG = '//xern4,2,1)
+    ERROR STOP 'LSEI : ALL OF THE VARIABLES N, ME, MA, MG MUST BE >= 0'
     RETURN
   END IF
   !
@@ -427,7 +429,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     lchk = 2*(Me+N) + MAX(Ma+Mg,N) + (Mg+2)*(N+7)
     IF( Ip(1)<lchk ) THEN
       WRITE (xern1,'(I8)') lchk
-      CALL XERMSG('LSEI','INSUFFICIENT STORAGE ALLOCATED FOR WS(*), NEED LW = '//xern1,2,1)
+      ERROR STOP 'LSEI : INSUFFICIENT STORAGE ALLOCATED FOR WS(*).'
       RETURN
     END IF
   END IF
@@ -436,7 +438,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     lchk = Mg + 2*N + 2
     IF( Ip(2)<lchk ) THEN
       WRITE (xern1,'(I8)') lchk
-      CALL XERMSG('LSEI','INSUFFICIENT STORAGE ALLOCATED FOR IP(*), NEED LIP = '//xern1,2,1)
+      ERROR STOP 'LSEI : INSUFFICIENT STORAGE ALLOCATED FOR IP(*).'
       RETURN
     END IF
   END IF
@@ -453,7 +455,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   END IF
   !
   IF( Mdw<m ) THEN
-    CALL XERMSG('LSEI','MDW<ME+MA+MG IS AN ERROR',2,1)
+    ERROR STOP 'LSEI : MDW<ME+MA+MG IS AN ERROR'
     RETURN
   END IF
   !
@@ -485,7 +487,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   last = 1
   link = INT( Prgopt(1) )
   IF( link==0 .OR. link>nlink ) THEN
-    CALL XERMSG('LSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
+    ERROR STOP 'LSEI : THE OPTION VECTOR IS UNDEFINED'
     RETURN
   END IF
   DO
@@ -493,8 +495,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     IF( link>1 ) THEN
       ntimes = ntimes + 1
       IF( ntimes>nopt ) THEN
-        CALL XERMSG('LSEI',&
-          'THE LINKS IN THE OPTION VECTOR ARE CYCLING.',2,1)
+        ERROR STOP 'LSEI : THE LINKS IN THE OPTION VECTOR ARE CYCLING.'
         RETURN
       END IF
       !
@@ -515,7 +516,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       !
       next = INT( Prgopt(link) )
       IF( next<=0 .OR. next>nlink ) THEN
-        CALL XERMSG('LSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
+        ERROR STOP 'LSEI : THE OPTION VECTOR IS UNDEFINED'
         RETURN
       END IF
       !
@@ -529,8 +530,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     END DO
     !
     IF( cov .AND. Mdw<N ) THEN
-      CALL XERMSG('LSEI',&
-        'MDW < N WHEN COV MATRIX NEEDED, IS AN ERROR',2,1)
+      ERROR STOP 'LSEI : MDW < N WHEN COV MATRIX NEEDED, IS AN ERROR'
       RETURN
     END IF
     !
@@ -727,4 +727,5 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   Ip(1) = kranke
   Ip(3) = Ip(3) + 2*kranke + N
+  !
 END SUBROUTINE LSEI

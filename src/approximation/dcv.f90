@@ -1,7 +1,7 @@
 !** DCV
 REAL(DP) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !> Evaluate the variance function of the curve obtained
-  !            by the constrained B-spline fitting subprogram DFC.
+  !  by the constrained B-spline fitting subprogram DFC.
   !***
   ! **Library:**   SLATEC
   !***
@@ -94,8 +94,7 @@ REAL(DP) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !***
   ! **References:**  R. J. Hanson, Constrained least squares curve fitting
   !                 to discrete data using B-splines, a users guide,
-  !                 Report SAND78-1291, Sandia Laboratories, December
-  !                 1978.
+  !                 Report SAND78-1291, Sandia Laboratories, December 1978.
   !***
   ! **Routines called:**  DDOT, DFSPVN
 
@@ -108,12 +107,11 @@ REAL(DP) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  INTEGER :: Nbkpt, Nconst, Ndata, Nord
-  REAL(DP) :: Xval, Bkpt(Nbkpt), W(:)
+  INTEGER, INTENT(IN) :: Nbkpt, Nconst, Ndata, Nord
+  REAL(DP), INTENT(IN) :: Xval, Bkpt(Nbkpt), W(:)
   INTEGER :: i, ileft, ip, is, last, mdg, mdw, n
-  REAL(DP) :: zero, v(40)
+  REAL(DP) :: v(40)
   !* FIRST EXECUTABLE STATEMENT  DCV
-  zero = 0._DP
   mdg = Nbkpt - Nord + 3
   mdw = Nbkpt - Nord + 1 + Nconst
   is = mdg*(Nord+1) + 2*MAX(Ndata,Nbkpt) + Nbkpt + Nord**2
@@ -122,7 +120,7 @@ REAL(DP) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   DO WHILE( Xval>=Bkpt(ileft+1) .AND. ileft<last-1 )
     ileft = ileft + 1
   END DO
-  CALL DFSPVN(Bkpt,Nord,1,Xval,ileft,v(Nord+1))
+  CALL DFSPVN(Bkpt,Nord,1,Xval,ileft,v(Nord+1:2*Nord))
   ileft = ileft - Nord + 1
   ip = mdw*(ileft-1) + ileft + is
   n = Nbkpt - Nord
@@ -130,8 +128,9 @@ REAL(DP) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
     v(i) = DOT_PRODUCT(W(ip:ip+Nord-1),v(Nord+1:2*Nord))
     ip = ip + mdw
   END DO
-  DCV = MAX(DOT_PRODUCT(v(1:Nord),v(Nord+1:2*Nord)),zero)
+  DCV = MAX(DOT_PRODUCT(v(1:Nord),v(Nord+1:2*Nord)),0._DP)
   !
   !     SCALE THE VARIANCE SO IT IS AN UNBIASED ESTIMATE.
   DCV = DCV/MAX(Ndata-n,1)
+  !
 END FUNCTION DCV

@@ -29,14 +29,17 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
-  USE service, ONLY : XERMSG
   USE blas, ONLY : DAXPY
   USE linear, ONLY : DBNDSL, DBNDAC
   USE data_handling, ONLY : DSORT
-  INTEGER :: Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nord, Nderiv(Nconst), Iwork(:)
-  REAL(DP) :: Bf(Nord,Nord), Bkpt(Nbkpt), Bkptin(:), Coeff(:), G(Mdg,Nord+1), &
-    Ptemp(MAX(Nbkpt,Ndata)), Sddata(Ndata), W(Mdw,Nbkpt-Nord+1), Work(*), &
-    Xconst(Nconst), Xdata(Ndata), Xtemp(MAX(Nbkpt,Ndata)), Yconst(Nconst), Ydata(Ndata)
+  !
+  INTEGER, INTENT(IN) :: Mdg, Mdw, Nbkpt, Nconst, Ndata, Nord, Nderiv(Nconst)
+  INTEGER, INTENT(INOUT) :: Mode, Iwork(:)
+  REAL(DP), INTENT(IN) :: Bkptin(:), Sddata(Ndata), Xconst(Nconst), Xdata(Ndata), &
+    Yconst(Nconst), Ydata(Ndata)
+  REAL(DP), INTENT(INOUT) :: Bf(Nord,Nord), G(Mdg,Nord+1), Work(*)
+  REAL(DP), INTENT(OUT) :: Bkpt(Nbkpt), Coeff(:), Ptemp(MAX(Nbkpt,Ndata)), &
+    Xtemp(MAX(Nbkpt,Ndata)), W(Mdw,Nbkpt-Nord+1)
   REAL(DP) :: dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
   INTEGER :: i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, &
     itype, iw1, iw2, l, lw, mt, n, nb, neqcon, nincon, nordm1, nordp1, np1
@@ -49,21 +52,19 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   dummy = 0._DP
   IF( Nord<1 .OR. Nord>20 ) THEN
-    CALL XERMSG('DFCMN',&
-      'IN DFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',2,1)
+    ERROR STOP 'DFCMN : IN DFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.'
     Mode = -1
     RETURN
     !
   ELSEIF( Nbkpt<2*Nord ) THEN
-    CALL XERMSG('DFCMN',&
-      'IN DFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
+    ERROR STOP 'DFCMN : IN DFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE &
+      &B-SPLINE ORDER.'
     Mode = -1
     RETURN
   END IF
   !
   IF( Ndata<0 ) THEN
-    CALL XERMSG('DFCMN',&
-      'IN DFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',2,1)
+    ERROR STOP 'DFCMN : IN DFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.'
     Mode = -1
     RETURN
   END IF
@@ -78,8 +79,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   IF( iw1<nb ) THEN
     WRITE (xern1,'(I8)') nb
-    CALL XERMSG('DFCMN',&
-      'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK NB = '//xern1,2,1)
+    ERROR STOP 'DFCMN : IN DFC, INSUFFICIENT STORAGE FOR W(*).'
     Mode = -1
     RETURN
   END IF
@@ -101,7 +101,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     var = .TRUE.
     new = .FALSE.
   ELSE
-    CALL XERMSG('DFCMN','IN DFC, INPUT VALUE OF MODE MUST BE 1-4.',2,1)
+    ERROR STOP 'DFCMN : IN DFC, INPUT VALUE OF MODE MUST BE 1-4.'
     Mode = -1
     RETURN
   END IF
@@ -236,7 +236,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       !           Obtain B-spline function value.
       !
-      CALL DFSPVN(Bkpt,Nord,1,xval,ileft,Bf)
+      CALL DFSPVN(Bkpt,Nord,1,xval,ileft,Bf(:,1))
       !
       !           Move row into place.
       !
@@ -283,16 +283,14 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   IF( iw1<lw ) THEN
     WRITE (xern1,'(I8)') lw
-    CALL XERMSG('DFCMN',&
-      'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK LW = '//xern1,2,1)
+    ERROR STOP 'DFCMN : IN DFC, INSUFFICIENT STORAGE FOR W(*).'
     Mode = -1
     RETURN
   END IF
   !
   IF( iw2<intw1 ) THEN
     WRITE (xern1,'(I8)') intw1
-    CALL XERMSG('DFCMN',&
-      'IN DFC, INSUFFICIENT STORAGE FOR IW(*).  CHECK IW1 = '//xern1,2,1)
+    ERROR STOP 'DFCMN : IN DFC, INSUFFICIENT STORAGE FOR IW(*).'
     Mode = -1
     RETURN
   END IF
@@ -377,6 +375,6 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   !     Solve constrained least squares equations.
   !
-  CALL DLSEI(W,Mdw,neqcon,np1,nincon,n,prgopt,Coeff,rnorme,rnorml,Mode,Work,&
-    Iwork)
+  CALL DLSEI(W,Mdw,neqcon,np1,nincon,n,prgopt,Coeff,rnorme,rnorml,Mode,Work,Iwork)
+  !
 END SUBROUTINE DFCMN

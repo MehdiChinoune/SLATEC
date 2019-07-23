@@ -1,12 +1,11 @@
 !** DQAWSE
-SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
+PURE SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
     Abserr,Neval,Ier,Alist,Blist,Rlist,Elist,Iord,Last)
-  !> The routine calculates an approximation result to a given
-  !            definite integral I = Integral of F*W over (A,B),
-  !            (where W shows a singular behaviour at the end points,
-  !            see parameter INTEGR).
-  !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = Integral of F*W over (A,B),
+  !  (where W shows a singular behaviour at the end points, see parameter INTEGR).
+  !  Hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -178,14 +177,17 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
   USE service, ONLY : D1MACH
   !
   INTERFACE
-    REAL(DP) FUNCTION F(X)
+    REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
-      REAL(DP) :: X
+      REAL(DP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Integr, Last, Limit, Neval, Iord(Limit)
-  REAL(DP) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result
-  REAL(DP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Integr, Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iord(Limit)
+  REAL(DP), INTENT(IN) :: A, Alfa, B, Beta, Epsabs, Epsrel
+  REAL(DP), INTENT(OUT) :: Abserr, Result
+  REAL(DP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: iroff1, iroff2, k, maxerr, nev, nrmax
   REAL(DP) :: area, area1, area12, area2, a1, a2, b1, b2, centre, epmach, errbnd, &
     errmax, error1, erro12, error2, errsum, resas1, resas2, rg(25), rh(25), &
@@ -392,4 +394,5 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
       Abserr = errsum
     END IF
   END IF
+  !
 END SUBROUTINE DQAWSE

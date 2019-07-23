@@ -686,7 +686,7 @@ CONTAINS
     RETURN
   END SUBROUTINE EG8CK
   !** FEIN
-  REAL(SP) FUNCTION FEIN(T)
+  REAL(SP) PURE FUNCTION FEIN(T)
     !> Subsidiary to EG8CK.
     !***
     ! **Library:**   SLATEC

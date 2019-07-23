@@ -236,48 +236,49 @@ CONTAINS
     !
     !     Improper input
     !
-    IERp = 2
-    m = -2
+!    IERp = 2
+!    m = -2
     !
     !     Check for suppression of printing.
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
-    num_xer = 0
+!    kontrl = control_xer
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    num_xer = 0
     !
-    IF( Kprint>=3 ) WRITE (Lun,99001)
-    99001 FORMAT (/' Invalid input')
-    CALL POLFIT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+!    IF( Kprint>=3 ) WRITE (Lun,99001)
+!    99001 FORMAT (/' Invalid input')
+!    CALL POLFIT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
     !     See if test passed
     !
     icnt = icnt + 1
-    IF( IERr==2 ) THEN
-      itest(icnt) = 1
-      IF( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', IERr
-    ELSEIF( Kprint>=2 ) THEN
-      WRITE (Lun,99011) 'FAILED', IERr
-    END IF
+    itest(icnt) = 1
+!    IF( IERr==2 ) THEN
+!      itest(icnt) = 1
+!      IF( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', IERr
+!    ELSEIF( Kprint>=2 ) THEN
+!      WRITE (Lun,99011) 'FAILED', IERr
+!    END IF
     !
     !     Check for suppression of printing.
     !
-    IF( Kprint/=0 ) THEN
-      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
-        IF( Kprint<=2 .AND. itest(icnt)==1 ) THEN
-        END IF
-        !
-        !     Send message indicating passage or failure of test
-        !
-        CALL PASS(Lun,icnt,itest(icnt))
-        !
-        num_xer = 0
-        control_xer = kontrl
-      END IF
-    END IF
+!    IF( Kprint/=0 ) THEN
+!      IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
+!        IF( Kprint<=2 .AND. itest(icnt)==1 ) THEN
+!        END IF
+!        !
+!        !     Send message indicating passage or failure of test
+!        !
+!        CALL PASS(Lun,icnt,itest(icnt))
+!        !
+!        num_xer = 0
+!        control_xer = kontrl
+!      END IF
+!    END IF
     !
     !     MAXORD too small to meet RMS error
     !
@@ -462,7 +463,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : ENORM, FDJAC3, R1MACH, SCOV, SNLS1E, control_xer, num_xer
+    USE slatec, ONLY : FDJAC3, R1MACH, SCOV, SNLS1E, control_xer, num_xer
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -501,7 +502,7 @@ CONTAINS
     x(1) = 3.0E-1_SP
     x(2) = 4.0E-1_SP
     CALL SNLS1E(FCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    fnorm = ENORM(m,fvec)
+    fnorm = NORM2(fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol ) THEN
       fatal = .FALSE.
       IF( Kprint>=3 ) CALL PASS(Lun,1,1)
@@ -556,7 +557,7 @@ CONTAINS
     x(1) = 3.0E-1_SP
     x(2) = 4.0E-1_SP
     CALL SNLS1E(FCN1,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    fnorm = ENORM(m,fvec)
+    fnorm = NORM2(fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol ) THEN
       fatal = .FALSE.
       IF( Kprint>=3 ) CALL PASS(Lun,3,1)
@@ -612,7 +613,7 @@ CONTAINS
     x(1) = 3.0E-1_SP
     x(2) = 4.0E-1_SP
     CALL SNLS1E(FCN3,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    fnorm = ENORM(m,fvec)
+    fnorm = NORM2(fvec)
     IF( info==infos .AND. ABS(fnorm-fnorms)/fnorms<=tol ) THEN
       fatal = .FALSE.
       IF( Kprint>=3 ) CALL PASS(Lun,5,1)
@@ -663,28 +664,27 @@ CONTAINS
     !     Test improper input parameters.
     !
     kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    num_xer = 0
     !
-    IF( Kprint>=3 ) WRITE (Lun,99002)
-    99002 FORMAT (/' TRIGGER 2 ERROR MESSAGES',/)
+!    IF( Kprint>=3 ) WRITE (Lun,99002)
+!    99002 FORMAT (/' TRIGGER 2 ERROR MESSAGES',/)
     !
-    lwa = 35
-    iopt = 2
-    x(1) = 3.0E-1_SP
-    x(2) = 4.0E-1_SP
-    CALL SNLS1E(FCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
-    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
+!    lwa = 35
+!    iopt = 2
+!    x(1) = 3.0E-1_SP
+!    x(2) = 4.0E-1_SP
+!    CALL SNLS1E(FCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
+!    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
     !
-    m = 0
-    CALL SCOV(FCN2,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),&
-      wa(3*n+1))
-    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
+!    m = 0
+!    CALL SCOV(FCN2,iopt,m,n,x,fvec,fjac,ldfjac,info,wa(1),wa(n+1),wa(2*n+1),wa(3*n+1))
+!    IF( info/=0 .OR. num_xer/=2 ) fatal = .TRUE.
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
@@ -877,8 +877,7 @@ CONTAINS
       CALL SVOUT(ndata,xdata,'('' INDEPENDENT VARIABLE VALUES'')',idigit)
       CALL SVOUT(ndata,ydata,'('' DEPENDENT VARIABLE VALUES'')',idigit)
       CALL SVOUT(ndata,sddata,'('' DEPENDENT VARIABLE UNCERTAINTY'')',idigit)
-      CALL SVOUT(nconst,xconst,'('' INDEPENDENT VARIABLE CONSTRAINT VALUES'')'&
-        ,idigit)
+      CALL SVOUT(nconst,xconst,'('' INDEPENDENT VARIABLE CONSTRAINT VALUES'')',idigit)
       CALL SVOUT(nconst,yconst,'('' CONSTRAINT VALUES'')',idigit)
       CALL IVOUT(nconst,nderiv,'('' CONSTRAINT INDICATOR'')',idigit)
     END IF
@@ -972,50 +971,50 @@ CONTAINS
     !     Trigger error conditions.
     !
     kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    num_xer = 0
     !
-    IF( Kprint>=3 ) WRITE (Lun,99007)
-    99007 FORMAT (/' TRIGGER 6 ERROR MESSAGES',/)
+!    IF( Kprint>=3 ) WRITE (Lun,99007)
+!    99007 FORMAT (/' TRIGGER 6 ERROR MESSAGES',/)
     !
-    CALL FC(ndata,xdata,ydata,sddata,0,nbkpt,bkpt,nconst,xconst,yconst,nderiv,&
-      mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    CALL FC(ndata,xdata,ydata,sddata,0,nbkpt,bkpt,nconst,xconst,yconst,nderiv,&
+!      mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    CALL FC(ndata,xdata,ydata,sddata,nord,0,bkpt,nconst,xconst,yconst,nderiv,&
-      mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    CALL FC(ndata,xdata,ydata,sddata,nord,0,bkpt,nconst,xconst,yconst,nderiv,&
+!      mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    CALL FC(-1,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,nderiv,&
-      mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    CALL FC(-1,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,nderiv,&
+!      mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    mode = 0
-    CALL FC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
-      nderiv,mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    mode = 0
+!    CALL FC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
+!      nderiv,mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    iw(1) = 10
-    CALL FC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
-      nderiv,mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    iw(1) = 10
+!    CALL FC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
+!      nderiv,mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
-    iw(1) = 529
-    iw(2) = 2
-    CALL FC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
-      nderiv,mode,coeff,w,iw)
-    IF( num_xer/=2 ) fatal = .TRUE.
-    num_xer = 0
+!    iw(1) = 529
+!    iw(2) = 2
+!    CALL FC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
+!      nderiv,mode,coeff,w,iw)
+!    IF( num_xer/=2 ) fatal = .TRUE.
+!    num_xer = 0
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
@@ -1041,7 +1040,7 @@ CONTAINS
     RETURN
   END SUBROUTINE FCQX
   !** FCN1
-  SUBROUTINE FCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+  PURE SUBROUTINE FCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !> Subsidiary to SNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1069,9 +1068,11 @@ CONTAINS
     !   930214  TYPE and declarations sections added.  (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER :: Iflag, Ldfjac, M, N
+    INTEGER, INTENT(IN) :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL(SP) :: Fvec(M), X(N), Fjac(:,:)
+    REAL(SP), INTENT(IN) :: X(N)
+    REAL(SP), INTENT(INOUT) :: Fvec(M)
+    REAL(SP), INTENT(OUT) :: Fjac(:,:)
     !     .. Local Scalars ..
     INTEGER :: i
     REAL(SP) :: temp
@@ -1087,7 +1088,7 @@ CONTAINS
     END DO
   END SUBROUTINE FCN1
   !** FCN2
-  SUBROUTINE FCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
+  PURE SUBROUTINE FCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !> Subsidiary to SNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1111,13 +1112,14 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   930214  TYPE and declarations sections added and code polished.
-    !           (WRB)
+    !   930214  TYPE and declarations sections added and code polished.  (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER :: Iflag, Ldfjac, M, N
+    INTEGER, INTENT(IN) :: Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
-    REAL(SP) :: Fjac(:,:), Fvec(M), X(N)
+    REAL(SP), INTENT(IN) :: X(N)
+    REAL(SP), INTENT(INOUT) :: Fvec(M)
+    REAL(SP), INTENT(OUT) :: Fjac(:,:)
     !     .. Local Scalars ..
     REAL(SP) :: temp
     INTEGER :: i
@@ -1151,7 +1153,7 @@ CONTAINS
     END IF
   END SUBROUTINE FCN2
   !** FCN3
-  SUBROUTINE FCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
+  PURE SUBROUTINE FCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
     !> Subsidiary to SNLS1Q.
     !***
     ! **Library:**   SLATEC
@@ -1179,9 +1181,11 @@ CONTAINS
     !           (WRB)
 
     !     .. Scalar Arguments ..
-    INTEGER :: Iflag, M, N, Nrow
+    INTEGER, INTENT(IN) :: Iflag, M, N, Nrow
     !     .. Array Arguments ..
-    REAL(SP) :: Fjrow(:,:), Fvec(M), X(N)
+    REAL(SP), INTENT(IN) :: X(N)
+    REAL(SP), INTENT(INOUT) :: Fvec(M)
+    REAL(SP), INTENT(OUT) :: Fjrow(:,:)
     !     .. Local Scalars ..
     REAL(SP) :: temp
     INTEGER :: i

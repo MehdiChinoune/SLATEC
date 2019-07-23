@@ -1,7 +1,7 @@
 !** AVINT
-SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
-  !> Integrate a function tabulated at arbitrarily spaced
-  !            abscissas using overlapping parabolas.
+PURE SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
+  !> Integrate a function tabulated at arbitrarily spaced abscissas using
+  !  overlapping parabolas.
   !***
   ! **Library:**   SLATEC
   !***
@@ -77,9 +77,12 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
-  INTEGER :: N, Ierr
-  REAL(SP) :: Ans, Xlo, Xup, X(N), Y(N)
+
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(IN) :: Xlo, Xup, X(N), Y(N)
+  REAL(SP), INTENT(OUT) :: Ans
+  !
   INTEGER :: i, inlft, inrt, istart, istop
   REAL(SP) :: fl, fr, slope
   REAL(DP) :: r3, rp5, summ, syl, syl2, syl3, syu, syu2, syu3, &
@@ -90,8 +93,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   IF( Xlo<Xup ) THEN
     IF( N<2 ) THEN
       Ierr = 5
-      CALL XERMSG('AVINT',&
-        'LESS THAN TWO FUNCTION VALUES WERE SUPPLIED.',4,1)
+      ERROR STOP 'AVINT : LESS THAN TWO FUNCTION VALUES WERE SUPPLIED.'
       RETURN
     ELSE
       DO i = 2, N
@@ -158,8 +160,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           syl3 = syu3
         END DO
         syu = Xup
-        Ans = REAL( summ + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2)&
-          + cc*(syu-syl) , 4 )
+        Ans = REAL( summ + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2) + cc*(syu-syl) , SP )
       ELSE
         !
         !     SPECIAL N=2 CASE
@@ -172,17 +173,18 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
     END IF
   ELSEIF( Xlo/=Xup ) THEN
     Ierr = 2
-    CALL XERMSG('AVINT',&
-      'THE UPPER LIMIT OF INTEGRATION WAS NOT GREATER THAN THE LOWER LIMIT.',4,1)
+    ERROR STOP 'AVINT : THE UPPER LIMIT OF INTEGRATION WAS NOT GREATER THAN &
+      &THE LOWER LIMIT.'
     RETURN
   END IF
   RETURN
   100  Ierr = 3
-  CALL XERMSG('AVINT',&
-    'THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE LIMITS OF INTEGRATION.',4,1)
+  ERROR STOP 'AVINT : THERE WERE LESS THAN THREE FUNCTION VALUES BETWEEN THE &
+    &LIMITS OF INTEGRATION.'
   RETURN
   200  Ierr = 4
-  CALL XERMSG('AVINT',&
-    'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE X(I-1) < X(I) FOR ALL I.',4,1)
+  ERROR STOP 'AVINT : THE ABSCISSAS WERE NOT STRICTLY INCREASING. &
+    &MUST HAVE X(I-1) < X(I) FOR ALL I.'
+  !
   RETURN
 END SUBROUTINE AVINT

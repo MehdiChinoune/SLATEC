@@ -1,12 +1,12 @@
 !** QAGI
-SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
+PURE SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     Lenw,Last,Iwork,Work)
-  !> The routine calculates an approximation result to a given
-  !            INTEGRAL   I = Integral of F over (BOUND,+INFINITY)
-  !                    OR I = Integral of F over (-INFINITY,BOUND)
-  !                    OR I = Integral of F over (-INFINITY,+INFINITY)
-  !            Hopefully satisfying following claim for accuracy
-  !            ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !> The routine calculates an approximation result to a given INTEGRAL
+  !  I = Integral of F over (BOUND,+INFINITY)
+  !  OR I = Integral of F over (-INFINITY,BOUND)
+  !  OR I = Integral of F over (-INFINITY,+INFINITY)
+  !  Hopefully satisfying following claim for accuracy
+  !  ABS(I-RESULT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -174,15 +174,18 @@ SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Inf, Last, Ier, Lenw, Limit, Neval, Iwork(Limit)
-  REAL(SP) :: Abserr, Bound, Epsabs, Epsrel, Result, Work(Lenw)
+  INTEGER, INTENT(IN) :: Inf, Lenw, Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval, Iwork(Limit)
+  REAL(SP), INTENT(IN) :: Bound, Epsabs, Epsrel
+  REAL(SP), INTENT(OUT) :: Abserr, Result, Work(Lenw)
+  !
   INTEGER :: lvl, l1, l2, l3
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
@@ -209,5 +212,6 @@ SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     lvl = 0
   END IF
   IF( Ier==6 ) lvl = 1
-  IF( Ier/=0 ) CALL XERMSG('QAGI','ABNORMAL RETURN',Ier,lvl)
+  IF( Ier/=0 ) ERROR STOP 'QAGI : ABNORMAL RETURN'
+  !
 END SUBROUTINE QAGI

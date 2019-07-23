@@ -1,11 +1,8 @@
 !** SBOCLS
-SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
-    Mode,Rw,Iw)
+SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,Iw)
   !> Solve the bounded and constrained least squares
-  !            problem consisting of solving the equation
-  !                      E*X = F  (in the least squares sense)
-  !             subject to the linear constraints
-  !                            C*X = Y.
+  !  problem consisting of solving the equation E*X = F  (in the least squares sense)
+  !  subject to the linear constraints C*X = Y.
   !***
   ! **Library:**   SLATEC
   !***
@@ -561,16 +558,23 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     /SSCAL/ TO /DSCAL/, /SASUM/ TO /DASUM/, /SBOLS/ TO /DBOLS/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  USE service, ONLY : XERMSG, R1MACH
-  INTEGER :: Mcon, Mdw, Mode, Mrows, Ncols
-  REAL(SP) :: Rnorm, Rnormc
-  INTEGER :: Ind(Ncols+Mcon), Iw(2*(Ncols+Mcon)), Iopt(*)
-  REAL(SP) :: W(Mdw,Ncols+Mcon+1), Bl(Ncols+Mcon), Bu(Ncols+Mcon), X(2*(Ncols+Mcon)+7), &
-    Rw(6*Ncols+5*Mcon)
+  USE service, ONLY : R1MACH
+  !
+  INTEGER, INTENT(IN) :: Mdw, Ncols
+  INTEGER, INTENT(INOUT) :: Mcon, Mrows
+  INTEGER, INTENT(OUT) :: Mode
+  REAL(SP), INTENT(OUT) :: Rnorm, Rnormc
+  INTEGER, INTENT(IN) :: Ind(Ncols+Mcon)
+  INTEGER, INTENT(INOUT) :: Iopt(*)
+  INTEGER, INTENT(OUT) :: Iw(2*(Ncols+Mcon))
+  REAL(SP), INTENT(INOUT) :: Bl(Ncols+Mcon), Bu(Ncols+Mcon), W(Mdw,Ncols+Mcon+1), &
+    X(2*(Ncols+Mcon)+7)
+  REAL(SP), INTENT(OUT) :: Rw(6*Ncols+5*Mcon)
+  !
   INTEGER :: i, icase, iiw, inrows, ip, irw, iscale, j, jp, lbou, lboum, lds, lenx, &
     liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
     m, mdwl, mnew, modec, mopt, mout, nerr
-  REAL(SP) :: anorm, cnorm, one, srelpr, t, t1, t2, wt, zero
+  REAL(SP) :: anorm, cnorm, one, srelpr, t, t1, t2, wt
   LOGICAL :: filter, pretri
   CHARACTER(8) :: xern1, xern2
   INTEGER :: jopt(05)
@@ -587,7 +591,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     SEE THAT MDW IS >0. GROSS CHECK ONLY.
     IF( Mdw<=0 ) THEN
       WRITE (xern1,'(I8)') Mdw
-      CALL XERMSG('SBOCLS','MDW = '//xern1//' MUST BE POSITIVE.',53,1)
+      ERROR STOP 'SBOCLS : MDW MUST BE POSITIVE.'
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -595,8 +599,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     SEE THAT NUMBER OF CONSTRAINTS IS NONNEGATIVE.
     IF( Mcon<0 ) THEN
       WRITE (xern1,'(I8)') Mcon
-      CALL XERMSG('SBOCLS','MCON = '//xern1//&
-        ' MUST BE NON-NEGATIVE',54,1)
+      ERROR STOP 'SBOCLS : MCON MUST BE NON-NEGATIVE'
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -604,8 +607,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     SEE THAT NUMBER OF UNKNOWNS IS POSITIVE.
     IF( Ncols<=0 ) THEN
       WRITE (xern1,'(I8)') Ncols
-      CALL XERMSG('SBOCLS','NCOLS = '//xern1//&
-        ' THE NO. OF VARIABLES, MUST BE POSITIVE.',55,1)
+      ERROR STOP 'SBOCLS : NCOLS THE NO. OF VARIABLES, MUST BE POSITIVE.'
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -615,8 +617,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF( Ind(j)<1 .OR. Ind(j)>4 ) THEN
         WRITE (xern1,'(I8)') j
         WRITE (xern2,'(I8)') Ind(j)
-        CALL XERMSG('SBOCLS','IND('//xern1//') = '//xern2//&
-          ' MUST BE 1-4.',56,1)
+        ERROR STOP 'SBOCLS : IND(J) MUST BE 1-4.'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
@@ -629,8 +630,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           WRITE (xern1,'(I8)') j
           WRITE (xern3,'(1PE15.6)') Bl(j)
           WRITE (xern4,'(1PE15.6)') Bu(j)
-          CALL XERMSG('SBOCLS','BOUND BL('//xern1//') = '//xern3//&
-            ' IS > BU('//xern1//') = '//xern4,57,1)
+          ERROR STOP 'SBOCLS : BOUND BL(J) IS > BU('')'
           !     DO(RETURN TO USER PROGRAM UNIT)
           GOTO 100
         END IF
@@ -639,7 +639,6 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
-    zero = 0._SP
     one = 1._SP
     srelpr = R1MACH(4)
     checkl = .FALSE.
@@ -788,8 +787,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           !     SEE THAT ISCALE IS 1 THRU 3.
           IF( iscale<1 .OR. iscale>3 ) THEN
             WRITE (xern1,'(I8)') iscale
-            CALL XERMSG('SBOCLS','ISCALE OPTION = '//xern1//&
-              ' MUST BE 1-3',48,1)
+            ERROR STOP 'SBOCLS : ISCALE OPTION MUST BE 1-3'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
@@ -804,20 +802,18 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           iscale = 4
           IF( Iopt(lp+2)<=0 ) THEN
             WRITE (xern1,'(I8)') Iopt(lp+2)
-            CALL XERMSG('SBOCLS','OFFSET PAST X(NCOLS) ('//xern1//&
-              ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',49,1)
+            ERROR STOP 'SBOCLS : OFFSET PAST X(NCOLS) FOR USER-PROVIDED COLUMN &
+              &SCALING MUST BE POSITIVE.'
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           END IF
           Rw(1:Ncols) = X(Ncols+Iopt(lp+2):2*Ncols+Iopt(lp+2)-1)
           lenx = lenx + Ncols
           DO j = 1, Ncols
-            IF( Rw(j)<=zero ) THEN
+            IF( Rw(j)<=0._SP ) THEN
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
-              CALL XERMSG('SBOCLS',&
-                'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '&
-                //xern1//' NOW = '//xern3,50,1)
+              ERROR STOP 'SBOCLS : EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.'
               !     DO(RETURN TO USER PROGRAM UNIT)
               GOTO 100
             END IF
@@ -866,8 +862,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         !     NO VALID OPTION NUMBER WAS NOTED. THIS IS AN ERROR CONDITION.
       ELSE
         WRITE (xern1,'(I8)') jp
-        CALL XERMSG('SBOCLS','OPTION NUMBER = '//xern1//&
-          ' IS NOT DEFINED.',51,1)
+        ERROR STOP 'SBOCLS : OPTION NUMBER IS NOT DEFINED.'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
@@ -888,57 +883,51 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       IF( lmdw<mdwl ) THEN
         WRITE (xern1,'(I8)') lmdw
         WRITE (xern2,'(I8)') mdwl
-        CALL XERMSG('SBOCLS','THE ROW DIMENSION OF W(,) = '//&
-          xern1//' MUST BE >= THE NUMBER OF EFFECTIVE ROWS = '//xern2,41,1)
+        ERROR STOP 'SBOCLS : THE ROW DIMENSION OF W(,) MUST BE >= THE NUMBER OF &
+          &EFFECTIVE ROWS'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
       IF( lndw<Ncols+Mcon+1 ) THEN
         WRITE (xern1,'(I8)') lndw
         WRITE (xern2,'(I8)') Ncols + Mcon + 1
-        CALL XERMSG('SBOCLS','THE COLUMN DIMENSION OF W(,) = '//&
-          xern1//' MUST BE >= NCOLS+MCON+1 = '//xern2,42,1)
+        ERROR STOP 'SBOCLS : THE COLUMN DIMENSION OF W(,) MUST BE >= NCOLS+MCON+1'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
       IF( llb<Ncols+Mcon ) THEN
         WRITE (xern1,'(I8)') llb
         WRITE (xern2,'(I8)') Ncols + Mcon
-        CALL XERMSG('SBOCLS',&
-          'THE DIMENSIONS OF THE ARRAYS BS(), BU(), AND IND() = '&
-          //xern1//' MUST BE >= NCOLS+MCON = '//xern2,43,1)
+        ERROR STOP 'SBOCLS : THE DIMENSIONS OF THE ARRAYS BS(), BU(), AND IND() &
+          &MUST BE >= NCOLS+MCON'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
       IF( llx<lenx ) THEN
         WRITE (xern1,'(I8)') llx
         WRITE (xern2,'(I8)') lenx
-        CALL XERMSG('SBOCLS','THE DIMENSION OF X() = '//xern1//&
-          ' MUST BE >= THE REQD. LENGTH = '//xern2,44,1)
+        ERROR STOP 'SBOCLS : THE DIMENSION OF X() MUST BE >= THE REQD. LENGTH'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
       IF( llrw<6*Ncols+5*Mcon ) THEN
         WRITE (xern1,'(I8)') llrw
         WRITE (xern2,'(I8)') 6*Ncols + 5*Mcon
-        CALL XERMSG('SBOCLS','THE DIMENSION OF RW() = '//xern1//&
-          ' MUST BE >= 6*NCOLS+5*MCON = '//xern2,45,1)
+        ERROR STOP 'SBOCLS : THE DIMENSION OF RW() MUST BE >= 6*NCOLS+5*MCON'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
       IF( lliw<2*Ncols+2*Mcon ) THEN
         WRITE (xern1,'(I8)') lliw
         WRITE (xern2,'(I8)') 2*Ncols + 2*Mcon
-        CALL XERMSG('SBOCLS','THE DIMENSION OF IW() = '//xern1//&
-          ' MUST BE >= 2*NCOLS+2*MCON = '//xern2,46,1)
+        ERROR STOP 'SBOCLS : THE DIMENSION OF IW() MUST BE >= 2*NCOLS+2*MCON'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
       IF( liopt<lp+17 ) THEN
         WRITE (xern1,'(I8)') liopt
         WRITE (xern2,'(I8)') lp + 17
-        CALL XERMSG('SBOCLS','THE DIMENSION OF IOPT() = '//xern1//&
-          ' MUST BE >= THE REQD. LEN = '//xern2,47,1)
+        ERROR STOP 'SBOCLS : THE DIMENSION OF IOPT() MUST BE >= THE REQD. LEN'
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       END IF
@@ -957,8 +946,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     IF( mnew<0 .OR. mnew+Mcon>Mdw ) THEN
       WRITE (xern1,'(I8)') mnew
       WRITE (xern2,'(I8)') Mdw - Mcon
-      CALL XERMSG('SBOCLS','NO. OF ROWS = '//xern1//&
-        ' MUST BE >= 0 .AND. <= MDW-MCON = '//xern2,52,1)
+      ERROR STOP 'SBOCLS : NO. OF ROWS MUST BE >= 0 .AND. <= MDW-MCON'
       !    (RETURN TO USER PROGRAM UNIT)
       GOTO 100
     END IF
@@ -1001,7 +989,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !
     !      PLACE (-)IDENTITY MATRIX AFTER CONSTRAINT DATA.
     DO j = Ncols + 1, Ncols + Mcon + 1
-      W(1:Mcon,j) = zero
+      W(1:Mcon,j) = 0._SP
     END DO
     DO j = 1, Mcon
       W(j,Ncols+j) = -one
@@ -1041,12 +1029,12 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   END IF
   IF( Mcon>0 ) THEN
     DO j = Ncols + 1, Ncols + Mcon
-      W(Mcon+1:Mcon+mout,j) = zero
+      W(Mcon+1:Mcon+mout,j) = 0._SP
     END DO
     !
     !     PUT IN (-)IDENTITY MATRIX (POSSIBLY) ONCE AGAIN.
     DO j = Ncols + 1, Ncols + Mcon + 1
-      W(1:Mcon,j) = zero
+      W(1:Mcon,j) = 0._SP
     END DO
     DO j = 1, Mcon
       W(j,Ncols+j) = -one
@@ -1054,13 +1042,13 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   END IF
   !
   !     COMPUTE NOMINAL COLUMN SCALING FOR THE UNWEIGHTED MATRIX.
-  cnorm = zero
-  anorm = zero
+  cnorm = 0._SP
+  anorm = 0._SP
   DO j = 1, Ncols
     t1 = SUM(ABS(W(1:Mcon,j)))
     t2 = SUM(ABS(W(Mcon+1:Mcon+mout,1)))
     t = t1 + t2
-    IF( t==zero ) t = one
+    IF( t==0._SP ) t = one
     cnorm = MAX(cnorm,t1)
     anorm = MAX(anorm,t2)
     X(Ncols+Mcon+j) = one/t
@@ -1072,7 +1060,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
       !     SCALE COLS. (BEFORE WEIGHTING) TO HAVE LENGTH ONE.
       DO j = 1, Ncols
         t = NORM2(W(1:Mcon+mout,j))
-        IF( t==zero ) t = one
+        IF( t==0._SP ) t = one
         X(Ncols+Mcon+j) = one/t
       END DO
     CASE (3)
@@ -1094,8 +1082,8 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !
   !     WEIGHT THE LEAST SQUARES EQUATIONS.
   wt = srelpr
-  IF( anorm>zero ) wt = wt/anorm
-  IF( cnorm>zero ) wt = wt*cnorm
+  IF( anorm>0._SP ) wt = wt/anorm
+  IF( cnorm>0._SP ) wt = wt*cnorm
   DO i = 1, mout
     W(i+Mcon,1:Ncols) = W(i+Mcon,1:Ncols)*wt
   END DO
@@ -1104,7 +1092,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   liw = 1
   !
   !     SET THE NEW TRIANGULARIZATION FACTOR.
-  X(2*(Ncols+Mcon)+1) = zero
+  X(2*(Ncols+Mcon)+1) = 0._SP
   !
   !     SET THE WEIGHT TO USE IN COMPONENTS > MCON,
   !     WHEN MAKING LINEAR INDEPENDENCE TEST.

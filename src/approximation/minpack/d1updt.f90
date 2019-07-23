@@ -1,5 +1,5 @@
 !** D1UPDT
-SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
+PURE SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !> Subsidiary to DNSQ and DNSQE
   !***
   ! **Library:**   SLATEC
@@ -45,19 +45,16 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !         trapezoidal matrix S stored by columns. On output S contains
   !         the lower trapezoidal matrix produced as described above.
   !
-  !       LS is a positive integer input variable not less than
-  !         (N*(2*M-N+1))/2.
+  !       LS is a positive integer input variable not less than (N*(2*M-N+1))/2.
   !
-  !       U is an input array of length M which must contain the
-  !         vector U.
+  !       U is an input array of length M which must contain the vector U.
   !
   !       V is an array of length N. On input V must contain the vector
   !         V. On output V(I) contains the information necessary to
   !         recover the Givens rotation GV(I) described above.
   !
   !       W is an output array of length M. W(I) contains information
-  !         necessary to recover the Givens rotation GW(I) described
-  !         above.
+  !         necessary to recover the Givens rotation GW(I) described above.
   !
   !       SING is a LOGICAL output variable. SING is set TRUE if any
   !         of the diagonal elements of the output S are zero. Otherwise
@@ -76,12 +73,16 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   USE service, ONLY : D1MACH
-  INTEGER :: Ls, M, N
-  REAL(DP) :: S(Ls), U(M), V(N), W(M)
-  LOGICAL :: Sing
+  !
+  INTEGER, INTENT(IN) :: Ls, M, N
+  REAL(DP), INTENT(IN) :: U(M)
+  REAL(DP), INTENT(INOUT) :: S(Ls), V(N)
+  REAL(DP), INTENT(OUT) :: W(M)
+  LOGICAL, INTENT(OUT) :: Sing
+  !
   INTEGER :: i, j, jj, l, nm1, nmj
   REAL(DP) :: coss, cotan, giant, sinn, tann, tau, temp
-  REAL(DP), PARAMETER :: one = 1._DP, p5 = 5.0E-1_DP, p25 = 2.5E-1_DP, zero = 0._DP
+  REAL(DP), PARAMETER :: p5 = 5.0E-1_DP, p25 = 2.5E-1_DP
   !
   !     GIANT IS THE LARGEST MAGNITUDE.
   !
@@ -108,8 +109,8 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
     DO nmj = 1, nm1
       j = N - nmj
       jj = jj - (M-j+1)
-      W(j) = zero
-      IF( V(j)/=zero ) THEN
+      W(j) = 0._DP
+      IF( V(j)/=0._DP ) THEN
         !
         !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
         !        J-TH ELEMENT OF V.
@@ -123,8 +124,8 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
           cotan = V(N)/V(j)
           sinn = p5/SQRT(p25+p25*cotan**2)
           coss = sinn*cotan
-          tau = one
-          IF( ABS(coss)*giant>one ) tau = one/coss
+          tau = 1._DP
+          IF( ABS(coss)*giant>1._DP ) tau = 1._DP/coss
         END IF
         !
         !        APPLY THE TRANSFORMATION TO V AND STORE THE INFORMATION
@@ -157,7 +158,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   Sing = .FALSE.
   IF( nm1>=1 ) THEN
     DO j = 1, nm1
-      IF( W(j)/=zero ) THEN
+      IF( W(j)/=0._DP ) THEN
         !
         !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
         !        J-TH ELEMENT OF THE SPIKE.
@@ -171,8 +172,8 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
           cotan = S(jj)/W(j)
           sinn = p5/SQRT(p25+p25*cotan**2)
           coss = sinn*cotan
-          tau = one
-          IF( ABS(coss)*giant>one ) tau = one/coss
+          tau = 1._DP
+          IF( ABS(coss)*giant>1._DP ) tau = 1._DP/coss
         END IF
         !
         !        APPLY THE TRANSFORMATION TO S AND REDUCE THE SPIKE IN W.
@@ -193,7 +194,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
       !
       !        TEST FOR ZERO DIAGONAL ELEMENTS IN THE OUTPUT S.
       !
-      IF( S(jj)==zero ) Sing = .TRUE.
+      IF( S(jj)==0._DP ) Sing = .TRUE.
       jj = jj + (M-j+1)
     END DO
   END IF
@@ -205,7 +206,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
     S(l) = W(i)
     l = l + 1
   END DO
-  IF( S(jj)==zero ) Sing = .TRUE.
+  IF( S(jj)==0._DP ) Sing = .TRUE.
   !
   !     LAST CARD OF SUBROUTINE D1UPDT.
   !

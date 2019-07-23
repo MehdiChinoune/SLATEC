@@ -1,11 +1,9 @@
 !** DQCHEB
-SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
-  !> This routine computes the CHEBYSHEV series expansion
-  !            of degrees 12 and 24 of a function using A
-  !            FAST FOURIER TRANSFORM METHOD
-  !            F(X) = SUM(K=1,..,13) (CHEB12(K)*T(K-1,X)),
-  !            F(X) = SUM(K=1,..,25) (CHEB24(K)*T(K-1,X)),
-  !            Where T(K,X) is the CHEBYSHEV POLYNOMIAL OF DEGREE K.
+PURE SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
+  !> This routine computes the CHEBYSHEV series expansion of degrees 12 and 24
+  !  of a function using A FAST FOURIER TRANSFORM METHOD
+  !  F(X) = SUM(K=1,..,13) (CHEB12(K)*T(K-1,X)), F(X) = SUM(K=1,..,25) (CHEB24(K)*T(K-1,X)),
+  !  Where T(K,X) is the CHEBYSHEV POLYNOMIAL OF DEGREE K.
   !***
   ! **Library:**   SLATEC
   !***
@@ -61,9 +59,12 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  REAL(DP) :: alam, alam1, alam2, Cheb12(13), Cheb24(25), Fval(25), part1, &
-    part2, part3, v(12), X(11)
+  REAL(DP), INTENT(IN) :: X(11)
+  REAL(DP), INTENT(INOUT) :: Fval(25)
+  REAL(DP), INTENT(OUT) :: Cheb12(13), Cheb24(25)
+  !
   INTEGER :: i, j
+  REAL(DP) :: alam, alam1, alam2, part1, part2, part3, v(12)
   !
   !* FIRST EXECUTABLE STATEMENT  DQCHEB
   DO i = 1, 12
@@ -156,4 +157,5 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   END DO
   Cheb24(1) = 0.5_DP*alam*Cheb24(1)
   Cheb24(25) = 0.5_DP*alam*Cheb24(25)
+  !
 END SUBROUTINE DQCHEB

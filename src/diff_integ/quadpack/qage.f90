@@ -1,10 +1,9 @@
 !** QAGE
-SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
+PURE SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
-  !> The routine calculates an approximation result to a given
-  !            definite integral   I = Integral of F over (A,B),
-  !            hopefully satisfying following claim for accuracy
-  !            ABS(I-RESLT)<=MAX(EPSABS,EPSREL*ABS(I)).
+  !> The routine calculates an approximation result to a given definite integral
+  !  I = Integral of F over (A,B), hopefully satisfying following claim for accuracy
+  !  ABS(I-RESLT)<=MAX(EPSABS,EPSREL*ABS(I)).
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -164,15 +163,18 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Ier, Key, Last, Limit, Neval
-  INTEGER :: Iord(Limit)
-  REAL(SP) :: A, Abserr, B, Epsabs, Epsrel, Result
-  REAL(SP) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  INTEGER, INTENT(IN) :: Key, Limit
+  INTEGER, INTENT(OUT) :: Ier, Last, Neval
+  INTEGER, INTENT(OUT) :: Iord(Limit)
+  REAL(SP), INTENT(IN) :: A, B, Epsabs, Epsrel
+  REAL(SP), INTENT(OUT) :: Abserr, Result
+  REAL(SP), INTENT(OUT) :: Alist(Limit), Blist(Limit), Elist(Limit), Rlist(Limit)
+  !
   INTEGER :: iroff1, iroff2, k, keyf, maxerr, nrmax
   REAL(SP) :: area, area1, area12, area2, a1, a2, b1, b2, defabs, defab1, defab2, &
     epmach, errbnd, errmax, error1, error2, erro12, errsum, resabs, uflow
@@ -362,4 +364,5 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
     IF( keyf/=1 ) Neval = (10*keyf+1)*(2*Neval+1)
     IF( keyf==1 ) Neval = 30*Neval + 15
   END IF
+  !
 END SUBROUTINE QAGE

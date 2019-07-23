@@ -1,31 +1,37 @@
-
 trigger:
-- master
+  - master
 
-pool:
-  vmImage: 'Ubuntu-16.04'
+jobs:
 
-container: 
-  image: chinoune/my-image
+- job: Debug
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  container: 
+    image: chinoune/my-image
+  steps:
+  - script: |
+      mkdir build && cd build
+      cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
+      make -j
+    displayName: 'Building gfortran-Debug'
+  - script: |
+      cd build
+      make test
+    displayName: 'Testing gfortran-Debug'
 
-steps:
-- script: |
-    mkdir build && cd build
-    cmake .. -DCMAKE_Fortran_COMPILER=gfortran
-    make -j$(nproc)
-  displayName: 'Building gfortran-Release'
-- script: |
-    ls
-    cd build
-    make test
-  displayName: 'Testing gfortran-Release'
-- script: |
-    cd build
-    rm -r *
-    cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
-    make -j$(nproc)
-  displayName: 'Building gfortran-Debug'
-- script: |
-    cd build
-    make test
-  displayName: 'Testing gfortran-Debug'
+
+- job: Release
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  container: 
+    image: chinoune/my-image
+  steps:
+  - script: |
+      mkdir build && cd build
+      cmake .. -DCMAKE_Fortran_COMPILER=gfortran
+      make -j$(nproc)
+    displayName: 'Building gfortran-Release'
+  - script: |
+      cd build
+      make test
+    displayName: 'Testing gfortran-Release'

@@ -1,8 +1,7 @@
 !** QK61
-SUBROUTINE QK61(F,A,B,Result,Abserr,Resabs,Resasc)
-  !> To compute I = Integral of F over (A,B) with error
-  !                           estimate
-  !                       J = Integral of ABS(F) over (A,B)
+PURE SUBROUTINE QK61(F,A,B,Result,Abserr,Resabs,Resasc)
+  !> To compute I = Integral of F over (A,B) with error estimate
+  !  J = Integral of ABS(F) over (A,B)
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -69,12 +68,14 @@ SUBROUTINE QK61(F,A,B,Result,Abserr,Resabs,Resasc)
   USE service, ONLY : R1MACH
   !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  REAL(SP) :: Abserr, B, A, Resabs, Resasc, Result
+  REAL(SP), INTENT(IN) :: B, A
+  REAL(SP), INTENT(OUT) :: Abserr, Resabs, Resasc, Result
+  !
   INTEGER :: j, jtw, jtwm1
   REAL(SP) :: absc, centr, dhlgth, epmach, fc, fsum, fval1, fval2, fv1(30), &
     fv2(30), hlgth, resg, resk, reskh, uflow
@@ -167,6 +168,7 @@ SUBROUTINE QK61(F,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(jtw)*fsum
     Resabs = Resabs + wgk(jtw)*(ABS(fval1)+ABS(fval2))
   END DO
+  !
   DO j = 1, 15
     jtwm1 = j*2 - 1
     absc = hlgth*xgk(jtwm1)
@@ -189,6 +191,6 @@ SUBROUTINE QK61(F,A,B,Result,Abserr,Resabs,Resasc)
   Abserr = ABS((resk-resg)*hlgth)
   IF( Resasc/=0._SP .AND. Abserr/=0._SP )&
     Abserr = Resasc*MIN(1._SP,(200._SP*Abserr/Resasc)**1.5_SP)
-  IF( Resabs>uflow/(50._SP*epmach) ) Abserr = MAX((epmach*50._SP)*Resabs,&
-    Abserr)
+  IF( Resabs>uflow/(50._SP*epmach) ) Abserr = MAX((epmach*50._SP)*Resabs,Abserr)
+  !
 END SUBROUTINE QK61

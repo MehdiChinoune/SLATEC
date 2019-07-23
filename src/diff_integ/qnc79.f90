@@ -1,7 +1,6 @@
 !** QNC79
-SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
-  !> Integrate a function using a 7-point adaptive Newton-Cotes
-  !            quadrature rule.
+PURE SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
+  !> Integrate a function using a 7-point adaptive Newton-Cotes quadrature rule.
   !***
   ! **Library:**   SLATEC
   !***
@@ -76,17 +75,18 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920218  Code and prologue polished.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH, I1MACH
-  !     .. Scalar Arguments ..
-  REAL(SP) :: A, Ans, B, Err
-  INTEGER :: Ierr, K
+  USE service, ONLY : R1MACH, I1MACH
   !     .. Function Arguments ..
   INTERFACE
-    REAL(SP) FUNCTION FUN(X)
+    REAL(SP) PURE FUNCTION FUN(X)
       IMPORT SP
       REAL(SP), INTENT(IN) :: X
     END FUNCTION FUN
   END INTERFACE
+  !     .. Scalar Arguments ..
+  INTEGER, INTENT(OUT) :: Ierr, K
+  REAL(SP), INTENT(IN) :: A, B, Err
+  REAL(SP), INTENT(OUT) :: Ans
   !     .. Local Scalars ..
   REAL(SP) :: ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
   INTEGER :: i, l, lmn, lmx, nib
@@ -232,8 +232,7 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
       Ans = vr
       IF( ABS(ce)>2._SP*tol*area ) THEN
         Ierr = 2
-        CALL XERMSG('QNC79',&
-          'ANS is probably insufficiently accurate.',2,1)
+        ERROR STOP 'QNC79 : ANS is probably insufficiently accurate.'
       END IF
       RETURN
     END IF
@@ -271,8 +270,8 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   f(13) = f7(l)
   GOTO 100
   400  Ierr = -1
-  CALL XERMSG('QNC79',&
-    'A and B are too nearly equal to allow normal integration.&
-    & $$ANS is set to zero and IERR to -1.',-1,-1)
+  ! 'QNC79 : A and B are too nearly equal to allow normal integration.&
+    ! & ANS is set to zero and IERR to -1.'
+  !
   RETURN
 END SUBROUTINE QNC79

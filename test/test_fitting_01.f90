@@ -158,8 +158,7 @@ CONTAINS
     !     Print out known and computed solutions.
     !
     IF( Kprint>=3 ) THEN
-      CALL SVOUT(n,err,'('' RESIDUALS FROM KNOWN LEAST SQUARES SOLUTION'')',&
-        idigit)
+      CALL SVOUT(n,err,'('' RESIDUALS FROM KNOWN LEAST SQUARES SOLUTION'')',idigit)
       CALL SVOUT(n,x,'(/'' SOLUTION COMPUTED BY LSEI'')',jdigit)
     END IF
     !
@@ -168,8 +167,7 @@ CONTAINS
         !
         !           Print out the known and computed residual norms.
         !
-        CALL SVOUT(1,resnrm,&
-          '(/'' RESIDUAL NORM OF KNOWN LEAST SQUARES SOLUTION'')', jdigit)
+        CALL SVOUT(1,resnrm,'(/'' RESIDUAL NORM OF KNOWN LEAST SQUARES SOLUTION'')',jdigit)
         CALL SVOUT(1,rnorml,'(/'' RESIDUAL NORM COMPUTED BY LSEI'')',jdigit)
         !
         !           Print out the computed solution relative error.
@@ -178,39 +176,38 @@ CONTAINS
         !
         !           Print out the computed relative error in residual norm.
         !
-        CALL SVOUT(1,relnrm,'(/'' COMPUTED RELATIVE ERROR IN RESIDUAL NORM'')'&
-          ,idigit)
+        CALL SVOUT(1,relnrm,'(/'' COMPUTED RELATIVE ERROR IN RESIDUAL NORM'')',idigit)
       END IF
     END IF
     !
     !     Check calls to error processor.
     !
     kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
+!    IF( Kprint<=2 ) THEN
+!      control_xer = 0
+!    ELSE
+!      control_xer = 1
+!    END IF
+!    num_xer = 0
     !
-    IF( Kprint>=3 ) WRITE (Lun,99004)
-    99004 FORMAT (/' 2 ERROR MESSAGES EXPECTED')
+!    IF( Kprint>=3 ) WRITE (Lun,99004)
+!    99004 FORMAT (/' 2 ERROR MESSAGES EXPECTED')
     !
-    CALL LSEI(d,0,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
+!    CALL LSEI(d,0,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
     !
-    prgopt(1) = -1
-    CALL LSEI(d,mdd,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
-    IF( num_xer/=2 ) THEN
-      Ipass = 0
-      fatal = .TRUE.
-    END IF
-    num_xer = 0
+!    prgopt(1) = -1
+!    CALL LSEI(d,mdd,me,ma,mg,n,prgopt,x,rnorme,rnorml(1),mode,work,ip)
+!    IF( num_xer/=2 ) THEN
+!      Ipass = 0
+!      fatal = .TRUE.
+!    END IF
+!    num_xer = 0
     !
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.

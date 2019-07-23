@@ -1,7 +1,6 @@
 !** QC25C
-SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
-  !> To compute I = Integral of F*W over (A,B) with
-  !            error estimate, where W(X) = 1/(X-C)
+PURE SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
+  !> To compute I = Integral of F*W over (A,B) with error estimate, where W(X) = 1/(X-C)
   !***
   ! **Library:**   SLATEC (QUADPACK)
   !***
@@ -72,13 +71,16 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
 
   !
   INTERFACE
-    REAL(SP) FUNCTION F(X)
+    REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
-      REAL(SP) :: X
+      REAL(SP), INTENT(IN) :: X
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Krul, Neval
-  REAL(SP) :: A, Abserr, B, C, Result
+  INTEGER, INTENT(INOUT) :: Krul
+  INTEGER, INTENT(OUT) :: Neval
+  REAL(SP), INTENT(IN) :: A, B, C
+  REAL(SP), INTENT(OUT) :: Abserr, Result
+  !
   INTEGER :: i, isym, k, kp
   REAL(SP) :: ak22, amom0, amom1, amom2, cc, centr, cheb12(13), cheb24(25), &
     fval(25), hlgth, p2, p3, p4, resabs, resasc, res12, res24, u
@@ -171,4 +173,5 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
     Neval = 15
     IF( resasc==Abserr ) Krul = Krul + 1
   END IF
+  !
 END SUBROUTINE QC25C
