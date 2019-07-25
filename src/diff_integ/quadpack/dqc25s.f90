@@ -103,7 +103,8 @@ PURE SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   INTEGER, INTENT(IN) :: Integr
   INTEGER, INTENT(OUT) :: Nev
   REAL(DP), INTENT(IN) :: A, Alfa, B, Beta, Bl, Br
-  REAL(DP), INTENT(OUT) :: Abserr, Resasc, Result, Rg(25), Rh(25), Ri(25), Rj(25)
+  REAL(DP), INTENT(OUT) :: Abserr, Resasc, Result
+  REAL(DP), INTENT(IN) :: Rg(25), Rh(25), Ri(25), Rj(25)
   !
   INTEGER :: i, isym
   REAL(DP) :: centr, cheb12(13), cheb24(25), dc, factor, fix, fval(25), hlgth, &

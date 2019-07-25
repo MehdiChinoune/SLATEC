@@ -25,6 +25,8 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+  USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE
+  !
   INTEGER, INTENT(IN) :: Kode, N, Nui
   INTEGER, INTENT(OUT) :: Nlast, Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Tol
@@ -33,6 +35,7 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   INTEGER :: i, iflag, iform, k, nl, nw
   COMPLEX(SP) :: cscl, cscr, cy(2), rz, st, s1, s2
   REAL(SP) :: ax, ay, dfnu, fnui, gnu, xx, yy, ascle, bry(3), str, sti, stm
+  REAL(SP), PARAMETER :: sqrt_huge = SQRT( HUGE(1._SP) )
   !* FIRST EXECUTABLE STATEMENT  CBUNI
   Nz = 0
   xx = REAL(Z)
@@ -81,6 +84,7 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         RETURN
       ELSE
         ay = ABS(cy(1))
+        IF( .NOT. IEEE_IS_FINITE(ay) ) ay = ABS( cy(1)/sqrt_huge ) *sqrt_huge
         !----------------------------------------------------------------------
         !     SCALE BACKWARD RECURRENCE, BRY(3) IS DEFINED BUT NEVER USED
         !----------------------------------------------------------------------
@@ -174,5 +178,6 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   IF( nw==(-2) ) Nz = -2
   RETURN
   100  Nz = nw
+  !
   RETURN
 END SUBROUTINE CBUNI

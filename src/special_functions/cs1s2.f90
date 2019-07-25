@@ -26,7 +26,8 @@ ELEMENTAL SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-
+  USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE
+  !
   INTEGER, INTENT(INOUT) :: Iuf
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Alim, Ascle
@@ -35,10 +36,13 @@ ELEMENTAL SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   COMPLEX(SP) :: c1, s1d
   REAL(SP) :: aa, aln, as1, as2, xx
   COMPLEX(SP), PARAMETER :: czero  = (0._SP,0._SP)
+  REAL(SP), PARAMETER :: sqrt_huge = SQRT( HUGE(1._SP) )
   !* FIRST EXECUTABLE STATEMENT  CS1S2
   Nz = 0
   as1 = ABS(S1)
   as2 = ABS(S2)
+  IF( .NOT. IEEE_IS_FINITE(as1) ) as1 = ABS(S1/sqrt_huge) * sqrt_huge
+  IF( .NOT. IEEE_IS_FINITE(as2) ) as2 = ABS(S2/sqrt_huge) * sqrt_huge
   aa = REAL(S1)
   aln = AIMAG(S1)
   IF( aa/=0._SP .OR. aln/=0._SP ) THEN
@@ -52,6 +56,7 @@ ELEMENTAL SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
         c1 = LOG(s1d) - Zr - Zr
         S1 = EXP(c1)
         as1 = ABS(S1)
+        IF( .NOT. IEEE_IS_FINITE(as1) ) as1 = ABS(S1/sqrt_huge) * sqrt_huge
         Iuf = Iuf + 1
       END IF
     END IF
@@ -62,5 +67,5 @@ ELEMENTAL SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   S2 = czero
   Nz = 1
   Iuf = 0
-
+  !
 END SUBROUTINE CS1S2

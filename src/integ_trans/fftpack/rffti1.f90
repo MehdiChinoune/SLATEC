@@ -63,6 +63,7 @@ PURE SUBROUTINE RFFTI1(N,Wa,Ifac)
   REAL(SP) :: arg, argh, argld, fi, tpi
   INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
   !* FIRST EXECUTABLE STATEMENT  RFFTI1
+  Ifac = 0
   nl = N
   nf = 0
   j = 0

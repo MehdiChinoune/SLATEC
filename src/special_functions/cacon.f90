@@ -27,6 +27,8 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : R1MACH
+  USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE
+  !
   INTEGER, INTENT(IN) :: Kode, Mr, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Rl, Tol
@@ -39,6 +41,7 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
     fmr, sgn, spn, yy
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
+  REAL(SP), PARAMETER :: sqrt_huge = SQRT( HUGE(1._SP) )
   !* FIRST EXECUTABLE STATEMENT  CACON
   Nz = 0
   zn = -Z
@@ -111,6 +114,7 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       bry(2) = 1._SP/ascle
       bry(3) = R1MACH(2)
       as2 = ABS(s2)
+      IF( .NOT. IEEE_IS_FINITE(as2) ) as2 = ABS(s2/sqrt_huge) * sqrt_huge
       kflag = 2
       IF( as2<=bry(1) ) THEN
         kflag = 1
@@ -167,4 +171,5 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   END IF
   Nz = -1
   IF( nw==(-2) ) Nz = -2
+  !
 END SUBROUTINE CACON

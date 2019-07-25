@@ -425,6 +425,7 @@ CONTAINS
     !   890831  Revised to meet new SLATEC standards
     !
     USE slatec, ONLY : CBESH, CUOIK, I1MACH, R1MACH
+    USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE, IEEE_IS_NORMAL
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -448,6 +449,7 @@ CONTAINS
       r, rfpi, rl, rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20)
     INTEGER :: i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
       kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, nz2, n1
+    REAL(SP), PARAMETER :: sqrt_huge = SQRT( HUGE(1._SP) )
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBH
     IF( Kprint>=2 ) THEN
@@ -636,7 +638,9 @@ CONTAINS
                       !     Error relative to maximum term
                       !-----------------------------------------------------------------------
                       aw = ABS(w(i+1))
+                      IF( .NOT. IEEE_IS_FINITE(aw) ) aw = ABS( w(i+1)/sqrt_huge ) *sqrt_huge
                       ay = ABS(y(i))
+                      IF( .NOT. IEEE_IS_FINITE(ay) ) ay = ABS( y(i)/sqrt_huge ) *sqrt_huge
                       az = LOG(aw) + LOG(ay)
                       az = ABS(az)
                       IF( az<=alim ) THEN
@@ -646,9 +650,15 @@ CONTAINS
                         cy = w(i+1)*y(i)
                         cy = cw - cy - cv
                         acy = aw*ay
-                        acw = ABS(w(i))*ABS(y(i+1))
+                        aw = ABS(w(i))
+                        IF( .NOT. IEEE_IS_FINITE(aw) ) aw = ABS( w(i)/sqrt_huge ) *sqrt_huge
+                        ay = ABS(y(i+1))
+                        IF( .NOT. IEEE_IS_FINITE(ay) ) ay = ABS( y(i+1)/sqrt_huge ) *sqrt_huge
+                        acw = aw*ay
                         av = MAX(acw,acy,av)
-                        er = ABS(cy)/av
+                        ay = ABS(cy)
+                        IF( .NOT. IEEE_IS_FINITE(ay) ) ay = ABS( cy/sqrt_huge ) *sqrt_huge
+                        er = ay/av
                         aer(i) = er
                         IF( er>ertol ) mflg = 1
                       END IF
