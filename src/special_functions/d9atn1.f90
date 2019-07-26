@@ -39,11 +39,13 @@ REAL(DP) ELEMENTAL FUNCTION D9ATN1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   REAL(DP) :: y
   INTEGER, PARAMETER :: ntatn1 = 21
-  REAL(DP), PARAMETER :: eps = D1MACH(3), xsml = SQRT(0.1_DP*eps), &
+  REAL(DP), PARAMETER :: eps = eps_2_dp, xsml = SQRT(0.1_DP*eps), &
     xbig = 1.571_DP/SQRT(eps), xmax = 1.571_DP/eps
   REAL(DP), PARAMETER :: atn1cs(40) = [ -.3283997535355202356907939922990E-1_DP, &
     +.5833432343172412449951669914907E-1_DP, -.7400369696719646463809011551413E-2_DP, &

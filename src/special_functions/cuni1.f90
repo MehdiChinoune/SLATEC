@@ -27,12 +27,14 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp
+  !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nlast, Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, iflag, init, k, m, nd, nn, nuf, nw
   COMPLEX(SP) :: cfn, crsc, cscl, csr(3), css(3), cwrk(16), c1, c2, &
     phi, rz, summ, s1, s2, zeta1, zeta2, cy(2)
@@ -55,7 +57,7 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   csr(1) = crsc
   csr(2) = cone
   csr(3) = cscl
-  bry(1) = 1.E+3_SP*R1MACH(1)/Tol
+  bry(1) = 1.E+3_SP*tiny_sp/Tol
   !-----------------------------------------------------------------------
   !     CHECK FOR UNDERFLOW AND OVERFLOW ON FIRST MEMBER
   !-----------------------------------------------------------------------
@@ -127,7 +129,7 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IF( nd>2 ) THEN
     rz = CMPLX(2._SP,0._SP,SP)/Z
     bry(2) = 1._SP/bry(1)
-    bry(3) = R1MACH(2)
+    bry(3) = huge_sp
     s1 = cy(1)
     s2 = cy(2)
     c1 = csr(iflag)

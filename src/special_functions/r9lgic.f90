@@ -30,11 +30,13 @@ REAL(SP) ELEMENTAL FUNCTION R9LGIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp
+  !
   REAL(SP), INTENT(IN) :: A, Alx, X
+  !
   INTEGER :: k
   REAL(SP) :: fk, p, r, s, t, xma, xpa
-  REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3)
+  REAL(SP), PARAMETER :: eps = 0.5_SP*eps_2_sp
   !* FIRST EXECUTABLE STATEMENT  R9LGIC
   !
   xpa = X + 1._SP - A

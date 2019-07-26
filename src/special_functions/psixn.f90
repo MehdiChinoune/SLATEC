@@ -26,8 +26,10 @@ REAL(SP) ELEMENTAL FUNCTION PSIXN(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
+  !
   INTEGER, INTENT(IN) :: N
+  !
   INTEGER :: k
   REAL(SP) :: ax, fn, rfn2, trm, s, wdtol
   !-----------------------------------------------------------------------
@@ -76,7 +78,7 @@ REAL(SP) ELEMENTAL FUNCTION PSIXN(N)
   !
   !* FIRST EXECUTABLE STATEMENT  PSIXN
   IF( N>100 ) THEN
-    wdtol = MAX(R1MACH(4),1.0E-18_SP)
+    wdtol = MAX(eps_sp,1.0E-18_SP)
     fn = N
     ax = 1._SP
     s = -0.5_SP/fn

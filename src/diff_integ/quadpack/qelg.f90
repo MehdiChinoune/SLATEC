@@ -61,7 +61,7 @@ PURE SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp, eps_sp
   !
   INTEGER, INTENT(INOUT) :: N, Nres
   REAL(SP), INTENT(INOUT) :: Epstab(52), Res3la(3)
@@ -96,8 +96,8 @@ PURE SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !           DIAGONAL OF THE EPSILON TABLE IS DELETED.
   !
   !* FIRST EXECUTABLE STATEMENT  QELG
-  epmach = R1MACH(4)
-  oflow = R1MACH(2)
+  epmach = eps_sp
+  oflow = huge_sp
   Nres = Nres + 1
   Abserr = oflow
   Result = Epstab(N)

@@ -54,14 +54,16 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
-
+  USE ISO_FORTRAN_ENV, ONLY : OUTPUT_UNIT
+  !
   INTEGER, INTENT(IN) :: Idigit, N, Ix(N)
   CHARACTER(*), INTENT(IN) :: Ifmt
+  !
   INTEGER :: i, k1, k2, lout, ndigit
   !
   !     GET THE UNIT NUMBER WHERE OUTPUT WILL BE WRITTEN.
   !* FIRST EXECUTABLE STATEMENT  IVOUT
-  lout = I1MACH(2)
+  lout = OUTPUT_UNIT
   WRITE (lout,Ifmt)
   IF( N<=0 ) RETURN
   ndigit = Idigit

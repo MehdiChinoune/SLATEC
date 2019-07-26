@@ -260,8 +260,8 @@ INTEGER PURE FUNCTION ISSGMR(N,X,Xl,MSOLVE,Itol,Tol,Iter,R,Dz,Rwork,Iwork, &
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE SSLBLK, ONLY : soln_com
-  USE service, ONLY : R1MACH
-
+  USE service, ONLY : tiny_sp
+  !
   INTERFACE
     PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
@@ -322,7 +322,7 @@ INTEGER PURE FUNCTION ISSGMR(N,X,Xl,MSOLVE,Itol,Tol,Iter,R,Dz,Rwork,Iwork, &
         r2 = tem*r2
       END IF
       !
-      fuzz = R1MACH(1)
+      fuzz = tiny_sp
       ielmax = 1
       ratmax = ABS(dz2(1))/MAX(ABS(X(1)),fuzz)
       DO i = 2, N

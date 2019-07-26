@@ -58,7 +58,7 @@ PURE SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !                            Algorithm termination condition not met
   !
   !         The nominal computational accuracy is the maximum of unit
-  !         roundoff (=D1MACH(4)) and 1.0D-18 since critical constants
+  !         roundoff (=eps_dp) and 1.0D-18 since critical constants
   !         are given to only 18 digits.
   !
   !         BSKIN is the single precision version of DBSKIN.
@@ -101,11 +101,13 @@ PURE SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : log10_radix_dp, eps_dp, digits_dp, max_exp_dp, min_exp_dp
+  !
   INTEGER, INTENT(IN) :: Kode, M, N
   INTEGER, INTENT(OUT) :: Ierr, Nz
   REAL(DP), INTENT(IN) :: X
   REAL(DP), INTENT(OUT) :: Y(M)
+  !
   INTEGER :: i, icase, il, i1m, k, kk, ktrms, m3, ne, nflg, nl, nlim, nn, np, ns, nt
   REAL(DP) :: enlim, exi(102), fn, gr, h(31), hn, ss, tol, t1, t2, w, xlim, xnlim, &
     xp, ys(3), yss(3)
@@ -160,18 +162,18 @@ PURE SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
     END DO
     RETURN
   ELSE
-    i1m = -I1MACH(15)
-    t1 = 2.3026_DP*D1MACH(5)*i1m
+    i1m = -min_exp_dp
+    t1 = 2.3026_DP*log10_radix_dp*i1m
     xlim = t1 - 3.228086_DP
     t2 = t1 + (N+M-1)
     IF( t2>1000._DP ) xlim = t1 - 0.5_DP*(LOG(t2)-0.451583_DP)
     IF( X>xlim .AND. Kode==1 ) GOTO 400
-    tol = MAX(D1MACH(4),1.E-18_DP)
-    i1m = I1MACH(14)
+    tol = MAX(eps_dp,1.E-18_DP)
+    i1m = digits_dp
     !-----------------------------------------------------------------------
     !     LN(NLIM) = 0.125*LN(EPS),   NLIM = 2*KTRMS+N
     !-----------------------------------------------------------------------
-    xnlim = 0.287823_DP*(i1m-1)*D1MACH(5)
+    xnlim = 0.287823_DP*(i1m-1)*log10_radix_dp
     enlim = EXP(xnlim)
     nlim = INT(enlim) + 2
     nlim = MIN(100,nlim)

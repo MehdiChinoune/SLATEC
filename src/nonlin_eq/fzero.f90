@@ -98,8 +98,8 @@ PURE SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
-
+  USE service, ONLY : eps_sp
+  !
   INTERFACE
     REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
@@ -109,6 +109,7 @@ PURE SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   INTEGER, INTENT(OUT) :: Iflag
   REAL(SP), INTENT(IN) :: Ae, Re
   REAL(SP), INTENT(INOUT) :: B, C, R
+  !
   INTEGER :: ic, kount
   REAL(SP) :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
   !* FIRST EXECUTABLE STATEMENT  FZERO
@@ -116,7 +117,7 @@ PURE SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   ER is two times the computer unit roundoff value which is defined
   !   here by the function R1MACH.
   !
-  er = 2.0E0*R1MACH(4)
+  er = 2.0E0*eps_sp
   !
   !   Initialize.
   !

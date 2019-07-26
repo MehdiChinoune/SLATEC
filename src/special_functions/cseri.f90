@@ -26,12 +26,14 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
+  !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, ib, iflag, il, k, l, m, nn, nw
   COMPLEX(SP) :: ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2)
   REAL(SP) :: aa, acz, ak, arm, ascle, atol, az, dfnu, &
@@ -42,7 +44,7 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   az = ABS(Z)
   IF( az==0._SP ) GOTO 500
   x = REAL(Z)
-  arm = 1.E+3_SP*R1MACH(1)
+  arm = 1.E+3_SP*tiny_sp
   rtr1 = SQRT(arm)
   crsc = CMPLX(1._SP,0._SP,SP)
   iflag = 0
@@ -120,7 +122,7 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       !-----------------------------------------------------------------------
       !     EXP(-ALIM)=EXP(-ELIM)/TOL=APPROX. ONE PRECISION ABOVE THE
-      !     UNDERFLOW LIMIT = ASCLE = R1MACH(1)*CSCL*1.0E+3
+      !     UNDERFLOW LIMIT = ASCLE = tiny_sp*CSCL*1.0E+3
       !-----------------------------------------------------------------------
       s1 = w(1)
       s2 = w(2)

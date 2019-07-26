@@ -82,14 +82,14 @@ CONTAINS
     !           (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900911  Test problem changed and cosmetic changes to code.  (WRB)
-    !   901205  Changed usage of D1MACH(3) to D1MACH(4) and modified the
+    !   901205  Changed usage of eps_2_dp to eps_dp and modified the
     !           FORMATs.  (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900911  Test problem changed and cosmetic changes to code.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-    USE slatec, ONLY : D1MACH, DP1VLU, DPCOEF, DPOLFT, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DP1VLU, DPCOEF, DPOLFT, num_xer, control_xer
     USE common_mod, ONLY : PASS
     INTEGER :: kontrl
     !     .. Scalar Arguments ..
@@ -111,7 +111,7 @@ CONTAINS
       itest(i) = 0
     END DO
     icnt = 0
-    TOL = SQRT(D1MACH(4))
+    TOL = SQRT(eps_dp)
     m = 11
     DO i = 1, m
       x(i) = i - 6
@@ -212,7 +212,7 @@ CONTAINS
     !
     IERp = 1
     NORdp = 4
-    EPS = 75._DP*D1MACH(4)
+    EPS = 75._DP*eps_dp
     SVEps = EPS
     CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
@@ -287,7 +287,7 @@ CONTAINS
     !
     m = 11
     w(1) = -1._DP
-    EPS = 5._DP*D1MACH(4)
+    EPS = 5._DP*eps_dp
     SVEps = EPS
     RP = 553._DP
     maxord = 2
@@ -466,7 +466,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : DFDJC3, D1MACH, DCOV, DNLS1E, control_xer, num_xer
+    USE slatec, ONLY : DFDJC3, eps_dp, DCOV, DNLS1E, control_xer, num_xer
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -495,7 +495,7 @@ CONTAINS
     iflag = 1
     zero = 0._DP
     one = 1._DP
-    tol = MAX(SQRT(40._DP*D1MACH(4)),1.E-12_DP)
+    tol = MAX(SQRT(40._DP*eps_dp),1.E-12_DP)
     tol2 = SQRT(tol)
     !
     !     OPTION=2, the full Jacobian is stored and the user provides the
@@ -758,11 +758,11 @@ CONTAINS
     !   891004  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, modified tolerances
-    !           to use D1MACH(4) rather than D1MACH(3) and cleaned up
+    !           to use eps_dp rather than eps_2_dp and cleaned up
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : D1MACH, DBVALU, DCV, DFC, DMOUT, DVOUT, IVOUT, &
+    USE slatec, ONLY : eps_dp, DBVALU, DCV, DFC, DMOUT, DVOUT, IVOUT, &
       control_xer, num_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -903,7 +903,7 @@ CONTAINS
     !
     !     Check coefficients.
     !
-    tol = MAX(7._DP*SQRT(D1MACH(4)),1.E-8_DP)
+    tol = MAX(7._DP*SQRT(eps_dp),1.E-8_DP)
     diff = 0._DP
     DO i = 1, ndata
       diff = MAX(diff,ABS(coeff(i)-coefck(i)))
@@ -1226,7 +1226,8 @@ END MODULE TEST53_MOD
 !** TEST53
 PROGRAM TEST53
   USE TEST53_MOD, ONLY : DFCQX, DNLS1Q, DPFITT
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1280,8 +1281,8 @@ PROGRAM TEST53
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST53
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

@@ -31,7 +31,8 @@ CONTAINS
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     !   910104  Changed to print variable number of decimals. (DWL and JMS)
-    USE slatec, ONLY : DXCON, DXLEGF, DXNRMP, DXSET, I1MACH
+    USE slatec, ONLY : DXCON, DXLEGF, DXNRMP, DXSET, digits_dp, max_exp_dp, radix_fp
+    !
     INTEGER :: i, ic1(10), ic2(10), id, ierr, ierror, ip(10), ipn(10), &
       iq(10), ir(10), irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
     INTEGER :: mu, mu1, mu2, n, nbits, ndec, nradpl, nu1, nudiff
@@ -48,7 +49,7 @@ CONTAINS
     99001 FORMAT (' ** TEST DOUBLE PRECISION LEGENDRE FUNCTION ROUTINES',&
       ' IN FCNPAK ** ',/)
     Ipass = 1
-    irad = I1MACH(10)
+    irad = radix_fp
     nradpl = 0
     dzero = 0._DP
     nbits = 0
@@ -56,13 +57,13 @@ CONTAINS
     IF( ierror/=0 ) Ipass = 0
     ierr = 0
     dnu1 = 2000.4_DP
-    IF( I1MACH(16)*LOG10(REAL(I1MACH(10)))<150._SP ) dnu1 = 100.4_DP
+    IF( max_exp_dp*LOG10(REAL(radix_fp))<150._SP ) dnu1 = 100.4_DP
     IF( Kprint>2 ) THEN
-      IF( I1MACH(16)<500 ) WRITE (Lun,99002)
+      IF( max_exp_dp<500 ) WRITE (Lun,99002)
       99002 FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/ &
         ' TEST VALUES FOR NU, MU ARE USED. IF LARGER THAN OR EQUAL 500,'/ &
         ' LARGER VALUES ARE USED. THIS COMPUTER USES THE SMALLER VALUES.')
-      IF( I1MACH(16)>=500 ) WRITE (Lun,99003)
+      IF( max_exp_dp>=500 ) WRITE (Lun,99003)
       99003 FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/ &
         ' TEST VALUES FOR NU, MU ARE USED. IF LARGER THAN OR EQUAL 500,'/ &
         ' LARGER VALUES ARE USED. THIS COMPUTER USES THE LARGER VALUES.')
@@ -79,14 +80,14 @@ CONTAINS
     ! values of the Casoratians should be approximately equal to 1.0.
     ! The check which is applied is to verify that the difference between
     ! the Casoratians and 1.0 is less that 10.**(6-NDEC), where NDEC =
-    ! INT((D-1)*LOG10(R)), D = I1MACH(14) = significand length, R =
-    ! I1MACH(10) = radix. The value of IERROR should always be returned
+    ! INT((D-1)*LOG10(R)), D = digits_dp = significand length, R =
+    ! radix_fp = radix. The value of IERROR should always be returned
     ! as zero. This test uses the programs
     ! XLEGF, XPQNU, XPSI, XQNU, XPMUP, XSET, XADD,
     ! XADJ, XCSRT, XRED, XC210, and XCON.
     !
     isum = 0
-    ndec = INT( (I1MACH(14)-1)*LOG10(REAL(I1MACH(10))) )
+    ndec = INT( (digits_dp-1)*LOG10(REAL(radix_fp)) )
     ! Formats that depend on NDEC ...
     fmt(1:20) = '(1X, 6X, 4H   (,E50.'
     WRITE (fmt(21:22),'(I2)') ndec
@@ -546,7 +547,8 @@ END MODULE TEST12_MOD
 !** TEST12
 PROGRAM TEST12
   USE TEST12_MOD, ONLY : FCNQX2
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -594,8 +596,8 @@ PROGRAM TEST12
   !   901204  DATE WRITTEN
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST12
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

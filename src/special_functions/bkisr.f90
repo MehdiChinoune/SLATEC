@@ -24,7 +24,8 @@ ELEMENTAL SUBROUTINE BKISR(X,N,Summ,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
+  !
   INTEGER, INTENT(IN) :: N
   INTEGER, INTENT(OUT) :: Ierr
   REAL(SP), INTENT(IN) :: X
@@ -35,7 +36,7 @@ ELEMENTAL SUBROUTINE BKISR(X,N,Summ,Ierr)
   REAL(SP), PARAMETER :: c(2) = [ 1.57079632679489662_SP, 1._SP ]
   !* FIRST EXECUTABLE STATEMENT  BKISR
   Ierr = 0
-  tol = MAX(R1MACH(4),1.0E-18_SP)
+  tol = MAX(eps_sp,1.0E-18_SP)
   IF( X>=tol ) THEN
     pr = 1._SP
     pol = 0._SP

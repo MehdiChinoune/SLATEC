@@ -387,7 +387,7 @@ pure SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   USE blas, ONLY : SAXPY, SSWAP
   USE linear, ONLY : H12
   !
@@ -405,7 +405,7 @@ pure SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   LOGICAL :: cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
-  REAL(SP), PARAMETER :: srelpr = R1MACH(4)
+  REAL(SP), PARAMETER :: srelpr = eps_sp
   !* FIRST EXECUTABLE STATEMENT  LSEI
   !
   !     Set the nominal tolerance used in the code for the equality

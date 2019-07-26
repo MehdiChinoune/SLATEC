@@ -31,12 +31,14 @@ REAL(SP) ELEMENTAL FUNCTION R9GMIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, tiny_sp
+  !
   REAL(SP), INTENT(IN) :: A, Alx, X
+  !
   INTEGER :: k, m, ma, mm1
   REAL(SP) :: alng, fk, fkp1, fm, s, sgng, t, te
   REAL(SP), PARAMETER :: euler = .5772156649015329_SP
-  REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3), bot = LOG(R1MACH(1))
+  REAL(SP), PARAMETER :: eps = 0.5_SP*eps_2_sp, bot = LOG(tiny_sp)
   !* FIRST EXECUTABLE STATEMENT  R9GMIC
   !
   IF( A>0._SP ) ERROR STOP 'R9GMIC : A MUST BE NEAR A NEGATIVE INTEGER'

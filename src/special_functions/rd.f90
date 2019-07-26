@@ -313,14 +313,16 @@ REAL(SP) ELEMENTAL FUNCTION RD(X,Y,Z)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900510  Modify calls to XERMSG to put in standard form.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, huge_sp, tiny_sp
+  !
   REAL(SP), INTENT(IN) :: X, Y, Z
+  !
   REAL(SP) :: epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, s2, xn, &
     xndev, xnroot, yn, yndev, ynroot, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  REAL(SP), PARAMETER :: errtol = (R1MACH(3)/3._SP)**(1._SP/6._SP), &
-    lolim = 2._SP/(R1MACH(2))**(2._SP/3._SP), &
-    uplim = (0.10_SP*errtol/R1MACH(1))**(2._SP/3._SP)
+  REAL(SP), PARAMETER :: errtol = (eps_2_sp/3._SP)**(1._SP/6._SP), &
+    lolim = 2._SP/(huge_sp)**(2._SP/3._SP), &
+    uplim = (0.10_SP*errtol/tiny_sp)**(2._SP/3._SP)
   REAL(SP), PARAMETER :: c1 = 3._SP/14._SP, c2 = 1._SP/6._SP, c3 = 9._SP/22._SP, &
     c4 = 3._SP/26._SP
   !

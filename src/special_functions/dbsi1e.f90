@@ -51,12 +51,14 @@ REAL(DP) ELEMENTAL FUNCTION DBSI1E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   REAL(DP) :: y
   INTEGER, PARAMETER :: nti1 = 11, ntai1 = 22, ntai12 = 24
-  REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xmin = 2._DP*D1MACH(1), &
-    xsml = SQRT(4.5_DP*D1MACH(3))
+  REAL(DP), PARAMETER :: eta = 0.1_DP*eps_2_dp, xmin = 2._DP*tiny_dp, &
+    xsml = SQRT(4.5_DP*eps_2_dp)
   REAL(DP), PARAMETER :: bi1cs(17) = [ -.19717132610998597316138503218149E-2_DP, &
     +.40734887667546480608155393652014E+0_DP, +.34838994299959455866245037783787E-1_DP, &
     +.15453945563001236038598401058489E-2_DP, +.41888521098377784129458832004120E-4_DP, &

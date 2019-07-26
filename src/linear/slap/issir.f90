@@ -156,8 +156,8 @@ INTEGER PURE FUNCTION ISSIR(N,Itol,Tol,R,Z,Dz,Bnrm,Solnrm)
   !   910506  Made subsidiary to SIR.  (FNF)
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
-  !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
-  USE service, ONLY : R1MACH
+  !   921026  Changed 1.0E10 to huge_sp.  (FNF)
+  USE service, ONLY : huge_sp
   !     .. Scalar Arguments ..
   INTEGER, INTENT(IN) :: Itol, N
   REAL(SP), INTENT(IN) :: Bnrm, Solnrm, Tol
@@ -180,7 +180,7 @@ INTEGER PURE FUNCTION ISSIR(N,Itol,Tol,R,Z,Dz,Bnrm,Solnrm)
     eror = NORM2(Dz)/Solnrm
   ELSE
     !         If we get here ITOL is not one of the acceptable values.
-    eror = R1MACH(2)
+    eror = huge_sp
     ierr = 3
     ERROR STOP "Itol is not one of the acceptable values {1,2,11}"
   END IF

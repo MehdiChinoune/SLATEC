@@ -59,7 +59,7 @@ PURE SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   900328  Added TYPE section.  (WRB)
   !   900604  DP version created from SP version.  (RWC)
   !   920422  Changed CALL to DHFTI to include variable MA.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   USE blas, ONLY : DSWAP, DAXPY
   USE linear, ONLY : DH12, DHFTI
   !
@@ -74,7 +74,7 @@ PURE SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
     n1, n2, n3, next, np1
   LOGICAL :: cov, sclcov
   !
-  REAL(DP), PARAMETER :: drelpr = D1MACH(4)
+  REAL(DP), PARAMETER :: drelpr = eps_dp
   !
   !* FIRST EXECUTABLE STATEMENT  DLSI
   !

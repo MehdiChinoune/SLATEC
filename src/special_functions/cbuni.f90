@@ -24,7 +24,7 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp, tiny_sp
   USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE
   !
   INTEGER, INTENT(IN) :: Kode, N, Nui
@@ -32,10 +32,11 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, iflag, iform, k, nl, nw
   COMPLEX(SP) :: cscl, cscr, cy(2), rz, st, s1, s2
   REAL(SP) :: ax, ay, dfnu, fnui, gnu, xx, yy, ascle, bry(3), str, sti, stm
-  REAL(SP), PARAMETER :: sqrt_huge = SQRT( HUGE(1._SP) )
+  REAL(SP), PARAMETER :: sqrt_huge = SQRT( huge_sp )
   !* FIRST EXECUTABLE STATEMENT  CBUNI
   Nz = 0
   xx = REAL(Z)
@@ -88,7 +89,7 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         !----------------------------------------------------------------------
         !     SCALE BACKWARD RECURRENCE, BRY(3) IS DEFINED BUT NEVER USED
         !----------------------------------------------------------------------
-        bry(1) = 1.E+3_SP*R1MACH(1)/Tol
+        bry(1) = 1.E+3_SP*tiny_sp/Tol
         bry(2) = 1._SP/bry(1)
         bry(3) = bry(2)
         iflag = 2

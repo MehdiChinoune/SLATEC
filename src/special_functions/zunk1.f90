@@ -24,7 +24,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, huge_dp
   !     COMPLEX CFN,CK,CONE,CRSC,CS,CSCL,CSGN,CSPN,CSR,CSS,CWRK,CY,CZERO,
   !    *C1,C2,PHI,PHID,RZ,SUM,SUMD,S1,S2,Y,Z,ZETA1,ZETA1D,ZETA2,ZETA2D,ZR
   INTEGER :: i, ib, iflag, ifn, il, init(2), inu, iuf, k, kdflg, kflag, &
@@ -52,9 +52,9 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   csrr(1) = crsc
   csrr(2) = coner
   csrr(3) = cscl
-  bry(1) = 1.E3_DP*D1MACH(1)/Tol
+  bry(1) = 1.E3_DP*tiny_dp/Tol
   bry(2) = 1._DP/bry(1)
-  bry(3) = D1MACH(2)
+  bry(3) = huge_dp
   zrr = Zr
   zri = Zi
   IF( Zr<0._DP ) THEN

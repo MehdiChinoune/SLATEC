@@ -147,7 +147,7 @@ PURE SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !       ter TOL.  This parameter is used in a test which makes a compar-
   !       ison between the approximation X and a solution XSOL.  SNSQE
   !       terminates when the test is satisfied.  If TOL is less than the
-  !       machine precision (as defined by the function R1MACH(4)), then
+  !       machine precision (as defined by the function eps_sp), then
   !       SNSQE attempts only to satisfy the test defined by the machine
   !       precision.  Further progress is not usually possible.  Unless
   !       high precision solutions are required, the recommended value
@@ -285,7 +285,7 @@ PURE SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   ! C     Unless high precision solutions are required,
   ! C     this is the recommended setting.
   ! C
-  !       TOL = SQRT(R1MACH(4))
+  !       TOL = SQRT(eps_sp)
   ! C
   !       CALL SNSQE(FCN,JAC,IOPT,N,X,FVEC,TOL,NPRINT,INFO,WA,LWA)
   !       FNORM = ENORM(N,FVEC)

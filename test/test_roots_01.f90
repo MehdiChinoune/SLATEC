@@ -27,7 +27,7 @@ CONTAINS
     !   810223  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    USE slatec, ONLY : CPZERO, R1MACH, RPZERO
+    USE slatec, ONLY : CPZERO, eps_sp, RPZERO
     INTEGER :: Kprint, Ipass, Lun
     INTEGER :: idegp1, info, i, j, id
     REAL(SP) :: err, erri, relerr
@@ -40,7 +40,7 @@ CONTAINS
     !* FIRST EXECUTABLE STATEMENT  CPRPQX
     Ipass = 1
     idegp1 = ideg + 1
-    relerr = SQRT(R1MACH(4))
+    relerr = SQRT(eps_sp)
     DO j = 1, idegp1
       ac(j) = CMPLX(a(j),0._SP,SP)
     END DO
@@ -106,12 +106,11 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    !   920212  Code completely restructured to test IFLAG for all values
-    !           of KPRINT.  (WRB)
-    USE slatec, ONLY : FZERO, R1MACH, num_xer, control_xer
+    !   920212  Code completely restructured to test IFLAG for all values of KPRINT.  (WRB)
+    USE slatec, ONLY : FZERO, eps_sp, num_xer, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -127,7 +126,7 @@ CONTAINS
     pi = 4._SP*ATAN(1._SP)
     re = 1.0E-6_SP
     ae = 1.0E-6_SP
-    tol = MAX(1.0E-5_SP,SQRT(R1MACH(4)))
+    tol = MAX(1.0E-5_SP,SQRT(eps_sp))
     !
     !     Set up and solve example problem
     !
@@ -229,7 +228,7 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-    USE slatec, ONLY : D1MACH, DFZERO, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DFZERO, num_xer, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -245,7 +244,7 @@ CONTAINS
     pi = 4._DP*ATAN(1._DP)
     re = 1.0E-10_DP
     ae = 1.0E-10_DP
-    tol = MAX(1.E-9_DP,SQRT(D1MACH(4)))
+    tol = MAX(1.E-9_DP,SQRT(eps_dp))
     !
     !     Set up and solve example problem
     !
@@ -350,10 +349,10 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs
-    !           and changed TOL from sqrt R1MACH(3) to sqrt R1MACH(4) for
+    !           and changed TOL from sqrt eps_2_sp to sqrt eps_sp for
     !           the IBM 370 mainframes.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    USE slatec, ONLY : R1MACH, RPQR79, num_xer, control_xer
+    USE slatec, ONLY : eps_sp, RPQR79, num_xer, control_xer
     USE common_mod, ONLY : PASS
     REAL(SP) :: beta, tol
     INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun
@@ -370,7 +369,7 @@ CONTAINS
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1',/,' RPQR79 QUICK CHECK')
-    tol = SQRT(R1MACH(4))
+    tol = SQRT(eps_sp)
     Ipass = 1
     !
     !     Initialize variables for testing.
@@ -481,9 +480,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    USE slatec, ONLY : CPQR79, R1MACH, num_xer, control_xer
+    USE slatec, ONLY : CPQR79, eps_sp, num_xer, control_xer
     USE common_mod, ONLY : PASS
     INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun
     REAL(SP) :: tol
@@ -503,7 +502,7 @@ CONTAINS
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1',/,' CPQR79 QUICK CHECK')
-    tol = SQRT(R1MACH(4))
+    tol = SQRT(eps_sp)
     Ipass = 1
     !
     !     First test.
@@ -621,7 +620,8 @@ END MODULE TEST34_MOD
 !** TEST34
 PROGRAM TEST34
   USE TEST34_MOD, ONLY : CPRPQX, CQRTST, DFZTST, FZTEST, RQRTST
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -675,8 +675,8 @@ PROGRAM TEST34
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST34
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

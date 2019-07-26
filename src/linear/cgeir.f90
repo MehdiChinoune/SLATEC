@@ -112,7 +112,7 @@ PURE SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   USE linpack, ONLY : CGEFA, CGESL
   USE blas, ONLY : SCASUM
   !
@@ -121,6 +121,7 @@ PURE SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   COMPLEX(SP), INTENT(IN) :: A(Lda,N)
   COMPLEX(SP), INTENT(INOUT) :: V(N)
   COMPLEX(SP), INTENT(OUT) :: Work(N,N+1)
+  !
   INTEGER :: info, j
   REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
@@ -195,7 +196,7 @@ PURE SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !     COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
   !     AND CHECK FOR IND GREATER THAN ZERO
   !
-  Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
+  Ind = INT( -LOG10(MAX(eps_sp,dnorm/xnorm)) )
   IF( Ind<=0 ) THEN
     Ind = -10
     ! 'CGEIR : SOLUTION MAY HAVE NO SIGNIFICANCE'

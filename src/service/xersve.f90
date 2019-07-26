@@ -58,11 +58,11 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
   !   900413  Routine modified to remove reference to KFLAG.  (WRB)
   !   900510  Changed to add LIBRARY NAME and SUBROUTINE to calling
   !           sequence, use IF-THEN-ELSE, make number of saved entries
-  !           easily changeable, changed routine name from XERSAV to
-  !           XERSVE.  (RWC)
+  !           easily changeable, changed routine name from XERSAV to XERSVE.  (RWC)
   !   910626  Added LIBTAB and SUBTAB to SAVE statement.  (BKS)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE ISO_FORTRAN_ENV, ONLY : ERROR_UNIT
+  !
   INTEGER, PARAMETER :: LENTAB = 10
   INTEGER :: i, Icount, iunit, Kflag, Level, Nerr
   CHARACTER(*) :: Subrou, Messg
@@ -79,7 +79,7 @@ SUBROUTINE XERSVE(Subrou,Messg,Kflag,Nerr,Level,Icount)
     !        Dump the table.
     !
     IF( nmsg==0 ) RETURN
-    iunit = I1MACH(4)
+    iunit = ERROR_UNIT
     !
     !           Print the table header.
     !

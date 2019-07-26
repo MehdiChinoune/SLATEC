@@ -212,7 +212,7 @@ PURE SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !       between the approximation X and a solution XSOL.  SNSQ termi-
   !       nates when the test is satisfied.  If the convergence parameter
   !       is less than the machine precision (as defined by the function
-  !       R1MACH(4)), then SNSQ only attempts to satisfy the test
+  !       eps_sp), then SNSQ only attempts to satisfy the test
   !       defined by the machine precision.  Further progress is not
   !       usually possible.
   !
@@ -345,7 +345,7 @@ PURE SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   ! C     Unless high precision solutions are required,
   ! C     this is the recommended setting.
   ! C
-  !       XTOL = SQRT(R1MACH(4))
+  !       XTOL = SQRT(eps_sp)
   ! C
   !       MAXFEV = 2000
   !       ML = 1
@@ -425,7 +425,7 @@ PURE SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   INTERFACE
     PURE SUBROUTINE FCN(N,X,Fvec,iflag)
@@ -457,7 +457,7 @@ PURE SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     p0001 = 1.E-4_SP
   !
   !* FIRST EXECUTABLE STATEMENT  SNSQ
-  epsmch = R1MACH(4)
+  epsmch = eps_sp
   !
   Info = 0
   iflag = 0

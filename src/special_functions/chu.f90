@@ -38,13 +38,15 @@ REAL(SP) ELEMENTAL FUNCTION CHU(A,B,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp
+  !
   REAL(SP), INTENT(IN) :: A, B, X
+  !
   INTEGER :: i, istrt, m, n
   REAL(SP) :: a0, aintb, alnx, b0, beps, c0, factor,gamri1, gamrni, pch1ai, &
     pch1i, pochai, summ, t, xeps1, xi, xi1, xn, xtoeps
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
-  REAL(SP), PARAMETER :: eps = R1MACH(3)
+  REAL(SP), PARAMETER :: eps = eps_2_sp
   !* FIRST EXECUTABLE STATEMENT  CHU
   !
   IF( X==0._SP ) ERROR STOP 'CHU : X IS ZERO SO CHU IS INFINITE'

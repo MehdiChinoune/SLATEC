@@ -44,11 +44,13 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
+  !
   INTEGER, INTENT(IN) :: Ipmtr
   REAL(SP), INTENT(IN) :: Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Arg, Asum, Bsum, Phi, Zeta1, Zeta2
+  !
   INTEGER :: ias, ibs, is, j, jr, ju, k, kmax, kp1, ks, l, lr, lrp1, l1, l2, m
   COMPLEX(SP) :: cfnu, cr(14), dr(14), p(30), przth, ptfn, rfn13, rtzta, rzth, &
     suma, sumb, tfn, t2, up(14), w, w2, za, zb, zc, zeta, zth
@@ -256,7 +258,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !-----------------------------------------------------------------------
   tstr = REAL(Z)
   tsti = AIMAG(Z)
-  test = R1MACH(1)*1.E+3_SP
+  test = tiny_sp*1.E+3_SP
   ac = Fnu*test
   IF( ABS(tstr)>ac .OR. ABS(tsti)>ac ) THEN
     zb = Z*CMPLX(rfnu,0._SP,SP)

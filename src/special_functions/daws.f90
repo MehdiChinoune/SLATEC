@@ -46,12 +46,14 @@ REAL(SP) ELEMENTAL FUNCTION DAWS(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, tiny_sp, huge_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   REAL(SP) :: y
   INTEGER, PARAMETER :: ntdaw = 7, ntdaw2 = 18, ntdawa = 7
-  REAL(SP), PARAMETER :: eps = R1MACH(3), xsml = SQRT(1.5_SP*eps), xbig = SQRT(0.5_SP/eps), &
-    xmax = EXP(MIN(-LOG(2._SP*R1MACH(1)),LOG(R1MACH(2)))-1._SP)
+  REAL(SP), PARAMETER :: eps = eps_2_sp, xsml = SQRT(1.5_SP*eps), xbig = SQRT(0.5_SP/eps), &
+    xmax = EXP(MIN(-LOG(2._SP*tiny_sp),LOG(huge_sp))-1._SP)
   REAL(SP), PARAMETER :: dawcs(13) = [ -.006351734375145949_SP,-.22940714796773869_SP, &
     .022130500939084764_SP, -.001549265453892985_SP, .000084973277156849_SP, &
     -.000003828266270972_SP, .000000146285480625_SP,-.000000004851982381_SP, &

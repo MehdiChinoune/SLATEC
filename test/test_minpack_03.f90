@@ -81,12 +81,12 @@ CONTAINS
     !           (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900911  Test problem changed and cosmetic changes to code.  (WRB)
-    !   901205  Changed usage of R1MACH(3) to R1MACH(4) and modified the
+    !   901205  Changed usage of eps_2_sp to eps_sp and modified the
     !           FORMATs.  (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-    USE slatec, ONLY : PCOEF, POLFIT, PVALUE, R1MACH, num_xer, control_xer
+    USE slatec, ONLY : PCOEF, POLFIT, PVALUE, eps_sp, num_xer, control_xer
     USE common_mod, ONLY : PASS
     INTEGER :: kontrl
     !     .. Scalar Arguments ..
@@ -108,7 +108,7 @@ CONTAINS
       itest(i) = 0
     END DO
     icnt = 0
-    TOL = SQRT(R1MACH(4))
+    TOL = SQRT(eps_sp)
     m = 11
     DO i = 1, m
       x(i) = i - 6
@@ -209,7 +209,7 @@ CONTAINS
     !
     IERp = 1
     NORdp = 4
-    EPS = 75._SP*R1MACH(4)
+    EPS = 75._SP*eps_sp
     SVEps = EPS
     CALL POLFIT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
     !
@@ -284,7 +284,7 @@ CONTAINS
     !
     m = 11
     w(1) = -1._SP
-    EPS = 5._SP*R1MACH(4)
+    EPS = 5._SP*eps_sp
     SVEps = EPS
     RP = 553._SP
     maxord = 2
@@ -463,7 +463,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : FDJAC3, R1MACH, SCOV, SNLS1E, control_xer, num_xer
+    USE slatec, ONLY : FDJAC3, eps_sp, SCOV, SNLS1E, control_xer, num_xer
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -492,7 +492,7 @@ CONTAINS
     iflag = 1
     zero = 0._SP
     one = 1._SP
-    tol = SQRT(40._SP*R1MACH(4))
+    tol = SQRT(40._SP*eps_sp)
     tol2 = SQRT(tol)
     !
     !     OPTION=2, the full Jacobian is stored and the user provides the
@@ -756,11 +756,11 @@ CONTAINS
     !   891004  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, modified tolerances
-    !           to use R1MACH(4) rather than R1MACH(3) and cleaned up
+    !           to use eps_sp rather than eps_2_sp and cleaned up
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : BVALU, CV, FC, IVOUT, R1MACH, SMOUT, SVOUT, num_xer, control_xer
+    USE slatec, ONLY : BVALU, CV, FC, IVOUT, eps_sp, SMOUT, SVOUT, num_xer, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -899,7 +899,7 @@ CONTAINS
     !
     !     Check coefficients.
     !
-    tol = 7._SP*SQRT(R1MACH(4))
+    tol = 7._SP*SQRT(eps_sp)
     diff = 0._SP
     DO i = 1, ndata
       diff = MAX(diff,ABS(coeff(i)-coefck(i)))
@@ -1220,7 +1220,8 @@ END MODULE TEST52_MOD
 !** TEST52
 PROGRAM TEST52
   USE TEST52_MOD, ONLY : FCQX, PFITQX, SNLS1Q
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1273,8 +1274,8 @@ PROGRAM TEST52
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST52
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

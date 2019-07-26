@@ -46,7 +46,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !     COMPLEX ARG,ASUM,BSUM,CFNU,CONE,CR,CZERO,DR,P,PHI,PRZTH,PTFN,
   !    *RFN13,RTZTA,RZTH,SUMA,SUMB,TFN,T2,UP,W,W2,Z,ZA,ZB,ZC,ZETA,ZETA1,
   !    *ZETA2,ZTH
@@ -257,7 +257,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST (Z/FNU TOO SMALL)
   !-----------------------------------------------------------------------
-  test = D1MACH(1)*1.E+3_DP
+  test = tiny_dp*1.E+3_DP
   ac = Fnu*test
   IF( ABS(Zr)>ac .OR. ABS(Zi)>ac ) THEN
     zbr = Zr*rfnu

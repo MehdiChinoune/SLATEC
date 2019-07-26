@@ -111,7 +111,7 @@ PURE SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : huge_dp
   USE lapack, ONLY : DGTSV
   !
   INTERFACE
@@ -171,7 +171,7 @@ PURE SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  DQC25F
-  oflow = D1MACH(2)
+  oflow = huge_dp
   !
   centr = 0.5_DP*(B+A)
   hlgth = 0.5_DP*(B-A)

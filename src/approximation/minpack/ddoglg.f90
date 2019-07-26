@@ -65,7 +65,7 @@ PURE SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   !
   INTEGER, INTENT(IN) :: Lr, N
   REAL(DP), INTENT(IN) :: Delta
@@ -78,7 +78,7 @@ PURE SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !     EPSMCH IS THE MACHINE PRECISION.
   !
   !* FIRST EXECUTABLE STATEMENT  DDOGLG
-  epsmch = D1MACH(4)
+  epsmch = eps_dp
   !
   !     FIRST, CALCULATE THE GAUSS-NEWTON DIRECTION.
   !

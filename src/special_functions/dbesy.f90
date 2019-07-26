@@ -74,19 +74,20 @@ PURE SUBROUTINE DBESY(X,Fnu,N,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : log10_radix_dp, tiny_dp, min_exp_dp
   !
   INTEGER, INTENT(IN) :: N
   REAL(DP), INTENT(IN) :: Fnu, X
   REAL(DP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, iflw, j, nb, nd, nn, nud
   REAL(DP) :: azn, cn, dnu, elim, flgjy, fn, rann, s, s1, s2, tm, trx, w(2), &
     wk(7), w2n, xlim, xxn
   INTEGER, PARAMETER :: nulim(2) = [ 70, 100 ]
   !* FIRST EXECUTABLE STATEMENT  DBESY
-  nn = -I1MACH(15)
-  elim = 2.303_DP*(nn*D1MACH(5)-3._DP)
-  xlim = D1MACH(1)*1.E+3_DP
+  nn = -min_exp_dp
+  elim = 2.303_DP*(nn*log10_radix_dp-3._DP)
+  xlim = tiny_dp*1.E+3_DP
   IF( Fnu<0._DP ) THEN
     ERROR STOP 'DBESY : ORDER, FNU, < 0'
   ELSEIF( X<=0._DP ) THEN

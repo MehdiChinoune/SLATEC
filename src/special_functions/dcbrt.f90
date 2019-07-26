@@ -27,15 +27,17 @@ REAL(DP) ELEMENTAL FUNCTION DCBRT(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   INTEGER :: irem, iter, ixpnt, n
   REAL(DP) :: y, cbrtsq
   REAL(SP) :: z
   REAL(DP), PARAMETER :: cbrt2(5) = [ 0.62996052494743658238360530363911_DP, &
     0.79370052598409973737585281963615_DP, 1._DP, &
     1.25992104989487316476721060727823_DP, 1.58740105196819947475170563927231_DP ]
-  INTEGER, PARAMETER :: niter = INT( 1.443*LOG(-.106*LOG(0.1_SP*D1MACH(3))) )
+  INTEGER, PARAMETER :: niter = INT( 1.443*LOG(-.106*LOG(0.1_SP*eps_2_dp)) )
   !* FIRST EXECUTABLE STATEMENT  DCBRT
   !
   DCBRT = 0._DP

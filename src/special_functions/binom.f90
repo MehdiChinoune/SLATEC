@@ -28,11 +28,13 @@ REAL(SP) ELEMENTAL FUNCTION BINOM(N,M)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp, eps_2_sp
+  !
   INTEGER, INTENT(IN) :: M, N
+  !
   INTEGER :: i, k
   REAL(SP) :: corr, xk, xn, xnk
-  REAL(SP), PARAMETER :: bilnmx = LOG(R1MACH(2)), fintmx = 0.9_SP/R1MACH(3)
+  REAL(SP), PARAMETER :: bilnmx = LOG(huge_sp), fintmx = 0.9_SP/eps_2_sp
   REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274_SP
   !* FIRST EXECUTABLE STATEMENT  BINOM
   !

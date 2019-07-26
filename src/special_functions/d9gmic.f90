@@ -32,11 +32,13 @@ REAL(DP) ELEMENTAL FUNCTION D9GMIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp
+  !
   REAL(DP), INTENT(IN) :: A, X, Alx
+  !
   INTEGER :: k, m, mm1
   REAL(DP) :: alng, fk, fkp1, fm, s, sgng, t, te
-  REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), bot = LOG(D1MACH(1))
+  REAL(DP), PARAMETER :: eps = 0.5_DP*eps_2_dp, bot = LOG(tiny_dp)
   REAL(DP), PARAMETER :: euler = 0.57721566490153286060651209008240_DP
   !* FIRST EXECUTABLE STATEMENT  D9GMIC
   !

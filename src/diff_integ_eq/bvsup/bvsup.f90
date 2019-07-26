@@ -424,7 +424,6 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     lllsud, lllsvc, mxnoni, mxnonr, ndeq, nxptsm
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !* FIRST EXECUTABLE STATEMENT  BVSUP
-  CALL MACON
   !
   !- *********************************************************************
   !     TEST FOR INVALID INPUT

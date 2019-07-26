@@ -270,12 +270,14 @@ REAL(SP) ELEMENTAL FUNCTION RC(X,Y)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, tiny_sp, huge_sp
+  !
   REAL(SP), INTENT(IN) :: X, Y
+  !
   REAL(SP) :: lamda, mu, s, sn, xn, yn
   CHARACTER(16) :: xern3, xern4, xern5
-  REAL(SP), PARAMETER :: errtol = (R1MACH(3)/16._SP)**(1._SP/6._SP), &
-    lolim = 5._SP*R1MACH(1), uplim = R1MACH(2)/5._SP
+  REAL(SP), PARAMETER :: errtol = (eps_2_sp/16._SP)**(1._SP/6._SP), &
+    lolim = 5._SP*tiny_sp, uplim = huge_sp/5._SP
   REAL(SP), PARAMETER ::  c1 = 1._SP/7._SP, c2 = 9._SP/22._SP
   !
   !* FIRST EXECUTABLE STATEMENT  RC

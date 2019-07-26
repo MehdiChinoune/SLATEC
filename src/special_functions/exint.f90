@@ -61,7 +61,7 @@ PURE SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !           M       number of exponential integrals in the sequence,
   !                   M >= 1
   !           TOL     relative accuracy wanted, ETOL <= TOL <= 0.1
-  !                   ETOL = single precision unit roundoff = R1MACH(4)
+  !                   ETOL = single precision unit roundoff = eps_sp
   !
   !         Output
   !           EN      a vector of dimension at least M containing values
@@ -98,18 +98,20 @@ PURE SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !   920207  Updated with code with a revision date of 880811 from
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : eps_sp, log10_radix_sp, min_exp_sp
+  !
   INTEGER, INTENT(IN) :: Kode, M, N
   INTEGER, INTENT(OUT) :: Nz, Ierr
   REAL(SP), INTENT(IN) :: X, Tol
   REAL(SP), INTENT(OUT) :: En(M)
+  !
   REAL(SP) :: a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, emx, &
     etol, fnm, fx, pt, p1, p2, s, tx, xcut, xlim, xtol, y(2), yt, y1, y2
   INTEGER :: i, ic, icase, ict, ik, ind, ix, i1m, jset, k, kk, kn, ks, ml, mu, nd, nm
   !* FIRST EXECUTABLE STATEMENT  EXINT
   Ierr = 0
   Nz = 0
-  etol = MAX(R1MACH(4),0.5E-18_SP)
+  etol = MAX(eps_sp,0.5E-18_SP)
   IF( X<0._SP ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
@@ -117,8 +119,8 @@ PURE SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   IF( Tol<etol .OR. Tol>0.1_SP ) Ierr = 1
   IF( X==0._SP .AND. N==1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
-  i1m = -I1MACH(12)
-  pt = 2.3026_SP*R1MACH(5)*i1m
+  i1m = -min_exp_sp
+  pt = 2.3026_SP*log10_radix_sp*i1m
   xlim = pt - 6.907755_SP
   bt = pt + (N+M-1)
   IF( bt>1000._SP ) xlim = pt - LOG(bt)

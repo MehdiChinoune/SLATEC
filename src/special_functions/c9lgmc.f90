@@ -33,15 +33,17 @@ COMPLEX(SP) ELEMENTAL FUNCTION C9LGMC(Zin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, huge_sp, tiny_sp
+  !
   COMPLEX(SP), INTENT(IN) :: Zin
+  !
   INTEGER :: i, ndx
   REAL(SP) :: cabsz, x, y
   COMPLEX(SP) :: z, z2inv
-  INTEGER, PARAMETER :: nterm = INT( -0.30*LOG(R1MACH(3)) )
-  REAL(SP), PARAMETER :: bound = 0.117_SP*nterm*(0.1_SP*R1MACH(3))**(-1._SP/(2*nterm-1)), &
-    xbig = 1._SP/SQRT(R1MACH(3)), &
-    xmax = EXP(MIN(LOG(R1MACH(2)/12._SP),-LOG(12._SP*R1MACH(1))))
+  INTEGER, PARAMETER :: nterm = INT( -0.30*LOG(eps_2_sp) )
+  REAL(SP), PARAMETER :: bound = 0.117_SP*nterm*(0.1_SP*eps_2_sp)**(-1._SP/(2*nterm-1)), &
+    xbig = 1._SP/SQRT(eps_2_sp), &
+    xmax = EXP(MIN(LOG(huge_sp/12._SP),-LOG(12._SP*tiny_sp)))
   REAL(SP), PARAMETER :: bern(11) = [ .083333333333333333_SP,-.0027777777777777778_SP, &
     .00079365079365079365_SP, -.00059523809523809524_SP, .00084175084175084175_SP, &
     -.0019175269175269175_SP,  .0064102564102564103_SP, -.029550653594771242_SP, &

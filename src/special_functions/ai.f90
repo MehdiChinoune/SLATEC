@@ -40,12 +40,12 @@ REAL(SP) ELEMENTAL FUNCTION AI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, eps_2_sp
   REAL(SP), INTENT(IN) :: X
   REAL(SP) :: theta, xm, z
   INTEGER, PARAMETER :: naif = 5, naig = 4
-  REAL(SP), PARAMETER :: x3sml = R1MACH(3)**0.3334_SP, &
-    xmaxt = (-1.5_SP*LOG(R1MACH(1)))**0.6667_SP, &
+  REAL(SP), PARAMETER :: x3sml = eps_2_sp**0.3334_SP, &
+    xmaxt = (-1.5_SP*LOG(tiny_sp))**0.6667_SP, &
     xmax = xmaxt - xmaxt*LOG(xmaxt)/(4._SP*SQRT(xmaxt)+1._SP) - 0.01_SP
   REAL(SP), PARAMETER :: aifcs(9) = [ -.03797135849666999750_SP, .05919188853726363857_SP, &
     .00098629280577279975_SP, .00000684884381907656_SP, .00000002594202596219_SP, &
@@ -55,8 +55,8 @@ REAL(SP) ELEMENTAL FUNCTION AI(X)
     .00025678356987483_SP, .00000142652141197_SP, .00000000457211492_SP, &
     .00000000000952517_SP, .00000000000001392_SP, .00000000000000001_SP ]
   !* FIRST EXECUTABLE STATEMENT  AI
-  ! naif = INITS(aifcs,0.1_SP*R1MACH(3))
-  ! naig = INITS(aigcs,0.1_SP*R1MACH(3))
+  ! naif = INITS(aifcs,0.1_SP*eps_2_sp)
+  ! naig = INITS(aigcs,0.1_SP*eps_2_sp)
   !
   IF( X<(-1._SP) ) THEN
     CALL R9AIMP(X,xm,theta)

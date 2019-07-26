@@ -115,7 +115,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH, max_xer, control_xer
+  USE service, ONLY : XERMSG, eps_dp, max_xer, control_xer
   INTEGER :: Iflag, Irank, Iscale, Isflg, M, Mlso, N, Nrda, Nrdu, Kpivot(N)
   REAL(DP) :: A(Nrda,M), B(N), Diag(N), Div(N), Q(Nrda,M), S(N), Scales(M), Td(N), &
     U(Nrdu,M), X(M)
@@ -132,7 +132,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !     BEGIN BLOCK PERMITTING ...EXITS TO 310
   !        BEGIN BLOCK PERMITTING ...EXITS TO 80
   !* FIRST EXECUTABLE STATEMENT  DLSSUD
-  uro = D1MACH(4)
+  uro = eps_dp
   !
   IF( N>=1 .AND. M>=N .AND. Nrda>=N ) THEN
     IF( Nrdu==0 .OR. Nrdu>=M ) THEN

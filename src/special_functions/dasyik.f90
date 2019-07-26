@@ -54,12 +54,13 @@ PURE SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
   !
   INTEGER, INTENT(IN) :: In, Kode
   REAL(DP), INTENT(IN) :: Flgik, Fnu, X
   REAL(DP), INTENT(INOUT) :: Arg, Ra
   REAL(DP), INTENT(OUT) :: Y(In)
+  !
   INTEGER :: j, jn, k, kk, l
   REAL(DP) :: ak, ap, coef, etx, fn, gln, s1, s2, t, tol, t2, z
   REAL(DP), PARAMETER :: con(2) = [ 3.98942280401432678E-01_DP, 1.25331413731550025E+00_DP ]
@@ -86,7 +87,7 @@ PURE SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
     -3.75671766607634E+07_DP, 1.32887671664218E+07_DP, -2.78561812808645E+06_DP, &
     3.08186404612662E+05_DP, -1.38860897537170E+04_DP, 1.10017140269247E+02_DP ]
   !* FIRST EXECUTABLE STATEMENT  DASYIK
-  tol = D1MACH(3)
+  tol = eps_2_dp
   tol = MAX(tol,1.E-15_DP)
   fn = Fnu
   z = (3._DP-Flgik)/2._DP

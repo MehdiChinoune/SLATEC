@@ -37,13 +37,15 @@ PURE SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : huge_dp
+  !
   INTEGER, INTENT(IN) :: Nin
   REAL(DP), INTENT(IN) :: Xnu, X
   REAL(DP), INTENT(OUT) :: Bke(Nin)
+  !
   INTEGER :: i, iswtch, n
   REAL(DP) :: bknu1, v, vincr, vend, direct
-  REAL(DP), PARAMETER :: alnbig = LOG(D1MACH(2))
+  REAL(DP), PARAMETER :: alnbig = LOG(huge_dp)
   !* FIRST EXECUTABLE STATEMENT  DBSKES
   !
   v = ABS(Xnu)

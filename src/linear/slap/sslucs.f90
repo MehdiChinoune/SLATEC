@@ -84,7 +84,7 @@ PURE SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !           IERR = 3 => Error in user input.
   !                       Check input values of N, ITOL.
   !           IERR = 4 => User error tolerance set too tight.
-  !                       Reset to 500*R1MACH(3).  Iteration proceeded.
+  !                       Reset to 500*eps_2_sp.  Iteration proceeded.
   !           IERR = 5 => Breakdown of the method detected.
   !                       (r0,r) approximately 0.
   !           IERR = 6 => Stagnation of the method detected.

@@ -57,12 +57,14 @@ REAL(DP) ELEMENTAL FUNCTION DAIE(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, huge_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   REAL(DP) :: sqrtx, theta, xm, z
   INTEGER, PARAMETER :: naif = 8, naig = 8, naip1 = 26, naip2 = 15
-  REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), x3sml = eta**0.3333_SP, &
-    x32sml = 1.3104_DP*x3sml**2, xbig = D1MACH(2)**0.6666_DP
+  REAL(DP), PARAMETER :: eta = 0.1_DP*eps_2_dp, x3sml = eta**0.3333_SP, &
+    x32sml = 1.3104_DP*x3sml**2, xbig = huge_dp**0.6666_DP
   REAL(DP), PARAMETER :: aifcs(13) = [ -.37971358496669997496197089469414E-1_DP, &
     +.59191888537263638574319728013777E-1_DP, +.98629280577279975365603891044060E-3_DP, &
     +.68488438190765667554854830182412E-5_DP, +.25942025962194713019489279081403E-7_DP, &

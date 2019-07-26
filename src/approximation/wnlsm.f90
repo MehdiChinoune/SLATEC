@@ -69,7 +69,7 @@ PURE SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   USE blas, ONLY : SAXPY, SROTM, SROTMG, SSWAP
   USE linear, ONLY : H12
   !
@@ -85,7 +85,7 @@ PURE SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     sparam(5), t, tau, wmax, z2, zz
   LOGICAL :: done, feasbl, hitcon, pos
   !
-  REAL(SP), PARAMETER :: srelpr = R1MACH(4)
+  REAL(SP), PARAMETER :: srelpr = eps_sp
   !* FIRST EXECUTABLE STATEMENT  WNLSM
   !
   !     Set the nominal tolerance used in the code.

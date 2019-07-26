@@ -19,12 +19,13 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of D1MACH(3) to D1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_dp to eps_dp.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
-    USE slatec, ONLY : D1MACH, DAVINT, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DAVINT, num_xer, control_xer
+    !
     INTEGER :: kontrl
     INTEGER :: i, ierr, Ipass, Kprint, Lun, n
     REAL(DP) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
@@ -33,7 +34,7 @@ CONTAINS
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' DAVINT Quick Check')
     Ipass = 1
-    tol = MAX(.0001_DP,SQRT(D1MACH(4)))
+    tol = MAX(.0001_DP,SQRT(eps_dp))
     tol1 = 1.E-2_DP*tol
     !
     !     Perform first accuracy test.
@@ -223,13 +224,12 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of D1MACH(3) to D1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_dp to eps_dp.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920213  Code restructured to test DGAUS8 for all values of KPRINT,
-    !           second accuracy test added and testing of error returns
-    !           revised.  (WRB)
-    USE slatec, ONLY : D1MACH, DGAUS8, control_xer
+    !           second accuracy test added and testing of error returns revised.  (WRB)
+    USE slatec, ONLY : eps_dp, DGAUS8, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -243,7 +243,7 @@ CONTAINS
     !
     !     Initialize variables for testing.
     !
-    tol = SQRT(D1MACH(4))
+    tol = SQRT(eps_dp)
     Ipass = 1
     !
     !     First accuracy test.
@@ -291,7 +291,7 @@ CONTAINS
 !    a = 0._DP
 !    b = 1._DP
 !    cor = 2._DP
-!    err = 100._DP*D1MACH(4)
+!    err = 100._DP*eps_dp
 !    req = err
 !    CALL DGAUS8(DFQD1,a,b,err,ans,ierr)
     !
@@ -308,7 +308,7 @@ CONTAINS
     !     Test DGAUS8 with A and B nearly equal.
     !
 !    a = 2._DP
-!    b = a*(1._DP+D1MACH(4))
+!    b = a*(1._DP+eps_dp)
 !    cor = 0._DP
 !    err = tol
     !
@@ -365,13 +365,12 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of D1MACH(3) to D1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_dp to eps_dp.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920213  Code restructured to test DQNC79 for all values of KPRINT,
-    !           second accuracy test added and testing of error returns
-    !           revised.  (WRB)
-    USE slatec, ONLY : D1MACH, DQNC79, control_xer
+    !           second accuracy test added and testing of error returns revised.  (WRB)
+    USE slatec, ONLY : eps_dp, DQNC79, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -385,7 +384,7 @@ CONTAINS
     !
     !     Initialize variables for testing.
     !
-    tol = SQRT(D1MACH(4))
+    tol = SQRT(eps_dp)
     Ipass = 1
     !
     !     First accuracy test.
@@ -433,7 +432,7 @@ CONTAINS
 !    a = 0._DP
 !    b = 1._DP
 !    cor = 2._DP
-!    err = 100._DP*D1MACH(4)
+!    err = 100._DP*eps_dp
 !    req = err
 !    CALL DQNC79(DFQD1,a,b,err,ans,ierr,nfct)
     !
@@ -450,7 +449,7 @@ CONTAINS
     !     Test DQNC79 with A and B nearly equal.
     !
 !    a = 2._DP
-!    b = a*(1._DP+D1MACH(4))
+!    b = a*(1._DP+eps_dp)
 !    cor = 0._DP
 !    err = tol
     !
@@ -546,7 +545,8 @@ END MODULE TEST42_MOD
 !** TEST42
 PROGRAM TEST42
   USE TEST42_MOD, ONLY : DAVNTS, DQG8TS, DQN79Q
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -598,8 +598,8 @@ PROGRAM TEST42
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST42
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

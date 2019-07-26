@@ -106,7 +106,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   910801  Added EXTERNAL statement for RAND due to problem on IBM
     !           RS 6000.  (WRB)
-    USE slatec, ONLY : CHFDV, CHFEV, R1MACH, RAND
+    USE slatec, ONLY : CHFDV, CHFEV, eps_sp, RAND
     !
     !  Declare arguments.
     !
@@ -133,7 +133,7 @@ CONTAINS
     REAL(SP), PARAMETER :: right(3) = [ 2.5_SP, 3.0E-10_SP, 1.0E8_SP ]
     !
     !* FIRST EXECUTABLE STATEMENT  EVCHCK
-    machep = R1MACH(4)
+    machep = eps_sp
     eps1 = four*machep
     eps2 = ten*machep
     !
@@ -608,11 +608,10 @@ CONTAINS
     !   901130  Made many changes to output:  (FNF)
     !           1. Reduced amount of output for KPRINT=3.  (Now need to
     !              use KPRINT=4 for full output.)
-    !           2. Added 1P's to formats and revised some to reduce maximum
-    !              line length.
+    !           2. Added 1P's to formats and revised some to reduce maximum line length.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    USE slatec, ONLY : PCHFD, PCHFE, R1MACH
+    USE slatec, ONLY : PCHFD, PCHFE, eps_sp
     !
     !  Declare arguments.
     !
@@ -635,7 +634,7 @@ CONTAINS
     !  INITIALIZE.
     !
     !* FIRST EXECUTABLE STATEMENT  EVPCCK
-    machep = R1MACH(4)
+    machep = eps_sp
     tol = 10._SP*machep
     !
     Fail = .FALSE.
@@ -1082,7 +1081,7 @@ CONTAINS
     !   901130  Added 1P's to formats; changed to allow KPRINT>3.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    USE slatec, ONLY : PCHIA, R1MACH
+    USE slatec, ONLY : PCHIA, eps_sp
     !
     !  Declare arguments.
     !
@@ -1107,7 +1106,7 @@ CONTAINS
     !  SET PASS/FAIL TOLERANCE.
     !
     !* FIRST EXECUTABLE STATEMENT  PCHQK2
-    machep = R1MACH(4)
+    machep = eps_sp
     tol = 100._SP*machep
     !
     !  SET UP PCH FUNCTION DEFINITION.
@@ -1274,7 +1273,7 @@ CONTAINS
     !           3. Added 1P's to formats.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    USE slatec, ONLY : PCHIC, PCHIM, PCHSP, R1MACH
+    USE slatec, ONLY : PCHIC, PCHIM, PCHSP, eps_sp
     !
     !*Internal Notes:
     !
@@ -1317,8 +1316,8 @@ CONTAINS
     ifail = 0
     !
     !        Set tolerances.
-    tol = 10*R1MACH(4)
-    told = SQRT(R1MACH(4))
+    tol = 10*eps_sp
+    told = SQRT(eps_sp)
     tolz = ZERO
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
@@ -1836,7 +1835,7 @@ CONTAINS
     !   900430  Corrected errors in prologue.
     !   900501  Corrected declarations.
     !   930317  Improved output formats.  (FNF)
-    USE slatec, ONLY : BVALU, PCHBS, R1MACH
+    USE slatec, ONLY : BVALU, PCHBS, eps_sp
     !
     !*Internal Notes:
     !  TOL  is the tolerance to use for quantities that should only
@@ -1872,7 +1871,7 @@ CONTAINS
     !
     !* FIRST EXECUTABLE STATEMENT  PCHQK5
     ifail = 0
-    tol = 100*R1MACH(4)
+    tol = 100*eps_sp
     tolz = ZERO
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
@@ -1989,7 +1988,8 @@ END MODULE TEST32_MOD
 !** TEST32
 PROGRAM TEST32
   USE TEST32_MOD, ONLY : PCHQK1, PCHQK2, PCHQK3, PCHQK4, PCHQK5
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -2044,8 +2044,8 @@ PROGRAM TEST32
   !   930318  Added new quick check PCHQK5.  (WRB,FNF)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST32
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

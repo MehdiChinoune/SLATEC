@@ -27,7 +27,7 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, huge_dp
   !     COMPLEX CFN,CONE,CRSC,CSCL,CSR,CSS,CWRK,CZERO,C1,C2,PHI,RZ,SUM,S1,
   !    *S2,Y,Z,ZETA1,ZETA2
   INTEGER :: i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, Nz
@@ -53,7 +53,7 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   csrr(1) = crsc
   csrr(2) = coner
   csrr(3) = cscl
-  bry(1) = 1.E3_DP*D1MACH(1)/Tol
+  bry(1) = 1.E3_DP*tiny_dp/Tol
   !-----------------------------------------------------------------------
   !     CHECK FOR UNDERFLOW AND OVERFLOW ON FIRST MEMBER
   !-----------------------------------------------------------------------
@@ -147,7 +147,7 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     rzr = (str+str)*rast
     rzi = (sti+sti)*rast
     bry(2) = 1._DP/bry(1)
-    bry(3) = D1MACH(2)
+    bry(3) = huge_dp
     s1r = cyr(1)
     s1i = cyi(1)
     s2r = cyr(2)

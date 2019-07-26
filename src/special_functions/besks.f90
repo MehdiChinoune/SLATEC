@@ -33,13 +33,15 @@ PURE SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
+  !
   INTEGER, INTENT(IN) :: Nin
   REAL(SP), INTENT(IN) :: X, Xnu
   REAL(SP), INTENT(OUT) :: Bk(Nin)
+  !
   REAL(SP) :: expxi
   INTEGER :: i, n
-  REAL(SP), PARAMETER :: xmax = -LOG(R1MACH(1))
+  REAL(SP), PARAMETER :: xmax = -LOG(tiny_sp)
   !* FIRST EXECUTABLE STATEMENT  BESKS
   !
   IF( X>xmax ) THEN

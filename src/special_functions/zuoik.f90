@@ -39,7 +39,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
   !    *ZR
   INTEGER :: i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
@@ -117,7 +117,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
         rcz = rcz + LOG(aphi)
         IF( iform==2 ) rcz = rcz - 0.25_DP*LOG(aarg) - aic
         IF( rcz>(-Elim) ) THEN
-          ascle = 1.E3_DP*D1MACH(1)/Tol
+          ascle = 1.E3_DP*tiny_dp/Tol
           CALL ZLOG(phir,phii,str,sti)
           czr = czr + str
           czi = czi + sti
@@ -179,7 +179,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
     rcz = rcz + LOG(aphi)
     IF( iform==2 ) rcz = rcz - 0.25_DP*LOG(aarg) - aic
     IF( rcz>(-Elim) ) THEN
-      ascle = 1.E3_DP*D1MACH(1)/Tol
+      ascle = 1.E3_DP*tiny_dp/Tol
       CALL ZLOG(phir,phii,str,sti)
       czr = czr + str
       czi = czi + sti

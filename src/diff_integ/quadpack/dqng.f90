@@ -90,7 +90,7 @@ PURE SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, eps_dp
   !
   INTERFACE
     REAL(DP) PURE FUNCTION F(X)
@@ -224,8 +224,8 @@ PURE SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  DQNG
-  epmach = D1MACH(4)
-  uflow = D1MACH(1)
+  epmach = eps_dp
+  uflow = tiny_dp
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------

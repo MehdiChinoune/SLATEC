@@ -62,7 +62,8 @@ PURE SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : eps_2_dp, log10_radix_dp, tiny_dp, digits_dp, min_exp_dp
+  !
   INTERFACE
     PURE SUBROUTINE FUNJY(A,B,C,D,E)
       IMPORT DP
@@ -75,6 +76,7 @@ PURE SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   INTEGER , INTENT(OUT) :: Iflw
   REAL(DP), INTENT(IN) :: Flgjy, Fnu, X
   REAL(DP), INTENT(OUT) :: Wk(7), Y(In)
+  !
   INTEGER :: i, j, jn, jr, ju, k, kb, klast, kmax(5), kp1, ks, ksp1, kstemp, l, lr, &
     lrp1, iseta, isetb
   REAL(DP) :: abw2, akm, ap, asum, az, bsum, cr(10), crz32, dfi, elim, dr(10), fi, &
@@ -206,14 +208,14 @@ PURE SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
     1.74293213231963E-02_DP, 1.65685837786612E-02_DP, 1.57865285987918E-02_DP, &
     1.50729501494096E-02_DP, 1.44193250839955E-02_DP, 1.38184805735342E-02_DP ]
   !* FIRST EXECUTABLE STATEMENT  DASYJY
-  ta = D1MACH(3)
+  ta = eps_2_dp
   tol = MAX(ta,1.E-15_DP)
-  tb = D1MACH(5)
-  ju = I1MACH(15)
+  tb = log10_radix_dp
+  ju = min_exp_dp
   IF( Flgjy==1._DP ) THEN
     elim = -2.303_DP*(tb*ju+3._DP)
   ELSE
-    jr = I1MACH(14)
+    jr = digits_dp
     elim = -2.303_DP*tb*(ju+jr)
   END IF
   fn = Fnu
@@ -409,7 +411,7 @@ PURE SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
     !
     150  CALL FUNJY(Wk(6),Wk(5),Wk(4),fi,dfi)
     ta = 1._DP/tol
-    tb = D1MACH(1)*ta*1.E+3_DP
+    tb = tiny_dp*ta*1.E+3_DP
     IF( ABS(fi)<=tb ) THEN
       fi = fi*ta
       dfi = dfi*ta

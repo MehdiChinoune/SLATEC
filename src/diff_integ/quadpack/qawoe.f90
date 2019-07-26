@@ -216,7 +216,7 @@ PURE SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp, eps_sp
   !
   INTERFACE
     REAL(SP) PURE FUNCTION F(X)
@@ -293,7 +293,7 @@ PURE SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  QAWOE
-  epmach = R1MACH(4)
+  epmach = eps_sp
   !
   !         TEST ON VALIDITY OF PARAMETERS
   !         ------------------------------
@@ -340,8 +340,8 @@ PURE SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,Result,
       !           INITIALIZATIONS
       !           ---------------
       !
-      uflow = R1MACH(1)
-      oflow = R1MACH(2)
+      uflow = tiny_sp
+      oflow = huge_sp
       errmax = Abserr
       maxerr = 1
       area = Result

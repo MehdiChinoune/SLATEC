@@ -47,12 +47,14 @@ REAL(DP) ELEMENTAL FUNCTION DDAWS(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp, huge_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   REAL(DP) :: y
   INTEGER, PARAMETER :: ntdaw = 13, ntdaw2 = 29, ntdawa = 27
-  REAL(DP), PARAMETER :: eps = D1MACH(3), xsml = SQRT(1.5_SP*eps), xbig = SQRT(0.5_SP/eps), &
-    xmax = EXP(MIN(-LOG(2._DP*D1MACH(1)),LOG(D1MACH(2)))-0.001_DP)
+  REAL(DP), PARAMETER :: eps = eps_2_dp, xsml = SQRT(1.5_SP*eps), xbig = SQRT(0.5_SP/eps), &
+    xmax = EXP(MIN(-LOG(2._DP*tiny_dp),LOG(huge_dp))-0.001_DP)
   REAL(DP), PARAMETER :: dawcs(21) = [ -.6351734375145949201065127736293E-2_DP, &
     -.2294071479677386939899824125866E+0_DP, +.2213050093908476441683979161786E-1_DP, &
     -.1549265453892985046743057753375E-2_DP, +.8497327715684917456777542948066E-4_DP, &

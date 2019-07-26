@@ -119,11 +119,13 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, control_xer, max_xer, R1MACH
+  USE service, ONLY : XERMSG, control_xer, max_xer, eps_2_sp
+  !
   INTEGER :: Iflag, Irank, Iter, M, N, Nrda, Kpivot(N)
   REAL(SP) :: Resnrm, Xnorm
   REAL(SP) :: A(Nrda,N), B(M), Diag(N), Div(N), Q(Nrda,N), R(M), Scales(N), Td(N), &
     X(N), Z(N)
+  !
   INTEGER :: irm, irp, Iscale, it, iterp, j, k, kp, l, nfatal, nmir, maxmes, &
     mmir, nfat
   REAL(SP) :: acc, gam, gama, uro, znrm0, znorm
@@ -134,7 +136,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !     THE FUNCTION R1MACH.
   !
   !* FIRST EXECUTABLE STATEMENT  LSSODS
-  uro = R1MACH(3)
+  uro = eps_2_sp
   !
   !- *********************************************************************
   !

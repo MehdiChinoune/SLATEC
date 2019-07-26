@@ -62,7 +62,8 @@ PURE SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : digits_sp, min_exp_sp, eps_2_sp, log10_radix_sp, tiny_sp
+  !
   INTERFACE
     PURE SUBROUTINE FUNJY(A,B,C,D,E)
       IMPORT SP
@@ -206,14 +207,14 @@ PURE SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
     1.74293213231963E-02_SP, 1.65685837786612E-02_SP, 1.57865285987918E-02_SP, &
     1.50729501494096E-02_SP, 1.44193250839955E-02_SP, 1.38184805735342E-02_SP ]
   !* FIRST EXECUTABLE STATEMENT  ASYJY
-  ta = R1MACH(3)
+  ta = eps_2_sp
   tol = MAX(ta,1.0E-15_SP)
-  tb = R1MACH(5)
-  ju = I1MACH(12)
+  tb = log10_radix_sp
+  ju = min_exp_sp
   IF( Flgjy==1._SP ) THEN
     elim = -2.303_SP*(tb*ju+3._SP)
   ELSE
-    jr = I1MACH(11)
+    jr = digits_sp
     elim = -2.303_SP*tb*(ju+jr)
   END IF
   fn = Fnu
@@ -409,7 +410,7 @@ PURE SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
     !
     150  CALL FUNJY(Wk(6),Wk(5),Wk(4),fi,dfi)
     ta = 1._SP/tol
-    tb = R1MACH(1)*ta*1.0E+3_SP
+    tb = tiny_sp*ta*1.0E+3_SP
     IF( ABS(fi)<=tb ) THEN
       fi = fi*ta
       dfi = dfi*ta

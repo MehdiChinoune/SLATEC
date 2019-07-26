@@ -49,7 +49,7 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           fixed code to test all four routines.  (RWC)
-    USE slatec, ONLY : R1MACH, SNBFS, SNBIR, SPOFS, SPOIR
+    USE slatec, ONLY : eps_sp, SNBFS, SNBIR, SPOFS, SPOIR
     INTEGER :: Kprint, Lun
     REAL(SP) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
       work(35), r, delx, delmax, signn
@@ -69,7 +69,7 @@ CONTAINS
     mu = 1
     jd = 2*ml + mu + 1
     Nerr = 0
-    r = R1MACH(4)**0.8_SP
+    r = eps_sp**0.8_SP
     !
     !     COMPUTE C VECTOR.
     !
@@ -230,7 +230,7 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-    USE slatec, ONLY : D1MACH, DNBFS, DPOFS
+    USE slatec, ONLY : eps_dp, DNBFS, DPOFS
     INTEGER :: Kprint, Lun
     REAL(DP) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), work(35), signn
     REAL(SP) :: r, delx, delmax
@@ -250,7 +250,7 @@ CONTAINS
     mu = 1
     jd = 2*ml + mu + 1
     Nerr = 0
-    r = REAL( D1MACH(4)**0.8_DP, SP )
+    r = REAL( eps_dp**0.8_DP, SP )
     !
     !     COMPUTE C VECTOR.
     !
@@ -409,7 +409,8 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-    USE slatec, ONLY : CNBFS, CNBIR, CPOFS, CPOIR, R1MACH
+    USE slatec, ONLY : CNBFS, CNBIR, CPOFS, CPOIR, eps_sp
+    !
     INTEGER :: Kprint, Lun
     REAL(SP) :: r, delx, delmax
     COMPLEX(SP) :: at(5,4), abe(5,7), abet(5,7), bt(4), work(35)
@@ -435,7 +436,7 @@ CONTAINS
     mu = 1
     jd = 2*ml + mu + 1
     Nerr = 0
-    r = R1MACH(4)**0.8_SP
+    r = eps_sp**0.8_SP
     !
     !     FORM ABE(NB ARRAY) FROM MATRIX A.
     !
@@ -532,7 +533,8 @@ END MODULE TEST22_MOD
 !** TEST22
 PROGRAM TEST22
   USE TEST22_MOD, ONLY : CQCK, DQCK, SQCK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -585,8 +587,8 @@ PROGRAM TEST22
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST22
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

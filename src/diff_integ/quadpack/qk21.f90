@@ -65,7 +65,7 @@ PURE SUBROUTINE QK21(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, eps_sp
   !
   INTERFACE
     REAL(SP) PURE FUNCTION F(X)
@@ -126,8 +126,8 @@ PURE SUBROUTINE QK21(F,A,B,Result,Abserr,Resabs,Resasc)
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  QK21
-  epmach = R1MACH(4)
-  uflow = R1MACH(1)
+  epmach = eps_sp
+  uflow = tiny_sp
   !
   centr = 0.5_SP*(A+B)
   hlgth = 0.5_SP*(B-A)

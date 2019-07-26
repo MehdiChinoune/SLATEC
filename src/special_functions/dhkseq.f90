@@ -32,11 +32,13 @@ PURE SUBROUTINE DHKSEQ(X,M,H,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : log10_radix_dp, eps_dp, digits_dp
+  !
   INTEGER, INTENT(IN) :: M
   INTEGER, INTENT(OUT) :: Ierr
   REAL(DP), INTENT(IN) :: X
   REAL(DP), INTENT(OUT) :: H(M)
+  !
   INTEGER :: i, j, k, mx, nx
   REAL(DP) :: fk, fln, fn, fnp, hrx, rln, rxsq, r1m5, s, slope, t, tk, trm(22), &
     trmh(25), trmr(25), tst, u(25), v(25), wdtol, xdmy, xh, xinc, xm, xmin, yint
@@ -54,14 +56,14 @@ PURE SUBROUTINE DHKSEQ(X,M,H,Ierr)
   !
   !* FIRST EXECUTABLE STATEMENT  DHKSEQ
   Ierr = 0
-  wdtol = MAX(D1MACH(4),1.E-18_DP)
+  wdtol = MAX(eps_dp,1.E-18_DP)
   fn = M - 1
   fnp = fn + 1._DP
   !-----------------------------------------------------------------------
   !     COMPUTE XMIN
   !-----------------------------------------------------------------------
-  r1m5 = D1MACH(5)
-  rln = r1m5*I1MACH(14)
+  r1m5 = log10_radix_dp
+  rln = r1m5*digits_dp
   rln = MIN(rln,18.06_DP)
   fln = MAX(rln,3._DP) - 3._DP
   yint = 3.50_DP + 0.40_DP*fln

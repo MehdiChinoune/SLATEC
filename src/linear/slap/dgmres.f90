@@ -391,7 +391,8 @@ PURE SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921026  Added check for valid value of ITOL.  (FNF)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
+  !
   INTERFACE
     PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
@@ -444,7 +445,7 @@ PURE SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
         !         If NRMAX = -1, then set NRMAX = 0 to turn off restarting.
         IF( nrmax==-1 ) nrmax = 0
         !         If input value of TOL is zero, set it to its default value.
-        IF( Tol==0._DP ) Tol = 500*D1MACH(3)
+        IF( Tol==0._DP ) Tol = 500*eps_2_dp
         !
         !         Initialize counters.
         Iter = 0

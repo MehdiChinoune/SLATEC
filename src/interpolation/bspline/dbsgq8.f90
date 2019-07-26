@@ -67,7 +67,7 @@ PURE SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : log10_radix_dp, eps_dp, digits_dp
   !
   INTERFACE
     PURE REAL(DP) FUNCTION FUN(X)
@@ -79,6 +79,7 @@ PURE SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
   INTEGER, INTENT(OUT) :: Ierr
   REAL(DP), INTENT(IN) :: A, B, Bc(N), Xt(N+Kk)
   REAL(DP), INTENT(OUT) :: Ans, Err
+  !
   INTEGER :: k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
   REAL(DP) :: aa(60), ae, anib, area, c, ce, ee, ef, eps, est, gl, glr, gr(60), &
     hh(60), tol, vl(60), vr
@@ -92,8 +93,8 @@ PURE SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
   !     INITIALIZE
   !
   !* FIRST EXECUTABLE STATEMENT  DBSGQ8
-  k = I1MACH(14)
-  anib = D1MACH(5)*k/0.30102000_DP
+  k = digits_dp
+  anib = log10_radix_dp*k/0.30102000_DP
   nbits = INT(anib)
   nlmx = MIN((nbits*5)/8,60)
   Ans = 0._DP
@@ -130,7 +131,7 @@ PURE SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
       END IF
     END IF
     tol = MAX(ABS(Err),2._DP**(5-nbits))/2._DP
-    IF( Err==0._DP ) tol = SQRT(D1MACH(4))
+    IF( Err==0._DP ) tol = SQRT(eps_dp)
     eps = tol
     hh(1) = (B-A)/4._DP
     aa(1) = A

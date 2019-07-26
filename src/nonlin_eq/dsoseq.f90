@@ -71,14 +71,14 @@ PURE SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !- ** Three machine dependent parameters appear in this subroutine.
   !
   !- ** The smallest positive magnitude, zero, is defined by the function
-  !- ** routine D1MACH(1).
+  !- ** routine tiny_dp.
   !
-  !- ** URO, the computer unit roundoff value, is defined by D1MACH(3) for
-  !- ** machines that round or D1MACH(4) for machines that truncate.
+  !- ** URO, the computer unit roundoff value, is defined by eps_2_dp for
+  !- ** machines that round or eps_dp for machines that truncate.
   !- ** URO is the smallest positive number such that 1.+URO  >  1.
   !
   !- ** The output tape unit number, LOUN, is defined by the function
-  !- ** I1MACH(2).
+  !- ** OUTPUT_UNIT.
   !- *********************************************************************
   !
   !***
@@ -91,7 +91,8 @@ PURE SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE ISO_FORTRAN_ENV, ONLY : OUTPUT_UNIT
+  USE service, ONLY : eps_dp, tiny_dp
   !
   INTERFACE
     REAL(DP) PURE FUNCTION FNC(X,K)
@@ -106,6 +107,7 @@ PURE SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   REAL(DP), INTENT(IN) :: Atolx, Rtolx, Tolf
   REAL(DP), INTENT(INOUT) :: C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), X(N), Y(N)
   REAL(DP), INTENT(OUT) :: Fmax
+  !
   INTEGER :: ic, icr, isj, isv, it, item, itry, j, jk, js, k, kd, kj, kk, km1, &
     kn, ksv, l, loun, ls, m, mit, np1
   REAL(DP) :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, pmax, re, &
@@ -115,9 +117,9 @@ PURE SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !        BEGIN BLOCK PERMITTING ...EXITS TO 410
   !           BEGIN BLOCK PERMITTING ...EXITS TO 390
   !* FIRST EXECUTABLE STATEMENT  DSOSEQ
-  uro = D1MACH(4)
-  loun = I1MACH(2)
-  zero = D1MACH(1)
+  uro = eps_dp
+  loun = OUTPUT_UNIT
+  zero = tiny_dp
   re = MAX(Rtolx,uro)
   sruro = SQRT(uro)
   !

@@ -37,18 +37,20 @@ REAL(SP) ELEMENTAL FUNCTION BESK0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, tiny_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   REAL(SP) :: y
   INTEGER, PARAMETER :: ntk0 = 6
-  REAL(SP), PARAMETER :: xsml = SQRT(4._SP*R1MACH(3)), xmaxt = -LOG(R1MACH(1)), &
+  REAL(SP), PARAMETER :: xsml = SQRT(4._SP*eps_2_sp), xmaxt = -LOG(tiny_sp), &
     xmax = xmaxt - 0.5_SP*xmaxt*LOG(xmaxt)/(xmaxt+0.5_SP) - 0.01_SP
   REAL(SP), PARAMETER :: bk0cs(11) = [ -.03532739323390276872_SP, .3442898999246284869_SP, &
     .03597993651536150163_SP, .00126461541144692592_SP, .00002286212103119451_SP, &
     .00000025347910790261_SP, .00000000190451637722_SP, .00000000001034969525_SP, &
     .00000000000004259816_SP, .00000000000000013744_SP, .00000000000000000035_SP ]
   !* FIRST EXECUTABLE STATEMENT  BESK0
-  ! ntk0 = INITS(bk0cs,0.1_SP*R1MACH(3))
+  ! ntk0 = INITS(bk0cs,0.1_SP*eps_2_sp)
   !
   IF( X<=0. ) THEN
     ERROR STOP 'BESK0 : X <= 0'

@@ -140,18 +140,19 @@ PURE SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901005  Replace usage of DIFF with usage of R1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
-
+  USE service, ONLY : eps_sp
+  !
   INTEGER, INTENT(IN) :: M, Mda, Mdb, N, Nb
   INTEGER, INTENT(INOUT) :: Ip(N)
   INTEGER, INTENT(OUT) :: Krank
   REAL(SP), INTENT(IN) :: Tau
   REAL(SP), INTENT(INOUT) :: A(Mda,N+1), B(Mdb,Nb), G(N), H(N)
   REAL(SP), INTENT(OUT) :: Rnorm(Nb)
+  !
   INTEGER :: i, ii, iopt, ip1, j, jb, jj, k, kp1, l, ldiag, lmax, nerr
   REAL(SP) :: factor, hmax, sm1, szero, tmp
   REAL(DP) :: sm, dzero
-  REAL(SP), PARAMETER :: releps = R1MACH(4)
+  REAL(SP), PARAMETER :: releps = eps_sp
   !* FIRST EXECUTABLE STATEMENT  HFTI
   szero = 0._SP
   dzero = 0._DP

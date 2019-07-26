@@ -34,13 +34,15 @@ PURE SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
+  !
   INTEGER, INTENT(IN) :: Nin
   REAL(DP), INTENT(IN) :: Xnu, X
   REAL(DP), INTENT(OUT) :: Bk(Nin)
+  !
   INTEGER :: i, n
   REAL(DP) :: expxi
-  REAL(DP), PARAMETER :: xmax = -LOG(D1MACH(1))
+  REAL(DP), PARAMETER :: xmax = -LOG(tiny_dp)
   !* FIRST EXECUTABLE STATEMENT  DBESKS
   !
   IF( X>xmax ) ERROR STOP 'DBESKS : X SO BIG BESSEL K UNDERFLOWS'

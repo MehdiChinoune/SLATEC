@@ -29,7 +29,7 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-    USE slatec, ONLY : R1MACH, SNSQE
+    USE slatec, ONLY : eps_sp, SNSQE
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -47,7 +47,7 @@ CONTAINS
     n = 2
     lwa = 19
     nprint = -1
-    tol = SQRT(R1MACH(4))
+    tol = SQRT(eps_sp)
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  SNSQE QUICK CHECK'/)
     !
@@ -170,7 +170,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-    USE slatec, ONLY : R1MACH, SOS
+    USE slatec, ONLY : eps_sp, SOS
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -188,8 +188,8 @@ CONTAINS
     n = 2
     lwa = 17
     liw = 6
-    tolf = SQRT(R1MACH(4))
-    rer = SQRT(R1MACH(4))
+    tolf = SQRT(eps_sp)
+    rer = SQRT(eps_sp)
     aer = 0._SP
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  SOS QUICK CHECK'/)
@@ -309,7 +309,8 @@ END MODULE TEST35_MOD
 !** TEST35
 PROGRAM TEST35
   USE TEST35_MOD, ONLY : SNSQQK, SOSNQX
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -360,8 +361,8 @@ PROGRAM TEST35
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST35
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

@@ -26,7 +26,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : tiny_dp, huge_dp
   !     COMPLEX CK,CONE,CSCL,CSCR,CSGN,CSPN,CY,CZERO,C1,C2,RZ,SC1,SC2,ST,
   !    *S1,S2,Y,Z,ZN
   INTEGER :: i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
@@ -81,7 +81,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       c1i = s1i
       c2r = Yr(1)
       c2i = Yi(1)
-      ascle = 1.E3_DP*D1MACH(1)/Tol
+      ascle = 1.E3_DP*tiny_dp/Tol
       IF( Kode/=1 ) THEN
         CALL ZS1S2(znr,zni,c1r,c1i,c2r,c2i,nw,ascle,Alim,iuf)
         Nz = Nz + nw
@@ -136,7 +136,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       csrr(3) = cscl
       bry(1) = ascle
       bry(2) = 1._DP/ascle
-      bry(3) = D1MACH(2)
+      bry(3) = huge_dp
       as2 = ZABS(s2r,s2i)
       kflag = 2
       IF( as2<=bry(1) ) THEN

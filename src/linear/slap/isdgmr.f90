@@ -262,8 +262,8 @@ INTEGER PURE FUNCTION ISDGMR(N,X,Xl,MSOLVE,Itol,Tol,Iter,R,Dz,Rwork,Iwork, &
   !   921026  Corrected D to E in output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   USE DSLBLK, ONLY : soln_com
-  USE service, ONLY : D1MACH
-
+  USE service, ONLY : tiny_dp
+  !
   INTERFACE
     PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
@@ -324,7 +324,7 @@ INTEGER PURE FUNCTION ISDGMR(N,X,Xl,MSOLVE,Itol,Tol,Iter,R,Dz,Rwork,Iwork, &
         r2 = tem*r2
       END IF
       !
-      fuzz = D1MACH(1)
+      fuzz = tiny_dp
       ielmax = 1
       ratmax = ABS(dz2(1))/MAX(ABS(X(1)),fuzz)
       DO i = 2, N

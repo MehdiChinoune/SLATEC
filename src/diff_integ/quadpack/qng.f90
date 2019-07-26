@@ -90,7 +90,7 @@ PURE SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, eps_sp
   !
   INTERFACE
     REAL(SP) PURE FUNCTION F(X)
@@ -204,8 +204,8 @@ PURE SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  QNG
-  epmach = R1MACH(4)
-  uflow = R1MACH(1)
+  epmach = eps_sp
+  uflow = tiny_sp
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------

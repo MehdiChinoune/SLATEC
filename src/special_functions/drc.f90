@@ -267,12 +267,14 @@ REAL(DP) ELEMENTAL FUNCTION DRC(X,Y)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp, huge_dp
+  !
   REAL(DP), INTENT(IN) :: X, Y
+  !
   REAL(DP) :: mu, s, sn, xn, yn, lamda
   CHARACTER(16) :: xern3, xern4, xern5
-  REAL(DP), PARAMETER :: errtol = (D1MACH(3)/16._DP)**(1._DP/6._DP), &
-    lolim = 5._DP*D1MACH(1), uplim = D1MACH(2)/5._DP
+  REAL(DP), PARAMETER :: errtol = (eps_2_dp/16._DP)**(1._DP/6._DP), &
+    lolim = 5._DP*tiny_dp, uplim = huge_dp/5._DP
   REAL(DP), PARAMETER :: c1 = 1._DP/7._DP, c2 = 9._DP/22._DP
   !* FIRST EXECUTABLE STATEMENT  DRC
   !         CALL ERROR HANDLER IF NECESSARY.

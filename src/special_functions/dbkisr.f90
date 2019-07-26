@@ -25,18 +25,20 @@ ELEMENTAL SUBROUTINE DBKISR(X,N,Summ,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
+  !
   INTEGER, INTENT(IN) :: N
   INTEGER, INTENT(OUT) :: Ierr
   REAL(DP), INTENT(IN) :: X
   REAL(DP), INTENT(OUT) :: Summ
+  !
   INTEGER :: i, k, kk, kkn, k1, np
   REAL(DP) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, tkp, tol, trm, xln
   !
   REAL(DP), PARAMETER :: c(2) = [ 1.57079632679489662_DP, 1._DP ]
   !* FIRST EXECUTABLE STATEMENT  DBKISR
   Ierr = 0
-  tol = MAX(D1MACH(4),1.E-18_DP)
+  tol = MAX(eps_dp,1.E-18_DP)
   IF( X>=tol ) THEN
     pr = 1._DP
     pol = 0._DP

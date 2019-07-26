@@ -58,7 +58,7 @@ PURE SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   920422  Changed CALL to HFTI to include variable MA.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   USE blas, ONLY : SAXPY, SSWAP
   USE linear, ONLY : H12, HFTI
   !
@@ -73,7 +73,7 @@ PURE SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
     n1, n2, n3, next, np1
   LOGICAL :: cov, sclcov
   !
-  REAL(SP), PARAMETER :: srelpr = R1MACH(4)
+  REAL(SP), PARAMETER :: srelpr = eps_sp
   !
   !* FIRST EXECUTABLE STATEMENT  LSI
   !

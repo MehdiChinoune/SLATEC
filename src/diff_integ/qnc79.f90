@@ -75,7 +75,7 @@ PURE SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920218  Code and prologue polished.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : log10_radix_sp, eps_sp, digits_sp
   !     .. Function Arguments ..
   INTERFACE
     REAL(SP) PURE FUNCTION FUN(X)
@@ -97,7 +97,7 @@ PURE SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Data statements ..
-  INTEGER, PARAMETER :: nbits = INT( R1MACH(5)*I1MACH(11)/0.30102000_SP ), &
+  INTEGER, PARAMETER :: nbits = INT( log10_radix_sp*digits_sp/0.30102000_SP ), &
     nlmx = MIN(40,(nbits*4)/5)
   REAL(SP), PARAMETER :: sq2 = SQRT(2._SP), w1 = 41._SP/140._SP, w2 = 216._SP/140._SP, &
     w3 = 27._SP/140._SP, w4 = 272._SP/140._SP
@@ -122,7 +122,7 @@ PURE SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
     END IF
   END IF
   tol = MAX(ABS(Err),2._SP**(5-nbits))
-  IF( Err==0._SP ) tol = SQRT(R1MACH(4))
+  IF( Err==0._SP ) tol = SQRT(eps_sp)
   eps = tol
   hh(1) = (B-A)/12._SP
   aa(1) = A

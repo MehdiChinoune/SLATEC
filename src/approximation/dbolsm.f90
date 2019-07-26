@@ -197,7 +197,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   !     rejected as dependent if the magnitude of the pivot element is
   !     <= TOL* magnitude of the column in components strictly above
   !     the pivot element. Nominally the value of this (rank) tolerance
-  !     is TOL = SQRT(R1MACH(4)). To change only the value of TOL, for
+  !     is TOL = SQRT(eps_sp). To change only the value of TOL, for
   !     example,
   !
   !       X(NCOLS+1)=TOL
@@ -216,7 +216,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   !
   !     The required length of IOPT(*) is increased by 2 if option 2 is
   !     used; The required length of X(*) is increased by 1. A value of
-  !     IOFF <= 0 is an error. A value of TOL <= R1MACH(4) gives a
+  !     IOFF <= 0 is an error. A value of TOL <= eps_sp gives a
   !     warning message; it is not considered an error.
   !
   !   3
@@ -224,7 +224,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   !     A solution component is left active (not used) if, roughly
   !     speaking, it seems too large. Mathematically the new component is
   !     left active if the magnitude is >=((vector norm of F)/(matrix
-  !     norm of E))/BLOWUP. Nominally the factor BLOWUP = SQRT(R1MACH(4)).
+  !     norm of E))/BLOWUP. Nominally the factor BLOWUP = SQRT(eps_sp).
   !     To change only the value of BLOWUP, for example,
   !
   !       X(NCOLS+2)=BLOWUP
@@ -421,7 +421,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   !     /SSWAP/ TO /DSWAP/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
-  USE service, ONLY : D1MACH, DVOUT, IVOUT
+  USE service, ONLY : huge_dp, eps_dp, DVOUT, IVOUT
   USE blas, ONLY : DROT, DROTG, DSWAP, DAXPY
   !
   INTEGER, INTENT(IN) :: Mdw, Minput, Ncols
@@ -515,8 +515,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   !     Process the option array.
   !
   fac = 0.75_DP
-  tolind = SQRT(D1MACH(4))
-  tolsze = SQRT(D1MACH(4))
+  tolind = SQRT(eps_dp)
+  tolsze = SQRT(eps_dp)
   itmax = 5*MAX(Minput,Ncols)
   wt = ONE
   mval = 0
@@ -561,7 +561,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
       !     program and the column scaling is defined in the calling program.
       !     'BIG' is plus infinity on this machine.
       !
-      big = D1MACH(2)
+      big = huge_dp
       DO j = 1, Ncols
         IF( Ind(j)==1 ) THEN
           Bu(j) = big
@@ -633,9 +633,9 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
         END IF
         !
         tolind = X(Ncols+ioff)
-        IF( tolind<D1MACH(4) ) THEN
+        IF( tolind<eps_dp ) THEN
           WRITE (xern3,'(1PD15.6)') tolind
-          WRITE (xern4,'(1PD15.6)') D1MACH(4)
+          WRITE (xern4,'(1PD15.6)') eps_dp
           ERROR STOP 'DBOLSM : THE TOLERANCE FOR RANK DETERMINATION IS LESS THAN &
             &MACHINE PRECISION'
           Mode = -25

@@ -37,13 +37,15 @@ PURE SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp
+  !
   INTEGER, INTENT(IN) :: Nin
   REAL(SP), INTENT(IN) :: X, Xnu
   REAL(SP), INTENT(OUT) :: Bke(Nin)
+  !
   INTEGER :: i, iswtch, n
   REAL(SP) :: bknu1, direct, v, vend, vincr
-  REAL(SP), PARAMETER :: alnbig = LOG(R1MACH(2))
+  REAL(SP), PARAMETER :: alnbig = LOG(huge_sp)
   !* FIRST EXECUTABLE STATEMENT  BESKES
   !
   v = ABS(Xnu)

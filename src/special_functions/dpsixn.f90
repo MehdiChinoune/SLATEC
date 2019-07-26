@@ -27,9 +27,10 @@ REAL(DP) ELEMENTAL FUNCTION DPSIXN(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   !
   INTEGER, INTENT(IN) :: N
+  !
   INTEGER :: k
   REAL(DP) :: ax, fn, rfn2, trm, s, wdtol
   !
@@ -75,7 +76,7 @@ REAL(DP) ELEMENTAL FUNCTION DPSIXN(N)
   !
   !* FIRST EXECUTABLE STATEMENT  DPSIXN
   IF( N>100 ) THEN
-    wdtol = MAX(D1MACH(4),1.E-18_DP)
+    wdtol = MAX(eps_dp,1.E-18_DP)
     fn = N
     ax = 1._DP
     s = -0.5_DP/fn

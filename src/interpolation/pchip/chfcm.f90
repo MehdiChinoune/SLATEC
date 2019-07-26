@@ -71,7 +71,7 @@ INTEGER ELEMENTAL FUNCTION CHFCM(D1,D2,Delta)
   !   890407  Converted to new SLATEC format.
   !   890407  Modified DESCRIPTION to LDOC format.
   !   891214  Moved SAVE statements.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !  Fortran intrinsics used:  SIGN.
   !  Other routines used:  R1MACH.
   ! ----------------------------------------------------------------------
@@ -92,7 +92,7 @@ INTEGER ELEMENTAL FUNCTION CHFCM(D1,D2,Delta)
   REAL(SP), PARAMETER :: zero = 0., one = 1.0, two = 2., three = 3., four = 4., ten = 10.
   !  MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !* FIRST EXECUTABLE STATEMENT  CHFCM
-  eps = ten*R1MACH(4)
+  eps = ten*eps_sp
   !
   !  MAKE THE CHECK.
   !

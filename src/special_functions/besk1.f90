@@ -36,19 +36,21 @@ REAL(SP) ELEMENTAL FUNCTION BESK1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp, eps_2_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   REAL(SP) :: y
   INTEGER, PARAMETER :: ntk1 = 7
-  REAL(SP), PARAMETER :: xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+.01_SP), &
-    xsml = SQRT(4._SP*R1MACH(3)), xmaxt = -LOG(R1MACH(1)), &
+  REAL(SP), PARAMETER :: xmin = EXP(MAX(LOG(tiny_sp),-LOG(huge_sp))+.01_SP), &
+    xsml = SQRT(4._SP*eps_2_sp), xmaxt = -LOG(tiny_sp), &
     xmax = xmaxt - 0.5_SP*xmaxt*LOG(xmaxt)/(xmaxt+0.5_SP)
   REAL(SP), PARAMETER :: bk1cs(11) = [ .0253002273389477705_SP,-.353155960776544876_SP, &
     -.122611180822657148_SP, -.0069757238596398643_SP,-.0001730288957513052_SP, &
     -.0000024334061415659_SP, -.0000000221338763073_SP,-.0000000001411488392_SP, &
     -.0000000000006666901_SP, -.0000000000000024274_SP,-.0000000000000000070_SP ]
   !* FIRST EXECUTABLE STATEMENT  BESK1
-  ! ntk1 = INITS(bk1cs,0.1_SP*R1MACH(3))
+  ! ntk1 = INITS(bk1cs,0.1_SP*eps_2_sp)
   !
   IF( X<=0. ) THEN
     ERROR STOP 'BESK1 : X <= 0'

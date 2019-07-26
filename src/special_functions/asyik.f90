@@ -54,12 +54,14 @@ PURE SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : R1MACH
+  !
+  USE service, ONLY : eps_2_sp
   !
   INTEGER, INTENT(IN) :: In, Kode
   REAL(SP), INTENT(IN) :: Flgik, Fnu, X
   REAL(SP), INTENT(INOUT) :: Arg, Ra
   REAL(SP), INTENT(OUT) :: Y(In)
+  !
   INTEGER :: j, jn, k, kk, l
   REAL(SP) :: ak, ap, coef, etx, fn, gln, s1, s2, t, tol, t2, z
   REAL(SP), PARAMETER :: con(2) = [ 3.98942280401432678E-01_SP, 1.25331413731550025E+00_SP ]
@@ -86,7 +88,7 @@ PURE SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
     -3.75671766607634E+07_SP, 1.32887671664218E+07_SP, -2.78561812808645E+06_SP, &
     3.08186404612662E+05_SP, -1.38860897537170E+04_SP, 1.10017140269247E+02_SP ]
   !* FIRST EXECUTABLE STATEMENT  ASYIK
-  tol = R1MACH(3)
+  tol = eps_2_sp
   tol = MAX(tol,1.0E-15_SP)
   fn = Fnu
   z = (3._SP-Flgik)/2._SP

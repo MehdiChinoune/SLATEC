@@ -24,7 +24,8 @@ PURE SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
+  !
   INTEGER, INTENT(IN) :: Ind, Ktrms, N
   INTEGER, INTENT(OUT) :: Ms, Ierr
   REAL(SP), INTENT(IN) :: T(Ktrms), X
@@ -86,7 +87,7 @@ PURE SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !
   !* FIRST EXECUTABLE STATEMENT  BKIAS
   Ierr = 0
-  tol = MAX(R1MACH(4),1.0E-18_SP)
+  tol = MAX(eps_sp,1.0E-18_SP)
   fln = N
   rz = 1._SP/(X+fln)
   rzx = X*rz

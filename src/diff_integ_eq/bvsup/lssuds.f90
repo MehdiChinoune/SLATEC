@@ -117,10 +117,12 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900510  Fixed an error message.  (RWC)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, control_xer, max_xer, R1MACH
+  USE service, ONLY : XERMSG, control_xer, max_xer, eps_sp
+  !
   INTEGER :: Iflag, Irank, Iscale, Isflg, M, Mlso, N, Nrda, Nrdu, Kpivot(N)
   REAL(SP) :: A(Nrda,M), B(N), Diag(N), Div(N), Q(Nrda,M), S(N), Scales(M), Td(N), &
     U(Nrdu,M), X(M)
+  !
   INTEGER :: i, irp, j, jr, k, kp, l, nmir, nu, maxmes, nfat, nfatal
   REAL(SP) :: gam, gama, res, ss, uro
   !
@@ -130,7 +132,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !     BY THE FUNCTION R1MACH.
   !
   !* FIRST EXECUTABLE STATEMENT  LSSUDS
-  uro = R1MACH(4)
+  uro = eps_sp
   !
   !- *********************************************************************
   !

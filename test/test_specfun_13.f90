@@ -25,7 +25,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : D1MACH, DRC, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DRC, num_xer, control_xer
     INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(DP) :: pi, trc, dif
@@ -60,7 +60,7 @@ CONTAINS
     !
 !    IF( Kprint>=3 ) WRITE (Lun,99002)
 !    99002 FORMAT (' DRC - FORCE ERROR 2 TO OCCUR')
-!    trc = DRC(D1MACH(1),D1MACH(1))
+!    trc = DRC(tiny_dp,tiny_dp)
 !    ier = num_xer
 !    IF( ier==2 ) THEN
 !      ipass2 = 1
@@ -73,7 +73,7 @@ CONTAINS
     !
 !    IF( Kprint>=3 ) WRITE (Lun,99003)
 !    99003 FORMAT (' DRC - FORCE ERROR 3 TO OCCUR')
-!    trc = DRC(D1MACH(2),D1MACH(2))
+!    trc = DRC(huge_dp,huge_dp)
 !    ier = num_xer
 !    IF( ier==3 ) THEN
 !      ipass3 = 1
@@ -88,7 +88,7 @@ CONTAINS
     trc = DRC(0._DP,0.25_DP)
     num_xer = 0
     dif = trc - pi
-    IF( (ABS(dif/pi)<1000._DP*D1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/pi)<1000._DP*eps_dp) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       ipass4 = 0
@@ -132,7 +132,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to BLEM.  (WRB)
-    USE slatec, ONLY : D1MACH, DRD, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DRD, num_xer, control_xer
     INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(DP) :: blem, trd, dif
@@ -180,7 +180,7 @@ CONTAINS
     !
 !    IF( Kprint>=3 ) WRITE (Lun,99003)
 !    99003 FORMAT (' DRD - FORCE ERROR 3 TO OCCUR')
-!    trd = DRD(D1MACH(2),D1MACH(2),D1MACH(2))
+!    trd = DRD(huge_dp,huge_dp,huge_dp)
 !    ier = num_xer
 !    IF( ier==3 ) THEN
 !      ipass3 = 1
@@ -196,7 +196,7 @@ CONTAINS
     trd = DRD(0._DP,2._DP,1._DP)
     num_xer = 0
     dif = trd - blem
-    IF( (ABS(dif/blem)<1000._DP*D1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/blem)<1000._DP*eps_dp) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       Ipass = 0
@@ -240,7 +240,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to ALEM.  (WRB)
-    USE slatec, ONLY : D1MACH, DRF, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DRF, num_xer, control_xer
     INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(DP) :: alem, trf, dif
@@ -275,7 +275,7 @@ CONTAINS
     !
 !    IF( Kprint>=3 ) WRITE (Lun,99002)
 !    99002 FORMAT (' DRF - FORCE ERROR 2 TO OCCUR')
-!    trf = DRF(D1MACH(1),D1MACH(1),D1MACH(1))
+!    trf = DRF(tiny_dp,tiny_dp,tiny_dp)
 !    ier = num_xer
 !    IF( ier==2 ) THEN
 !      ipass2 = 1
@@ -288,7 +288,7 @@ CONTAINS
     !
 !    IF( Kprint>=3 ) WRITE (Lun,99003)
 !    99003 FORMAT (' DRF - FORCE ERROR 3 TO OCCUR')
-!    trf = DRF(D1MACH(2),D1MACH(2),D1MACH(2))
+!    trf = DRF(huge_dp,huge_dp,huge_dp)
 !    ier = num_xer
 !    IF( ier==3 ) THEN
 !      ipass3 = 1
@@ -304,7 +304,7 @@ CONTAINS
     trf = DRF(0._DP,1._DP,2._DP)
     num_xer = 0
     dif = trf - alem
-    IF( (ABS(dif/alem)<1000._DP*D1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/alem)<1000._DP*eps_dp) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       ipass4 = 0
@@ -348,7 +348,8 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to CONSJ.  (WRB)
-    USE slatec, ONLY : D1MACH, DRJ, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DRJ, num_xer, control_xer
+    !
     INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(DP) :: consj, trj, dif
@@ -383,7 +384,7 @@ CONTAINS
     !
 !    IF( Kprint>=3 ) WRITE (Lun,99002)
 !    99002 FORMAT (' DRJ - FORCE ERROR 2 TO OCCUR')
-!    trj = DRJ(D1MACH(1),D1MACH(1),D1MACH(1),D1MACH(1))
+!    trj = DRJ(tiny_dp,tiny_dp,tiny_dp,tiny_dp)
 !    ier = num_xer
 !    IF( ier==2 ) THEN
 !      ipass2 = 1
@@ -396,7 +397,7 @@ CONTAINS
     !
 !    IF( Kprint>=3 ) WRITE (Lun,99003)
 !    99003 FORMAT (' DRJ - FORCE ERROR 3 TO OCCUR')
-!    trj = DRJ(D1MACH(2),D1MACH(2),D1MACH(2),D1MACH(2))
+!    trj = DRJ(huge_dp,huge_dp,huge_dp,huge_dp)
 !    ier = num_xer
 !    IF( ier==3 ) THEN
 !      ipass3 = 1
@@ -411,7 +412,7 @@ CONTAINS
     trj = DRJ(2._DP,3._DP,4._DP,5._DP)
     num_xer = 0
     dif = trj - consj
-    IF( (ABS(dif/consj)<1000._DP*D1MACH(4)) .AND. (ier==0) ) THEN
+    IF( (ABS(dif/consj)<1000._DP*eps_dp) .AND. (ier==0) ) THEN
       ipass4 = 1
     ELSE
       ipass4 = 0
@@ -436,7 +437,8 @@ END MODULE TEST14_MOD
 !** TEST14
 PROGRAM TEST14
   USE TEST14_MOD, ONLY : QCDRC, QCDRD, QCDRF, QCDRJ
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -488,8 +490,8 @@ PROGRAM TEST14
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST14
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

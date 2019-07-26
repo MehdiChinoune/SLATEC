@@ -97,12 +97,12 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   !         large, losses of significance by argument reduction occur.
   !         Consequently, if either one exceeds U1=SQRT(0.5/UR), then
   !         losses exceeding half precision are likely and an error flag
-  !         IERR=3 is triggered where UR=MAX(D1MACH(4),1.0D-18) is double
+  !         IERR=3 is triggered where UR=MAX(eps_dp,1.0D-18) is double
   !         precision unit roundoff limited to 18 digits precision.  Also,
   !         if either is larger than U2=0.5/UR, then all significance is
   !         lost and IERR=4.  In order to use the INT function, arguments
   !         must be further restricted not to exceed the largest machine
-  !         integer, U3=I1MACH(9).  Thus, the magnitude of Z and FNU+N-1
+  !         integer, U3=huge_int.  Thus, the magnitude of Z and FNU+N-1
   !         is restricted by MIN(U2,U3).  In IEEE arithmetic, U1,U2, and
   !         U3 approximate 2.0E+3, 4.2E+6, 2.1E+9 in single precision
   !         and 4.7E+7, 2.3E+15 and 2.1E+9 in double precision.  This
@@ -162,7 +162,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  USE service, ONLY : XERMSG, D1MACH, I1MACH
+  USE service, ONLY : eps_dp, log10_radix_dp, tiny_dp, max_exp_dp, min_exp_dp
   !     COMPLEX CWRK,CY,C1,C2,EX,HCI,Z,ZU,ZV
   INTEGER :: i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
   REAL(DP) :: Cwrki(N), Cwrkr(N), Cyi(N), Cyr(N), c1i, c1r, c2i, c2r, &
@@ -187,11 +187,11 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
     ELSE
       Nz = MIN(nz1,nz2)
       IF( Kode==2 ) THEN
-        tol = MAX(D1MACH(4),1.E-18_DP)
-        k1 = I1MACH(15)
-        k2 = I1MACH(16)
+        tol = MAX(eps_dp,1.E-18_DP)
+        k1 = min_exp_dp
+        k2 = max_exp_dp
         k = MIN(ABS(k1),ABS(k2))
-        r1m5 = D1MACH(5)
+        r1m5 = log10_radix_dp
         !-----------------------------------------------------------------------
         !     ELIM IS THE APPROXIMATE EXPONENTIAL UNDER- AND OVERFLOW LIMIT
         !-----------------------------------------------------------------------
@@ -214,7 +214,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
         END IF
         Nz = 0
         rtol = 1._DP/tol
-        ascle = D1MACH(1)*rtol*1.E+3_DP
+        ascle = tiny_dp*rtol*1.E+3_DP
         DO i = 1, N
           !       STR = C1R*CYR(I) - C1I*CYI(I)
           !       STI = C1R*CYI(I) + C1I*CYR(I)

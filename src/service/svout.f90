@@ -50,19 +50,20 @@ SUBROUTINE SVOUT(N,Sx,Ifmt,Idigit)
   !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
-  !   891107  Added comma after 1P edit descriptor in FORMAT
-  !           statements.  (WRB)
+  !   891107  Added comma after 1P edit descriptor in FORMAT statements.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
+  USE ISO_FORTRAN_ENV, ONLY : OUTPUT_UNIT
+  !
   INTEGER, INTENT(IN) :: Idigit, N
   REAL(SP), INTENT(IN) :: Sx(N)
   CHARACTER(*), INTENT(IN) :: Ifmt
+  !
   INTEGER :: i, k1, k2, lout, ndigit
   !
   !     GET THE UNIT NUMBER WHERE OUTPUT WILL BE WRITTEN.
   !* FIRST EXECUTABLE STATEMENT  SVOUT
-  lout = I1MACH(2)
+  lout = OUTPUT_UNIT
   WRITE (lout,Ifmt)
   IF( N<=0 ) RETURN
   ndigit = Idigit

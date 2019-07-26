@@ -28,15 +28,17 @@ SUBROUTINE COMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE CBLKT, ONLY : k_com, cnv_com, eps_com, nm_com, npp_com
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
+  !
   INTEGER :: Ierror
   REAL(SP) :: Ah(:), An(nm_com), B(:), Bh(:), Bn(nm_com), Cn(nm_com)
   COMPLEX(SP) :: Bc(500)
+  !
   INTEGER :: i, i2, i4, ib, if, ifd, ipl, ir, j, j1, j2, jf, js, kdo, l, &
     l1, l2, lh, ls, n2m2, nb, nmp
   REAL(SP) :: arg, bnorm, d1, d2, d3
   !* FIRST EXECUTABLE STATEMENT  COMPB
-  eps_com = R1MACH(4)
+  eps_com = eps_sp
   bnorm = ABS(Bn(1))
   DO j = 2, nm_com
     bnorm = MAX(bnorm,ABS(Bn(j)))

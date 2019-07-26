@@ -693,7 +693,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !       to I2 and columns J1 to J2.
   !              DOUBLE PRECISION DFDY(N,N), EPSJ, H, R, D1MACH,
   !             8     SAVE1(N), SAVE2(N), T, UROUND, Y(N), YJ, YWT(N)
-  !              UROUND = D1MACH(4)
+  !              UROUND = eps_dp
   !              EPSJ = SQRT(UROUND)
   !              DO 30 J = J1,J2
   !                R = EPSJ*MAX(ABS(YWT(J)), ABS(Y(J)))
@@ -728,9 +728,10 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : XERMSG, eps_dp, tiny_dp
   USE linpack, ONLY : DGBFA, DGEFA
   USE lapack, ONLY : DGBTRS, DGETRS
+  !
   INTERFACE
     REAL(DP) FUNCTION G(N,T,Y,Iroot)
       IMPORT DP
@@ -763,6 +764,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
   REAL(DP) :: Eps, Hmax, T, Tout
   REAL(DP) :: Ewt(N), Work(Lenw+Leniw), Y(N+1)
+  !
   INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, &
     isave2, itroot, iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, &
     ndecom, npar, nstepl
@@ -978,9 +980,9 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       Iwork(IMTRSV) = Miter
     END IF
     Work(IHMAX) = Hmax
-    uround = D1MACH(4)
+    uround = eps_dp
     Work(IMACH4) = uround
-    Work(IMACH1) = D1MACH(1)
+    Work(IMACH1) = tiny_dp
     IF( Nroot/=0 ) THEN
       re = uround
       ae = Work(IMACH1)

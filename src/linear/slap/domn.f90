@@ -126,7 +126,7 @@ PURE SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !           IERR = 3 => Error in user input.
   !                       Check input values of N, ITOL.
   !           IERR = 4 => User error tolerance set too tight.
-  !                       Reset to 500*D1MACH(3).  Iteration proceeded.
+  !                       Reset to 500*eps_2_dp.  Iteration proceeded.
   !           IERR = 5 => Preconditioning matrix, M, is not positive
   !                       definite.  (r,z) < 0.
   !           IERR = 6 => Breakdown of method detected.
@@ -249,10 +249,10 @@ PURE SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930326  Removed unused variable.  (FNF)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
   USE blas, ONLY : DAXPY
   USE DSLBLK, ONLY : soln_com
-
+  !
   INTERFACE
     PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
@@ -292,7 +292,7 @@ PURE SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     Ierr = 3
     RETURN
   END IF
-  fuzz = D1MACH(3)
+  fuzz = eps_2_dp
   IF( Tol<500*fuzz ) THEN
     Tol = 500*fuzz
     Ierr = 4

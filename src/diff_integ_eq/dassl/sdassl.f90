@@ -926,7 +926,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !           be of more uniform format.  (FNF)
   !   910624  Fixed minor bug related to HMAX (six lines after label
   !           525).  (LRP)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : XERMSG, eps_sp
   !     Declare arguments.
   INTERFACE
     SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
@@ -1238,7 +1238,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       END DO
       !
       !     COMPUTE UNIT ROUNDOFF AND HMIN
-      uround = R1MACH(4)
+      uround = eps_sp
       Rwork(LROUND) = uround
       hmin = 4._SP*uround*MAX(ABS(T),ABS(Tout))
       !

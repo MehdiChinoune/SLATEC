@@ -80,7 +80,8 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !   891214  Prologue converted to Version 4.0 format.  (WRB)
   !   900510  Added code to break messages between words.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-
+  USE ISO_FORTRAN_ENV, ONLY : ERROR_UNIT
+  !
   INTEGER :: i, idelta, lenmsg, lpiece, lpref, lwrap, n, nextc
   CHARACTER(*) Prefix, Messg
   INTEGER :: Npref, Nwrap
@@ -119,7 +120,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !
   IF( lenmsg==0 ) THEN
     cbuff(lpref+1:lpref+1) = ' '
-    WRITE (I1MACH(4),'(A)') cbuff(1:lpref+1)
+    WRITE (ERROR_UNIT,'(A)') cbuff(1:lpref+1)
     RETURN
   END IF
   !
@@ -214,7 +215,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
     !
     !       PRINT
     !
-    WRITE (I1MACH(4),'(A)') cbuff(1:lpref+lpiece)
+    WRITE (ERROR_UNIT,'(A)') cbuff(1:lpref+lpiece)
     !
     IF( nextc>lenmsg ) EXIT
   END DO

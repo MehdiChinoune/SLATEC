@@ -30,11 +30,13 @@ COMPLEX(SP) ELEMENTAL FUNCTION C0LGMC(Z)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp
+  !
   COMPLEX(SP), INTENT(IN) :: Z
+  !
   REAL(SP) :: cabsz
   COMPLEX(SP) :: q
-  REAL(SP), PARAMETER :: rbig = 1._SP/R1MACH(3)
+  REAL(SP), PARAMETER :: rbig = 1._SP/eps_2_sp
   !* FIRST EXECUTABLE STATEMENT  C0LGMC
   !
   cabsz = ABS(Z)

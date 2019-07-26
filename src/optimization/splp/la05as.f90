@@ -55,7 +55,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   USE LA05DS, ONLY : lp_com, lcol_com, lenl_com, lenu_com, ncp_com, lrow_com, small_com
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
 
   INTEGER, INTENT(IN) :: Ia, N
   INTEGER , INTENT(INOUT):: Ind(Ia,2), Nz
@@ -67,7 +67,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   REAL(SP) :: amax, au, am
   CHARACTER(8) :: xern0, xern1, xern2
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
-  REAL(SP), PARAMETER :: eps = 2.0E0*R1MACH(4)
+  REAL(SP), PARAMETER :: eps = 2.0E0*eps_sp
   !* FIRST EXECUTABLE STATEMENT  LA05AS
   !
   !     SET THE OUTPUT UNIT NUMBER FOR THE ERROR PROCESSOR.

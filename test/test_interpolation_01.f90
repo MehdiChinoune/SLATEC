@@ -21,11 +21,11 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test errors for all values
     !           of KPRINT.  (WRB)
-    USE slatec, ONLY : POLCOF, POLINT, POLYVL, R1MACH
+    USE slatec, ONLY : POLCOF, POLINT, POLYVL, eps_sp
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -48,7 +48,7 @@ CONTAINS
     !
     !     Initialize variables for tests.
     !
-    tol = SQRT(R1MACH(4))
+    tol = SQRT(eps_sp)
     Ipass = 1
     n = 6
     !
@@ -159,7 +159,7 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-    USE slatec, ONLY : D1MACH, DPLINT, DPOLCF, DPOLVL
+    USE slatec, ONLY : eps_dp, DPLINT, DPOLCF, DPOLVL
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -182,7 +182,7 @@ CONTAINS
     !
     !     Initialize variables for tests.
     !
-    tol = SQRT(D1MACH(4))
+    tol = SQRT(eps_dp)
     Ipass = 1
     n = 6
     !
@@ -280,7 +280,8 @@ END MODULE TEST29_MOD
 !** TEST29
 PROGRAM TEST29
   USE TEST29_MOD, ONLY : DPNTCK, PNTCHK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -333,8 +334,8 @@ PROGRAM TEST29
   !   920225  Added CALL to DPNTCK.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST29
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

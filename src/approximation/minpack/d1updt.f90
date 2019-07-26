@@ -72,7 +72,7 @@ PURE SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : huge_dp
   !
   INTEGER, INTENT(IN) :: Ls, M, N
   REAL(DP), INTENT(IN) :: U(M)
@@ -87,7 +87,7 @@ PURE SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !     GIANT IS THE LARGEST MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  D1UPDT
-  giant = D1MACH(2)
+  giant = huge_dp
   !
   !     INITIALIZE THE DIAGONAL ELEMENT POINTER.
   !

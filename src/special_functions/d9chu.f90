@@ -35,11 +35,13 @@ REAL(DP) ELEMENTAL FUNCTION D9CHU(A,B,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
+  !
   REAL(DP), INTENT(IN) :: A, B, Z
+  !
   INTEGER :: i, j
   REAL(DP) :: aa(4), bb(4), ab, anbn, bp, ct1, ct2, ct3, c2, d1z, g1, g2, g3, sab, x2i1
-  REAL(DP), PARAMETER :: eps = 4._DP*D1MACH(4), sqeps = SQRT(D1MACH(4))
+  REAL(DP), PARAMETER :: eps = 4._DP*eps_dp, sqeps = SQRT(eps_dp)
   !* FIRST EXECUTABLE STATEMENT  D9CHU
   bp = 1._DP + A - B
   ab = A*bp

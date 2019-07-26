@@ -42,12 +42,13 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    USE slatec, ONLY : D1MACH, DBSKIN, I1MACH
+    USE slatec, ONLY : eps_dp, log10_radix_dp, DBSKIN, min_exp_dp
+    !
     INTEGER :: Ipass, Kprint, nz
     INTEGER :: i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn
     REAL(DP) :: aix, er, tol, v(1), x, xinc, y(10)
     !* FIRST EXECUTABLE STATEMENT  DQCKIN
-    tol = 1000._DP*MAX(D1MACH(4),1.E-18_DP)
+    tol = 1000._DP*MAX(eps_dp,1.E-18_DP)
     iflg = 0
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT ('1 QUICK CHECK DIAGNOSTICS FOR DBSKIN'//)
@@ -95,8 +96,8 @@ CONTAINS
     kode = 1
     m = 10
     n = 10
-    i1m12 = I1MACH(15)
-    x = -2.302_DP*D1MACH(5)*i1m12
+    i1m12 = min_exp_dp
+    x = -2.302_DP*log10_radix_dp*i1m12
     CALL DBSKIN(x,n,kode,m,y,nz,ierr)
     IF( nz==m ) THEN
       DO i = 1, m
@@ -164,13 +165,14 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    USE slatec, ONLY : D1MACH, DPSIFN
+    USE slatec, ONLY : eps_dp, DPSIFN
+    !
     INTEGER :: Ipass, Kprint
     INTEGER :: i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
     REAL(DP) :: er, psi1(3), psi2(20), r1m4, s, tol, x
     REAL(DP), PARAMETER :: euler = 0.5772156649015328606_DP
     !* FIRST EXECUTABLE STATEMENT  DQCPSI
-    r1m4 = D1MACH(4)
+    r1m4 = eps_dp
     tol = 1000._DP*MAX(r1m4,1.E-18_DP)
     IF( Kprint>=3 ) WRITE (Lun,99001)
     99001 FORMAT ('1 QUICK CHECK DIAGNOSTICS FOR DPSIFN'//)
@@ -263,7 +265,8 @@ END MODULE TEST08_MOD
 !** TEST08
 PROGRAM TEST08
   USE TEST08_MOD, ONLY : DQCKIN, DQCPSI
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -314,8 +317,8 @@ PROGRAM TEST08
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST08
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

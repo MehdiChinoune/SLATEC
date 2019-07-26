@@ -195,7 +195,8 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   USE DXBLK, ONLY : l_com, dlg10r_com, kmax_com, l2_com, mlg102_com, nbitsf_com, &
     nlg102_com, rad2l_com, radixl_com, lg102_com, radixx_com
-  USE service, ONLY : I1MACH
+  USE service, ONLY : digits_dp, digits_int, max_exp_dp, min_exp_dp, radix_fp
+  !
   INTEGER :: Ierror, Irad, Nradpl, Nbits
   REAL(DP) :: Dzero
   INTEGER :: i, ic, ii, imaxex, iminex, iradx, it, j, k, kk, lg102x, log2r, lx, &
@@ -225,11 +226,11 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   ! FOLLOWING 5 STATEMENTS SHOULD BE DELETED IF I1MACH IS
   ! NOT AVAILABLE OR NOT CONFIGURED TO RETURN THE CORRECT
   ! MACHINE-DEPENDENT VALUES.
-  IF( iradx==0 ) iradx = I1MACH(10)
-  IF( nrdplc==0 ) nrdplc = I1MACH(14)
-  IF( dzerox==0._DP ) iminex = I1MACH(15)
-  IF( dzerox==0._DP ) imaxex = I1MACH(16)
-  IF( nbitsx==0 ) nbitsx = I1MACH(8)
+  IF( iradx==0 ) iradx = radix_fp
+  IF( nrdplc==0 ) nrdplc = digits_dp
+  IF( dzerox==0._DP ) iminex = min_exp_dp
+  IF( dzerox==0._DP ) imaxex = max_exp_dp
+  IF( nbitsx==0 ) nbitsx = digits_int
   IF( iradx/=2 ) THEN
     IF( iradx/=4 ) THEN
       IF( iradx/=8 ) THEN

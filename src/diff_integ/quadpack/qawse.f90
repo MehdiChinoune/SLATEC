@@ -174,7 +174,7 @@ PURE SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, eps_sp
   !
   INTERFACE
     REAL(SP) PURE FUNCTION F(X)
@@ -222,8 +222,8 @@ PURE SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  QAWSE
-  epmach = R1MACH(4)
-  uflow = R1MACH(1)
+  epmach = eps_sp
+  uflow = tiny_sp
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------

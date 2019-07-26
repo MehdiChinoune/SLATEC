@@ -42,9 +42,10 @@ REAL(SP) PURE FUNCTION CSEVL(X,Cs)
   !   900329  Prologued revised extensively and code rewritten to allow
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+
   REAL(SP), INTENT(IN) :: X
   REAL(SP), INTENT(IN) :: Cs(:)
+  !
   INTEGER :: i, ni, n
   REAL(SP) :: b0, b1, b2, twox
   !* FIRST EXECUTABLE STATEMENT  CSEVL

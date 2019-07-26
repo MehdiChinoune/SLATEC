@@ -72,7 +72,7 @@ PURE SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !                            array TRMR(NMAX) is not large enough for N
   !
   !         The nominal computational accuracy is the maximum of unit
-  !         roundoff (=R1MACH(4)) and 1.0E-18 since critical constants
+  !         roundoff (=eps_sp) and 1.0E-18 since critical constants
   !         are given to only 18 digits.
   !
   !         DPSIFN is the Double Precision version of PSIFN.
@@ -111,11 +111,13 @@ PURE SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : log10_radix_sp, eps_sp, digits_sp, max_exp_sp, min_exp_sp
+  !
   INTEGER, INTENT(IN) :: Kode, M, N
   INTEGER, INTENT(OUT) :: Ierr, Nz
   REAL(SP), INTENT(IN) :: X
   REAL(SP), INTENT(OUT) :: Ans(M)
+  !
   INTEGER :: i, j, k, mm, mx, nn, np, nx
   REAL(SP) :: arg, den, elim, eps, fln, fn, fnp, fns, fx, rln, rxsq, r1m4, r1m5, s, &
     slope, t, ta, tk, tol, tols, trm(22), trmr(100), tss, tst, tt, t1, t2, wdtol, &
@@ -142,9 +144,9 @@ PURE SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   IF( M<1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
   mm = M
-  nx = MIN(-I1MACH(12),I1MACH(13))
-  r1m5 = R1MACH(5)
-  r1m4 = R1MACH(4)*0.5_SP
+  nx = MIN(-min_exp_sp,max_exp_sp)
+  r1m5 = log10_radix_sp
+  r1m4 = eps_sp*0.5_SP
   wdtol = MAX(r1m4,0.5E-18_SP)
   !-----------------------------------------------------------------------
   !     ELIM = APPROXIMATE EXPONENTIAL OVER AND UNDERFLOW LIMIT
@@ -178,7 +180,7 @@ PURE SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       !-----------------------------------------------------------------------
       !     COMPUTE XMIN AND THE NUMBER OF TERMS OF THE SERIES, FLN+1
       !-----------------------------------------------------------------------
-      rln = r1m5*I1MACH(11)
+      rln = r1m5*digits_sp
       rln = MIN(rln,18.06E0_SP)
       fln = MAX(rln,3._SP) - 3._SP
       yint = 3.50_SP + 0.40_SP*fln

@@ -433,10 +433,9 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !          SET UP MACHINE DEPENDENT CONSTANTS.
   !
   !* FIRST EXECUTABLE STATEMENT  DBVSUP
-  CALL DMACON
   !
-  !                       ************************************************
-  !                           TEST FOR INVALID INPUT
+  !************************************************
+  !    TEST FOR INVALID INPUT
   !
   IF( Nrowy>=Ncomp ) THEN
     IF( Ncomp==Nic+Nfc ) THEN

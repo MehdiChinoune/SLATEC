@@ -26,7 +26,7 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp, tiny_sp
   USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE
   !
   INTEGER, INTENT(IN) :: Kode, Mr, N
@@ -34,6 +34,7 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Rl, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, inu, iuf, kflag, nn, nw
   COMPLEX(SP) :: ck, cs, cscl, cscr, csgn, cspn, css(3), csr(3), c1, c2, &
     rz, sc1, sc2, st, s1, s2, zn, cy(2)
@@ -41,7 +42,7 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
     fmr, sgn, spn, yy
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
-  REAL(SP), PARAMETER :: sqrt_huge = SQRT( HUGE(1._SP) )
+  REAL(SP), PARAMETER :: sqrt_huge = SQRT( huge_sp )
   !* FIRST EXECUTABLE STATEMENT  CACON
   Nz = 0
   zn = -Z
@@ -77,7 +78,7 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       iuf = 0
       c1 = s1
       c2 = Y(1)
-      ascle = 1.E+3_SP*R1MACH(1)/Tol
+      ascle = 1.E+3_SP*tiny_sp/Tol
       IF( Kode/=1 ) THEN
         CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
         Nz = Nz + nw
@@ -112,7 +113,7 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       csr(3) = cscl
       bry(1) = ascle
       bry(2) = 1._SP/ascle
-      bry(3) = R1MACH(2)
+      bry(3) = huge_sp
       as2 = ABS(s2)
       IF( .NOT. IEEE_IS_FINITE(as2) ) as2 = ABS(s2/sqrt_huge) * sqrt_huge
       kflag = 2

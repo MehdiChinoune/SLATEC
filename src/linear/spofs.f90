@@ -105,13 +105,14 @@ PURE SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   USE linpack, ONLY : SPOCO, SPOSL
   !
   INTEGER, INTENT(IN) :: Lda, N, Itask
   INTEGER, INTENT(OUT) :: Ind
   REAL(SP), INTENT(INOUT) :: A(Lda,N), V(N)
   REAL(SP), INTENT(OUT) :: Work(N)
+  !
   INTEGER :: info
   REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
@@ -155,7 +156,7 @@ PURE SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
     !        COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
     !        AND CHECK FOR IND GREATER THAN ZERO
     !
-    Ind = INT( -LOG10(R1MACH(4)/rcond) )
+    Ind = INT( -LOG10(eps_sp/rcond) )
     IF( Ind<=0 ) THEN
       Ind = -10
       ! 'SPOFS : SOLUTION MAY HAVE NO SIGNIFICANCE'

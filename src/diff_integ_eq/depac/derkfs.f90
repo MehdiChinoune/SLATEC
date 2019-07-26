@@ -50,7 +50,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   900510  Convert XERRWV calls to XERMSG calls, replace GOTOs with
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : XERMSG, huge_sp, eps_sp
+  !
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
@@ -64,6 +65,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   REAL(SP) :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Rtol(:), &
     Y(Neq), Yp(Neq), Ys(Neq)
   LOGICAL :: Stiff, Nonstf
+  !
   REAL(SP) :: a, big, dt, dy, ee, eeoet, es, estiff, esttol, et, hmin
   INTEGER :: k, ktol, natolp, nrtolp
   REAL(SP) :: s, tol, u, ute, yavg
@@ -111,7 +113,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !        FUNCTION ROUTINE  R1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN R1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
     !
-    u = R1MACH(4)
+    u = eps_sp
     !                       -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
     U26 = 26._SP*u
     Rer = 2._SP*u + remin
@@ -286,8 +288,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !
     Init = 2
     Dtsign = SIGN(1._SP,Tout-T)
-    u = R1MACH(4)
-    big = SQRT(R1MACH(2))
+    u = eps_sp
+    big = SQRT(huge_sp)
     ute = u**0.375_SP
     dy = ute*HVNRM(Y,Neq)
     IF( dy==0. ) dy = ute

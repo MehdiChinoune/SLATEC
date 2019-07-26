@@ -165,14 +165,15 @@ PURE SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
-
+  USE service, ONLY : eps_sp
+  !
   INTEGER, INTENT(IN) :: Key, Liw, Lw, M, Mda, Mdb, Mode, N, Nb, Np
   INTEGER, INTENT(INOUT) :: Info
   INTEGER, INTENT(OUT) :: Krank, Ksure
   INTEGER, INTENT(INOUT) :: Iwork(N+M)
   REAL(SP), INTENT(INOUT) :: Ae(N), Re(N), A(Mda,N), B(Mdb,Nb), W(5*N)
   REAL(SP), INTENT(OUT) :: Rnorm(Nb)
+  !
   INTEGER :: i, it, n1, n2, n3, n4, n5
   REAL(SP) :: eps
   !
@@ -236,7 +237,7 @@ PURE SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                   RETURN
                 ELSE
                   !
-                  eps = 10._SP*R1MACH(4)
+                  eps = 10._SP*eps_sp
                   n1 = 1
                   n2 = n1 + N
                   n3 = n2 + N

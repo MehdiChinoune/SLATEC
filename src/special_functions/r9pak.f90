@@ -32,13 +32,15 @@ REAL(SP) ELEMENTAL FUNCTION R9PAK(Y,N)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   901009  Routine used I1MACH(7) where it should use I1MACH(10), Corrected (RWC)
-  USE service, ONLY : XERMSG, R1MACH, I1MACH
+  !   901009  Routine used radix_int where it should use radix_fp, Corrected (RWC)
+  USE service, ONLY : log10_radix_sp, min_exp_sp, max_exp_sp
+  !
   INTEGER, INTENT(IN) :: N
   REAL(SP), INTENT(IN) :: Y
+  !
   INTEGER :: nsum, ny
-  REAL(SP), PARAMETER :: a1n2b = R1MACH(5)/LOG(2._SP)
-  INTEGER, PARAMETER :: nmin = INT( a1n2b*I1MACH(12) ), nmax = INT( a1n2b*I1MACH(13) )
+  REAL(SP), PARAMETER :: a1n2b = log10_radix_sp/LOG(2._SP)
+  INTEGER, PARAMETER :: nmin = INT( a1n2b*min_exp_sp ), nmax = INT( a1n2b*max_exp_sp )
   !* FIRST EXECUTABLE STATEMENT  R9PAK
   !
   CALL R9UPAK(Y,R9PAK,ny)

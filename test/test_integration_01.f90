@@ -19,12 +19,12 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
-    USE slatec, ONLY : AVINT, R1MACH, num_xer, control_xer
+    USE slatec, ONLY : AVINT, eps_sp, num_xer, control_xer
     REAL(SP) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
     INTEGER :: i, ierr, Ipass, kontrl, Kprint, Lun, n
     LOGICAL :: fatal
@@ -32,7 +32,7 @@ CONTAINS
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' AVINT Quick Check')
     Ipass = 1
-    tol = MAX(.0001_SP,SQRT(R1MACH(4)))
+    tol = MAX(.0001_SP,SQRT(eps_sp))
     tol1 = 1.E-2_SP*tol
     !
     !     Perform first accuracy test.
@@ -222,13 +222,13 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920213  Code restructured to test GAUS8 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    USE slatec, ONLY : GAUS8, R1MACH, control_xer
+    USE slatec, ONLY : GAUS8, eps_sp, control_xer
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -242,7 +242,7 @@ CONTAINS
     !
     !     Initialize variables for testing.
     !
-    tol = SQRT(R1MACH(4))
+    tol = SQRT(eps_sp)
     Ipass = 1
     !
     !     First accuracy test.
@@ -290,7 +290,7 @@ CONTAINS
 !    a = 0._SP
 !    b = 1._SP
 !    cor = 2._SP
-!    err = 100._SP*R1MACH(4)
+!    err = 100._SP*eps_sp
 !    req = err
 !    CALL GAUS8(FQD1,a,b,err,ans,ierr)
     !
@@ -307,7 +307,7 @@ CONTAINS
     !     Test GAUS8 with A and B nearly equal.
     !
 !    a = 2._SP
-!    b = a*(1._SP+R1MACH(4))
+!    b = a*(1._SP+eps_sp)
 !    cor = 0._SP
 !    err = tol
     !
@@ -364,13 +364,13 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920213  Code restructured to test QNC79 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    USE slatec, ONLY : QNC79, R1MACH, control_xer
+    USE slatec, ONLY : QNC79, eps_sp, control_xer
     INTEGER :: kontrl
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -385,7 +385,7 @@ CONTAINS
     !
     !     Initialize variables for testing.
     !
-    tol = SQRT(R1MACH(4))
+    tol = SQRT(eps_sp)
     Ipass = 1
     !
     !     First accuracy test.
@@ -433,7 +433,7 @@ CONTAINS
 !    a = 0._SP
 !    b = 1._SP
 !    cor = 2._SP
-!    err = 100._SP*R1MACH(4)
+!    err = 100._SP*eps_sp
 !    req = err
 !    CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
     !
@@ -450,7 +450,7 @@ CONTAINS
     !     Test QNC79 with A and B nearly equal.
     !
 !    a = 2._SP
-!    b = a*(1._SP+R1MACH(4))
+!    b = a*(1._SP+eps_sp)
 !    cor = 0._SP
 !    err = tol
     !
@@ -546,7 +546,8 @@ END MODULE TEST41_MOD
 !** TEST41
 PROGRAM TEST41
   USE TEST41_MOD, ONLY : AVNTST, QG8TST, QN79QX
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -598,8 +599,8 @@ PROGRAM TEST41
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST41
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

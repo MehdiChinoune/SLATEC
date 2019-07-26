@@ -28,7 +28,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-    USE slatec, ONLY : D1MACH, DNSQE
+    USE slatec, ONLY : eps_dp, DNSQE
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -46,7 +46,7 @@ CONTAINS
     n = 2
     lwa = 19
     nprint = -1
-    tol = SQRT(D1MACH(4))
+    tol = SQRT(eps_dp)
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  DNSQE QUICK CHECK'/)
     !
@@ -169,7 +169,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-    USE slatec, ONLY : D1MACH, DSOS
+    USE slatec, ONLY : eps_dp, DSOS
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -187,8 +187,8 @@ CONTAINS
     n = 2
     lwa = 17
     liw = 6
-    tolf = SQRT(D1MACH(4))
-    rer = SQRT(D1MACH(4))
+    tolf = SQRT(eps_dp)
+    rer = SQRT(eps_dp)
     aer = 0._DP
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/'  DSOS QUICK CHECK'/)
@@ -307,7 +307,8 @@ END MODULE TEST36_MOD
 !** TEST36
 PROGRAM TEST36
   USE TEST36_MOD, ONLY : DNSQQK, DSOSQX
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -358,8 +359,8 @@ PROGRAM TEST36
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST36
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

@@ -156,8 +156,8 @@ INTEGER PURE FUNCTION ISDIR(N,Itol,Tol,R,Z,Dz,Bnrm,Solnrm)
   !   910506  Made subsidiary to DIR.  (FNF)
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
-  !   921026  Changed 1.0E10 to D1MACH(2) and corrected E to D in output format.  (FNF)
-  USE service, ONLY : D1MACH
+  !   921026  Changed 1.0E10 to huge_dp and corrected E to D in output format.  (FNF)
+  USE service, ONLY : huge_dp
   !     .. Scalar Arguments ..
   REAL(DP), INTENT(IN) :: Bnrm, Solnrm, Tol
   INTEGER, INTENT(IN) :: Itol, N
@@ -181,7 +181,7 @@ INTEGER PURE FUNCTION ISDIR(N,Itol,Tol,R,Z,Dz,Bnrm,Solnrm)
   ELSE
     !
     !         If we get here ITOL is not one of the acceptable values.
-    eror = D1MACH(2)
+    eror = huge_dp
     ierr = 3
     ERROR STOP "Itol is not one of the acceptable values {1,2,11}"
   END IF

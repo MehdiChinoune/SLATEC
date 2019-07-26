@@ -259,7 +259,7 @@ PURE SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !       which make three types of comparisons between the approximation
   !       X and a solution XSOL.  SNLS1 terminates when any of the tests
   !       is satisfied.  If any of the convergence parameters is less than
-  !       the machine precision (as defined by the function R1MACH(4)),
+  !       the machine precision (as defined by the function eps_sp),
   !       then SNLS1 only attempts to satisfy the test defined by the
   !       machine precision.  Further progress is not usually possible.
   !
@@ -418,8 +418,8 @@ PURE SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   ! C     and GTOL to zero.  Unless high precision solutions are
   ! C     required, these are the recommended settings.
   ! C
-  !       FTOL = SQRT(R1MACH(4))
-  !       XTOL = SQRT(R1MACH(4))
+  !       FTOL = SQRT(eps_sp)
+  !       XTOL = SQRT(eps_sp)
   !       GTOL = 0.E0
   ! C
   !       MAXFEV = 400
@@ -607,7 +607,7 @@ PURE SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   INTERFACE
     PURE SUBROUTINE FCN(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
@@ -638,7 +638,7 @@ PURE SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     p75 = 7.5E-1, p0001 = 1.E-4_SP
   !
   !* FIRST EXECUTABLE STATEMENT  SNLS1
-  epsmch = R1MACH(4)
+  epsmch = eps_sp
   err = 0.
   !
   Info = 0

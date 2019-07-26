@@ -30,11 +30,13 @@ REAL(DP) ELEMENTAL FUNCTION D9LGIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
+  !
   REAL(DP), INTENT(IN) :: A, X, Alx
+  !
   INTEGER :: k
   REAL(DP) :: fk, p, r, s, t, xma, xpa
-  REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3)
+  REAL(DP), PARAMETER :: eps = 0.5_DP*eps_2_dp
   !* FIRST EXECUTABLE STATEMENT  D9LGIC
   !
   xpa = X + 1._DP - A

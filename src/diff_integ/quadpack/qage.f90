@@ -160,7 +160,7 @@ PURE SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, eps_sp
   !
   INTERFACE
     REAL(SP) PURE FUNCTION F(X)
@@ -208,8 +208,8 @@ PURE SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !           UFLOW  IS THE SMALLEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  QAGE
-  epmach = R1MACH(4)
-  uflow = R1MACH(1)
+  epmach = eps_sp
+  uflow = tiny_sp
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------

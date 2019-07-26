@@ -46,7 +46,7 @@ PURE SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !           TOL    - desired accuracy for the quadrature, suggest
   !                    10.*DTOL < TOL <= 0.1 where DTOL is the
   !                    maximum of 1.0D-18 and double precision unit
-  !                    roundoff for the machine = D1MACH(4)
+  !                    roundoff for the machine = eps_dp
   !
   !         Output     QUAD is double precision
   !           QUAD   - integral of PF(X) on (X1,X2)
@@ -74,7 +74,7 @@ PURE SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   USE interpolation, ONLY : DINTRV
   !
   INTERFACE
@@ -108,7 +108,7 @@ PURE SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
     ERROR STOP 'DPFQAD : LXI DOES NOT SATISFY LXI>=1'
     RETURN
   ELSE
-    wtol = D1MACH(4)
+    wtol = eps_dp
     wtol = MAX(wtol,1.0E-18_DP)
     IF( Tol>=wtol .AND. Tol<=0.1_DP ) THEN
       aa = MIN(X1,X2)

@@ -77,9 +77,11 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : XERMSG, eps_2_sp
+  !
   INTEGER :: Iflag, Irank, Iscale, M, N, Nrda, Kpivot(N)
   REAL(SP) :: A(Nrda,N), Cols(N), Cs(N), Diag(N), Scales(N)
+  !
   INTEGER :: j, jcol, k, kp, l, mk
   REAL(SP) :: acc, akk, anorm, as, asave, css, diagk, dum(1), sad, sc, sig, sigma, &
     sruro, uro
@@ -90,7 +92,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !     BY THE FUNCTION R1MACH.
   !
   !* FIRST EXECUTABLE STATEMENT  ORTHOL
-  uro = R1MACH(3)
+  uro = eps_2_sp
   dum = 0._SP
   !
   !- *********************************************************************

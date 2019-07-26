@@ -36,11 +36,13 @@ REAL(SP) ELEMENTAL FUNCTION R9ATN1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   REAL(SP) :: y
   INTEGER, PARAMETER :: ntatn1 = 10
-  REAL(SP), PARAMETER :: eps = R1MACH(3), xsml = SQRT(0.1_SP*eps), &
+  REAL(SP), PARAMETER :: eps = eps_2_sp, xsml = SQRT(0.1_SP*eps), &
     xbig = 1.571_SP/SQRT(eps), xmax = 1.571_SP/eps
   REAL(SP), PARAMETER :: atn1cs(21) = [ -.03283997535355202_SP, .05833432343172412_SP, &
     -.00740036969671964_SP, .00100978419933728_SP,-.00014397871635652_SP, &

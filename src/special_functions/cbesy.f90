@@ -92,11 +92,11 @@ PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !         large, losses of significance by argument reduction occur.
   !         Consequently, if either one exceeds U1=SQRT(0.5/UR), then
   !         losses exceeding half precision are likely and an error flag
-  !         IERR=3 is triggered where UR=R1MACH(4)=UNIT ROUNDOFF.  Also,
+  !         IERR=3 is triggered where UR=eps_sp=UNIT ROUNDOFF.  Also,
   !         if either is larger than U2=0.5/UR, then all significance is
   !         lost and IERR=4.  In order to use the INT function, arguments
   !         must be further restricted not to exceed the largest machine
-  !         integer, U3=I1MACH(9).  Thus, the magnitude of Z and FNU+N-1
+  !         integer, U3=huge_int.  Thus, the magnitude of Z and FNU+N-1
   !         is restricted by MIN(U2,U3).  In IEEE arithmetic, U1,U2, and
   !         U3 approximate 2.0E+3, 4.2E+6, 2.1E+9 in single precision
   !         and 4.7E+7, 2.3E+15 and 2.1E+9 in double precision.  This
@@ -156,13 +156,14 @@ PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : max_exp_sp, min_exp_sp, eps_sp, log10_radix_sp, tiny_sp
   !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Ierr, Nz
   REAL(SP), INTENT(IN) :: Fnu
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Cwrk(N), Cy(N)
+  !
   INTEGER :: i, k, k1, k2, nz1, nz2
   COMPLEX(SP) :: c1, c2, ex, hci, zu, zv
   REAL(SP) :: elim, ey, r1, r2, tay, xx, yy, r1m5, ascle, &
@@ -187,11 +188,11 @@ PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
     ELSE
       Nz = MIN(nz1,nz2)
       IF( Kode==2 ) THEN
-        tol = MAX(R1MACH(4),1.0E-18_SP)
-        k1 = I1MACH(12)
-        k2 = I1MACH(13)
+        tol = MAX(eps_sp,1.0E-18_SP)
+        k1 = min_exp_sp
+        k2 = max_exp_sp
         k = MIN(ABS(k1),ABS(k2))
-        r1m5 = R1MACH(5)
+        r1m5 = log10_radix_sp
         !-----------------------------------------------------------------------
         !     ELIM IS THE APPROXIMATE EXPONENTIAL UNDER- AND OVERFLOW LIMIT
         !-----------------------------------------------------------------------
@@ -211,7 +212,7 @@ PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
         END IF
         Nz = 0
         rtol = 1._SP/tol
-        ascle = R1MACH(1)*rtol*1.E+3_SP
+        ascle = tiny_sp*rtol*1.E+3_SP
         DO i = 1, N
           !       CY(I) = HCI*(C2*CWRK(I)-C1*CY(I))
           zv = Cwrk(i)

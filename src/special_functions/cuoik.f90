@@ -38,12 +38,14 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
+  !
   INTEGER, INTENT(IN) :: Ikflg, Kode, N
   INTEGER, INTENT(OUT) :: Nuf
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, iform, init, nn, nw
   COMPLEX(SP) :: arg, asum, bsum, cwrk(16), cz, phi, summ, zb, zeta1, zeta2, zn, zr
   REAL(SP) :: aarg, aphi, ascle, ax, ay, fnn, gnn, gnu, rcz, x, yy
@@ -103,7 +105,7 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
         rcz = rcz + LOG(aphi)
         IF( iform==2 ) rcz = rcz - 0.25_SP*LOG(aarg) - aic
         IF( rcz>(-Elim) ) THEN
-          ascle = 1.E+3_SP*R1MACH(1)/Tol
+          ascle = 1.E+3_SP*tiny_sp/Tol
           cz = cz + LOG(phi)
           IF( iform/=1 ) cz = cz - CMPLX(0.25_SP,0._SP,SP)*LOG(arg)- CMPLX(aic,0._SP,SP)
           ax = EXP(rcz)/Tol
@@ -150,7 +152,7 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
     rcz = rcz + LOG(aphi)
     IF( iform==2 ) rcz = rcz - 0.25_SP*LOG(aarg) - aic
     IF( rcz>(-Elim) ) THEN
-      ascle = 1.E+3_SP*R1MACH(1)/Tol
+      ascle = 1.E+3_SP*tiny_sp/Tol
       cz = cz + LOG(phi)
       IF( iform/=1 ) cz = cz - CMPLX(0.25_SP,0._SP,SP)*LOG(arg)- CMPLX(aic,0._SP,SP)
       ax = EXP(rcz)/Tol

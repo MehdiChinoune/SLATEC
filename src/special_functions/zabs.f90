@@ -22,10 +22,10 @@ REAL(DP) ELEMENTAL FUNCTION ZABS(Zr,Zi)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, huge_dp
 
   REAL(DP), INTENT(IN) :: Zr, Zi
-  REAL(DP), PARAMETER :: sqrt_tiny = SQRT( D1MACH(1) ), sqrt_huge = SQRT( D1MACH(2) )
+  REAL(DP), PARAMETER :: sqrt_tiny = SQRT( tiny_dp ), sqrt_huge = SQRT( huge_dp )
   !* FIRST EXECUTABLE STATEMENT  ZABS
 
   IF( ABS(Zr)<sqrt_tiny .AND. ABS(Zi)<sqrt_tiny ) THEN

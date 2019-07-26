@@ -203,7 +203,7 @@ PURE SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp, eps_sp
   !
   INTERFACE
     REAL(SP) PURE FUNCTION F(X)
@@ -282,7 +282,7 @@ PURE SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  QAGPE
-  epmach = R1MACH(4)
+  epmach = eps_sp
   !
   !            TEST ON VALIDITY OF PARAMETERS
   !            -----------------------------
@@ -406,8 +406,8 @@ PURE SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   iroff2 = 0
   iroff3 = 0
   ierro = 0
-  uflow = R1MACH(1)
-  oflow = R1MACH(2)
+  uflow = tiny_sp
+  oflow = huge_sp
   Abserr = oflow
   ksgn = -1
   IF( dres>=(1._SP-50._SP*epmach)*resabs ) ksgn = 1

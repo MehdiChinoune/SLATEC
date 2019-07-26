@@ -94,12 +94,12 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !         large, losses of significance by argument reduction occur.
   !         Consequently, if either one exceeds U1=SQRT(0.5/UR), then
   !         losses exceeding half precision are likely and an error flag
-  !         IERR=3 is triggered where UR=MAX(D1MACH(4),1.0D-18) is double
+  !         IERR=3 is triggered where UR=MAX(eps_dp,1.0D-18) is double
   !         precision unit roundoff limited to 18 digits precision.  Also,
   !         if either is larger than U2=0.5/UR, then all significance is
   !         lost and IERR=4.  In order to use the INT function, arguments
   !         must be further restricted not to exceed the largest machine
-  !         integer, U3=I1MACH(9).  Thus, the magnitude of Z and FNU+N-1
+  !         integer, U3=huge_int.  Thus, the magnitude of Z and FNU+N-1
   !         is restricted by MIN(U2,U3).  In IEEE arithmetic, U1,U2, and
   !         U3 approximate 2.0E+3, 4.2E+6, 2.1E+9 in single precision
   !         and 4.7E+7, 2.3E+15 and 2.1E+9 in double precision.  This
@@ -159,7 +159,8 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  USE service, ONLY : XERMSG, D1MACH, I1MACH
+  USE service, ONLY : eps_dp, log10_radix_dp, tiny_dp, digits_dp, huge_int, &
+    max_exp_dp, min_exp_dp
   !     COMPLEX CI,CSGN,CY,Z,ZN
   INTEGER :: i, Ierr, inu, inuh, ir, k, Kode, k1, k2, N, nl, Nz
   REAL(DP) :: aa, alim, arg, cii, csgni, csgnr, Cyi(N), Cyr(N), dig, elim, Fnu, &
@@ -184,13 +185,13 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
   !     FNUL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC SERIES FOR LARGE FNU.
   !-----------------------------------------------------------------------
-  tol = MAX(D1MACH(4),1.E-18_DP)
-  k1 = I1MACH(15)
-  k2 = I1MACH(16)
-  r1m5 = D1MACH(5)
+  tol = MAX(eps_dp,1.E-18_DP)
+  k1 = min_exp_dp
+  k2 = max_exp_dp
+  r1m5 = log10_radix_dp
   k = MIN(ABS(k1),ABS(k2))
   elim = 2.303_DP*(k*r1m5-3._DP)
-  k1 = I1MACH(14) - 1
+  k1 = digits_dp - 1
   aa = r1m5*k1
   dig = MIN(aa,18._DP)
   aa = aa*2.303_DP
@@ -203,7 +204,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   az = ZABS(Zr,Zi)
   fn = Fnu + (N-1)
   aa = 0.5_DP/tol
-  bb = I1MACH(9)*0.5_DP
+  bb = huge_int*0.5_DP
   aa = MIN(aa,bb)
   IF( az<=aa ) THEN
     IF( fn<=aa ) THEN
@@ -241,7 +242,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         nl = N - Nz
         IF( nl==0 ) RETURN
         rtol = 1._DP/tol
-        ascle = D1MACH(1)*rtol*1.E+3_DP
+        ascle = tiny_dp*rtol*1.E+3_DP
         DO i = 1, nl
           !       STR = CYR(I)*CSGNR - CYI(I)*CSGNI
           !       CYI(I) = CYR(I)*CSGNI + CYI(I)*CSGNR

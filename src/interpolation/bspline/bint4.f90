@@ -101,16 +101,17 @@ PURE SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   INTEGER, INTENT(IN) :: Ibcl, Ibcr, Kntopt, Ndata
   INTEGER, INTENT(OUT) :: K, N
   REAL(SP), INTENT(IN) :: Fbcl, Fbcr, X(Ndata), Y(Ndata)
   REAL(SP), INTENT(OUT) :: Bcoef(Ndata+2), T(Ndata+6), W(5,Ndata+2)
+  !
   INTEGER :: i, iflag, ilb, ileft, it, iub, iw, iwp, j, jw, ndm, np, nwrow
   REAL(SP) :: tol, txn, tx1, vnikx(4,4), wdtol, work(15), xl
   !* FIRST EXECUTABLE STATEMENT  BINT4
-  wdtol = R1MACH(4)
+  wdtol = eps_sp
   tol = SQRT(wdtol)
   IF( Ndata<2 ) THEN
     ERROR STOP 'BINT4 : NDATA IS LESS THAN 2'

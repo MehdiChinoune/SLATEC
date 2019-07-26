@@ -120,7 +120,7 @@ PURE SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !           IERR = 3 => Error in user input.
   !                       Check input values of N, ITOL.
   !           IERR = 4 => User error tolerance set too tight.
-  !                       Reset to 500*D1MACH(3).  Iteration proceeded.
+  !                       Reset to 500*eps_2_dp.  Iteration proceeded.
   !           IERR = 5 => Preconditioning matrix, M, is not positive
   !                       definite.  (r,z) < 0.
   !           IERR = 6 => Matrix A is not positive definite.  (p,Ap) < 0.
@@ -261,9 +261,9 @@ PURE SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
   USE DSLBLK, ONLY : soln_com
-
+  !
   INTERFACE
     PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT DP
@@ -300,7 +300,7 @@ PURE SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Ierr = 3
     RETURN
   END IF
-  tolmin = 500*D1MACH(3)
+  tolmin = 500*eps_2_dp
   IF( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4

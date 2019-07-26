@@ -73,7 +73,7 @@ PURE SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900510  Fixed an error message.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !   900911  Restriction on value of ALAMDA included.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : huge_dp, eps_dp
   USE blas, ONLY : DAXPY, DROTM, DROTMG, DSWAP
   USE linear, ONLY : DH12
   !
@@ -89,7 +89,7 @@ PURE SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     sparam(5), t, tau, wmax, z2, zz
   LOGICAL :: done, feasbl, hitcon, pos
   !
-  REAL(DP), PARAMETER :: drelpr = D1MACH(4)
+  REAL(DP), PARAMETER :: drelpr = eps_dp
   !* FIRST EXECUTABLE STATEMENT  DWNLSM
   !
   !     Set the nominal tolerance used in the code.
@@ -189,7 +189,7 @@ PURE SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !     computed value of ALAMDA may cause an overflow condition.
     !     Therefore, this code further limits the value of ALAMDA.
     !
-    alamda = MIN(alamda,SQRT(D1MACH(2)))
+    alamda = MIN(alamda,SQRT(huge_dp))
     !
     !     Define scaling diagonal matrix for modified Givens usage and
     !     classify equation types.

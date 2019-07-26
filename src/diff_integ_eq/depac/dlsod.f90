@@ -33,7 +33,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     iquit_com, init_com, ksteps_com, ibegin_com, itol_com, iinteg_com, itstop_com, &
     ijac_com, iband_com, jstart_com, kflag_com, meth_com, miter_com, maxord_com, &
     n_com, nq_com, nst_com, nfe_com, nje_com
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : XERMSG, eps_dp, huge_dp
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
@@ -54,6 +54,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   REAL(DP) :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
     Yh(Neq,6), Yh1(6*Neq), Ypout(Neq)
   LOGICAL :: Intout
+  !
   INTEGER :: intflg, k, l, ltol, natolp, nrtolp
   REAL(DP) :: absdel, big, del, dt, ha, tol
 
@@ -78,7 +79,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     !        FUNCTION ROUTINE D1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN D1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
     !
-    uround_com = D1MACH(4)
+    uround_com = eps_dp
     !                          -- SET ASSOCIATED MACHINE DEPENDENT PARAMETER
     Wm(1) = SQRT(uround_com)
     !                          -- SET TERMINATION FLAG
@@ -284,7 +285,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       Ewt(l) = tol
     END DO
     !
-    big = SQRT(D1MACH(2))
+    big = SQRT(huge_dp)
     CALL DHSTRT(DF,Neq,T,Tout,Y,Yh(1,2),Ewt,1,uround_com,big,Yh(1,3),Yh(1,4),Yh(1,5),&
       Yh(1,6),h_com)
     !

@@ -39,11 +39,13 @@ REAL(DP) ELEMENTAL FUNCTION DBETAI(X,Pin,Qin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp
+  !
   REAL(DP), INTENT(IN) :: X, Pin, Qin
+  !
   INTEGER :: i, ib, n
   REAL(DP) :: c, finsum, p, ps, q, term, xb, xi, y, p1
-  REAL(DP), PARAMETER :: eps = D1MACH(3), alneps = LOG(eps), sml = D1MACH(1), &
+  REAL(DP), PARAMETER :: eps = eps_2_dp, alneps = LOG(eps), sml = tiny_dp, &
     alnsml = LOG(sml)
   !* FIRST EXECUTABLE STATEMENT  DBETAI
   !

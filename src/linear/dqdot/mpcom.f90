@@ -4,7 +4,8 @@
 !     R. P. Brent, MP, a Fortran multiple-precision arithmetic package,
 !       Algorithm 524, ACM Transactions on Mathematical Software 4, 1 (March 1978), pp. 71-81.
 MODULE MPCOM
-  USE service, ONLY : I1MACH
+  USE ISO_FORTRAN_ENV, ONLY : ERROR_UNIT
+  USE service, ONLY : digits_int, digits_dp, huge_int
   IMPLICIT NONE
   INTEGER, PARAMETER :: &
     !     For full extended precision accuracy, MPB should be as large as
@@ -18,15 +19,15 @@ MODULE MPCOM
     !       24     MPB =    1024
     !       18     MPB =     128
     !       16     MPB =      64
-    mpbexp = I1MACH(8)/2 - 2, &
+    mpbexp = digits_int/2 - 2, &
     b_com = 2**mpbexp, &
     !  UNIT FOR ERROR MESSAGES
-    lun_com = I1MACH(4), &
+    lun_com = ERROR_UNIT, &
     !  NUMBER OF MP DIGITS
-    t_com = MIN( 26, (2*I1MACH(14)+mpbexp-1)/mpbexp ), &
+    t_com = MIN( 26, (2*digits_dp+mpbexp-1)/mpbexp ), &
     !  DIMENSION OF R
     mxr_com = MIN( 30, t_com + 4 ), &
     !  EXPONENT RANGE
-    m_com = MIN(32767,I1MACH(9)/4-1)
+    m_com = MIN(32767,huge_int/4-1)
   INTEGER :: r_com(mxr_com)
 END MODULE MPCOM

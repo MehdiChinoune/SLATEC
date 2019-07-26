@@ -106,16 +106,16 @@ PURE SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
-  !           IF-THEN-ELSE.  (RWC)
+  !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   USE linpack, ONLY : CPOCO, CPOSL
   !
   INTEGER, INTENT(IN) :: Lda, N, Itask
   INTEGER, INTENT(OUT) :: Ind
   COMPLEX(SP), INTENT(INOUT) :: A(Lda,N), V(N)
   COMPLEX(SP), INTENT(OUT) :: Work(N)
+  !
   INTEGER :: info
   REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
@@ -159,7 +159,7 @@ PURE SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
     !        COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
     !        AND CHECK FOR IND GREATER THAN ZERO
     !
-    Ind = INT( -LOG10(R1MACH(4)/rcond) )
+    Ind = INT( -LOG10(eps_sp/rcond) )
     IF( Ind<=0 ) THEN
       Ind = -10
       ! 'CPOFS : SOLUTION MAY HAVE NO SIGNIFICANCE'

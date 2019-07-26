@@ -45,11 +45,13 @@ REAL(SP) ELEMENTAL FUNCTION SPENC(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   REAL(SP) :: aln
   INTEGER, PARAMETER :: nspenc = 9
-  REAL(SP), PARAMETER :: xbig = 1._SP/R1MACH(3)
+  REAL(SP), PARAMETER :: xbig = 1._SP/eps_2_sp
   REAL(SP), PARAMETER :: spencs(19) = [ .1527365598892406_SP, .08169658058051014_SP, &
     .00581415714077873_SP, .00053716198145415_SP, .00005724704675185_SP, &
     .00000667454612164_SP, .00000082764673397_SP, .00000010733156730_SP, &
@@ -59,7 +61,7 @@ REAL(SP) ELEMENTAL FUNCTION SPENC(X)
     .00000000000000044_SP, .00000000000000006_SP ]
   REAL(SP), PARAMETER ::  pi26 = 1.644934066848226_SP
   !* FIRST EXECUTABLE STATEMENT  SPENC
-  ! nspenc = INITS(spencs,0.1_SP*R1MACH(3))
+  ! nspenc = INITS(spencs,0.1_SP*eps_2_sp)
   !
   IF( X>2._SP ) THEN
     ! X > 2.0

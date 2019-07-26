@@ -279,7 +279,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message.  (RWC)
-    USE slatec, ONLY : D1MACH, DBOCLS, DBOLS
+    USE slatec, ONLY : eps_dp, DBOCLS, DBOLS
+    !
     REAL(DP) :: rnorm, rnormc, sr
     INTEGER :: ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
@@ -342,7 +343,7 @@ CONTAINS
         !
         sr = NORM2(x(1:ncols))
         mpass = 1
-        IF( sr>10.D2*SQRT(D1MACH(4)) ) mpass = 0
+        IF( sr>10.D2*SQRT(eps_dp) ) mpass = 0
         Ipass = Ipass*mpass
         IF( Kprint>=2 ) THEN
           msg = 'PASS'
@@ -393,7 +394,7 @@ CONTAINS
         !
         sr = NORM2(x(1:ncols+mcon))
         mpass = 1
-        IF( sr>10.D2*SQRT(D1MACH(4)) ) mpass = 0
+        IF( sr>10.D2*SQRT(eps_dp) ) mpass = 0
         Ipass = Ipass*mpass
         IF( Kprint>=2 ) THEN
           msg = 'PASS'
@@ -419,7 +420,8 @@ END MODULE TEST38_MOD
 !** TEST38
 PROGRAM TEST38
   USE TEST38_MOD, ONLY : DBOCQX, DPLPQX
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -470,8 +472,8 @@ PROGRAM TEST38
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST38
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

@@ -333,7 +333,8 @@ END MODULE TEST23_MOD
 !** TEST23
 PROGRAM TEST23
   USE TEST23_MOD, ONLY : CGBQC, CGECK, CPOQC
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -400,8 +401,8 @@ PROGRAM TEST23
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST23
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

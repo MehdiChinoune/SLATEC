@@ -51,11 +51,12 @@ REAL(SP) ELEMENTAL FUNCTION BESI1E(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, eps_2_sp
+  !
   REAL(SP), INTENT(IN) :: X
   REAL(SP) :: y
   INTEGER, PARAMETER :: nti1 = 7, ntai1 = 9, ntai12 = 6
-  REAL(SP), PARAMETER :: xmin = 2._SP*R1MACH(1), xsml = SQRT(4.5_SP*R1MACH(3))
+  REAL(SP), PARAMETER :: xmin = 2._SP*tiny_sp, xsml = SQRT(4.5_SP*eps_2_sp)
   REAL(SP), PARAMETER :: bi1cs(11) = [ -.001971713261099859_SP, .40734887667546481_SP, &
     .034838994299959456_SP, .001545394556300123_SP, .000041888521098377_SP, &
     .000000764902676483_SP, .000000010042493924_SP, .000000000099322077_SP, &
@@ -77,9 +78,9 @@ REAL(SP) ELEMENTAL FUNCTION BESI1E(X)
     -.00000000000000382_SP,-.00000000000000186_SP, .00000000000000033_SP, &
     .00000000000000028_SP, -.00000000000000003_SP ]
   !* FIRST EXECUTABLE STATEMENT  BESI1E
-  ! nti1 = INITS(bi1cs,0.1_SP*R1MACH(3))
-  ! ntai1 = INITS(ai1cs,0.1_SP*R1MACH(3))
-  ! ntai12 = INITS(ai12cs,0.1_SP*R1MACH(3))
+  ! nti1 = INITS(bi1cs,0.1_SP*eps_2_sp)
+  ! ntai1 = INITS(ai1cs,0.1_SP*eps_2_sp)
+  ! ntai12 = INITS(ai12cs,0.1_SP*eps_2_sp)
   !
   y = ABS(X)
   IF( y>3._SP ) THEN

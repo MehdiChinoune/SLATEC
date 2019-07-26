@@ -42,7 +42,7 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine DRACAH.  These changes were
     !           made by M. McClain.
-    USE slatec, ONLY : D1MACH, DRC3JJ, DRC3JM, DRC6J, control_xer
+    USE slatec, ONLY : eps_2_dp, DRC3JJ, DRC3JM, DRC6J, control_xer
     !
     INTEGER :: Lun, Kprint, Ipass
     !
@@ -96,7 +96,7 @@ CONTAINS
     !* FIRST EXECUTABLE STATEMENT  DQC36J
     !
     ! --- INITIALIZATION OF TESTS
-    tol = 100._DP*D1MACH(3)
+    tol = 100._DP*eps_2_dp
     IF( Kprint>=2 ) THEN
       WRITE (Lun,*) ' THIS IS DQC36J, A TEST PROGRAM FOR THE '//&
         'DOUBLE PRECISION 3J6J PACKAGE.'
@@ -496,7 +496,8 @@ END MODULE TEST16_MOD
 !** TEST16
 PROGRAM TEST16
   USE TEST16_MOD, ONLY : DQC36J
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -548,8 +549,8 @@ PROGRAM TEST16
   !   891130  DATE WRITTEN
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST16
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

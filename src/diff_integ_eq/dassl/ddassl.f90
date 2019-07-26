@@ -930,7 +930,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !           be of more uniform format.  (FNF)
   !   910624  Fixed minor bug related to HMAX (six lines after label
   !           525).  (LRP)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : XERMSG, eps_dp
   !
   !     Declare arguments.
   INTERFACE
@@ -1242,7 +1242,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       END DO
       !
       !     COMPUTE UNIT ROUNDOFF AND HMIN
-      uround = D1MACH(4)
+      uround = eps_dp
       Rwork(LROUND) = uround
       hmin = 4._DP*uround*MAX(ABS(T),ABS(Tout))
       !

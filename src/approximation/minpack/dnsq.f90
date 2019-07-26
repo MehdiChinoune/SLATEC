@@ -212,7 +212,7 @@ PURE SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !       between the approximation X and a solution XSOL.  DNSQ
   !       terminates when the test is satisfied.  If the convergence
   !       parameter is less than the machine precision (as defined by the
-  !       function D1MACH(4)), then DNSQ only attempts to satisfy the test
+  !       function eps_dp), then DNSQ only attempts to satisfy the test
   !       defined by the machine precision.  Further progress is not
   !       usually possible.
   !
@@ -346,7 +346,7 @@ PURE SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   ! C     UNLESS HIGH PRECISION SOLUTIONS ARE REQUIRED,
   ! C     THIS IS THE RECOMMENDED SETTING.
   ! C
-  !       XTOL = SQRT(D1MACH(4))
+  !       XTOL = SQRT(eps_dp)
   ! C
   !       MAXFEV = 2000
   !       ML = 1
@@ -426,7 +426,7 @@ PURE SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   !
   INTERFACE
     PURE SUBROUTINE FCN(N,X,Fvec,iflag)
@@ -458,7 +458,7 @@ PURE SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 320
   !* FIRST EXECUTABLE STATEMENT  DNSQ
-  epsmch = D1MACH(4)
+  epsmch = eps_dp
   !
   Info = 0
   iflag = 0

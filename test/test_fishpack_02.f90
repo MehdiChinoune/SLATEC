@@ -76,7 +76,7 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920211  Code cleaned up, an error in printing an error message fixed
     !           and comments on PASS/FAIL of individual tests added.  (WRB)
@@ -84,8 +84,8 @@ CONTAINS
     !   930315  Modified RFFT* tests to compute "slow-transform" in DOUBLE
     !           PRECISION.  (WRB)
     USE slatec, ONLY : CFFTB, CFFTF, CFFTI, COSQB, COSQF, COSQI, COST, COSTI, &
-      EZFFTB, EZFFTF, EZFFTI, R1MACH, RFFTB, RFFTF, RFFTI, SINQB, SINQF, &
-      SINQI, SINT, SINTI
+      EZFFTB, EZFFTF, EZFFTI, RFFTB, RFFTF, RFFTI, SINQB, SINQF, SINQI, SINT, &
+      SINTI, eps_sp
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -104,7 +104,7 @@ CONTAINS
     REAL(DP), PARAMETER :: pi = 3.14159265358979_DP
     !* FIRST EXECUTABLE STATEMENT  FFTQX
     sqrt2 = SQRT(2._SP)
-    errmax = 2._SP*SQRT(R1MACH(4))
+    errmax = 2._SP*SQRT(eps_sp)
     nns = 7
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -636,7 +636,8 @@ END MODULE TEST51_MOD
 !** TEST51
 PROGRAM TEST51
   USE TEST51_MOD, ONLY : FFTQX
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -689,8 +690,8 @@ PROGRAM TEST51
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST51
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

@@ -1200,7 +1200,8 @@ END MODULE TEST54_MOD
 !** TEST54
 PROGRAM TEST54
   USE TEST54_MOD, ONLY : DSRTQC, HSRTQC, ISRTQC, SSRTQC
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1252,8 +1253,8 @@ PROGRAM TEST54
 
   INTEGER :: lun, lin, nfail, kprint, ipass
   !* FIRST EXECUTABLE STATEMENT  TEST54
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

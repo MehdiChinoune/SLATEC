@@ -33,10 +33,12 @@ COMPLEX(SP) ELEMENTAL FUNCTION CLNREL(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
+  !
   COMPLEX(SP), INTENT(IN) :: Z
+  !
   REAL(SP) :: rho, x
-  REAL(SP), PARAMETER :: sqeps = SQRT(R1MACH(4))
+  REAL(SP), PARAMETER :: sqeps = SQRT(eps_sp)
   !* FIRST EXECUTABLE STATEMENT  CLNREL
   !
   ! IF( ABS(1._SP+Z)<sqeps ) 'CLNREL : ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR -1'

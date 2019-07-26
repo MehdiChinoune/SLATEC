@@ -36,7 +36,7 @@ PURE SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   !        ERR - is a requested pseudorelative error tolerance.  Normally
   !              pick a value of ABS(ERR) so that STOL < ABS(ERR) <=
   !              1.0E-3 where STOL is the single precision unit roundoff
-  !              R1MACH(4).  ANS will normally have no more error than
+  !              eps_sp.  ANS will normally have no more error than
   !              ABS(ERR) times the integral of the absolute value of
   !              FUN(X).  Usually, smaller values for ERR yield more
   !              accuracy and require more function evaluations.
@@ -75,7 +75,7 @@ PURE SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : log10_radix_sp, eps_sp, digits_sp
   !
   INTERFACE
     REAL(SP) PURE FUNCTION FUN(X)
@@ -101,8 +101,8 @@ PURE SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   !
   !     Initialize
   !
-  k = I1MACH(11)
-  anib = R1MACH(5)*k/0.30102000_SP
+  k = digits_sp
+  anib = log10_radix_sp*k/0.30102000_SP
   nbits = INT( anib )
   nlmx = MIN(30,(nbits*5)/8)
   Ans = 0._SP
@@ -139,7 +139,7 @@ PURE SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
       END IF
     END IF
     tol = MAX(ABS(Err),2._SP**(5-nbits))/2._SP
-    IF( Err==0._SP ) tol = SQRT(R1MACH(4))
+    IF( Err==0._SP ) tol = SQRT(eps_sp)
     eps = tol
     hh(1) = (B-A)/4._SP
     aa(1) = A

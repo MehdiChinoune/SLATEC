@@ -53,12 +53,14 @@ ELEMENTAL SUBROUTINE D9B0MP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, eps_dp
+  !
   REAL(DP), INTENT(IN) :: X
   REAL(DP), INTENT(OUT) :: Ampl, Theta
+  !
   REAL(DP) :: z
   INTEGER, PARAMETER :: nbm0 = 15, nbt02 = 16, nbm02 = 13, nbth0 = 14
-  REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xmax = 1._DP/D1MACH(4)
+  REAL(DP), PARAMETER :: eta = 0.1_DP*eps_2_dp, xmax = 1._DP/eps_dp
   REAL(DP), PARAMETER :: bm0cs(37) = [ +.9211656246827742712573767730182E-1_DP, &
     -.1050590997271905102480716371755E-2_DP, +.1470159840768759754056392850952E-4_DP, &
     -.5058557606038554223347929327702E-6_DP, +.2787254538632444176630356137881E-7_DP, &

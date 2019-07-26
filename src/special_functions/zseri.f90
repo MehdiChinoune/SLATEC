@@ -27,7 +27,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
   INTEGER :: i, ib, iflag, il, k, Kode, l, m, N, nn, Nz, nw
   REAL(DP) :: aa, acz, ak, ak1i, ak1r, Alim, arm, ascle, atol, az, cki, ckr, &
@@ -39,7 +39,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   Nz = 0
   az = ZABS(Zr,Zi)
   IF( az==0._DP ) GOTO 500
-  arm = 1.E3_DP*D1MACH(1)
+  arm = 1.E3_DP*tiny_dp
   rtr1 = SQRT(arm)
   crscr = 1._DP
   iflag = 0
@@ -136,7 +136,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       !-----------------------------------------------------------------------
       !     EXP(-ALIM)=EXP(-ELIM)/TOL=APPROX. ONE PRECISION ABOVE THE
-      !     UNDERFLOW LIMIT = ASCLE = D1MACH(1)*SS*1.0D+3
+      !     UNDERFLOW LIMIT = ASCLE = tiny_dp*SS*1.0D+3
       !-----------------------------------------------------------------------
       s1r = wr(1)
       s1i = wi(1)

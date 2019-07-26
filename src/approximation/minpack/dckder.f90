@@ -100,7 +100,7 @@ PURE SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   !
   INTEGER, INTENT(IN) :: Ldfjac, M, Mode, N
   REAL(DP), INTENT(IN) :: Fjac(Ldfjac,N), Fvec(M), Fvecp(M), X(N)
@@ -112,7 +112,7 @@ PURE SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !     EPSMCH IS THE MACHINE PRECISION.
   !
   !* FIRST EXECUTABLE STATEMENT  DCKDER
-  epsmch = D1MACH(4)
+  epsmch = eps_dp
   !
   eps = SQRT(epsmch)
   !

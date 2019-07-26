@@ -70,19 +70,20 @@ PURE SUBROUTINE BESY(X,Fnu,N,Y)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : min_exp_sp, log10_radix_sp, tiny_sp
   !
   INTEGER, INTENT(IN) :: N
   REAL(SP), INTENT(IN) :: Fnu, X
   REAL(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, iflw, j, nb, nd, nn, nud
   REAL(SP) :: azn, cn, dnu, elim, flgjy, fn, rann, s, s1, s2, tm, &
     trx, w(2), wk(7), w2n, xlim, xxn
   INTEGER, PARAMETER :: nulim(2) = [ 70, 100 ]
   !* FIRST EXECUTABLE STATEMENT  BESY
-  nn = -I1MACH(12)
-  elim = 2.303_SP*(nn*R1MACH(5)-3._SP)
-  xlim = R1MACH(1)*1.E+3_SP
+  nn = -min_exp_sp
+  elim = 2.303_SP*(nn*log10_radix_sp-3._SP)
+  xlim = tiny_sp*1.E+3_SP
   IF( Fnu<0._SP ) THEN
     ERROR STOP 'BESY : ORDER, FNU < 0'
   ELSEIF( X<=0._SP ) THEN

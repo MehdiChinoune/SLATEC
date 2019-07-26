@@ -691,7 +691,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !       to I2 and columns J1 to J2.
   !              REAL DFDY(N,N), EPSJ, H, R, R1MACH,
   !             8     SAVE1(N), SAVE2(N), T, UROUND, Y(N), YJ, YWT(N)
-  !              UROUND = R1MACH(4)
+  !              UROUND = eps_sp
   !              EPSJ = SQRT(UROUND)
   !              DO 30 J = J1,J2
   !                R = EPSJ*MAX(ABS(YWT(J)), ABS(Y(J)))
@@ -726,9 +726,10 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : XERMSG, eps_sp, tiny_sp
   USE linpack, ONLY : SGBFA, SGEFA
   USE lapack, ONLY : SGBTRS, SGETRS
+  !
   INTERFACE
     REAL(SP) FUNCTION G(N,T,Y,Iroot)
       IMPORT SP
@@ -761,6 +762,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
   REAL(SP) :: Eps, Hmax, T, Tout
   REAL(SP) :: Ewt(N), Work(Lenw+Leniw), Y(N+1)
+  !
   INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, isave2, &
     itroot,iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, ndecom, npar, nstepl
   REAL(SP) :: ae, big, glast, gnow, h, hsign, hused, re, sizee, summ, tlast, troot, uround
@@ -971,9 +973,9 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       Iwork(IMTRSV) = Miter
     END IF
     Work(IHMAX) = Hmax
-    uround = R1MACH(4)
+    uround = eps_sp
     Work(IMACH4) = uround
-    Work(IMACH1) = R1MACH(1)
+    Work(IMACH1) = tiny_sp
     IF( Nroot/=0 ) THEN
       re = uround
       ae = Work(IMACH1)

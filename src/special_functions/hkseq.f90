@@ -32,11 +32,13 @@ PURE SUBROUTINE HKSEQ(X,M,H,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : eps_sp, log10_radix_sp, digits_sp
+  !
   INTEGER, INTENT(IN) :: M
   INTEGER, INTENT(OUT) :: Ierr
   REAL(SP), INTENT(IN) :: X
   REAL(SP), INTENT(OUT) :: H(M)
+  !
   INTEGER :: i, j, k, mx, nx
   REAL(SP) :: fk, fln, fn, fnp, hrx, rln, rxsq, r1m5, s, slope, t, tk, trm(22), &
     trmh(25), trmr(25), tst, u(25), v(25), wdtol, xdmy, xh, xinc, xm, xmin, yint
@@ -54,14 +56,14 @@ PURE SUBROUTINE HKSEQ(X,M,H,Ierr)
   !
   !* FIRST EXECUTABLE STATEMENT  HKSEQ
   Ierr = 0
-  wdtol = MAX(R1MACH(4),1.0E-18_SP)
+  wdtol = MAX(eps_sp,1.0E-18_SP)
   fn = M - 1
   fnp = fn + 1._SP
   !-----------------------------------------------------------------------
   !     COMPUTE XMIN
   !-----------------------------------------------------------------------
-  r1m5 = R1MACH(5)
-  rln = r1m5*I1MACH(11)
+  r1m5 = log10_radix_sp
+  rln = r1m5*digits_sp
   rln = MIN(rln,18.06E0_SP)
   fln = MAX(rln,3._SP) - 3._SP
   yint = 3.50_SP + 0.40_SP*fln

@@ -718,10 +718,10 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     2 before executing a call to DSPLP( ).  This file is type
   !     sequential and is unformatted.
   !
-  !     Fortran unit=I1MACH(2) (check local setting) is used by DSPLP( )
+  !     Fortran unit=OUTPUT_UNIT (check local setting) is used by DSPLP( )
   !     when the printed output feature (KEY=51) is used.  Normally
   !     this feature is not used.  It is activated by input in the
-  !     options array PRGOPT(*).  For many computer systems I1MACH(2)=6.
+  !     options array PRGOPT(*).  For many computer systems OUTPUT_UNIT=6.
   !
   !  |-------|
   !  |Output:|

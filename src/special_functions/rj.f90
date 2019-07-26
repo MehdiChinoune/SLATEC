@@ -304,14 +304,16 @@ REAL(SP) ELEMENTAL FUNCTION RJ(X,Y,Z,P)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   900510  Changed calls to XERMSG to standard form, and some editorial changes.  (RWC)).
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, tiny_sp, huge_sp
+  !
   REAL(SP), INTENT(IN) :: P, X, Y, Z
+  !
   REAL(SP) :: alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, pn, pndev, power4, &
     sigma, s1, s2, s3, xn, xndev, xnroot, yn, yndev, ynroot, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
-  REAL(SP), PARAMETER :: errtol = (R1MACH(3)/3._SP)**(1._SP/6._SP), &
-    lolim = (5._SP*R1MACH(1))**(1._SP/3._SP), &
-    uplim = 0.30_SP*(R1MACH(2)/5._SP)**(1._SP/3._SP)
+  REAL(SP), PARAMETER :: errtol = (eps_2_sp/3._SP)**(1._SP/6._SP), &
+    lolim = (5._SP*tiny_sp)**(1._SP/3._SP), &
+    uplim = 0.30_SP*(huge_sp/5._SP)**(1._SP/3._SP)
   REAL(SP), PARAMETER :: c1 = 3._SP/14._SP, c2 = 1._SP/3._SP, c3 = 3._SP/22._SP, &
     c4 = 3._SP/26._SP
   !

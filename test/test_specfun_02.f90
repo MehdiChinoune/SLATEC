@@ -46,7 +46,7 @@ CONTAINS
     !           reorganized.  (WRB)
     !   900330  Prologue converted to Version 4.0 format.  (BAB)
     !   900727  Added EXTERNAL statement.  (WRB)
-    USE slatec, ONLY : D1MACH, D9ATN1, D9LN2R, DAI, DAIE, DBESI0, DBESI1, DBESK0, &
+    USE slatec, ONLY : eps_dp, D9ATN1, D9LN2R, DAI, DAIE, DBESI0, DBESI1, DBESK0, &
       DBESK1, DBESKS, DBETA, DBETAI, DBI, DBIE, DBINOM, DBSI0E, DBSI1E, DBSK0E, &
       DBSK1E, DBSKES, DCBRT, DCHU, DCOSDG, DCOT, DDAWS, DE1, DEI, DEXPRL, DFAC, &
       DGAMI, DGAMIC, DGAMIT, DGAMR, DLI, DLNREL, DPOCH, DPOCH1, DPSI, DSINDG, DSPENC
@@ -232,7 +232,7 @@ CONTAINS
     !
     !   Check for possible errors
     !
-    errmax = D1MACH(4)
+    errmax = eps_dp
     errtol = SQRT(errmax)
     DO i = 1, 87
       abserr = ABS(v(i)-y(i))
@@ -252,7 +252,8 @@ END MODULE TEST03_MOD
 !** TEST03
 PROGRAM TEST03
   USE TEST03_MOD, ONLY : DFNCK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -303,8 +304,8 @@ PROGRAM TEST03
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST03
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

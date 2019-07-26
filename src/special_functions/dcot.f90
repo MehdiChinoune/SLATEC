@@ -35,13 +35,15 @@ REAL(DP) ELEMENTAL FUNCTION DCOT(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, eps_dp, tiny_dp, huge_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   INTEGER :: ifn
   REAL(DP) :: ainty, ainty2, y, yrem, prodbg
   INTEGER, PARAMETER :: nterms = 8
-  REAL(DP), PARAMETER :: xmax = 1._DP/D1MACH(4), xsml = SQRT(3._DP*D1MACH(3)), &
-    xmin = EXP(MAX(LOG(D1MACH(1)),-LOG(D1MACH(2)))+0.01_DP), sqeps = SQRT(D1MACH(4))
+  REAL(DP), PARAMETER :: xmax = 1._DP/eps_dp, xsml = SQRT(3._DP*eps_2_dp), &
+    xmin = EXP(MAX(LOG(tiny_dp),-LOG(huge_dp))+0.01_DP), sqeps = SQRT(eps_dp)
   REAL(DP), PARAMETER :: cotcs(15) = [ +.240259160982956302509553617744970E+0_DP, &
     -.165330316015002278454746025255758E-1_DP, -.429983919317240189356476228239895E-4_DP, &
     -.159283223327541046023490851122445E-6_DP, -.619109313512934872588620579343187E-9_DP, &
@@ -52,7 +54,7 @@ REAL(DP) ELEMENTAL FUNCTION DCOT(X)
     -.140155139824298666666666666666666E-30_DP, -.551800436872533333333333333333333E-33_DP ]
   REAL(DP), PARAMETER :: pi2rec = .011619772367581343075535053490057_DP
   !* FIRST EXECUTABLE STATEMENT  DCOT
-  ! nterms = INITDS(cotcs,0.1_SP*D1MACH(3))
+  ! nterms = INITDS(cotcs,0.1_SP*eps_2_dp)
   !
   y = ABS(X)
   IF( y<xmin ) ERROR STOP 'DCOT : ABS(X) IS ZERO OR SO SMALL DCOT OVERFLOWS'

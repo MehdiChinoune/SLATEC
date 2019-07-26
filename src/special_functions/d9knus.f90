@@ -45,17 +45,19 @@ ELEMENTAL SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp, huge_dp
+  !
   INTEGER, INTENT(OUT) :: Iswtch
   REAL(DP), INTENT(IN) :: Xnu, X
   REAL(DP), INTENT(OUT) :: Bknu, Bknu1
+  !
   INTEGER :: i, ii, inu, n, nterms
   REAL(DP) :: alpha(32), beta(32), a(32), alnz, a0, bknud, bknu0, b0, c0, expx, &
     p1, p2, p3, qq, result, sqrtx, v, vlnz, xi, xmu, x2n, x2tov, z, ztov, an, bn
   INTEGER, PARAMETER :: ntc0k = 16, ntznu1 = 12
-  REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xnusml = SQRT(D1MACH(3)/8._DP), &
-    xsml = 0.1_DP*D1MACH(3), alnsml = LOG(D1MACH(1)), alnbig = LOG(D1MACH(2)), &
-    alneps = LOG(0.1_DP*D1MACH(3))
+  REAL(DP), PARAMETER :: eta = 0.1_DP*eps_2_dp, xnusml = SQRT(eps_2_dp/8._DP), &
+    xsml = 0.1_DP*eps_2_dp, alnsml = LOG(tiny_dp), alnbig = LOG(huge_dp), &
+    alneps = LOG(0.1_DP*eps_2_dp)
   REAL(DP), PARAMETER :: c0kcs(29) = [ +.60183057242626108387577445180329E-1_DP, &
     -.15364871433017286092959755943124E+0_DP, -.11751176008210492040068229226213E-1_DP, &
     -.85248788891979509827048401550987E-3_DP, -.61329838767496791874098176922111E-4_DP, &

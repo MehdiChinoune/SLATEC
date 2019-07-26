@@ -65,7 +65,7 @@ PURE SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Err,Ans,Ierr)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : log10_radix_sp, eps_sp, digits_sp
   USE interpolation, ONLY : PPVAL
   !
   INTERFACE
@@ -92,8 +92,8 @@ PURE SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Err,Ans,Ierr)
   !     INITIALIZE
   !
   !* FIRST EXECUTABLE STATEMENT  PPGQ8
-  k = I1MACH(11)
-  anib = R1MACH(5)*k/0.30102000_SP
+  k = digits_sp
+  anib = log10_radix_sp*k/0.30102000_SP
   nbits = INT(anib)
   nlmx = (nbits*5)/8
   Ans = 0._SP
@@ -130,7 +130,7 @@ PURE SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Err,Ans,Ierr)
       END IF
     END IF
     tol = MAX(ABS(Err),2._SP**(5-nbits))/2._SP
-    IF( Err==0._SP ) tol = SQRT(R1MACH(4))
+    IF( Err==0._SP ) tol = SQRT(eps_sp)
     eps = tol
     hh(1) = (B-A)/4._SP
     aa(1) = A

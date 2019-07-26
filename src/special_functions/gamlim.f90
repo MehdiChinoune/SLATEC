@@ -35,11 +35,13 @@ ELEMENTAL SUBROUTINE GAMLIM(Xmin,Xmax)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp
+  !
   REAL(SP), INTENT(OUT) :: Xmax, Xmin
+  !
   INTEGER :: i
   REAL(SP) :: xln, xold
-  REAL(SP), PARAMETER :: alnsml = LOG(R1MACH(1)), alnbig = LOG(R1MACH(2))
+  REAL(SP), PARAMETER :: alnsml = LOG(tiny_sp), alnbig = LOG(huge_sp)
   !* FIRST EXECUTABLE STATEMENT  GAMLIM
   Xmin = -alnsml
   DO i = 1, 10

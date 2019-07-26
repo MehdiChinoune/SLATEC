@@ -60,7 +60,7 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
-  USE service, ONLY : I1MACH
+  USE ISO_FORTRAN_ENV, ONLY : OUTPUT_UNIT
   !
   INTEGER, INTENT(IN) :: Idigit, Lda, M, N
   REAL(DP), INTENT(IN) :: A(Lda,N)
@@ -69,7 +69,7 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   INTEGER :: i, j, k1, k2, lout, ndigit
   CHARACTER(3), PARAMETER :: icol = 'COL'
   !* FIRST EXECUTABLE STATEMENT  DMOUT
-  lout = I1MACH(2)
+  lout = OUTPUT_UNIT
   WRITE (lout,Ifmt)
   IF( M<=0 .OR. N<=0 .OR. Lda<=0 ) RETURN
   ndigit = Idigit

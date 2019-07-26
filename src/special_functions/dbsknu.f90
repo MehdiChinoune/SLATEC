@@ -87,12 +87,13 @@ PURE SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : log10_radix_dp, eps_2_dp, min_exp_dp
   !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(DP), INTENT(IN) :: Fnu, X
   REAL(DP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, iflag, inu, j, k, kk, koded, nn
   REAL(DP) :: a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, elim, &
     etest, ex, f, fc, fhs, fk, fks, flrx, fmu, g1, g2, p, pt, p1, p2, q, &
@@ -103,9 +104,9 @@ PURE SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
     -4.21977345555443E-02_DP, 7.21894324666300E-03_DP, -2.15241674114900E-04_DP, &
     -2.01348547807000E-05_DP, 1.13302723200000E-06_DP, 6.11609500000000E-09_DP ]
   !* FIRST EXECUTABLE STATEMENT  DBSKNU
-  kk = -I1MACH(15)
-  elim = 2.303_DP*(kk*D1MACH(5)-3._DP)
-  ak = D1MACH(3)
+  kk = -min_exp_dp
+  elim = 2.303_DP*(kk*log10_radix_dp-3._DP)
+  ak = eps_2_dp
   tol = MAX(ak,1.E-15_DP)
   IF( X<=0._DP ) THEN
     ERROR STOP 'DBSKNU : X <= 0'

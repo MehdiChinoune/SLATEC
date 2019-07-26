@@ -44,7 +44,7 @@ PURE SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr)
   !           TOL    - desired accuracy for the quadrature, suggest
   !                    10.*DTOL < TOL <= .1 where DTOL is the maximum
   !                    of 1.0D-18 and double precision unit roundoff for
-  !                    the machine = D1MACH(4)
+  !                    the machine = eps_dp
   !
   !         Output     QUAD,WORK are double precision
   !           QUAD   - integral of BF(X) on (X1,X2)
@@ -72,7 +72,8 @@ PURE SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section. (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
+  !
   INTERFACE
     PURE REAL(DP) FUNCTION F(X)
       IMPORT DP
@@ -84,6 +85,7 @@ PURE SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr)
   REAL(DP), INTENT(IN) :: Bcoef(N), T(N+K), X1, X2
   REAL(DP), INTENT(INOUT) :: Tol
   REAL(DP), INTENT(OUT) :: Quad
+  !
   INTEGER :: inbv, iflg, ilo, il1, il2, left, mflag, npk, np1
   REAL(DP) :: a, aa, ans, b, bb, q, ta, tb, wtol
   !* FIRST EXECUTABLE STATEMENT  DBFQAD
@@ -96,7 +98,7 @@ PURE SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr)
   ELSEIF( Id<0 .OR. Id>=K ) THEN
     ERROR STOP 'DBFQAD : ID DOES NOT SATISFY 0<=ID<K'
   ELSE
-    wtol = D1MACH(4)
+    wtol = eps_dp
     wtol = MAX(wtol,1.E-18_DP)
     IF( Tol>=wtol .AND. Tol<=0.1_DP ) THEN
       aa = MIN(X1,X2)

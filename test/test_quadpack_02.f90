@@ -18,10 +18,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Added PASS/FAIL message and changed the name of the first
-    !           argument.  (RWC)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : D1MACH, DQAG
+    USE slatec, ONLY : eps_dp, DQAG
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
@@ -40,7 +39,7 @@ CONTAINS
     limit = 100
     lenw = limit*4
     epsabs = 0._DP
-    epmach = D1MACH(4)
+    epmach = eps_dp
     key = 6
     epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     a = 0._DP
@@ -69,7 +68,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 1
     !
-!    uflow = D1MACH(1)
+!    uflow = tiny_dp
 !    limit = 100
 !    lenw = limit*4
 !    CALL DQAG(DF2G,a,b,uflow,0._DP,key,result,abserr,neval,ier,limit,lenw,&
@@ -132,7 +131,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : D1MACH, DQAGI
+    USE slatec, ONLY : eps_dp, DQAGI
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4), inf
@@ -152,7 +151,7 @@ CONTAINS
     limit = 200
     lenw = limit*4
     epsabs = 0._DP
-    epmach = D1MACH(4)
+    epmach = eps_dp
     epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     bound = 0._DP
     inf = 1
@@ -177,7 +176,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-!    uflow = D1MACH(1)
+!    uflow = tiny_dp
 !    CALL DQAGI(DT2,bound,inf,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
 !      last,iwork,work)
 !    ierv(1) = ier
@@ -216,7 +215,7 @@ CONTAINS
     !
     ! TEST ON IER = 5
     !
-!    oflow = D1MACH(2)
+!    oflow = huge_dp
 !    CALL DQAGI(DT5,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
 !      last,iwork,work)
 !    ierv(1) = ier
@@ -262,7 +261,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : D1MACH, DQAGP
+    USE slatec, ONLY : eps_dp, DQAGP
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4)
@@ -286,7 +285,7 @@ CONTAINS
     leniw = limit*2 + npts2
     lenw = limit*4 + npts2
     epsabs = 0._DP
-    epmach = D1MACH(4)
+    epmach = eps_dp
     epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     a = 0._DP
     b = 1._DP
@@ -319,7 +318,7 @@ CONTAINS
 !    points(1) = 0.1_DP
 !    leniw = limit*2 + npts2
 !    lenw = limit*4 + npts2
-!    uflow = D1MACH(1)
+!    uflow = tiny_dp
 !    a = 0.1_DP
 !    CALL DQAGP(DF2P,a,b,npts2,points,uflow,0._DP,result,abserr,neval,ier,&
 !      leniw,lenw,last,iwork,work)
@@ -359,7 +358,7 @@ CONTAINS
 !    ip = 0
 !    IF( ier==5 ) ip = 1
 !    IF( ip==0 ) Ipass = 0
-!    oflow = D1MACH(2)
+!    oflow = huge_dp
 !    CALL DPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
@@ -407,7 +406,7 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   911114  Modified test on IER=4 to allow IER=5.  (WRB)
-    USE slatec, ONLY : D1MACH, DQAGS
+    USE slatec, ONLY : eps_dp, DQAGS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(5), Lun
@@ -428,7 +427,7 @@ CONTAINS
     limit = 200
     lenw = limit*4
     epsabs = 0._DP
-    epmach = D1MACH(4)
+    epmach = eps_dp
     epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     a = 0._DP
     b = 1._DP
@@ -452,7 +451,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-!    uflow = D1MACH(1)
+!    uflow = tiny_dp
 !    a = 0.1_DP
 !    CALL DQAGS(DF2S,a,b,uflow,0._DP,result,abserr,neval,ier,limit,lenw,last,&
 !      iwork,work)
@@ -496,7 +495,7 @@ CONTAINS
     !
     ! TEST ON IER = 5
     !
-!    oflow = D1MACH(2)
+!    oflow = huge_dp
 !    CALL DQAGS(DF5S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
 !      iwork,work)
 !    ierv(1) = ier
@@ -542,7 +541,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : D1MACH, DQAWC
+    USE slatec, ONLY : eps_dp, DQAWC
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
@@ -563,7 +562,7 @@ CONTAINS
     limit = 200
     lenw = limit*4
     epsabs = 0._DP
-    epmach = D1MACH(4)
+    epmach = eps_dp
     epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     CALL DQAWC(DF0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
       last,iwork,work)
@@ -586,7 +585,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 1
     !
-!    uflow = D1MACH(1)
+!    uflow = tiny_dp
 !    CALL DQAWC(DF0C,a,b,c,uflow,0._DP,result,abserr,neval,ier,limit,lenw,&
 !      last,iwork,work)
 !    ierv(1) = ier
@@ -645,7 +644,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : D1MACH, DQAWF
+    USE slatec, ONLY : eps_dp, DQAWF
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4), integr, iwork(450), leniw, Lun, maxp1
@@ -664,7 +663,7 @@ CONTAINS
     limit = 200
     leniw = limit*2 + limlst
     lenw = leniw*2 + maxp1*25
-    epmach = D1MACH(4)
+    epmach = eps_dp
     epsabs = MAX(SQRT(epmach),0.1E-2_DP)
     a = 0._DP
     omega = 0.8E+01_DP
@@ -696,7 +695,7 @@ CONTAINS
 !    limlst = 50
 !    leniw = limit*2 + limlst
 !    lenw = leniw*2 + maxp1*25
-!    uflow = D1MACH(1)
+!    uflow = tiny_dp
 !    CALL DQAWF(DF1F,a,0._DP,1,uflow,result,abserr,neval,ier,limlst,lst,&
 !      leniw,maxp1,lenw,iwork,work)
 !    ierv(1) = ier
@@ -759,7 +758,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : D1MACH, DQAWO
+    USE slatec, ONLY : eps_dp, DQAWO
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: leniw
@@ -779,7 +778,7 @@ CONTAINS
     leniw = 400
     lenw = leniw*2 + maxp1*25
     epsabs = 0._DP
-    epmach = D1MACH(4)
+    epmach = eps_dp
     epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     a = 0._DP
     b = pi
@@ -808,7 +807,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-!    uflow = D1MACH(1)
+!    uflow = tiny_dp
 !    leniw = 400
 !    lenw = leniw*2 + maxp1*25
 !    CALL DQAWO(DF0O,a,b,omega,integr,uflow,0._DP,result,abserr,neval,ier,&
@@ -840,7 +839,7 @@ CONTAINS
     ! TEST ON IER = 5
     !
 !    b = 1._DP
-!    oflow = D1MACH(2)
+!    oflow = huge_dp
 !    CALL DQAWO(DF2O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
 !      leniw,maxp1,lenw,last,iwork,work)
 !    ierv(1) = ier
@@ -887,7 +886,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : D1MACH, DQAWS
+    USE slatec, ONLY : eps_dp, DQAWS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
@@ -910,7 +909,7 @@ CONTAINS
     limit = 200
     lenw = limit*4
     epsabs = 0._DP
-    epmach = D1MACH(4)
+    epmach = eps_dp
     epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     CALL DQAWS(DF0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,&
       ier,limit,lenw,last,iwork,work)
@@ -933,7 +932,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 1
     !
-!    uflow = D1MACH(1)
+!    uflow = tiny_dp
 !    CALL DQAWS(DF0WS,a,b,alfa,beta,integr,uflow,0._DP,result,abserr,neval,&
 !      ier,limit,lenw,last,iwork,work)
 !    ierv(1) = ier
@@ -991,7 +990,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : D1MACH, DQNG
+    USE slatec, ONLY : eps_dp, tiny_dp, DQNG
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: Lun
@@ -1006,8 +1005,8 @@ CONTAINS
     !
     Ipass = 1
     epsabs = 0._DP
-    epmach = D1MACH(4)
-    uflow = D1MACH(1)
+    epmach = eps_dp
+    uflow = tiny_dp
     epsrel = MAX(SQRT(epmach),0.1E-7_DP)
     a = 0._DP
     b = 1._DP
@@ -1731,7 +1730,8 @@ END MODULE TEST40_MOD
 PROGRAM TEST40
   USE TEST40_MOD, ONLY : CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC, CDQAWF, CDQAWO, &
     CDQAWS, CDQNG
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1785,8 +1785,8 @@ PROGRAM TEST40
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST40
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

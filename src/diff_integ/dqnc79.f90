@@ -76,9 +76,8 @@ PURE SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920218  Code redone to parallel QNC79.  (WRB)
-  !   930120  Increase array size 80->99, and KMX 2000->5000 for SUN -r8
-  !           wordlength.  (RWC)
-  USE service, ONLY : D1MACH, I1MACH
+  !   930120  Increase array size 80->99, and KMX 2000->5000 for SUN -r8 wordlength.  (RWC)
+  USE service, ONLY : log10_radix_dp, eps_dp, digits_dp
   !     .. Function Arguments ..
   INTERFACE
     REAL(DP) PURE FUNCTION FUN(X)
@@ -100,7 +99,7 @@ PURE SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Data statements ..
-  INTEGER, PARAMETER :: nbits = INT( D1MACH(5)*I1MACH(14)/0.30102000_DP ), &
+  INTEGER, PARAMETER :: nbits = INT( log10_radix_dp*digits_dp/0.30102000_DP ), &
     nlmx = MIN(99,(nbits*4)/5)
   REAL(DP), PARAMETER :: sq2 = SQRT(2._DP), w1 = 41._DP/140._DP, w2 = 216._DP/140._DP, &
     w3 = 27._DP/140._DP, w4 = 272._DP/140._DP
@@ -125,7 +124,7 @@ PURE SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     END IF
   END IF
   tol = MAX(ABS(Err),2._DP**(5-nbits))
-  IF( Err==0._DP ) tol = SQRT(D1MACH(4))
+  IF( Err==0._DP ) tol = SQRT(eps_dp)
   eps = tol
   hh(1) = (B-A)/12._DP
   aa(1) = A

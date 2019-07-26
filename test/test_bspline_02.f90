@@ -38,7 +38,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : D1MACH, DBFQAD, DBINT4, DBINTK, DBSPDR, DBSPEV, DBSPPP, &
+    USE slatec, ONLY : eps_dp, DBFQAD, DBINT4, DBINTK, DBSPDR, DBSPEV, DBSPPP, &
       DBSPVD, DBSPVN, DBSQAD, DBVALU, DINTRV, DPFQAD, DPPQAD, DPPVAL
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -61,7 +61,7 @@ CONTAINS
     !
     Ipass = 1
     pi = 3.14159265358979324_DP
-    tol = 1000._DP*MAX(D1MACH(4),1.E-18_DP)
+    tol = 1000._DP*MAX(eps_dp,1.E-18_DP)
     !
     !     Generate data.
     !
@@ -477,7 +477,8 @@ END MODULE TEST31_MOD
 !** TEST31
 PROGRAM TEST31
   USE TEST31_MOD, ONLY : DBSPCK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -530,8 +531,8 @@ PROGRAM TEST31
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST31
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

@@ -28,12 +28,14 @@ REAL(DP) ELEMENTAL FUNCTION DBINOM(N,M)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : huge_dp, eps_2_dp
+  !
   INTEGER, INTENT(IN) :: M, N
+  !
   INTEGER :: i, k
   REAL(DP) :: corr, xk, xn, xnk
-  REAL(DP), PARAMETER :: bilnmx = LOG(D1MACH(2)) - 0.0001_DP, &
-    fintmx = 0.9_DP/D1MACH(3)
+  REAL(DP), PARAMETER :: bilnmx = LOG(huge_dp) - 0.0001_DP, &
+    fintmx = 0.9_DP/eps_2_dp
   REAL(DP), PARAMETER :: sq2pil = 0.91893853320467274178032973640562_DP
   !* FIRST EXECUTABLE STATEMENT  DBINOM
   !

@@ -106,16 +106,16 @@ PURE SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
-  !           IF-THEN-ELSE.  (RWC)
+  !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   USE linpack, ONLY : CGECO, CGESL
   !
   INTEGER, INTENT(IN) :: Lda, N, Itask
   INTEGER, INTENT(OUT) :: Ind, Iwork(N)
   COMPLEX(SP), INTENT(INOUT) :: A(Lda,N), V(N)
   COMPLEX(SP), INTENT(OUT) :: Work(N)
+  !
   REAL(SP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  CGEFS
@@ -156,7 +156,7 @@ PURE SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     !        COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
     !
-    Ind = INT( -LOG10(R1MACH(4)/rcond) )
+    Ind = INT( -LOG10(eps_sp/rcond) )
     !
     !        CHECK FOR IND GREATER THAN ZERO
     !

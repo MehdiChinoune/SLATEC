@@ -31,11 +31,13 @@ REAL(DP) ELEMENTAL FUNCTION D9GMIT(A,X,Algap1,Sgngam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp
+  !
   REAL(DP), INTENT(IN) :: A, X, Algap1, Sgngam
+  !
   INTEGER :: k, m, ma
   REAL(DP) :: ae, aeps, algs, alg2, fk, s, sgng2, t, te
-  REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), bot = LOG(D1MACH(1))
+  REAL(DP), PARAMETER :: eps = 0.5_DP*eps_2_dp, bot = LOG(tiny_dp)
   !* FIRST EXECUTABLE STATEMENT  D9GMIT
   !
   IF( X<=0._DP ) ERROR STOP 'D9GMIT : X SHOULD BE > 0'

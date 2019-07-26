@@ -78,11 +78,13 @@ PURE SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : digits_sp, min_exp_sp, eps_2_sp, log10_radix_sp, tiny_sp
+  !
   INTEGER, INTENT(IN) :: N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Alpha, X
   REAL(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, ialp, idalp, iflw, in, is, i1, i2, k, kk, km, kt, nn, ns
   REAL(SP) :: ak, akm, ans, ap, arg, coef, dalpha, dfn, dtm, earg, elim1, etx, fidal, &
     flgjy, fn, fnf, fni, fnp1, fnu, gln, rden, relb, rtx, rzden, s, sa, sb, sxo2, &
@@ -98,16 +100,16 @@ PURE SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   Nz = 0
   kt = 1
   ns = 0
-  !     I1MACH(14) REPLACES I1MACH(11) IN A DOUBLE PRECISION CODE
-  !     I1MACH(15) REPLACES I1MACH(12) IN A DOUBLE PRECISION CODE
-  ta = R1MACH(3)
+  !     digits_sp REPLACES digits_sp IN A DOUBLE PRECISION CODE
+  !     min_exp_dp REPLACES min_exp_sp IN A DOUBLE PRECISION CODE
+  ta = eps_2_sp
   tol = MAX(ta,1.0E-15_SP)
-  i1 = I1MACH(11) + 1
-  i2 = I1MACH(12)
-  tb = R1MACH(5)
+  i1 = digits_sp + 1
+  i2 = min_exp_sp
+  tb = log10_radix_sp
   elim1 = -2.303_SP*(i2*tb+3._SP)
   rtol = 1._SP/tol
-  slim = R1MACH(1)*1.0E+3_SP*rtol
+  slim = tiny_sp*1.0E+3_SP*rtol
   !     TOLLN = -LN(TOL)
   tolln = 2.303_SP*tb*i1
   tolln = MIN(tolln,34.5388E0_SP)
@@ -473,7 +475,7 @@ PURE SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   DO
     !
     !     BACKWARD RECUR UNINDEXED AND SCALE WHEN MAGNITUDES ARE CLOSE TO
-    !     UNDERFLOW LIMITS (LESS THAN SLIM=R1MACH(1)*1.0E+3/TOL)
+    !     UNDERFLOW LIMITS (LESS THAN SLIM=tiny_sp*1.0E+3/TOL)
     !
     DO i = 1, in
       s = tb

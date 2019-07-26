@@ -33,13 +33,15 @@ REAL(DP) ELEMENTAL FUNCTION D9PAK(Y,N)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !   901009  Routine used I1MACH(7) where it should use I1MACH(10), Corrected (RWC)
-  USE service, ONLY : D1MACH, I1MACH
+  !   901009  Routine used radix_int where it should use radix_fp, Corrected (RWC)
+  USE service, ONLY : log10_radix_dp, min_exp_dp, max_exp_dp
+  !
   INTEGER, INTENT(IN) :: N
   REAL(DP), INTENT(IN) :: Y
+  !
   INTEGER :: nsum, ny
-  REAL(DP), PARAMETER :: a1n2b = D1MACH(5)/LOG(2._DP)
-  INTEGER, PARAMETER :: nmin = INT( a1n2b*I1MACH(15) ), nmax = INT( a1n2b*I1MACH(16) )
+  REAL(DP), PARAMETER :: a1n2b = log10_radix_dp/LOG(2._DP)
+  INTEGER, PARAMETER :: nmin = INT( a1n2b*min_exp_dp ), nmax = INT( a1n2b*max_exp_dp )
   !* FIRST EXECUTABLE STATEMENT  D9PAK
   !
   CALL D9UPAK(Y,D9PAK,ny)

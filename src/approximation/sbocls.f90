@@ -558,7 +558,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
   !     /SSCAL/ TO /DSCAL/, /SASUM/ TO /DASUM/, /SBOLS/ TO /DBOLS/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   INTEGER, INTENT(IN) :: Mdw, Ncols
   INTEGER, INTENT(INOUT) :: Mcon, Mrows
@@ -640,7 +640,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
     one = 1._SP
-    srelpr = R1MACH(4)
+    srelpr = eps_sp
     checkl = .FALSE.
     filter = .TRUE.
     lenx = 2*(Ncols+Mcon) + 2

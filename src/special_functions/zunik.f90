@@ -35,7 +35,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added EXTERNAL statement with ZLOG and ZSQRT.  (RWC)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !     COMPLEX CFN,CON,CONE,CRFN,CWRK,CZERO,PHI,S,SR,SUM,T,T2,ZETA1,
   !    *ZETA2,ZN,ZR
   REAL(DP) :: ac, crfni, crfnr, Cwrki(16), Cwrkr(16), Fnu, Phii, Phir, rfn, si, sr, &
@@ -94,7 +94,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     !-----------------------------------------------------------------------
     !     OVERFLOW TEST (ZR/FNU TOO SMALL)
     !-----------------------------------------------------------------------
-    test = D1MACH(1)*1.E+3_DP
+    test = tiny_dp*1.E+3_DP
     ac = Fnu*test
     IF( ABS(Zrr)>ac .OR. ABS(Zri)>ac ) THEN
       tr = Zrr*rfn

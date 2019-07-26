@@ -31,7 +31,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTOs to
   !           IF-THEN-ELSE.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : XERMSG, eps_dp
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
@@ -47,6 +47,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Psi(12), Rtol(:), Sig(13), V(12), W(12), Wt(Neq), Y(Neq), Yp(Neq), &
     Ypout(Neq), Yy(Neq)
   LOGICAL :: Stiff, Start, Phase1, Nornd, Intout
+  !
   INTEGER :: k, l, ltol, natolp, nrtolp
   REAL(DP) :: a, absdel, del, dt, ha, u
   LOGICAL :: crash
@@ -72,7 +73,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     !        FUNCTION ROUTINE  D1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN D1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
     !
-    u = D1MACH(4)
+    u = eps_dp
     !                       -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
     Twou = 2._DP*u
     Fouru = 4._DP*u

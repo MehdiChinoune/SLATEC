@@ -88,7 +88,7 @@ PURE SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : digits_sp, min_exp_sp, eps_2_sp, log10_radix_sp
   !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
@@ -103,15 +103,15 @@ PURE SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !* FIRST EXECUTABLE STATEMENT  BESI
   Nz = 0
   kt = 1
-  !     I1MACH(15) REPLACES I1MACH(12) IN A DOUBLE PRECISION CODE
-  !     I1MACH(14) REPLACES I1MACH(11) IN A DOUBLE PRECISION CODE
-  ra = R1MACH(3)
+  !     min_exp_dp REPLACES min_exp_sp IN A DOUBLE PRECISION CODE
+  !     digits_sp REPLACES digits_sp IN A DOUBLE PRECISION CODE
+  ra = eps_2_sp
   tol = MAX(ra,1.0E-15_SP)
-  i1 = -I1MACH(12)
-  gln = R1MACH(5)
+  i1 = -min_exp_sp
+  gln = log10_radix_sp
   elim = 2.303_SP*(i1*gln-3._SP)
   !     TOLLN = -LN(TOL)
-  i1 = I1MACH(11) + 1
+  i1 = digits_sp + 1
   tolln = 2.303_SP*gln*i1
   tolln = MIN(tolln,34.5388E0_SP)
   IF( N<1 ) THEN

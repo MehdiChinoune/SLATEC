@@ -110,7 +110,7 @@ CONTAINS
     !           RS 6000.  (WRB)
     !   910819  Changed argument to RAND function from a D.P. zero to a
     !           S.P. zero.  (WRB)
-    USE slatec, ONLY : D1MACH, DCHFDV, DCHFEV, RAND
+    USE slatec, ONLY : eps_dp, DCHFDV, DCHFEV, RAND
     !
     !  Declare arguments.
     !
@@ -137,7 +137,7 @@ CONTAINS
     REAL(DP), PARAMETER :: right(3) = [ 2.5_DP, 3.E-10_DP, 1.E8_DP ]
     !
     !* FIRST EXECUTABLE STATEMENT  DEVCHK
-    machep = D1MACH(4)
+    machep = eps_dp
     eps1 = four*machep
     eps2 = ten*machep
     !
@@ -614,7 +614,7 @@ CONTAINS
     !              line length.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    USE slatec, ONLY : D1MACH, DPCHFD, DPCHFE
+    USE slatec, ONLY : eps_dp, DPCHFD, DPCHFE
     !
     !  Declare arguments.
     !
@@ -637,7 +637,7 @@ CONTAINS
     !  INITIALIZE.
     !
     !* FIRST EXECUTABLE STATEMENT  DEVPCK
-    machep = D1MACH(4)
+    machep = eps_dp
     !       Following tolerance is looser than S.P. version to avoid
     !       spurious failures on some systems.
     tol = 25._DP*machep
@@ -1087,7 +1087,7 @@ CONTAINS
     !   901130  Added 1P's to formats; changed to allow KPRINT>3.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    USE slatec, ONLY : D1MACH, DPCHIA
+    USE slatec, ONLY : eps_dp, DPCHIA
     !
     !  Declare arguments.
     !
@@ -1112,7 +1112,7 @@ CONTAINS
     !  SET PASS/FAIL TOLERANCE.
     !
     !* FIRST EXECUTABLE STATEMENT  DPCHQ2
-    machep = D1MACH(4)
+    machep = eps_dp
     tol = 100._DP*machep
     !
     !  SET UP PCH FUNCTION DEFINITION.
@@ -1281,7 +1281,7 @@ CONTAINS
     !           3. Added 1P's to formats.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    USE slatec, ONLY : D1MACH, DPCHIC, DPCHIM, DPCHSP
+    USE slatec, ONLY : eps_dp, DPCHIC, DPCHIM, DPCHSP
     !
     !*Internal Notes:
     !
@@ -1324,8 +1324,8 @@ CONTAINS
     ifail = 0
     !
     !        Set tolerances.
-    tol = 10*D1MACH(4)
-    told = SQRT(D1MACH(4))
+    tol = 10*eps_dp
+    told = SQRT(eps_dp)
     tolz = ZERO
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
@@ -1844,7 +1844,7 @@ CONTAINS
     !   900430  Produced double precision version.
     !   900501  Corrected declarations.
     !   930317  Improved output formats.  (FNF)
-    USE slatec, ONLY : DBVALU, DPCHBS, D1MACH
+    USE slatec, ONLY : DBVALU, DPCHBS, eps_dp
     !
     !*Internal Notes:
     !  TOL  is the tolerance to use for quantities that should only
@@ -1880,7 +1880,7 @@ CONTAINS
     !
     !* FIRST EXECUTABLE STATEMENT  DPCHQ5
     ifail = 0
-    tol = 100*D1MACH(4)
+    tol = 100*eps_dp
     tolz = ZERO
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
@@ -1997,7 +1997,8 @@ END MODULE TEST33_MOD
 !** TEST33
 PROGRAM TEST33
   USE TEST33_MOD, ONLY : DPCHQ1, DPCHQ2, DPCHQ3, DPCHQ4, DPCHQ5
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -2053,8 +2054,8 @@ PROGRAM TEST33
   !   930318  Added new quick check DPCHQ5.  (WRB,FNF)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST33
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

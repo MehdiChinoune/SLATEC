@@ -99,8 +99,8 @@ PURE SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
-
+  USE service, ONLY : eps_dp
+  !
   INTERFACE
     REAL(DP) PURE FUNCTION F(X)
       IMPORT DP
@@ -110,6 +110,7 @@ PURE SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   INTEGER, INTENT(OUT) :: Iflag
   REAL(DP), INTENT(IN) :: Ae, Re
   REAL(DP), INTENT(INOUT) :: B, C, R
+  !
   INTEGER :: ic, kount
   REAL(DP) :: a, acbs, acmb, aw, cmb, er, fa, fb, fc, fx, fz, p, q, rw, t, tol, z
   !
@@ -118,7 +119,7 @@ PURE SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   !   ER is two times the computer unit roundoff value which is defined
   !   here by the function D1MACH.
   !
-  er = 2._DP*D1MACH(4)
+  er = 2._DP*eps_dp
   !
   !   Initialize.
   !

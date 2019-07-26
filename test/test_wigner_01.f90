@@ -41,7 +41,7 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine RACAH.  These changes were
     !           made by M. McClain.
-    USE slatec, ONLY : R1MACH, RC3JJ, RC3JM, RC6J
+    USE slatec, ONLY : eps_2_sp, RC3JJ, RC3JM, RC6J
     !
     INTEGER :: Lun, Kprint, Ipass
     !
@@ -79,7 +79,7 @@ CONTAINS
     !* FIRST EXECUTABLE STATEMENT  QC36J
     !
     ! --- INITIALIZATION OF TESTS
-    tol = 100._SP*R1MACH(3)
+    tol = 100._SP*eps_2_sp
     IF( Kprint>=2 ) THEN
       WRITE (Lun,*) ' THIS IS QC36J, A TEST PROGRAM FOR THE '//&
         'SINGLE PRECISION 3J6J PACKAGE.'
@@ -479,7 +479,8 @@ END MODULE TEST15_MOD
 !** TEST15
 PROGRAM TEST15
   USE TEST15_MOD, ONLY : QC36J
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -531,8 +532,8 @@ PROGRAM TEST15
   !   891130  DATE WRITTEN
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST15
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

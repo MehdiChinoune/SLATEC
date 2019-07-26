@@ -93,12 +93,13 @@ PURE SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : eps_2_dp, log10_radix_dp, digits_dp, min_exp_dp
   !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(DP), INTENT(IN) :: Alpha, X
   REAL(DP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, ialp, in, is, i1, k, kk, km, kt, nn, ns
   REAL(DP) :: ain, ak, akm, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, &
     elim, etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, &
@@ -108,15 +109,15 @@ PURE SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !* FIRST EXECUTABLE STATEMENT  DBESI
   Nz = 0
   kt = 1
-  !     I1MACH(15) REPLACES I1MACH(12) IN A DOUBLE PRECISION CODE
-  !     I1MACH(14) REPLACES I1MACH(11) IN A DOUBLE PRECISION CODE
-  ra = D1MACH(3)
+  !     min_exp_dp REPLACES min_exp_sp IN A DOUBLE PRECISION CODE
+  !     digits_dp REPLACES digits_sp IN A DOUBLE PRECISION CODE
+  ra = eps_2_dp
   tol = MAX(ra,1.E-15_DP)
-  i1 = -I1MACH(15)
-  gln = D1MACH(5)
+  i1 = -min_exp_dp
+  gln = log10_radix_dp
   elim = 2.303_DP*(i1*gln-3._DP)
   !     TOLLN = -LN(TOL)
-  i1 = I1MACH(14) + 1
+  i1 = digits_dp + 1
   tolln = 2.303_DP*gln*i1
   tolln = MIN(tolln,34.5388_DP)
   IF( N<1 ) THEN

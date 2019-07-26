@@ -65,7 +65,7 @@ PURE SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : log10_radix_sp, eps_sp, digits_sp
   !
   INTERFACE
     PURE REAL(SP) FUNCTION FUN(X)
@@ -78,6 +78,7 @@ PURE SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
   REAL(SP), INTENT(IN) :: A, B, Bc(N), Xt(N+Kk)
   REAL(SP), INTENT(INOUT) :: Err
   REAL(SP), INTENT(OUT) :: Ans
+  !
   INTEGER :: k, l, lmn, lmx, lr(30), mxl, nbits, nib, nlmx
   REAL(SP) :: aa(30), ae, anib, area, c, ce, ee, ef, eps, est, gl, glr, gr(30), &
     hh(30), tol, vl(30), vr
@@ -91,8 +92,8 @@ PURE SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
   !     INITIALIZE
   !
   !* FIRST EXECUTABLE STATEMENT  BSGQ8
-  k = I1MACH(11)
-  anib = R1MACH(5)*k/0.30102000_SP
+  k = digits_sp
+  anib = log10_radix_sp*k/0.30102000_SP
   nbits = INT(anib)
   nlmx = (nbits*5)/8
   Ans = 0._SP
@@ -129,7 +130,7 @@ PURE SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Err,Ans,Ierr)
       END IF
     END IF
     tol = MAX(ABS(Err),2._SP**(5-nbits))/2._SP
-    IF( Err==0._SP ) tol = SQRT(R1MACH(4))
+    IF( Err==0._SP ) tol = SQRT(eps_sp)
     eps = tol
     hh(1) = (B-A)/4._SP
     aa(1) = A

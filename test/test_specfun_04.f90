@@ -35,9 +35,9 @@ CONTAINS
     !           obtain more information when there is failure of the
     !           Wronskian.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !   910708  Code revised to test error returns for all values of
-    !           KPRINT.  (WRB)
-    USE slatec, ONLY : BESI, BESK, R1MACH, num_xer, control_xer
+    !   910708  Code revised to test error returns for all values of KPRINT.  (WRB)
+    USE slatec, ONLY : BESI, BESK, eps_sp, num_xer, control_xer, tiny_sp, huge_sp
+    !
     INTEGER :: Ipass, Kprint
     INTEGER :: i, ix, k, kontrl, kode, Lun, m, n, nu, nw, ny
     REAL(SP) :: alp, del, er, fnu, fnup, rx, tol, x
@@ -57,7 +57,7 @@ CONTAINS
     fn(1) = 0.095_SP
     fn(2) = 0.70_SP
     fn(3) = 0._SP
-    tol = 500._SP*MAX(R1MACH(4),7.1E-15_SP)
+    tol = 500._SP*MAX(eps_sp,7.1E-15_SP)
     DO kode = 1, 2
       DO m = 1, 3
         DO n = 1, 4
@@ -107,7 +107,7 @@ CONTAINS
     !
     n = 2
     fnu = 1._SP
-    x = R1MACH(4)/100._SP
+    x = eps_sp/100._SP
     DO i = 1, 3
       DO kode = 1, 2
         CALL BESI(x,fnu,kode,n,y,ny)
@@ -126,7 +126,7 @@ CONTAINS
         END IF
       END DO
       !
-      fnu = R1MACH(4)/100._SP
+      fnu = eps_sp/100._SP
       x = xx(2*i-1)
     END DO
     !
@@ -173,7 +173,7 @@ CONTAINS
     !
     !     Check underflow flags
     !
-    100  x = R1MACH(1)*10._SP
+    100  x = tiny_sp*10._SP
     alp = 12.3_SP
     n = 3
     CALL BESI(x,alp,1,n,y,ny)
@@ -183,7 +183,7 @@ CONTAINS
       99005 FORMAT (/' ERROR IN BESI UNDERFLOW TEST'/)
     END IF
     !
-    x = LOG(R1MACH(2)/10._SP) + 20._SP
+    x = LOG(huge_sp/10._SP) + 20._SP
     alp = 1.3_SP
     n = 3
     CALL BESK(x,alp,1,n,w,nw)
@@ -235,7 +235,7 @@ CONTAINS
     !
     !     Trigger overflow
     !
-!    x = LOG(R1MACH(2)/10._SP) + 20._SP
+!    x = LOG(huge_sp/10._SP) + 20._SP
 !    n = 3
 !    alp = 2.3_SP
 !    CALL BESI(x,alp,1,n,y,ny)
@@ -245,7 +245,7 @@ CONTAINS
 !    END IF
 !    num_xer = 0
 !    !
-!    x = R1MACH(1)*10._SP
+!    x = tiny_sp*10._SP
 !    CALL BESK(x,alp,1,n,w,nw)
 !    IF( num_xer/=6 ) THEN
 !      Ipass = 0
@@ -301,9 +301,9 @@ CONTAINS
     !           obtain more information when there is failure of the
     !           Wronskian.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !   910708  Code revised to test error returns for all values of
-    !           KPRINT.  (WRB)
-    USE slatec, ONLY : BESJ, BESY, R1MACH, num_xer, control_xer
+    !   910708  Code revised to test error returns for all values of KPRINT.  (WRB)
+    USE slatec, ONLY : BESJ, BESY, eps_sp, num_xer, control_xer, tiny_sp
+    !
     INTEGER :: Ipass, Kprint
     INTEGER :: i, ix, k, kontrl, Lun, m, n, nu, ny
     REAL(SP) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
@@ -324,7 +324,7 @@ CONTAINS
     fn(1) = 0.095_SP
     fn(2) = 0.70_SP
     fn(3) = 0._SP
-    tol = 500._SP*MAX(R1MACH(4),7.1E-15_SP)
+    tol = 500._SP*MAX(eps_sp,7.1E-15_SP)
     DO m = 1, 3
       DO n = 1, 4
         DO nu = 1, 4
@@ -367,7 +367,7 @@ CONTAINS
     !
     n = 2
     fnu = 1._SP
-    x = R1MACH(4)/100._SP
+    x = eps_sp/100._SP
     rx = rhpi/x
     DO i = 1, 3
       CALL BESJ(x,fnu,n,y,ny)
@@ -385,7 +385,7 @@ CONTAINS
         EXIT
       END IF
       !
-      fnu = R1MACH(4)/100._SP
+      fnu = eps_sp/100._SP
       x = xx(2*i-1)
       rx = rhpi/x
     END DO
@@ -428,7 +428,7 @@ CONTAINS
     !
     !     Check underflow flags
     !
-    100  x = R1MACH(1)*10._SP
+    100  x = tiny_sp*10._SP
     alp = 12.3_SP
     n = 3
     CALL BESJ(x,alp,n,y,ny)
@@ -478,7 +478,7 @@ CONTAINS
     !
     !     Trigger overflow
     !
-!    x = R1MACH(1)*10._SP
+!    x = tiny_sp*10._SP
 !    n = 3
 !    alp = 2.3_SP
 !    CALL BESY(x,alp,n,w)
@@ -531,10 +531,10 @@ CONTAINS
     !   890718  Added check when testing error conditions.  (WRB)
     !   890718  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   910708  Code revised to test error returns for all values of
-    !           KPRINT.  (WRB)
+    !   910708  Code revised to test error returns for all values of KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to EXINT.  (WRB)
-    USE slatec, ONLY : EXINT, GAUS8, R1MACH
+    USE slatec, ONLY : EXINT, GAUS8, eps_sp
+    !
     INTEGER :: Kprint
     INTEGER :: i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
@@ -545,7 +545,7 @@ CONTAINS
     !
     99001 FORMAT ('1'/' QUICK CHECK FOR EXINT AND GAUS8'/)
     Ipass = 1
-    tol = SQRT(MAX(R1MACH(4),1.E-18_SP))
+    tol = SQRT(MAX(eps_sp,1.E-18_SP))
     DO kode = 1, 2
       ik = kode - 1
       FKM = ik
@@ -711,7 +711,8 @@ END MODULE TEST05_MOD
 !** TEST05
 PROGRAM TEST05
   USE TEST05_MOD, ONLY : BIKCK, BJYCK, EG8CK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -764,8 +765,8 @@ PROGRAM TEST05
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST05
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

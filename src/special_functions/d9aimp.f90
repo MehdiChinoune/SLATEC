@@ -64,13 +64,15 @@ ELEMENTAL SUBROUTINE D9AIMP(X,Ampl,Theta)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
+  !
   REAL(DP), INTENT(IN) :: X
   REAL(DP), INTENT(OUT) :: Ampl, Theta
+  !
   REAL(DP) :: sqrtx, z
   INTEGER, PARAMETER :: nam20 = 17, nath0 = 15, nam21 = 25, nath1 = 23, &
     nam22 = 34, nath2 = 33
-  REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xsml = -1._DP/D1MACH(3)**0.3333_DP
+  REAL(DP), PARAMETER :: eta = 0.1_DP*eps_2_dp, xsml = -1._DP/eps_2_dp**0.3333_DP
   REAL(DP), PARAMETER :: am20cs(57) = [ +.108716749086561856615730588125E-1_DP, &
     +.369489228982663555091728665146E-3_DP, +.440680100484689563667507001327E-5_DP, &
     +.143686762361911153929183952833E-6_DP, +.824275552390078308670628855353E-8_DP, &

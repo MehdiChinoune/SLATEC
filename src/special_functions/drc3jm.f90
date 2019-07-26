@@ -130,7 +130,7 @@ PURE SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of THRCOF expanded. These changes were done by
   !           D. W. Lozier.
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : huge_dp
   !
   INTEGER, INTENT(IN) :: Ndim
   INTEGER, INTENT(OUT) :: Ier
@@ -147,7 +147,7 @@ PURE SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.
-  hugee = SQRT(D1MACH(2)/20._DP)
+  hugee = SQRT(huge_dp/20._DP)
   srhuge = SQRT(hugee)
   tinyy = 1._DP/hugee
   srtiny = 1._DP/srhuge

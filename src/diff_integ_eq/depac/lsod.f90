@@ -33,7 +33,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     iquit_com, init_com, ksteps_com, ibegin_com, itol_com, iinteg_com, itstop_com, &
     ijac_com, iband_com, jstart_com, kflag_com, meth_com, miter_com, maxord_com, &
     n_com, nq_com, nst_com, nfe_com, nje_com
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : XERMSG, eps_sp, huge_sp
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
@@ -77,7 +77,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     !        FUNCTION ROUTINE R1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN R1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
     !
-    uround_com = R1MACH(4)
+    uround_com = eps_sp
     !                          -- SET ASSOCIATED MACHINE DEPENDENT PARAMETER
     Wm(1) = SQRT(uround_com)
     !                          -- SET TERMINATION FLAG
@@ -269,7 +269,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       Ewt(l) = tol
     END DO
     !
-    big = SQRT(R1MACH(2))
+    big = SQRT(huge_sp)
     CALL HSTART(F,Neq,T,Tout,Y,Yh(1,2),Ewt,1,uround_com,big,Yh(1,3),Yh(1,4),Yh(1,5),&
       Yh(1,6),h_com)
     !

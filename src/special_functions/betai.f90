@@ -40,11 +40,13 @@ REAL(SP) ELEMENTAL FUNCTION BETAI(X,Pin,Qin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, tiny_sp
+  !
   REAL(SP), INTENT(IN) :: X, Pin, Qin
+  !
   INTEGER :: i, ib, n
   REAL(SP) :: c, finsum, p, p1, ps, q, term, xb, y
-  REAL(SP), PARAMETER :: eps = R1MACH(3), alneps = LOG(eps), sml = R1MACH(1), &
+  REAL(SP), PARAMETER :: eps = eps_2_sp, alneps = LOG(eps), sml = tiny_sp, &
     alnsml = LOG(sml)
   !* FIRST EXECUTABLE STATEMENT  BETAI
   !

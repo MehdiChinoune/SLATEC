@@ -83,7 +83,7 @@ PURE SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   INTEGER, INTENT(IN) :: M, N, Lda, Lipvt
   INTEGER, INTENT(OUT) :: Ipvt(Lipvt)
@@ -95,7 +95,7 @@ PURE SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   REAL(SP) :: ajnorm, epsmch, summ, temp
   REAL(SP), PARAMETER :: p05 = 5.E-2_SP
   !* FIRST EXECUTABLE STATEMENT  QRFAC
-  epsmch = R1MACH(4)
+  epsmch = eps_sp
   !
   !     COMPUTE THE INITIAL COLUMN NORMS AND INITIALIZE SEVERAL ARRAYS.
   !

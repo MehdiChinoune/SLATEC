@@ -99,7 +99,7 @@ PURE SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   INTEGER, INTENT(IN) :: M, N, Ldfjac, Mode
   REAL(SP), INTENT(IN) :: X(N), Fvec(M), Fjac(Ldfjac,N), Fvecp(M)
@@ -108,7 +108,7 @@ PURE SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   INTEGER :: i, j
   REAL(SP) :: eps, epsf, epslog, epsmch, temp
   !* FIRST EXECUTABLE STATEMENT  CHKDER
-  epsmch = R1MACH(4)
+  epsmch = eps_sp
   !
   eps = SQRT(epsmch)
   !

@@ -135,7 +135,7 @@ PURE SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !           IERR = 3 => Error in user input.
   !                       Check input values of N, ITOL.
   !           IERR = 4 => User error tolerance set too tight.
-  !                       Reset to 500*R1MACH(3).  Iteration proceeded.
+  !                       Reset to 500*eps_2_sp.  Iteration proceeded.
   !           IERR = 5 => Preconditioning matrix, M, is not positive
   !                       definite.  (r,z) < 0.
   !           IERR = 6 => Matrix A is not positive definite.  (p,Ap) < 0.
@@ -273,10 +273,10 @@ PURE SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !   920929  Corrected format of reference.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp
   USE blas, ONLY : SAXPY
   USE SSLBLK, ONLY : soln_com
-
+  !
   INTERFACE
     PURE SUBROUTINE MSOLVE(N,R,Z,Rwork,Iwork)
       IMPORT SP
@@ -319,7 +319,7 @@ PURE SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     Ierr = 3
     RETURN
   END IF
-  tolmin = 500*R1MACH(3)
+  tolmin = 500*eps_2_sp
   IF( Tol<tolmin ) THEN
     Tol = tolmin
     Ierr = 4

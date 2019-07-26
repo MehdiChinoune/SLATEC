@@ -66,7 +66,7 @@ PURE SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, eps_dp
   !
   INTERFACE
     REAL(DP) PURE FUNCTION F(X)
@@ -141,8 +141,8 @@ PURE SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   !           EPMACH IS THE LARGEST RELATIVE SPACING.
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !* FIRST EXECUTABLE STATEMENT  DQK31
-  epmach = D1MACH(4)
-  uflow = D1MACH(1)
+  epmach = eps_dp
+  uflow = tiny_dp
   !
   centr = 0.5_DP*(A+B)
   hlgth = 0.5_DP*(B-A)

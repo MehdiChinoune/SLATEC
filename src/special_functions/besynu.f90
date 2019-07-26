@@ -68,11 +68,13 @@ PURE SUBROUTINE BESYNU(X,Fnu,N,Y)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  !
+  USE service, ONLY : eps_2_sp
   !
   INTEGER, INTENT(IN) :: N
   REAL(SP), INTENT(IN) :: Fnu, X
   REAL(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, inu, j, k, kk, nn
   REAL(SP) :: a(120), ak, arg, a1, a2, bk, cb(120), cbk, cck, ck, coef, cpt, cp1, cp2, &
     cs, cs1, cs2, cx, dnu, dnu2, etest, etx, f, fc, fhs, fk, fks, flrx, fmu, fn, &
@@ -85,7 +87,7 @@ PURE SUBROUTINE BESYNU(X,Fnu,N,Y)
     -4.21977345555443E-02_SP, 7.21894324666300E-03_SP, -2.15241674114900E-04_SP, &
     -2.01348547807000E-05_SP, 1.13302723200000E-06_SP, 6.11609500000000E-09_SP ]
   !* FIRST EXECUTABLE STATEMENT  BESYNU
-  ak = R1MACH(3)
+  ak = eps_2_sp
   tol = MAX(ak,1.0E-15_SP)
   s2 = 0.
   IF( X<=0._SP ) THEN

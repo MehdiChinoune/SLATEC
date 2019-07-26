@@ -40,7 +40,7 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-    USE slatec, ONLY : R1MACH, SGEFS, SGEIR
+    USE slatec, ONLY : eps_sp, SGEFS, SGEIR
     !     .. Scalar Arguments ..
     INTEGER :: Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -62,7 +62,7 @@ CONTAINS
     n = 4
     lda = 5
     Nerr = 0
-    errcmp = R1MACH(4)**0.8_SP
+    errcmp = eps_sp**0.8_SP
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT (//,2X,'SGEFS and SGEIR Quick Check'/)
@@ -179,7 +179,7 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-    USE slatec, ONLY : D1MACH, DGEFS
+    USE slatec, ONLY : eps_dp, DGEFS
     !     .. Scalar Arguments ..
     INTEGER :: Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -202,7 +202,7 @@ CONTAINS
     n = 4
     lda = 5
     Nerr = 0
-    errcmp = D1MACH(4)**0.8_DP
+    errcmp = eps_dp**0.8_DP
     IF( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT (//,2X,'DGEFS Quick Check'/)
@@ -413,7 +413,8 @@ END MODULE TEST21_MOD
 !** TEST21
 PROGRAM TEST21
   USE TEST21_MOD, ONLY : CGEQC, DGEQC, SGEQC
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -466,8 +467,8 @@ PROGRAM TEST21
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST21
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

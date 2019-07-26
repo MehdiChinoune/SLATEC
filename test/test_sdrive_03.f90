@@ -36,7 +36,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    USE slatec, ONLY : CDRIV1, CDRIV2, CDRIV3, R1MACH, num_xer
+    USE slatec, ONLY : CDRIV1, CDRIV2, CDRIV3, eps_sp, num_xer
     REAL(SP) :: eps, t, tout
     INTEGER :: ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
       mstate, nde, nfe, nje, nstate, nstep, nx
@@ -48,7 +48,7 @@ CONTAINS
     REAL(SP), PARAMETER :: ewt(1)  = .00001_SP
     !* FIRST EXECUTABLE STATEMENT  CDQCK
     alfa = (1._SP,1._SP)
-    eps = R1MACH(4)**(1._SP/3._SP)
+    eps = eps_sp**(1._SP/3._SP)
     Ipass = 1
     !                                            Exercise CDRIV1 for problem
     !                                            with known solution.
@@ -486,7 +486,8 @@ END MODULE TEST47_MOD
 !** TEST47
 PROGRAM TEST47
   USE TEST47_MOD, ONLY : CDQCK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -535,8 +536,8 @@ PROGRAM TEST47
   !   920801  DATE WRITTEN
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST47
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

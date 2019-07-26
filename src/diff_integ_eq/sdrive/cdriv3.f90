@@ -690,7 +690,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !       to I2 and columns J1 to J2.
   !             COMPLEX DFDY(N,N), R, SAVE1(N), SAVE2(N), Y(N), YJ, YWT(N)
   !             REAL EPSJ, H, R1MACH, T, UROUND
-  !             UROUND = R1MACH(4)
+  !             UROUND = eps_sp
   !             EPSJ = SQRT(UROUND)
   !             DO 30 J = J1,J2
   !               IF(ABS(Y(J)) > ABS(YWT(J))) THEN
@@ -729,10 +729,11 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : XERMSG, eps_sp, tiny_sp
   USE blas, ONLY : SCNRM2
   USE linpack, ONLY : CGBFA, CGEFA
   USE lapack, ONLY : CGBTRS, CGETRS
+  !
   INTERFACE
     REAL(SP) FUNCTION G(N,T,Y,Iroot)
       IMPORT SP
@@ -769,6 +770,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
   REAL(SP) :: Eps, Hmax, T, Tout, Ewt(N)
   COMPLEX(SP) :: Work(Lenw+Leniw), Y(N+1)
+  !
   INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, &
     isave2, itroot, iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, &
     ndecom, npar, nstepl
@@ -982,9 +984,9 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       Iwork(IMTRSV) = Miter
     END IF
     Work(IHMAX) = Hmax
-    uround = R1MACH(4)
+    uround = eps_sp
     Work(IMACH4) = uround
-    Work(IMACH1) = R1MACH(1)
+    Work(IMACH1) = tiny_sp
     IF( Nroot/=0 ) THEN
       re = uround
       ae = REAL( Work(IMACH1) )

@@ -83,7 +83,7 @@ PURE SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : log10_radix_dp, tiny_dp, min_exp_dp
   !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
@@ -94,9 +94,9 @@ PURE SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
     trx, w(2), xlim, zn
   INTEGER, PARAMETER :: nulim(2) = [ 35, 70 ]
   !* FIRST EXECUTABLE STATEMENT  DBESK
-  nn = -I1MACH(15)
-  elim = 2.303_DP*(nn*D1MACH(5)-3._DP)
-  xlim = D1MACH(1)*1.E+3_DP
+  nn = -min_exp_dp
+  elim = 2.303_DP*(nn*log10_radix_dp-3._DP)
+  xlim = tiny_dp*1.E+3_DP
   IF( Kode<1 .OR. Kode>2 ) THEN
     ERROR STOP 'DBESK : SCALING OPTION, KODE, NOT 1 OR 2'
   ELSEIF( Fnu<0._DP ) THEN

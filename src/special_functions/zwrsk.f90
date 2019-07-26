@@ -21,7 +21,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !     COMPLEX CINU,CSCL,CT,CW,C1,C2,RCT,ST,Y,ZR
   INTEGER :: i, Kode, N, nw, Nz
   REAL(DP) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
@@ -59,7 +59,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     !     THE RESULT IS ON SCALE.
     !-----------------------------------------------------------------------
     acw = ZABS(Cwr(2),Cwi(2))
-    ascle = 1.E3_DP*D1MACH(1)/Tol
+    ascle = 1.E3_DP*tiny_dp/Tol
     csclr = 1._DP
     IF( acw>ascle ) THEN
       ascle = 1._DP/ascle

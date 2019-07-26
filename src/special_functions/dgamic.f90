@@ -49,12 +49,14 @@ REAL(DP) ELEMENTAL FUNCTION DGAMIC(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, eps_dp, tiny_dp
+  !
   REAL(DP), INTENT(IN) :: A, X
+  !
   INTEGER :: izero
   REAL(DP) :: aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, sgngam, sgngs, t
-  REAL(DP), PARAMETER :: eps = 0.5_DP*D1MACH(3), sqeps = SQRT(D1MACH(4)), &
-    alneps = -LOG(D1MACH(3)), bot = LOG(D1MACH(1))
+  REAL(DP), PARAMETER :: eps = 0.5_DP*eps_2_dp, sqeps = SQRT(eps_dp), &
+    alneps = -LOG(eps_2_dp), bot = LOG(tiny_dp)
   !* FIRST EXECUTABLE STATEMENT  DGAMIC
   !
   IF( X<0._DP ) ERROR STOP 'DGAMIC : X IS NEGATIVE'

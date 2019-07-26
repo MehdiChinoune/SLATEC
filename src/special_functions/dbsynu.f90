@@ -73,11 +73,12 @@ PURE SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
   !
   INTEGER, INTENT(IN) :: N
   REAL(DP), INTENT(IN) :: Fnu, X
   REAL(DP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, inu, j, k, kk, nn
   REAL(DP) :: a(120), ak, arg, a1, a2, bk, cb(120), cbk, cck, ck, coef, cpt, cp1, cp2, &
     cs, cs1, cs2, cx, dnu, dnu2, etest, etx, f, fc, fhs, fk, fks, flrx, fmu, fn, &
@@ -90,7 +91,7 @@ PURE SUBROUTINE DBSYNU(X,Fnu,N,Y)
     -4.21977345555443E-02_DP, 7.21894324666300E-03_DP, -2.15241674114900E-04_DP, &
     -2.01348547807000E-05_DP, 1.13302723200000E-06_DP, 6.11609500000000E-09_DP ]
   !* FIRST EXECUTABLE STATEMENT  DBSYNU
-  ak = D1MACH(3)
+  ak = eps_2_dp
   tol = MAX(ak,1.E-15_DP)
   s2 = 0._DP
   IF( X<=0._DP ) THEN

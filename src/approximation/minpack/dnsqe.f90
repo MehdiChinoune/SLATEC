@@ -143,7 +143,7 @@ PURE SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !       TOL.  This parameter is used in a test which makes a comparison
   !       between the approximation X and a solution XSOL.  DNSQE
   !       terminates when the test is satisfied.  If TOL is less than the
-  !       machine precision (as defined by the  function D1MACH(4)), then
+  !       machine precision (as defined by the  function eps_dp), then
   !       DNSQE only attempts to satisfy the test defined by the machine
   !       precision.  Further progress is not usually possible.  Unless
   !       high precision solutions are required, the recommended value
@@ -281,7 +281,7 @@ PURE SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   ! C     UNLESS HIGH PRECISION SOLUTIONS ARE REQUIRED,
   ! C     THIS IS THE RECOMMENDED SETTING.
   ! C
-  !       TOL = SQRT(D1MACH(4))
+  !       TOL = SQRT(eps_dp)
   ! C
   !       CALL DNSQE(FCN,JAC,IOPT,N,X,FVEC,TOL,NPRINT,INFO,WA,LWA)
   !       FNORM = DENORM(N,FVEC)

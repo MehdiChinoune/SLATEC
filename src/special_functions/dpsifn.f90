@@ -71,7 +71,7 @@ PURE SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !                            array TRMR(NMAX) is not large enough for N
   !
   !         The nominal computational accuracy is the maximum of unit
-  !         roundoff (=D1MACH(4)) and 1.0D-18 since critical constants
+  !         roundoff (=eps_dp) and 1.0D-18 since critical constants
   !         are given to only 18 digits.
   !
   !         PSIFN is the single precision version of DPSIFN.
@@ -112,11 +112,13 @@ PURE SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : log10_radix_dp, eps_dp, digits_dp, max_exp_dp, min_exp_dp
+  !
   INTEGER, INTENT(IN) :: Kode, M, N
   INTEGER, INTENT(OUT) :: Ierr, Nz
   REAL(DP), INTENT(IN) :: X
   REAL(DP), INTENT(OUT) :: Ans(M)
+  !
   INTEGER :: i, j, k, mm, mx, nn, np, nx, fn
   REAL(DP) :: arg, den, elim, eps, fln, fx, rln, rxsq, r1m4, r1m5, s, slope, t, ta, &
     tk, tol, tols, trm(22), trmr(100), tss, tst, tt, t1, t2, wdtol, xdmln, xdmy, &
@@ -142,9 +144,9 @@ PURE SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
     RETURN
   END IF
   mm = M
-  nx = MIN(-I1MACH(15),I1MACH(16))
-  r1m5 = D1MACH(5)
-  r1m4 = D1MACH(4)*0.5_DP
+  nx = MIN(-min_exp_dp,max_exp_dp)
+  r1m5 = log10_radix_dp
+  r1m4 = eps_dp*0.5_DP
   wdtol = MAX(r1m4,0.5E-18_DP)
   !-----------------------------------------------------------------------
   !     ELIM = APPROXIMATE EXPONENTIAL OVER AND UNDERFLOW LIMIT
@@ -177,7 +179,7 @@ PURE SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       !-----------------------------------------------------------------------
       !     COMPUTE XMIN AND THE NUMBER OF TERMS OF THE SERIES, FLN+1
       !-----------------------------------------------------------------------
-      rln = r1m5*I1MACH(14)
+      rln = r1m5*digits_dp
       rln = MIN(rln,18.06_DP)
       fln = MAX(rln,3._DP) - 3._DP
       yint = 3.50_DP + 0.40_DP*fln

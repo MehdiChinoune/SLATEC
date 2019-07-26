@@ -83,11 +83,13 @@ PURE SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : eps_2_dp, log10_radix_dp, tiny_dp, digits_dp, min_exp_dp
+  !
   INTEGER, INTENT(IN) ::  N
   INTEGER, INTENT(OUT) ::  Nz
   REAL(DP), INTENT(IN) :: Alpha, X
   REAL(DP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, ialp, idalp, iflw, in, is, i1, i2, k, kk, km, kt,nn, ns
   REAL(DP) :: ak, akm, ans, ap, arg, coef, dalpha, dfn, dtm, earg, elim1, &
     etx, fidal, flgjy, fn, fnf, fni, fnp1, fnu, gln, rden, relb, &
@@ -103,16 +105,16 @@ PURE SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   Nz = 0
   kt = 1
   ns = 0
-  !     I1MACH(14) REPLACES I1MACH(11) IN A DOUBLE PRECISION CODE
-  !     I1MACH(15) REPLACES I1MACH(12) IN A DOUBLE PRECISION CODE
-  ta = D1MACH(3)
+  !     digits_dp REPLACES digits_sp IN A DOUBLE PRECISION CODE
+  !     min_exp_dp REPLACES min_exp_sp IN A DOUBLE PRECISION CODE
+  ta = eps_2_dp
   tol = MAX(ta,1.E-15_DP)
-  i1 = I1MACH(14) + 1
-  i2 = I1MACH(15)
-  tb = D1MACH(5)
+  i1 = digits_dp + 1
+  i2 = min_exp_dp
+  tb = log10_radix_dp
   elim1 = -2.303_DP*(i2*tb+3._DP)
   rtol = 1._DP/tol
-  slim = D1MACH(1)*rtol*1.E+3_DP
+  slim = tiny_dp*rtol*1.E+3_DP
   !     TOLLN = -LN(TOL)
   tolln = 2.303_DP*tb*i1
   tolln = MIN(tolln,34.5388_DP)

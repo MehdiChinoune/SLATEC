@@ -44,16 +44,18 @@ ELEMENTAL SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, tiny_sp, huge_sp
+  !
   INTEGER, INTENT(OUT) :: Iswtch
   REAL(SP), INTENT(IN) :: X, Xnu
   REAL(SP), INTENT(OUT) :: Bknu, Bknu1
+  !
   INTEGER :: i, ii, inu, n, nterms
   REAL(SP) :: a(15), a0, alnz, alpha(15), an, b0, beta(15), bknu0, bknud, bn, c0, &
     expx, p1, p2, p3, qq, result, sqrtx, v, vlnz, x2n, x2tov, xi, xmu, z, ztov
   INTEGER, PARAMETER :: ntc0k = 8, ntznu1 = 7
-  REAL(SP), PARAMETER :: xnusml = SQRT(R1MACH(3)/8._SP), xsml = 0.1_SP*R1MACH(3), &
-    alnsml = LOG(R1MACH(1)), alnbig = LOG(R1MACH(2)), alneps = LOG(0.1_SP*R1MACH(3))
+  REAL(SP), PARAMETER :: xnusml = SQRT(eps_2_sp/8._SP), xsml = 0.1_SP*eps_2_sp, &
+    alnsml = LOG(tiny_sp), alnbig = LOG(huge_sp), alneps = LOG(0.1_SP*eps_2_sp)
   REAL(SP), PARAMETER :: c0kcs(16) = [ .060183057242626108_SP,-.15364871433017286_SP, &
     -.011751176008210492_SP,-.000852487888919795_SP,-.000061329838767496_SP, &
     -.000004405228124551_SP,-.000000316312467283_SP,-.000000022710719382_SP, &
@@ -69,8 +71,8 @@ ELEMENTAL SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   REAL(SP), PARAMETER :: sqpi2 = 1.2533141373155003_SP
   REAL(SP), PARAMETER :: aln2 = 0.69314718055994531_SP
   !* FIRST EXECUTABLE STATEMENT  R9KNUS
-  ! ntc0k = INITS(c0kcs,0.1_SP*R1MACH(3))
-  ! ntznu1 = INITS(znu1cs,0.1_SP*R1MACH(3))
+  ! ntc0k = INITS(c0kcs,0.1_SP*eps_2_sp)
+  ! ntznu1 = INITS(znu1cs,0.1_SP*eps_2_sp)
   !
   IF( Xnu<0._SP .OR. Xnu>=1._SP ) THEN
     ERROR STOP 'R9KNUS : XNU MUST 0 <= XNU < 1'

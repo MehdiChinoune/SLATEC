@@ -29,12 +29,12 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, modified tolerances
-    !           to use D1MACH(4) rather than D1MACH(3) and cleaned up
+    !           to use eps_dp rather than eps_2_dp and cleaned up
     ! FORMATs.  (RWC)
     !   920722  Initialized IP(1) and IP(2) for CALL to DLSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : D1MACH, DLSEI, DVOUT, control_xer, num_xer
+    USE slatec, ONLY : eps_dp, DLSEI, DVOUT, control_xer, num_xer
     USE blas, ONLY : DAXPY
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
@@ -144,7 +144,7 @@ CONTAINS
     relerr = cnorm/tnorm
     relnrm = (resnrm-rnorml)/resnrm
     !
-    IF( relerr(1)<=70._DP*SQRT(D1MACH(4)) .AND. relnrm(1)<=5._DP*D1MACH(4) ) THEN
+    IF( relerr(1)<=70._DP*SQRT(eps_dp) .AND. relnrm(1)<=5._DP*eps_dp ) THEN
       Ipass = 1
       IF( Kprint>=3 ) WRITE (Lun,99002)
       99002 FORMAT (/' DLSEI PASSED TEST')
@@ -254,7 +254,7 @@ CONTAINS
     !      THE REAL QUANTITIES FOR THE COMPUTED SOLUTION VECTOR
     !      X  AND THE CORRESPONDING  RNORM  ARE COMPARED AGAINST
     !      STORED VALUES.  DISAGREEMENT OCCURS IF A DIFFERENCE
-    !      IS SQRT(D1MACH(4) OR MORE.  THE RETURNED VALUE (INTEGER)
+    !      IS SQRT(eps_dp OR MORE.  THE RETURNED VALUE (INTEGER)
     !      OF  INFO  IS ALSO CHECKED.  FOUR CASES ARE RUN, TWO
     !      INVOLVING  LLSIA  AND TWO INVOLVING  ULSIA .
     !
@@ -269,10 +269,10 @@ CONTAINS
     !   811026  DATE WRITTEN
     !   850601  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901010  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
-    !           including removing an illegal character from column 1, and
-    !           editorial changes.  (RWC)
-    USE slatec, ONLY : D1MACH, DGLSS
+    !   901010  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs, including
+    !           removing an illegal character from column 1, and editorial changes.  (RWC)
+    USE slatec, ONLY : eps_dp, DGLSS
+    !
     REAL(DP) :: a(4,4), b(4), delmax, delx, r, rnorm(1), work(50)
     INTEGER :: i, Ipass, j, kk, Kprint, nerr, kprog, kcase, iwork(20), info, Lun
     REAL(DP), PARAMETER :: aa(4,4,2) = RESHAPE( [1._DP, .5_DP, 1._DP, .25_DP, &
@@ -291,7 +291,7 @@ CONTAINS
     !* FIRST EXECUTABLE STATEMENT  DQCGLS
     info = 0
     nerr = 0
-    r = MAX(SQRT(D1MACH(4)),1.E-12_DP)
+    r = MAX(SQRT(eps_dp),1.E-12_DP)
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (/' *  DQCGLS - QUICK CHECK FOR DGLSS (DLLSIA AND DULSIA)'/)
     DO kprog = 1, 2
@@ -376,7 +376,8 @@ END MODULE TEST28_MOD
 !** TEST28
 PROGRAM TEST28
   USE TEST28_MOD, ONLY : DLSEIT, DQCGLS
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -427,8 +428,8 @@ PROGRAM TEST28
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST28
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

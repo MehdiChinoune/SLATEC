@@ -121,7 +121,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    USE slatec, ONLY : DEABM, R1MACH
+    USE slatec, ONLY : DEABM, eps_sp
     !
     !     Declare arguments.
     !
@@ -150,7 +150,7 @@ CONTAINS
     u(3) = 0._SP
     u(4) = 1._SP
     Ipass = 1
-    reltol = SQRT(R1MACH(4))
+    reltol = SQRT(eps_sp)
     relerr = 0.1_SP*reltol
     abserr = relerr**1.5_SP
     info(1) = 0
@@ -232,7 +232,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    USE slatec, ONLY : DEBDF, R1MACH
+    USE slatec, ONLY : DEBDF, eps_sp
     !
     !     Declare arguments.
     !
@@ -261,7 +261,7 @@ CONTAINS
     u(3) = 0._SP
     u(4) = 1._SP
     Ipass = 1
-    reltol = SQRT(R1MACH(4))
+    reltol = SQRT(eps_sp)
     relerr = 0.001_SP*reltol
     abserr = relerr**1.5_SP
     info(1) = 0
@@ -345,7 +345,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    USE slatec, ONLY : DERKF, R1MACH
+    USE slatec, ONLY : DERKF, eps_sp
     !
     !     Declare arguments.
     !
@@ -374,7 +374,7 @@ CONTAINS
     u(3) = 0._SP
     u(4) = 1._SP
     Ipass = 1
-    reltol = SQRT(R1MACH(4))
+    reltol = SQRT(eps_sp)
     relerr = 0.1_SP*reltol
     abserr = relerr**1.5_SP
     info(1) = 0
@@ -667,7 +667,8 @@ END MODULE TEST43_MOD
 !** TEST43
 PROGRAM TEST43
   USE TEST43_MOD, ONLY :  QXABM, QXBDF, QXBVSP, QXRKF
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -719,8 +720,8 @@ PROGRAM TEST43
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST43
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

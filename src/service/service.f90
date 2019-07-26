@@ -1,29 +1,18 @@
 MODULE service
-  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT, ERROR_UNIT, &
-    NUMERIC_STORAGE_SIZE, CHARACTER_STORAGE_SIZE
   IMPLICIT NONE
+  !
   INTEGER, PARAMETER :: SP = SELECTED_REAL_KIND(6,37)
   INTEGER, PARAMETER :: DP = SELECTED_REAL_KIND(15,307)
   INTEGER, PARAMETER :: QP = SELECTED_REAL_KIND(33,4931)
-  !   I/O unit numbers:
-  !     I1MACH( 1) = the standard input unit.
-  !     I1MACH( 2) = the standard output unit.
-  !     I1MACH( 3) = the standard punch unit.
-  !     I1MACH( 4) = the standard error message unit.
-  !
-  !   Words:
-  !     I1MACH( 5) = the number of bits per integer storage unit.
-  !     I1MACH( 6) = the number of characters per integer storage unit.
-  !
   !   Integers:
   !     assume integers are represented in the S-digit, base-A form
   !
   !                sign ( X(S-1)*A**(S-1) + ... + X(1)*A + X(0) )
   !
   !                where 0 <= X(I) < A for I=0,...,S-1.
-  !     I1MACH( 7) = A, the base.
-  !     I1MACH( 8) = S, the number of base-A digits.
-  !     I1MACH( 9) = A**S - 1, the largest magnitude.
+  !     radix_int  = A, the base.
+  !     digits_int = S, the number of base-A digits.
+  !     huge_int   = A**S - 1, the largest magnitude.
   !
   !   Floating-Point Numbers:
   !     Assume floating-point numbers are represented in the T-digit,
@@ -32,27 +21,27 @@ MODULE service
   !
   !                where 0 <= X(I) < B for I=1,...,T,
   !                0 < X(1), and EMIN <= E <= EMAX.
-  !     I1MACH(10) = B, the base.
+  !     radix_fp  = B, the base.
   !
   !   Single-Precision:
-  !     I1MACH(11) = T, the number of base-B digits.
-  !     I1MACH(12) = EMIN, the smallest exponent E.
-  !     I1MACH(13) = EMAX, the largest exponent E.
+  !     digits_sp  = T, the number of base-B digits.
+  !     min_exp_sp = EMIN, the smallest exponent E.
+  !     max_exp_sp = EMAX, the largest exponent E.
   !
   !   Double-Precision:
-  !     I1MACH(14) = T, the number of base-B digits.
-  !     I1MACH(15) = EMIN, the smallest exponent E.
-  !     I1MACH(16) = EMAX, the largest exponent E.
-  INTEGER, PARAMETER :: I1MACH(16) = [ INPUT_UNIT, OUTPUT_UNIT, OUTPUT_UNIT, &
-    ERROR_UNIT, NUMERIC_STORAGE_SIZE, CHARACTER_STORAGE_SIZE, &
-    RADIX(1), DIGITS(1), HUGE(1), RADIX(1._SP), &
-    DIGITS(1._SP), MINEXPONENT(1._SP), MAXEXPONENT(1._SP), &
-    DIGITS(1._DP), MINEXPONENT(1._DP), MAXEXPONENT(1._DP) ]
-  !   R1MACH(1) = B**(EMIN-1), the smallest positive magnitude.
-  !   R1MACH(2) = B**EMAX*(1 - B**(-T)), the largest magnitude.
-  !   R1MACH(3) = B**(-T), the smallest relative spacing.
-  !   R1MACH(4) = B**(1-T), the largest relative spacing.
-  !   R1MACH(5) = LOG10(B)
+  !     digits_dp  = T, the number of base-B digits.
+  !     min_exp_dp = EMIN, the smallest exponent E.
+  !     max_exp_dp = EMAX, the largest exponent E.
+  INTEGER, PARAMETER :: radix_int = RADIX(1), digits_int = DIGITS(1), &
+    huge_int = HUGE(1), radix_fp = RADIX(1._SP), &
+    digits_sp = DIGITS(1._SP), min_exp_sp = MINEXPONENT(1._SP), &
+    max_exp_sp = MAXEXPONENT(1._SP), digits_dp = DIGITS(1._DP), &
+    min_exp_dp = MINEXPONENT(1._DP), max_exp_dp = MAXEXPONENT(1._DP)
+  !   tiny_sp        = B**(EMIN-1), the smallest positive magnitude.
+  !   huge_sp        = B**EMAX*(1 - B**(-T)), the largest magnitude.
+  !   eps_2_sp       = B**(-T), the smallest relative spacing.
+  !   eps_sp         = B**(1-T), the largest relative spacing.
+  !   log10_radix_sp = LOG10(B)
   !
   !   Assume single precision numbers are represented in the T-digit,
   !   base-B form
@@ -61,13 +50,14 @@ MODULE service
   !
   !   where 0 <= X(I) < B for I=1,...,T, 0 < X(1), and
   !   EMIN <= E <= EMAX.
-  REAL(SP), PARAMETER :: R1MACH(5) = [ TINY(1._SP), HUGE(1._SP), &
-    EPSILON(1._SP)/RADIX(1._SP), EPSILON(1._SP), LOG10( REAL( RADIX(1._SP), SP ) ) ]
-  !   D1MACH( 1) = B**(EMIN-1), the smallest positive magnitude.
-  !   D1MACH( 2) = B**EMAX*(1 - B**(-T)), the largest magnitude.
-  !   D1MACH( 3) = B**(-T), the smallest relative spacing.
-  !   D1MACH( 4) = B**(1-T), the largest relative spacing.
-  !   D1MACH( 5) = LOG10(B)
+  REAL(SP), PARAMETER :: tiny_sp = TINY(1._SP), huge_sp = HUGE(1._SP), &
+    eps_2_sp = EPSILON(1._SP)/RADIX(1._SP), eps_sp = EPSILON(1._SP), &
+    log10_radix_sp = LOG10( REAL( RADIX(1._SP), SP ) )
+  !   tiny_dp        = B**(EMIN-1), the smallest positive magnitude.
+  !   huge_dp        = B**EMAX*(1 - B**(-T)), the largest magnitude.
+  !   eps_2_dp       = B**(-T), the smallest relative spacing.
+  !   eps_dp         = B**(1-T), the largest relative spacing.
+  !   log10_radix_dp = LOG10(B)
   !
   !   Assume double precision numbers are represented in the T-digit,
   !   base-B form
@@ -76,8 +66,9 @@ MODULE service
   !
   !   where 0 <= X(I) < B for I=1,...,T, 0 < X(1), and
   !   EMIN <= E <= EMAX.
-  REAL(DP), PARAMETER :: D1MACH(5) = [ TINY(1._DP), HUGE(1._DP), &
-    EPSILON(1._DP)/RADIX(1._DP), EPSILON(1._DP), LOG10( REAL( RADIX(1._DP), DP ) ) ]
+  REAL(DP), PARAMETER :: tiny_dp = TINY(1._DP), huge_dp = HUGE(1._DP), &
+    eps_2_dp = EPSILON(1._DP)/RADIX(1._DP), eps_dp = EPSILON(1._DP), &
+    log10_radix_dp = LOG10( REAL( RADIX(1._DP), DP ) )
   !
   INTEGER :: num_xer     = 0  !! The most recent error number
   INTEGER :: control_xer = 2  !! Error control flag.

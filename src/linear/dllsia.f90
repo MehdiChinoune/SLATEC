@@ -166,14 +166,15 @@ PURE SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
-
+  USE service, ONLY : eps_2_dp
+  !
   INTEGER, INTENT(IN) :: Key, Liw, Lw, M, Mda, Mdb, Mode, N, Nb, Np
   INTEGER, INTENT(INOUT) :: Info
   INTEGER, INTENT(OUT) :: Krank, Ksure
   INTEGER, INTENT(INOUT) :: Iwork(N+M)
   REAL(DP), INTENT(INOUT) :: Ae(N), Re(N), A(Mda,N), B(Mdb,Nb), W(5*N)
   REAL(DP), INTENT(OUT) :: Rnorm(Nb)
+  !
   INTEGER :: i, it, n1, n2, n3, n4, n5
   REAL(DP) :: eps
   !
@@ -237,7 +238,7 @@ PURE SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                   RETURN
                 ELSE
                   !
-                  eps = 10._SP*D1MACH(3)
+                  eps = 10._SP*eps_2_dp
                   n1 = 1
                   n2 = n1 + N
                   n3 = n2 + N

@@ -21,7 +21,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : QAG, R1MACH
+    USE slatec, ONLY : QAG, eps_sp
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
@@ -41,7 +41,7 @@ CONTAINS
     limit = 100
     lenw = limit*4
     epsabs = 0._SP
-    epmach = R1MACH(4)
+    epmach = eps_sp
     key = 6
     epsrel = MAX(SQRT(epmach),0.1E-7_SP)
     a = 0._SP
@@ -70,7 +70,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 1
     !
-!    uflow = R1MACH(1)
+!    uflow = tiny_sp
 !    limit = 100
 !    lenw = limit*4
 !    CALL QAG(F2G,a,b,uflow,0._SP,key,result,abserr,neval,ier,limit,lenw,&
@@ -133,7 +133,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : QAGI, R1MACH
+    USE slatec, ONLY : QAGI, eps_sp
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4), inf
@@ -153,7 +153,7 @@ CONTAINS
     limit = 200
     lenw = limit*4
     epsabs = 0._SP
-    epmach = R1MACH(4)
+    epmach = eps_sp
     epsrel = MAX(SQRT(epmach),0.1E-7_SP)
     bound = 0._SP
     inf = 1
@@ -177,7 +177,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-!    uflow = R1MACH(1)
+!    uflow = tiny_sp
 !    CALL QAGI(T2,bound,inf,uflow,0._SP,result,abserr,neval,ier,limit,lenw,&
 !      last,iwork,work)
 !    ierv(1) = ier
@@ -215,7 +215,7 @@ CONTAINS
     !
     ! TEST ON IER = 5
     !
-!    oflow = R1MACH(2)
+!    oflow = huge_sp
 !    CALL QAGI(T5,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
 !      last,iwork,work)
 !    ierv(1) = ier
@@ -261,7 +261,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : QAGP, R1MACH
+    USE slatec, ONLY : QAGP, eps_sp
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4)
@@ -285,7 +285,7 @@ CONTAINS
     leniw = limit*2 + npts2
     lenw = limit*4 + npts2
     epsabs = 0._SP
-    epmach = R1MACH(4)
+    epmach = eps_sp
     epsrel = MAX(SQRT(epmach),0.1E-7_SP)
     a = 0._SP
     b = 1._SP
@@ -318,7 +318,7 @@ CONTAINS
 !    points(1) = 0.1_SP
 !    leniw = limit*2 + npts2
 !    lenw = limit*4 + npts2
-!    uflow = R1MACH(1)
+!    uflow = tiny_sp
 !    a = 0.1_SP
 !    CALL QAGP(F2P,a,b,npts2,points,uflow,0._SP,result,abserr,neval,ier,&
 !      leniw,lenw,last,iwork,work)
@@ -358,7 +358,7 @@ CONTAINS
 !    ip = 0
 !    IF( ier==5 ) ip = 1
 !    IF( ip==0 ) Ipass = 0
-!    oflow = R1MACH(2)
+!    oflow = huge_sp
 !    CALL CPRIN(Lun,5,Kprint,ip,oflow,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
@@ -405,7 +405,7 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   911114  Modified test on IER=4 to allow IER=5.  (WRB)
-    USE slatec, ONLY : QAGS, R1MACH
+    USE slatec, ONLY : QAGS, eps_sp
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(5), Lun
@@ -426,7 +426,7 @@ CONTAINS
     limit = 200
     lenw = limit*4
     epsabs = 0._SP
-    epmach = R1MACH(4)
+    epmach = eps_sp
     epsrel = MAX(SQRT(epmach),0.1E-7_SP)
     a = 0._SP
     b = 1._SP
@@ -450,7 +450,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-!    uflow = R1MACH(1)
+!    uflow = tiny_sp
 !    a = 0.1_SP
 !    CALL QAGS(F2S,a,b,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
 !      iwork,work)
@@ -496,7 +496,7 @@ CONTAINS
     !
     ! TEST ON IER = 5
     !
-!    oflow = R1MACH(2)
+!    oflow = huge_sp
 !    CALL QAGS(F5S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
 !      iwork,work)
 !    ierv(1) = ier
@@ -542,7 +542,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : QAWC, R1MACH
+    USE slatec, ONLY : QAWC, eps_sp
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
@@ -563,7 +563,7 @@ CONTAINS
     limit = 200
     lenw = limit*4
     epsabs = 0._SP
-    epmach = R1MACH(4)
+    epmach = eps_sp
     epsrel = MAX(SQRT(epmach),0.1E-7_SP)
     CALL QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
       iwork,work)
@@ -585,7 +585,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 1
     !
-!    uflow = R1MACH(1)
+!    uflow = tiny_sp
 !    CALL QAWC(F0C,a,b,c,uflow,0._SP,result,abserr,neval,ier,limit,lenw,last,&
 !      iwork,work)
 !    ierv(1) = ier
@@ -641,10 +641,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Added PASS/FAIL message and changed the name of the first
-    !           argument.  (RWC)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : QAWF, R1MACH
+    USE slatec, ONLY : QAWF, eps_sp
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(3), integr, iwork(450), leniw, Lun, maxp1
@@ -663,7 +662,7 @@ CONTAINS
     limit = 200
     leniw = limit*2 + limlst
     lenw = leniw*2 + maxp1*25
-    epmach = R1MACH(4)
+    epmach = eps_sp
     epsabs = MAX(SQRT(epmach),0.1E-02_SP)
     a = 0._SP
     omega = 0.8E+01
@@ -695,7 +694,7 @@ CONTAINS
 !    limlst = 50
 !    leniw = limit*2 + limlst
 !    lenw = leniw*2 + maxp1*25
-!    uflow = R1MACH(1)
+!    uflow = tiny_sp
 !    CALL QAWF(F1F,a,0._SP,1,uflow,result,abserr,neval,ier,limlst,lst,leniw,&
 !      maxp1,lenw,iwork,work)
 !    ierv(1) = ier
@@ -757,7 +756,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : QAWO, R1MACH
+    USE slatec, ONLY : QAWO, eps_sp
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: leniw
@@ -777,7 +776,7 @@ CONTAINS
     leniw = 400
     lenw = leniw*2 + maxp1*25
     epsabs = 0._SP
-    epmach = R1MACH(4)
+    epmach = eps_sp
     epsrel = MAX(SQRT(epmach),0.1E-7_SP)
     a = 0._SP
     b = pi
@@ -806,7 +805,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 4 OR 1
     !
-!    uflow = R1MACH(1)
+!    uflow = tiny_sp
 !    leniw = 400
 !    lenw = leniw*2 + maxp1*25
 !    CALL QAWO(F0O,a,b,omega,integr,uflow,0._SP,result,abserr,neval,ier,&
@@ -837,7 +836,7 @@ CONTAINS
     ! TEST ON IER = 5
     !
 !    b = 1._SP
-!    oflow = R1MACH(2)
+!    oflow = huge_sp
 !    CALL QAWO(F2O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
 !      leniw,maxp1,lenw,last,iwork,work)
 !    ierv(1) = ier
@@ -884,7 +883,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : QAWS, R1MACH
+    USE slatec, ONLY : QAWS, eps_sp
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
@@ -907,7 +906,7 @@ CONTAINS
     limit = 200
     lenw = limit*4
     epsabs = 0._SP
-    epmach = R1MACH(4)
+    epmach = eps_sp
     epsrel = MAX(SQRT(epmach),0.1E-7_SP)
     CALL QAWS(F0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,ier,&
       limit,lenw,last,iwork,work)
@@ -930,7 +929,7 @@ CONTAINS
     !
     ! TEST ON IER = 2 OR 1
     !
-!    uflow = R1MACH(1)
+!    uflow = tiny_sp
 !    CALL QAWS(F0WS,a,b,alfa,beta,integr,uflow,0._SP,result,abserr,neval,ier,&
 !      limit,lenw,last,iwork,work)
 !    ierv(1) = ier
@@ -988,7 +987,7 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    USE slatec, ONLY : QNG, R1MACH
+    USE slatec, ONLY : QNG, eps_sp, tiny_sp
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: Lun
@@ -1003,8 +1002,8 @@ CONTAINS
     !
     Ipass = 1
     epsabs = 0._SP
-    epmach = R1MACH(4)
-    uflow = R1MACH(1)
+    epmach = eps_sp
+    uflow = tiny_sp
     epsrel = MAX(SQRT(epmach),0.1E-07_SP)
     a = 0._SP
     b = 1._SP
@@ -1730,7 +1729,8 @@ END MODULE TEST39_MOD
 !** TEST39
 PROGRAM TEST39
   USE TEST39_MOD, ONLY : CQAG, CQAGI, CQAGP, CQAGS, CQAWC, CQAWF, CQAWO, CQAWS, CQNG
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1783,8 +1783,8 @@ PROGRAM TEST39
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST39
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

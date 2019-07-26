@@ -108,7 +108,7 @@ PURE SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !   810101  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp
   USE lapack, ONLY : SGTSV
   !
   INTERFACE
@@ -169,7 +169,7 @@ PURE SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  QC25F
-  oflow = R1MACH(2)
+  oflow = huge_sp
   !
   centr = 0.5_SP*(B+A)
   hlgth = 0.5_SP*(B-A)

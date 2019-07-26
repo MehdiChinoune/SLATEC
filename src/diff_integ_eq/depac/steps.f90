@@ -106,7 +106,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !      TWOU -- 2.*U where U is machine unit roundoff quantity
   !      FOURU -- 4.*U where U is machine unit roundoff quantity
   !   Define U to be the machine unit roundoff quantity by calling
-  !   the function routine  R1MACH,  U = R1MACH(4), or by
+  !   the function routine  R1MACH,  U = eps_sp, or by
   !   computing U so that U is the smallest positive number such
   !   that 1.0+U > 1.0.
   !
@@ -178,7 +178,8 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp, huge_sp
+  !
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
@@ -246,8 +247,8 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
         !     IF(EPS < 16.0*SUM*H*H) ABSH = 0.25*SQRT(EPS/SUM)
         !     H = SIGN(MAX(ABSH,FOURU*ABS(X)),H)
         !
-        u = R1MACH(4)
-        big = SQRT(R1MACH(2))
+        u = eps_sp
+        big = SQRT(huge_sp)
         CALL HSTART(F,Neqn,X,X+H,Y,Yp,Wt,1,u,big,Phi(1,3),Phi(1,4),Phi(1,5),&
           Phi(1,6),H)
         !

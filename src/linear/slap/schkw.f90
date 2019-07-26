@@ -69,7 +69,7 @@ PURE SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !   910506  Made subsidiary.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
   !   921015  Added code to initialize ITER and ERR when IERR=0.  (FNF)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp
   !     .. Scalar Arguments ..
   INTEGER, INTENT(IN) :: Leniw, Lenw, Lociw, Locw
   INTEGER, INTENT(OUT) :: Ierr, Iter
@@ -83,10 +83,10 @@ PURE SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !
   Ierr = 0
   Iter = 0
-  Err = R1MACH(1)
+  Err = tiny_sp
   IF( Lociw>Leniw ) THEN
     Ierr = 1
-    Err = R1MACH(2)
+    Err = huge_sp
     xernam = Name
     WRITE (xern1,'(I8)') Lociw
     WRITE (xern2,'(I8)') Leniw
@@ -96,7 +96,7 @@ PURE SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !         Check the Real workspace situation.
   IF( Locw>Lenw ) THEN
     Ierr = 1
-    Err = R1MACH(2)
+    Err = huge_sp
     xernam = Name
     WRITE (xern1,'(I8)') Locw
     WRITE (xern2,'(I8)') Lenw

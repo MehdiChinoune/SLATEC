@@ -254,13 +254,15 @@ REAL(DP) ELEMENTAL FUNCTION DRF(X,Y,Z)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp, huge_dp
+  !
   REAL(DP), INTENT(IN) :: X, Y, Z
+  !
   REAL(DP) :: epslon, e2, e3, lamda, mu, s, xn, xndev, xnroot, yn, yndev, ynroot, &
     zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  REAL(DP), PARAMETER :: errtol = (4._DP*D1MACH(3))**(1._DP/6._DP), &
-    lolim = 5._DP*D1MACH(1), uplim = D1MACH(2)/5._DP
+  REAL(DP), PARAMETER :: errtol = (4._DP*eps_2_dp)**(1._DP/6._DP), &
+    lolim = 5._DP*tiny_dp, uplim = huge_dp/5._DP
   REAL(DP), PARAMETER :: c1 = 1._DP/24._DP, c2 = 3._DP/44._DP, c3 = 1._DP/14._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DRF

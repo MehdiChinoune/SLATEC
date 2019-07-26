@@ -24,7 +24,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !     COMPLEX CSCL,CSCR,CY,RZ,ST,S1,S2,Y,Z
   INTEGER :: i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
   REAL(DP) :: Alim, ax, ay, csclr, cscrr, cyi(2), cyr(2), dfnu, &
@@ -79,7 +79,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         !----------------------------------------------------------------------
         !     SCALE BACKWARD RECURRENCE, BRY(3) IS DEFINED BUT NEVER USED
         !----------------------------------------------------------------------
-        bry(1) = 1.E3_DP*D1MACH(1)/Tol
+        bry(1) = 1.E3_DP*tiny_dp/Tol
         bry(2) = 1._DP/bry(1)
         bry(3) = bry(2)
         iflag = 2

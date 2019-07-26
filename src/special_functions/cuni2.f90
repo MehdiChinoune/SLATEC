@@ -28,12 +28,14 @@ PURE SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp
+  !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nlast, Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, iflag, in, inu, j, k, nai, nd, ndai, nn, nuf, nw, idum
   COMPLEX(SP) :: ai, arg, asum, bsum, cfn, cid, crsc, cscl, csr(3), css(3), cy(2), c1, &
     c2, dai, phi, rz, s1, s2, zb, zeta1, zeta2, zn, zar
@@ -60,7 +62,7 @@ PURE SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   csr(1) = crsc
   csr(2) = cone
   csr(3) = cscl
-  bry(1) = 1.E+3_SP*R1MACH(1)/Tol
+  bry(1) = 1.E+3_SP*tiny_sp/Tol
   yy = AIMAG(Z)
   !-----------------------------------------------------------------------
   !     ZN IS IN THE RIGHT HALF PLANE AFTER ROTATION BY CI OR -CI
@@ -160,7 +162,7 @@ PURE SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IF( nd>2 ) THEN
     rz = CMPLX(2._SP,0._SP,SP)/Z
     bry(2) = 1._SP/bry(1)
-    bry(3) = R1MACH(2)
+    bry(3) = huge_sp
     s1 = cy(1)
     s2 = cy(2)
     c1 = csr(iflag)

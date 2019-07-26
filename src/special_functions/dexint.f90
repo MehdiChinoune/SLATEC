@@ -66,7 +66,7 @@ PURE SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !                   M >= 1
   !           TOL     relative accuracy wanted, ETOL <= TOL <= 0.1
   !                   ETOL is the larger of double precision unit
-  !                   roundoff = D1MACH(4) and 1.0D-18
+  !                   roundoff = eps_dp and 1.0D-18
   !
   !         Output    * EN is a double precision vector *
   !           EN      a vector of dimension at least M containing values
@@ -103,11 +103,13 @@ PURE SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !   920207  Updated with code with a revision date of 880811 from
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : eps_dp, log10_radix_dp, min_exp_dp
+  !
   INTEGER, INTENT(IN) :: Kode, M, N
   INTEGER, INTENT(OUT) :: Ierr, Nz
   REAL(DP), INTENT(IN) :: X, Tol
   REAL(DP), INTENT(OUT) :: En(M)
+  !
   REAL(DP) :: a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, emx, &
     etol, fnm, fx, pt, p1, p2, s, tx, xlim, xtol, y(2), yt, y1, y2
   INTEGER :: i, ic, icase, ict, ik, ind, ix, i1m, jset, k, kk, kn, ks, ml, mu, nd, nm
@@ -115,7 +117,7 @@ PURE SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  DEXINT
   Ierr = 0
   Nz = 0
-  etol = MAX(D1MACH(4),0.5E-18_DP)
+  etol = MAX(eps_dp,0.5E-18_DP)
   IF( X<0._DP ) Ierr = 1
   IF( N<1 ) Ierr = 1
   IF( Kode<1 .OR. Kode>2 ) Ierr = 1
@@ -123,8 +125,8 @@ PURE SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   IF( Tol<etol .OR. Tol>0.1_DP ) Ierr = 1
   IF( X==0._DP .AND. N==1 ) Ierr = 1
   IF( Ierr/=0 ) RETURN
-  i1m = -I1MACH(15)
-  pt = 2.3026_DP*i1m*D1MACH(5)
+  i1m = -min_exp_dp
+  pt = 2.3026_DP*i1m*log10_radix_dp
   xlim = pt - 6.907755_DP
   bt = pt + (N+M-1)
   IF( bt>1000._DP ) xlim = pt - LOG(bt)

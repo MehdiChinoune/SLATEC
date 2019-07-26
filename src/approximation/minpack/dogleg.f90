@@ -65,7 +65,7 @@ PURE SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   INTEGER, INTENT(IN) :: Lr, N
   REAL(SP), INTENT(IN) :: Delta
@@ -75,7 +75,7 @@ PURE SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   INTEGER :: i, j, jj, jp1, k, l
   REAL(SP) :: alpha, bnorm, epsmch, gnorm, qnorm, sgnorm, summ, temp
   !* FIRST EXECUTABLE STATEMENT  DOGLEG
-  epsmch = R1MACH(4)
+  epsmch = eps_sp
   !
   !     FIRST, CALCULATE THE GAUSS-NEWTON DIRECTION.
   !

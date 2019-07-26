@@ -25,12 +25,14 @@ PURE SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
+  !
   INTEGER, INTENT(IN) :: Ind, Ktrms, N
   INTEGER, INTENT(OUT) :: Ms, Ierr
   REAL(DP), INTENT(IN) :: T(Ktrms), X
   REAL(DP), INTENT(INOUT) :: H(30)
   REAL(DP), INTENT(OUT) :: Ans, Gmrn
+  !
   INTEGER :: i, ii, j, jmi, jn, k, kk, km, mm, mp
   REAL(DP) :: den1, den2, den3, er, err, fj, fk, fln, fm1, g1, gs, hn, rat, rg1, &
     rxp, rz, rzx, s(31), ss, sumi, sumj, tol, v(52), w(52), xp(16), z
@@ -87,7 +89,7 @@ PURE SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !
   !* FIRST EXECUTABLE STATEMENT  DBKIAS
   Ierr = 0
-  tol = MAX(D1MACH(4),1.E-18_DP)
+  tol = MAX(eps_dp,1.E-18_DP)
   fln = N
   rz = 1._DP/(X+fln)
   rzx = X*rz

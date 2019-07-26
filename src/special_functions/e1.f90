@@ -78,11 +78,13 @@ REAL(SP) ELEMENTAL FUNCTION E1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, tiny_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   INTEGER, PARAMETER :: ntae11 = 14, ntae12 = 11, nte11 = 11, nte12 = 9, &
     ntae13 = 11, ntae14 = 11
-  REAL(SP), PARAMETER :: eta = 0.1_SP*R1MACH(3), xmaxt = -LOG(R1MACH(1)), &
+  REAL(SP), PARAMETER :: eta = 0.1_SP*eps_2_sp, xmaxt = -LOG(tiny_sp), &
     xmax = xmaxt - LOG(xmaxt)
   REAL(SP), PARAMETER :: ae11cs(39) = [ .12150323971606579_SP, -.065088778513550150_SP, &
     .004897651357459670_SP, -.000649237843027216_SP, .000093840434587471_SP, &

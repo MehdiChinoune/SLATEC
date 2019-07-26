@@ -30,15 +30,17 @@ COMPLEX(SP) ELEMENTAL FUNCTION CLNGAM(Zin)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, eps_sp
+  !
   COMPLEX(SP), INTENT(IN) :: Zin
+  !
   INTEGER :: i, n
   REAL(SP) :: argsum, cabsz, x, y
   COMPLEX(SP) :: z, corr
-  INTEGER, PARAMETER :: np = INT( -0.30_SP*LOG(R1MACH(3)) )
+  INTEGER, PARAMETER :: np = INT( -0.30_SP*LOG(eps_2_sp) )
   ! BOUND = N*(0.1*EPS)**(-1/(2*N-1))/(PI*EXP(1))
-  REAL(SP), PARAMETER :: bound = 0.1171_SP*np*(0.1_SP*R1MACH(3))**(-1._SP/(2*np-1)), &
-    dxrel = SQRT(R1MACH(4))
+  REAL(SP), PARAMETER :: bound = 0.1171_SP*np*(0.1_SP*eps_2_sp)**(-1._SP/(2*np-1)), &
+    dxrel = SQRT(eps_sp)
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   REAL(SP), PARAMETER :: sq2pil = 0.91893853320467274_SP
   !* FIRST EXECUTABLE STATEMENT  CLNGAM

@@ -176,13 +176,14 @@ PURE SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   INTEGER, INTENT(IN) :: Lda, N, Itask, Ml, Mu
   INTEGER, INTENT(OUT) :: Ind, Iwork(N)
   REAL(SP), INTENT(IN) :: Abe(Lda,Ml+Mu+1)
   REAL(SP), INTENT(INOUT) ::V(N)
   REAL(SP), INTENT(OUT) :: Work(N,2*Ml+Mu+2)
+  !
   INTEGER :: info, j, k, kk, l, m, nc
   REAL(SP) :: xnorm, dnorm
   CHARACTER(8) :: xern1, xern2
@@ -278,7 +279,7 @@ PURE SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !     COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
   !     AND CHECK FOR IND GREATER THAN ZERO
   !
-  Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
+  Ind = INT( -LOG10(MAX(eps_sp,dnorm/xnorm)) )
   IF( Ind<=0 ) THEN
     Ind = -10
     ! 'SNBIR : SOLUTION MAY HAVE NO SIGNIFICANCE'

@@ -36,7 +36,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    USE slatec, ONLY : R1MACH, SDRIV1, SDRIV2, SDRIV3, num_xer
+    USE slatec, ONLY : eps_sp, SDRIV1, SDRIV2, SDRIV3, num_xer
     REAL(SP) :: eps, t, tout
     INTEGER :: ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, &
       Lun, mint, mstate, nde, nfe, nje, nstate, nstep, nx
@@ -47,7 +47,7 @@ CONTAINS
     INTEGER :: iwork(LIWMX)
     REAL(SP), PARAMETER :: ewt(1) = .00001_SP
     !* FIRST EXECUTABLE STATEMENT  SDQCK
-    eps = R1MACH(4)**(1._SP/3._SP)
+    eps = eps_sp**(1._SP/3._SP)
     Ipass = 1
     !                                            Exercise SDRIV1 for problem
     !                                            with known solution.
@@ -480,7 +480,8 @@ END MODULE TEST45_MOD
 !** TEST45
 PROGRAM TEST45
   USE TEST45_MOD, ONLY : SDQCK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -529,8 +530,8 @@ PROGRAM TEST45
   !   920801  DATE WRITTEN
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST45
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

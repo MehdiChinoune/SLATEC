@@ -315,14 +315,16 @@ REAL(DP) ELEMENTAL FUNCTION DRD(X,Y,Z)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900510  Modify calls to XERMSG to put in standard form.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, huge_dp, tiny_dp
+  !
   REAL(DP), INTENT(IN) :: X, Y, Z
+  !
   REAL(DP) :: epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, &
     s2, xn, xndev, xnroot, yn, yndev, ynroot, zn, zndev, znroot
   CHARACTER(16) :: xern3, xern4, xern5, xern6
-  REAL(DP), PARAMETER :: errtol = (D1MACH(3)/3._DP)**(1._DP/6._DP), &
-    lolim = 2._DP/(D1MACH(2))**(2._DP/3._DP), &
-    uplim = (0.10_DP*errtol/D1MACH(1))**(2._DP/3._DP)
+  REAL(DP), PARAMETER :: errtol = (eps_2_dp/3._DP)**(1._DP/6._DP), &
+    lolim = 2._DP/(huge_dp)**(2._DP/3._DP), &
+    uplim = (0.10_DP*errtol/tiny_dp)**(2._DP/3._DP)
   REAL(DP), PARAMETER :: c1 = 3._DP/14._DP, c2 = 1._DP/6._DP, c3 = 9._DP/22._DP, &
     c4 = 3._DP/26._DP
   !

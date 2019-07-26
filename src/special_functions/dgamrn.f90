@@ -24,7 +24,7 @@ REAL(DP) ELEMENTAL FUNCTION DGAMRN(X)
   !         utational tolerances are computed as a function of the number
   !         of digits carried in a word by calls to I1MACH and D1MACH.
   !         However, the computational accuracy is limited to the max-
-  !         imum of unit roundoff (=D1MACH(4)) and 1.0D-18 since critical
+  !         imum of unit roundoff (=eps_dp) and 1.0D-18 since critical
   !         constants are given to only 18 digits.
   !
   !         Input      X is Double Precision
@@ -51,8 +51,10 @@ REAL(DP) ELEMENTAL FUNCTION DGAMRN(X)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : eps_dp, log10_radix_dp, digits_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   INTEGER :: i, i1m11, k, mx, nx
   REAL(DP) :: fln, rln, s, tol, trm, xdmy, xinc, xm, xmin, xp, xsq
   !
@@ -64,9 +66,9 @@ REAL(DP) ELEMENTAL FUNCTION DGAMRN(X)
   !
   !* FIRST EXECUTABLE STATEMENT  DGAMRN
   nx = INT(X)
-  tol = MAX(D1MACH(4),1.E-18_DP)
-  i1m11 = I1MACH(14)
-  rln = D1MACH(5)*i1m11
+  tol = MAX(eps_dp,1.E-18_DP)
+  i1m11 = digits_dp
+  rln = log10_radix_dp*i1m11
   fln = MIN(rln,20._DP)
   fln = MAX(fln,3._DP)
   fln = fln - 3._DP

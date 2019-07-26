@@ -165,7 +165,7 @@ PURE SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, huge_dp, eps_dp
   !
   INTERFACE
     REAL(DP) PURE FUNCTION F(X)
@@ -241,7 +241,7 @@ PURE SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  DQAGIE
-  epmach = D1MACH(4)
+  epmach = eps_dp
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           -----------------------------
@@ -288,8 +288,8 @@ PURE SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !           INITIALIZATION
   !           --------------
   !
-  uflow = D1MACH(1)
-  oflow = D1MACH(2)
+  uflow = tiny_dp
+  oflow = huge_dp
   rlist2(1) = Result
   errmax = Abserr
   maxerr = 1

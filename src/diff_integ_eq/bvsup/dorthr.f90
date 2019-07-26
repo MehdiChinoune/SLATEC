@@ -73,9 +73,11 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : XERMSG, eps_dp
+  !
   INTEGER :: Iflag, Irank, Iscale, M, N, Nrda, Kpivot(N)
   REAL(DP) :: A(Nrda,M), Diag(N), Rows(N), Rs(N), Scales(M)
+  !
   INTEGER :: j, jrow, k, kp, l, mk
   REAL(DP) :: acc, akk, anorm, as, asave, diagk, dum(1), rss, sad, sig, sigma, &
     sruro, uro
@@ -88,7 +90,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !     ******************************************************************
   !
   !* FIRST EXECUTABLE STATEMENT  DORTHR
-  uro = D1MACH(4)
+  uro = eps_dp
   dum = 0._DP
   IF( M>=N .AND. N>=1 .AND. Nrda>=N ) THEN
     !

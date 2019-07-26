@@ -78,20 +78,21 @@ PURE SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : min_exp_sp, log10_radix_sp, tiny_sp
   !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Fnu, X
   REAL(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, j, k, mz, nb, nd, nn, nud
   REAL(SP) :: cn, dnu, elim, etx, flgik, fn, fnn, gln, gnu, rtz, &
     s, s1, s2, t, tm, trx, w(2), xlim, zn
   INTEGER, PARAMETER :: nulim(2) = [ 35, 70 ]
   !* FIRST EXECUTABLE STATEMENT  BESK
-  nn = -I1MACH(12)
-  elim = 2.303_SP*(nn*R1MACH(5)-3._SP)
-  xlim = R1MACH(1)*1.E+3_SP
+  nn = -min_exp_sp
+  elim = 2.303_SP*(nn*log10_radix_sp-3._SP)
+  xlim = tiny_sp*1.E+3_SP
   IF( Kode<1 .OR. Kode>2 ) THEN
     ERROR STOP 'BESK : SCALING OPTION, KODE, NOT 1 OR 2'
   ELSEIF( Fnu<0._SP ) THEN

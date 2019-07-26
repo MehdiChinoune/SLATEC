@@ -72,7 +72,7 @@ ELEMENTAL SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920526  Eliminated possible divide by zero problem.  (FNF)
   !   930503  Improved purpose.  (FNF)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   !**End
   !
@@ -104,7 +104,7 @@ ELEMENTAL SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !      SMALL SHOULD BE A FEW ORDERS OF MAGNITUDE GREATER THAN MACHEPS.
   !* FIRST EXECUTABLE STATEMENT  PCHSW
-  small = fact*R1MACH(4)
+  small = fact*eps_sp
   !
   !  DO MAIN CALCULATION.
   !

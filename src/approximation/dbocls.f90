@@ -560,7 +560,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
   !     /SSCAL/ TO /DSCAL/, /SASUM/ TO /DASUM/, /SBOLS/ TO /DBOLS/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   !
   INTEGER, INTENT(IN) :: Mdw, Ncols
   INTEGER, INTENT(INOUT) :: Mcon, Mrows
@@ -641,7 +641,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
     one = 1._DP
-    drelpr = D1MACH(4)
+    drelpr = eps_dp
     checkl = .FALSE.
     filter = .TRUE.
     lenx = 2*(Ncols+Mcon) + 2

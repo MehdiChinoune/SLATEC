@@ -21,12 +21,14 @@ PURE SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
+  !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Zr
   COMPLEX(SP), INTENT(OUT) :: Cw(2), Y(N)
+  !
   INTEGER :: i, nw
   COMPLEX(SP) :: cinu, cscl, ct, c1, c2, rct, st
   REAL(SP) :: act, acw, ascle, s1, s2, yy
@@ -62,7 +64,7 @@ PURE SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
     !     THE RESULT IS ON SCALE.
     !-----------------------------------------------------------------------
     acw = ABS(Cw(2))
-    ascle = 1.E+3_SP*R1MACH(1)/Tol
+    ascle = 1.E+3_SP*tiny_sp/Tol
     cscl = CMPLX(1._SP,0._SP,SP)
     IF( acw>ascle ) THEN
       ascle = 1._SP/ascle

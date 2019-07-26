@@ -48,7 +48,7 @@ CONTAINS
     USE slatec, ONLY : AI, AIE, ALI, ALNREL, BESI0, BESI0E, BESI1, BESI1E, BESK0, &
       BESK0E, BESK1, BESK1E, BESKES, BESKS, BETA, BETAI, BI, BIE, BINOM, CBRT, CHU, &
       COSDG, COT, DAWS, E1, EI, EXPREL, FAC, GAMI, GAMIC, GAMIT, GAMR, POCH, POCH1, &
-      PSI, R1MACH, R9ATN1, R9LN2R, SINDG, SPENC
+      PSI, R9ATN1, R9LN2R, SINDG, SPENC, eps_sp
     INTEGER :: i, Lun, Kprint, Ipass
     REAL(SP) :: y(105), errmax, errtol, abserr, relerr
     !
@@ -229,7 +229,7 @@ CONTAINS
     !
     !     Check for possible errors
     !
-    errmax = R1MACH(4)
+    errmax = eps_sp
     errtol = SQRT(errmax)
     DO i = 1, 87
       abserr = ABS(v(i)-y(i))
@@ -250,7 +250,8 @@ END MODULE TEST02_MOD
 !** TEST02
 PROGRAM TEST02
   USE TEST02_MOD, ONLY : SFNCK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -301,8 +302,8 @@ PROGRAM TEST02
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST02
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

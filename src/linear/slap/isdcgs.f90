@@ -189,9 +189,9 @@ INTEGER PURE FUNCTION ISDCGS(N,Itol,Tol,R,V2,Bnrm,Solnrm)
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   920930  Corrected to not print AK,BK when ITER=0.  (FNF)
-  !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in output format.  (FNF)
+  !   921026  Changed 1.0E10 to huge_dp and corrected D to E in output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : huge_dp
   !     .. Scalar Arguments ..
   INTEGER, INTENT(IN) :: Itol, N
   REAL(DP), INTENT(IN) :: Bnrm, Solnrm, Tol
@@ -215,7 +215,7 @@ INTEGER PURE FUNCTION ISDCGS(N,Itol,Tol,R,V2,Bnrm,Solnrm)
     eror = NORM2(V2)/Solnrm
   ELSE
     !         If we get here ITOL is not one of the acceptable values.
-    eror = D1MACH(2)
+    eror = huge_dp
     ierr = 3
     ERROR STOP "Itol is not one of the acceptable values {1,2,11}"
   END IF

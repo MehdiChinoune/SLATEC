@@ -49,7 +49,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   900510  Convert XERRWV calls to XERMSG calls, change GOTOs to
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : XERMSG, eps_dp, huge_dp
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
@@ -111,7 +111,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !        FUNCTION ROUTINE  D1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN D1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
     !
-    u = D1MACH(4)
+    u = eps_dp
     !                       -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
     U26 = 26._DP*u
     Rer = 2._DP*u + remin
@@ -300,8 +300,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !
     Init = 2
     Dtsign = SIGN(1._DP,Tout-T)
-    u = D1MACH(4)
-    big = SQRT(D1MACH(2))
+    u = eps_dp
+    big = SQRT(huge_dp)
     ute = u**0.375_DP
     dy = ute*DHVNRM(Y,Neq)
     IF( dy==0._DP ) dy = ute

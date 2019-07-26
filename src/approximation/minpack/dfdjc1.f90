@@ -92,7 +92,7 @@ PURE SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   !
   INTERFACE
     PURE SUBROUTINE FCN(N,X,Fvec,iflag)
@@ -113,7 +113,7 @@ PURE SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !     EPSMCH IS THE MACHINE PRECISION.
   !
   !* FIRST EXECUTABLE STATEMENT  DFDJC1
-  epsmch = D1MACH(4)
+  epsmch = eps_dp
   !
   eps = SQRT(MAX(Epsfcn,epsmch))
   msum = Ml + Mu + 1

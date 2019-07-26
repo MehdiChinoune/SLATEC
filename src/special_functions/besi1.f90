@@ -36,18 +36,20 @@ REAL(SP) ELEMENTAL FUNCTION BESI1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp, eps_2_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   REAL(SP) :: y
   INTEGER, PARAMETER :: nti1 = 7
-  REAL(SP), PARAMETER :: xmin = 2._SP*R1MACH(1), xsml = SQRT(4.5_SP*R1MACH(3)), &
-    xmax = LOG(R1MACH(2))
+  REAL(SP), PARAMETER :: xmin = 2._SP*tiny_sp, xsml = SQRT(4.5_SP*eps_2_sp), &
+    xmax = LOG(huge_sp)
   REAL(SP), PARAMETER :: bi1cs(11) = [ -.001971713261099859_SP, .40734887667546481_SP, &
     .034838994299959456_SP, .001545394556300123_SP, .000041888521098377_SP, &
     .000000764902676483_SP, .000000010042493924_SP, .000000000099322077_SP, &
     .000000000000766380_SP, .000000000000004741_SP, .000000000000000024_SP ]
   !* FIRST EXECUTABLE STATEMENT  BESI1
-  ! nti1 = INITS(bi1cs,0.1_SP*R1MACH(3))
+  ! nti1 = INITS(bi1cs,0.1_SP*eps_2_sp)
   !
   y = ABS(X)
   IF( y>xmax ) THEN

@@ -104,7 +104,7 @@ PURE SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !
   INTEGER, INTENT(IN) :: N, Ldr
   INTEGER, INTENT(IN) :: Ipvt(N)
@@ -118,7 +118,7 @@ PURE SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   REAL(DP) :: dxnorm, dwarf, fp, gnorm, parc, parl, paru, summ, temp
   REAL(DP), PARAMETER :: p1 = 1.0E-1_DP, p001 = 1.0E-3_DP
   !* FIRST EXECUTABLE STATEMENT  DMPAR
-  dwarf = D1MACH(1)
+  dwarf = tiny_dp
   !
   !     COMPUTE AND STORE IN X THE GAUSS-NEWTON DIRECTION. IF THE
   !     JACOBIAN IS RANK-DEFICIENT, OBTAIN A LEAST SQUARES SOLUTION.

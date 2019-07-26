@@ -22,7 +22,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
   INTEGER :: i, iaz, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
   REAL(DP) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, cnormr, fkap, fkk, flam, &
@@ -30,7 +30,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     str, sumi, sumr, tfnf, Tol, tst, Yi(N), Yr(N), Zi, Zr
   REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZMLRI
-  scle = D1MACH(1)/Tol
+  scle = tiny_dp/Tol
   Nz = 0
   az = ZABS(Zr,Zi)
   iaz = INT( az )

@@ -83,7 +83,7 @@ PURE SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   !
   INTEGER, INTENT(IN) :: M, N, Lda, Lipvt
   INTEGER, INTENT(OUT) :: Ipvt(Lipvt)
@@ -95,7 +95,7 @@ PURE SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   REAL(DP) :: ajnorm, epsmch, summ, temp
   REAL(DP), PARAMETER :: p05 = 5.0E-2_DP
   !* FIRST EXECUTABLE STATEMENT  DQRFAC
-  epsmch = D1MACH(4)
+  epsmch = eps_dp
   !
   !     COMPUTE THE INITIAL COLUMN NORMS AND INITIALIZE SEVERAL ARRAYS.
   !

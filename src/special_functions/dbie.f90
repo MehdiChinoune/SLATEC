@@ -75,12 +75,14 @@ REAL(DP) ELEMENTAL FUNCTION DBIE(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, huge_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   REAL(DP) :: sqrtx, theta, xm, z
   INTEGER, PARAMETER :: nbif = 8, nbig = 8, nbif2 = 10, nbig2 = 9, nbip1 = 24, nbip2 = 32
-  REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), x3sml = eta**0.3333_DP, &
-    x32sml = 1.3104_DP*x3sml**2, xbig = D1MACH(2)**0.6666_DP
+  REAL(DP), PARAMETER :: eta = 0.1_DP*eps_2_dp, x3sml = eta**0.3333_DP, &
+    x32sml = 1.3104_DP*x3sml**2, xbig = huge_dp**0.6666_DP
   REAL(DP), PARAMETER :: bifcs(13) = [ -.16730216471986649483537423928176E-1_DP, &
     +.10252335834249445611426362777757E+0_DP, +.17083092507381516539429650242013E-2_DP, &
     +.11862545467744681179216459210040E-4_DP, +.44932907017792133694531887927242E-7_DP, &

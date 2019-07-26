@@ -128,7 +128,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of THRCOF expanded. These changes were done by
   !           D. W. Lozier.
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp
   !
   INTEGER, INTENT(IN) :: Ndim
   INTEGER, INTENT(OUT) :: Ier
@@ -145,7 +145,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.
-  hugee = SQRT(R1MACH(2)/20._SP)
+  hugee = SQRT(huge_sp/20._SP)
   srhuge = SQRT(hugee)
   tinyy = 1._SP/hugee
   srtiny = 1._SP/srhuge

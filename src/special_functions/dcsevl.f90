@@ -42,12 +42,14 @@ REAL(DP) PURE FUNCTION DCSEVL(X,Cs)
   !   900329  Prologued revised extensively and code rewritten to allow
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, D1MACH
+  USE service, ONLY : eps_dp
+  !
   REAL(DP), INTENT(IN) :: X
   REAL(DP), INTENT(IN) :: Cs(:)
+  !
   INTEGER :: i, ni, n
   REAL(DP) :: b0, b1, b2, twox
-  REAL(DP), PARAMETER :: onepl = 1._DP + D1MACH(4)
+  REAL(DP), PARAMETER :: onepl = 1._DP + eps_dp
   !* FIRST EXECUTABLE STATEMENT  DCSEVL
   IF( ABS(X)>1._DP ) ERROR STOP 'DCSEVL : X OUTSIDE THE INTERVAL (-1,+1)'
   n = SIZE( Cs )

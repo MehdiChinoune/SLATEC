@@ -42,12 +42,14 @@ REAL(SP) ELEMENTAL FUNCTION R9LN2R(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, eps_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   INTEGER, PARAMETER :: ntln21 = 12, ntln22 = 9
-  REAL(SP), PARAMETER :: eps = R1MACH(3), sqeps = SQRT(eps), txbig = 4._SP/SQRT(sqeps), &
+  REAL(SP), PARAMETER :: eps = eps_2_sp, sqeps = SQRT(eps), txbig = 4._SP/SQRT(sqeps), &
     xbig = txbig - (sqeps*txbig**2-2._SP*LOG(txbig))/(2._SP*sqeps*txbig), &
-    txmax = 6._SP/sqeps, xmin = -1._SP + SQRT(R1MACH(4)), &
+    txmax = 6._SP/sqeps, xmin = -1._SP + SQRT(eps_sp), &
     xmax = txmax - (eps*txmax**2-2._SP*LOG(txmax))/(2._SP*eps*txmax)
   REAL(SP), PARAMETER :: ln21cs(26) = [ .18111962513478810_SP,-.15627123192872463_SP, &
     .028676305361557275_SP, -.005558699655948139_SP, .001117897665229983_SP, &

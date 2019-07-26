@@ -48,14 +48,14 @@ CONTAINS
     !         various preconditioners and all the various stop tests.
     !
     !         It is assumed that the test is being run interactively and
-    !         that STDIN (STANDARD INPUT) is Fortran I/O unit I1MACH(1)
-    !         and STDOUT (STANDARD OUTPUT) is unit I1MACH(2).
+    !         that STDIN (STANDARD INPUT) is Fortran I/O unit INPUT_UNIT
+    !         and STDOUT (STANDARD OUTPUT) is unit OUTPUT_UNIT.
     !
     !         *************************************************************
     !         **** WARNING !!! WARNING !!! WARNING !!! WARNING !!! WARNING
     !         *************************************************************
     !         **** THIS PROGRAM WILL NOT FUNCTION PROPERLY IF THE FORTRAN
-    !         **** I/O UNITS I1MACH(1) and I1MACH(2) are not connected
+    !         **** I/O UNITS INPUT_UNIT and OUTPUT_UNIT are not connected
     !         **** to the program for I/O.
     !         *************************************************************
     !
@@ -85,7 +85,7 @@ CONTAINS
     !           corrected lower limit in "DO 80" statement.  (FNF)
     !   921021  Changed E's to 1P,D's in output formats.  (FNF)
     USE DSLBLK, ONLY : soln_com
-    USE slatec, ONLY : D1MACH, DCPPLT, DS2Y, DSDBCG, DSDCG, DSDCGN, DSDCGS, DSDGMR, &
+    USE slatec, ONLY : eps_2_dp, DCPPLT, DS2Y, DSDBCG, DSDCG, DSDCGN, DSDCGS, DSDGMR, &
       DSDOMN, DSGS, DSICCG, DSILUR, DSJAC, DSLUBC, DSLUCN, DSLUCS, DSLUGM, DSLUOM
     !
     !     The problem size, MAXN, should be large enough that the
@@ -139,7 +139,7 @@ CONTAINS
     !
     !     Set the Error tolerance to depend on the machine epsilon.
     !
-    tol = MAX(1.E3_DP*D1MACH(3),1.E-6_DP)
+    tol = MAX(1.E3_DP*eps_2_dp,1.E-6_DP)
     nfail = 0
     !
     !     Test routines using various convergence criteria.
@@ -711,7 +711,8 @@ END MODULE TEST26_MOD
 !** TEST26
 PROGRAM TEST26
   USE TEST26_MOD, ONLY : DLAPQC
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms.
@@ -762,8 +763,8 @@ PROGRAM TEST26
   !     .. Local Scalars ..
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST26
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

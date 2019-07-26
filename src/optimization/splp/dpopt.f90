@@ -35,7 +35,7 @@ PURE SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
 
   INTEGER, INTENT(IN) :: Mrelas, Nvars
   INTEGER, INTENT(OUT) :: Info
@@ -70,8 +70,8 @@ PURE SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !
   !     GET THE MACHINE REL. FLOATING POINT ACCURACY VALUE FROM THE
   !     LIBRARY SUBPROGRAM, D1MACH( ).
-  eps = D1MACH(4)
-  tolls = D1MACH(4)
+  eps = eps_dp
+  tolls = eps_dp
   tune = one
   tolabs = zero
   !

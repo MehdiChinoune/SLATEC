@@ -99,7 +99,7 @@ PURE SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !           IERR = 3 => Error in user input.
   !                       Check input values of N, ITOL.
   !           IERR = 4 => User error tolerance set too tight.
-  !                       Reset to 500*D1MACH(3).  Iteration proceeded.
+  !                       Reset to 500*eps_2_dp.  Iteration proceeded.
   !           IERR = 5 => Preconditioning matrix, M, is not positive
   !                       definite.  (r,z) < 0.
   !           IERR = 6 => Breakdown of the method detected.

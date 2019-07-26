@@ -37,16 +37,18 @@ REAL(SP) ELEMENTAL FUNCTION R9LGMC(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp, tiny_sp, eps_2_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   INTEGER, PARAMETER :: nalgm = 2
-  REAL(SP), PARAMETER :: xmax = EXP(MIN(LOG(R1MACH(2)/12._SP),-LOG(12._SP*R1MACH(1)))), &
-    xbig = 1._SP/SQRT(R1MACH(3))
+  REAL(SP), PARAMETER :: xmax = EXP(MIN(LOG(huge_sp/12._SP),-LOG(12._SP*tiny_sp))), &
+    xbig = 1._SP/SQRT(eps_2_sp)
   REAL(SP), PARAMETER :: algmcs(6) = [ .166638948045186_SP,-.0000138494817606_SP, &
     .0000000098108256_SP,-.0000000000180912_SP, .0000000000000622_SP, &
     -.0000000000000003_SP ]
   !* FIRST EXECUTABLE STATEMENT  R9LGMC
-  ! nalgm = INITS(algmcs,R1MACH(3))
+  ! nalgm = INITS(algmcs,eps_2_sp)
   !
   IF( X<10._SP ) THEN
     ERROR STOP 'R9LGMC : X MUST BE >= 10'

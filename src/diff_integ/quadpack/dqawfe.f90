@@ -210,7 +210,7 @@ PURE SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !
   INTERFACE
     REAL(DP) PURE FUNCTION F(X)
@@ -283,7 +283,7 @@ PURE SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
       c1 = A
       c2 = cycle + A
       p1 = 1._DP - p
-      uflow = D1MACH(1)
+      uflow = tiny_dp
       eps = Epsabs
       IF( Epsabs>uflow/p1 ) eps = Epsabs*p1
       ep = eps

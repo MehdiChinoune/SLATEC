@@ -71,14 +71,14 @@ PURE SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !- ** Three machine dependent parameters appear in this subroutine.
   !
   !- ** The smallest positive magnitude, zero, is defined by the function
-  !- ** routine R1MACH(1).
+  !- ** routine tiny_sp.
   !
-  !- ** URO, The computer unit roundoff value, is defined by R1MACH(3) for
-  !- ** machines that round or R1MACH(4) for machines that truncate.
+  !- ** URO, The computer unit roundoff value, is defined by eps_2_sp for
+  !- ** machines that round or eps_sp for machines that truncate.
   !- ** URO is the smallest positive number such that 1.+URO  >  1.
   !
   !- ** The output tape unit number, LOUN, is defined by the function
-  !- ** I1MACH(2).
+  !- ** OUTPUT_UNIT.
   !- *********************************************************************
   !
   !***
@@ -92,8 +92,9 @@ PURE SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
-
+  USE ISO_FORTRAN_ENV, ONLY : OUTPUT_UNIT
+  USE service, ONLY : eps_sp, tiny_sp
+  !
   INTERFACE
     REAL(SP) PURE FUNCTION FNC(X,K)
       IMPORT SP
@@ -107,14 +108,15 @@ PURE SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   REAL(SP), INTENT(IN) :: Atolx, Rtolx, Tolf
   REAL(SP), INTENT(INOUT) :: C(Nc), B(N), Fac(N), P(N), S(N), Temp(N), X(N), Y(N)
   REAL(SP), INTENT(OUT) :: Fmax
+  !
   INTEGER :: ksv, l, loun, ls, m, mit, np1, ic, icr, isj, isv, it, item, &
     itry, j, jk, js, k, kd, kj, kk, km1, kn
   REAL(SP) :: csv, f, fact, fdif, fmin, fmxs, fn1, fn2, fp, h, hx, pmax, re, &
     sruro, test, uro, xnorm, yj, yn1, yn2, yn3, ynorm, yns, zero
   !* FIRST EXECUTABLE STATEMENT  SOSEQS
-  uro = R1MACH(4)
-  loun = I1MACH(2)
-  zero = R1MACH(1)
+  uro = eps_sp
+  loun = OUTPUT_UNIT
+  zero = tiny_sp
   re = MAX(Rtolx,uro)
   sruro = SQRT(uro)
   !

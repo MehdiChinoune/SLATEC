@@ -63,7 +63,8 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-    USE slatec, ONLY : ZAIRY, ZBIRY, ZABS, ZSQRT, ZEXP, I1MACH, D1MACH
+    USE slatec, ONLY : ZAIRY, ZBIRY, ZABS, ZSQRT, ZEXP, eps_dp, log10_radix_dp, &
+      min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -107,13 +108,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = D1MACH(4)
+    r1m4 = eps_dp
     tol = MAX(r1m4,1.E-18_DP)
     atol = 100._DP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = D1MACH(5)
+    k1 = min_exp_dp
+    k2 = max_exp_dp
+    r1m5 = log10_radix_dp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_DP*(k*r1m5-3._DP)
     ab = aa*2.303_DP
@@ -454,7 +455,8 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-    USE slatec, ONLY : ZBESH, ZUOIK, ZABS, ZDIV, I1MACH, D1MACH
+    USE slatec, ONLY : ZBESH, ZUOIK, ZABS, ZDIV, eps_dp, log10_radix_dp, &
+      min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -496,13 +498,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = D1MACH(4)
+    r1m4 = eps_dp
     tol = MAX(r1m4,1.E-18_DP)
     atol = 100._DP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = D1MACH(5)
+    k1 = min_exp_dp
+    k2 = max_exp_dp
+    r1m5 = log10_radix_dp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_DP*(k*r1m5-3._DP)
     ab = aa*2.303_DP
@@ -817,7 +819,8 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-    USE slatec, ONLY : ZBESI, ZBESK, ZWRSK, ZABS, ZDIV, I1MACH, D1MACH
+    USE slatec, ONLY : ZBESI, ZBESK, ZWRSK, ZABS, ZDIV, eps_dp, log10_radix_dp, &
+      min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -860,13 +863,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = D1MACH(4)
+    r1m4 = eps_dp
     tol = MAX(r1m4,1.E-18_DP)
     atol = 100._DP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = D1MACH(5)
+    k1 = min_exp_dp
+    k2 = max_exp_dp
+    r1m5 = log10_radix_dp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_DP*(k*r1m5-3._DP)
     ab = aa*2.303_DP
@@ -1340,7 +1343,8 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL statement.  (RWC)
-    USE slatec, ONLY : ZBESH, ZBESJ, ZABS, ZEXP, I1MACH, D1MACH
+    USE slatec, ONLY : ZBESH, ZBESJ, ZABS, ZEXP, eps_dp, log10_radix_dp, &
+      min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -1382,13 +1386,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = D1MACH(4)
+    r1m4 = eps_dp
     tol = MAX(r1m4,1.E-18_DP)
     atol = 100._DP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = D1MACH(5)
+    k1 = min_exp_dp
+    k2 = max_exp_dp
+    r1m5 = log10_radix_dp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_DP*(k*r1m5-3._DP)
     ab = aa*2.303_DP
@@ -1741,7 +1745,8 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standard
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-    USE slatec, ONLY : ZBESI, ZBESK, ZABS, ZDIV, ZEXP, I1MACH, D1MACH
+    USE slatec, ONLY : ZBESI, ZBESK, ZABS, ZDIV, ZEXP, eps_dp, log10_radix_dp, &
+      min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -1783,13 +1788,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = D1MACH(4)
+    r1m4 = eps_dp
     tol = MAX(r1m4,1.E-18_DP)
     atol = 100._DP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = D1MACH(5)
+    k1 = min_exp_dp
+    k2 = max_exp_dp
+    r1m5 = log10_radix_dp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_DP*(k*r1m5-3._DP)
     ab = aa*2.303_DP
@@ -2128,7 +2133,8 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-    USE slatec, ONLY : ZBESI, ZBESK, ZBESY, ZABS, ZEXP, I1MACH, D1MACH
+    USE slatec, ONLY : ZBESI, ZBESK, ZBESY, ZABS, ZEXP, eps_dp, log10_radix_dp, &
+      min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -2173,13 +2179,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = D1MACH(4)
+    r1m4 = eps_dp
     tol = MAX(r1m4,1.E-18_DP)
     atol = 100._DP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = D1MACH(5)
+    k1 = min_exp_dp
+    k2 = max_exp_dp
+    r1m5 = log10_radix_dp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_DP*(k*r1m5-3._DP)
     ab = aa*2.303_DP
@@ -2488,7 +2494,8 @@ END MODULE TEST10_MOD
 !** TEST10
 PROGRAM TEST10
   USE TEST10_MOD, ONLY : ZQCAI, ZQCBH, ZQCBI, ZQCBJ, ZQCBK, ZQCBY
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms.
@@ -2540,8 +2547,8 @@ PROGRAM TEST10
 
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST10
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

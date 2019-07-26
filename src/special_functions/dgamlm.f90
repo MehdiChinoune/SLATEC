@@ -35,11 +35,13 @@ ELEMENTAL SUBROUTINE DGAMLM(Xmin,Xmax)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, huge_dp
+  !
   REAL(DP), INTENT(OUT) :: Xmin, Xmax
+  !
   INTEGER :: i
   REAL(DP) :: xln, xold
-  REAL(DP), PARAMETER :: alnsml = LOG(D1MACH(1)), alnbig = LOG(D1MACH(2))
+  REAL(DP), PARAMETER :: alnsml = LOG(tiny_dp), alnbig = LOG(huge_dp)
   !* FIRST EXECUTABLE STATEMENT  DGAMLM
   Xmin = -alnsml
   DO i = 1, 10

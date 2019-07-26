@@ -47,12 +47,12 @@ REAL(SP) ELEMENTAL FUNCTION AIE(X)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, huge_sp
   REAL(SP), INTENT(IN) :: X
   REAL(SP) :: sqrtx, theta, xm, z
   INTEGER, PARAMETER :: naif = 5, naig = 4, naip = 12
-  REAL(SP), PARAMETER :: eta = 0.1_SP*R1MACH(3), x3sml = eta**0.3333_SP, &
-    x32sml = 1.3104_SP*x3sml**2, xbig = R1MACH(2)**0.6666_SP
+  REAL(SP), PARAMETER :: eta = 0.1_SP*eps_2_sp, x3sml = eta**0.3333_SP, &
+    x32sml = 1.3104_SP*x3sml**2, xbig = huge_sp**0.6666_SP
   REAL(SP), PARAMETER :: aifcs(9) = [ -.03797135849666999750_SP, .05919188853726363857_SP, &
     .00098629280577279975_SP, .00000684884381907656_SP, .00000002594202596219_SP, &
     .00000000006176612774_SP, .00000000000010092454_SP, .00000000000000012014_SP, &

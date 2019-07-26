@@ -61,7 +61,7 @@ PURE SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : huge_dp, eps_dp
   !
   INTEGER, INTENT(INOUT) :: N, Nres
   REAL(DP), INTENT(INOUT) :: Epstab(52), Res3la(3)
@@ -96,8 +96,8 @@ PURE SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !           DIAGONAL OF THE EPSILON TABLE IS DELETED.
   !
   !* FIRST EXECUTABLE STATEMENT  DQELG
-  epmach = D1MACH(4)
-  oflow = D1MACH(2)
+  epmach = eps_dp
+  oflow = huge_dp
   Nres = Nres + 1
   Abserr = oflow
   Result = Epstab(N)

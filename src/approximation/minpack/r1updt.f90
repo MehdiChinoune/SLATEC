@@ -74,7 +74,7 @@ PURE SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp
   !
   INTEGER, INTENT(IN) :: M, N, Ls
   REAL(SP), INTENT(IN) :: U(M)
@@ -86,7 +86,7 @@ PURE SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   REAL(SP) :: coss, cotan, giant, sinn, tann, tau, temp
   REAL(SP), PARAMETER :: p5 = 5.E-1_SP, p25 = 2.5E-1
   !* FIRST EXECUTABLE STATEMENT  R1UPDT
-  giant = R1MACH(2)
+  giant = huge_sp
   !
   !     INITIALIZE THE DIAGONAL ELEMENT POINTER.
   !

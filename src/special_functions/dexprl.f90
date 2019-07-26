@@ -32,12 +32,14 @@ REAL(DP) ELEMENTAL FUNCTION DEXPRL(X)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   INTEGER :: i
   REAL(DP) :: absx
-  REAL(DP), PARAMETER :: alneps = LOG(D1MACH(3)), xn = 3.72_DP - 0.3_DP*alneps, &
-    xln = LOG((xn+1._DP)/1.36_DP), xbnd = D1MACH(3)
+  REAL(DP), PARAMETER :: alneps = LOG(eps_2_dp), xn = 3.72_DP - 0.3_DP*alneps, &
+    xln = LOG((xn+1._DP)/1.36_DP), xbnd = eps_2_dp
   INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36_DP) + 1.5_DP )
   !* FIRST EXECUTABLE STATEMENT  DEXPRL
   !

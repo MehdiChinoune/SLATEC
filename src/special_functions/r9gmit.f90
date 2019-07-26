@@ -29,11 +29,13 @@ REAL(SP) ELEMENTAL FUNCTION R9GMIT(A,X,Algap1,Sgngam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, tiny_sp
+  !
   REAL(SP), INTENT(IN) :: A, Algap1, Sgngam, X
+  !
   INTEGER :: k, m, ma
   REAL(SP) :: ae, aeps, alg2, algs, fk, s, sgng2, t, te
-  REAL(SP), PARAMETER :: eps = 0.5_SP*R1MACH(3), bot = LOG(R1MACH(1))
+  REAL(SP), PARAMETER :: eps = 0.5_SP*eps_2_sp, bot = LOG(tiny_sp)
   !* FIRST EXECUTABLE STATEMENT  R9GMIT
   !
   IF( X<=0._SP ) ERROR STOP 'R9GMIT : X SHOULD BE > 0'

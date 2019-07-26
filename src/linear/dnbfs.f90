@@ -176,12 +176,13 @@ PURE SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, changed GOTOs to
   !           IF-THEN-ELSEs.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   !
   INTEGER, INTENT(IN) :: Lda, N, Itask, Ml, Mu
   INTEGER, INTENT(OUT) :: Ind, Iwork(N)
   REAL(DP), INTENT(INOUT) :: Abe(Lda,2*Ml+Mu+1), V(N)
   REAL(DP), INTENT(OUT) :: Work(N)
+  !
   REAL(DP) :: rcond
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DNBFS
@@ -238,7 +239,7 @@ PURE SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !        COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
     !        AND CHECK FOR IND GREATER THAN ZERO
     !
-    Ind = INT( -LOG10(D1MACH(4)/rcond) )
+    Ind = INT( -LOG10(eps_dp/rcond) )
     IF( Ind<=0 ) THEN
       Ind = -10
       ! 'DNBFS : SOLUTION MAY HAVE NO SIGNIFICANCE'

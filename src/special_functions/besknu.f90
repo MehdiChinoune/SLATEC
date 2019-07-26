@@ -82,12 +82,13 @@ PURE SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : min_exp_sp, eps_2_sp, log10_radix_sp
   !
   INTEGER, INTENT(IN) :: N, Kode
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Fnu, X
   REAL(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, iflag, inu, j, k, kk, koded, nn
   REAL(SP) :: a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, elim, etest, &
     ex, f, fc, fhs, fk, fks, flrx, fmu, g1, g2, p, pt, p1, p2, q, rx, s, smu, sqk, &
@@ -98,9 +99,9 @@ PURE SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
     -4.21977345555443E-02_SP, 7.21894324666300E-03_SP, -2.15241674114900E-04_SP, &
     -2.01348547807000E-05_SP, 1.13302723200000E-06_SP, 6.11609500000000E-09_SP ]
   !* FIRST EXECUTABLE STATEMENT  BESKNU
-  kk = -I1MACH(12)
-  elim = 2.303_SP*(kk*R1MACH(5)-3._SP)
-  ak = R1MACH(3)
+  kk = -min_exp_sp
+  elim = 2.303_SP*(kk*log10_radix_sp-3._SP)
+  ak = eps_2_sp
   tol = MAX(ak,1.0E-15_SP)
   IF( X<=0._SP ) THEN
     ERROR STOP 'BESKNU : X <= 0'

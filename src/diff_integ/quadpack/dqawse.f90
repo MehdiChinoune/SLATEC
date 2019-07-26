@@ -174,7 +174,7 @@ PURE SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, eps_dp
   !
   INTERFACE
     REAL(DP) PURE FUNCTION F(X)
@@ -222,8 +222,8 @@ PURE SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  DQAWSE
-  epmach = D1MACH(4)
-  uflow = D1MACH(1)
+  epmach = eps_dp
+  uflow = tiny_dp
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------

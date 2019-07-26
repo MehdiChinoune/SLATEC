@@ -162,7 +162,7 @@ PURE SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp, eps_sp
   !
   INTERFACE
     REAL(SP) PURE FUNCTION F(X)
@@ -237,7 +237,7 @@ PURE SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
   !* FIRST EXECUTABLE STATEMENT  QAGSE
-  epmach = R1MACH(4)
+  epmach = eps_sp
   !
   !            TEST ON VALIDITY OF PARAMETERS
   !            ------------------------------
@@ -256,8 +256,8 @@ PURE SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     !           FIRST APPROXIMATION TO THE INTEGRAL
     !           -----------------------------------
     !
-    uflow = R1MACH(1)
-    oflow = R1MACH(2)
+    uflow = tiny_sp
+    oflow = huge_sp
     ierro = 0
     CALL QK21(F,A,B,Result,Abserr,defabs,resabs)
     !

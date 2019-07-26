@@ -33,10 +33,12 @@ REAL(SP) ELEMENTAL FUNCTION BETA(A,B)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
+  !
   REAL(SP), INTENT(IN) :: A, B
+  !
   REAL(SP), PARAMETER :: xmax = 35.0307808_SP
-  REAL(SP), PARAMETER :: alnsml = LOG(R1MACH(1))
+  REAL(SP), PARAMETER :: alnsml = LOG(tiny_sp)
   !* FIRST EXECUTABLE STATEMENT
   !
   IF( A<=0. .OR. B<=0. ) ERROR STOP 'BETA : BOTH ARGUMENTS MUST BE > 0'

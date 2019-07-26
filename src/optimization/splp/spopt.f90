@@ -35,7 +35,7 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
 
   INTEGER, INTENT(IN) :: Mrelas, Nvars
   INTEGER, INTENT(OUT) :: Info
@@ -70,8 +70,8 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !
   !     GET THE MACHINE REL. FLOATING POINT ACCURACY VALUE FROM THE
   !     LIBRARY SUBPROGRAM, R1MACH( ).
-  eps = R1MACH(4)
-  tolls = R1MACH(4)
+  eps = eps_sp
+  tolls = eps_sp
   tune = one
   tolabs = zero
   !

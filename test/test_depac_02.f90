@@ -122,7 +122,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    USE slatec, ONLY : D1MACH, DDEABM
+    USE slatec, ONLY : eps_dp, DDEABM
     !
     !     Declare arguments.
     !
@@ -152,7 +152,7 @@ CONTAINS
     u(4) = 1._DP
     Ipass = 1
     nstep = 0
-    reltol = SQRT(D1MACH(4))
+    reltol = SQRT(eps_dp)
     relerr = 0.1_DP*reltol
     abserr = relerr**1.5_DP
     info(1) = 0
@@ -242,7 +242,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    USE slatec, ONLY : D1MACH, DDEBDF
+    USE slatec, ONLY : eps_dp, DDEBDF
     !
     !     Declare arguments.
     !
@@ -272,7 +272,7 @@ CONTAINS
     u(4) = 1._DP
     Ipass = 1
     nstep = 0
-    reltol = MAX(SQRT(D1MACH(4)),1.E-9_DP)
+    reltol = MAX(SQRT(eps_dp),1.E-9_DP)
     relerr = MAX(0.0001_DP*reltol,1.E-12_DP)
     abserr = relerr**1.5_DP
     info(1) = 0
@@ -623,7 +623,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    USE slatec, ONLY : D1MACH, DDERKF
+    USE slatec, ONLY : eps_dp, DDERKF
     !
     !     Declare arguments.
     !
@@ -653,7 +653,7 @@ CONTAINS
     u(4) = 1._DP
     Ipass = 1
     nstep = 0
-    reltol = MAX(SQRT(D1MACH(4)),1.E-10_DP)
+    reltol = MAX(SQRT(eps_dp),1.E-10_DP)
     relerr = MAX(.1_DP*reltol,1.E-12_DP)
     abserr = relerr**1.5_DP
     info(1) = 0
@@ -697,7 +697,8 @@ END MODULE TEST44_MOD
 !** TEST44
 PROGRAM TEST44
   USE TEST44_MOD, ONLY : QXDABM, QXDBDF, QXDBVS, QXDRKF
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -749,8 +750,8 @@ PROGRAM TEST44
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST44
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

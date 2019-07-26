@@ -71,7 +71,7 @@ INTEGER ELEMENTAL FUNCTION DCHFCM(D1,D2,Delta)
   !   890407  Converted to new SLATEC format.
   !   890407  Modified DESCRIPTION to LDOC format.
   !   891214  Moved SAVE statements.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   !
   !  Fortran intrinsics used:  DSIGN.
   !  Other routines used:  D1MACH.
@@ -104,7 +104,7 @@ INTEGER ELEMENTAL FUNCTION DCHFCM(D1,D2,Delta)
   !
   !        MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !* FIRST EXECUTABLE STATEMENT  DCHFCM
-  eps = ten*D1MACH(4)
+  eps = ten*eps_dp
   !
   !  MAKE THE CHECK.
   !

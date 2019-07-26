@@ -22,7 +22,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP, ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
-  USE service, ONLY : D1MACH, I1MACH
+  USE service, ONLY : tiny_dp, huge_dp, log10_radix_dp, digits_dp
   !
   INTEGER :: i, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, j, ic, inub, nw
   REAL(DP) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, cbi, cbr, cchi, &
@@ -53,9 +53,9 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   csrr(1) = crscr
   csrr(2) = 1._DP
   csrr(3) = csclr
-  bry(1) = 1.E3_DP*D1MACH(1)/Tol
+  bry(1) = 1.E3_DP*tiny_dp/Tol
   bry(2) = 1._DP/bry(1)
-  bry(3) = D1MACH(2)
+  bry(3) = huge_dp
   Nz = 0
   iflag = 0
   koded = Kode
@@ -250,11 +250,11 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     COMPUTE R2=F(E). IF ABS(Z)>=R2, USE FORWARD RECURRENCE TO
   !     DETERMINE THE BACKWARD INDEX K. R2=F(E) IS A STRAIGHT LINE ON
-  !     12<=E<=60. E IS COMPUTED FROM 2**(-E)=B**(1-I1MACH(14))=
+  !     12<=E<=60. E IS COMPUTED FROM 2**(-E)=B**(1-digits_dp)=
   !     TOL WHERE B IS THE BASE OF THE ARITHMETIC.
   !-----------------------------------------------------------------------
-  t1 = I1MACH(14) - 1
-  t1 = t1*D1MACH(5)*3.321928094_DP
+  t1 = digits_dp - 1
+  t1 = t1*log10_radix_dp*3.321928094_DP
   t1 = MAX(t1,12._DP)
   t1 = MIN(t1,60._DP)
   t2 = tth*t1 - 6._DP

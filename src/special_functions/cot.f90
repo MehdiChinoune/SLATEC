@@ -35,19 +35,21 @@ REAL(SP) ELEMENTAL FUNCTION COT(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp, eps_2_sp, tiny_sp, huge_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   INTEGER :: ifn
   REAL(SP) :: ainty, ainty2, prodbg, y, yrem
   INTEGER, PARAMETER :: nterms = 4
-  REAL(SP), PARAMETER :: xmax = 1._SP/R1MACH(4), xsml = SQRT(3._SP*R1MACH(3)), &
-    xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.01_SP), sqeps = SQRT(R1MACH(4))
+  REAL(SP), PARAMETER :: xmax = 1._SP/eps_sp, xsml = SQRT(3._SP*eps_2_sp), &
+    xmin = EXP(MAX(LOG(tiny_sp),-LOG(huge_sp))+0.01_SP), sqeps = SQRT(eps_sp)
   REAL(SP), PARAMETER :: cotcs(8) = [ .24025916098295630_SP,-.016533031601500228_SP, &
     -.000042998391931724_SP,-.000000159283223327_SP,-.000000000619109313_SP, &
     -.000000000002430197_SP,-.000000000000009560_SP,-.000000000000000037_SP ]
   REAL(SP), PARAMETER :: pi2rec = .0116197723675813430_SP
   !* FIRST EXECUTABLE STATEMENT  COT
-  ! nterms = INITS(cotcs,0.1_SP*R1MACH(3))
+  ! nterms = INITS(cotcs,0.1_SP*eps_2_sp)
   !
   y = ABS(X)
   IF( y<xmin ) ERROR STOP 'COT : ABS(X) IS ZERO OR SO SMALL COT OVERFLOWS'

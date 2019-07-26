@@ -29,12 +29,14 @@ PURE SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
+  !
   INTEGER, INTENT(IN) :: Kode, Mr, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Rl, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: inu, iuf, nn, nw
   COMPLEX(SP) :: csgn, cspn, c1, c2, zn, cy(2)
   REAL(SP) :: arg, ascle, az, cpn, dfnu, fmr, sgn, spn, yy
@@ -95,7 +97,7 @@ PURE SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
     c2 = Y(1)
     IF( Kode/=1 ) THEN
       iuf = 0
-      ascle = 1.E+3_SP*R1MACH(1)/Tol
+      ascle = 1.E+3_SP*tiny_sp/Tol
       CALL CS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
       Nz = Nz + nw
     END IF

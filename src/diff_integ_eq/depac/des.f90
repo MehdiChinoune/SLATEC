@@ -31,7 +31,8 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   900510  Convert XERRWV calls to XERMSG calls, replace GOTOs with
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : XERMSG, R1MACH
+  USE service, ONLY : XERMSG, eps_sp
+  !
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
@@ -46,6 +47,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Psi(12), Rtol(:), Sig(13), V(12), W(12), Wt(Neq), Y(Neq), Yp(Neq), &
     Ypout(Neq), Yy(Neq)
   LOGICAL :: Stiff, Start, Phase1, Nornd, Intout
+  !
   INTEGER :: k, l, ltol, natolp, nrtolp
   REAL(SP) :: a, absdel, del, dt, ha, u
   LOGICAL :: crash
@@ -71,7 +73,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     !        FUNCTION ROUTINE  R1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN R1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
     !
-    u = R1MACH(4)
+    u = eps_sp
     !                       -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
     Twou = 2._SP*u
     Fouru = 4._SP*u

@@ -41,7 +41,7 @@ PURE SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !                    XI(1) <= X <= XI(LXI+1)
   !           TOL    - desired accuracy for the quadrature, suggest
   !                    10.*STOL < TOL <= 0.1 where STOL is the single
-  !                    precision unit roundoff for the machine = R1MACH(4)
+  !                    precision unit roundoff for the machine = eps_sp
   !
   !         Output
   !           QUAD   - integral of PF(X) on (X1,X2)
@@ -70,7 +70,7 @@ PURE SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   USE interpolation, ONLY : INTRV
   !
   INTERFACE
@@ -104,7 +104,7 @@ PURE SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
     ERROR STOP 'PFQAD : LXI DOES NOT SATISFY LXI>=1'
     RETURN
   ELSE
-    wtol = R1MACH(4)
+    wtol = eps_sp
     IF( Tol>=wtol .AND. Tol<=0.1_SP ) THEN
       aa = MIN(X1,X2)
       bb = MAX(X1,X2)

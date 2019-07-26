@@ -172,7 +172,7 @@ PURE SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
 
   INTEGER, INTENT(IN) :: Key, Liw, Lw, M, Mda, Mdb, Mode, N, Nb, Np
   INTEGER, INTENT(INOUT) :: Info
@@ -180,6 +180,7 @@ PURE SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   INTEGER, INTENT(INOUT) :: Iwork(N+M)
   REAL(SP), INTENT(INOUT) :: Ae(N), Re(N), A(Mda,N), B(Mdb,Nb), W(5*M)
   REAL(SP), INTENT(OUT) :: Rnorm(Nb)
+  !
   INTEGER :: i, it, m1, m2, m3, m4, m5
   REAL(SP) :: eps
   !
@@ -243,7 +244,7 @@ PURE SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                   RETURN
                 ELSE
                   !
-                  eps = 10._SP*R1MACH(4)
+                  eps = 10._SP*eps_sp
                   m1 = 1
                   m2 = m1 + M
                   m3 = m2 + M

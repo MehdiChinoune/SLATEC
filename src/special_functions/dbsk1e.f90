@@ -49,12 +49,14 @@ REAL(DP) ELEMENTAL FUNCTION DBSK1E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp, huge_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   REAL(DP) :: y
   INTEGER, PARAMETER :: ntk1 = 10, ntak1 = 18, ntak12 = 14
-  REAL(DP), PARAMETER :: eta = 0.1_DP*D1MACH(3), xsml = SQRT(4._DP*D1MACH(3)), &
-    xmin = EXP(MAX(LOG(D1MACH(1)),-LOG(D1MACH(2)))+0.01_DP)
+  REAL(DP), PARAMETER :: eta = 0.1_DP*eps_2_dp, xsml = SQRT(4._DP*eps_2_dp), &
+    xmin = EXP(MAX(LOG(tiny_dp),-LOG(huge_dp))+0.01_DP)
   REAL(DP), PARAMETER :: bk1cs(16) = [ +.25300227338947770532531120868533E-1_DP, &
     -.35315596077654487566723831691801E+0_DP, -.12261118082265714823479067930042E+0_DP, &
     -.69757238596398643501812920296083E-2_DP, -.17302889575130520630176507368979E-3_DP, &

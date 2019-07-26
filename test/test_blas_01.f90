@@ -323,12 +323,13 @@ CONTAINS
     !   910501  Added TYPE record.  (WRB)
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
-    USE slatec, ONLY : R1MACH
+    USE slatec, ONLY : eps_sp
+    !
     INTEGER :: i, Leng, Kprint
     REAL(SP) :: Scomp(*), Strue(*), Ssize(*), Sfac, sd
     REAL(SP) :: releps = 0._SP
     !* FIRST EXECUTABLE STATEMENT  STEST
-    IF( releps==0._SP ) releps = R1MACH(4)
+    IF( releps==0._SP ) releps = eps_sp
     DO i = 1, Leng
       sd = ABS(Scomp(i)-Strue(i))
       IF( Sfac*sd>ABS(Ssize(i))*releps ) THEN
@@ -386,14 +387,14 @@ CONTAINS
     !           changes to routine.  (WRB)
     !   901005  Removed usage of DDIFF in favour of D1MACH.  (RWC)
     !   910501  Added TYPE record.  (WRB)
-    !   920211  Code restructured and information added to the DESCRIPTION
-    !           section.  (WRB)
-    USE slatec, ONLY : D1MACH
+    !   920211  Code restructured and information added to the DESCRIPTION section.  (WRB)
+    USE slatec, ONLY : eps_dp
+    !
     INTEGER :: i, Leng, Kprint
     REAL(DP) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd
     REAL(DP) :: releps = 0._DP
     !* FIRST EXECUTABLE STATEMENT  DTEST
-    IF( releps==0._DP ) releps = D1MACH(4)
+    IF( releps==0._DP ) releps = eps_dp
     DO i = 1, Leng
       dd = ABS(Dcomp(i)-Dtrue(i))
       IF( Dfac*dd>ABS(Dsize(i))*releps ) THEN
@@ -451,16 +452,16 @@ CONTAINS
     !           changes to routine.  (WRB)
     !   901005  Removed usage of DDIFF in favour of D1MACH.  (RWC)
     !   910501  Added TYPE record.  (WRB)
-    !   920211  Code restructured and information added to the DESCRIPTION
-    !           section.  (WRB)
-    USE slatec, ONLY : R1MACH
+    !   920211  Code restructured and information added to the DESCRIPTION section.  (WRB)
+    USE slatec, ONLY : eps_sp
     USE blas, ONLY : SCABS1
+    !
     INTEGER :: i, Leng, Kprint
     COMPLEX(SP) :: Ccomp(*), Ctrue(*), Csize(*)
     REAL(SP) :: Cfac, dd
     REAL(SP) :: releps = 0._SP
     !* FIRST EXECUTABLE STATEMENT  DTEST
-    IF( releps==0.0 ) releps = R1MACH(4)
+    IF( releps==0.0 ) releps = eps_sp
     DO i = 1, Leng
       dd = SCABS1(Ccomp(i)-Ctrue(i))
       IF( Cfac*dd>ABS(Csize(i))*releps ) THEN
@@ -491,7 +492,8 @@ END MODULE TEST17_MOD
 !** TEST17
 PROGRAM TEST17
   USE TEST17_MOD, ONLY : BLACHK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -542,8 +544,8 @@ PROGRAM TEST17
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST17
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

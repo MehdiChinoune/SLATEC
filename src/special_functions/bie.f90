@@ -63,12 +63,14 @@ REAL(SP) ELEMENTAL FUNCTION BIE(X)
   !   770701  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, huge_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   REAL(SP) :: sqrtx, theta, xm, z
   INTEGER, PARAMETER :: nbif = 5, nbig = 5, nbif2 = 6, nbig2 = 6, nbip = 10, nbip2 = 8
-  REAL(SP), PARAMETER :: eta = 0.1_SP*R1MACH(3), x3sml = eta**0.3333_SP, &
-    x32sml = 1.3104_SP*x3sml**2, xbig = R1MACH(2)**0.6666_SP
+  REAL(SP), PARAMETER :: eta = 0.1_SP*eps_2_sp, x3sml = eta**0.3333_SP, &
+    x32sml = 1.3104_SP*x3sml**2, xbig = huge_sp**0.6666_SP
   REAL(SP), PARAMETER :: bifcs(9) = [ -.01673021647198664948_SP, .1025233583424944561_SP, &
     .00170830925073815165_SP, .00001186254546774468_SP, .00000004493290701779_SP, &
     .00000000010698207143_SP, .00000000000017480643_SP, .00000000000000020810_SP, &

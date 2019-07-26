@@ -70,11 +70,11 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !         of significance by argument reduction occur.  Consequently, if
   !         the magnitude of ZETA=(2/3)*Z**(3/2) exceeds U1=SQRT(0.5/UR),
   !         then losses exceeding half precision are likely and an error
-  !         flag IERR=3 is triggered where UR=R1MACH(4)=UNIT ROUNDOFF.
+  !         flag IERR=3 is triggered where UR=eps_sp=UNIT ROUNDOFF.
   !         Also, if the magnitude of ZETA is larger than U2=0.5/UR, then
   !         all significance is lost and IERR=4.  In order to use the INT
   !         function, ZETA must be further restricted not to exceed
-  !         U3=I1MACH(9)=LARGEST INTEGER.  Thus, the magnitude of ZETA
+  !         U3=huge_int=LARGEST INTEGER.  Thus, the magnitude of ZETA
   !         must be restricted by MIN(U2,U3).  In IEEE arithmetic, U1,U2,
   !         and U3 are approximately 2.0E+3, 4.2E+6, 2.1E+9 in single
   !         precision and 4.7E+7, 2.3E+15, 2.1E+9 in double precision.
@@ -133,11 +133,13 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : digits_sp, huge_int, max_exp_sp, min_exp_sp, eps_sp, log10_radix_sp
+  !
   INTEGER, INTENT(IN) :: Id, Kode
   INTEGER, INTENT(OUT) :: Ierr
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Bi
+  !
   INTEGER :: k, k1, k2, nz
   REAL(SP) :: aa, ad, ak, alim, atrm, az, az3, bb, bk, ck, dig, dk, d1, d2, elim, fid, &
     fmr, fnu, fnul, rl, r1m5, sfac, tol, zi, zr, z3i, z3r
@@ -154,7 +156,7 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     RETURN
   END IF
   az = ABS(Z)
-  tol = MAX(R1MACH(4),1.0E-18_SP)
+  tol = MAX(eps_sp,1.0E-18_SP)
   fid = Id
   IF( az>1._SP ) THEN
     !-----------------------------------------------------------------------
@@ -172,12 +174,12 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     !     DIG = NUMBER OF BASE 10 DIGITS IN TOL = 10**(-DIG).
     !     FNUL IS THE LOWER BOUNDARY OF THE ASYMPTOTIC SERIES FOR LARGE FNU.
     !-----------------------------------------------------------------------
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = R1MACH(5)
+    k1 = min_exp_sp
+    k2 = max_exp_sp
+    r1m5 = log10_radix_sp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_SP*(k*r1m5-3._SP)
-    k1 = I1MACH(11) - 1
+    k1 = digits_sp - 1
     aa = r1m5*k1
     dig = MIN(aa,18._SP)
     aa = aa*2.303_SP
@@ -188,7 +190,7 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     !     TEST FOR RANGE
     !-----------------------------------------------------------------------
     aa = 0.5_SP/tol
-    bb = 0.5_SP*I1MACH(9)
+    bb = 0.5_SP*huge_int
     aa = MIN(aa,bb)
     aa = aa**tth
     IF( az>aa ) THEN

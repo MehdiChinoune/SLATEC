@@ -60,7 +60,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-    USE slatec, ONLY : CAIRY, CBIRY, I1MACH, R1MACH
+    USE slatec, ONLY : CAIRY, CBIRY, eps_sp, log10_radix_sp, min_exp_sp, max_exp_sp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -103,13 +103,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = R1MACH(4)
+    r1m4 = eps_sp
     tol = MAX(r1m4,1.E-18_SP)
     atol = 100._SP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = R1MACH(5)
+    k1 = min_exp_sp
+    k2 = max_exp_sp
+    r1m5 = log10_radix_sp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_SP*(k*r1m5-3._SP)
     ab = aa*2.303_SP
@@ -424,7 +424,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-    USE slatec, ONLY : CBESH, CUOIK, I1MACH, R1MACH
+    USE slatec, ONLY : CBESH, CUOIK, eps_sp, log10_radix_sp, min_exp_sp, max_exp_sp
     USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE, IEEE_IS_NORMAL
     !
     !*Internal Notes:
@@ -467,13 +467,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = R1MACH(4)
+    r1m4 = eps_sp
     tol = MAX(r1m4,1.E-18_SP)
     atol = 100._SP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = R1MACH(5)
+    k1 = min_exp_sp
+    k2 = max_exp_sp
+    r1m5 = log10_radix_sp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_SP*(k*r1m5-3._SP)
     ab = aa*2.303_SP
@@ -787,7 +787,8 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-    USE slatec, ONLY : CBESI, CBESK, CWRSK, I1MACH, R1MACH
+    USE slatec, ONLY : CBESI, CBESK, CWRSK, eps_sp, log10_radix_sp, min_exp_sp, &
+      max_exp_sp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -828,13 +829,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = R1MACH(4)
+    r1m4 = eps_sp
     tol = MAX(r1m4,1.E-18_SP)
     atol = 100._SP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = R1MACH(5)
+    k1 = min_exp_sp
+    k2 = max_exp_sp
+    r1m5 = log10_radix_sp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_SP*(k*r1m5-3._SP)
     ab = aa*2.303_SP
@@ -1281,7 +1282,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-    USE slatec, ONLY : CBESH, CBESJ, I1MACH, R1MACH
+    USE slatec, ONLY : CBESH, CBESJ, eps_sp, log10_radix_sp, min_exp_sp, max_exp_sp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -1322,13 +1323,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = R1MACH(4)
+    r1m4 = eps_sp
     tol = MAX(r1m4,1.E-18_SP)
     atol = 100._SP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = R1MACH(5)
+    k1 = min_exp_sp
+    k2 = max_exp_sp
+    r1m5 = log10_radix_sp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_SP*(k*r1m5-3._SP)
     ab = aa*2.303_SP
@@ -1667,7 +1668,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standard
     !
-    USE slatec, ONLY : CBESI, CBESK, I1MACH, R1MACH
+    USE slatec, ONLY : CBESI, CBESK, eps_sp, log10_radix_sp, min_exp_sp, max_exp_sp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -1708,13 +1709,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = R1MACH(4)
+    r1m4 = eps_sp
     tol = MAX(r1m4,1.E-18_SP)
     atol = 100._SP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = R1MACH(5)
+    k1 = min_exp_sp
+    k2 = max_exp_sp
+    r1m5 = log10_radix_sp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_SP*(k*r1m5-3._SP)
     ab = aa*2.303_SP
@@ -2033,7 +2034,8 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !
-    USE slatec, ONLY : CBESI, CBESK, CBESY, I1MACH, R1MACH
+    USE slatec, ONLY : CBESI, CBESK, CBESY, eps_sp, log10_radix_sp, &
+      min_exp_sp, max_exp_sp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and R1MACH.
@@ -2076,13 +2078,13 @@ CONTAINS
     !     DIG = number of base 10 digits in TOL = 10**(-DIG).
     !     FNUL is the lower boundary of the asymptotic series for large FNU.
     !-----------------------------------------------------------------------
-    r1m4 = R1MACH(4)
+    r1m4 = eps_sp
     tol = MAX(r1m4,1.E-18_SP)
     atol = 100._SP*tol
     aa = -LOG10(r1m4)
-    k1 = I1MACH(12)
-    k2 = I1MACH(13)
-    r1m5 = R1MACH(5)
+    k1 = min_exp_sp
+    k2 = max_exp_sp
+    r1m5 = log10_radix_sp
     k = MIN(ABS(k1),ABS(k2))
     elim = 2.303_SP*(k*r1m5-3._SP)
     ab = aa*2.303_SP
@@ -2368,7 +2370,8 @@ END MODULE TEST09_MOD
 !** TEST09
 PROGRAM TEST09
   USE TEST09_MOD, ONLY : CQCAI, CQCBH, CQCBI, CQCBJ, CQCBK, CQCBY
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms.
@@ -2418,8 +2421,8 @@ PROGRAM TEST09
   !   920128  Category corrected.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST09
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

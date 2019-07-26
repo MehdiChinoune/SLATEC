@@ -46,7 +46,7 @@ PURE SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  USE service, ONLY : I1MACH
+  USE service, ONLY : digits_sp, radix_fp
 
   INTEGER, INTENT(IN) :: M, N
   LOGICAL, INTENT(IN) :: Kbd
@@ -55,7 +55,7 @@ PURE SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   INTEGER :: i, j, mini, np1
   REAL(SP) :: r, s
   COMPLEX(SP) :: ci, cim1, bi, bim1, t
-  REAL(SP), PARAMETER :: d1 = REAL(I1MACH(10))**(1-I1MACH(11))
+  REAL(SP), PARAMETER :: d1 = REAL(radix_fp)**(1-digits_sp)
   !* FIRST EXECUTABLE STATEMENT  CPEVL
   np1 = N + 1
   DO j = 1, np1

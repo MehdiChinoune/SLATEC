@@ -30,12 +30,14 @@ COMPLEX(SP) ELEMENTAL FUNCTION CEXPRL(Z)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp
+  !
   COMPLEX(SP), INTENT(IN) :: Z
+  !
   INTEGER :: i
   REAL(SP) :: r
-  REAL(SP), PARAMETER :: alneps = LOG(R1MACH(3)), xn = 3.72_SP - 0.3_SP*alneps, &
-    xln = LOG((xn+1._SP)/1.36_SP), rbnd = R1MACH(3)
+  REAL(SP), PARAMETER :: alneps = LOG(eps_2_sp), xn = 3.72_SP - 0.3_SP*alneps, &
+    xln = LOG((xn+1._SP)/1.36_SP), rbnd = eps_2_sp
   INTEGER, PARAMETER :: nterms = INT( xn - (xn*xln+alneps)/(xln+1.36_SP) + 1.5_SP )
   !* FIRST EXECUTABLE STATEMENT  CEXPRL
   !

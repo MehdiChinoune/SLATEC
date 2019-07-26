@@ -388,7 +388,7 @@ PURE SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_dp
   USE blas, ONLY : DAXPY, DSWAP
   USE linear, ONLY : DH12
   !
@@ -405,7 +405,7 @@ PURE SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
   LOGICAL :: cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
-  REAL(DP), PARAMETER :: drelpr = D1MACH(4)
+  REAL(DP), PARAMETER :: drelpr = eps_dp
   !* FIRST EXECUTABLE STATEMENT  DLSEI
   !
   !     Set the nominal tolerance used in the code for the equality

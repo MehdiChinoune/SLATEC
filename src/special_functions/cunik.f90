@@ -33,12 +33,14 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
+  !
   INTEGER, INTENT(IN) :: Ikflg, Ipmtr
   INTEGER, INTENT(INOUT) :: Init
   REAL(SP), INTENT(IN) :: Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Zr
   COMPLEX(SP), INTENT(INOUT) :: Phi, Summ, Zeta1, Zeta2, Cwrk(16)
+  !
   INTEGER :: i, j, k, l
   REAL(SP) :: ac, rfn, test, tstr, tsti
   COMPLEX(SP) :: cfn, crfn, s, sr, t, t2, zn
@@ -99,7 +101,7 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
     !-----------------------------------------------------------------------
     tstr = REAL(Zr)
     tsti = AIMAG(Zr)
-    test = R1MACH(1)*1.E+3_SP
+    test = tiny_sp*1.E+3_SP
     ac = Fnu*test
     IF( ABS(tstr)>ac .OR. ABS(tsti)>ac ) THEN
       t = Zr*crfn

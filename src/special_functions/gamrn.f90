@@ -24,7 +24,7 @@ REAL(SP) ELEMENTAL FUNCTION GAMRN(X)
   !         utational tolerances are computed as a function of the number
   !         of digits carried in a word by calls to I1MACH and R1MACH.
   !         However, the computational accuracy is limited to the max-
-  !         imum of unit roundoff (=R1MACH(4)) and 1.0E-18 since critical
+  !         imum of unit roundoff (=eps_sp) and 1.0E-18 since critical
   !         constants are given to only 18 digits.
   !
   !         Input
@@ -50,8 +50,10 @@ REAL(SP) ELEMENTAL FUNCTION GAMRN(X)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
-  USE service, ONLY : R1MACH, I1MACH
+  USE service, ONLY : eps_sp, log10_radix_sp, digits_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   INTEGER :: i, i1m11, k, mx, nx
   REAL(SP) :: fln, rln, s, tol, trm, xdmy, xinc, xm, xmin, xp, xsq
   !
@@ -63,9 +65,9 @@ REAL(SP) ELEMENTAL FUNCTION GAMRN(X)
   !
   !* FIRST EXECUTABLE STATEMENT  GAMRN
   nx = INT(X)
-  tol = MAX(R1MACH(4),1.0E-18_SP)
-  i1m11 = I1MACH(11)
-  rln = R1MACH(5)*i1m11
+  tol = MAX(eps_sp,1.0E-18_SP)
+  i1m11 = digits_sp
+  rln = log10_radix_sp*i1m11
   fln = MIN(rln,20._SP)
   fln = MAX(fln,3._SP)
   fln = fln - 3._SP

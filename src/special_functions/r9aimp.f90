@@ -51,12 +51,14 @@ ELEMENTAL SUBROUTINE R9AIMP(X,Ampl,Theta)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp
+  !
   REAL(SP), INTENT(IN) :: X
   REAL(SP), INTENT(OUT) :: Ampl, Theta
+  !
   REAL(SP) :: sqrtx, z
   INTEGER, PARAMETER :: nam21 = 10, nath1 = 9, nam22 = 12, nath2 = 12
-  REAL(SP), PARAMETER :: eta = 0.1_SP*R1MACH(3), xsml = -1._SP/R1MACH(3)**0.3333_SP
+  REAL(SP), PARAMETER :: eta = 0.1_SP*eps_2_sp, xsml = -1._SP/eps_2_sp**0.3333_SP
   REAL(SP), PARAMETER :: am21cs(40) = [ .0065809191761485_SP, .0023675984685722_SP, &
     .0001324741670371_SP, .0000157600904043_SP, .0000027529702663_SP, &
     .0000006102679017_SP, .0000001595088468_SP, .0000000471033947_SP, &

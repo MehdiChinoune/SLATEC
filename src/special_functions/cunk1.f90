@@ -24,12 +24,14 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp, huge_sp
+  !
   INTEGER, INTENT(IN) :: Kode, Mr, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, ib, iflag, ifn, il, init(2), inu, iuf, k, kdflg, kflag, &
     kk, nw, j, ipard, initd, ic, m
   REAL(SP) :: ang, aphi, asc, ascle, bry(3), cpn, c2i, c2m, c2r, &
@@ -54,9 +56,9 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   csr(1) = crsc
   csr(2) = cone
   csr(3) = cscl
-  bry(1) = 1.E+3_SP*R1MACH(1)/Tol
+  bry(1) = 1.E+3_SP*tiny_sp/Tol
   bry(2) = 1._SP/bry(1)
-  bry(3) = R1MACH(2)
+  bry(3) = huge_sp
   x = REAL(Z)
   zr = Z
   IF( x<0._SP ) zr = -Z

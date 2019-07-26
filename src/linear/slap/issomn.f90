@@ -171,9 +171,9 @@ INTEGER PURE FUNCTION ISSOMN(N,Itol,Tol,R,Z,Dz,Bnrm,Solnrm)
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   920930  Corrected to not print AK when ITER=0.  (FNF)
-  !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
+  !   921026  Changed 1.0E10 to huge_sp.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : huge_sp
   !     .. Scalar Arguments ..
   INTEGER, INTENT(IN) :: Itol, N
   REAL(SP), INTENT(IN) :: Bnrm, Solnrm, Tol
@@ -197,7 +197,7 @@ INTEGER PURE FUNCTION ISSOMN(N,Itol,Tol,R,Z,Dz,Bnrm,Solnrm)
     eror = NORM2(Dz)/Solnrm
   ELSE
     !         If we get here ITOL is not one of the acceptable values.
-    eror = R1MACH(2)
+    eror = huge_sp
     ierr = 3
     ERROR STOP "Itol is not one of the acceptable values {1,2,11}"
   END IF

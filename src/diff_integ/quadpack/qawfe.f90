@@ -209,7 +209,7 @@ PURE SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
   INTERFACE
     REAL(SP) PURE FUNCTION F(X)
       IMPORT SP
@@ -283,7 +283,7 @@ PURE SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       c2 = cycle + A
       p1 = 1._SP - p
       eps = Epsabs
-      uflow = R1MACH(1)
+      uflow = tiny_sp
       IF( Epsabs>uflow/p1 ) eps = Epsabs*p1
       ep = eps
       fact = 1._SP

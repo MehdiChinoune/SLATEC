@@ -54,13 +54,15 @@ REAL(DP) ELEMENTAL FUNCTION DPOCH1(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, eps_2_dp
+  !
   REAL(DP), INTENT(IN) :: A, X
+  !
   INTEGER :: i, ii, incr, j, k, ndx, nterms
   REAL(DP) :: absa, absx, alnvar, b, binv, bp, gbern(21), gbk, poly1, q, rho, &
     sinpxx, sinpx2, term, trig, var, var2
-  REAL(DP), PARAMETER :: sqtbig = 1._DP/SQRT(24._DP*D1MACH(1)), &
-    alneps = LOG(D1MACH(3))
+  REAL(DP), PARAMETER :: sqtbig = 1._DP/SQRT(24._DP*tiny_dp), &
+    alneps = LOG(eps_2_dp)
   REAL(DP), PARAMETER :: bern(20) = [ +.833333333333333333333333333333333E-1_DP, &
     -.138888888888888888888888888888888E-2_DP, +.330687830687830687830687830687830E-4_DP, &
     -.826719576719576719576719576719576E-6_DP, +.208767569878680989792100903212014E-7_DP, &
@@ -109,7 +111,7 @@ REAL(DP) ELEMENTAL FUNCTION DPOCH1(A,X)
       poly1 = gbern(2)*term
       !
       nterms = INT( -0.5_DP*alneps/alnvar ) + 1
-      IF( nterms>20 ) ERROR STOP 'DPOCH1 : NTERMS IS TOO BIG, MAYBE D1MACH(3) IS BAD'
+      IF( nterms>20 ) ERROR STOP 'DPOCH1 : NTERMS IS TOO BIG, MAYBE eps_2_dp IS BAD'
       IF( nterms>=2 ) THEN
         !
         DO k = 2, nterms

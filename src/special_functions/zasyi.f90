@@ -24,7 +24,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp
   !     COMPLEX AK1,CK,CONE,CS1,CS2,CZ,CZERO,DK,EZ,P1,RZ,S2,Y,Z
   INTEGER :: i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
   REAL(DP) :: aa, aez, ak, ak1i, ak1r, Alim, arg, arm, atol, az, bb, bk, cki, &
@@ -36,7 +36,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !* FIRST EXECUTABLE STATEMENT  ZASYI
   Nz = 0
   az = ZABS(Zr,Zi)
-  arm = 1.E3_DP*D1MACH(1)
+  arm = 1.E3_DP*tiny_dp
   rtr1 = SQRT(arm)
   il = MIN(2,N)
   dfnu = Fnu + (N-il)

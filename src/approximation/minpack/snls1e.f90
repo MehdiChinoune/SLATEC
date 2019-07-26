@@ -179,7 +179,7 @@ PURE SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !       of comparisons between the approximation X and a solution XSOL.
   !       SNLS1E terminates when any of the tests is satisfied.  If TOL is
   !       less than the machine precision (as defined by the function
-  !       R1MACH(4)), then SNLS1E only attempts to satisfy the test
+  !       eps_sp), then SNLS1E only attempts to satisfy the test
   !       defined by the machine precision.  Further progress is not usu-
   !       ally possible.  Unless high precision solutions are required,
   !       the recommended value for TOL is the square root of the machine
@@ -334,7 +334,7 @@ PURE SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   ! C     Unless high precision solutions are required,
   ! C     this is the recommended setting.
   ! C
-  !       TOL = SQRT(R1MACH(4))
+  !       TOL = SQRT(eps_sp)
   ! C
   !       CALL SNLS1E(FCN,IOPT,M,N,X,FVEC,TOL,NPRINT,
   !      *            INFO,IW,WA,LWA)

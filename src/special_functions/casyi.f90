@@ -23,12 +23,14 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : tiny_sp
+  !S
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Rl, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, ib, il, inu, j, jl, k, koded, m, nn
   COMPLEX(SP) :: ak1, ck, cs1, cs2, cz, dk, ez, p1, rz, s2
   REAL(SP) :: aa, acz, aez, ak, arg, arm, atol, az, bb, bk, dfnu, &
@@ -39,7 +41,7 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   Nz = 0
   az = ABS(Z)
   x = REAL(Z)
-  arm = 1.E+3_SP*R1MACH(1)
+  arm = 1.E+3_SP*tiny_sp
   rtr1 = SQRT(arm)
   il = MIN(2,N)
   dfnu = Fnu + (N-il)

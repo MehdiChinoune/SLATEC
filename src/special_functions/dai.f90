@@ -41,12 +41,14 @@ REAL(DP) ELEMENTAL FUNCTION DAI(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : eps_2_dp, tiny_dp
+  !
   REAL(DP), INTENT(IN) :: X
+  !
   REAL(DP) :: theta, xm, z
   INTEGER, PARAMETER :: naif = 8, naig = 8
-  REAL(DP), PARAMETER :: x3sml = D1MACH(3)**0.3334_DP, &
-    xmaxt = (-1.5_DP*LOG(D1MACH(1)))**0.6667_DP, &
+  REAL(DP), PARAMETER :: x3sml = eps_2_dp**0.3334_DP, &
+    xmaxt = (-1.5_DP*LOG(tiny_dp))**0.6667_DP, &
     xmax = xmaxt - xmaxt*LOG(xmaxt)/(4._DP*SQRT(xmaxt)+1._DP) - 0.01_DP
   REAL(DP), PARAMETER :: aifcs(13) = [ -.37971358496669997496197089469414E-1_DP, &
     +.59191888537263638574319728013777E-1_DP, +.98629280577279975365603891044060E-3_DP, &
@@ -63,8 +65,8 @@ REAL(DP) ELEMENTAL FUNCTION DAI(X)
     +.83063073770821340343829333333333E-23_DP, +.44657538493718567445333333333333E-26_DP, &
     +.19900855034518869333333333333333E-29_DP, +.74702885256533333333333333333333E-33_DP ]
   !* FIRST EXECUTABLE STATEMENT  DAI
-  ! naif = INITDS(aifcs,0.1_SP*D1MACH(3))
-  ! naig = INITDS(aigcs,0.1_SP*D1MACH(3))
+  ! naif = INITDS(aifcs,0.1_SP*eps_2_dp)
+  ! naig = INITDS(aigcs,0.1_SP*eps_2_dp)
   !
   IF( X<(-1._DP) ) THEN
     CALL D9AIMP(X,xm,theta)

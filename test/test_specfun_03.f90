@@ -43,7 +43,7 @@ CONTAINS
     !   900330  Prologue converted to Version 4.0 format.  (BAB)
     !   900727  Added EXTERNAL statement.  (WRB)
     USE slatec, ONLY : C0LGMC, CATAN2, CBETA, CCBRT, CCOT, CEXPRL, CGAMMA, CGAMR, &
-      CLBETA, CLNGAM, CLNREL, CPSI, R1MACH
+      CLBETA, CLNGAM, CLNREL, CPSI, eps_sp
     INTEGER :: i, Lun, Kprint, Ipass
     REAL(SP) :: errmax, errtol, abserr, relerr
     COMPLEX(SP) :: w(48)
@@ -133,7 +133,7 @@ CONTAINS
     !
     !     Check for possible errors
     !
-    errmax = R1MACH(4)
+    errmax = eps_sp
     errtol = SQRT(errmax)
     DO i = 1, 26
       abserr = ABS(c(i)-w(i))
@@ -153,7 +153,8 @@ END MODULE TEST04_MOD
 !** TEST04
 PROGRAM TEST04
   USE TEST04_MOD, ONLY : CFNCK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -204,8 +205,8 @@ PROGRAM TEST04
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST04
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

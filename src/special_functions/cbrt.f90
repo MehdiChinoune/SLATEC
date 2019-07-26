@@ -26,13 +26,13 @@ REAL(SP) ELEMENTAL FUNCTION CBRT(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp
   REAL(SP), INTENT(IN) :: X
   INTEGER :: irem, iter, ixpnt, n
   REAL(SP) :: cbrtsq, y
   REAL(SP), PARAMETER :: cbrt2(5) = [ 0.62996052494743658_SP,  0.79370052598409974_SP, &
     1._SP, 1.25992104989487316_SP, 1.58740105196819947_SP ]
-  INTEGER, PARAMETER :: niter = INT( 1.443*LOG(-.106*LOG(0.1_SP*R1MACH(3))) ) + 1
+  INTEGER, PARAMETER :: niter = INT( 1.443*LOG(-.106*LOG(0.1_SP*eps_2_sp)) ) + 1
   !* FIRST EXECUTABLE STATEMENT  CBRT
   !
   IF( X==0._SP ) THEN

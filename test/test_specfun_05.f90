@@ -31,15 +31,14 @@ CONTAINS
     !   891004  Removed unreachable code.  (WRB)
     !   891004  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of D1MACH(3) to D1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_dp to eps_dp.  (RWC)
     !   910121  Editorial Changes.  (RWC)
     !   910501  Added TYPE record.  (WRB)
-    !   910708  Code revised to test error returns for all values of
-    !           KPRINT.  (WRB)
+    !   910708  Code revised to test error returns for all values of KPRINT.  (WRB)
     !   910801  Editorial changes, some restructing and modifications to
-    !           obtain more information when there is failure of the
-    !           Wronskian.  (WRB)
-    USE slatec, ONLY : D1MACH, DBESI, DBESK, num_xer, control_xer
+    !           obtain more information when there is failure of the Wronskian.  (WRB)
+    USE slatec, ONLY : eps_dp, DBESI, DBESK, num_xer, control_xer, tiny_dp, huge_dp
+    !
     INTEGER :: Kprint
     INTEGER :: i, Ipass, ix, k, kode, kontrl, Lun, m, n, nu, nw, ny
     REAL(DP) :: alp, del, er, fnu, fnup, rx, tol, x
@@ -58,7 +57,7 @@ CONTAINS
     fn(1) = 0.095_DP
     fn(2) = 0.70_DP
     fn(3) = 0._DP
-    tol = MAX(500._DP*D1MACH(4),7.1E-12_DP)
+    tol = MAX(500._DP*eps_dp,7.1E-12_DP)
     DO kode = 1, 2
       DO m = 1, 3
         DO n = 1, 4
@@ -108,7 +107,7 @@ CONTAINS
     !
     n = 2
     fnu = 1._DP
-    x = D1MACH(4)
+    x = eps_dp
     DO i = 1, 3
       DO kode = 1, 2
         CALL DBESI(x,fnu,kode,n,y,ny)
@@ -127,7 +126,7 @@ CONTAINS
         END IF
       END DO
       !
-      fnu = D1MACH(4)/100._DP
+      fnu = eps_dp/100._DP
       x = xx(2*i-1)
     END DO
     !
@@ -174,7 +173,7 @@ CONTAINS
     !
     !     Check underflow flags
     !
-    100  x = D1MACH(1)*10._DP
+    100  x = tiny_dp*10._DP
     alp = 12.3_DP
     n = 3
     CALL DBESI(x,alp,1,n,y,ny)
@@ -184,7 +183,7 @@ CONTAINS
       99005 FORMAT (/' ERROR IN DBESI UNDERFLOW TEST'/)
     END IF
     !
-    x = LOG(D1MACH(2)/10._DP) + 20._DP
+    x = LOG(huge_dp/10._DP) + 20._DP
     alp = 1.3_DP
     n = 3
     CALL DBESK(x,alp,1,n,w,nw)
@@ -236,7 +235,7 @@ CONTAINS
     !
     !     Trigger overflow
     !
-!    x = LOG(D1MACH(2)/10._DP) + 20._DP
+!    x = LOG(huge_dp/10._DP) + 20._DP
 !    n = 3
 !    alp = 2.3_DP
 !    CALL DBESI(x,alp,1,n,y,ny)
@@ -246,7 +245,7 @@ CONTAINS
 !    END IF
 !    num_xer = 0
 !    !
-!    x = D1MACH(1)*10._DP
+!    x = tiny_dp*10._DP
 !    CALL DBESK(x,alp,1,n,w,nw)
 !    IF( num_xer/=6 ) THEN
 !      Ipass = 0
@@ -298,15 +297,14 @@ CONTAINS
     !   891004  Removed unreachable code.  (WRB)
     !   891004  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901205  Changed usage of D1MACH(3) to D1MACH(4).  (RWC)
+    !   901205  Changed usage of eps_2_dp to eps_dp.  (RWC)
     !   910121  Editorial Changes.  (RWC)
     !   910501  Added TYPE record.  (WRB)
-    !   910708  Code revised to test error returns for all values of
-    !           KPRINT.  (WRB)
+    !   910708  Code revised to test error returns for all values of KPRINT.  (WRB)
     !   910801  Editorial changes, some restructing and modifications to
-    !           obtain more information when there is failure of the
-    !           Wronskian.  (WRB)
-    USE slatec, ONLY : D1MACH, DBESJ, DBESY, num_xer, control_xer
+    !           obtain more information when there is failure of the Wronskian.  (WRB)
+    USE slatec, ONLY : eps_dp, DBESJ, DBESY, num_xer, control_xer, tiny_dp
+    !
     INTEGER :: Kprint
     INTEGER :: i, Ipass, ix, k, kontrl, Lun, m, n, nu, ny
     REAL(DP) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
@@ -326,7 +324,7 @@ CONTAINS
     fn(1) = 0.095_DP
     fn(2) = 0.70_DP
     fn(3) = 0._DP
-    tol = MAX(500._DP*D1MACH(4),7.1E-12_DP)
+    tol = MAX(500._DP*eps_dp,7.1E-12_DP)
     DO m = 1, 3
       DO n = 1, 4
         DO nu = 1, 4
@@ -369,7 +367,7 @@ CONTAINS
     !
     n = 2
     fnu = 1._DP
-    x = D1MACH(4)/5._DP
+    x = eps_dp/5._DP
     rx = rhpi/x
     DO i = 1, 3
       CALL DBESJ(x,fnu,n,y,ny)
@@ -385,7 +383,7 @@ CONTAINS
           E14.7/' Y(1) = ',E14.7,', Y(2) = ',E14.7/' W(1) = ',E14.7,', W(2) = ',E14.7)
         EXIT
       END IF
-      fnu = D1MACH(4)/100._DP
+      fnu = eps_dp/100._DP
       x = xx(2*i-1)
       rx = rhpi/x
     END DO
@@ -428,7 +426,7 @@ CONTAINS
     !
     !     Check underflow flags
     !
-    100  x = D1MACH(1)*10._DP
+    100  x = tiny_dp*10._DP
     alp = 12.3_DP
     n = 3
     CALL DBESJ(x,alp,n,y,ny)
@@ -477,7 +475,7 @@ CONTAINS
     !
     !     Trigger overflow
     !
-!    x = D1MACH(1)*10._DP
+!    x = tiny_dp*10._DP
 !    n = 3
 !    alp = 2.3_DP
 !    CALL DBESY(x,alp,n,w)
@@ -530,10 +528,10 @@ CONTAINS
     !   890718  Added check when testing error conditions.  (WRB)
     !   890718  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   910708  Code revised to test error returns for all values of
-    !           KPRINT.  (WRB)
+    !   910708  Code revised to test error returns for all values of KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to DEXINT.  (WRB)
-    USE slatec, ONLY : D1MACH, DEXINT, DGAUS8
+    USE slatec, ONLY : eps_dp, DEXINT, DGAUS8
+    !
     INTEGER :: Kprint
     INTEGER :: i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
@@ -544,7 +542,7 @@ CONTAINS
     !
     99001 FORMAT ('1'/' QUICK CHECK FOR DEXINT AND DGAUS8'/)
     Ipass = 1
-    tol = SQRT(MAX(D1MACH(4),1.E-18_DP))
+    tol = SQRT(MAX(eps_dp,1.E-18_DP))
     DO kode = 1, 2
       ik = kode - 1
       FKM = ik
@@ -710,7 +708,8 @@ END MODULE TEST06_MOD
 !** TEST06
 PROGRAM TEST06
   USE TEST06_MOD, ONLY : DBIKCK, DBJYCK, DEG8CK
-  USE slatec, ONLY : I1MACH, control_xer, max_xer
+  USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
+  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -764,8 +763,8 @@ PROGRAM TEST06
   !   900524  Cosmetic changes to code.  (WRB)
   INTEGER :: ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST06
-  lun = I1MACH(2)
-  lin = I1MACH(1)
+  lun = OUTPUT_UNIT
+  lin = INPUT_UNIT
   nfail = 0
   !
   !     Read KPRINT parameter

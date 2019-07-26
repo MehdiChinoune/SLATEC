@@ -93,7 +93,7 @@ PURE SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
   !   900328  Added TYPE section.  (WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_sp
   !
   INTERFACE
     PURE SUBROUTINE FCN(N,X,Fvec,iflag)
@@ -111,7 +111,7 @@ PURE SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   INTEGER :: i, j, k, msum
   REAL(SP) :: eps, epsmch, h, temp, x_temp(N)
   !* FIRST EXECUTABLE STATEMENT  FDJAC1
-  epsmch = R1MACH(4)
+  epsmch = eps_sp
   !
   eps = SQRT(MAX(Epsfcn,epsmch))
   msum = Ml + Mu + 1

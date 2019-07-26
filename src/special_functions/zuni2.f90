@@ -28,7 +28,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : D1MACH
+  USE service, ONLY : tiny_dp, huge_dp
   !     COMPLEX AI,ARG,ASUM,BSUM,CFN,CI,CID,CIP,CONE,CRSC,CSCL,CSR,CSS,
   !    *CZERO,C1,C2,DAI,PHI,RZ,S1,S2,Y,Z,ZB,ZETA1,ZETA2,ZN
   INTEGER :: i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, Nlast, nn, nuf, nw, Nz, idum
@@ -58,7 +58,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   csrr(1) = crsc
   csrr(2) = coner
   csrr(3) = cscl
-  bry(1) = 1.E3_DP*D1MACH(1)/Tol
+  bry(1) = 1.E3_DP*tiny_dp/Tol
   !-----------------------------------------------------------------------
   !     ZN IS IN THE RIGHT HALF PLANE AFTER ROTATION BY CI OR -CI
   !-----------------------------------------------------------------------
@@ -191,7 +191,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     rzr = (str+str)*raz
     rzi = (sti+sti)*raz
     bry(2) = 1._DP/bry(1)
-    bry(3) = D1MACH(2)
+    bry(3) = huge_dp
     s1r = cyr(1)
     s1i = cyi(1)
     s2r = cyr(2)

@@ -149,7 +149,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     LBM        INTEGER      LENGTH OF BASMAT(*)
   !     SMALL      DOUBLE       EPS*ANORM  USED IN HARWELL SPARSE CODE
   !     LP         INTEGER      USED IN HARWELL LA05*() PACK AS OUTPUT
-  !                             FILE NUMBER. SET=I1MACH(4) NOW.
+  !                             FILE NUMBER. SET=ERROR_UNIT NOW.
   !     UU         DOUBLE       0.1--USED IN HARWELL SPARSE CODE
   !                             FOR RELATIVE PIVOTING TOLERANCE.
   !     GG         DOUBLE       OUTPUT INFO FLAG IN HARWELL SPARSE CODE

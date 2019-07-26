@@ -51,18 +51,19 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
-  !   891107  Added comma after 1P edit descriptor in FORMAT
-  !           statements.  (WRB)
+  !   891107  Added comma after 1P edit descriptor in FORMAT statements.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
-
+  USE ISO_FORTRAN_ENV, ONLY : OUTPUT_UNIT
+  !
   INTEGER, INTENT(IN) :: Idigit, N
   REAL(DP), INTENT(IN) :: Dx(N)
   CHARACTER(*), INTENT(IN) :: Ifmt
+  !
   INTEGER :: i, k1, k2, lout, ndigit
   !* FIRST EXECUTABLE STATEMENT  DVOUT
-  lout = I1MACH(2)
+  lout = OUTPUT_UNIT
   WRITE (lout,Ifmt)
   IF( N<=0 ) RETURN
   ndigit = Idigit

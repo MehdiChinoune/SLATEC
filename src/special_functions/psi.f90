@@ -42,12 +42,14 @@ REAL(SP) ELEMENTAL FUNCTION PSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : R1MACH
+  USE service, ONLY : eps_2_sp, eps_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   INTEGER :: i, n
   REAL(SP) :: aux, y
   INTEGER, PARAMETER :: ntpsi = 12, ntapsi = 5
-  REAL(SP), PARAMETER :: xbig = 1._SP/SQRT(R1MACH(3)), dxrel = SQRT(R1MACH(4))
+  REAL(SP), PARAMETER :: xbig = 1._SP/SQRT(eps_2_sp), dxrel = SQRT(eps_sp)
   REAL(SP), PARAMETER :: psics(23) = [ -.038057080835217922_SP, .49141539302938713_SP, &
     -.056815747821244730_SP, .008357821225914313_SP,-.001333232857994342_SP, &
     .000220313287069308_SP, -.000037040238178456_SP, .000006283793654854_SP, &
@@ -64,8 +66,8 @@ REAL(SP) ELEMENTAL FUNCTION PSI(X)
     .0000000000000002_SP, -.0000000000000000_SP ]
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   !* FIRST EXECUTABLE STATEMENT  PSI
-  ! ntpsi = INITS(psics,0.1_SP*R1MACH(3))
-  ! ntapsi = INITS(apsics,0.1_SP*R1MACH(3))
+  ! ntpsi = INITS(psics,0.1_SP*eps_2_sp)
+  ! ntapsi = INITS(apsics,0.1_SP*eps_2_sp)
   !
   y = ABS(X)
   IF( y>=2._SP ) THEN
