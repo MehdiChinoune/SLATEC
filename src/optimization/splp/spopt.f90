@@ -46,13 +46,11 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   LOGICAL, INTENT(OUT) :: Lopt(8)
   INTEGER :: i, iadbig, ictmax, ictopt, idg, iopt, ipagef, isave, itbrc, itest, j, &
     key, kprint, last, lds, lprg, mxitlp, n20043, n20053, n20096, nerr, next, npp
-  REAL(SP) :: abig, asmall, costsc, eps, one, tolls, tune, zero, tolabs
+  REAL(SP) :: abig, asmall, costsc, eps, tolls, tune, tolabs
   LOGICAL :: contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg
   !
   !* FIRST EXECUTABLE STATEMENT  SPOPT
   iopt = 1
-  zero = 0._SP
-  one = 1._SP
   asmall = 0._SP
   abig = 0._SP
   costsc = 0._SP
@@ -72,8 +70,8 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !     LIBRARY SUBPROGRAM, R1MACH( ).
   eps = eps_sp
   tolls = eps_sp
-  tune = one
-  tolabs = zero
+  tune = 1._SP
+  tolabs = 0._SP
   !
   !     DEFINE NOMINAL FILE NUMBERS FOR MATRIX PAGES AND DATA SAVING.
   ipagef = 1
@@ -123,7 +121,7 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       !     IF USER HAS PROVIDED SIZE PARAMETERS, MAKE SURE THEY ARE ORDERED
       !     AND POSITIVE.
       IF( sizeup ) THEN
-        IF( asmall<=zero .OR. abig<asmall ) THEN
+        IF( asmall<=0._SP .OR. abig<asmall ) THEN
           nerr = 17
           Info = -nerr
           ERROR STOP 'SPOPT : IN SPLP, SIZE PARAMETERS FOR MATRIX MUST BE SMALLEST &
@@ -177,7 +175,7 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       !     IF KEY = 50, THIS IS TO BE A MAXIMIZATION PROBLEM
       !     INSTEAD OF A MINIMIZATION PROBLEM.
       IF( key==50 ) THEN
-        minprb = Prgopt(last+2)==zero
+        minprb = Prgopt(last+2)==0._SP
         lds = 3
         !
         !     IF KEY = 51, THE LEVEL OF OUTPUT IS BEING MODIFIED.
@@ -192,7 +190,7 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !     IF KEY = 52, REDEFINE THE FORMAT AND PRECISION USED
         !     IN THE OUTPUT.
       ELSEIF( key==52 ) THEN
-        IF( Prgopt(last+2)/=zero ) idg = INT( Prgopt(last+3) )
+        IF( Prgopt(last+2)/=0._SP ) idg = INT( Prgopt(last+3) )
         lds = 4
         !
         !     IF KEY = 53, THE ALLOTTED SPACE FOR THE SPARSE MATRIX
@@ -204,35 +202,35 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !     IF KEY = 54, REDEFINE THE FILE NUMBER WHERE THE PAGES
         !     FOR THE SPARSE MATRIX ARE STORED.
       ELSEIF( key==54 ) THEN
-        IF( Prgopt(last+2)/=zero ) ipagef = INT( Prgopt(last+3) )
+        IF( Prgopt(last+2)/=0._SP ) ipagef = INT( Prgopt(last+3) )
         lds = 4
         !
         !     IF KEY = 55,  A CONTINUATION FOR A PROBLEM MAY BE REQUESTED.
       ELSEIF( key==55 ) THEN
-        contin = Prgopt(last+2)/=zero
+        contin = Prgopt(last+2)/=0._SP
         lds = 3
         !
         !     IF KEY = 56, REDEFINE THE FILE NUMBER WHERE THE SAVED DATA
         !     WILL BE STORED.
       ELSEIF( key==56 ) THEN
-        IF( Prgopt(last+2)/=zero ) isave = INT( Prgopt(last+3) )
+        IF( Prgopt(last+2)/=0._SP ) isave = INT( Prgopt(last+3) )
         lds = 4
         !
         !     IF KEY = 57, SAVE DATA (ON EXTERNAL FILE)  AT MXITLP ITERATIONS OR
         !     THE OPTIMUM, WHICHEVER COMES FIRST.
       ELSEIF( key==57 ) THEN
-        savedt = Prgopt(last+2)/=zero
+        savedt = Prgopt(last+2)/=0._SP
         lds = 3
         !
         !     IF KEY = 58,  SEE IF PROBLEM IS TO RUN ONLY A GIVEN
         !     NUMBER OF ITERATIONS.
       ELSEIF( key==58 ) THEN
-        IF( Prgopt(last+2)/=zero ) mxitlp = INT( Prgopt(last+3) )
+        IF( Prgopt(last+2)/=0._SP ) mxitlp = INT( Prgopt(last+3) )
         lds = 4
         !
         !     IF KEY = 59,  SEE IF USER PROVIDES THE BASIS INDICES.
       ELSEIF( key==59 ) THEN
-        usrbas = Prgopt(last+2)/=zero
+        usrbas = Prgopt(last+2)/=0._SP
         IF( .NOT. (usrbas) ) THEN
           lds = Mrelas + 3
         ELSE
@@ -247,7 +245,7 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !
         !     IF KEY = 60,  SEE IF USER HAS PROVIDED SCALING OF COLUMNS.
       ELSEIF( key==60 ) THEN
-        colscp = Prgopt(last+2)/=zero
+        colscp = Prgopt(last+2)/=0._SP
         IF( .NOT. (colscp) ) THEN
           lds = Nvars + 3
         ELSE
@@ -262,14 +260,14 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !
         !     IF KEY = 61,  SEE IF USER HAS PROVIDED SCALING OF COSTS.
       ELSEIF( key==61 ) THEN
-        cstscp = Prgopt(last+2)/=zero
+        cstscp = Prgopt(last+2)/=0._SP
         IF( cstscp ) costsc = Prgopt(last+3)
         lds = 4
         !
         !     IF KEY = 62,  SEE IF SIZE PARAMETERS ARE PROVIDED WITH THE DATA.
         !     THESE WILL BE CHECKED AGAINST THE MATRIX ELEMENT SIZES LATER.
       ELSEIF( key==62 ) THEN
-        sizeup = Prgopt(last+2)/=zero
+        sizeup = Prgopt(last+2)/=0._SP
         IF( sizeup ) THEN
           asmall = Prgopt(last+3)
           abig = Prgopt(last+4)
@@ -279,33 +277,33 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !     IF KEY = 63, SEE IF TOLERANCE FOR LINEAR SYSTEM RESIDUAL ERROR IS
         !     PROVIDED.
       ELSEIF( key==63 ) THEN
-        IF( Prgopt(last+2)/=zero ) tolls = MAX(eps,Prgopt(last+3))
+        IF( Prgopt(last+2)/=0._SP ) tolls = MAX(eps,Prgopt(last+3))
         lds = 4
         !
         !     IF KEY = 64,  SEE IF MINIMUM REDUCED COST OR STEEPEST EDGE
         !     DESCENT IS TO BE USED FOR SELECTING VARIABLES TO ENTER BASIS.
       ELSEIF( key==64 ) THEN
-        stpedg = Prgopt(last+2)==zero
+        stpedg = Prgopt(last+2)==0._SP
         lds = 3
         !
         !     IF KEY = 65, SET THE NUMBER OF ITERATIONS BETWEEN RECALCULATING
         !     THE ERROR IN THE PRIMAL SOLUTION.
       ELSEIF( key==65 ) THEN
-        IF( Prgopt(last+2)/=zero ) itbrc = INT( MAX(one,Prgopt(last+3)) )
+        IF( Prgopt(last+2)/=0._SP ) itbrc = INT( MAX(1._SP,Prgopt(last+3)) )
         lds = 4
         !
         !     IF KEY = 66, SET THE NUMBER OF NEGATIVE REDUCED COSTS TO BE FOUND
         !     IN THE PARTIAL PRICING STRATEGY.
       ELSEIF( key==66 ) THEN
-        IF( Prgopt(last+2)/=zero ) THEN
-          npp = INT( MAX(Prgopt(last+3),one) )
+        IF( Prgopt(last+2)/=0._SP ) THEN
+          npp = INT( MAX(Prgopt(last+3),1._SP) )
           npp = MIN(npp,Nvars)
         END IF
         lds = 4
         !     IF KEY = 67, CHANGE THE TUNING PARAMETER TO APPLY TO THE ERROR
         !     ESTIMATES FOR THE PRIMAL AND DUAL SYSTEMS.
       ELSEIF( key==67 ) THEN
-        IF( Prgopt(last+2)/=zero ) tune = ABS(Prgopt(last+3))
+        IF( Prgopt(last+2)/=0._SP ) tune = ABS(Prgopt(last+3))
         lds = 4
       ELSEIF( key==68 ) THEN
         lds = 6
@@ -313,7 +311,7 @@ PURE SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !     RESET THE ABSOLUTE TOLERANCE TO BE USED ON THE FEASIBILITY
         !     DECISION PROVIDED THE RELATIVE ERROR TEST FAILED.
       ELSEIF( key==69 ) THEN
-        IF( Prgopt(last+2)/=zero ) tolabs = Prgopt(last+3)
+        IF( Prgopt(last+2)/=0._SP ) tolabs = Prgopt(last+3)
         lds = 4
       END IF
       !

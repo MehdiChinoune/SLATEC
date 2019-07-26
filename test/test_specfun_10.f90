@@ -38,7 +38,7 @@ CONTAINS
     CHARACTER(34) :: fmt, fmtf, fmti
     INTEGER :: Lun, Kprint, Ipass
     REAL(SP) :: p(10), q(10), r(10), c1(10), c2(10), pn(10)
-    REAL(SP) :: deg, theta, dnu1, dzero
+    REAL(SP) :: deg, theta, dnu1
     REAL(SP) :: x11, x12, x13, x21, x22, x23
     REAL(SP) :: nu
     !
@@ -50,9 +50,8 @@ CONTAINS
     Ipass = 1
     irad = radix_fp
     nradpl = 0
-    dzero = 0._SP
     nbits = 0
-    CALL XSET(irad,nradpl,dzero,nbits,ierror)
+    CALL XSET(irad,nradpl,0._SP,nbits,ierror)
     IF( ierror/=0 ) Ipass = 0
     ierr = 0
     dnu1 = 2000.4_SP

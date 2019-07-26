@@ -41,7 +41,7 @@ PURE SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     c2, dai, phi, rz, s1, s2, zb, zeta1, zeta2, zn, zar
   REAL(SP) :: aarg, ang, aphi, ascle, ay, bry(3), car, c2i, c2m, c2r, fn, &
     rs1, sar, yy
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP), ci= (0._SP,1._SP)
+  COMPLEX(SP), PARAMETER :: ci= (0._SP,1._SP)
   COMPLEX(SP), PARAMETER :: cip(4) = [ (1._SP,0._SP), (0._SP,1._SP), &
     (-1._SP,0._SP), (0._SP,-1._SP) ]
   REAL(SP), PARAMETER :: hpi = 1.57079632679489662_SP, aic = 1.265512123484645396_SP
@@ -57,10 +57,10 @@ PURE SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   cscl = CMPLX(1._SP/Tol,0._SP,SP)
   crsc = CMPLX(Tol,0._SP,SP)
   css(1) = cscl
-  css(2) = cone
+  css(2) = (1._SP,0._SP)
   css(3) = crsc
   csr(1) = crsc
-  csr(2) = cone
+  csr(2) = (1._SP,0._SP)
   csr(3) = cscl
   bry(1) = 1.E+3_SP*tiny_sp/Tol
   yy = AIMAG(Z)
@@ -101,7 +101,7 @@ PURE SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     IF( rs1>0._SP ) GOTO 400
     Nz = N
     DO i = 1, N
-      Y(i) = czero
+      Y(i) = (0._SP,0._SP)
     END DO
     RETURN
   END IF
@@ -201,7 +201,7 @@ PURE SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     !     SET UNDERFLOW AND UPDATE PARAMETERS
     !-----------------------------------------------------------------------
-    Y(nd) = czero
+    Y(nd) = (0._SP,0._SP)
     Nz = Nz + 1
     nd = nd - 1
     IF( nd==0 ) GOTO 200

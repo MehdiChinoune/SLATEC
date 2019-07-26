@@ -61,12 +61,11 @@ PURE SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   INTEGER :: i, indcat, indexx, iplace, itcnt, itmax, j
   INTEGER :: iflag(10)
   LOGICAL :: first
-  REAL(SP) :: aij, amn, amx, xval, zero
+  REAL(SP) :: aij, amn, amx, xval
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !
   !* FIRST EXECUTABLE STATEMENT  SPLPUP
-  zero = 0._SP
   !
   !     CHECK USER-SUPPLIED BOUNDS
   !
@@ -139,7 +138,7 @@ PURE SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       RETURN
     END IF
     !
-    aij = zero
+    aij = 0._SP
     CALL USRMAT(i,j,aij,indcat,Dattrv,iflag)
     IF( iflag(1)==1 ) THEN
       iflag(1) = 2
@@ -154,7 +153,7 @@ PURE SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       !        RECORD THE LARGEST AND SMALLEST(IN MAGNITUDE) NONZERO ELEMENTS.
       !
       IF( iflag(1)==3 ) THEN
-        IF( Sizeup .AND. ABS(aij)/=zero ) THEN
+        IF( Sizeup .AND. ABS(aij)/=0._SP ) THEN
           IF( first ) THEN
             amx = ABS(aij)
             amn = ABS(aij)
@@ -195,7 +194,7 @@ PURE SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     !     CHECK ON SIZE OF MATRIX DATA
     !     RECORD THE LARGEST AND SMALLEST(IN MAGNITUDE) NONZERO ELEMENTS.
     !
-    IF( Sizeup .AND. ABS(aij)/=zero ) THEN
+    IF( Sizeup .AND. ABS(aij)/=0._SP ) THEN
       IF( first ) THEN
         amx = ABS(aij)
         amn = ABS(aij)

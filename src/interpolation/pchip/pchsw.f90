@@ -87,8 +87,7 @@ ELEMENTAL SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   REAL(SP) :: cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
   !
-  REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP, two = 2._SP, three = 3._SP, &
-    fact = 100._SP
+  REAL(SP), PARAMETER :: fact = 100._SP
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.
   REAL(SP), PARAMETER :: third = 0.33333_SP
   !
@@ -108,18 +107,18 @@ ELEMENTAL SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !  DO MAIN CALCULATION.
   !
-  IF( D1==zero ) THEN
+  IF( D1==0._SP ) THEN
     !
     !        SPECIAL CASE -- D1=ZERO .
     !
     !          IF D2 IS ALSO ZERO, THIS ROUTINE SHOULD NOT HAVE BEEN CALLED.
-    IF( D2==zero ) GOTO 200
+    IF( D2==0._SP ) GOTO 200
     !
     rho = Slope/D2
     !          EXTREMUM IS OUTSIDE INTERVAL WHEN RHO >= 1/3 .
     IF( rho<third ) THEN
-      that = (two*(three*rho-one))/(three*(two*rho-one))
-      phi = that**2*((three*rho-one)/three)
+      that = (2._SP*(3._SP*rho-1._SP))/(3._SP*(2._SP*rho-1._SP))
+      phi = that**2*((3._SP*rho-1._SP)/3._SP)
       !
       !          CONVERT TO DISTANCE FROM F2 IF IEXTRM/=1 .
       IF( Iextrm/=1 ) phi = phi - rho
@@ -133,38 +132,38 @@ ELEMENTAL SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
     !
     rho = Slope/D1
     lambda = -D2/D1
-    IF( D2==zero ) THEN
+    IF( D2==0._SP ) THEN
       !
       !           SPECIAL CASE -- D2=ZERO .
       !
       !             EXTREMUM IS OUTSIDE INTERVAL WHEN RHO >= 1/3 .
       IF( rho>=third ) GOTO 100
-      cp = two - three*rho
-      nu = one - two*rho
-      that = one/(three*nu)
+      cp = 2._SP - 3._SP*rho
+      nu = 1._SP - 2._SP*rho
+      that = 1._SP/(3._SP*nu)
     ELSE
-      IF( lambda<=zero ) GOTO 200
+      IF( lambda<=0._SP ) GOTO 200
       !
       !           NORMAL CASE -- D1 AND D2 BOTH NONZERO, OPPOSITE SIGNS.
       !
-      nu = one - lambda - two*rho
-      sigma = one - rho
+      nu = 1._SP - lambda - 2._SP*rho
+      sigma = 1._SP - rho
       cp = nu + sigma
       IF( ABS(nu)>small ) THEN
-        radcal = (nu-(two*rho+one))*nu + sigma**2
-        IF( radcal<zero ) THEN
+        radcal = (nu-(2._SP*rho+1._SP))*nu + sigma**2
+        IF( radcal<0._SP ) THEN
           !
           !     NEGATIVE VALUE OF RADICAL (SHOULD NEVER OCCUR).
           Ierr = -2
           ERROR STOP 'PCHSW : NEGATIVE RADICAL'
         ELSE
-          that = (cp-SQRT(radcal))/(three*nu)
+          that = (cp-SQRT(radcal))/(3._SP*nu)
         END IF
       ELSE
-        that = one/(two*sigma)
+        that = 1._SP/(2._SP*sigma)
       END IF
     END IF
-    phi = that*((nu*that-cp)*that+one)
+    phi = that*((nu*that-cp)*that+1._SP)
     !
     !          CONVERT TO DISTANCE FROM F2 IF IEXTRM/=1 .
     IF( Iextrm/=1 ) phi = phi - rho

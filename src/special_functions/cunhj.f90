@@ -246,10 +246,9 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
     1.50729501494095594E-02_SP, 1.44193250839954639E-02_SP, 1.38184805735341786E-02_SP, &
     1.32643378994276568E-02_SP, 1.27517121970498651E-02_SP, 1.22761545318762767E-02_SP, &
     1.18338262398482403E-02_SP ]
-  REAL(SP), PARAMETER :: ex1 = 3.33333333333333333E-01_SP, ex2 = 6.66666666666666667E-01_SP, &
-    hpi = 1.57079632679489662E+00_SP, pi = 3.14159265358979324E+00_SP, &
-    thpi = 4.71238898038468986_SP
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
+  REAL(SP), PARAMETER :: ex1 = 3.33333333333333333E-01_SP, &
+    ex2 = 6.66666666666666667E-01_SP, thpi = 4.71238898038468986_SP, &
+    hpi = 1.57079632679489662E+00_SP, pi = 3.14159265358979324E+00_SP
   !* FIRST EXECUTABLE STATEMENT  CUNHJ
   rfnu = 1._SP/Fnu
   !     ZB = Z*CMPLX(RFNU,0.0E0)
@@ -269,7 +268,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
     fn13 = Fnu**ex1
     fn23 = fn13*fn13
     rfn13 = CMPLX(1._SP/fn13,0._SP,SP)
-    w2 = cone - zb*zb
+    w2 = (1._SP,0._SP) - zb*zb
     aw2 = ABS(w2)
     IF( aw2>0.25_SP ) THEN
       !-----------------------------------------------------------------------
@@ -281,7 +280,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       IF( wr<0._SP ) wr = 0._SP
       IF( wi<0._SP ) wi = 0._SP
       w = CMPLX(wr,wi,SP)
-      za = (cone+w)/zb
+      za = ((1._SP,0._SP)+w)/zb
       zc = LOG(za)
       zcr = REAL(zc)
       zci = AIMAG(zc)
@@ -318,14 +317,14 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
         tfn = CMPLX(rfnu,0._SP,SP)/w
         rzth = CMPLX(rfnu,0._SP,SP)/zth
         zc = rzth*CMPLX(ar(2),0._SP,SP)
-        t2 = cone/w2
+        t2 = (1._SP,0._SP)/w2
         up(2) = (t2*CMPLX(c(2),0._SP,SP)+CMPLX(c(3),0._SP,SP))*tfn
         Bsum = up(2) + zc
-        Asum = czero
+        Asum = (0._SP,0._SP)
         IF( rfnu>=Tol ) THEN
           przth = rzth
           ptfn = tfn
-          up(1) = cone
+          up(1) = (1._SP,0._SP)
           pp = 1._SP
           bsumr = REAL(Bsum)
           bsumi = AIMAG(Bsum)
@@ -386,7 +385,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
             IF( ias==1 .AND. ibs==1 ) EXIT
           END DO
         END IF
-        Asum = Asum + cone
+        Asum = Asum + (1._SP,0._SP)
         Bsum = -Bsum*rfn13/rtzta
       END IF
     ELSE
@@ -394,7 +393,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       !     POWER SERIES FOR ABS(W2)<=0.25E0
       !-----------------------------------------------------------------------
       k = 1
-      p(1) = cone
+      p(1) = (1._SP,0._SP)
       suma = CMPLX(gama(1),0._SP,SP)
       ap(1) = 1._SP
       IF( aw2>=Tol ) THEN
@@ -411,18 +410,18 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       Arg = zeta*CMPLX(fn23,0._SP,SP)
       za = SQRT(suma)
       Zeta2 = SQRT(w2)*CMPLX(Fnu,0._SP,SP)
-      Zeta1 = Zeta2*(cone+zeta*za*CMPLX(ex2,0._SP,SP))
+      Zeta1 = Zeta2*((1._SP,0._SP)+zeta*za*CMPLX(ex2,0._SP,SP))
       za = za + za
       Phi = SQRT(za)*rfn13
       IF( Ipmtr/=1 ) THEN
         !-----------------------------------------------------------------------
         !     SUM SERIES FOR ASUM AND BSUM
         !-----------------------------------------------------------------------
-        sumb = czero
+        sumb = (0._SP,0._SP)
         DO k = 1, kmax
           sumb = sumb + p(k)*CMPLX(beta(k),0._SP,SP)
         END DO
-        Asum = czero
+        Asum = (0._SP,0._SP)
         Bsum = sumb
         l1 = 0
         l2 = 30
@@ -436,7 +435,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
             atol = atol/rfnu2
             pp = pp*rfnu2
             IF( ias/=1 ) THEN
-              suma = czero
+              suma = (0._SP,0._SP)
               DO k = 1, kmax
                 m = l1 + k
                 suma = suma + p(k)*CMPLX(alfa(m),0._SP,SP)
@@ -446,7 +445,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
               IF( pp<Tol ) ias = 1
             END IF
             IF( ibs/=1 ) THEN
-              sumb = czero
+              sumb = (0._SP,0._SP)
               DO k = 1, kmax
                 m = l2 + k
                 sumb = sumb + p(k)*CMPLX(beta(m),0._SP,SP)
@@ -460,7 +459,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
             l2 = l2 + 30
           END DO
         END IF
-        Asum = Asum + cone
+        Asum = Asum + (1._SP,0._SP)
         pp = rfnu*REAL(rfn13)
         Bsum = Bsum*CMPLX(pp,0._SP,SP)
       END IF
@@ -469,8 +468,8 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
     ac = 2._SP*ABS(LOG(test)) + Fnu
     Zeta1 = CMPLX(ac,0._SP,SP)
     Zeta2 = CMPLX(Fnu,0._SP,SP)
-    Phi = cone
-    Arg = cone
+    Phi = (1._SP,0._SP)
+    Arg = (1._SP,0._SP)
     RETURN
   END IF
   RETURN

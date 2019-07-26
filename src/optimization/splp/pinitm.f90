@@ -53,7 +53,6 @@ PURE SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   INTEGER, INTENT(OUT) :: Ix(Lmx)
   REAL(SP), INTENT(OUT) :: Sx(Lmx)
   INTEGER :: i, iopt, lp4, n20008, n20012, nerr
-  REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  PINITM
   iopt = 1
   !
@@ -73,15 +72,15 @@ PURE SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !
   !     INITIALIZE DATA STRUCTURE INDEPENDENT VALUES.
   !
-  Sx(1) = zero
-  Sx(2) = zero
+  Sx(1) = 0._SP
+  Sx(2) = 0._SP
   Sx(3) = Ipagef
   Ix(1) = Lmx
   Ix(2) = M
   Ix(3) = N
   Ix(4) = 0
-  Sx(Lmx-1) = zero
-  Sx(Lmx) = -one
+  Sx(Lmx-1) = 0._SP
+  Sx(Lmx) = -1._SP
   Ix(Lmx-1) = -1
   lp4 = N + 4
   !
@@ -90,7 +89,7 @@ PURE SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   i = 4
   n20008 = lp4
   DO WHILE( (n20008-i)>=0 )
-    Sx(i) = zero
+    Sx(i) = 0._SP
     i = i + 1
   END DO
   i = 5
@@ -99,7 +98,7 @@ PURE SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
     Ix(i) = lp4
     i = i + 1
   END DO
-  Sx(N+5) = zero
+  Sx(N+5) = 0._SP
   Ix(N+5) = 0
   Ix(Lmx) = 0
   !

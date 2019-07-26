@@ -48,14 +48,12 @@ PURE SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   REAL(DP), INTENT(IN) :: Amat(Lmx), Basmat(Lbm), Csc(Nvars), Bl(Nvars+Mrelas), &
     Bu(Nvars+Mrelas), Rz(Nvars+Mrelas), Rg(Nvars+Mrelas), Colnrm(Nvars)
   REAL(DP), INTENT(OUT) :: Wr(Mrelas), Ww(Mrelas), Duals(Nvars+Mrelas)
-  REAL(DP) :: cnorm, one, ratio, rcost, rmax, zero
+  REAL(DP) :: cnorm, ratio, rcost, rmax
   INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, lpg, n20002, n20050
   LOGICAL :: trans
   !* FIRST EXECUTABLE STATEMENT  DPLPFE
   lpg = Lmx - (Nvars+4)
-  zero = 0._DP
-  one = 1._DP
-  rmax = zero
+  rmax = 0._DP
   Found = .FALSE.
   i = Mrelas + 1
   n20002 = Mrelas + Nvars
@@ -83,11 +81,11 @@ PURE SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
         !     IF THE VARIABLE IS FREE, USE THE NEGATIVE MAGNITUDE OF THE
         !     REDUCED COST FOR THAT VARIABLE.
         IF( Ind(j)==4 ) rcost = -ABS(rcost)
-        cnorm = one
+        cnorm = 1._DP
         IF( j<=Nvars ) cnorm = Colnrm(j)
         !
         !     TEST FOR NEGATIVITY OF REDUCED COSTS.
-        IF( rcost+Erdnrm*Dulnrm*cnorm<zero ) THEN
+        IF( rcost+Erdnrm*Dulnrm*cnorm<0._DP ) THEN
           Found = .TRUE.
           ratio = rcost**2/Rg(j)
           IF( ratio>rmax ) THEN
@@ -103,7 +101,7 @@ PURE SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !     USE COL. CHOSEN TO COMPUTE SEARCH DIRECTION.
   IF( Found ) THEN
     j = Ibasis(Ienter)
-    Ww(1:Mrelas) = zero
+    Ww(1:Mrelas) = 0._DP
     IF( j<=Nvars ) THEN
       IF( j/=1 ) THEN
         ilow = Imat(j+3) + 1
@@ -128,9 +126,9 @@ PURE SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
         ihi = ihi - lpg
       END DO
     ELSEIF( Ind(j)/=2 ) THEN
-      Ww(j-Nvars) = -one
+      Ww(j-Nvars) = -1._DP
     ELSE
-      Ww(j-Nvars) = one
+      Ww(j-Nvars) = 1._DP
     END IF
     !
     !     COMPUTE SEARCH DIRECTION.
@@ -140,7 +138,7 @@ PURE SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     !     THE SEARCH DIRECTION REQUIRES THE FOLLOWING SIGN CHANGE IF EITHER
     !     VARIABLE ENTERING IS AT ITS UPPER BOUND OR IS FREE AND HAS
     !     POSITIVE REDUCED COST.
-    IF( MOD(Ibb(j),2)==0 .OR. (Ind(j)==4 .AND. Rz(j)>zero) ) THEN
+    IF( MOD(Ibb(j),2)==0 .OR. (Ind(j)==4 .AND. Rz(j)>0._DP) ) THEN
       i = 1
       n20050 = Mrelas
       DO WHILE( (n20050-i)>=0 )

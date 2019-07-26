@@ -47,12 +47,10 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Ibasis,Imat,Ibrc,&
   REAL(SP), INTENT(IN) :: Amat(:), Csc(Nvars)
   REAL(SP), INTENT(OUT) :: Basmat(Lbm), Wr(Mrelas)
   INTEGER :: i, iplace, j, k, nzbm
-  REAL(SP) :: aij, one, zero
+  REAL(SP) :: aij
   CHARACTER(16) :: xern3
   !
   !* FIRST EXECUTABLE STATEMENT  SPLPDM
-  zero = 0._SP
-  one = 1._SP
   !
   !     DEFINE BASIS MATRIX BY COLUMNS FOR SPARSE MATRIX EQUATION SOLVER.
   !     THE LA05AS() SUBPROGRAM REQUIRES THE NONZERO ENTRIES OF THE MATRIX
@@ -68,9 +66,9 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Ibasis,Imat,Ibrc,&
     IF( j>Nvars ) THEN
       nzbm = nzbm + 1
       IF( Ind(j)==2 ) THEN
-        Basmat(nzbm) = one
+        Basmat(nzbm) = 1._SP
       ELSE
-        Basmat(nzbm) = -one
+        Basmat(nzbm) = -1._SP
       END IF
       Ibrc(nzbm,1) = j - Nvars
       Ibrc(nzbm,2) = k
@@ -109,7 +107,7 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lbm,Nredc,Info,Ibasis,Imat,Ibrc,&
   !
   !     CHECK RETURN VALUE OF ERROR FLAG, GG.
   !
-  IF( Gg>=zero ) RETURN
+  IF( Gg>=0._SP ) RETURN
   IF( Gg==(-7.) ) THEN
     Info = -28
     ERROR STOP 'SPLPDM : IN SPLP, SHORT ON STORAGE FOR LA05AS. USE PRGOPT(*) TO GIVE MORE.'

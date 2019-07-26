@@ -468,7 +468,7 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(SP) :: fnorm, fnorms, one, sigma, temp1, temp2, temp3, tol, tol2, zero
+    REAL(SP) :: fnorm, fnorms, sigma, temp1, temp2, temp3, tol, tol2
     INTEGER :: i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nprint
     LOGICAL :: fatal
     !     .. Local Arrays ..
@@ -490,8 +490,6 @@ CONTAINS
     ldfjac = 10
     nprint = -1
     iflag = 1
-    zero = 0._SP
-    one = 1._SP
     tol = SQRT(40._SP*eps_sp)
     tol2 = SQRT(tol)
     !
@@ -520,7 +518,7 @@ CONTAINS
     iflag = 2
     CALL FCN2(iflag,m,n,x,fvec,fjac,ldfjac)
     DO i = 1, 3
-      fjtj(i) = zero
+      fjtj(i) = 0._SP
     END DO
     DO i = 1, m
       fjtj(1) = fjtj(1) + fjac(i,1)**2
@@ -538,8 +536,8 @@ CONTAINS
     temp1 = (fjtj(1)*fjac(1,1)+fjtj(2)*fjac(1,2))/sigma
     temp2 = (fjtj(1)*fjac(1,2)+fjtj(2)*fjac(2,2))/sigma
     temp3 = (fjtj(2)*fjac(1,2)+fjtj(3)*fjac(2,2))/sigma
-    IF( info==infos .AND. ABS(temp1-one)<tol2 .AND. ABS(temp2)<tol2 .AND. &
-        ABS(temp3-one)<tol2 ) THEN
+    IF( info==infos .AND. ABS(temp1-1._SP)<tol2 .AND. ABS(temp2)<tol2 .AND. &
+        ABS(temp3-1._SP)<tol2 ) THEN
       fatal = .FALSE.
       IF( Kprint>=3 ) CALL PASS(Lun,2,1)
     ELSE
@@ -573,9 +571,9 @@ CONTAINS
     !
     sigma = fnorm*fnorm/(m-n)
     iflag = 1
-    CALL FDJAC3(FCN1,m,n,x,fvec,fjac,ldfjac,iflag,zero,wa)
+    CALL FDJAC3(FCN1,m,n,x,fvec,fjac,ldfjac,iflag,0._SP,wa)
     DO i = 1, 3
-      fjtj(i) = zero
+      fjtj(i) = 0._SP
     END DO
     DO i = 1, m
       fjtj(1) = fjtj(1) + fjac(i,1)**2
@@ -593,8 +591,8 @@ CONTAINS
     temp1 = (fjtj(1)*fjac(1,1)+fjtj(2)*fjac(1,2))/sigma
     temp2 = (fjtj(1)*fjac(1,2)+fjtj(2)*fjac(2,2))/sigma
     temp3 = (fjtj(2)*fjac(1,2)+fjtj(3)*fjac(2,2))/sigma
-    IF( info==infos .AND. ABS(temp1-one)<tol2 .AND. ABS(temp2)<tol2 .AND. &
-        ABS(temp3-one)<tol2 ) THEN
+    IF( info==infos .AND. ABS(temp1-1._SP)<tol2 .AND. ABS(temp2)<tol2 .AND. &
+        ABS(temp3-1._SP)<tol2 ) THEN
       fatal = .FALSE.
       IF( Kprint>=3 ) CALL PASS(Lun,4,1)
     ELSE
@@ -629,7 +627,7 @@ CONTAINS
     !
     sigma = fnorm*fnorm/(m-n)
     DO i = 1, 3
-      fjtj(i) = zero
+      fjtj(i) = 0._SP
     END DO
     iflag = 3
     DO i = 1, m
@@ -649,8 +647,8 @@ CONTAINS
     temp1 = (fjtj(1)*fjac(1,1)+fjtj(2)*fjac(1,2))/sigma
     temp2 = (fjtj(1)*fjac(1,2)+fjtj(2)*fjac(2,2))/sigma
     temp3 = (fjtj(2)*fjac(1,2)+fjtj(3)*fjac(2,2))/sigma
-    IF( info==infos .AND. ABS(temp1-one)<tol2 .AND. ABS(temp2)<tol2 .AND. &
-        ABS(temp3-one)<tol2 ) THEN
+    IF( info==infos .AND. ABS(temp1-1._SP)<tol2 .AND. ABS(temp2)<tol2 .AND. &
+        ABS(temp3-1._SP)<tol2 ) THEN
       fatal = .FALSE.
       IF( Kprint>=3 ) CALL PASS(Lun,6,1)
     ELSE
@@ -764,7 +762,7 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    REAL(SP) :: diff, one, t, tol, xval, zero
+    REAL(SP) :: diff, t, tol, xval
     INTEGER :: kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nval
     LOGICAL :: fatal
     !     .. Local Arrays ..
@@ -808,8 +806,6 @@ CONTAINS
     !
     99001 FORMAT ('1'/' Test FC')
     Ipass = 1
-    zero = 0
-    one = 1
     ndeg = nord - 1
     !
     !     Write the various constraints for the fitted curve.
@@ -821,7 +817,7 @@ CONTAINS
     !
     nconst = nconst + 1
     xconst(nconst) = t
-    yconst(nconst) = zero
+    yconst(nconst) = 0._SP
     nderiv(nconst) = 2 + 4*0
     !
     !     Constrain first derivative to be nonnegative at left-most
@@ -829,7 +825,7 @@ CONTAINS
     !
     nconst = nconst + 1
     xconst(nconst) = t
-    yconst(nconst) = zero
+    yconst(nconst) = 0._SP
     nderiv(nconst) = 1 + 4*1
     !
     !     Constrain second derivatives to be nonnegative at left set of
@@ -840,7 +836,7 @@ CONTAINS
       t = bkpt(l)
       nconst = nconst + 1
       xconst(nconst) = t
-      yconst(nconst) = zero
+      yconst(nconst) = 0._SP
       nderiv(nconst) = 1 + 4*2
     END DO
     !
@@ -849,7 +845,7 @@ CONTAINS
     nconst = nconst + 1
     t = bkpt(last)
     xconst(nconst) = t
-    yconst(nconst) = one
+    yconst(nconst) = 1._SP
     nderiv(nconst) = 2 + 4*0
     !
     !     Constrain slope to agree at left- and right-most breakpoints.
@@ -866,7 +862,7 @@ CONTAINS
       nconst = nconst + 1
       l = last - 4 + i
       xconst(nconst) = bkpt(l)
-      yconst(nconst) = zero
+      yconst(nconst) = 0._SP
       nderiv(nconst) = 0 + 4*2
     END DO
     !
@@ -1078,13 +1074,11 @@ CONTAINS
     REAL(SP) :: temp
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
-    !     .. Data statements ..
-    REAL(SP), PARAMETER :: two = 2._SP
     !* FIRST EXECUTABLE STATEMENT  FCN1
     IF( Iflag/=1 ) RETURN
     DO i = 1, M
       temp = i
-      Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
+      Fvec(i) = 2._SP + 2._SP*temp - EXP(temp*X(1)) - EXP(temp*X(2))
     END DO
   END SUBROUTINE FCN1
   !** FCN2
@@ -1125,8 +1119,6 @@ CONTAINS
     INTEGER :: i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
-    !     .. Data statements ..
-    REAL(SP), PARAMETER :: two = 2._SP
     !* FIRST EXECUTABLE STATEMENT  FCN2
     IF( Iflag==0 ) RETURN
     !
@@ -1138,7 +1130,7 @@ CONTAINS
       !
       DO i = 1, M
         temp = i
-        Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
+        Fvec(i) = 2._SP + 2._SP*temp - EXP(temp*X(1)) - EXP(temp*X(2))
       END DO
     ELSE
       !
@@ -1191,8 +1183,6 @@ CONTAINS
     INTEGER :: i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
-    !     .. Data statements ..
-    REAL(SP), PARAMETER :: two = 2._SP
     !* FIRST EXECUTABLE STATEMENT  FCN3
     IF( Iflag==0 ) RETURN
     !
@@ -1204,7 +1194,7 @@ CONTAINS
       !
       DO i = 1, M
         temp = i
-        Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
+        Fvec(i) = 2._SP + 2._SP*temp - EXP(temp*X(1)) - EXP(temp*X(2))
       END DO
     ELSE
       !

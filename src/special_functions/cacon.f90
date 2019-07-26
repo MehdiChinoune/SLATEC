@@ -41,7 +41,6 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   REAL(SP) :: arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, &
     fmr, sgn, spn, yy
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
-  COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
   REAL(SP), PARAMETER :: sqrt_huge = SQRT( huge_sp )
   !* FIRST EXECUTABLE STATEMENT  CACON
   Nz = 0
@@ -106,10 +105,10 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       cscl = CMPLX(1._SP/Tol,0._SP,SP)
       cscr = CMPLX(Tol,0._SP,SP)
       css(1) = cscl
-      css(2) = cone
+      css(2) = (1._SP,0._SP)
       css(3) = cscr
       csr(1) = cscr
-      csr(2) = cone
+      csr(2) = (1._SP,0._SP)
       csr(3) = cscl
       bry(1) = ascle
       bry(2) = 1._SP/ascle

@@ -37,8 +37,6 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !
   INTEGER, PARAMETER :: kmax = 30
   REAL(SP), PARAMETER ::  r1 = 2._SP
-  COMPLEX(SP), PARAMETER ::  czero = (0._SP,0._SP), cone = (1._SP,0._SP), &
-    ctwo = (2._SP,0._SP)
   !
   REAL(SP), PARAMETER ::  pi = 3.14159265358979324_SP, rthpi = 1.25331413731550025_SP, &
     spi= 1.90985931710274403_SP, hpi = 1.57079632679489662_SP, &
@@ -55,10 +53,10 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   cscl = CMPLX(1._SP/Tol,0._SP,SP)
   crsc = CMPLX(Tol,0._SP,SP)
   css(1) = cscl
-  css(2) = cone
+  css(2) = (1._SP,0._SP)
   css(3) = crsc
   csr(1) = crsc
-  csr(2) = cone
+  csr(2) = (1._SP,0._SP)
   csr(3) = cscl
   bry(1) = 1.E+3_SP*tiny_sp/Tol
   bry(2) = 1._SP/bry(1)
@@ -66,7 +64,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   Nz = 0
   iflag = 0
   koded = Kode
-  rz = ctwo/Z
+  rz = (2._SP,0._SP)/Z
   inu = INT( Fnu + 0.5_SP )
   dnu = Fnu - inu
   IF( ABS(dnu)/=0.5_SP ) THEN
@@ -117,7 +115,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       s2 = p
       ak = 1._SP
       a1 = 1._SP
-      ck = cone
+      ck = (1._SP,0._SP)
       bk = 1._SP - dnu2
       IF( inu>0 .OR. N>1 ) THEN
         !-----------------------------------------------------------------------
@@ -274,7 +272,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   fk = k
   fks = fk*fk
-  p1 = czero
+  p1 = (0._SP,0._SP)
   p2 = CMPLX(Tol,0._SP,SP)
   cs = p2
   DO i = 1, k
@@ -308,7 +306,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     p1 = pt*p1
     p2 = CONJG(p2)*pt
     pt = p1*p2
-    s2 = s1*(cone+(CMPLX(dnu+0.5_SP,0._SP,SP)-pt)/Z)
+    s2 = s1*((1._SP,0._SP)+(CMPLX(dnu+0.5_SP,0._SP,SP)-pt)/Z)
   ELSE
     zd = Z
     IF( iflag/=1 ) GOTO 400

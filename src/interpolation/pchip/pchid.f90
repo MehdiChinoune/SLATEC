@@ -118,12 +118,8 @@ REAL(SP) PURE FUNCTION PCHID(N,X,F,D,Incfd,Ia,Ib)
   INTEGER :: i, iup, low
   REAL(SP) :: h, summ, value
   LOGICAL, PARAMETER :: Skip = .FALSE.
-  !
-  !  INITIALIZE.
-  !
-  REAL(SP), PARAMETER :: zero = 0., half = 0.5, six = 6.
   !* FIRST EXECUTABLE STATEMENT  PCHID
-  value = zero
+  value = 0._SP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -156,12 +152,12 @@ REAL(SP) PURE FUNCTION PCHID(N,X,F,D,Incfd,Ia,Ib)
   IF( Ia/=Ib ) THEN
     low = MIN(Ia,Ib)
     iup = MAX(Ia,Ib) - 1
-    summ = zero
+    summ = 0._SP
     DO i = low, iup
       h = X(i+1) - X(i)
-      summ = summ + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
+      summ = summ + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/6._SP))
     END DO
-    value = half*summ
+    value = 0.5_SP*summ
     IF( Ia>Ib ) value = -value
   END IF
   !

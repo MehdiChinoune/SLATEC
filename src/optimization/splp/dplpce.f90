@@ -50,12 +50,9 @@ PURE SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   REAL(DP), INTENT(OUT) :: Erd(Mrelas), Erp(Mrelas), Wr(Mrelas), Ww(Mrelas)
   INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, l, lpg, n20002, n20012, &
     n20016, n20023, n20047, n20057, n20061
-  REAL(DP) :: factor, one, zero, ten
+  REAL(DP) :: factor
   LOGICAL :: trans, pagepl
   !* FIRST EXECUTABLE STATEMENT  DPLPCE
-  zero = 0._DP
-  one = 1._DP
-  ten = 10._DP
   lpg = Lmx - (Nvars+4)
   Singlr = .FALSE.
   factor = 0.01_DP
@@ -68,9 +65,9 @@ PURE SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     IF( j<=Nvars ) THEN
       Ww(i) = Primal(j)
     ELSEIF( Ind(j)/=2 ) THEN
-      Ww(i) = -one
+      Ww(i) = -1._DP
     ELSE
-      Ww(i) = one
+      Ww(i) = 1._DP
     END IF
     i = i + 1
   END DO
@@ -80,7 +77,7 @@ PURE SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   i = 1
   n20012 = Mrelas
   DO WHILE( (n20012-i)>=0 )
-    Ww(i) = Ww(i) + ten*Eps*Ww(i)
+    Ww(i) = Ww(i) + 10._DP*Eps*Ww(i)
     i = i + 1
   END DO
   trans = .TRUE.
@@ -88,7 +85,7 @@ PURE SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   i = 1
   n20016 = Mrelas
   DO WHILE( (n20016-i)>=0 )
-    Erd(i) = MAX(ABS(Ww(i)-one),Eps)*Tune
+    Erd(i) = MAX(ABS(Ww(i)-1._DP),Eps)*Tune
     !
     !     SYSTEM BECOMES SINGULAR WHEN ACCURACY OF SOLUTION IS > FACTOR.
     !     THIS VALUE (FACTOR) MIGHT NEED TO BE CHANGED.
@@ -102,12 +99,12 @@ PURE SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   IF( MOD(Itlp,Itbrc)==0 .OR. Redbas ) THEN
     !
     !     COMPUTE ROW SUMS, STORE IN WW(*), SOLVE PRIMAL SYSTEM.
-    Ww(1:Mrelas) = zero
+    Ww(1:Mrelas) = 0._DP
     pagepl = .TRUE.
     j = 1
     n20023 = Nvars
     DO WHILE( (n20023-j)>=0 )
-      IF( Ibb(j)<zero ) THEN
+      IF( Ibb(j)<0._DP ) THEN
         IF( j/=1 ) THEN
           ilow = Imat(j+3) + 1
         ELSE
@@ -149,9 +146,9 @@ PURE SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
       IF( j>Nvars ) THEN
         i = j - Nvars
         IF( Ind(j)/=2 ) THEN
-          Ww(i) = Ww(i) - one
+          Ww(i) = Ww(i) - 1._DP
         ELSE
-          Ww(i) = Ww(i) + one
+          Ww(i) = Ww(i) + 1._DP
         END IF
       END IF
       l = l + 1
@@ -161,7 +158,7 @@ PURE SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     i = 1
     n20057 = Mrelas
     DO WHILE( (n20057-i)>=0 )
-      Ww(i) = Ww(i) + ten*Eps*Ww(i)
+      Ww(i) = Ww(i) + 10._DP*Eps*Ww(i)
       i = i + 1
     END DO
     trans = .FALSE.
@@ -169,7 +166,7 @@ PURE SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     i = 1
     n20061 = Mrelas
     DO WHILE( (n20061-i)>=0 )
-      Erp(i) = MAX(ABS(Ww(i)-one),Eps)*Tune
+      Erp(i) = MAX(ABS(Ww(i)-1._DP),Eps)*Tune
       !
       !     SYSTEM BECOMES SINGULAR WHEN ACCURACY OF SOLUTION IS > FACTOR.
       !     THIS VALUE (FACTOR) MIGHT NEED TO BE CHANGED.

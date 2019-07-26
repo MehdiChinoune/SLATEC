@@ -31,7 +31,6 @@ PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   INTEGER :: i, ic, k, kk, nn, nw
   COMPLEX(SP) :: ck, cs, cy(2), s1, s2, zd, celm
   REAL(SP) :: aa, acs, as, csi, csr, fn, xx, zri, elm, alas, helim
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
   ic = 0
@@ -43,7 +42,7 @@ PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
     as = ABS(s1)
     acs = -xx + LOG(as)
     Nz = Nz + 1
-    Y(i) = czero
+    Y(i) = (0._SP,0._SP)
     IF( acs>=(-Elim) ) THEN
       cs = -Zr + LOG(s1)
       csr = REAL(cs)
@@ -60,7 +59,7 @@ PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   END DO
   IF( N==1 ) RETURN
   IF( ic<=1 ) THEN
-    Y(1) = czero
+    Y(1) = (0._SP,0._SP)
     Nz = 2
   END IF
   IF( N==2 ) RETURN
@@ -88,7 +87,7 @@ PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
     alas = LOG(as)
     acs = -xx + alas
     Nz = Nz + 1
-    Y(i) = czero
+    Y(i) = (0._SP,0._SP)
     IF( acs>=(-Elim) ) THEN
       cs = -zd + LOG(s2)
       csr = REAL(cs)
@@ -117,7 +116,7 @@ PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   100  Nz = kk - 2
   200 CONTINUE
   DO k = 1, Nz
-    Y(k) = czero
+    Y(k) = (0._SP,0._SP)
   END DO
 
 END SUBROUTINE CKSCL

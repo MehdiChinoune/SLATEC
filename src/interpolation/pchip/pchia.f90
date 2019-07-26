@@ -127,12 +127,8 @@ REAL(SP) PURE FUNCTION PCHIA(N,X,F,D,Incfd,A,B)
   INTEGER :: i, ia, ib, il, ir
   REAL(SP) :: value, xa, xb
   LOGICAL, PARAMETER :: Skip = .FALSE.
-  !
-  !  INITIALIZE.
-  !
-  REAL(SP), PARAMETER :: zero = 0.
   !* FIRST EXECUTABLE STATEMENT  PCHIA
-  value = zero
+  value = 0._SP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

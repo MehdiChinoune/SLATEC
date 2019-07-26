@@ -88,32 +88,30 @@ INTEGER ELEMENTAL FUNCTION CHFCM(D1,D2,Delta)
   !  DECLARE LOCAL VARIABLES
   INTEGER :: ismon, itrue
   REAL(SP) :: a, b, eps, phi
-  !  INITIALIZE.
-  REAL(SP), PARAMETER :: zero = 0., one = 1.0, two = 2., three = 3., four = 4., ten = 10.
   !  MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !* FIRST EXECUTABLE STATEMENT  CHFCM
-  eps = ten*eps_sp
+  eps = 10._SP*eps_sp
   !
   !  MAKE THE CHECK.
   !
-  IF( Delta/=zero ) THEN
+  IF( Delta/=0._SP ) THEN
     !        DATA IS NOT CONSTANT -- PICK UP SIGN.
-    itrue = INT( SIGN(one,Delta) )
+    itrue = INT( SIGN(1._SP,Delta) )
     a = D1/Delta
     b = D2/Delta
-    IF( (a<zero) .OR. (b<zero) ) THEN
+    IF( (a<0._SP) .OR. (b<0._SP) ) THEN
       ismon = 2
-    ELSEIF( (a<=three-eps) .AND. (b<=three-eps) ) THEN
+    ELSEIF( (a<=3._SP-eps) .AND. (b<=3._SP-eps) ) THEN
       !           INSIDE SQUARE (0,3)X(0,3)  IMPLIES   OK.
       ismon = itrue
-    ELSEIF( (a>four+eps) .AND. (b>four+eps) ) THEN
+    ELSEIF( (a>4._SP+eps) .AND. (b>4._SP+eps) ) THEN
       !           OUTSIDE SQUARE (0,4)X(0,4)  IMPLIES   NONMONOTONIC.
       ismon = 2
     ELSE
       !           MUST CHECK AGAINST BOUNDARY OF ELLIPSE.
-      a = a - two
-      b = b - two
-      phi = ((a*a+b*b)+a*b) - three
+      a = a - 2._SP
+      b = b - 2._SP
+      phi = ((a*a+b*b)+a*b) - 3._SP
       IF( phi<-eps ) THEN
         ismon = itrue
       ELSEIF( phi>eps ) THEN
@@ -125,7 +123,7 @@ INTEGER ELEMENTAL FUNCTION CHFCM(D1,D2,Delta)
       END IF
     END IF
     !        CASE OF CONSTANT DATA.
-  ELSEIF( (D1==zero) .AND. (D2==zero) ) THEN
+  ELSEIF( (D1==0._SP) .AND. (D2==0._SP) ) THEN
     ismon = 0
   ELSE
     ismon = 2

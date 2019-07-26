@@ -65,7 +65,6 @@ PURE SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   INTEGER :: i, iend, il, ilast, iopt, ipl, istart, ixlast, j, jj, jstart, k, &
     ll, lmx, lpg, n20055, nerr, np
   REAL(SP) :: sxlast, sxval
-  REAL(SP), PARAMETER :: zero = 0._SP, one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  PCHNGS
   iopt = 1
   !
@@ -182,7 +181,7 @@ PURE SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
     sxval = Xval
   ELSE
     Sx(ipl) = Xval
-    Sx(lmx) = one
+    Sx(lmx) = 1._SP
     RETURN
   END IF
   200  ilast = MIN(iend,np*lpg+ll-2)
@@ -197,14 +196,14 @@ PURE SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
       Sx(k-jj) = Sx(k-jj-1)
       Ix(k-jj) = Ix(k-jj-1)
     END DO
-    Sx(lmx) = one
+    Sx(lmx) = 1._SP
   END IF
   IF( ipl<=lmx ) THEN
     Sx(ipl) = sxval
     Ix(ipl) = i
     sxval = sxlast
     i = ixlast
-    Sx(lmx) = one
+    Sx(lmx) = 1._SP
     IF( Ix(lmx-1)>0 ) THEN
       ipl = ll + 1
       np = np + 1
@@ -218,7 +217,7 @@ PURE SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   il = il + 1
   IF( il==lmx-1 ) THEN
-    Sx(lmx) = one
+    Sx(lmx) = 1._SP
     !
     !     STORE LAST ELEMENT MOVED DOWN IN A NEW PAGE.
     !
@@ -233,7 +232,7 @@ PURE SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   ELSEIF( ipl/=il ) THEN
     Sx(il) = sxval
     Ix(il) = i
-    Sx(lmx) = one
+    Sx(lmx) = 1._SP
   END IF
   !
   !     INCREMENT POINTERS TO LAST ELEMENT IN VECTORS J,J+1,... .

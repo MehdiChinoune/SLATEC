@@ -163,8 +163,6 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   INTEGER :: ibeg, iend, indexx, j, nm1
   REAL(SP) :: g, stemp(3), xtemp(4)
   !
-  REAL(SP), PARAMETER :: zero = 0., half = 0.5, one = 1., two = 2., three = 3.
-  !
   !  VALIDITY-CHECK ARGUMENTS.
   !
   !* FIRST EXECUTABLE STATEMENT  PCHSP
@@ -265,24 +263,24 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         IF( ibeg==0 ) THEN
           IF( N==2 ) THEN
             !           NO CONDITION AT LEFT END AND N = 2.
-            Wk(2,1) = one
-            Wk(1,1) = one
-            D(1,1) = two*Wk(2,2)
+            Wk(2,1) = 1._SP
+            Wk(1,1) = 1._SP
+            D(1,1) = 2._SP*Wk(2,2)
           ELSE
             !           NOT-A-KNOT CONDITION AT LEFT END AND N > 2.
             Wk(2,1) = Wk(1,3)
             Wk(1,1) = Wk(1,2) + Wk(1,3)
-            D(1,1) = ((Wk(1,2)+two*Wk(1,1))*Wk(2,2)*Wk(1,3)+Wk(1,2)**2*Wk(2,3))/Wk(1,1)
+            D(1,1) = ((Wk(1,2)+2._SP*Wk(1,1))*Wk(2,2)*Wk(1,3)+Wk(1,2)**2*Wk(2,3))/Wk(1,1)
           END IF
         ELSEIF( ibeg==1 ) THEN
           !        SLOPE PRESCRIBED AT LEFT END.
-          Wk(2,1) = one
-          Wk(1,1) = zero
+          Wk(2,1) = 1._SP
+          Wk(1,1) = 0._SP
         ELSE
           !        SECOND DERIVATIVE PRESCRIBED AT LEFT END.
-          Wk(2,1) = two
-          Wk(1,1) = one
-          D(1,1) = three*Wk(2,2) - half*Wk(1,2)*D(1,1)
+          Wk(2,1) = 2._SP
+          Wk(1,1) = 1._SP
+          D(1,1) = 3._SP*Wk(2,2) - 0.5_SP*Wk(1,2)*D(1,1)
         END IF
         !
         !  IF THERE ARE INTERIOR KNOTS, GENERATE THE CORRESPONDING EQUATIONS AND
@@ -292,10 +290,10 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         nm1 = N - 1
         IF( nm1>1 ) THEN
           DO j = 2, nm1
-            IF( Wk(2,j-1)==zero ) GOTO 50
+            IF( Wk(2,j-1)==0._SP ) GOTO 50
             g = -Wk(1,j+1)/Wk(2,j-1)
-            D(1,j) = g*D(1,j-1) + three*(Wk(1,j)*Wk(2,j+1)+Wk(1,j+1)*Wk(2,j) )
-            Wk(2,j) = g*Wk(1,j-1) + two*(Wk(1,j)+Wk(1,j+1))
+            D(1,j) = g*D(1,j-1) + 3._SP*(Wk(1,j)*Wk(2,j+1)+Wk(1,j+1)*Wk(2,j) )
+            Wk(2,j) = g*Wk(1,j-1) + 2._SP*(Wk(1,j)+Wk(1,j+1))
           END DO
         END IF
         !
@@ -309,10 +307,10 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           !
           IF( iend/=0 ) THEN
             !        SECOND DERIVATIVE PRESCRIBED AT RIGHT ENDPOINT.
-            D(1,N) = three*Wk(2,N) + half*Wk(1,N)*D(1,N)
-            Wk(2,N) = two
-            IF( Wk(2,N-1)==zero ) GOTO 50
-            g = -one/Wk(2,N-1)
+            D(1,N) = 3._SP*Wk(2,N) + 0.5_SP*Wk(1,N)*D(1,N)
+            Wk(2,N) = 2._SP
+            IF( Wk(2,N-1)==0._SP ) GOTO 50
+            g = -1._SP/Wk(2,N-1)
           ELSEIF( N==2 .AND. ibeg==0 ) THEN
             !           NOT-A-KNOT AT RIGHT ENDPOINT AND AT LEFT ENDPOINT AND N = 2.
             D(1,2) = Wk(2,2)
@@ -320,18 +318,18 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           ELSEIF( (N==2) .OR. (N==3 .AND. ibeg==0) ) THEN
             !           EITHER (N=3 AND NOT-A-KNOT ALSO AT LEFT) OR (N=2 AND *NOT*
             !           NOT-A-KNOT AT LEFT END POINT).
-            D(1,N) = two*Wk(2,N)
-            Wk(2,N) = one
-            IF( Wk(2,N-1)==zero ) GOTO 50
-            g = -one/Wk(2,N-1)
+            D(1,N) = 2._SP*Wk(2,N)
+            Wk(2,N) = 1._SP
+            IF( Wk(2,N-1)==0._SP ) GOTO 50
+            g = -1._SP/Wk(2,N-1)
           ELSE
             !           NOT-A-KNOT AND N >= 3, AND EITHER N>3 OR  ALSO NOT-A-
             !           KNOT AT LEFT END POINT.
             g = Wk(1,N-1) + Wk(1,N)
             !           DO NOT NEED TO CHECK FOLLOWING DENOMINATORS (X-DIFFERENCES).
-            D(1,N) = ((Wk(1,N)+two*g)*Wk(2,N)*Wk(1,N-1)+Wk(1,N)**2*(F(1,N-1)-F(1,N-2))&
+            D(1,N) = ((Wk(1,N)+2._SP*g)*Wk(2,N)*Wk(1,N-1)+Wk(1,N)**2*(F(1,N-1)-F(1,N-2))&
               /Wk(1,N-1))/g
-            IF( Wk(2,N-1)==zero ) GOTO 50
+            IF( Wk(2,N-1)==0._SP ) GOTO 50
             g = -g/Wk(2,N-1)
             Wk(2,N) = Wk(1,N-1)
           END IF
@@ -339,7 +337,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           !  COMPLETE FORWARD PASS OF GAUSS ELIMINATION.
           !
           Wk(2,N) = g*Wk(1,N-1) + Wk(2,N)
-          IF( Wk(2,N)==zero ) GOTO 50
+          IF( Wk(2,N)==0._SP ) GOTO 50
           D(1,N) = (g*D(1,N-1)+D(1,N))/Wk(2,N)
         END IF
         !
@@ -347,7 +345,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         10 CONTINUE
         DO j = nm1, 1, -1
-          IF( Wk(2,j)==zero ) GOTO 50
+          IF( Wk(2,j)==0._SP ) GOTO 50
           D(1,j) = (D(1,j)-Wk(1,j)*D(1,j+1))/Wk(2,j)
         END DO
         ! --------------------(  END  CODING FROM CUBSPL )--------------------

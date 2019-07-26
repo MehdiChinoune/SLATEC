@@ -43,9 +43,8 @@ PURE SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
   REAL(SP), INTENT(IN) :: Csc(Nvars), Ww(Mrelas), Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), &
     Erp(Mrelas), Rprim(Mrelas), Primal(Nvars+Mrelas)
   INTEGER :: i, j, n20005, n20036
-  REAL(SP) ::  bound, ratio, zero
+  REAL(SP) ::  bound, ratio
   !* FIRST EXECUTABLE STATEMENT  SPLPFL
-  zero = 0._SP
   !
   !     SEE IF THE ENTERING VARIABLE IS RESTRICTING THE STEP LENGTH
   !     BECAUSE OF AN UPPER BOUND.
@@ -74,13 +73,13 @@ PURE SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
       !     THE STEP LENGTH.
     ELSEIF( ABS(Ww(i))<=Dirnrm*Erp(i) ) THEN
       i = i + 1
-    ELSEIF( Ww(i)<=zero ) THEN
+    ELSEIF( Ww(i)<=0._SP ) THEN
       !
       !     IF THE VARIABLE IS LESS THAN ITS LOWER BOUND, IT CAN
       !     INCREASE ONLY TO ITS LOWER BOUND.
-      IF( Primal(i+Nvars)<zero ) THEN
+      IF( Primal(i+Nvars)<0._SP ) THEN
         ratio = Rprim(i)/Ww(i)
-        IF( ratio<zero ) ratio = zero
+        IF( ratio<0._SP ) ratio = 0._SP
         IF( .NOT. Finite ) THEN
           Ileave = i
           Theta = ratio
@@ -92,7 +91,7 @@ PURE SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
           !     THEN IT CAN INCREASE TO ITS UPPER BOUND.
           Theta = ratio
         END IF
-      ELSEIF( Ind(j)==3 .AND. Primal(i+Nvars)==zero ) THEN
+      ELSEIF( Ind(j)==3 .AND. Primal(i+Nvars)==0._SP ) THEN
         bound = Bu(j) - Bl(j)
         IF( j<=Nvars ) bound = bound/Csc(j)
         ratio = (bound-Rprim(i))/(-Ww(i))
@@ -114,7 +113,7 @@ PURE SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
       !     ONLY TO ITS UPPER BOUND.  IF IT DECREASES TO ITS
       !     UPPER BOUND, THEN RPRIM(I) HAS ALREADY BEEN TRANSLATED
       !     TO ITS UPPER BOUND AND NOTHING NEEDS TO BE DONE TO IBB(J).
-      IF( Rprim(i)>zero ) THEN
+      IF( Rprim(i)>0._SP ) THEN
         ratio = Rprim(i)/Ww(i)
         IF( .NOT. Finite ) THEN
           Ileave = i
@@ -132,7 +131,7 @@ PURE SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Theta,Dirnrm,&
       END IF
       i = i + 1
     ELSE
-      Theta = zero
+      Theta = 0._SP
       Ileave = i
       Finite = .TRUE.
       EXIT

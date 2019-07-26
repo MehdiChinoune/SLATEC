@@ -436,8 +436,6 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !
-  REAL(SP), PARAMETER :: ZERO = 0._SP, ONE = 1._SP, TWO = 2._SP
-  !
   !* FIRST EXECUTABLE STATEMENT  SBOLSM
   !
   !     Verify that the problem dimensions are defined properly.
@@ -515,7 +513,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   tolind = SQRT(eps_sp)
   tolsze = SQRT(eps_sp)
   itmax = 5*MAX(Minput,Ncols)
-  wt = ONE
+  wt = 1._SP
   mval = 0
   iprint = 0
   !
@@ -541,7 +539,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
         DO j = 1, Ncols + 1
           DO i = Minput, j + mval + 1, -1
             CALL SROTG(W(i-1,j),W(i,j),sc,ss)
-            W(i,j) = ZERO
+            W(i,j) = 0._SP
             CALL SROT(Ncols-j+1,W(i-1,j+1),Mdw,W(i,j+1),Mdw,sc,ss)
           END DO
         END DO
@@ -552,7 +550,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
       !
       !     Set the X(*) array to zero so all components are defined.
       !
-      X(1:Ncols) = ZERO
+      X(1:Ncols) = 0._SP
       !
       !     The arrays IBASIS(*) and IBB(*) are initialized by the calling
       !     program and the column scaling is defined in the calling program.
@@ -571,8 +569,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
       END DO
       !
       DO j = 1, Ncols
-        IF( (Bl(j)<=ZERO .AND. ZERO<=Bu(j) .AND. ABS(Bu(j))<ABS(Bl(j))) .OR. &
-            Bu(j)<ZERO ) THEN
+        IF( (Bl(j)<=0._SP .AND. 0._SP<=Bu(j) .AND. ABS(Bu(j))<ABS(Bl(j))) .OR. &
+            Bu(j)<0._SP ) THEN
           t = Bu(j)
           Bu(j) = -Bl(j)
           Bl(j) = -t
@@ -585,7 +583,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
         !         Indices in set T(=TIGHT) are denoted by negative values
         !         of IBASIS(*).
         !
-        IF( Bl(j)>=ZERO ) THEN
+        IF( Bl(j)>=0._SP ) THEN
           Ibasis(j) = -Ibasis(j)
           t = -Bl(j)
           Bu(j) = Bu(j) + t
@@ -656,7 +654,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
         END IF
         !
         tolsze = X(Ncols+ioff)
-        IF( tolsze<=ZERO ) THEN
+        IF( tolsze<=0._SP ) THEN
           WRITE (xern3,'(1PE15.6)') tolsze
           ERROR STOP 'SBOLSM : THE RECIPROCAL OF THE BLOW-UP FACTOR&
             & FOR REJECTING VARIABLES MUST BE POSITIVE.'
@@ -695,7 +693,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
         END IF
         !
         fac = X(Ncols+ioff)
-        IF( fac<ZERO ) THEN
+        IF( fac<0._SP ) THEN
           WRITE (xern3,'(1PE15.6)') fac
           ERROR STOP 'SBOLSM : THE FACTOR (NCOLS/MINPUT) WHERE PRE-TRIANGULARIZING &
             &IS PERFORMED MUST BE NON-NEGATIVE'
@@ -717,7 +715,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
         wt = X(Ncols+ioff)
       END IF
       !
-      IF( mval<0 .OR. mval>Minput .OR. wt<=ZERO ) THEN
+      IF( mval<0 .OR. mval>Minput .OR. wt<=0._SP ) THEN
         WRITE (xern1,'(I8)') mval
         WRITE (xern2,'(I8)') Minput
         WRITE (xern3,'(1PE15.6)') wt
@@ -757,7 +755,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   !                                                 T
   !     Compute (negative) of gradient vector, W = E *(F-E*X).
   !
-  Ww(1:Ncols) = ZERO
+  Ww(1:Ncols) = 0._SP
   DO j = nsetb + 1, Ncols
     jcol = ABS(Ibasis(j))
     Ww(j) = DOT_PRODUCT(W(INEXT(nsetb):INEXT(nsetb)+mrows-nsetb-1,j), &
@@ -791,7 +789,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
         t1 = NORM2(W(INEXT(nsetb):INEXT(nsetb)+mval-nsetb-1,j))
         IF( itemp<0 ) THEN
           IF( MOD(Ibb(jcol),2)==0 ) t = -t
-          IF( t>=ZERO ) THEN
+          IF( t>=0._SP ) THEN
             IF( mval>nsetb ) t = t1
             IF( t>wlarge ) THEN
               wlarge = t
@@ -811,8 +809,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
     !     Choose magnitude of largest component of gradient for candidate.
     !
     jbig = 0
-    wbig = ZERO
-    IF( wlarge>ZERO ) THEN
+    wbig = 0._SP
+    IF( wlarge>0._SP ) THEN
       jbig = jlarge
       wbig = wlarge
     END IF
@@ -873,19 +871,19 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
       DO i = mrows, nsetb + 1, -1
         IF( i/=mval+1 ) THEN
           CALL SROTG(W(i-1,nsetb),W(i,nsetb),sc,ss)
-          W(i,nsetb) = ZERO
+          W(i,nsetb) = 0._SP
           CALL SROT(Ncols-nsetb+1,W(i-1,nsetb+1),Mdw,W(i,nsetb+1),Mdw,sc,ss)
         END IF
       END DO
       !
       IF( mval>=nsetb .AND. mval<mrows ) THEN
         CALL SROTG(W(nsetb,nsetb),W(mval+1,nsetb),sc,ss)
-        W(mval+1,nsetb) = ZERO
+        W(mval+1,nsetb) = 0._SP
         CALL SROT(Ncols-nsetb+1,W(nsetb,nsetb+1),Mdw,W(mval+1,nsetb+1),Mdw,sc,ss)
       END IF
     END IF
     !
-    IF( W(nsetb,nsetb)==ZERO ) THEN
+    IF( W(nsetb,nsetb)==0._SP ) THEN
       Ww(nsetb) = big
       nsetb = nsetb - 1
       IF( iprint>0 ) CALL IVOUT(0,i2,'('' PIVOT IS ZERO, NOT USED.'')',-4)
@@ -902,8 +900,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
       !         IF(WW(NSETB)>=ZERO .AND. XNEW<=ZERO) exit(quit)
       !         IF(WW(NSETB)<=ZERO .AND. XNEW>=ZERO) exit(quit)
       !
-      IF( (Ww(nsetb)>=ZERO .AND. xnew<=ZERO) .OR. &
-          (Ww(nsetb)<=ZERO .AND. xnew>=ZERO) ) THEN
+      IF( (Ww(nsetb)>=0._SP .AND. xnew<=0._SP) .OR. &
+          (Ww(nsetb)<=0._SP .AND. xnew>=0._SP) ) THEN
         !
         Ww(nsetb) = big
         nsetb = nsetb - 1
@@ -939,7 +937,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
       itemp = Ibasis(j)
       jcol = ABS(itemp)
       IF( itemp<0 ) THEN
-        bou = ZERO
+        bou = 0._SP
       ELSE
         bou = Bl(jcol)
       END IF
@@ -963,16 +961,16 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   !     See if the unconstrained solution (obtained by solving the
   !     triangular system) satisfies the problem bounds.
   !
-  alpha = TWO
-  beta = TWO
-  X(nsetb) = ZERO
+  alpha = 2._SP
+  beta = 2._SP
+  X(nsetb) = 0._SP
   DO j = 1, nsetb
     itemp = Ibasis(j)
     jcol = ABS(itemp)
-    t1 = TWO
-    t2 = TWO
+    t1 = 2._SP
+    t2 = 2._SP
     IF( itemp<0 ) THEN
-      bou = ZERO
+      bou = 0._SP
     ELSE
       bou = Bl(jcol)
     END IF
@@ -996,7 +994,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
     END IF
   END DO
   !
-  constr = alpha<TWO .OR. beta<TWO
+  constr = alpha<2._SP .OR. beta<2._SP
   IF( .NOT. constr ) THEN
     !
     !         Accept the candidate because it satisfies the stated bounds
@@ -1045,8 +1043,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
     !
     !     Variable is at a lower bound.
     !
-  ELSEIF( itemp<ZERO ) THEN
-    t = ZERO
+  ELSEIF( itemp<0._SP ) THEN
+    t = 0._SP
   ELSE
     t = -Bl(jcol)
     Bu(jcol) = Bu(jcol) + t
@@ -1065,7 +1063,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   END DO
   !
   Ibasis(nsetb) = itemp
-  W(jdrop+1:mrows,nsetb) = ZERO
+  W(jdrop+1:mrows,nsetb) = 0._SP
   W(1:jdrop,nsetb) = Rw(1:jdrop)
   !
   !     Transform the matrix from upper Hessenberg form to upper
@@ -1078,7 +1076,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
     !         nonweighted rows.
     !
     IF( i==mval ) THEN
-      t = ZERO
+      t = 0._SP
       DO j = i, nsetb
         jcol = ABS(Ibasis(j))
         t1 = ABS(W(i,j)*Scl(jcol))
@@ -1090,7 +1088,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
       GOTO 400
     END IF
     CALL SROTG(W(i,i),W(i+1,i),sc,ss)
-    W(i+1,i) = ZERO
+    W(i+1,i) = 0._SP
     CALL SROT(Ncols-i+1,W(i,i+1),Mdw,W(i+1,i+1),Mdw,sc,ss)
   END DO
   GOTO 500
@@ -1108,7 +1106,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   DO j = jbig, nsetb
     DO i = j + 1, mrows
       CALL SROTG(W(j,j),W(i,j),sc,ss)
-      W(i,j) = ZERO
+      W(i,j) = 0._SP
       CALL SROT(Ncols-j+1,W(j,j+1),Mdw,W(i,j+1),Mdw,sc,ss)
     END DO
   END DO
@@ -1134,7 +1132,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   !
   igopr = 2
   700  Rw(1:nsetb) = X(1:nsetb)
-  X(1:Ncols) = ZERO
+  X(1:Ncols) = 0._SP
   DO j = 1, nsetb
     jcol = ABS(Ibasis(j))
     X(jcol) = Rw(j)*ABS(Scl(jcol))
@@ -1150,7 +1148,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,Scl,Ibasi
   END DO
   !
   DO j = 1, Ncols
-    IF( Scl(j)<ZERO ) X(j) = -X(j)
+    IF( Scl(j)<0._SP ) X(j) = -X(j)
   END DO
   !
   i = MAX(nsetb,mval)

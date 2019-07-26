@@ -29,7 +29,6 @@ PURE SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   INTEGER :: i, inw, nlast, nn, nui, nw
   REAL(SP) :: az, dfnu
   COMPLEX(SP) :: cw(2)
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CBINU
   Nz = 0
   az = ABS(Z)
@@ -90,7 +89,7 @@ PURE SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
     ELSE
       Nz = nn
       DO i = 1, nn
-        Cy(i) = czero
+        Cy(i) = (0._SP,0._SP)
       END DO
       RETURN
     END IF

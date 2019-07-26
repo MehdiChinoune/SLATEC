@@ -38,7 +38,6 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   COMPLEX(SP) :: ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2)
   REAL(SP) :: aa, acz, ak, arm, ascle, atol, az, dfnu, &
     fnup, rak1, rs, rtr1, s, ss, x
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CSERI
   Nz = 0
   az = ABS(Z)
@@ -54,7 +53,7 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     GOTO 500
   ELSE
     hz = Z*CMPLX(0.5_SP,0._SP,SP)
-    cz = czero
+    cz = (0._SP,0._SP)
     IF( az>rtr1 ) cz = hz*hz
     acz = ABS(cz)
     nn = N
@@ -86,9 +85,9 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     DO i = 1, il
       dfnu = Fnu + (nn-i)
       fnup = dfnu + 1._SP
-      s1 = cone
+      s1 = (1._SP,0._SP)
       IF( acz>=Tol*fnup ) THEN
-        ak1 = cone
+        ak1 = (1._SP,0._SP)
         ak = fnup + 2._SP
         s = fnup
         aa = 2._SP
@@ -115,7 +114,7 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     IF( nn<=2 ) RETURN
     k = nn - 2
     ak = k
-    rz = (cone+cone)/Z
+    rz = (2._SP,0._SP)/Z
     IF( iflag==1 ) THEN
       !-----------------------------------------------------------------------
       !     RECUR BACKWARD WITH SCALED VALUES
@@ -143,7 +142,7 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     END IF
   END IF
   200  Nz = Nz + 1
-  Y(nn) = czero
+  Y(nn) = (0._SP,0._SP)
   IF( acz>dfnu ) THEN
     !-----------------------------------------------------------------------
     !     RETURN WITH NZ<0 IF ABS(Z*Z/4)>FNU+N-NZ-1 COMPLETE
@@ -166,10 +165,10 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   400  ib = l + 1
   IF( ib>nn ) RETURN
   GOTO 300
-  500  Y(1) = czero
-  IF( Fnu==0._SP ) Y(1) = cone
+  500  Y(1) = (0._SP,0._SP)
+  IF( Fnu==0._SP ) Y(1) = (1._SP,0._SP)
   IF( N==1 ) RETURN
-  Y = czero
+  Y = (0._SP,0._SP)
 
   RETURN
 END SUBROUTINE CSERI

@@ -44,17 +44,15 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
     Colnrm(Nvars), Duals(Nvars+Mrelas)
   REAL(SP), INTENT(OUT) :: Rg(Nvars+Mrelas), Rz(Nvars+Mrelas), Wr(Mrelas), Ww(Mrelas)
   INTEGER :: i, ihi, il1, ilow, ipage, iu1, j, key, lpg, nnegrc
-  REAL(SP) :: one, rzj, scalr, zero, rcost, cnorm
+  REAL(SP) :: rzj, scalr, rcost, cnorm
   LOGICAL :: pagepl, trans
   !* FIRST EXECUTABLE STATEMENT  SPINCW
   lpg = Lmx - (Nvars+4)
-  zero = 0._SP
-  one = 1.
   !
   !     FORM REDUCED COSTS, RZ(*), AND STEEPEST EDGE WEIGHTS, RG(*).
   pagepl = .TRUE.
-  Rz(1:Nvars+Mrelas) = zero
-  Rg(1:Nvars+Mrelas) = one
+  Rz(1:Nvars+Mrelas) = 0._SP
+  Rg(1:Nvars+Mrelas) = 1._SP
   nnegrc = 0
   j = Jstrt
   100 CONTINUE
@@ -65,20 +63,20 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
     !     MATRIX FORMAT.
   ELSEIF( j>Nvars ) THEN
     pagepl = .TRUE.
-    Ww(1:Mrelas) = zero
-    scalr = -one
-    IF( Ind(j)==2 ) scalr = one
+    Ww(1:Mrelas) = 0._SP
+    scalr = -1._SP
+    IF( Ind(j)==2 ) scalr = 1._SP
     i = j - Nvars
     Rz(j) = -scalr*Duals(i)
     Ww(i) = scalr
     IF( Stpedg ) THEN
       trans = .FALSE.
       CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
-      Rg(j) = NORM2(Ww(1:Mrelas)) + one
+      Rg(j) = NORM2(Ww(1:Mrelas)) + 1._SP
     END IF
   ELSE
     rzj = Costsc*Costs(j)
-    Ww(1:Mrelas) = zero
+    Ww(1:Mrelas) = 0._SP
     IF( j/=1 ) THEN
       ilow = Imat(j+3) + 1
     ELSE
@@ -116,16 +114,16 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Imat,Ibrc,Ipr,Iwr,&
       !
       !     THESE ARE NONBASIC DEPENDENT VARIABLES. THE COLS. ARE IMPLICITLY
       !     DEFINED.
-      Rg(j) = NORM2(Ww(1:Mrelas))**2 + one
+      Rg(j) = NORM2(Ww(1:Mrelas))**2 + 1._SP
     END IF
   END IF
   !
   rcost = Rz(j)
   IF( MOD(Ibb(j),2)==0 ) rcost = -rcost
   IF( Ind(j)==4 ) rcost = -ABS(rcost)
-  cnorm = one
+  cnorm = 1._SP
   IF( j<=Nvars ) cnorm = Colnrm(j)
-  IF( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
+  IF( rcost+Erdnrm*Dulnrm*cnorm<0._SP ) nnegrc = nnegrc + 1
   j = MOD(j,Mrelas+Nvars) + 1
   IF( nnegrc<Npp .AND. j/=Jstrt ) GOTO 100
   Jstrt = j

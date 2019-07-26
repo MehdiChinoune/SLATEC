@@ -107,9 +107,8 @@ REAL(SP) FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   INTEGER, INTENT(IN) :: Nbkpt, Nconst, Ndata, Nord
   REAL(SP), INTENT(IN) :: Xval, Bkpt(Nbkpt), W(:)
   INTEGER :: i, ileft, ip, is, last, mdg, mdw, n
-  REAL(SP) :: zero, v(40)
+  REAL(SP) :: v(40)
   !* FIRST EXECUTABLE STATEMENT  CV
-  zero = 0.
   mdg = Nbkpt - Nord + 3
   mdw = Nbkpt - Nord + 1 + Nconst
   is = mdg*(Nord+1) + 2*MAX(Ndata,Nbkpt) + Nbkpt + Nord**2
@@ -126,7 +125,7 @@ REAL(SP) FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
     v(i) = DOT_PRODUCT(W(ip:ip+Nord-1),v(Nord+1:2*Nord))
     ip = ip + mdw
   END DO
-  CV = MAX(DOT_PRODUCT(v(1:Nord),v(Nord+1:2*Nord)),zero)
+  CV = MAX(DOT_PRODUCT(v(1:Nord),v(Nord+1:2*Nord)),0._SP)
   !
   !     SCALE THE VARIANCE SO IT IS AN UNBIASED ESTIMATE.
   CV = CV/MAX(Ndata-n,1)

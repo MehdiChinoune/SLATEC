@@ -124,10 +124,6 @@ PURE SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   INTEGER :: ibeg, iend, indexx, j, k
   REAL(SP) :: stemp(3), xtemp(4)
   !
-  !  INITIALIZE.
-  !
-  REAL(SP), PARAMETER :: zero = 0., half = 0.5, two = 2., three = 3.
-  !
   !* FIRST EXECUTABLE STATEMENT  PCHCE
   ibeg = Ic(1)
   iend = Ic(2)
@@ -147,7 +143,7 @@ PURE SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
       D(1,1) = Vc(1)
     ELSEIF( k==2 ) THEN
       !        BOUNDARY SECOND DERIVATIVE PROVIDED.
-      D(1,1) = half*((three*Slope(1)-D(1,2))-half*Vc(1)*H(1))
+      D(1,1) = 0.5_SP*((3._SP*Slope(1)-D(1,2))-0.5_SP*Vc(1)*H(1))
     ELSEIF( k<5 ) THEN
       !        USE K-POINT DERIVATIVE FORMULA.
       !        PICK UP FIRST K POINTS, IN REVERSE ORDER.
@@ -161,7 +157,7 @@ PURE SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
       D(1,1) = PCHDF(k,xtemp,stemp)
     ELSE
       !        USE 'NOT A KNOT' CONDITION.
-      D(1,1) = (three*(H(1)*Slope(2)+H(2)*Slope(1))-two*(H(1)+H(2))*D(1,2)&
+      D(1,1) = (3._SP*(H(1)*Slope(2)+H(2)*Slope(1))-2._SP*(H(1)+H(2))*D(1,2)&
         -H(1)*D(1,3))/H(2)
     END IF
     !
@@ -169,16 +165,16 @@ PURE SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
       !
       !  CHECK D(1,1) FOR COMPATIBILITY WITH MONOTONICITY.
       !
-      IF( Slope(1)==zero ) THEN
-        IF( D(1,1)/=zero ) THEN
-          D(1,1) = zero
+      IF( Slope(1)==0._SP ) THEN
+        IF( D(1,1)/=0._SP ) THEN
+          D(1,1) = 0._SP
           Ierr = Ierr + 1
         END IF
-      ELSEIF( PCHST(D(1,1),Slope(1))<zero ) THEN
-        D(1,1) = zero
+      ELSEIF( PCHST(D(1,1),Slope(1))<0._SP ) THEN
+        D(1,1) = 0._SP
         Ierr = Ierr + 1
-      ELSEIF( ABS(D(1,1))>three*ABS(Slope(1)) ) THEN
-        D(1,1) = three*Slope(1)
+      ELSEIF( ABS(D(1,1))>3._SP*ABS(Slope(1)) ) THEN
+        D(1,1) = 3._SP*Slope(1)
         Ierr = Ierr + 1
       END IF
     END IF
@@ -193,7 +189,7 @@ PURE SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
       D(1,N) = Vc(2)
     ELSEIF( k==2 ) THEN
       !        BOUNDARY SECOND DERIVATIVE PROVIDED.
-      D(1,N) = half*((three*Slope(N-1)-D(1,N-1))+half*Vc(2)*H(N-1))
+      D(1,N) = 0.5_SP*((3._SP*Slope(N-1)-D(1,N-1))+0.5_SP*Vc(2)*H(N-1))
     ELSEIF( k<5 ) THEN
       !        USE K-POINT DERIVATIVE FORMULA.
       !        PICK UP LAST K POINTS.
@@ -207,24 +203,24 @@ PURE SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
       D(1,N) = PCHDF(k,xtemp,stemp)
     ELSE
       !        USE 'NOT A KNOT' CONDITION.
-      D(1,N) = (three*(H(N-1)*Slope(N-2)+H(N-2)*Slope(N-1))&
-        -two*(H(N-1)+H(N-2))*D(1,N-1)-H(N-1)*D(1,N-2))/H(N-2)
+      D(1,N) = (3._SP*(H(N-1)*Slope(N-2)+H(N-2)*Slope(N-1))&
+        -2._SP*(H(N-1)+H(N-2))*D(1,N-1)-H(N-1)*D(1,N-2))/H(N-2)
     END IF
     !
     IF( iend<=0 ) THEN
       !
       !  CHECK D(1,N) FOR COMPATIBILITY WITH MONOTONICITY.
       !
-      IF( Slope(N-1)==zero ) THEN
-        IF( D(1,N)/=zero ) THEN
-          D(1,N) = zero
+      IF( Slope(N-1)==0._SP ) THEN
+        IF( D(1,N)/=0._SP ) THEN
+          D(1,N) = 0._SP
           Ierr = Ierr + 2
         END IF
-      ELSEIF( PCHST(D(1,N),Slope(N-1))<zero ) THEN
-        D(1,N) = zero
+      ELSEIF( PCHST(D(1,N),Slope(N-1))<0._SP ) THEN
+        D(1,N) = 0._SP
         Ierr = Ierr + 2
-      ELSEIF( ABS(D(1,N))>three*ABS(Slope(N-1)) ) THEN
-        D(1,N) = three*Slope(N-1)
+      ELSEIF( ABS(D(1,N))>3._SP*ABS(Slope(N-1)) ) THEN
+        D(1,N) = 3._SP*Slope(N-1)
         Ierr = Ierr + 2
       END IF
     END IF

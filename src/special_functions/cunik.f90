@@ -44,7 +44,6 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   INTEGER :: i, j, k, l
   REAL(SP) :: ac, rfn, test, tstr, tsti
   COMPLEX(SP) :: cfn, crfn, s, sr, t, t2, zn
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   COMPLEX(SP), PARAMETER :: con(2) = [ (3.98942280401432678E-01_SP,0._SP), &
     (1.25331413731550025E+00_SP,0._SP) ]
   REAL(SP), PARAMETER :: c(120) = [ 1.00000000000000000E+00_SP, -2.08333333333333333E-01_SP, &
@@ -105,24 +104,24 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
     ac = Fnu*test
     IF( ABS(tstr)>ac .OR. ABS(tsti)>ac ) THEN
       t = Zr*crfn
-      s = cone + t*t
+      s = (1._SP,0._SP) + t*t
       sr = SQRT(s)
       cfn = CMPLX(Fnu,0._SP,SP)
-      zn = (cone+sr)/t
+      zn = ((1._SP,0._SP)+sr)/t
       Zeta1 = cfn*LOG(zn)
       Zeta2 = cfn*sr
-      t = cone/sr
+      t = (1._SP,0._SP)/sr
       sr = t*crfn
       Cwrk(16) = SQRT(sr)
       Phi = Cwrk(16)*con(Ikflg)
       IF( Ipmtr/=0 ) RETURN
-      t2 = cone/s
-      Cwrk(1) = cone
-      crfn = cone
+      t2 = (1._SP,0._SP)/s
+      Cwrk(1) = (1._SP,0._SP)
+      crfn = (1._SP,0._SP)
       ac = 1._SP
       l = 1
       DO k = 2, 15
-        s = czero
+        s = (0._SP,0._SP)
         DO j = 1, k
           l = l + 1
           s = s*t2 + CMPLX(c(l),0._SP,SP)
@@ -141,7 +140,7 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
       ac = 2._SP*ABS(LOG(test)) + Fnu
       Zeta1 = CMPLX(ac,0._SP,SP)
       Zeta2 = CMPLX(Fnu,0._SP,SP)
-      Phi = cone
+      Phi = (1._SP,0._SP)
       RETURN
     END IF
   END IF
@@ -149,8 +148,8 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
     !-----------------------------------------------------------------------
     !     COMPUTE SUM FOR THE K FUNCTION
     !-----------------------------------------------------------------------
-    s = czero
-    t = cone
+    s = (0._SP,0._SP)
+    t = (1._SP,0._SP)
     DO i = 1, Init
       s = s + t*Cwrk(i)
       t = -t
@@ -162,7 +161,7 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   !-----------------------------------------------------------------------
   !     COMPUTE SUM FOR THE I FUNCTION
   !-----------------------------------------------------------------------
-  s = czero
+  s = (0._SP,0._SP)
   DO i = 1, Init
     s = s + Cwrk(i)
   END DO

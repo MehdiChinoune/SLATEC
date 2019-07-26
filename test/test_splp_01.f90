@@ -23,7 +23,7 @@ CONTAINS
     USE slatec, ONLY : USRMAT, SPLP
     USE common_mod, ONLY : PASS
     REAL(SP) :: bl(60), bu(60), d(14,37), dattrv(210), duals(60), prgopt(50), &
-      primal(60), work(800), zero
+      primal(60), work(800)
     INTEGER :: i, ibasis(60), ic, icnt, ind(60), info, Ipass, isoln(14), iv, ivv, &
       iwork(900), j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
     INTEGER :: nvars
@@ -32,7 +32,6 @@ CONTAINS
     IF( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1 SPLP QUICK CHECK')
     icnt = 1
-    zero = 0._SP
     !
     !     DEFINE WORKING ARRAY LENGTHS
     !
@@ -174,7 +173,7 @@ CONTAINS
     DO mm = 1, nvars
       dattrv(kount) = -mm
       DO kk = 1, mrelas
-        IF( d(kk,mm)/=zero ) THEN
+        IF( d(kk,mm)/=0._SP ) THEN
           kount = kount + 1
           dattrv(kount) = kk
           kount = kount + 1
@@ -183,12 +182,12 @@ CONTAINS
       END DO
       kount = kount + 1
     END DO
-    dattrv(kount) = zero
+    dattrv(kount) = 0._SP
     !
     !     NON-NEGATIVITY CONSTRAINT
     !
     DO ic = 1, nvars
-      bl(ic) = zero
+      bl(ic) = 0._SP
       ind(ic) = 3
       bu(ic) = 10000000.000
     END DO

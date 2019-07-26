@@ -64,22 +64,20 @@ PURE SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   REAL(SP), INTENT(IN) :: Abe(Lda,2*Ml+Mu+1)
   REAL(SP), INTENT(OUT) :: Det(2)
   !
-  REAL(SP) :: ten
   INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  SNBDI
   Det(1) = 1._SP
   Det(2) = 0._SP
-  ten = 10._SP
   DO i = 1, N
     IF( Ipvt(i)/=i ) Det(1) = -Det(1)
     Det(1) = Abe(i,Ml+1)*Det(1)
     IF( Det(1)==0._SP ) EXIT
     DO WHILE( ABS(Det(1))<1._SP )
-      Det(1) = ten*Det(1)
+      Det(1) = 10._SP*Det(1)
       Det(2) = Det(2) - 1._SP
     END DO
-    DO WHILE( ABS(Det(1))>=ten )
-      Det(1) = Det(1)/ten
+    DO WHILE( ABS(Det(1))>=10._SP )
+      Det(1) = Det(1)/10._SP
       Det(2) = Det(2) + 1._SP
     END DO
   END DO

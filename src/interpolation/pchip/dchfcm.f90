@@ -97,35 +97,30 @@ INTEGER ELEMENTAL FUNCTION DCHFCM(D1,D2,Delta)
   INTEGER :: ismon, itrue
   REAL(DP) :: a, b, eps, phi
   !
-  !  INITIALIZE.
-  !
-  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, two = 2._DP, three = 3._DP, &
-    four = 4._DP, ten = 10._DP
-  !
   !        MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !* FIRST EXECUTABLE STATEMENT  DCHFCM
-  eps = ten*eps_dp
+  eps = 10._DP*eps_dp
   !
   !  MAKE THE CHECK.
   !
-  IF( Delta/=zero ) THEN
+  IF( Delta/=0._DP ) THEN
     !        DATA IS NOT CONSTANT -- PICK UP SIGN.
-    itrue = INT( SIGN(one,Delta) )
+    itrue = INT( SIGN(1._DP,Delta) )
     a = D1/Delta
     b = D2/Delta
-    IF( (a<zero) .OR. (b<zero) ) THEN
+    IF( (a<0._DP) .OR. (b<0._DP) ) THEN
       ismon = 2
-    ELSEIF( (a<=three-eps) .AND. (b<=three-eps) ) THEN
+    ELSEIF( (a<=3._DP-eps) .AND. (b<=3._DP-eps) ) THEN
       !           INSIDE SQUARE (0,3)X(0,3)  IMPLIES   OK.
       ismon = itrue
-    ELSEIF( (a>four+eps) .AND. (b>four+eps) ) THEN
+    ELSEIF( (a>4._DP+eps) .AND. (b>4._DP+eps) ) THEN
       !           OUTSIDE SQUARE (0,4)X(0,4)  IMPLIES   NONMONOTONIC.
       ismon = 2
     ELSE
       !           MUST CHECK AGAINST BOUNDARY OF ELLIPSE.
-      a = a - two
-      b = b - two
-      phi = ((a*a+b*b)+a*b) - three
+      a = a - 2._DP
+      b = b - 2._DP
+      phi = ((a*a+b*b)+a*b) - 3._DP
       IF( phi<-eps ) THEN
         ismon = itrue
       ELSEIF( phi>eps ) THEN
@@ -137,7 +132,7 @@ INTEGER ELEMENTAL FUNCTION DCHFCM(D1,D2,Delta)
       END IF
     END IF
     !        CASE OF CONSTANT DATA.
-  ELSEIF( (D1==zero) .AND. (D2==zero) ) THEN
+  ELSEIF( (D1==0._DP) .AND. (D2==0._DP) ) THEN
     ismon = 0
   ELSE
     ismon = 2

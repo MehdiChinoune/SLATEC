@@ -65,22 +65,20 @@ PURE SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   REAL(DP), INTENT(IN) :: Abe(Lda,2*Ml+Mu+1)
   REAL(DP), INTENT(OUT) :: Det(2)
   !
-  REAL(DP) :: ten
   INTEGER :: i
   !* FIRST EXECUTABLE STATEMENT  DNBDI
   Det(1) = 1._DP
   Det(2) = 0._DP
-  ten = 10._DP
   DO i = 1, N
     IF( Ipvt(i)/=i ) Det(1) = -Det(1)
     Det(1) = Abe(i,Ml+1)*Det(1)
     IF( Det(1)==0._DP ) EXIT
     DO WHILE( ABS(Det(1))<1._DP )
-      Det(1) = ten*Det(1)
+      Det(1) = 10._DP*Det(1)
       Det(2) = Det(2) - 1._DP
     END DO
-    DO WHILE( ABS(Det(1))>=ten )
-      Det(1) = Det(1)/ten
+    DO WHILE( ABS(Det(1))>=10._DP )
+      Det(1) = Det(1)/10._DP
       Det(2) = Det(2) + 1._DP
     END DO
   END DO

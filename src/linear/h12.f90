@@ -54,9 +54,8 @@ PURE SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   REAL(SP), INTENT(INOUT) :: C(Icv*Ncv+M*Ice), U(Iue,M)
   REAL(SP), INTENT(OUT) :: Up
   INTEGER :: i, i2, i3, i4, incr, j, kl1, kl2, klp, l1m1, mml1p2
-  REAL(SP) :: b, cl, clinv, one, sm, ul1m1
+  REAL(SP) :: b, cl, clinv, sm, ul1m1
   !* FIRST EXECUTABLE STATEMENT  H12
-  one = 1.
   !
   IF( 0>=Lpivot .OR. Lpivot>=L1 .OR. L1>M ) RETURN
   cl = ABS(U(1,Lpivot))
@@ -66,7 +65,7 @@ PURE SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       cl = MAX(ABS(U(1,j)),cl)
     END DO
     IF( cl<=0 ) RETURN
-    clinv = one/cl
+    clinv = 1._SP/cl
     sm = (U(1,Lpivot)*clinv)**2
     DO j = L1, M
       sm = sm + (U(1,j)*clinv)**2
@@ -85,7 +84,7 @@ PURE SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !                       B  MUST BE NONPOSITIVE HERE.  IF B = 0., RETURN.
   !
   IF( b<0 ) THEN
-    b = one/b
+    b = 1._SP/b
     mml1p2 = M - L1 + 2
     IF( mml1p2>20 ) THEN
       l1m1 = L1 - 1

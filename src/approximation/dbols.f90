@@ -442,7 +442,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   REAL(DP), INTENT(OUT) :: Rnorm, Rw(5*Ncols)
   INTEGER :: i, ibig, inrows, ip, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
     llx, lmdw, lndw, locdim, lp,mnew, nerr
-  REAL(DP) :: sc, ss, one
+  REAL(DP) :: sc, ss
   LOGICAL :: checkl
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
@@ -498,7 +498,6 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
-    one = 1._DP
     checkl = .FALSE.
     lenx = Ncols
     iscale = 1
@@ -749,9 +748,9 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           ibig = MAXLOC(W(1:Mrows,j),1)
           Rw(j) = ABS(W(ibig,j))
           IF( Rw(j)==0._DP ) THEN
-            Rw(j) = one
+            Rw(j) = 1._DP
           ELSE
-            Rw(j) = one/Rw(j)
+            Rw(j) = 1._DP/Rw(j)
           END IF
         CASE (2)
           !     CASE 2
@@ -760,16 +759,16 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           !     HAVE EUCLIDEAN LENGTH EQUAL TO ONE.
           Rw(j) = NORM2(W(1:Mrows,j))
           IF( Rw(j)==0._DP ) THEN
-            Rw(j) = one
+            Rw(j) = 1._DP
           ELSE
-            Rw(j) = one/Rw(j)
+            Rw(j) = 1._DP/Rw(j)
           END IF
         CASE (3)
           !     CASE 3
           !
           !     THIS CASE EFFECTIVELY SUPPRESSES SCALING BY SETTING
           !     THE SCALING MATRIX TO THE IDENTITY MATRIX.
-          Rw(1:Ncols) = one
+          Rw(1:Ncols) = 1._DP
           !     CASE 4
           EXIT
         CASE (4)

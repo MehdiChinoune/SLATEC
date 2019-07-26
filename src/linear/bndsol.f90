@@ -201,16 +201,15 @@ PURE SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   REAL(SP), INTENT(INOUT) :: X(N)
   REAL(SP), INTENT(OUT) :: Rnorm
   INTEGER :: i, i1, i2, ie, ii, iopt, irm1, ix, j, jg, l, nerr, np1
-  REAL(SP) :: rsq, s, zero
+  REAL(SP) :: rsq, s
   !* FIRST EXECUTABLE STATEMENT  BNDSOL
-  zero = 0.
   !
-  Rnorm = zero
+  Rnorm = 0._SP
   SELECT CASE (Mode)
     CASE (2)
       !                                   ********************* MODE = 2
       DO j = 1, N
-        s = zero
+        s = 0._SP
         IF( j/=1 ) THEN
           i1 = MAX(1,j-Nb+1)
           i2 = j - 1
@@ -231,7 +230,7 @@ PURE SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
       DO j = 1, N
         X(j) = G(j,Nb+1)
       END DO
-      rsq = zero
+      rsq = 0._SP
       np1 = N + 1
       irm1 = Ir - 1
       IF( np1<=irm1 ) THEN
@@ -246,7 +245,7 @@ PURE SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   DO ii = 1, N
     i = N + 1 - ii
     !                                   ALG. STEP 28
-    s = zero
+    s = 0._SP
     l = MAX(0,i-Ip)
     !                                   ALG. STEP 29
     IF( i/=N ) THEN

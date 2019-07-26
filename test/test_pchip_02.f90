@@ -130,7 +130,6 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, four = 4._DP, ten = 10._DP
     REAL(DP), PARAMETER :: small = 1.E-10_DP
     INTEGER, PARAMETER :: nintt = 3
     REAL(DP), PARAMETER :: left(3) = [ -1.5_DP, 2.E-10_DP, 1._DP ]
@@ -138,8 +137,8 @@ CONTAINS
     !
     !* FIRST EXECUTABLE STATEMENT  DEVCHK
     machep = eps_dp
-    eps1 = four*machep
-    eps2 = ten*machep
+    eps1 = 4._DP*machep
+    eps2 = 10._DP*machep
     !
     Fail = .FALSE.
     !
@@ -152,7 +151,7 @@ CONTAINS
       x1 = left(iintt)
       x2 = right(iintt)
       !
-      fact = MAX(SQRT(x2-x1),one)
+      fact = MAX(SQRT(x2-x1),1._DP)
       tol1 = eps1*fact
       tol2 = eps2*fact
       !
@@ -353,12 +352,12 @@ CONTAINS
           END IF
         END DO
         failnx = (next2(1)/=next(1)) .OR. (next2(2)/=next(2))
-        failoc = failnx .OR. (aefmax/=zero)
+        failoc = failnx .OR. (aefmax/=0._DP)
         IF( Kprint>=2 ) THEN
           IF( failoc ) THEN
             WRITE (Lout,99013)
             99013 FORMAT (/' ***** DCHFEV DID NOT AGREE WITH DCHFDV:')
-            IF( aefmax/=zero ) WRITE (Lout,99014) aefmax, xafmax
+            IF( aefmax/=0._DP ) WRITE (Lout,99014) aefmax, xafmax
             99014 FORMAT (7X,'MAXIMUM DIFFERENCE ',1P,D12.5,'; OCCURRED AT X =',&
               D12.5)
             IF( failnx ) WRITE (Lout,99015) next2, next
@@ -632,7 +631,6 @@ CONTAINS
     !
     INTEGER, PARAMETER :: nmax = 10, nx = 4, ny = 6
     INTEGER, PARAMETER :: ne = 51
-    REAL(DP), PARAMETER :: zero = 0._DP
     !
     !  INITIALIZE.
     !
@@ -740,7 +738,7 @@ CONTAINS
         END DO
         !
         faild = (fermax>tol) .OR. (dermax>tol)
-        faile = fdifmx/=zero
+        faile = fdifmx/=0._DP
         failoc = faild .OR. faile .OR. (ierr/=13) .OR. (ier2/=ierr)
         !
         IF( failoc .AND. (Kprint>=2) ) WRITE (Lout,99006) 'J', j, 'Y', Y(j)
@@ -828,7 +826,7 @@ CONTAINS
         END DO
         !
         faild = (fermax>tol) .OR. (dermax>tol)
-        faile = fdifmx/=zero
+        faile = fdifmx/=0._DP
         failoc = faild .OR. faile .OR. (ierr/=20) .OR. (ier2/=ierr)
         !
         IF( failoc .AND. (Kprint>=2) ) WRITE (Lout,99006) 'I', i, 'X', X(i)
@@ -1100,7 +1098,7 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    REAL(DP), PARAMETER :: thrqtr = 0.75_DP, one = 1._DP, two = 2._DP, three = 3._DP
+    REAL(DP), PARAMETER :: thrqtr = 0.75_DP
     INTEGER, PARAMETER :: n = 7
     REAL(DP), PARAMETER :: x(7) = [ -4._DP, -2._DP, -0.9_DP, 0._DP, 0.9_DP, 2._DP, 4._DP ]
     INTEGER, PARAMETER :: npairs = 17
@@ -1152,7 +1150,7 @@ CONTAINS
           WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
         END IF
         !
-        error = ABS(error)/MAX(one,ABS(true))
+        error = ABS(error)/MAX(1._DP,ABS(true))
         IF( error>tol ) ifail = ifail + 1
         IF( i==1 ) THEN
           errmax = error
@@ -1199,15 +1197,15 @@ CONTAINS
     !
     REAL(DP) FUNCTION FCN(ax)
       REAL(DP), INTENT(IN) :: ax
-      FCN = three*ax*ax*(ax-two)
+      FCN = 3._DP*ax*ax*(ax-2._DP)
     END FUNCTION FCN
     REAL(DP) FUNCTION DERIV(ax)
       REAL(DP), INTENT(IN) :: ax
-      DERIV = three*ax*(two*(ax-two)+ax)
+      DERIV = 3._DP*ax*(2._DP*(ax-2._DP)+ax)
     END FUNCTION DERIV
     REAL(DP) FUNCTION ANTDER(ax)
       REAL(DP), INTENT(IN) :: ax
-      ANTDER = ax**3*(thrqtr*ax-two)
+      ANTDER = ax**3*(thrqtr*ax-2._DP)
     END FUNCTION ANTDER
   END SUBROUTINE DPCHQ2
   !** DPCHQ3
@@ -1301,7 +1299,6 @@ CONTAINS
     INTEGER :: i, ierr, ifail, nbad, nbadz
     INTEGER, PARAMETER :: N = 9, NWK = 2*N
     REAL(DP) :: d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
-    REAL(DP), PARAMETER :: ZERO = 0._DP, MONE = -1._DP
     CHARACTER(6) :: result
     !
     !  Initialize.
@@ -1326,7 +1323,7 @@ CONTAINS
     !        Set tolerances.
     tol = 10*eps_dp
     told = SQRT(eps_dp)
-    tolz = ZERO
+    tolz = 0._DP
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     !
@@ -1374,7 +1371,7 @@ CONTAINS
         result = '  OK'
         !             D-values should agree with stored values.
         !               (Zero values should agree exactly.)
-        IF( dm(i)==ZERO ) THEN
+        IF( dm(i)==0._DP ) THEN
           err = ABS(d(i))
           IF( err>tolz ) THEN
             nbadz = nbadz + 1
@@ -1403,7 +1400,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99011) 'IC'
     !     --------------------------------------------------------
-    CALL DPCHIC(ic,vc,ZERO,N,x,f,dc,1,wk,NWK,ierr)
+    CALL DPCHIC(ic,vc,0._DP,N,x,f,dc,1,wk,NWK,ierr)
     !     --------------------------------------------------------
     !        Expect IERR=0 .
     IF( Kprint>=3 ) WRITE (Lun,99012) 0
@@ -1435,7 +1432,7 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lun,99011) 'IC'
     !     -------------------------------------------------------
-    CALL DPCHIC(ic,vc,MONE,N,x,f,d,1,wk,NWK,ierr)
+    CALL DPCHIC(ic,vc,-1._DP,N,x,f,d,1,wk,NWK,ierr)
     !     -------------------------------------------------------
     !        Expect IERR=0 .
     IF( Kprint>=3 ) WRITE (Lun,99012) 0
@@ -1864,7 +1861,6 @@ CONTAINS
     INTEGER, PARAMETER :: N = 9
     REAL(DP) :: bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, fermax, t(2*N+4), &
       terr, termax, tol, tolz, tsave(2*N+4)
-    REAL(DP), PARAMETER :: ZERO = 0._DP
     LOGICAL :: fail
     !
     !  Define test data.
@@ -1881,7 +1877,7 @@ CONTAINS
     !* FIRST EXECUTABLE STATEMENT  DPCHQ5
     ifail = 0
     tol = 100*eps_dp
-    tolz = ZERO
+    tolz = 0._DP
     !
     IF( Kprint>=3 ) WRITE (Lun,99001)
     !
@@ -1909,8 +1905,8 @@ CONTAINS
       ELSE
         !             Compare evaluated results with inputs to DPCHBS.
         inbv = 1
-        fermax = ZERO
-        dermax = ZERO
+        fermax = 0._DP
+        dermax = 0._DP
         IF( Kprint>=3 ) THEN
           WRITE (Lun,99006)
           99006 FORMAT (/15X,'X',9X,'KNOTS',10X,'F',7X,'FERR',8X,'D',7X,'DERR')
@@ -1950,7 +1946,7 @@ CONTAINS
         END DO
       ELSEIF( knotyp==-1 ) THEN
         !             Check that knot vector is unchanged.
-        termax = ZERO
+        termax = 0._DP
         DO i = 1, nknots
           terr = ABS(t(i)-tsave(i))
           termax = MAX(termax,terr)

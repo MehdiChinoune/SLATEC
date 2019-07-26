@@ -49,13 +49,12 @@ REAL(DP) ELEMENTAL FUNCTION DPCHST(Arg1,Arg2)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   !
   !  PERFORM THE TEST.
   !
   !* FIRST EXECUTABLE STATEMENT  DPCHST
-  DPCHST = SIGN(one,Arg1)*SIGN(one,Arg2)
-  IF( (Arg1==zero) .OR. (Arg2==zero) ) DPCHST = zero
+  DPCHST = SIGN(1._DP,Arg1)*SIGN(1._DP,Arg2)
+  IF( (Arg1==0._DP) .OR. (Arg2==0._DP) ) DPCHST = 0._DP
   !
   !------------- LAST LINE OF DPCHST FOLLOWS -----------------------------
 END FUNCTION DPCHST

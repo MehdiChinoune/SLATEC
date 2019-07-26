@@ -149,9 +149,9 @@ ELEMENTAL SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   REAL(SP) :: aa, ad, ak, alim, atrm, az, az3, bk, ck, dig, dk, d1, d2, elim, fid, fnu, &
   rl, r1m5, sfac, tol, zi, zr, z3i, z3r, bb, alaz
   COMPLEX(SP) :: csq, cy(1), s1, s2, trm1, trm2, zta, z3
-  REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01_SP, c1 = 3.55028053887817240E-01_SP, &
-    c2 = 2.58819403792806799E-01_SP, coef = 1.83776298473930683E-01_SP
-  COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
+  REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01_SP, &
+    c1 = 3.55028053887817240E-01_SP, c2 = 2.58819403792806799E-01_SP, &
+    coef = 1.83776298473930683E-01_SP
   !* FIRST EXECUTABLE STATEMENT  CAIRY
   Ierr = 0
   Nz = 0
@@ -291,8 +291,8 @@ ELEMENTAL SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     !-----------------------------------------------------------------------
     !     POWER SERIES FOR ABS(Z)<=1.
     !-----------------------------------------------------------------------
-    s1 = cone
-    s2 = cone
+    s1 = (1._SP,0._SP)
+    s2 = (1._SP,0._SP)
     IF( az<tol ) THEN
       aa = 1.E+3_SP*tiny_sp
       s1 = CMPLX(0._SP,0._SP,SP)
@@ -310,8 +310,8 @@ ELEMENTAL SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     ELSE
       aa = az*az
       IF( aa>=tol/az ) THEN
-        trm1 = cone
-        trm2 = cone
+        trm1 = (1._SP,0._SP)
+        trm2 = (1._SP,0._SP)
         atrm = 1._SP
         z3 = Z*Z*Z
         az3 = az*aa

@@ -71,10 +71,6 @@ REAL(DP) ELEMENTAL FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   REAL(DP) :: dterm, fterm, h, phia1, phia2, phib1, phib2, psia1, psia2, psib1, &
     psib2, ta1, ta2, tb1, tb2, ua1, ua2, ub1, ub2
   !
-  !  INITIALIZE.
-  !
-  REAL(DP), PARAMETER :: half = .5_DP, two = 2._DP, three = 3._DP, four = 4._DP, six = 6._DP
-  !
   !  VALIDITY CHECK INPUT.
   !
   !* FIRST EXECUTABLE STATEMENT  DCHFIE
@@ -88,23 +84,23 @@ REAL(DP) ELEMENTAL FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
     tb2 = (X2-B)/h
     !
     ua1 = ta1**3
-    phia1 = ua1*(two-ta1)
-    psia1 = ua1*(three*ta1-four)
+    phia1 = ua1*(2._DP-ta1)
+    psia1 = ua1*(3._DP*ta1-4._DP)
     ua2 = ta2**3
-    phia2 = ua2*(two-ta2)
-    psia2 = -ua2*(three*ta2-four)
+    phia2 = ua2*(2._DP-ta2)
+    psia2 = -ua2*(3._DP*ta2-4._DP)
     !
     ub1 = tb1**3
-    phib1 = ub1*(two-tb1)
-    psib1 = ub1*(three*tb1-four)
+    phib1 = ub1*(2._DP-tb1)
+    psib1 = ub1*(3._DP*tb1-4._DP)
     ub2 = tb2**3
-    phib2 = ub2*(two-tb2)
-    psib2 = -ub2*(three*tb2-four)
+    phib2 = ub2*(2._DP-tb2)
+    psib2 = -ub2*(3._DP*tb2-4._DP)
     !
     fterm = F1*(phia2-phib2) + F2*(phib1-phia1)
-    dterm = (D1*(psia2-psib2)+D2*(psib1-psia1))*(h/six)
+    dterm = (D1*(psia2-psib2)+D2*(psib1-psia1))*(h/6._DP)
     !
-    DCHFIE = (half*h)*(fterm+dterm)
+    DCHFIE = (0.5_DP*h)*(fterm+dterm)
   END IF
   !
   !------------- LAST LINE OF DCHFIE FOLLOWS -----------------------------

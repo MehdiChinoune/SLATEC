@@ -201,9 +201,8 @@ PURE SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   INTEGER, INTENT(INOUT) :: Ip, Ir
   REAL(SP), INTENT(INOUT) :: G(Mdg,Nb+1)
   INTEGER :: i, ie, ig, ig1, ig2, iopt, j, jg, k, kh, l, lp1, mh, mu, nbp1, nerr
-  REAL(SP) :: rho, zero
+  REAL(SP) :: rho
   !* FIRST EXECUTABLE STATEMENT  BNDACC
-  zero = 0.
   !
   !              ALG. STEPS 1-4 ARE PERFORMED EXTERNAL TO THIS SUBROUTINE.
   !
@@ -229,7 +228,7 @@ PURE SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
         DO i = 1, ie
           ig = Ir + i - 1
           DO j = 1, nbp1
-            G(ig,j) = zero
+            G(ig,j) = 0._SP
           END DO
         END DO
         !  ALG. STEP 11
@@ -252,7 +251,7 @@ PURE SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
           !  ALG. STEP 16
           DO i = 1, k
             jg = nbp1 - i
-            G(ig,jg) = zero
+            G(ig,jg) = 0._SP
           END DO
         END DO
       END IF
@@ -273,7 +272,7 @@ PURE SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
     IF( kh>=nbp1 ) THEN
       !  ALG. STEP 23
       DO i = 1, Nb
-        G(Ir-1,i) = zero
+        G(Ir-1,i) = 0._SP
       END DO
     END IF
   ELSE

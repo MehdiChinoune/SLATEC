@@ -65,8 +65,8 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     npr014, npr015, nredc, ntries, nx0066, nx0091, nx0106, idum(01)
   INTEGER, TARGET :: intopt(08)
   INTEGER, POINTER :: idg, ipagef, isave, mxitlp, kprint, itbrc, npp, lprg
-  REAL(DP) :: aij, anorm, dirnrm, dulnrm, erdnrm, factor, gg, one, resnrm, rhsnrm, &
-    rprnrm, rzj, scalr, scosts, sizee, theta, upbnd, uu, xlamda, xval, zero, rdum(01)
+  REAL(DP) :: aij, anorm, dirnrm, dulnrm, erdnrm, factor, gg, resnrm, rhsnrm, &
+    rprnrm, rzj, scalr, scosts, sizee, theta, upbnd, uu, xlamda, xval, rdum(01)
   REAL(DP), TARGET :: ropt(07)
   REAL(DP), POINTER :: eps, asmall, abig, costsc, tolls, tune, tolabs
   !
@@ -198,8 +198,6 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   lp_com = 0
   !
   !     THE VALUES ZERO AND ONE.
-  zero = 0._DP
-  one = 1._DP
   factor = 0.01_DP
   lpg = Lmx - (Nvars+4)
   iopt = 1
@@ -332,8 +330,8 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     i = 1
     n20046 = Mrelas
     DO WHILE( (n20046-i)>=0 )
-      IF( Primal(i+Nvars)/=zero ) THEN
-        xlamda = zero
+      IF( Primal(i+Nvars)/=0._DP ) THEN
+        xlamda = 0._DP
         npr009 = 1700
         npr013 = 2000
         GOTO 4100
@@ -348,7 +346,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     !     COSTSC) AND PERFORM STANDARD PHASE-1.
     IF( kprint>=2 ) CALL IVOUT(0,idum,'('' ENTER STANDARD PHASE-1'')',idg)
     scosts = costsc
-    costsc = zero
+    costsc = 0._DP
     npr007 = 1200
     GOTO 2800
   END IF
@@ -366,7 +364,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     !
     !     SET LAMDA TO ZERO, COSTSC=SCOSTS, PERFORM STANDARD PHASE-2.
     IF( kprint>1 ) CALL IVOUT(0,idum,'('' ENTER STANDARD PHASE-2'')',idg)
-    xlamda = zero
+    xlamda = 0._DP
     costsc = scosts
     npr009 = 1700
     npr013 = 2000
@@ -443,8 +441,8 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
               Ind(j) = -3
             CASE (3)
             CASE (4)
-              Bl(j) = zero
-              Bu(j) = zero
+              Bl(j) = 0._DP
+              Bu(j) = 0._DP
               Ind(j) = -3
             CASE DEFAULT
               Bu(j) = Bl(j)
@@ -463,7 +461,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   GOTO 4500
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (COMPUTE RIGHT HAND SIDE)
-  1900 Rhs(1:Mrelas) = zero
+  1900 Rhs(1:Mrelas) = 0._DP
   j = 1
   n20098 = Nvars + Mrelas
   DO WHILE( (n20098-j)>=0 )
@@ -475,12 +473,12 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         CASE (3)
           scalr = -Bl(j)
         CASE (4)
-          scalr = zero
+          scalr = 0._DP
         CASE DEFAULT
           scalr = -Bl(j)
       END SELECT
     END IF
-    IF( scalr==zero ) THEN
+    IF( scalr==0._DP ) THEN
       j = j + 1
     ELSEIF( j>Nvars ) THEN
       Rhs(j-Nvars) = Rhs(j-Nvars) - scalr
@@ -501,9 +499,9 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   j = 1
   n20119 = Nvars + Mrelas
   DO WHILE( (n20119-j)>=0 )
-    scalr = zero
+    scalr = 0._DP
     IF( Ind(j)==3 .AND. MOD(Ibb(j),2)==0 ) scalr = Bu(j) - Bl(j)
-    IF( scalr==zero ) THEN
+    IF( scalr==0._DP ) THEN
       j = j + 1
     ELSEIF( j>Nvars ) THEN
       Rhs(j-Nvars) = Rhs(j-Nvars) + scalr
@@ -662,14 +660,14 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     -1 VIOLATES LOWER BOUND, 0 FEASIBLE, +1 VIOLATES UPPER BOUND.
   !     (THIS INFO IS STORED IN PRIMAL(NVARS+1)-PRIMAL(NVARS+MRELAS))
   !     TRANSLATE VARIABLE TO ITS UPPER BOUND, IF > UPPER BOUND
-  2800 Primal(Nvars+1:Nvars+Mrelas) = zero
+  2800 Primal(Nvars+1:Nvars+Mrelas) = 0._DP
   i = 1
   n20172 = Mrelas
   DO WHILE( (n20172-i)>=0 )
     j = Ibasis(i)
     IF( Ind(j)/=4 ) THEN
-      IF( Rprim(i)<zero ) THEN
-        Primal(i+Nvars) = -one
+      IF( Rprim(i)<0._DP ) THEN
+        Primal(i+Nvars) = -1._DP
       ELSEIF( Ind(j)==3 ) THEN
         upbnd = Bu(j) - Bl(j)
         IF( j<=Nvars ) upbnd = upbnd/Csc(j)
@@ -685,7 +683,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
               Rhs(k) = Rhs(k) - upbnd*aij*Csc(j)
             END DO
           END IF
-          Primal(i+Nvars) = one
+          Primal(i+Nvars) = 1._DP
         END IF
       END IF
     END IF
@@ -742,7 +740,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     xval = Rprim(j)
     !
     !     ALL VARIABLES BOUNDED BELOW HAVE ZERO AS THAT BOUND.
-    IF( Ind(ibas)<=3 ) xval = MAX(zero,xval)
+    IF( Ind(ibas)<=3 ) xval = MAX(0._DP,xval)
     !
     !     IF THE VARIABLE HAS AN UPPER BOUND, COMPUTE THAT BOUND.
     IF( Ind(ibas)==3 ) THEN
@@ -752,7 +750,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     END IF
     !
     !     SUBTRACT XVAL TIMES COLUMN VECTOR FROM RIGHT-HAND SIDE IN WW(*)
-    IF( xval==zero ) THEN
+    IF( xval==0._DP ) THEN
       j = j + 1
     ELSEIF( ibas>Nvars ) THEN
       IF( Ind(ibas)/=2 ) THEN
@@ -782,7 +780,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     TRY AN ABSOLUTE ERROR TEST IF THE RELATIVE TEST FAILS.
   IF( .NOT. feas ) feas = resnrm<=tolabs
   IF( feas ) THEN
-    Primal(Nvars+1:Nvars+Mrelas) = zero
+    Primal(Nvars+1:Nvars+Mrelas) = 0._DP
   END IF
   SELECT CASE(npr008)
     CASE(600)
@@ -898,7 +896,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       GOTO 2300
   END SELECT
   4300 CONTINUE
-  IF( costsc==zero ) THEN
+  IF( costsc==0._DP ) THEN
     npr006 = 4400
     GOTO 4000
   ELSE
@@ -926,12 +924,12 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   END DO
   !
   !     REPLACE TRANSLATED BASIC VARIABLES INTO ARRAY PRIMAL(*)
-  Primal(1:Nvars+Mrelas) = zero
+  Primal(1:Nvars+Mrelas) = 0._DP
   j = 1
   n20283 = Nvars + Mrelas
   DO WHILE( (n20283-j)>=0 )
     ibas = ABS(Ibasis(j))
-    xval = zero
+    xval = 0._DP
     IF( j<=Mrelas ) xval = Rprim(j)
     IF( Ind(ibas)==1 ) xval = xval + Bl(ibas)
     IF( Ind(ibas)==2 ) xval = Bu(ibas) - xval
@@ -948,8 +946,8 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   j = 1
   n20290 = Nvars
   DO WHILE( (n20290-j)>=0 )
-    rzj = zero
-    IF( Ibb(j)>zero .AND. Ind(j)/=4 ) THEN
+    rzj = 0._DP
+    IF( Ibb(j)>0._DP .AND. Ind(j)/=4 ) THEN
       rzj = Costs(j)
       i = 0
       DO
@@ -1009,7 +1007,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     !
     !     FORCE PAGE FILE TO BE OPENED ON RESTARTS.
     key = INT( Amat(4) )
-    Amat(4) = zero
+    Amat(4) = 0._DP
     lpr = Nvars + 4
     WRITE (isave) (Amat(i),i=1,lpr), (Imat(i),i=1,lpr)
     Amat(4) = key

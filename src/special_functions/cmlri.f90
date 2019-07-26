@@ -33,8 +33,6 @@ PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   COMPLEX(SP) :: ck, cnorm, pt, p1, p2, rz, summ
   REAL(SP) :: ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, rho, &
     rho2, scle, tfnf, tst, x
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP), &
-    ctwo = (2._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CMLRI
   scle = 1.E+3_SP*tiny_sp/Tol
   Nz = 0
@@ -45,9 +43,9 @@ PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   inu = ifnu + N - 1
   at = iaz + 1._SP
   ck = CMPLX(at,0._SP,SP)/Z
-  rz = ctwo/Z
-  p1 = czero
-  p2 = cone
+  rz = (2._SP,0._SP)/Z
+  p1 = (0._SP,0._SP)
+  p2 = (1._SP,0._SP)
   ack = (at+1._SP)/az
   rho = ack + SQRT(ack*ack-1._SP)
   rho2 = rho*rho
@@ -74,8 +72,8 @@ PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     !-----------------------------------------------------------------------
     !     COMPUTE RELATIVE TRUNCATION ERROR FOR RATIOS
     !-----------------------------------------------------------------------
-    p1 = czero
-    p2 = cone
+    p1 = (0._SP,0._SP)
+    p2 = (1._SP,0._SP)
     at = inu + 1._SP
     ck = CMPLX(at,0._SP,SP)/Z
     ack = at/az
@@ -106,7 +104,7 @@ PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   200  k = k + 1
   kk = MAX(i+iaz,k+inu)
   fkk = kk
-  p1 = czero
+  p1 = (0._SP,0._SP)
   !-----------------------------------------------------------------------
   !     SCALE P2 AND SUM BY SCLE
   !-----------------------------------------------------------------------
@@ -115,7 +113,7 @@ PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   tfnf = fnf + fnf
   bk = LOG_GAMMA(fkk+tfnf+1._SP) - LOG_GAMMA(fkk+1._SP)- LOG_GAMMA(tfnf+1._SP)
   bk = EXP(bk)
-  summ = czero
+  summ = (0._SP,0._SP)
   km = kk - inu
   DO i = 1, km
     pt = p2

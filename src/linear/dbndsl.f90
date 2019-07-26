@@ -200,16 +200,15 @@ PURE SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   REAL(DP), INTENT(INOUT) :: X(N)
   REAL(DP), INTENT(OUT) :: Rnorm
   INTEGER :: i, i1, i2, ie, ii, iopt, irm1, ix, j, jg, l, nerr, np1
-  REAL(DP) :: rsq, s, zero
+  REAL(DP) :: rsq, s
   !* FIRST EXECUTABLE STATEMENT  DBNDSL
-  zero = 0._DP
   !
-  Rnorm = zero
+  Rnorm = 0._DP
   SELECT CASE (Mode)
     CASE (2)
       !                                   ********************* MODE = 2
       DO j = 1, N
-        s = zero
+        s = 0._DP
         IF( j/=1 ) THEN
           i1 = MAX(1,j-Nb+1)
           i2 = j - 1
@@ -230,7 +229,7 @@ PURE SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
       DO j = 1, N
         X(j) = G(j,Nb+1)
       END DO
-      rsq = zero
+      rsq = 0._DP
       np1 = N + 1
       irm1 = Ir - 1
       IF( np1<=irm1 ) THEN
@@ -245,7 +244,7 @@ PURE SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   DO ii = 1, N
     i = N + 1 - ii
     !                                   ALG. STEP 28
-    s = zero
+    s = 0._DP
     l = MAX(0,i-Ip)
     !                                   ALG. STEP 29
     IF( i/=N ) THEN

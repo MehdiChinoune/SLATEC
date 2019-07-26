@@ -36,7 +36,6 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   REAL(SP) :: aa, acz, aez, ak, arg, arm, atol, az, bb, bk, dfnu, &
     dnu2, fdn, rtr1, s, sgn, sqk, x, yy
   REAL(SP), PARAMETER ::  pi = 3.14159265358979324_SP, rtpi = 0.159154943091895336_SP
-  COMPLEX(SP), PARAMETER ::  czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CASYI
   Nz = 0
   az = ABS(Z)
@@ -75,7 +74,7 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
     s = Tol/aez
     jl = INT( Rl + Rl ) + 2
     yy = AIMAG(Z)
-    p1 = czero
+    p1 = (0._SP,0._SP)
     IF( yy/=0._SP ) THEN
       !-----------------------------------------------------------------------
       !     CALCULATE EXP(PI*(0.5+FNU+N-IL)*I) TO MINIMIZE LOSSES OF
@@ -94,9 +93,9 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       sqk = fdn - 1._SP
       atol = s*ABS(sqk)
       sgn = 1._SP
-      cs1 = cone
-      cs2 = cone
-      ck = cone
+      cs1 = (1._SP,0._SP)
+      cs2 = (1._SP,0._SP)
+      ck = (1._SP,0._SP)
       ak = 0._SP
       aa = 1._SP
       bb = aez
@@ -125,7 +124,7 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
     nn = N
     k = nn - 2
     ak = k
-    rz = (cone+cone)/Z
+    rz = (2._SP,0._SP)/Z
     ib = 3
     DO i = ib, nn
       Y(k) = CMPLX(ak+Fnu,0._SP,SP)*rz*Y(k+1) + Y(k+2)

@@ -150,12 +150,10 @@ PURE SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   REAL(SP), INTENT(OUT) :: Rnorm(Nb)
   !
   INTEGER :: i, ii, iopt, ip1, j, jb, jj, k, kp1, l, ldiag, lmax, nerr
-  REAL(SP) :: factor, hmax, sm1, szero, tmp
-  REAL(DP) :: sm, dzero
+  REAL(SP) :: factor, hmax, sm1, tmp
+  REAL(DP) :: sm
   REAL(SP), PARAMETER :: releps = eps_sp
   !* FIRST EXECUTABLE STATEMENT  HFTI
-  szero = 0._SP
-  dzero = 0._DP
   factor = 0.001_SP
   !
   k = 0
@@ -236,7 +234,7 @@ PURE SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
     !
     IF( Nb>0 ) THEN
       DO jb = 1, Nb
-        tmp = szero
+        tmp = 0._SP
         IF( kp1<=M ) THEN
           DO i = kp1, M
             tmp = tmp + B(i,jb)**2
@@ -265,7 +263,7 @@ PURE SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !     SOLVE THE K BY K TRIANGULAR SYSTEM.
           !    ..
           DO l = 1, k
-            sm = dzero
+            sm = 0._DP
             i = kp1 - l
             IF( i/=k ) THEN
               ip1 = i + 1
@@ -281,7 +279,7 @@ PURE SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !    ..
           IF( k/=N ) THEN
             DO j = kp1, N
-              B(j,jb) = szero
+              B(j,jb) = 0._SP
             END DO
             DO i = 1, k
               CALL H12(2,i,kp1,N,A(i,1),Mda,G(i),B(1,jb),1,Mdb,1)
@@ -305,7 +303,7 @@ PURE SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
     ELSEIF( Nb>0 ) THEN
       DO jb = 1, Nb
         DO i = 1, N
-          B(i,jb) = szero
+          B(i,jb) = 0._SP
         END DO
       END DO
     END IF

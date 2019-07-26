@@ -107,7 +107,6 @@ PURE SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  INITIALIZE.
   !
-  REAL(SP), PARAMETER :: zero = 0., one = 1.
   REAL(SP), PARAMETER :: fudge = 4.
   !* FIRST EXECUTABLE STATEMENT  PCHCS
   Ierr = 0
@@ -124,11 +123,11 @@ PURE SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
       !
       !           DO NOT CHANGE D IF 'UP-DOWN-UP'.
       IF( i>2 ) THEN
-        IF( PCHST(Slope(i-2),Slope(i))>zero ) CYCLE
+        IF( PCHST(Slope(i-2),Slope(i))>0._SP ) CYCLE
         !                   --------------------------
       END IF
       IF( i<nless1 ) THEN
-        IF( PCHST(Slope(i+1),Slope(i-1))>zero ) CYCLE
+        IF( PCHST(Slope(i+1),Slope(i-1))>0._SP ) CYCLE
         !                   ----------------------------
       END IF
       !
@@ -165,7 +164,7 @@ PURE SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
       !                     CHECK FOR FLAT-TOPPED PEAK .......................
       !
       IF( i==nless1 ) CYCLE
-      IF( PCHST(Slope(i-1),Slope(i+1))>=zero ) CYCLE
+      IF( PCHST(Slope(i-1),Slope(i+1))>=0._SP ) CYCLE
       !                -----------------------------
       !
       !           WE HAVE FLAT-TOPPED PEAK ON (X(I),X(I+1)).
@@ -196,14 +195,14 @@ PURE SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
     IF( (k>1) .AND. (k<nless1) ) THEN
       !           NORMAL CASE -- EXTREMUM IS NOT IN A BOUNDARY INTERVAL.
       fact = fudge*ABS(del(3)*(del(1)-del(2))*(wtave(2)/slmax))
-      D(1,k) = D(1,k) + MIN(fact,one)*(wtave(1)-D(1,k))
+      D(1,k) = D(1,k) + MIN(fact,1._SP)*(wtave(1)-D(1,k))
       fact = fudge*ABS(del(1)*(del(3)-del(2))*(wtave(1)/slmax))
-      D(1,k+1) = D(1,k+1) + MIN(fact,one)*(wtave(2)-D(1,k+1))
+      D(1,k+1) = D(1,k+1) + MIN(fact,1._SP)*(wtave(2)-D(1,k+1))
     ELSE
       !           SPECIAL CASE K=1 (WHICH CAN OCCUR ONLY IF I=2) OR
       !                        K=NLESS1 (WHICH CAN OCCUR ONLY IF I=NLESS1).
       fact = fudge*ABS(del(2))
-      D(1,i) = MIN(fact,one)*wtave(i-k+1)
+      D(1,i) = MIN(fact,1._SP)*wtave(i-k+1)
       !              NOTE THAT I-K+1 = 1 IF K=I  (=NLESS1),
       !                        I-K+1 = 2 IF K=I-1(=1).
     END IF
@@ -211,7 +210,7 @@ PURE SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
     !
     !....... ADJUST IF NECESSARY TO LIMIT EXCURSIONS FROM DATA.
     !
-    IF( Switch>zero ) THEN
+    IF( Switch>0._SP ) THEN
       !
       dfloc = H(k)*ABS(Slope(k))
       IF( k>1 ) dfloc = MAX(dfloc,H(k-1)*ABS(Slope(k-1)))

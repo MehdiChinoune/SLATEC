@@ -65,7 +65,6 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
     n20018, n20121, nerr, nnegrc, npr001, npr003
   REAL(DP) :: aij, alpha, gama, gq, rzj, scalr, wp, rcost, cnorm
   LOGICAL :: pagepl, trans
-  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP, two = 2._DP
   !
   !* FIRST EXECUTABLE STATEMENT  DPLPMU
   lpg = Lmx - (Nvars+4)
@@ -117,7 +116,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
   Ibb(ibas) = -ABS(Ibb(ibas))
   i = Ibasis(ABS(Ileave))
   Ibb(i) = ABS(Ibb(i))
-  IF( Primal(ABS(Ileave)+Nvars)>zero ) Ibb(i) = Ibb(i) + 1
+  IF( Primal(ABS(Ileave)+Nvars)>0._DP ) Ibb(i) = Ibb(i) + 1
   !
   !     INTERCHANGE COLUMN POINTERS TO NOTE EXCHANGE OF COLUMNS.
   600  ibas = Ibasis(Ienter)
@@ -136,10 +135,10 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
     !     SEE IF VARIABLES THAT WERE CLASSIFIED AS INFEASIBLE HAVE NOW
     !     BECOME FEASIBLE.  THIS MAY REQUIRED TRANSLATING UPPER BOUNDED
     !     VARIABLES.
-    IF( Primal(k+Nvars)==zero .OR. ABS(Rprim(k))>Rprnrm*Erp(k) ) THEN
+    IF( Primal(k+Nvars)==0._DP .OR. ABS(Rprim(k))>Rprnrm*Erp(k) ) THEN
       k = k + 1
     ELSE
-      IF( Primal(k+Nvars)<=zero ) GOTO 900
+      IF( Primal(k+Nvars)<=0._DP ) GOTO 900
       ibas = Ibasis(k)
       scalr = -(Bu(ibas)-Bl(ibas))
       IF( ibas<=Nvars ) scalr = scalr/Csc(ibas)
@@ -157,10 +156,10 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
   ELSE
     !
     !     THE INCOMING VARIABLE IS ALWAYS CLASSIFIED AS FEASIBLE.
-    Primal(ABS(Ileave)+Nvars) = zero
+    Primal(ABS(Ileave)+Nvars) = 0._DP
     !
     wp = Ww(ABS(Ileave))
-    gq = NORM2(Ww(1:Mrelas))**2 + one
+    gq = NORM2(Ww(1:Mrelas))**2 + 1._DP
     !
     !     COMPUTE INVERSE (TRANSPOSE) TIMES SEARCH DIRECTION.
     trans = .TRUE.
@@ -171,7 +170,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
     !     INCOMING COLUMN.
     CALL LA05CD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Duals,Gg,Uu,ABS(Ileave))
     Redbas = .FALSE.
-    IF( Gg>=zero ) GOTO 1000
+    IF( Gg>=0._DP ) GOTO 1000
     !
     !     REDECOMPOSE BASIS MATRIX WHEN AN ERROR RETURN FROM
     !     LA05CD( ) IS NOTED.  THIS WILL PROBABLY BE DUE TO
@@ -197,7 +196,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
   END IF
   800  Rprim(k) = -scalr
   Rprnrm = Rprnrm - scalr
-  900  Primal(k+Nvars) = zero
+  900  Primal(k+Nvars) = 0._DP
   k = k + 1
   GOTO 700
   !
@@ -213,8 +212,8 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
     !     COMPUTE COL. ABS(ILEAVE) OF THE NEW INVERSE (TRANSPOSE) MATRIX
     !     HERE ABS(ILEAVE) POINTS TO THE EJECTED COLUMN.
     !     USE ERD(*) FOR TEMP. STORAGE.
-    Erd(1:Mrelas) = zero
-    Erd(ABS(Ileave)) = one
+    Erd(1:Mrelas) = 0._DP
+    Erd(ABS(Ileave)) = 1._DP
     trans = .TRUE.
     CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Erd,trans)
     !
@@ -229,28 +228,28 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
   !     SEARCH DIRECTION WITH EACH NON-BASIC COLUMN.
   !     RECOMPUTE REDUCED COSTS.
   1100 pagepl = .TRUE.
-  Rz(1:Nvars+Mrelas) = zero
+  Rz(1:Nvars+Mrelas) = 0._DP
   nnegrc = 0
   j = Jstrt
   1200 CONTINUE
   IF( Ibb(j)<=0 ) THEN
     pagepl = .TRUE.
-    Rg(j) = one
+    Rg(j) = 1._DP
     !
     !     NONBASIC INDEPENDENT VARIABLES (COLUMN IN SPARSE MATRIX STORAGE)
   ELSEIF( j>Nvars ) THEN
     pagepl = .TRUE.
-    scalr = -one
-    IF( Ind(j)==2 ) scalr = one
+    scalr = -1._DP
+    IF( Ind(j)==2 ) scalr = 1._DP
     i = j - Nvars
     alpha = scalr*Erd(i)
     Rz(j) = -scalr*Duals(i)
     gama = scalr*Ww(i)
-    Rg(j) = MAX(Rg(j)-two*alpha*gama+alpha**2*gq,one+alpha**2)
+    Rg(j) = MAX(Rg(j)-2._DP*alpha*gama+alpha**2*gq,1._DP+alpha**2)
   ELSE
     rzj = Costs(j)*Costsc
-    alpha = zero
-    gama = zero
+    alpha = 0._DP
+    gama = 0._DP
     !
     !     COMPUTE THE DOT PRODUCT OF THE SPARSE MATRIX NONBASIC COLUMNS
     !     WITH THREE VECTORS INVOLVED IN THE UPDATING STEP.
@@ -288,18 +287,18 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
     gama = gama*Csc(j)
     !
     !     NONBASIC DEPENDENT VARIABLES (COLUMNS DEFINED IMPLICITLY)
-    Rg(j) = MAX(Rg(j)-two*alpha*gama+alpha**2*gq,one+alpha**2)
+    Rg(j) = MAX(Rg(j)-2._DP*alpha*gama+alpha**2*gq,1._DP+alpha**2)
   END IF
   !
   rcost = Rz(j)
   IF( MOD(Ibb(j),2)==0 ) rcost = -rcost
   IF( Ind(j)==3 ) THEN
-    IF( Bu(j)==Bl(j) ) rcost = zero
+    IF( Bu(j)==Bl(j) ) rcost = 0._DP
   END IF
   IF( Ind(j)==4 ) rcost = -ABS(rcost)
-  cnorm = one
+  cnorm = 1._DP
   IF( j<=Nvars ) cnorm = Colnrm(j)
-  IF( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
+  IF( rcost+Erdnrm*Dulnrm*cnorm<0._DP ) nnegrc = nnegrc + 1
   j = MOD(j,Mrelas+Nvars) + 1
   IF( nnegrc<Npp .AND. j/=Jstrt ) GOTO 1200
   Jstrt = j
@@ -310,7 +309,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
   !     IF MINIMUM REDUCED COST (DANTZIG) PRICING IS USED,
   !     CALCULATE THE NEW REDUCED COSTS.
   GOTO 1700
-  1300 Rz(1:Nvars+Mrelas) = zero
+  1300 Rz(1:Nvars+Mrelas) = 0._DP
   nnegrc = 0
   j = Jstrt
   pagepl = .TRUE.
@@ -323,8 +322,8 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
     !     NONBASIC INDEPENDENT VARIABLE (COLUMN IN SPARSE MATRIX STORAGE)
   ELSEIF( j>Nvars ) THEN
     pagepl = .TRUE.
-    scalr = -one
-    IF( Ind(j)==2 ) scalr = one
+    scalr = -1._DP
+    IF( Ind(j)==2 ) scalr = 1._DP
     i = j - Nvars
     Rz(j) = -scalr*Duals(i)
     GOTO 1600
@@ -373,12 +372,12 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Npp,&
   1600 rcost = Rz(j)
   IF( MOD(Ibb(j),2)==0 ) rcost = -rcost
   IF( Ind(j)==3 ) THEN
-    IF( Bu(j)==Bl(j) ) rcost = zero
+    IF( Bu(j)==Bl(j) ) rcost = 0._DP
   END IF
   IF( Ind(j)==4 ) rcost = -ABS(rcost)
-  cnorm = one
+  cnorm = 1._DP
   IF( j<=Nvars ) cnorm = Colnrm(j)
-  IF( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
+  IF( rcost+Erdnrm*Dulnrm*cnorm<0._DP ) nnegrc = nnegrc + 1
   j = MOD(j,Mrelas+Nvars) + 1
   IF( nnegrc<Npp .AND. j/=Jstrt ) GOTO 1400
   Jstrt = j

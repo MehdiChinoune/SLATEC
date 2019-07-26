@@ -121,12 +121,8 @@ REAL(DP) PURE FUNCTION DPCHID(N,X,F,D,Incfd,Ia,Ib)
   INTEGER :: i, iup, low
   REAL(DP) :: h, summ, value
   LOGICAL, PARAMETER :: Skip = .FALSE.
-  !
-  !  INITIALIZE.
-  !
-  REAL(DP), PARAMETER :: zero = 0._DP, half = .5_DP, six = 6._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHID
-  value = zero
+  value = 0._DP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -159,12 +155,12 @@ REAL(DP) PURE FUNCTION DPCHID(N,X,F,D,Incfd,Ia,Ib)
   IF( Ia/=Ib ) THEN
     low = MIN(Ia,Ib)
     iup = MAX(Ia,Ib) - 1
-    summ = zero
+    summ = 0._DP
     DO i = low, iup
       h = X(i+1) - X(i)
-      summ = summ + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
+      summ = summ + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/6._DP))
     END DO
-    value = half*summ
+    value = 0.5_DP*summ
     IF( Ia>Ib ) value = -value
   END IF
   !

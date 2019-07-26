@@ -147,7 +147,6 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01_SP, c1 = 6.14926627446000736E-01_SP, &
     c2 = 4.48288357353826359E-01_SP, coef = 5.77350269189625765E-01_SP, &
     pi =  3.14159265358979324_SP
-  COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CBIRY
   Ierr = 0
   nz = 0
@@ -272,8 +271,8 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     !-----------------------------------------------------------------------
     !     POWER SERIES FOR ABS(Z)<=1.
     !-----------------------------------------------------------------------
-    s1 = cone
-    s2 = cone
+    s1 = (1._SP,0._SP)
+    s2 = (1._SP,0._SP)
     IF( az<tol ) THEN
       aa = c1*(1._SP-fid) + fid*c2
       Bi = CMPLX(aa,0._SP,SP)
@@ -281,8 +280,8 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     ELSE
       aa = az*az
       IF( aa>=tol/az ) THEN
-        trm1 = cone
-        trm2 = cone
+        trm1 = (1._SP,0._SP)
+        trm2 = (1._SP,0._SP)
         atrm = 1._SP
         z3 = Z*Z*Z
         az3 = az*aa

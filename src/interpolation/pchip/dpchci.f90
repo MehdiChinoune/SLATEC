@@ -103,10 +103,6 @@ PURE SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !
   INTEGER :: i, nless1
   REAL(DP) :: del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
-  !
-  !  INITIALIZE.
-  !
-  REAL(DP), PARAMETER :: zero = 0._DP, three = 3._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHCI
   nless1 = N - 1
   del1 = Slope(1)
@@ -126,11 +122,11 @@ PURE SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
     w1 = (H(1)+hsum)/hsum
     w2 = -H(1)/hsum
     D(1,1) = w1*del1 + w2*del2
-    IF( DPCHST(D(1,1),del1)<=zero ) THEN
-      D(1,1) = zero
-    ELSEIF( DPCHST(del1,del2)<zero ) THEN
+    IF( DPCHST(D(1,1),del1)<=0._DP ) THEN
+      D(1,1) = 0._DP
+    ELSEIF( DPCHST(del1,del2)<0._DP ) THEN
       !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
-      dmax = three*del1
+      dmax = 3._DP*del1
       IF( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
     END IF
     !
@@ -146,8 +142,8 @@ PURE SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
       !
       !        SET D(I)=0 UNLESS DATA ARE STRICTLY MONOTONIC.
       !
-      D(1,i) = zero
-      IF( DPCHST(del1,del2)>zero ) THEN
+      D(1,i) = 0._DP
+      IF( DPCHST(del1,del2)>0._DP ) THEN
         !
         !        USE BRODLIE MODIFICATION OF BUTLAND FORMULA.
         !
@@ -169,11 +165,11 @@ PURE SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
     w1 = -H(N-1)/hsum
     w2 = (H(N-1)+hsum)/hsum
     D(1,N) = w1*del1 + w2*del2
-    IF( DPCHST(D(1,N),del2)<=zero ) THEN
-      D(1,N) = zero
-    ELSEIF( DPCHST(del1,del2)<zero ) THEN
+    IF( DPCHST(D(1,N),del2)<=0._DP ) THEN
+      D(1,N) = 0._DP
+    ELSEIF( DPCHST(del1,del2)<0._DP ) THEN
       !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
-      dmax = three*del2
+      dmax = 3._DP*del2
       IF( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
     END IF
   ELSE

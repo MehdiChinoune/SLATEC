@@ -39,7 +39,6 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   COMPLEX(SP) :: cfn, ck, crsc, cs, cscl, csgn, cspn, csr(3), css(3), &
     cwrk(16,3), cy(2), c1, c2, phi(2), rz, summ(2), s1, s2, &
     zeta1(2), zeta2(2), zr, phid, zeta1d, zeta2d, sumd
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   !* FIRST EXECUTABLE STATEMENT  CUNK1
   kdflg = 1
@@ -51,10 +50,10 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   cscl = CMPLX(1._SP/Tol,0._SP,SP)
   crsc = CMPLX(Tol,0._SP,SP)
   css(1) = cscl
-  css(2) = cone
+  css(2) = (1._SP,0._SP)
   css(3) = crsc
   csr(1) = crsc
-  csr(2) = cone
+  csr(2) = (1._SP,0._SP)
   csr(3) = cscl
   bry(1) = 1.E+3_SP*tiny_sp/Tol
   bry(2) = 1._SP/bry(1)
@@ -121,11 +120,11 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     IF( x<0._SP ) GOTO 600
     kdflg = 1
-    Y(i) = czero
+    Y(i) = (0._SP,0._SP)
     Nz = Nz + 1
     IF( i/=1 ) THEN
-      IF( Y(i-1)/=czero ) THEN
-        Y(i-1) = czero
+      IF( Y(i-1)/=(0._SP,0._SP) ) THEN
+        Y(i-1) = (0._SP,0._SP)
         Nz = Nz + 1
       END IF
     END IF
@@ -167,7 +166,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   IF( x<0._SP ) GOTO 600
   Nz = N
   DO i = 1, N
-    Y(i) = czero
+    Y(i) = (0._SP,0._SP)
   END DO
   RETURN
   !-----------------------------------------------------------------------
@@ -297,7 +296,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     Y(kk) = s1*cspn + s2
     kk = kk - 1
     cspn = -cspn
-    IF( c2/=czero ) THEN
+    IF( c2/=(0._SP,0._SP) ) THEN
       IF( kdflg==2 ) GOTO 500
       kdflg = 2
       CYCLE
@@ -306,7 +305,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       CYCLE
     END IF
     450  IF( rs1>0._SP ) GOTO 600
-    s2 = czero
+    s2 = (0._SP,0._SP)
     GOTO 400
   END DO
   k = N

@@ -141,7 +141,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   REAL(SP) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, &
     newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, &
     sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
-  REAL(SP), PARAMETER :: zero = 0._SP, eps = 0.01_SP, one = 1._SP, two = 2._SP, three = 3._SP
+  REAL(SP), PARAMETER :: eps = 0.01_SP
   !
   !* FIRST EXECUTABLE STATEMENT  RC6J
   Ier = 0
@@ -155,14 +155,14 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !     LMATCH = ZERO
   !
   !  Check error conditions 1, 2, and 3.
-  IF( (MOD(L2+L3+L5+L6+eps,one)>=eps+eps) .OR. &
-      (MOD(L4+L2+L6+eps,one)>=eps+eps) ) THEN
+  IF( (MOD(L2+L3+L5+L6+eps,1._SP)>=eps+eps) .OR. &
+      (MOD(L4+L2+L6+eps,1._SP)>=eps+eps) ) THEN
     Ier = 1
     ERROR STOP 'RC6J : L2+L3+L5+L6 or L4+L2+L6 not integer.'
-  ELSEIF( (L4+L2-L6<zero) .OR. (L4-L2+L6<zero) .OR. (-L4+L2+L6<zero) ) THEN
+  ELSEIF( (L4+L2-L6<0._SP) .OR. (L4-L2+L6<0._SP) .OR. (-L4+L2+L6<0._SP) ) THEN
     Ier = 2
     ERROR STOP 'RC6J : L4, L2, L6 triangular condition not satisfied.'
-  ELSEIF( (L4-L5+L3<zero) .OR. (L4+L5-L3<zero) .OR. (-L4+L5+L3<zero) ) THEN
+  ELSEIF( (L4-L5+L3<0._SP) .OR. (L4+L5-L3<0._SP) .OR. (-L4+L5+L3<0._SP) ) THEN
     Ier = 3
     ERROR STOP 'RC6J : L4, L5, L3 triangular condition not satisfied.'
   END IF
@@ -173,7 +173,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   L1max = MIN(L2+L3,L5+L6)
   !
   !  Check error condition 4.
-  IF( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
+  IF( MOD(L1max-L1min+eps,1._SP)>=eps+eps ) THEN
     Ier = 4
     ERROR STOP 'RC6J : L1MAX-L1MIN not integer.'
   END IF
@@ -183,7 +183,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     !  This is reached in case that L1 can take more than one value.
     !
     !     LSCALE = 0
-    nfin = INT(L1max-L1min+one+eps)
+    nfin = INT(L1max-L1min+1._SP+eps)
     IF( Ndim<nfin ) THEN
       !
       !  Check error condition 6.
@@ -198,7 +198,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       newfac = 0._SP
       c1 = 0._SP
       Sixcof(1) = srtiny
-      sum1 = (l1+l1+one)*tinyy
+      sum1 = (l1+l1+1._SP)*tinyy
       !
       lstep = 1
     END IF
@@ -208,8 +208,8 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     !  This is reached in case that L1 can take only one value
     !
     !     LSCALE = 0
-    Sixcof(1) = (-one)**INT(L2+L3+L5+L6+eps)&
-      /SQRT((L1min+L1min+one)*(L4+L4+one))
+    Sixcof(1) = (-1._SP)**INT(L2+L3+L5+L6+eps)&
+      /SQRT((L1min+L1min+1._SP)*(L4+L4+1._SP))
     RETURN
   ELSE
     !
@@ -219,29 +219,29 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     RETURN
   END IF
   100  lstep = lstep + 1
-  l1 = l1 + one
+  l1 = l1 + 1._SP
   !
   oldfac = newfac
-  a1 = (l1+L2+L3+one)*(l1-L2+L3)*(l1+L2-L3)*(-l1+L2+L3+one)
-  a2 = (l1+L5+L6+one)*(l1-L5+L6)*(l1+L5-L6)*(-l1+L5+L6+one)
+  a1 = (l1+L2+L3+1._SP)*(l1-L2+L3)*(l1+L2-L3)*(-l1+L2+L3+1._SP)
+  a2 = (l1+L5+L6+1._SP)*(l1-L5+L6)*(l1+L5-L6)*(-l1+L5+L6+1._SP)
   newfac = SQRT(a1*a2)
   !
-  IF( l1<one+eps ) THEN
+  IF( l1<1._SP+eps ) THEN
     !
     !  If L1 = 1, (L1 - 1) has to be factored out of DV, hence
     !
-    c1 = -two*(L2*(L2+one)+L5*(L5+one)-L4*(L4+one))/newfac
+    c1 = -2._SP*(L2*(L2+1._SP)+L5*(L5+1._SP)-L4*(L4+1._SP))/newfac
   ELSE
     !
-    dv = two*(L2*(L2+one)*L5*(L5+one)+L3*(L3+one)*L6*(L6+one)-l1*(l1-one)&
-      *L4*(L4+one)) - (L2*(L2+one)+L3*(L3+one)-l1*(l1-one))&
-      *(L5*(L5+one)+L6*(L6+one)-l1*(l1-one))
+    dv = 2._SP*(L2*(L2+1._SP)*L5*(L5+1._SP)+L3*(L3+1._SP)*L6*(L6+1._SP)-l1*(l1-1._SP)&
+      *L4*(L4+1._SP)) - (L2*(L2+1._SP)+L3*(L3+1._SP)-l1*(l1-1._SP))&
+      *(L5*(L5+1._SP)+L6*(L6+1._SP)-l1*(l1-1._SP))
     !
-    denom = (l1-one)*newfac
+    denom = (l1-1._SP)*newfac
     !
     !
     IF( lstep>2 ) c1old = ABS(c1)
-    c1 = -(l1+l1-one)*dv/denom
+    c1 = -(l1+l1-1._SP)*dv/denom
   END IF
   !
   IF( lstep>2 ) THEN
@@ -255,7 +255,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     Sixcof(lstep) = x
     !
     sumfor = sum1
-    sum1 = sum1 + (l1+l1+one)*x*x
+    sum1 = sum1 + (l1+l1+1._SP)*x*x
     IF( lstep/=nfin ) THEN
       !
       !  See if last unnormalized 6j coefficient exceeds SRHUGE
@@ -268,7 +268,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         !
         !     LSCALE = LSCALE + 1
         DO i = 1, lstep
-          IF( ABS(Sixcof(i))<srtiny ) Sixcof(i) = zero
+          IF( ABS(Sixcof(i))<srtiny ) Sixcof(i) = 0._SP
           Sixcof(i) = Sixcof(i)/srhuge
         END DO
         sum1 = sum1/hugee
@@ -307,30 +307,30 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     l1 = L1max
     !
     Sixcof(nfin) = srtiny
-    sum2 = (l1+l1+one)*tinyy
+    sum2 = (l1+l1+1._SP)*tinyy
     !
     !
-    l1 = l1 + two
+    l1 = l1 + 2._SP
     lstep = 1
     DO
       lstep = lstep + 1
-      l1 = l1 - one
+      l1 = l1 - 1._SP
       !
       oldfac = newfac
-      a1s = (l1+L2+L3)*(l1-L2+L3-one)*(l1+L2-L3-one)*(-l1+L2+L3+two)
-      a2s = (l1+L5+L6)*(l1-L5+L6-one)*(l1+L5-L6-one)*(-l1+L5+L6+two)
+      a1s = (l1+L2+L3)*(l1-L2+L3-1._SP)*(l1+L2-L3-1._SP)*(-l1+L2+L3+2._SP)
+      a2s = (l1+L5+L6)*(l1-L5+L6-1._SP)*(l1+L5-L6-1._SP)*(-l1+L5+L6+2._SP)
       newfac = SQRT(a1s*a2s)
       !
-      dv = two*(L2*(L2+one)*L5*(L5+one)+L3*(L3+one)*L6*(L6+one)-l1*(l1-one)&
-        *L4*(L4+one)) - (L2*(L2+one)+L3*(L3+one)-l1*(l1-one))&
-        *(L5*(L5+one)+L6*(L6+one)-l1*(l1-one))
+      dv = 2._SP*(L2*(L2+1._SP)*L5*(L5+1._SP)+L3*(L3+1._SP)*L6*(L6+1._SP)-l1*(l1-1._SP)&
+        *L4*(L4+1._SP)) - (L2*(L2+1._SP)+L3*(L3+1._SP)-l1*(l1-1._SP))&
+        *(L5*(L5+1._SP)+L6*(L6+1._SP)-l1*(l1-1._SP))
       !
       denom = l1*newfac
-      c1 = -(l1+l1-one)*dv/denom
+      c1 = -(l1+l1-1._SP)*dv/denom
       IF( lstep>2 ) THEN
         !
         !
-        c2 = -(l1-one)*oldfac/denom
+        c2 = -(l1-1._SP)*oldfac/denom
         !
         !  Recursion to the next 6j coefficient Y
         !
@@ -338,7 +338,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         IF( lstep==nstep2 ) EXIT
         Sixcof(nfinp1-lstep) = y
         sumbac = sum2
-        sum2 = sum2 + (l1+l1-three)*y*y
+        sum2 = sum2 + (l1+l1-3._SP)*y*y
         !
         !  See if last unnormalized 6j coefficient exceeds SRHUGE
         !
@@ -351,7 +351,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
           !     LSCALE = LSCALE + 1
           DO i = 1, lstep
             indexx = nfin - i + 1
-            IF( ABS(Sixcof(indexx))<srtiny ) Sixcof(indexx) = zero
+            IF( ABS(Sixcof(indexx))<srtiny ) Sixcof(indexx) = 0._SP
             Sixcof(indexx) = Sixcof(indexx)/srhuge
           END DO
           sumbac = sumbac/hugee
@@ -366,7 +366,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         Sixcof(nfin-1) = y
         IF( lstep==nstep2 ) EXIT
         sumbac = sum2
-        sum2 = sum2 + (l1+l1-three)*c1*c1*tinyy
+        sum2 = sum2 + (l1+l1-3._SP)*c1*c1*tinyy
       END IF
     END DO
     !
@@ -385,10 +385,10 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     ratio = (x1*y1+x2*y2+x3*y3)/(x1*x1+x2*x2+x3*x3)
     nlim = nfin - nstep2 + 1
     !
-    IF( ABS(ratio)<one ) THEN
+    IF( ABS(ratio)<1._SP ) THEN
       !
       nlim = nlim + 1
-      ratio = one/ratio
+      ratio = 1._SP/ratio
       DO n = nlim, nfin
         Sixcof(n) = ratio*Sixcof(n)
       END DO
@@ -406,7 +406,7 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
     !
     x = srtiny*c1
     Sixcof(2) = x
-    sum1 = sum1 + tinyy*(l1+l1+one)*c1*c1
+    sum1 = sum1 + tinyy*(l1+l1+1._SP)*c1*c1
     !
     IF( lstep/=nfin ) GOTO 100
     !
@@ -416,19 +416,19 @@ PURE SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !
   !  Normalize 6j coefficients
   !
-  cnorm = one/SQRT((L4+L4+one)*sumuni)
+  cnorm = 1._SP/SQRT((L4+L4+1._SP)*sumuni)
   !
   !  Sign convention for last 6j coefficient determines overall phase
   !
-  sign1 = SIGN(one,Sixcof(nfin))
-  sign2 = (-one)**INT(L2+L3+L5+L6+eps)
+  sign1 = SIGN(1._SP,Sixcof(nfin))
+  sign2 = (-1._SP)**INT(L2+L3+L5+L6+eps)
   IF( sign1*sign2<=0 ) cnorm = -cnorm
   !
-  IF( ABS(cnorm)<one ) THEN
+  IF( ABS(cnorm)<1._SP ) THEN
     !
     thresh = tinyy/ABS(cnorm)
     DO n = 1, nfin
-      IF( ABS(Sixcof(n))<thresh ) Sixcof(n) = zero
+      IF( ABS(Sixcof(n))<thresh ) Sixcof(n) = 0._SP
       Sixcof(n) = cnorm*Sixcof(n)
     END DO
     RETURN

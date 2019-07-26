@@ -71,7 +71,6 @@ REAL(SP) PURE FUNCTION PCHDF(K,X,S)
   !
   INTEGER :: i, j
   REAL(SP) :: value, s_tmp(K)
-  REAL(SP), PARAMETER :: zero = 0.
   !
   !  CHECK FOR LEGAL VALUE OF K.
   !

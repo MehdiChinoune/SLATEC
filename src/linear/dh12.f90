@@ -57,10 +57,9 @@ PURE SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   REAL(DP), INTENT(INOUT) :: C(Icv*Ncv+M*Ice), U(Iue,M)
   REAL(DP), INTENT(OUT) :: Up
   INTEGER :: i, i2, i3, i4, incr, j, kl1, kl2, klp, l1m1, mml1p2
-  REAL(DP) :: b, cl, clinv, one, ul1m1, sm
+  REAL(DP) :: b, cl, clinv, ul1m1, sm
   !     BEGIN BLOCK PERMITTING ...EXITS TO 140
   !* FIRST EXECUTABLE STATEMENT  DH12
-  one = 1._DP
   !
   !     ...EXIT
   IF( 0<Lpivot .AND. Lpivot<L1 .AND. L1<=M ) THEN
@@ -72,7 +71,7 @@ PURE SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       END DO
       !     .........EXIT
       IF( cl<=0._DP ) RETURN
-      clinv = one/cl
+      clinv = 1._DP/cl
       sm = (U(1,Lpivot)*clinv)**2
       DO j = L1, M
         sm = sm + (U(1,j)*clinv)**2
@@ -93,7 +92,7 @@ PURE SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       !        B  MUST BE NONPOSITIVE HERE.  IF B = 0., RETURN.
       !
       IF( b<0._DP ) THEN
-        b = one/b
+        b = 1._DP/b
         mml1p2 = M - L1 + 2
         IF( mml1p2<=20 ) THEN
           i2 = 1 - Icv + Ice*(Lpivot-1)

@@ -170,7 +170,6 @@ PURE SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   REAL(SP) :: aa, alim, arg, dig, elim, fnul, rl, r1m5, s1, &
     s2, tol, xx, yy, az, fn, bb, ascle, rtol, atol
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
-  COMPLEX(SP), PARAMETER :: cone = (1._SP,0._SP)
   !
   !* FIRST EXECUTABLE STATEMENT  CBESI
   Ierr = 0
@@ -219,7 +218,7 @@ PURE SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
       IF( az>aa ) Ierr = 3
       IF( fn>aa ) Ierr = 3
       zn = Z
-      csgn = cone
+      csgn = (1._SP,0._SP)
       IF( xx<0._SP ) THEN
         zn = -Z
         !-----------------------------------------------------------------------

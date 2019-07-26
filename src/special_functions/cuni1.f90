@@ -39,7 +39,6 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   COMPLEX(SP) :: cfn, crsc, cscl, csr(3), css(3), cwrk(16), c1, c2, &
     phi, rz, summ, s1, s2, zeta1, zeta2, cy(2)
   REAL(SP) :: aphi, ascle, bry(3), c2i, c2m, c2r, fn, rs1, yy
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CUNI1
   Nz = 0
   nd = N
@@ -52,10 +51,10 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   cscl = CMPLX(1._SP/Tol,0._SP,SP)
   crsc = CMPLX(Tol,0._SP,SP)
   css(1) = cscl
-  css(2) = cone
+  css(2) = (1._SP,0._SP)
   css(3) = crsc
   csr(1) = crsc
-  csr(2) = cone
+  csr(2) = (1._SP,0._SP)
   csr(3) = cscl
   bry(1) = 1.E+3_SP*tiny_sp/Tol
   !-----------------------------------------------------------------------
@@ -75,7 +74,7 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     IF( rs1>0._SP ) GOTO 400
     Nz = N
     DO i = 1, N
-      Y(i) = czero
+      Y(i) = (0._SP,0._SP)
     END DO
     RETURN
   END IF
@@ -168,7 +167,7 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   300 CONTINUE
   IF( rs1<=0._SP ) THEN
-    Y(nd) = czero
+    Y(nd) = (0._SP,0._SP)
     Nz = Nz + 1
     nd = nd - 1
     IF( nd==0 ) GOTO 200

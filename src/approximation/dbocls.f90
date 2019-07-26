@@ -575,7 +575,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
   INTEGER :: i, icase, iiw, inrows, ip, irw, iscale, j, jp, lbou, lboum, lds, lenx, &
     liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
     m, mdwl, mnew, modec, mopt, mout, nerr
-  REAL(DP) :: anorm, cnorm, one, drelpr, t, t1, t2, wt
+  REAL(DP) :: anorm, cnorm, drelpr, t, t1, t2, wt
   LOGICAL :: filter, pretri
   CHARACTER(8) :: xern1, xern2
   INTEGER :: jopt(05)
@@ -640,7 +640,6 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
     !     END PROCEDURE
     !     DO(PROCESS OPTION ARRAY)
     !     PROCEDURE(PROCESS OPTION ARRAY)
-    one = 1._DP
     drelpr = eps_dp
     checkl = .FALSE.
     filter = .TRUE.
@@ -992,7 +991,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
       W(1:Mcon,j) = 0._DP
     END DO
     DO j = 1, Mcon
-      W(j,Ncols+j) = -one
+      W(j,Ncols+j) = -1._DP
     END DO
     !
     !     OBTAIN A 'FEASIBLE POINT' FOR THE LINEAR CONSTRAINTS.
@@ -1037,7 +1036,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
       W(1:Mcon,j) = 0._DP
     END DO
     DO j = 1, Mcon
-      W(j,Ncols+j) = -one
+      W(j,Ncols+j) = -1._DP
     END DO
   END IF
   !
@@ -1048,10 +1047,10 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
     t1 = SUM(ABS(W(1:Mcon,j)))
     t2 = SUM(ABS(W(Mcon+1:Mcon+mout,1)))
     t = t1 + t2
-    IF( t==0._DP ) t = one
+    IF( t==0._DP ) t = 1._DP
     cnorm = MAX(cnorm,t1)
     anorm = MAX(anorm,t2)
-    X(Ncols+Mcon+j) = one/t
+    X(Ncols+Mcon+j) = 1._DP/t
   END DO
   SELECT CASE (iscale)
     CASE (2)
@@ -1060,14 +1059,14 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
       !     SCALE COLS. (BEFORE WEIGHTING) TO HAVE LENGTH ONE.
       DO j = 1, Ncols
         t = NORM2(W(1:Mcon+mout,j))
-        IF( t==0._DP ) t = one
-        X(Ncols+Mcon+j) = one/t
+        IF( t==0._DP ) t = 1._DP
+        X(Ncols+Mcon+j) = 1._DP/t
       END DO
     CASE (3)
       !     CASE 3
       !
       !     SUPPRESS SCALING (USE UNIT MATRIX).
-      X(Ncols+Mcon+1:2*Ncols+Mcon) = one
+      X(Ncols+Mcon+1:2*Ncols+Mcon) = 1._DP
     CASE (4)
       !     CASE 4
       !
@@ -1077,7 +1076,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
       !     CASE 1
   END SELECT
   DO j = Ncols + 1, Ncols + Mcon
-    X(Ncols+Mcon+j) = one
+    X(Ncols+Mcon+j) = 1._DP
   END DO
   !
   !     WEIGHT THE LEAST SQUARES EQUATIONS.
@@ -1096,7 +1095,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,Mode,Rw,I
   !
   !     SET THE WEIGHT TO USE IN COMPONENTS > MCON,
   !     WHEN MAKING LINEAR INDEPENDENCE TEST.
-  X(2*(Ncols+Mcon)+2) = one/wt
+  X(2*(Ncols+Mcon)+2) = 1._DP/wt
   m = mout + Mcon
   CALL DBOLS(W,Mdw,m,Ncols+Mcon,Bl,Bu,Ind,Iopt(lbou),X,Rnorm,Mode,Rw(lrw),Iw(liw))
   Rnorm = Rnorm/wt

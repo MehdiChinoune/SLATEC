@@ -53,7 +53,6 @@ PURE SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   INTEGER, INTENT(OUT) :: Ix(Lmx)
   REAL(DP), INTENT(OUT) :: Sx(Lmx)
   INTEGER :: i, iopt, lp4, n20008, n20012, nerr
-  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   !* FIRST EXECUTABLE STATEMENT  DPINTM
   iopt = 1
   !
@@ -73,15 +72,15 @@ PURE SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !
   !     INITIALIZE DATA STRUCTURE INDEPENDENT VALUES.
   !
-  Sx(1) = zero
-  Sx(2) = zero
+  Sx(1) = 0._DP
+  Sx(2) = 0._DP
   Sx(3) = Ipagef
   Ix(1) = Lmx
   Ix(2) = M
   Ix(3) = N
   Ix(4) = 0
-  Sx(Lmx-1) = zero
-  Sx(Lmx) = -one
+  Sx(Lmx-1) = 0._DP
+  Sx(Lmx) = -1._DP
   Ix(Lmx-1) = -1
   lp4 = N + 4
   !
@@ -90,7 +89,7 @@ PURE SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   i = 4
   n20008 = lp4
   DO WHILE( (n20008-i)>=0 )
-    Sx(i) = zero
+    Sx(i) = 0._DP
     i = i + 1
   END DO
   i = 5
@@ -99,7 +98,7 @@ PURE SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
     Ix(i) = lp4
     i = i + 1
   END DO
-  Sx(N+5) = zero
+  Sx(N+5) = 0._DP
   Ix(N+5) = 0
   Ix(Lmx) = 0
   !

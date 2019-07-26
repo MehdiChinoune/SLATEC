@@ -231,7 +231,6 @@ PURE SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER :: i, ibeg, iend, nless1
-  REAL(DP), PARAMETER :: zero = 0._DP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -297,7 +296,7 @@ PURE SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           !
           !  SET DERIVATIVES AT POINTS WHERE MONOTONICITY SWITCHES DIRECTION.
           !
-          IF( Switch/=zero ) THEN
+          IF( Switch/=0._DP ) THEN
             !     ----------------------------------------------------
             CALL DPCHCS(Switch,N,Wk(1),Wk(N),D,Incfd,Ierr)
             !     ----------------------------------------------------

@@ -49,7 +49,6 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   INTEGER :: i, iform, init, nn, nw
   COMPLEX(SP) :: arg, asum, bsum, cwrk(16), cz, phi, summ, zb, zeta1, zeta2, zn, zr
   REAL(SP) :: aarg, aphi, ascle, ax, ay, fnn, gnn, gnu, rcz, x, yy
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP)
   REAL(SP), PARAMETER :: aic = 1.265512123484645396_SP
   !* FIRST EXECUTABLE STATEMENT  CUOIK
   Nuf = 0
@@ -116,7 +115,7 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
         END IF
       END IF
       DO i = 1, nn
-        Y(i) = czero
+        Y(i) = (0._SP,0._SP)
       END DO
       Nuf = nn
       RETURN
@@ -162,7 +161,7 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
       IF( nw/=1 ) RETURN
     END IF
   END IF
-  Y(nn) = czero
+  Y(nn) = (0._SP,0._SP)
   nn = nn - 1
   Nuf = Nuf + 1
   IF( nn==0 ) RETURN

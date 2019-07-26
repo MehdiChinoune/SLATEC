@@ -101,7 +101,6 @@ PURE SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   INTEGER :: i
   REAL(SP) :: c2, c3, del1, del2, delta, h, x, xmi, xma
-  REAL(SP), PARAMETER :: zero = 0.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -115,7 +114,7 @@ PURE SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
     ERROR STOP 'CHFEV : NUMBER OF EVALUATION POINTS LESS THAN ONE'
   ELSE
     h = X2 - X1
-    IF( h==zero ) THEN
+    IF( h==0._SP ) THEN
       !
       !     X1=X2 RETURN.
       Ierr = -2
@@ -128,8 +127,8 @@ PURE SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   Ierr = 0
   Next(1) = 0
   Next(2) = 0
-  xmi = MIN(zero,h)
-  xma = MAX(zero,h)
+  xmi = MIN(0._SP,h)
+  xma = MAX(0._SP,h)
   !
   !  COMPUTE CUBIC COEFFICIENTS (EXPANDED ABOUT X1).
   !

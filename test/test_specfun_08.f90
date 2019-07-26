@@ -806,7 +806,7 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX(SP) :: ck(20), cone, csgn, cw, cy, w(20), y(20), z, zn, zsc, zt, zz
+    COMPLEX(SP) :: ck(20), csgn, cw, cy, w(20), y(20), z, zn, zsc, zt, zz
     REAL(SP) :: aa, ab, aer(20), alim, arg, atol, aw, carg, ct, dig, elim, &
       eps, er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, &
       rlt, rm, r1, r1m4, r1m5, r2, sarg, slak, st, t(20), tol, ts, xx, yy
@@ -862,7 +862,6 @@ CONTAINS
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
     zz = CMPLX(1._SP/tol,0._SP,SP)
-    cone = CMPLX(1._SP,0._SP,SP)
     hpi = 2._SP*ATAN(1._SP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
@@ -1121,7 +1120,7 @@ CONTAINS
           END IF
           !------ End repeat
           CALL CBESK(z,fnu,kode,2,w,nzk,ierr)
-          zt = cone/z
+          zt = (1._SP,0._SP)/z
           cy = w(1)*y(2)
           cw = w(2)*y(1)
           cw = cw + cy - zt
@@ -1170,7 +1169,7 @@ CONTAINS
         !---- End repeat
         gnu = fnu + (n-2)
         CALL CBESI(z,gnu,kode,2,w,nzi,ierr)
-        zt = cone/z
+        zt = (1._SP,0._SP)/z
         cy = y(n-1)*w(2)
         cw = y(n)*w(1)
         cw = cw + cy - zt
@@ -1300,7 +1299,7 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX(SP) :: chalf, coe1, coe2, cw, v(20), w(20), y(20), z
+    COMPLEX(SP) :: coe1, coe2, cw, v(20), w(20), y(20), z
     REAL(SP) :: aa, ab, aer(20), alim, atol, av, cc, ct, dd, dig, elim, eps, &
       er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, rm, &
       r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20), xx, yy
@@ -1354,7 +1353,6 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    chalf = (0.5_SP,0._SP)
     hpi = 2._SP*ATAN(1._SP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
@@ -1516,7 +1514,7 @@ CONTAINS
                 DO i = 1, n
                   ab = fnu + i - 1
                   aa = MAX(2._SP,ab)
-                  cw = (w(i)+y(i))*chalf
+                  cw = (w(i)+y(i))*0.5_SP
                   av = ABS(v(i))
                   er = ABS(cw-v(i))
                   IF( av/=0._SP ) THEN
@@ -1686,7 +1684,7 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX(SP) :: cone, csgn, cv, cw, cy, w(20), y(20), z, zn
+    COMPLEX(SP) :: csgn, cv, cw, cy, w(20), y(20), z, zn
     REAL(SP) :: aa, ab, aer(20), alim, arg, atol, axx, ct, dig, elim, eps, &
       er, ertol, ffnu, film, fnu, fnul, hpi, pi, r, rl, rm, &
       r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20), xx
@@ -1740,7 +1738,6 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    cone = (1._SP,0._SP)
     hpi = 2._SP*ATAN(1._SP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
@@ -1867,7 +1864,7 @@ CONTAINS
                   IF( icase==1 .OR. ct>=0._SP ) THEN
                     !------------------ Z is in the right half plane
                     CALL CBESK(z,fnu,kode,n1,y,nz1,ierr)
-                    cv = cone/z
+                    cv = (1._SP,0._SP)/z
                     IF( kode==2 ) THEN
                       !-------------------- Adjust Wronskian due to scaled I and K functions
                       xx = REAL(z)
@@ -1887,7 +1884,7 @@ CONTAINS
                       y(kk) = y(kk)*zn
                       zn = -zn
                     END DO
-                    cv = cone/z
+                    cv = (1._SP,0._SP)/z
                     IF( kode==2 ) THEN
                       !-------------------- Adjust Wronskian due to scaled I and K functions
                       xx = REAL(z)

@@ -43,7 +43,6 @@ PURE SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   REAL(SP), INTENT(IN) :: Dattrv(:), Prgopt(:)
   REAL(SP), INTENT(OUT) :: Aij
   INTEGER :: key, level, lp, nerr, next
-  REAL(SP), PARAMETER :: zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  FULMAT
   IF( Iflag(1)==1 ) THEN
     !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN
@@ -55,7 +54,7 @@ PURE SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
         key = INT( Prgopt(lp+1) )
         IF( key/=68 ) THEN
           lp = next
-        ELSEIF( Prgopt(lp+2)/=zero ) THEN
+        ELSEIF( Prgopt(lp+2)/=0._SP ) THEN
           Iflag(2) = 1
           Iflag(3) = 1
           Iflag(4) = INT( Prgopt(lp+3) )
@@ -83,7 +82,7 @@ PURE SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       ELSEIF( I<=Iflag(5) ) THEN
         Aij = Dattrv(Iflag(4)*(J-1)+I)
         Iflag(2) = I + 1
-        IF( Aij/=zero ) THEN
+        IF( Aij/=0._SP ) THEN
           Indcat = 0
           EXIT
         END IF

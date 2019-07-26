@@ -149,7 +149,6 @@ PURE SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   !
   INTEGER :: i, nless1
   REAL(SP) :: del1, del2, dmax, dmin, drat1, drat2, dsave, h1, h2, hsum, hsumt3, w1, w2
-  REAL(SP), PARAMETER :: zero = 0., three = 3.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -196,11 +195,11 @@ PURE SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
         w1 = (h1+hsum)/hsum
         w2 = -h1/hsum
         D(1,1) = w1*del1 + w2*del2
-        IF( PCHST(D(1,1),del1)<=zero ) THEN
-          D(1,1) = zero
-        ELSEIF( PCHST(del1,del2)<zero ) THEN
+        IF( PCHST(D(1,1),del1)<=0._SP ) THEN
+          D(1,1) = 0._SP
+        ELSEIF( PCHST(del1,del2)<0._SP ) THEN
           !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
-          dmax = three*del1
+          dmax = 3._SP*del1
           IF( ABS(D(1,1))>ABS(dmax) ) D(1,1) = dmax
         END IF
         !
@@ -218,7 +217,7 @@ PURE SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
           !
           !        SET D(I)=0 UNLESS DATA ARE STRICTLY MONOTONIC.
           !
-          D(1,i) = zero
+          D(1,i) = 0._SP
           IF( PCHST(del1,del2)<0 ) THEN
             !
             Ierr = Ierr + 1
@@ -227,8 +226,8 @@ PURE SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
             !
             !        COUNT NUMBER OF CHANGES IN DIRECTION OF MONOTONICITY.
             !
-            IF( del2/=zero ) THEN
-              IF( PCHST(dsave,del2)<zero ) Ierr = Ierr + 1
+            IF( del2/=0._SP ) THEN
+              IF( PCHST(dsave,del2)<0._SP ) Ierr = Ierr + 1
               dsave = del2
             END IF
           ELSE
@@ -253,11 +252,11 @@ PURE SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
         w1 = -h2/hsum
         w2 = (h2+hsum)/hsum
         D(1,N) = w1*del1 + w2*del2
-        IF( PCHST(D(1,N),del2)<=zero ) THEN
-          D(1,N) = zero
-        ELSEIF( PCHST(del1,del2)<zero ) THEN
+        IF( PCHST(D(1,N),del2)<=0._SP ) THEN
+          D(1,N) = 0._SP
+        ELSEIF( PCHST(del1,del2)<0._SP ) THEN
           !        NEED DO THIS CHECK ONLY IF MONOTONICITY SWITCHES.
-          dmax = three*del2
+          dmax = 3._SP*del2
           IF( ABS(D(1,N))>ABS(dmax) ) D(1,N) = dmax
         END IF
       ELSE

@@ -43,7 +43,6 @@ PURE SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   INTEGER :: i, ip, iplace, j, n20007, n20019, n20028, n20041, n20056, n20066, &
     n20070, n20074, n20078
   REAL(DP) :: aij, cmax, csum, scalr, testsc
-  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   LOGICAL :: contin, usrbas, colscp, cstscp, minprb
   !
   !* FIRST EXECUTABLE STATEMENT  DPINIT
@@ -64,17 +63,17 @@ PURE SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     j = 1
     n20007 = Nvars
     DO WHILE( (n20007-j)>=0 )
-      cmax = zero
+      cmax = 0._DP
       i = 0
       DO
         CALL DPNNZR(i,aij,iplace,Amat,Imat,j)
         IF( i/=0 ) THEN
           cmax = MAX(cmax,ABS(aij))
         ELSE
-          IF( cmax/=zero ) THEN
-            Csc(j) = one/cmax
+          IF( cmax/=0._DP ) THEN
+            Csc(j) = 1._DP/cmax
           ELSE
-            Csc(j) = one
+            Csc(j) = 1._DP
           END IF
           j = j + 1
           EXIT
@@ -84,12 +83,12 @@ PURE SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   END IF
   !
   !     FORM CHECK SUMS OF COLUMNS. COMPUTE MATRIX NORM OF SCALED MATRIX.
-  Anorm = zero
+  Anorm = 0._DP
   j = 1
   n20019 = Nvars
   DO WHILE( (n20019-j)>=0 )
-    Primal(j) = zero
-    csum = zero
+    Primal(j) = 0._DP
+    csum = 0._DP
     i = 0
     DO
       CALL DPNNZR(i,aij,iplace,Amat,Imat,j)
@@ -109,7 +108,7 @@ PURE SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !
   !     IF THE USER HAS NOT PROVIDED COST VECTOR SCALING THEN SCALE IT
   !     USING THE MAX. NORM OF THE TRANSFORMED COST VECTOR, IF NONZERO.
-  testsc = zero
+  testsc = 0._DP
   j = 1
   n20028 = Nvars
   DO WHILE( (n20028-j)>=0 )
@@ -117,14 +116,14 @@ PURE SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     j = j + 1
   END DO
   IF( .NOT. cstscp ) THEN
-    IF( testsc<=zero ) THEN
-      Costsc = one
+    IF( testsc<=0._DP ) THEN
+      Costsc = 1._DP
     ELSE
-      Costsc = one/testsc
+      Costsc = 1._DP/testsc
     END IF
   END IF
   Xlamda = (Costsc+Costsc)*testsc
-  IF( Xlamda==zero ) Xlamda = one
+  IF( Xlamda==0._DP ) Xlamda = 1._DP
   !
   !     IF MAXIMIZATION PROBLEM, THEN CHANGE SIGN OF COSTSC AND LAMDA
   !     =WEIGHT FOR PENALTY-FEASIBILITY METHOD.
@@ -133,7 +132,7 @@ PURE SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
   !     PROCEDURE (INITIALIZE RHS(*),IBASIS(*), AND IBB(*))
   !
   !     INITIALLY SET RIGHT-HAND SIDE VECTOR TO ZERO.
-  Rhs(1:Mrelas) = zero
+  Rhs(1:Mrelas) = 0._DP
   !
   !     TRANSLATE RHS ACCORDING TO CLASSIFICATION OF INDEPENDENT VARIABLES
   j = 1
@@ -146,9 +145,9 @@ PURE SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     ELSEIF( Ind(j)==3 ) THEN
       scalr = -Bl(j)
     ELSEIF( Ind(j)==4 ) THEN
-      scalr = zero
+      scalr = 0._DP
     END IF
-    IF( scalr==zero ) THEN
+    IF( scalr==0._DP ) THEN
       j = j + 1
     ELSE
       i = 0
@@ -175,7 +174,7 @@ PURE SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Amat,Csc,&
     ELSEIF( Ind(i)==3 ) THEN
       scalr = Bl(i)
     ELSEIF( Ind(i)==4 ) THEN
-      scalr = zero
+      scalr = 0._DP
     END IF
     Rhs(i-Nvars) = Rhs(i-Nvars) + scalr
     i = i + 1

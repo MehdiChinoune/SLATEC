@@ -42,8 +42,7 @@ PURE SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     zeta2(2), zn, zr, phid, argd, zeta1d, zeta2d, asumd, bsumd
   REAL(SP) :: aarg, ang, aphi, asc, ascle, bry(3), car, cpn, c2i, c2m, c2r, &
     fmr, fn, fnf, rs1, sar, sgn, spn, x, yy
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP), &
-    ci = (0._SP,1._SP), cr1 = (1._SP,1.73205080756887729E0_SP), &
+  COMPLEX(SP), PARAMETER :: ci = (0._SP,1._SP), cr1 = (1._SP,1.73205080756887729E0_SP), &
     cr2 = (-0.5_SP,-8.66025403784438647E-01_SP)
   REAL(SP), PARAMETER :: hpi = 1.57079632679489662_SP, pi = 3.14159265358979324_SP, &
     aic = 1.26551212348464539_SP
@@ -59,10 +58,10 @@ PURE SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   cscl = CMPLX(1._SP/Tol,0._SP,SP)
   crsc = CMPLX(Tol,0._SP,SP)
   css(1) = cscl
-  css(2) = cone
+  css(2) = (1._SP,0._SP)
   css(3) = crsc
   csr(1) = crsc
-  csr(2) = cone
+  csr(2) = (1._SP,0._SP)
   csr(3) = cscl
   bry(1) = 1.E+3_SP*tiny_sp/Tol
   bry(2) = 1._SP/bry(1)
@@ -156,12 +155,12 @@ PURE SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     IF( x<0._SP ) GOTO 600
     kdflg = 1
-    Y(i) = czero
+    Y(i) = (0._SP,0._SP)
     cs = -ci*cs
     Nz = Nz + 1
     IF( i/=1 ) THEN
-      IF( Y(i-1)/=czero ) THEN
-        Y(i-1) = czero
+      IF( Y(i-1)/=(0._SP,0._SP) ) THEN
+        Y(i-1) = (0._SP,0._SP)
         Nz = Nz + 1
       END IF
     END IF
@@ -203,7 +202,7 @@ PURE SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   IF( x<0._SP ) GOTO 600
   Nz = N
   DO i = 1, N
-    Y(i) = czero
+    Y(i) = (0._SP,0._SP)
   END DO
   RETURN
   !-----------------------------------------------------------------------
@@ -346,7 +345,7 @@ PURE SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     kk = kk - 1
     cspn = -cspn
     cs = -cs*ci
-    IF( c2/=czero ) THEN
+    IF( c2/=(0._SP,0._SP) ) THEN
       IF( kdflg==2 ) GOTO 500
       kdflg = 2
       CYCLE
@@ -355,7 +354,7 @@ PURE SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       CYCLE
     END IF
     450  IF( rs1>0._SP ) GOTO 600
-    s2 = czero
+    s2 = (0._SP,0._SP)
     GOTO 400
   END DO
   k = N

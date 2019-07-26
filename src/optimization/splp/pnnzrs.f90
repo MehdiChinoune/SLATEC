@@ -66,7 +66,6 @@ PURE SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   REAL(SP), INTENT(INOUT) :: Xval
   INTEGER :: i1, idiff, iend, ii, il, ilast, iopt, ipl, ipploc, istart,  j, l, &
     ll, lmx, lpg, n20046, nerr, np
-  REAL(SP), PARAMETER :: zero = 0._SP
   !* FIRST EXECUTABLE STATEMENT  PNNZRS
   iopt = 1
   !
@@ -123,7 +122,7 @@ PURE SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
       GOTO 200
     ELSE
       I = 0
-      Xval = zero
+      Xval = 0._SP
       RETURN
     END IF
   ELSE
@@ -189,13 +188,13 @@ PURE SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !     SEARCH FOR A NONZERO VALUE WITH AN INDEX > I ON THE PRESENT
   !     PAGE.
   !
-  DO WHILE( .NOT. (ipl>=il .OR. (Ix(ipl)>I .AND. Sx(ipl)/=zero)) )
+  DO WHILE( .NOT. (ipl>=il .OR. (Ix(ipl)>I .AND. Sx(ipl)/=0._SP)) )
     ipl = ipl + 1
   END DO
   !
   !     TEST IF WE HAVE FOUND THE NEXT NONZERO.
   !
-  IF( Ix(ipl)<=I .OR. Sx(ipl)==zero .OR. ipl>il ) THEN
+  IF( Ix(ipl)<=I .OR. Sx(ipl)==0._SP .OR. ipl>il ) THEN
     !
     !     UPDATE TO SCAN THE NEXT PAGE.
     ipl = ll + 1
@@ -205,7 +204,7 @@ PURE SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !     NO DATA WAS FOUND. END OF VECTOR ENCOUNTERED.
     !
     I = 0
-    Xval = zero
+    Xval = 0._SP
     il = il + 1
     IF( il==lmx-1 ) il = il + 2
     !
@@ -227,7 +226,7 @@ PURE SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !     IN ANY ROW.
     !
     I = 0
-    Xval = zero
+    Xval = 0._SP
     RETURN
   ELSE
     !
@@ -263,7 +262,7 @@ PURE SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !
   !     TEST IF WE HAVE FOUND THE NEXT NONZERO.
   !
-  IF( Ix(ipl)/=j .OR. Sx(ipl)==zero .OR. ipl>il ) THEN
+  IF( Ix(ipl)/=j .OR. Sx(ipl)==0._SP .OR. ipl>il ) THEN
     IF( Ix(ipl)>=j ) ilast = iend
     ipl = ll + 1
     np = np + 1

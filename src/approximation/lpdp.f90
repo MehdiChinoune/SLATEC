@@ -71,7 +71,7 @@ PURE SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !
   INTEGER :: i, iw, ix, j, l, modew, n, np1
   REAL(SP) :: rnorm, sc, ynorm
-  REAL(SP), PARAMETER :: one = 1._SP, fac = 0.1_SP
+  REAL(SP), PARAMETER :: fac = 0.1_SP
   !* FIRST EXECUTABLE STATEMENT  LPDP
   n = N1 + N2
   Mode = 1
@@ -82,7 +82,7 @@ PURE SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     DO i = 1, M
       sc = NORM2(A(i,1:n))
       IF( sc/=0._SP ) THEN
-        sc = one/sc
+        sc = 1._SP/sc
         A(i,1:np1) = A(i,1:np1)*sc
       END IF
     END DO
@@ -90,7 +90,7 @@ PURE SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     !     SCALE RT.-SIDE VECTOR TO HAVE LENGTH ONE (OR ZERO).
     ynorm = NORM2(A(1:M,np1))
     IF( ynorm/=0._SP ) THEN
-      sc = one/ynorm
+      sc = 1._SP/ynorm
       A(1:M,np1) = A(1:M,np1)*sc
     END IF
     !
@@ -98,7 +98,7 @@ PURE SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     j = N1 + 1
     DO WHILE( j<=n )
       sc = NORM2(A(1:M,j))
-      IF( sc/=0._SP ) sc = one/sc
+      IF( sc/=0._SP ) sc = 1._SP/sc
       A(1:M,j) = A(1:M,j)*sc
       X(j) = sc
       j = j + 1
@@ -123,7 +123,7 @@ PURE SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       END DO
       Ws(iw+1:iw+n) = 0._SP
       iw = iw + n
-      Ws(iw+1) = one
+      Ws(iw+1) = 1._SP
       iw = iw + 1
       !
       !     SOLVE EU=F SUBJECT TO (TRANSPOSE OF H)U=0, U>=0.  THE
@@ -138,12 +138,12 @@ PURE SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       CALL WNNLS(Ws,np1,N2,np1-N2,M,0,Prgopt,Ws(ix),rnorm,modew,Is,Ws(iw+1))
       !
       !     COMPUTE THE COMPONENTS OF THE SOLN DENOTED ABOVE BY W.
-      sc = one - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
-      IF( one+fac*ABS(sc)==one .OR. rnorm<=0._SP ) THEN
+      sc = 1._SP - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
+      IF( 1._SP+fac*ABS(sc)==1._SP .OR. rnorm<=0._SP ) THEN
         Mode = 2
         RETURN
       ELSE
-        sc = one/sc
+        sc = 1._SP/sc
         DO j = 1, N1
           X(j) = sc*DOT_PRODUCT(A(1:M,j),Ws(ix:ix+M-1))
         END DO
@@ -166,7 +166,7 @@ PURE SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       END DO
       Ws(iw+1:iw+N2) = 0._SP
       iw = iw + N2
-      Ws(iw+1) = one
+      Ws(iw+1) = 1._SP
       iw = iw + 1
       ix = iw + 1
       iw = iw + M
@@ -181,12 +181,12 @@ PURE SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       CALL WNNLS(Ws,N2+1,0,N2+1,M,0,Prgopt,Ws(ix),rnorm,modew,Is,Ws(iw+1))
       !
       !     COMPUTE THE COMPONENTS OF THE SOLN DENOTED ABOVE BY Z.
-      sc = one - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
-      IF( one+fac*ABS(sc)==one .OR. rnorm<=0._SP ) THEN
+      sc = 1._SP - DOT_PRODUCT(A(1:M,np1),Ws(ix:ix+M-1))
+      IF( 1._SP+fac*ABS(sc)==1._SP .OR. rnorm<=0._SP ) THEN
         Mode = 2
         RETURN
       ELSE
-        sc = one/sc
+        sc = 1._SP/sc
         DO j = 1, N2
           l = N1 + j
           X(l) = sc*DOT_PRODUCT(A(1:M,l),Ws(ix:ix+M-1))*X(l)

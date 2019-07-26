@@ -1565,10 +1565,8 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   INTEGER :: iadbig, ictmax, ictopt, iopt, key, lamat, last, lbasma, lbm, lcolnr, &
     lcsc, lerd, lerp, libb, librc, limat, lipr, liwork, liwr, lmx, lrg, lrhs, &
     lrprim, lrz, lwork, lwr, lww, nerr, next
-  REAL(DP) :: zero
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  DSPLP
-  zero = 0._DP
   iopt = 1
   !
   !     VERIFY THAT MRELAS, NVARS > 0.
@@ -1667,7 +1665,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       !     SPARSE MATRIX STORAGE AND SPARSE LINEAR EQUATION
       !     SOLVING.
       IF( key==53 ) THEN
-        IF( Prgopt(last+2)/=zero ) THEN
+        IF( Prgopt(last+2)/=0._DP ) THEN
           lmx = INT( Prgopt(last+3) )
           lbm = INT( Prgopt(last+4) )
         END IF

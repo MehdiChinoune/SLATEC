@@ -45,15 +45,11 @@ REAL(SP) ELEMENTAL FUNCTION PCHST(Arg1,Arg2)
   !
   REAL(SP), INTENT(IN) :: Arg1, Arg2
   !
-  !  DECLARE LOCAL VARIABLES.
-  !
-  REAL(SP), PARAMETER :: zero = 0., one = 1.
-  !
   !  PERFORM THE TEST.
   !
   !* FIRST EXECUTABLE STATEMENT  PCHST
-  PCHST = SIGN(one,Arg1)*SIGN(one,Arg2)
-  IF( (Arg1==zero) .OR. (Arg2==zero) ) PCHST = zero
+  PCHST = SIGN(1._SP,Arg1)*SIGN(1._SP,Arg2)
+  IF( (Arg1==0._SP) .OR. (Arg2==0._SP) ) PCHST = 0._SP
   !
   !------------- LAST LINE OF PCHST FOLLOWS ------------------------------
 END FUNCTION PCHST

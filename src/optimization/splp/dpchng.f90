@@ -63,7 +63,6 @@ PURE SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   INTEGER :: i, iend, il, ilast, iopt, ipl, istart, ixlast, j, jj, jstart, k, &
     ll, lmx, lpg, n20055, nerr, np
   REAL(DP) :: sxlast, sxval
-  REAL(DP), PARAMETER :: zero = 0._DP, one = 1._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHNG
   iopt = 1
   !
@@ -180,7 +179,7 @@ PURE SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
     sxval = Xval
   ELSE
     Sx(ipl) = Xval
-    Sx(lmx) = one
+    Sx(lmx) = 1._DP
     RETURN
   END IF
   200  ilast = MIN(iend,np*lpg+ll-2)
@@ -195,14 +194,14 @@ PURE SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
       Sx(k-jj) = Sx(k-jj-1)
       Ix(k-jj) = Ix(k-jj-1)
     END DO
-    Sx(lmx) = one
+    Sx(lmx) = 1._DP
   END IF
   IF( ipl<=lmx ) THEN
     Sx(ipl) = sxval
     Ix(ipl) = i
     sxval = sxlast
     i = ixlast
-    Sx(lmx) = one
+    Sx(lmx) = 1._DP
     IF( Ix(lmx-1)>0 ) THEN
       ipl = ll + 1
       np = np + 1
@@ -216,7 +215,7 @@ PURE SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !
   il = il + 1
   IF( il==lmx-1 ) THEN
-    Sx(lmx) = one
+    Sx(lmx) = 1._DP
     !
     !     STORE LAST ELEMENT MOVED DOWN IN A NEW PAGE.
     !
@@ -231,7 +230,7 @@ PURE SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   ELSEIF( ipl/=il ) THEN
     Sx(il) = sxval
     Ix(il) = i
-    Sx(lmx) = one
+    Sx(lmx) = 1._DP
   END IF
   !
   !     INCREMENT POINTERS TO LAST ELEMENT IN VECTORS J,J+1,... .

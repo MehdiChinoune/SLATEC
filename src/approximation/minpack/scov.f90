@@ -165,7 +165,6 @@ PURE SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
   REAL(SP) :: sigma, temp
   LOGICAL :: sing
-  REAL(SP), PARAMETER :: one = 1._SP
   !* FIRST EXECUTABLE STATEMENT  SCOV
   sing = .FALSE.
   iflag = 0
@@ -177,7 +176,7 @@ PURE SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
     CALL FCN(iflag,M,N,X,Fvec,R,Ldr)
     IF( iflag>=0 ) THEN
       temp = NORM2(Fvec)
-      sigma = one
+      sigma = 1._SP
       IF( M/=N ) sigma = temp*temp/(M-N)
       !
       !     CALCULATE THE JACOBIAN
@@ -237,7 +236,7 @@ PURE SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
             !     INITIALIZE THE RIGHT-HAND SIDE (WA1(*)) AS THE K-TH COLUMN OF THE
             !     IDENTITY MATRIX.
             Wa1 = 0._SP
-            Wa1(k,1) = one
+            Wa1(k,1) = 1._SP
             !
             R(k,k) = Wa1(k,1)/R(k,k)
             kp1 = k + 1
@@ -251,7 +250,7 @@ PURE SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
             END DO
           END DO
         END IF
-        R(N,N) = one/R(N,N)
+        R(N,N) = 1._SP/R(N,N)
         !
         !     CALCULATE R-INVERSE * (R TRANSPOSE) INVERSE AND STORE IN THE UPPER
         !     TRIANGLE OF R.

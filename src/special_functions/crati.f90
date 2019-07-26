@@ -34,7 +34,6 @@ PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   COMPLEX(SP) :: cdfnu, pt, p1, p2, rz, t1
   REAL(SP) :: ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, fnup, &
     rap1, rho, test, test1
-  COMPLEX(SP), PARAMETER :: czero = (0._SP,0._SP), cone = (1._SP,0._SP)
   !* FIRST EXECUTABLE STATEMENT  CRATI
   az = ABS(Z)
   inu = INT( Fnu )
@@ -46,10 +45,10 @@ PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   id = idnu - magz - 1
   itime = 1
   k = 1
-  rz = (cone+cone)/Z
+  rz = (2._SP,0._SP)/Z
   t1 = CMPLX(fnup,0._SP,SP)*rz
   p2 = -t1
-  p1 = cone
+  p1 = (1._SP,0._SP)
   t1 = t1 + rz
   IF( id>0 ) id = 0
   ap2 = ABS(p2)
@@ -83,12 +82,12 @@ PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
         cdfnu = CMPLX(dfnu,0._SP,SP)
         t1 = CMPLX(ak,0._SP,SP)
         p1 = CMPLX(1._SP/ap2,0._SP,SP)
-        p2 = czero
+        p2 = (0._SP,0._SP)
         DO i = 1, kk
           pt = p1
           p1 = rz*(cdfnu+t1)*p1 + p2
           p2 = pt
-          t1 = t1 - cone
+          t1 = t1 - (1._SP,0._SP)
         END DO
         IF( REAL(p1)==0._SP .AND. AIMAG(p1)==0._SP ) p1 = CMPLX(Tol,Tol,SP)
         Cy(N) = p2/p1
@@ -100,8 +99,8 @@ PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
         DO i = 2, N
           pt = cdfnu + t1*rz + Cy(k+1)
           IF( REAL(pt)==0._SP .AND. AIMAG(pt)==0._SP ) pt = CMPLX(Tol,Tol,SP)
-          Cy(k) = cone/pt
-          t1 = t1 - cone
+          Cy(k) = (1._SP,0._SP)/pt
+          t1 = t1 - (1._SP,0._SP)
           k = k - 1
         END DO
         EXIT

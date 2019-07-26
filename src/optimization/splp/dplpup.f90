@@ -59,13 +59,12 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
   REAL(DP), INTENT(IN) :: Bl(Nvars+Mrelas), Bu(Nvars+Mrelas), Dattrv(:)
   REAL(DP), INTENT(INOUT) :: Amat(:)
   INTEGER :: iflag(10), i, indcat, indexx, iplace, itcnt, itmax, j
-  REAL(DP) :: aij, amn, amx, xval, zero
+  REAL(DP) :: aij, amn, amx, xval
   LOGICAL :: first
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !
   !* FIRST EXECUTABLE STATEMENT  DPLPUP
-  zero = 0._DP
   !
   !     CHECK USER-SUPPLIED BOUNDS
   !
@@ -138,7 +137,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       RETURN
     END IF
     !
-    aij = zero
+    aij = 0._DP
     CALL DUSRMT(i,j,aij,indcat,Dattrv,iflag)
     IF( iflag(1)==1 ) THEN
       iflag(1) = 2
@@ -153,7 +152,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
       !        RECORD THE LARGEST AND SMALLEST(IN MAGNITUDE) NONZERO ELEMENTS.
       !
       IF( iflag(1)==3 ) THEN
-        IF( Sizeup .AND. ABS(aij)/=zero ) THEN
+        IF( Sizeup .AND. ABS(aij)/=0._DP ) THEN
           IF( first ) THEN
             amx = ABS(aij)
             amn = ABS(aij)
@@ -194,7 +193,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Dattrv,Bl,Bu,Ind,Info,Amat,&
     !     CHECK ON SIZE OF MATRIX DATA
     !     RECORD THE LARGEST AND SMALLEST(IN MAGNITUDE) NONZERO ELEMENTS.
     !
-    IF( Sizeup .AND. ABS(aij)/=zero ) THEN
+    IF( Sizeup .AND. ABS(aij)/=0._DP ) THEN
       IF( first ) THEN
         amx = ABS(aij)
         amn = ABS(aij)

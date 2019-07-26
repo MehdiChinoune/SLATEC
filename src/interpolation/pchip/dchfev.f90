@@ -106,7 +106,6 @@ PURE SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   INTEGER :: i
   REAL(DP) :: c2, c3, del1, del2, delta, h, x, xmi, xma
-  REAL(DP), PARAMETER :: zero = 0._DP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -120,7 +119,7 @@ PURE SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
     ERROR STOP 'DCHFEV : NUMBER OF EVALUATION POINTS LESS THAN ONE'
   ELSE
     h = X2 - X1
-    IF( h==zero ) THEN
+    IF( h==0._DP ) THEN
       !
       !     X1=X2 RETURN.
       Ierr = -2
@@ -133,8 +132,8 @@ PURE SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   Ierr = 0
   Next(1) = 0
   Next(2) = 0
-  xmi = MIN(zero,h)
-  xma = MAX(zero,h)
+  xmi = MIN(0._DP,h)
+  xma = MAX(0._DP,h)
   !
   !  COMPUTE CUBIC COEFFICIENTS (EXPANDED ABOUT X1).
   !

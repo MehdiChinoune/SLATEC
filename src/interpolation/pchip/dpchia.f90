@@ -130,12 +130,8 @@ REAL(DP) PURE FUNCTION DPCHIA(N,X,F,D,Incfd,A,B)
   INTEGER :: i, ia, ib, il, ir
   REAL(DP) :: value, xa, xb
   LOGICAL, PARAMETER :: Skip = .FALSE.
-  !
-  !  INITIALIZE.
-  !
-  REAL(DP), PARAMETER :: zero = 0._DP
   !* FIRST EXECUTABLE STATEMENT  DPCHIA
-  value = zero
+  value = 0._DP
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

@@ -139,7 +139,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   REAL(SP) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, denom, dv, hugee, l1, m1, &
     newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, &
     sumfor, sumuni, thresh, tinyy, x, x1, x2, x3, y, y1, y2, y3
-  REAL(SP), PARAMETER :: zero = 0._SP, eps = 0.01_SP, one = 1._SP, two = 2._SP, three = 3._SP
+  REAL(SP), PARAMETER :: eps = 0.01_SP
   !
   !* FIRST EXECUTABLE STATEMENT  RC3JJ
   Ier = 0
@@ -154,11 +154,11 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   m1 = -M2 - M3
   !
   !  Check error conditions 1 and 2.
-  IF( (L2-ABS(M2)+eps<zero) .OR. (L3-ABS(M3)+eps<zero) ) THEN
+  IF( (L2-ABS(M2)+eps<0._SP) .OR. (L3-ABS(M3)+eps<0._SP) ) THEN
     Ier = 1
     ERROR STOP 'RC3JJ : L2-ABS(M2) or L3-ABS(M3) less than zero.'
-  ELSEIF( (MOD(L2+ABS(M2)+eps,one)>=eps+eps) .OR. &
-      (MOD(L3+ABS(M3)+eps,one)>=eps+eps) ) THEN
+  ELSEIF( (MOD(L2+ABS(M2)+eps,1._SP)>=eps+eps) .OR. &
+      (MOD(L3+ABS(M3)+eps,1._SP)>=eps+eps) ) THEN
     Ier = 2
     ERROR STOP 'RC3JJ : L2+ABS(M2) or L3+ABS(M3) not integer.'
   END IF
@@ -171,7 +171,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   L1max = L2 + L3
   !
   !  Check error condition 3.
-  IF( MOD(L1max-L1min+eps,one)>=eps+eps ) THEN
+  IF( MOD(L1max-L1min+eps,1._SP)>=eps+eps ) THEN
     Ier = 3
     ERROR STOP 'RC3JJ : L1MAX-L1MIN not integer.'
   END IF
@@ -181,7 +181,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     !  i.e. L1MIN < L1MAX.
     !
     !     LSCALE = 0
-    nfin = INT(L1max-L1min+one+eps)
+    nfin = INT(L1max-L1min+1._SP+eps)
     IF( Ndim<nfin ) THEN
       !
       !  Check error condition 5.
@@ -196,7 +196,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       newfac = 0._SP
       c1 = 0._SP
       Thrcof(1) = srtiny
-      sum1 = (l1+l1+one)*tinyy
+      sum1 = (l1+l1+1._SP)*tinyy
       !
       !
       lstep = 1
@@ -207,7 +207,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     !  i.e. L1MIN = L1MAX
     !
     !     LSCALE = 0
-    Thrcof(1) = (-one)**INT(ABS(L2+M2-L3+M3)+eps)/SQRT(L1min+L2+L3+one)
+    Thrcof(1) = (-1._SP)**INT(ABS(L2+M2-L3+M3)+eps)/SQRT(L1min+L2+L3+1._SP)
     RETURN
   ELSE
     !
@@ -216,27 +216,27 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     ERROR STOP 'RC3JJ : L1MIN greater than L1MAX.'
   END IF
   100  lstep = lstep + 1
-  l1 = l1 + one
+  l1 = l1 + 1._SP
   !
   !
   oldfac = newfac
-  a1 = (l1+L2+L3+one)*(l1-L2+L3)*(l1+L2-L3)*(-l1+L2+L3+one)
+  a1 = (l1+L2+L3+1._SP)*(l1-L2+L3)*(l1+L2-L3)*(-l1+L2+L3+1._SP)
   a2 = (l1+m1)*(l1-m1)
   newfac = SQRT(a1*a2)
-  IF( l1<one+eps ) THEN
+  IF( l1<1._SP+eps ) THEN
     !
     !  If L1 = 1, (L1-1) has to be factored out of DV, hence
     !
-    c1 = -(l1+l1-one)*l1*(M3-M2)/newfac
+    c1 = -(l1+l1-1._SP)*l1*(M3-M2)/newfac
   ELSE
     !
     !
-    dv = -L2*(L2+one)*m1 + L3*(L3+one)*m1 + l1*(l1-one)*(M3-M2)
-    denom = (l1-one)*newfac
+    dv = -L2*(L2+1._SP)*m1 + L3*(L3+1._SP)*m1 + l1*(l1-1._SP)*(M3-M2)
+    denom = (l1-1._SP)*newfac
     !
     !
     IF( lstep>2 ) c1old = ABS(c1)
-    c1 = -(l1+l1-one)*dv/denom
+    c1 = -(l1+l1-1._SP)*dv/denom
   END IF
   !
   IF( lstep>2 ) THEN
@@ -249,7 +249,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     x = c1*Thrcof(lstep-1) + c2*Thrcof(lstep-2)
     Thrcof(lstep) = x
     sumfor = sum1
-    sum1 = sum1 + (l1+l1+one)*x*x
+    sum1 = sum1 + (l1+l1+1._SP)*x*x
     IF( lstep/=nfin ) THEN
       !
       !  See if last unnormalized 3j coefficient exceeds SRHUGE
@@ -262,7 +262,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
         !
         !     LSCALE = LSCALE + 1
         DO i = 1, lstep
-          IF( ABS(Thrcof(i))<srtiny ) Thrcof(i) = zero
+          IF( ABS(Thrcof(i))<srtiny ) Thrcof(i) = 0._SP
           Thrcof(i) = Thrcof(i)/srhuge
         END DO
         sum1 = sum1/hugee
@@ -300,27 +300,27 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     nfinp3 = nfin + 3
     l1 = L1max
     Thrcof(nfin) = srtiny
-    sum2 = tinyy*(l1+l1+one)
+    sum2 = tinyy*(l1+l1+1._SP)
     !
-    l1 = l1 + two
+    l1 = l1 + 2._SP
     lstep = 1
     DO
       lstep = lstep + 1
-      l1 = l1 - one
+      l1 = l1 - 1._SP
       !
       oldfac = newfac
-      a1s = (l1+L2+L3)*(l1-L2+L3-one)*(l1+L2-L3-one)*(-l1+L2+L3+two)
-      a2s = (l1+m1-one)*(l1-m1-one)
+      a1s = (l1+L2+L3)*(l1-L2+L3-1._SP)*(l1+L2-L3-1._SP)*(-l1+L2+L3+2._SP)
+      a2s = (l1+m1-1._SP)*(l1-m1-1._SP)
       newfac = SQRT(a1s*a2s)
       !
-      dv = -L2*(L2+one)*m1 + L3*(L3+one)*m1 + l1*(l1-one)*(M3-M2)
+      dv = -L2*(L2+1._SP)*m1 + L3*(L3+1._SP)*m1 + l1*(l1-1._SP)*(M3-M2)
       !
       denom = l1*newfac
-      c1 = -(l1+l1-one)*dv/denom
+      c1 = -(l1+l1-1._SP)*dv/denom
       IF( lstep>2 ) THEN
         !
         !
-        c2 = -(l1-one)*oldfac/denom
+        c2 = -(l1-1._SP)*oldfac/denom
         !
         !  Recursion to the next 3j coefficient Y
         !
@@ -343,10 +343,10 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
           ratio = (x1*y1+x2*y2+x3*y3)/(x1*x1+x2*x2+x3*x3)
           nlim = nfin - nstep2 + 1
           !
-          IF( ABS(ratio)<one ) THEN
+          IF( ABS(ratio)<1._SP ) THEN
             !
             nlim = nlim + 1
-            ratio = one/ratio
+            ratio = 1._SP/ratio
             DO n = nlim, nfin
               Thrcof(n) = ratio*Thrcof(n)
             END DO
@@ -363,7 +363,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
           !
           Thrcof(nfinp1-lstep) = y
           sumbac = sum2
-          sum2 = sum2 + (l1+l1-three)*y*y
+          sum2 = sum2 + (l1+l1-3._SP)*y*y
           !
           !  See if last unnormalized 3j coefficient exceeds SRHUGE
           !
@@ -376,7 +376,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
             !     LSCALE = LSCALE + 1
             DO i = 1, lstep
               indexx = nfin - i + 1
-              IF( ABS(Thrcof(indexx))<srtiny ) Thrcof(indexx) = zero
+              IF( ABS(Thrcof(indexx))<srtiny ) Thrcof(indexx) = 0._SP
               Thrcof(indexx) = Thrcof(indexx)/srhuge
             END DO
             sum2 = sum2/hugee
@@ -393,7 +393,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
         Thrcof(nfin-1) = y
         sumbac = sum2
         !
-        sum2 = sum2 + tinyy*(l1+l1-three)*c1*c1
+        sum2 = sum2 + tinyy*(l1+l1-3._SP)*c1*c1
       END IF
     END DO
   ELSE
@@ -403,7 +403,7 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
     !  hence
     x = srtiny*c1
     Thrcof(2) = x
-    sum1 = sum1 + tinyy*(l1+l1+one)*c1*c1
+    sum1 = sum1 + tinyy*(l1+l1+1._SP)*c1*c1
     IF( lstep/=nfin ) GOTO 100
     !
     sumuni = sum1
@@ -412,19 +412,19 @@ PURE SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !
   !  Normalize 3j coefficients
   !
-  cnorm = one/SQRT(sumuni)
+  cnorm = 1._SP/SQRT(sumuni)
   !
   !  Sign convention for last 3j coefficient determines overall phase
   !
-  sign1 = SIGN(one,Thrcof(nfin))
-  sign2 = (-one)**INT(ABS(L2+M2-L3+M3)+eps)
+  sign1 = SIGN(1._SP,Thrcof(nfin))
+  sign2 = (-1._SP)**INT(ABS(L2+M2-L3+M3)+eps)
   IF( sign1*sign2<=0 ) cnorm = -cnorm
   !
-  IF( ABS(cnorm)<one ) THEN
+  IF( ABS(cnorm)<1._SP ) THEN
     !
     thresh = tinyy/ABS(cnorm)
     DO n = 1, nfin
-      IF( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
+      IF( ABS(Thrcof(n))<thresh ) Thrcof(n) = 0._SP
       Thrcof(n) = cnorm*Thrcof(n)
     END DO
     RETURN
