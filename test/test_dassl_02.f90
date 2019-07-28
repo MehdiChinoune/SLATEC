@@ -402,7 +402,6 @@ END MODULE TEST49_MOD
 PROGRAM TEST49
   USE TEST49_MOD, ONLY : DDASQC
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -460,12 +459,6 @@ PROGRAM TEST49
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
-  max_xer = 1000
   !
   !     Test DDASSL
   !

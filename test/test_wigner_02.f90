@@ -42,7 +42,7 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine DRACAH.  These changes were
     !           made by M. McClain.
-    USE slatec, ONLY : eps_2_dp, DRC3JJ, DRC3JM, DRC6J, control_xer
+    USE slatec, ONLY : eps_2_dp, DRC3JJ, DRC3JM, DRC6J
     !
     INTEGER :: Lun, Kprint, Ipass
     !
@@ -319,11 +319,6 @@ CONTAINS
     !
     ! --- TEST 5: CHECK INVALID INPUT
     ipass5 = 1
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = -1
-    END IF
     IF( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ', &
       'OF INVALID INPUT'
     ! --- DRC3JJ: L2-ABS(M2) OR L3-ABS(M3) LESS THAN ZERO (IER=1)
@@ -497,7 +492,6 @@ END MODULE TEST16_MOD
 PROGRAM TEST16
   USE TEST16_MOD, ONLY : DQC36J
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -556,12 +550,6 @@ PROGRAM TEST16
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test double precision 3J6J routines
   !

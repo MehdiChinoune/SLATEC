@@ -33,9 +33,9 @@ CONTAINS
     !   910104  Changed to print variable number of decimals. (DWL and JMS)
     USE slatec, ONLY : DXCON, DXLEGF, DXNRMP, DXSET, digits_dp, max_exp_dp, radix_fp
     !
-    INTEGER :: i, ic1(10), ic2(10), id, ierr, ierror, ip(10), ipn(10), &
+    INTEGER :: i, ic1(10), ic2(10), ierr, ierror, ip(10), ipn(10), &
       iq(10), ir(10), irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
-    INTEGER :: mu, mu1, mu2, n, nbits, ndec, nradpl, nu1, nudiff
+    INTEGER :: mu, mu1, mu2, nbits, ndec, nradpl, nu1, nudiff
     CHARACTER(34) :: fmt, fmtf, fmti
     INTEGER :: Lun, Kprint, Ipass
     REAL(DP) :: p(10), q(10), r(10), c1(10), c2(10), pn(10)
@@ -547,7 +547,6 @@ END MODULE TEST12_MOD
 PROGRAM TEST12
   USE TEST12_MOD, ONLY : FCNQX2
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -602,12 +601,6 @@ PROGRAM TEST12
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test DXLEGF and DXNRMP
   !

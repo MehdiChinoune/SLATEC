@@ -119,7 +119,7 @@ PURE SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : control_xer, max_xer, eps_2_sp
+  USE service, ONLY : eps_2_sp
   !
   INTEGER, INTENT(IN) :: Iscale, M, N, Nrda
   INTEGER, INTENT(INOUT) :: Iflag, Iter
@@ -129,7 +129,7 @@ PURE SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   REAL(SP), INTENT(INOUT) :: Q(Nrda,N), X(N)
   REAL(SP), INTENT(OUT) :: Diag(N), Div(N), R(M), Scales(N), Td(N), Z(N)
   !
-  INTEGER :: irm, irp, it, iterp, j, k, kp, l, nfatal, nmir, maxmes, mmir, nfat
+  INTEGER :: irm, irp, it, iterp, j, k, kp, l, nmir, mmir, nfat
   REAL(SP) :: acc, gam, gama, uro, znrm0, znorm
   !
   !- *********************************************************************
@@ -146,11 +146,8 @@ PURE SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     IF( Iter>=0 ) THEN
       IF( Iflag<=0 ) THEN
         !
-        nfatal = control_xer
-        maxmes = max_xer
         IF( Iflag/=0 ) THEN
-          nfat = -1
-          IF( nfatal==0 ) nfat = 0
+          nfat = 0
         END IF
         !
         !     COPY MATRIX A INTO MATRIX Q

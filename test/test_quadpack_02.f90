@@ -24,7 +24,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
-    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow, work(400)
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, work(400)
     INTEGER :: ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
     REAL(DP), PARAMETER :: pi = 0.31415926535897932E+01_DP
     REAL(DP), PARAMETER :: exact1 = 0.1154700538379252E+01_DP
@@ -135,8 +135,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4), inf
-    REAL(DP) :: abserr, bound, epmach, epsabs, epsrel, error, oflow, result, &
-      uflow, work(800)
+    REAL(DP) :: abserr, bound, epmach, epsabs, epsrel, error, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
     REAL(DP), PARAMETER :: exact0 = 2._DP, exact1 = 0.115470066904E1_DP
     REAL(DP), PARAMETER :: exact2 = 0.909864525656E-02_DP
@@ -265,8 +264,8 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4)
-    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, &
-      points(5), result, uflow, work(405)
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
+      points(5), result, work(405)
     INTEGER :: ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
     REAL(DP), PARAMETER :: exact1 = 0.4285277667368085E+01_DP
@@ -410,8 +409,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(5), Lun
-    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, result, &
-      uflow, work(800)
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(DP), PARAMETER :: exact0 = 2._DP
     REAL(DP), PARAMETER :: exact1 = 0.115470066904E+01_DP
@@ -545,8 +543,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
-    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, c, result, &
-      uflow, work(800)
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, c, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(DP), PARAMETER :: exact0 = -0.6284617285065624E+03_DP
     REAL(DP), PARAMETER :: exact1 = 0.1855802E+01_DP
@@ -648,7 +645,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4), integr, iwork(450), leniw, Lun, maxp1
-    REAL(DP) :: a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
+    REAL(DP) :: a, abserr, epsabs, epmach, error, omega, result, work(1425)
     INTEGER :: ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
     REAL(DP), PARAMETER :: exact0 = 0.1422552162575912E+01_DP
     REAL(DP), PARAMETER :: pi = 0.31415926535897932E+01_DP
@@ -762,8 +759,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: leniw
-    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, oflow, omega, result, &
-      uflow, work(1325)
+    REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, omega, result, work(1325)
     INTEGER :: ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
     REAL(DP), PARAMETER :: exact0 = 0.1042872789432789E+05_DP
@@ -891,7 +887,7 @@ CONTAINS
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
     REAL(DP) :: a, abserr, b, epmach, epsabs, epsrel, error, alfa, beta, &
-      result, uflow, work(800)
+      result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
     REAL(DP), PARAMETER :: exact0 = 0.5350190569223644_DP
     REAL(DP), PARAMETER :: exact1 = 0.1998491554328673E+04_DP
@@ -1731,7 +1727,6 @@ PROGRAM TEST40
   USE TEST40_MOD, ONLY : CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC, CDQAWF, CDQAWO, &
     CDQAWS, CDQNG
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1792,12 +1787,6 @@ PROGRAM TEST40
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test double precision QUADPACK routines
   !

@@ -34,13 +34,13 @@ CONTAINS
     !   920722  Initialized IP(1) and IP(2) for CALL to LSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : LSEI, eps_sp, SVOUT, control_xer, num_xer
+    USE slatec, ONLY : LSEI, eps_sp, SVOUT
     USE blas, ONLY :  SAXPY
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(SP) :: cnorm, relerr(1), relnrm(1), resnrm(1), rnorme, rnorml(1), tnorm
-    INTEGER :: i, idigit, jdigit, kontrl, ma, mdd, me, meap1, mep1, mg, &
+    INTEGER :: i, idigit, jdigit, ma, mdd, me, meap1, mep1, mg, &
       mode, n, np1
     LOGICAL :: fatal
     !     .. Local Arrays ..
@@ -182,7 +182,6 @@ CONTAINS
     !
     !     Check calls to error processor.
     !
-    kontrl = control_xer
     fatal = .FALSE.
 !    IF( Kprint<=2 ) THEN
 !      control_xer = 0
@@ -212,7 +211,6 @@ CONTAINS
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
     !
-    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99005)
@@ -379,7 +377,6 @@ END MODULE TEST27_MOD
 PROGRAM TEST27
   USE TEST27_MOD, ONLY : LSEIQX, QCGLSS
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -437,12 +434,6 @@ PROGRAM TEST27
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test LSEI
   !

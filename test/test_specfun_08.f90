@@ -2368,7 +2368,6 @@ END MODULE TEST09_MOD
 PROGRAM TEST09
   USE TEST09_MOD, ONLY : CQCAI, CQCBH, CQCBI, CQCBJ, CQCBK, CQCBY
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms.
@@ -2425,12 +2424,6 @@ PROGRAM TEST09
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test Single Precision Complex Bessel Functions.
   !

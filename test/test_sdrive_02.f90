@@ -36,10 +36,10 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    USE slatec, ONLY : eps_dp, DDRIV1, DDRIV2, DDRIV3, num_xer
+    USE slatec, ONLY : eps_dp, DDRIV1, DDRIV2, DDRIV3
     REAL(DP) :: eps, t, tout
-    INTEGER :: ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
-      mstate, nde, nfe, nje, nstate, nstep, nx
+    INTEGER :: ierflg, Ipass, Kprint, leniw, lenw, Lun, mint, &
+      mstate, nde, nfe, nje, nstate, nstep
     REAL(DP), PARAMETER :: ALFA = 1._DP, HMAX = 15._DP
     INTEGER, PARAMETER :: IERROR = 3, IMPL = 0, LENWMX = 342, LIWMX = 53, &
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
@@ -117,7 +117,6 @@ CONTAINS
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
     END IF
-    num_xer = 0
     !  Run DDRIV1 with invalid input.
 !    nx = 201
 !    t = 0._DP
@@ -235,7 +234,6 @@ CONTAINS
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
     END IF
-    num_xer = 0
     !  Run DDRIV2 with invalid input.
 !    t = 0._DP
 !    y(1) = 10._DP
@@ -357,7 +355,6 @@ CONTAINS
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
     END IF
-    num_xer = 0
     !  Run DDRIV3 with invalid input.
 !    t = 0._DP
 !    y(1) = 10._DP
@@ -483,7 +480,6 @@ END MODULE TEST46_MOD
 PROGRAM TEST46
   USE TEST46_MOD, ONLY : DDQCK
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -539,12 +535,6 @@ PROGRAM TEST46
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test double precision SDRIVE
   !

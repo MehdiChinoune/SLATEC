@@ -25,19 +25,16 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : eps_dp, DRC, num_xer, control_xer
-    INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
+    USE slatec, ONLY : eps_dp, DRC
+    INTEGER :: Kprint, Ipass, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(DP) :: pi, trc, dif
     !* FIRST EXECUTABLE STATEMENT  QCDRC
-    num_xer = 0
-    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    control_xer = kontrl
     ipass1 = 1
     ipass2 = 1
     ipass3 = 1
@@ -86,7 +83,6 @@ CONTAINS
     !
     pi = 3.141592653589793238462643383279_DP
     trc = DRC(0._DP,0.25_DP)
-    num_xer = 0
     dif = trc - pi
     IF( (ABS(dif/pi)<1000._DP*eps_dp) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -106,7 +102,6 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PD21.14/'COMPUTED ANSWER =',&
         D21.14/'     DIFFERENCE =',D21.14)
     END IF
-    control_xer = contrl
     99006 FORMAT (' DRC - FAILED')
   END SUBROUTINE QCDRC
   !** QCDRD
@@ -132,19 +127,16 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to BLEM.  (WRB)
-    USE slatec, ONLY : eps_dp, DRD, num_xer, control_xer
-    INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
+    USE slatec, ONLY : eps_dp, DRD
+    INTEGER :: Kprint, Ipass, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(DP) :: blem, trd, dif
     !* FIRST EXECUTABLE STATEMENT  QCDRD
-    num_xer = 0
-    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    control_xer = kontrl
     ipass1 = 1
     ipass2 = 1
     ipass3 = 1
@@ -194,7 +186,6 @@ CONTAINS
     !
     blem = 1.797210352103388311159883738420485817341_DP
     trd = DRD(0._DP,2._DP,1._DP)
-    num_xer = 0
     dif = trd - blem
     IF( (ABS(dif/blem)<1000._DP*eps_dp) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -214,7 +205,6 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PD21.14/'COMPUTED ANSWER =',&
         D21.14/'     DIFFERENCE =',D21.14)
     END IF
-    control_xer = contrl
     99006 FORMAT (' DRD - FAILED')
   END SUBROUTINE QCDRD
   !** QCDRF
@@ -240,19 +230,16 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to ALEM.  (WRB)
-    USE slatec, ONLY : eps_dp, DRF, num_xer, control_xer
-    INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
+    USE slatec, ONLY : eps_dp, DRF
+    INTEGER :: Kprint, Ipass, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(DP) :: alem, trf, dif
     !* FIRST EXECUTABLE STATEMENT  QCDRF
-    num_xer = 0
-    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    control_xer = kontrl
     ipass1 = 1
     ipass2 = 1
     ipass3 = 1
@@ -302,7 +289,6 @@ CONTAINS
     !
     alem = 1.3110287771460599052324197949455597068_DP
     trf = DRF(0._DP,1._DP,2._DP)
-    num_xer = 0
     dif = trf - alem
     IF( (ABS(dif/alem)<1000._DP*eps_dp) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -322,7 +308,6 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PD21.14/'COMPUTED ANSWER =',&
         D21.14/'     DIFFERENCE =',D21.14)
     END IF
-    control_xer = contrl
     99006 FORMAT (' DRF - FAILED')
   END SUBROUTINE QCDRF
   !** QCDRJ
@@ -348,20 +333,17 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to CONSJ.  (WRB)
-    USE slatec, ONLY : eps_dp, DRJ, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DRJ
     !
-    INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
+    INTEGER :: Kprint, Ipass, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(DP) :: consj, trj, dif
     !* FIRST EXECUTABLE STATEMENT  QCDRJ
-    num_xer = 0
-    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    control_xer = kontrl
     ipass1 = 1
     ipass2 = 1
     ipass3 = 1
@@ -410,7 +392,6 @@ CONTAINS
     !
     consj = 0.14297579667156753833233879421985774801_DP
     trj = DRJ(2._DP,3._DP,4._DP,5._DP)
-    num_xer = 0
     dif = trj - consj
     IF( (ABS(dif/consj)<1000._DP*eps_dp) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -430,7 +411,6 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PD21.14/'COMPUTED ANSWER =',&
         D21.14/'     DIFFERENCE =',D21.14)
     END IF
-    control_xer = contrl
     99006 FORMAT (' DRJ - FAILED')
   END SUBROUTINE QCDRJ
 END MODULE TEST14_MOD
@@ -438,7 +418,6 @@ END MODULE TEST14_MOD
 PROGRAM TEST14
   USE TEST14_MOD, ONLY : QCDRC, QCDRD, QCDRF, QCDRJ
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -497,12 +476,6 @@ PROGRAM TEST14
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test double precision Carlson elliptic routines
   !

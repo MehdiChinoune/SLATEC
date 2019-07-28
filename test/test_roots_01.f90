@@ -110,11 +110,11 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test IFLAG for all values of KPRINT.  (WRB)
-    USE slatec, ONLY : FZERO, eps_sp, num_xer, control_xer
+    USE slatec, ONLY : FZERO, eps_sp
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    INTEGER :: iflag, kontrl
+    INTEGER :: iflag
     REAL(SP) :: ae, b, c, pi, r, re, tol
     LOGICAL :: fatal
     !     .. Intrinsic Functions ..
@@ -146,14 +146,7 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' IFLAG 3 and 4 tests')
@@ -182,9 +175,7 @@ CONTAINS
       IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
     END IF
     !
-    num_xer = 0
     !
-    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
@@ -228,11 +219,11 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-    USE slatec, ONLY : eps_dp, DFZERO, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DFZERO
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    INTEGER :: iflag, kontrl
+    INTEGER :: iflag
     REAL(DP) :: ae, b, c, pi, r, re, tol
     LOGICAL :: fatal
     !     .. Intrinsic Functions ..
@@ -264,14 +255,7 @@ CONTAINS
     !
     !     Trigger 2 error conditions
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99002)
     99002 FORMAT (/' IFLAG 3 and 4 tests')
@@ -300,9 +284,7 @@ CONTAINS
       IF( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
     END IF
     !
-    num_xer = 0
     !
-    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99003)
@@ -352,14 +334,13 @@ CONTAINS
     !           and changed TOL from sqrt eps_2_sp to sqrt eps_sp for
     !           the IBM 370 mainframes.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    USE slatec, ONLY : eps_sp, RPQR79, num_xer, control_xer
+    USE slatec, ONLY : eps_sp, RPQR79
     USE common_mod, ONLY : PASS
     REAL(SP) :: beta, tol
-    INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun
+    INTEGER :: i, ierr, Ipass, j, Kprint, Lun
     INTEGER :: itmp(7)
     COMPLEX(SP) :: root(7)
     REAL(SP) :: coef(8)
-    LOGICAL :: fatal
     !
     COMPLEX(SP), PARAMETER :: chk(7) = [ (1.4142135623731_SP,1.4142135623731_SP), &
       (1.4142135623731_SP,-1.4142135623731_SP), (0._SP,2._SP), (0._SP,-2._SP), &
@@ -482,13 +463,12 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    USE slatec, ONLY : CPQR79, eps_sp, num_xer, control_xer
+    USE slatec, ONLY : CPQR79, eps_sp
     USE common_mod, ONLY : PASS
-    INTEGER :: i, ierr, Ipass, j, kontrl, Kprint, Lun
+    INTEGER :: i, ierr, Ipass, j, Kprint, Lun
     REAL(SP) :: tol
     INTEGER :: itest(2), itmp(7)
     COMPLEX(SP) :: root(8)
-    LOGICAL :: fatal
     !
     COMPLEX(SP), PARAMETER :: coeff1(9) = [ (1._SP,0._SP), (-7._SP,-2._SP),&
       (8._SP,6._SP), (28._SP,8._SP), (-49._SP,-24._SP), (7._SP,2._SP),&
@@ -621,7 +601,6 @@ END MODULE TEST34_MOD
 PROGRAM TEST34
   USE TEST34_MOD, ONLY : CPRPQX, CQRTST, DFZTST, FZTEST, RQRTST
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -682,12 +661,6 @@ PROGRAM TEST34
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test CPZERO and RPZERO
   !

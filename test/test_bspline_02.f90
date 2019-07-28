@@ -44,11 +44,9 @@ CONTAINS
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: atol, bquad, bv, den, dn, er, fbcl, fbcr, pi, &
-      pquad, quad, spv, tol, x1, x2, xl, xx
-    INTEGER :: i, ibcl, ibcr, id, ierr, iknt, ileft, ilo, inbv, inev, &
-      inppv, iwork, j, jhigh, jj, k, kk, knt, kntopt, kontrl, &
-      ldc, ldcc, lxi, mflag, n, ndata, nmk, nn
-    LOGICAL :: fatal
+      spv, tol, x1, x2, xl, xx
+    INTEGER :: i, ibcl, ibcr, ierr, iknt, ileft, ilo, inbv, inev, &
+      inppv, j, jj, k, knt, ldc, ldcc, lxi, mflag, n, ndata, nmk, nn
     !     .. Local Arrays ..
     REAL(DP) :: adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), &
       qsave(2), sv(4), t(17), w(65), x(11), xi(11), y(11)
@@ -478,7 +476,6 @@ END MODULE TEST31_MOD
 PROGRAM TEST31
   USE TEST31_MOD, ONLY : DBSPCK
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -538,12 +535,6 @@ PROGRAM TEST31
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test double precision B-Spline package
   !

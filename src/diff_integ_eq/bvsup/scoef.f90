@@ -75,7 +75,6 @@ PURE SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : eps_com
-  USE service, ONLY : control_xer
   !
   INTEGER, INTENT(IN) :: Inhomo, Ncomp, Nfc, Nfcc, Nrowb
   INTEGER, INTENT(OUT) :: Iflag
@@ -85,7 +84,7 @@ PURE SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   REAL(SP), INTENT(INOUT) :: Work(*)
   REAL(SP), INTENT(OUT) :: By(Nfcc,Ncomp), Cvec(Nrowb), Coef(Nfcc)
   !
-  INTEGER :: i, j, k, kflag, ki, l, mlso, ncomp2, nf, nfccm1
+  INTEGER :: i, j, k, kflag, ki, l, mlso, ncomp2, nfccm1
   REAL(SP) :: bbn, bn, brn, bykl, bys, cons, gam, un, ypn
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP
@@ -127,7 +126,6 @@ PURE SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   mlso = 0
   IF( Inhomo==3 ) mlso = 1
   kflag = INT( 0.5_SP*LOG10(eps_com) )
-  nf = control_xer
   DO
     CALL SUDS(By,Coef,Cvec,Nfcc,Nfcc,Nfcc,kflag,mlso,Work,Iwork)
     IF( kflag/=3 ) THEN

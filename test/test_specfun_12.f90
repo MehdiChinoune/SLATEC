@@ -25,19 +25,16 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : eps_sp, RC, num_xer, control_xer
-    INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
+    USE slatec, ONLY : eps_sp, RC
+    INTEGER :: Kprint, Ipass, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(SP) :: pi, trc, dif
     !* FIRST EXECUTABLE STATEMENT  QCRC
-    num_xer = 0
-    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    control_xer = kontrl
     ier = 0
     ipass1 = 1
     ipass2 = 1
@@ -86,7 +83,6 @@ CONTAINS
     !
     pi = 3.1415926535897932_SP
     trc = RC(0._SP,0.25_SP)
-    num_xer = 0
     dif = trc - pi
     IF( (ABS(dif/pi)<1000._SP*eps_sp) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -106,7 +102,6 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
     END IF
-    control_xer = contrl
     99006 FORMAT (' RC - FAILED')
   END SUBROUTINE QCRC
   !** QCRD
@@ -131,20 +126,17 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : eps_sp, RD, num_xer, control_xer
+    USE slatec, ONLY : eps_sp, RD
     !
-    INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
+    INTEGER :: Kprint, Ipass, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(SP) :: blem, trd, dif
     !* FIRST EXECUTABLE STATEMENT  QCRD
-    num_xer = 0
-    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    control_xer = kontrl
     ier = 0
     ipass1 = 1
     ipass2 = 1
@@ -194,7 +186,6 @@ CONTAINS
     !
     blem = 1.79721035210338831_SP
     trd = RD(0._SP,2._SP,1._SP)
-    num_xer = 0
     dif = trd - blem
     IF( (ABS(dif/blem)<1000._SP*eps_sp) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -214,7 +205,6 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
     END IF
-    control_xer = contrl
     99006 FORMAT (' RD - FAILED')
   END SUBROUTINE QCRD
   !** QCRF
@@ -239,20 +229,17 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : eps_sp, RF, num_xer, control_xer
+    USE slatec, ONLY : eps_sp, RF
     !
-    INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
+    INTEGER :: Kprint, Ipass, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(SP) :: alem, trf, dif
     !* FIRST EXECUTABLE STATEMENT  QCRF
-    num_xer = 0
-    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    control_xer = kontrl
     ier = 0
     ipass1 = 1
     ipass2 = 1
@@ -303,7 +290,6 @@ CONTAINS
     !
     alem = 1.311028777146059905_SP
     trf = RF(0._SP,1._SP,2._SP)
-    num_xer = 0
     dif = trf - alem
     IF( (ABS(dif/alem)<1000._SP*eps_sp) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -323,7 +309,6 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
     END IF
-    control_xer = contrl
     99006 FORMAT (' RF - FAILED')
   END SUBROUTINE QCRF
   !** QCRJ
@@ -348,20 +333,17 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    USE slatec, ONLY : eps_sp, RJ, num_xer, control_xer
+    USE slatec, ONLY : eps_sp, RJ
     !
-    INTEGER :: Kprint, Ipass, contrl, kontrl, Lun, ier
+    INTEGER :: Kprint, Ipass, kontrl, Lun, ier
     INTEGER :: ipass1, ipass2, ipass3, ipass4
     REAL(SP) :: consj, trj, dif
     !* FIRST EXECUTABLE STATEMENT  QCRJ
-    num_xer = 0
-    contrl = control_xer
     IF( Kprint>=3 ) THEN
       kontrl = +1
     ELSE
       kontrl = 0
     END IF
-    control_xer = kontrl
     ier = 0
     ipass1 = 1
     ipass2 = 1
@@ -410,7 +392,6 @@ CONTAINS
     !
     consj = 0.142975796671567538_SP
     trj = RJ(2._SP,3._SP,4._SP,5._SP)
-    num_xer = 0
     dif = trj - consj
     IF( (ABS(dif/consj)<1000._SP*eps_sp) .AND. (ier==0) ) THEN
       ipass4 = 1
@@ -430,7 +411,6 @@ CONTAINS
       99005 FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
         E14.6/'     DIFFERENCE =',E14.6)
     END IF
-    control_xer = contrl
     99006 FORMAT (' RJ - FAILED')
   END SUBROUTINE QCRJ
 END MODULE TEST13_MOD
@@ -438,7 +418,6 @@ END MODULE TEST13_MOD
 PROGRAM TEST13
   USE TEST13_MOD, ONLY : QCRC, QCRD, QCRF, QCRJ
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -497,12 +476,6 @@ PROGRAM TEST13
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test single precision Carlson elliptic routines
   !

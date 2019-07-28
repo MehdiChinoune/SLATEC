@@ -25,8 +25,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
-    REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
-      result, uflow, work(400)
+    REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, work(400)
     INTEGER :: ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
     REAL(SP), PARAMETER :: pi = 0.31415926535897932E+01_SP
     REAL(SP), PARAMETER :: exact1 = 0.1154700538379252E+01_SP
@@ -137,8 +136,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4), inf
-    REAL(SP) :: abserr, bound, epmach, epsabs, epsrel, error, &
-      oflow, result, uflow, work(800)
+    REAL(SP) :: abserr, bound, epmach, epsabs, epsrel, error, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
     REAL(SP), PARAMETER :: exact0 = 2._SP, exact1 = 0.115470066904E1_SP
     REAL(SP), PARAMETER :: exact2 = 0.909864525656E-02_SP
@@ -266,7 +264,7 @@ CONTAINS
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(4)
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
-      oflow, points(5), result, uflow, work(405)
+      points(5), result, work(405)
     INTEGER :: ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
     REAL(SP), PARAMETER :: exact1 = 0.4285277667368085E+01_SP
@@ -409,8 +407,7 @@ CONTAINS
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(5), Lun
-    REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
-      oflow, result, uflow, work(800)
+    REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(SP), PARAMETER :: exact0 = 2._SP
     REAL(SP), PARAMETER :: exact1 = 0.115470066904E+01_SP
@@ -546,8 +543,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
-    REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
-      c, result, uflow, work(800)
+    REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, c, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(SP), PARAMETER :: exact0 = -0.6284617285065624E+03_SP
     REAL(SP), PARAMETER :: exact1 = 0.1855802E+01_SP
@@ -647,7 +643,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(3), integr, iwork(450), leniw, Lun, maxp1
-    REAL(SP) :: a, abserr, epsabs, epmach, error, omega, result, uflow, work(1425)
+    REAL(SP) :: a, abserr, epsabs, epmach, error, omega, result, work(1425)
     INTEGER :: ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
     REAL(SP), PARAMETER :: exact0 = 0.1422552162575912E+01_SP
     REAL(SP), PARAMETER :: pi = 0.31415926535897932E+01_SP
@@ -760,8 +756,7 @@ CONTAINS
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: leniw
-    REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
-      oflow, omega, result, uflow, work(1325)
+    REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, omega, result, work(1325)
     INTEGER :: ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
     REAL(SP), PARAMETER :: exact0 = 0.1042872789432789E+05_SP
@@ -888,7 +883,7 @@ CONTAINS
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER :: ierv(2), Lun
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, &
-      alfa, beta, result, uflow, work(800)
+      alfa, beta, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
     REAL(SP), PARAMETER :: exact0 = 0.5350190569223644_SP
     REAL(SP), PARAMETER :: exact1 = 0.1998491554328673E+04_SP
@@ -1730,7 +1725,6 @@ END MODULE TEST39_MOD
 PROGRAM TEST39
   USE TEST39_MOD, ONLY : CQAG, CQAGI, CQAGP, CQAGS, CQAWC, CQAWF, CQAWO, CQAWS, CQNG
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1790,12 +1784,6 @@ PROGRAM TEST39
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test single precision QUADPACK routines
   !

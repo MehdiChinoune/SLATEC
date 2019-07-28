@@ -24,9 +24,8 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
-    USE slatec, ONLY : eps_dp, DAVINT, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DAVINT
     !
-    INTEGER :: kontrl
     INTEGER :: i, ierr, Ipass, Kprint, Lun, n
     REAL(DP) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
     LOGICAL :: fatal
@@ -91,7 +90,6 @@ CONTAINS
     !
     !     Test error returns.
     !
-    kontrl = control_xer
     fatal = .FALSE.
 !    IF( Kprint<=2 ) THEN
 !      control_xer = 0
@@ -186,7 +184,6 @@ CONTAINS
     !
     !     Reset XERMSG control variables and write summary.
     !
-    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99005)
@@ -229,12 +226,12 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920213  Code restructured to test DGAUS8 for all values of KPRINT,
     !           second accuracy test added and testing of error returns revised.  (WRB)
-    USE slatec, ONLY : eps_dp, DGAUS8, control_xer
+    USE slatec, ONLY : eps_dp, DGAUS8
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    INTEGER :: ierr, kontrl
-    REAL(DP) :: a, ans, b, cor, err, req, tol
+    INTEGER :: ierr
+    REAL(DP) :: a, ans, b, cor, err, tol
     LOGICAL :: fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, EXP, SQRT
@@ -276,7 +273,6 @@ CONTAINS
     !
     !     Test error returns.
     !
-    kontrl = control_xer
     fatal = .FALSE.
 !    IF( Kprint<=2 ) THEN
 !      control_xer = 0
@@ -324,7 +320,6 @@ CONTAINS
 !      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
 !    END IF
     !
-    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99001)
@@ -370,12 +365,12 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920213  Code restructured to test DQNC79 for all values of KPRINT,
     !           second accuracy test added and testing of error returns revised.  (WRB)
-    USE slatec, ONLY : eps_dp, DQNC79, control_xer
+    USE slatec, ONLY : eps_dp, DQNC79
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
-    INTEGER :: ierr, kontrl, nfct
-    REAL(DP) :: a, ans, b, cor, err, req, tol
+    INTEGER :: ierr, nfct
+    REAL(DP) :: a, ans, b, cor, err, tol
     LOGICAL :: fatal
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
@@ -417,7 +412,6 @@ CONTAINS
     !
     !     Test error returns.
     !
-    kontrl = control_xer
     fatal = .FALSE.
 !    IF( Kprint<=2 ) THEN
 !      control_xer = 0
@@ -465,7 +459,6 @@ CONTAINS
 !      IF( Kprint>=2 ) WRITE (Lun,99007) 'FAILED'
 !    END IF
     !
-    control_xer = kontrl
     IF( fatal ) THEN
       IF( Kprint>=2 ) THEN
         WRITE (Lun,99001)
@@ -546,7 +539,6 @@ END MODULE TEST42_MOD
 PROGRAM TEST42
   USE TEST42_MOD, ONLY : DAVNTS, DQG8TS, DQN79Q
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -605,12 +597,6 @@ PROGRAM TEST42
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test DAVINT
   !

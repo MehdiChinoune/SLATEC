@@ -70,16 +70,8 @@ MODULE service
     eps_2_dp = EPSILON(1._DP)/RADIX(1._DP), eps_dp = EPSILON(1._DP), &
     log10_radix_dp = LOG10( REAL( RADIX(1._DP), DP ) )
   !
-  INTEGER :: num_xer     = 0  !! The most recent error number
-  INTEGER :: control_xer = 2  !! Error control flag.
-  INTEGER :: unit_xer    = 0  !! Output file to which error messages are to be sent.
-  INTEGER :: max_xer     = 10 !! Maximum number of times any error message is to be printed
-
 CONTAINS
   include"ivout.f90"
   include"svout.f90"
   include"dvout.f90"
-  include"xermsg.f90"
-  include"xerprn.f90"
-  include"xersve.f90"
 END MODULE service

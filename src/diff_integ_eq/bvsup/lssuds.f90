@@ -117,7 +117,7 @@ PURE SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900510  Fixed an error message.  (RWC)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : control_xer, max_xer, eps_sp
+  USE service, ONLY : eps_sp
   !
   INTEGER, INTENT(IN) :: Iscale, M, Mlso, N, Nrda, Nrdu
   INTEGER, INTENT(INOUT) :: Iflag, Irank, Isflg
@@ -126,7 +126,7 @@ PURE SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   REAL(SP), INTENT(INOUT) :: Q(Nrda,M), U(Nrdu,M), X(M)
   REAL(SP), INTENT(OUT) :: Diag(N), Div(N), S(N), Scales(M), Td(N)
   !
-  INTEGER :: i, irp, j, jr, k, kp, l, nmir, nu, maxmes, nfat, nfatal
+  INTEGER :: i, irp, j, jr, k, kp, l, nmir, nu, nfat
   REAL(SP) :: gam, gama, res, ss, uro
   !
   !- *********************************************************************
@@ -143,13 +143,10 @@ PURE SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     IF( Nrdu==0 .OR. Nrdu>=M ) THEN
       IF( Iflag<=0 ) THEN
         !
-        nfatal = control_xer
-        maxmes = max_xer
         Isflg = -15
         IF( Iflag/=0 ) THEN
           Isflg = Iflag
-          nfat = -1
-          IF( nfatal==0 ) nfat = 0
+          nfat = 0
         END IF
         !
         !     COPY MATRIX A INTO MATRIX Q

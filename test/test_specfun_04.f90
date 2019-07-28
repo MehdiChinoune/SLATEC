@@ -36,10 +36,10 @@ CONTAINS
     !           Wronskian.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of KPRINT.  (WRB)
-    USE slatec, ONLY : BESI, BESK, eps_sp, num_xer, control_xer, tiny_sp, huge_sp
+    USE slatec, ONLY : BESI, BESK, eps_sp, tiny_sp, huge_sp
     !
     INTEGER :: Ipass, Kprint
-    INTEGER :: i, ix, k, kontrl, kode, Lun, m, n, nu, nw, ny
+    INTEGER :: i, ix, k, kode, Lun, m, n, nu, nw, ny
     REAL(SP) :: alp, del, er, fnu, fnup, rx, tol, x
     REAL(SP) :: fn(3), w(5), xx(5), y(5)
     LOGICAL :: fatal
@@ -195,14 +195,7 @@ CONTAINS
     !
     !     Trigger 10 error conditions
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99007)
     99007 FORMAT (//' TRIGGER 10 ERROR CONDITIONS'//)
@@ -302,10 +295,10 @@ CONTAINS
     !           Wronskian.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of KPRINT.  (WRB)
-    USE slatec, ONLY : BESJ, BESY, eps_sp, num_xer, control_xer, tiny_sp
+    USE slatec, ONLY : BESJ, BESY, eps_sp, tiny_sp
     !
     INTEGER :: Ipass, Kprint
-    INTEGER :: i, ix, k, kontrl, Lun, m, n, nu, ny
+    INTEGER :: i, ix, k, Lun, m, n, nu, ny
     REAL(SP) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
     REAL(SP) :: fn(3), w(5), xx(5), y(5)
     LOGICAL :: fatal
@@ -440,14 +433,7 @@ CONTAINS
     !
     !     Trigger 7 error conditions
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     fatal = .FALSE.
-    num_xer = 0
     !
     IF( Kprint>=3 ) WRITE (Lun,99006)
     99006 FORMAT (//' TRIGGER 7 ERROR CONDITIONS'//)
@@ -712,7 +698,6 @@ END MODULE TEST05_MOD
 PROGRAM TEST05
   USE TEST05_MOD, ONLY : BIKCK, BJYCK, EG8CK
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -772,12 +757,6 @@ PROGRAM TEST05
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test EXINT and GAUS8
   !

@@ -74,7 +74,6 @@ PURE SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : eps_com
-  USE service, ONLY : control_xer
   !
   INTEGER, INTENT(IN) :: Inhomo, Ncomp, Nfc, Nfcc, Nrowb
   INTEGER, INTENT(OUT) :: Iflag
@@ -84,7 +83,7 @@ PURE SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   REAL(DP), INTENT(INOUT) :: Work(*)
   REAL(DP), INTENT(OUT) :: By(Nfcc,Ncomp), Cvec(Nrowb), Coef(Nfcc)
   !
-  INTEGER :: i, j, k, kflag, ki, l, mlso, ncomp2, nf, nfccm1
+  INTEGER :: i, j, k, kflag, ki, l, mlso, ncomp2, nfccm1
   REAL(DP) :: bbn, bn, brn, bykl, bys, cons, gam, un, ypn
   !* FIRST EXECUTABLE STATEMENT  DCOEF
   !
@@ -126,7 +125,6 @@ PURE SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   mlso = 0
   IF( Inhomo==3 ) mlso = 1
   kflag = INT( 0.5_DP*LOG10(eps_com) )
-  nf = control_xer
   DO
     CALL DSUDS(By,Coef,Cvec,Nfcc,Nfcc,Nfcc,kflag,mlso,Work,Iwork)
     IF( kflag/=3 ) THEN

@@ -434,7 +434,7 @@ CONTAINS
     !   900322  Made miscellaneous cosmetic changes.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930504  Removed parens from constants in WRITE statements.  (FNF)
-    USE slatec, ONLY : DCHFDV, DCHFEV, DPCHFD, DPCHFE, XERSVE, control_xer
+    USE slatec, ONLY : DCHFDV, DCHFEV, DPCHFD, DPCHFE
     !
     !  Declare arguments.
     !
@@ -443,7 +443,7 @@ CONTAINS
     !
     !  DECLARATIONS.
     !
-    INTEGER :: i, ierr, kontrl, nerr, next(2)
+    INTEGER :: i, ierr, nerr, next(2)
     REAL(DP) :: d(10), dum(1), f(10), temp, x(10)
     LOGICAL :: skip
     !  INITIALIZE.
@@ -451,12 +451,6 @@ CONTAINS
     !* FIRST EXECUTABLE STATEMENT  DEVERK
     nerr = 0
     !
-    kontrl = control_xer
-    IF( Kprint<=2 ) THEN
-      control_xer = 0
-    ELSE
-      control_xer = 1
-    END IF
     !
     IF( Kprint>=3 ) WRITE (Lout,99001)
     !
@@ -532,7 +526,6 @@ CONTAINS
     !
     !  SUMMARIZE RESULTS.
     !
-    IF( Kprint>2 ) CALL XERSVE(' ',' ',0,0,0,i)
     IF( nerr==0 ) THEN
       Fail = .FALSE.
       IF( Kprint>=2 ) WRITE (Lout,99003)
@@ -546,7 +539,6 @@ CONTAINS
     !
     !  TERMINATE.
     !
-    control_xer = kontrl
     RETURN
     99005 FORMAT (/' THIS CALL SHOULD RETURN IERR =',I3)
     !------------- LAST LINE OF DEVERK FOLLOWS -----------------------------
@@ -1994,7 +1986,6 @@ END MODULE TEST33_MOD
 PROGRAM TEST33
   USE TEST33_MOD, ONLY : DPCHQ1, DPCHQ2, DPCHQ3, DPCHQ4, DPCHQ5
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -2057,12 +2048,6 @@ PROGRAM TEST33
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test DPCHIP evaluators
   !

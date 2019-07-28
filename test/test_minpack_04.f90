@@ -89,9 +89,8 @@ CONTAINS
     !   900911  Test problem changed and cosmetic changes to code.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-    USE slatec, ONLY : eps_dp, DP1VLU, DPCOEF, DPOLFT, num_xer, control_xer
+    USE slatec, ONLY : eps_dp, DP1VLU, DPCOEF, DPOLFT
     USE common_mod, ONLY : PASS
-    INTEGER :: kontrl
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -466,13 +465,13 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : DFDJC3, eps_dp, DCOV, DNLS1E, control_xer, num_xer
+    USE slatec, ONLY : DFDJC3, eps_dp, DCOV, DNLS1E
     USE common_mod, ONLY : PASS
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: fnorm, fnorms, sigma, temp1, temp2, temp3, tol, tol2
-    INTEGER :: i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, nprint
+    INTEGER :: i, iflag, info, infos, iopt, ldfjac, lwa, m, n, nprint
     LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: fjac(10,2), fjrow(2,1), fjtj(3), fvec(10), wa(40), x(2)
@@ -662,7 +661,6 @@ CONTAINS
     !
     !     Test improper input parameters.
     !
-    kontrl = control_xer
     fatal = .FALSE.
 !    IF( Kprint<=2 ) THEN
 !      control_xer = 0
@@ -760,13 +758,12 @@ CONTAINS
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    USE slatec, ONLY : eps_dp, DBVALU, DCV, DFC, DMOUT, DVOUT, IVOUT, &
-      control_xer, num_xer
+    USE slatec, ONLY : eps_dp, DBVALU, DCV, DFC, DMOUT, DVOUT, IVOUT
     !     .. Scalar Arguments ..
     INTEGER :: Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(DP) :: diff, t, tol, xval
-    INTEGER :: kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nval
+    INTEGER :: i, idigit, ii, j, l, mode, n, nconst, ndeg, nval
     LOGICAL :: fatal
     !     .. Local Arrays ..
     REAL(DP) :: coeff(9), v(51,5), w(529), xconst(11), yconst(11)
@@ -970,7 +967,6 @@ CONTAINS
     !
     !     Trigger error conditions.
     !
-    kontrl = control_xer
     fatal = .FALSE.
 !    IF( Kprint<=2 ) THEN
 !      control_xer = 0
@@ -1019,7 +1015,6 @@ CONTAINS
     !     Restore KONTRL and check to see if the tests of error detection
     !     passed.
     !
-    control_xer = kontrl
     IF( fatal ) THEN
       Ipass = 0
       IF( Kprint>=2 ) THEN
@@ -1217,7 +1212,6 @@ END MODULE TEST53_MOD
 PROGRAM TEST53
   USE TEST53_MOD, ONLY : DFCQX, DNLS1Q, DPFITT
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -1278,12 +1272,6 @@ PROGRAM TEST53
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test DNLS1E and DNLS1
   !

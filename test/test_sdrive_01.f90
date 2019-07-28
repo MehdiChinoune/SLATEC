@@ -36,10 +36,10 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    USE slatec, ONLY : eps_sp, SDRIV1, SDRIV2, SDRIV3, num_xer
+    USE slatec, ONLY : eps_sp, SDRIV1, SDRIV2, SDRIV3
     REAL(SP) :: eps, t, tout
-    INTEGER :: ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, &
-      Lun, mint, mstate, nde, nfe, nje, nstate, nstep, nx
+    INTEGER :: ierflg, Ipass, Kprint, leniw, lenw, &
+      Lun, mint, mstate, nde, nfe, nje, nstate, nstep
     REAL(SP), PARAMETER :: ALFA = 1._SP, HMAX = 15._SP
     INTEGER, PARAMETER :: IERROR = 3, IMPL = 0, LENWMX = 342, LIWMX = 53, &
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
@@ -117,7 +117,6 @@ CONTAINS
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
     END IF
-    num_xer = 0
     !  Run SDRIV1 with invalid input.
 !    nx = 201
 !    t = 0._SP
@@ -234,7 +233,6 @@ CONTAINS
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
     END IF
-    num_xer = 0
     !  Run SDRIV2 with invalid input.
 !    t = 0._SP
 !    y(1) = 10._SP
@@ -356,7 +354,6 @@ CONTAINS
       WRITE (Lun,*) ' Y(3) ', y(3)
       WRITE (Lun,'(/)')
     END IF
-    num_xer = 0
     !  Run SDRIV3 with invalid input.
 !    t = 0._SP
 !    y(1) = 10._SP
@@ -480,7 +477,6 @@ END MODULE TEST45_MOD
 PROGRAM TEST45
   USE TEST45_MOD, ONLY : SDQCK
   USE ISO_FORTRAN_ENV, ONLY : INPUT_UNIT, OUTPUT_UNIT
-  USE slatec, ONLY : control_xer, max_xer
   USE common_mod, ONLY : GET_ARGUMENT
   IMPLICIT NONE
   !> Driver for testing SLATEC subprograms
@@ -536,12 +532,6 @@ PROGRAM TEST45
   !     Read KPRINT parameter
   !
   CALL GET_ARGUMENT(kprint)
-  max_xer = 1000
-  IF( kprint<=1 ) THEN
-    control_xer = 0
-  ELSE
-    control_xer = 1
-  END IF
   !
   !     Test single precision SDRIVE
   !
