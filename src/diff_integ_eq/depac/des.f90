@@ -28,25 +28,28 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !   900510  Convert XERRWV calls to XERMSG calls, replace GOTOs with
-  !           IF-THEN-ELSEs.  (RWC)
+  !   900510  Convert XERRWV calls to XERMSG calls, replace GOTOs with IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : XERMSG, eps_sp
+  USE service, ONLY : eps_sp
   !
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Uprime(:)
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE F
   END INTERFACE
-  INTEGER :: Idid, Init, Iquit, Ivc, Kgi, Kle4, Kold, Kord, Kprev, Ksteps, Neq, Ns
-  INTEGER :: Info(15), Iv(10)
-  REAL(SP) :: Delsgn, Eps, Fouru, H, Hold, T, Told, Tout, Tstop, Twou, X, Xold
-  REAL(SP) :: Alpha(12), Atol(:), Beta(12), G(13), Gi(11), P(Neq), Phi(Neq,16), &
-    Psi(12), Rtol(:), Sig(13), V(12), W(12), Wt(Neq), Y(Neq), Yp(Neq), &
+  INTEGER, INTENT(IN) :: Neq
+  INTEGER, INTENT(INOUT) :: Idid, Init, Iquit, Ivc, Kgi, Kle4, Kold, Kord, &
+    Kprev, Ksteps, Ns
+  INTEGER, INTENT(INOUT) :: Iv(10), Info(15)
+  REAL(SP), INTENT(IN) :: Tout, Tstop
+  REAL(SP), INTENT(INOUT) :: Delsgn, Eps, Fouru, H, Hold, Twou, T, Told, X, Xold
+  REAL(SP), INTENT(INOUT) :: Alpha(12), Atol(:), Beta(12), G(13), Gi(11), P(Neq), &
+    Phi(Neq,16), Psi(12), Rtol(:), Sig(13), V(12), W(12), Wt(Neq), Y(Neq), Yp(Neq), &
     Ypout(Neq), Yy(Neq)
-  LOGICAL :: Stiff, Start, Phase1, Nornd, Intout
+  LOGICAL, INTENT(INOUT) :: Stiff, Start, Phase1, Nornd, Intout
   !
   INTEGER :: k, l, ltol, natolp, nrtolp
   REAL(SP) :: a, absdel, del, dt, ha, u
@@ -103,41 +106,36 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   IF( Info(1)/=0 .AND. Info(1)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(1)
-    CALL XERMSG('DES','IN DEABM, INFO(1) MUST BE SET TO 0 FOR THE&
+    ERROR STOP 'DES : IN DEABM, INFO(1) MUST BE SET TO 0 FOR THE&
       & START OF A NEW PROBLEM, AND MUST BE SET TO 1 FOLLOWING AN INTERRUPTED TASK.&
-      & YOU ARE ATTEMPTING TO CONTINUE THE INTEGRATION ILLEGALLY BY CALLING THE&
-      & CODE WITH INFO(1) = '//xern1,3,1)
+      & YOU ARE ATTEMPTING TO CONTINUE THE INTEGRATION ILLEGALLY'
     Idid = -33
   END IF
   !
   IF( Info(2)/=0 .AND. Info(2)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(2)
-    CALL XERMSG('DES','IN DEABM, INFO(2) MUST BE 0 OR 1 INDICATING&
-      & SCALAR AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
-      & YOU HAVE CALLED THE CODE WITH INFO(2) = '//xern1,4,1)
+    ERROR STOP 'DES : IN DEABM, INFO(2) MUST BE 0 OR 1 INDICATING&
+      & SCALAR AND VECTOR ERROR TOLERANCES, RESPECTIVELY.'
     Idid = -33
   END IF
   !
   IF( Info(3)/=0 .AND. Info(3)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(3)
-    CALL XERMSG('DES','IN DEABM, INFO(3) MUST BE 0 OR 1 INDICATING&
-      & THE INTERVAL OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.&
-      & YOU HAVE CALLED THE CODE WITH  INFO(3) = '//xern1,5,1)
+    ERROR STOP 'DES : IN DEABM, INFO(3) MUST BE 0 OR 1 INDICATING&
+      & THE INTERVAL OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.'
     Idid = -33
   END IF
   !
   IF( Info(4)/=0 .AND. Info(4)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(4)
-    CALL XERMSG('DES','IN DEABM, INFO(4) MUST BE 0 OR 1 INDICATING&
-      & WHETHER OR NOT THE INTEGRATION INTERVAL IS TO BE RESTRICTED BY A POINT TSTOP.&
-      & YOU HAVE CALLED THE CODE WITH INFO(4) = '//xern1,14,1)
+    ERROR STOP 'DES : IN DEABM, INFO(4) MUST BE 0 OR 1 INDICATING&
+      & WHETHER OR NOT THE INTEGRATION INTERVAL IS TO BE RESTRICTED BY A POINT TSTOP.'
     Idid = -33
   END IF
   !
   IF( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
-    CALL XERMSG('DES','IN DEABM, THE NUMBER OF EQUATIONS NEQ MUST BE&
-      & A POSITIVE INTEGER.  YOU HAVE CALLED THE CODE WITH  NEQ = '//xern1,6,1)
+    ERROR STOP 'DES : IN DEABM, THE NUMBER OF EQUATIONS NEQ MUST BE A POSITIVE INTEGER.'
     Idid = -33
   END IF
   !
@@ -147,10 +145,9 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     IF( nrtolp==0 .AND. Rtol(k)<0. ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
-      CALL XERMSG('DES','IN DEABM, THE RELATIVE ERROR TOLERANCES RTOL&
-        & MUST BE NON-NEGATIVE.  YOU HAVE CALLED THE CODE WITH  RTOL('//xern1//') = '&
-        //xern3//'.  IN THE CASE OF VECTOR ERROR TOLERANCES, NO FURTHER&
-        & CHECKING OF RTOL COMPONENTS IS DONE.',7,1)
+      ERROR STOP 'DES : IN DEABM, THE RELATIVE ERROR TOLERANCES RTOL&
+        & MUST BE NON-NEGATIVE. IN THE CASE OF VECTOR ERROR TOLERANCES, NO FURTHER&
+        & CHECKING OF RTOL COMPONENTS IS DONE.'
       Idid = -33
       nrtolp = 1
     END IF
@@ -158,10 +155,9 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     IF( natolp==0 .AND. Atol(k)<0. ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
-      CALL XERMSG('DES','IN DEABM, THE ABSOLUTE ERROR TOLERANCES ATOL&
-        & MUST BE NON-NEGATIVE.  YOU HAVE CALLED THE CODE WITH  ATOL('//xern1//') = '&
-        //xern3//'.  IN THE CASE OF VECTOR ERROR TOLERANCES, NO FURTHER&
-        & CHECKING OF ATOL COMPONENTS IS DONE.',8,1)
+      ERROR STOP 'DES : IN DEABM, THE ABSOLUTE ERROR TOLERANCES ATOL&
+        & MUST BE NON-NEGATIVE. IN THE CASE OF VECTOR ERROR TOLERANCES, NO FURTHER&
+        & CHECKING OF ATOL COMPONENTS IS DONE.'
       Idid = -33
       natolp = 1
     END IF
@@ -174,9 +170,9 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     IF( SIGN(1._SP,Tout-T)/=SIGN(1._SP,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
-      CALL XERMSG('DES','IN DEABM, YOU HAVE CALLED THE CODE WITH  TOUT = '&
-        //xern3//' BUT YOU HAVE ALSO TOLD THE CODE (INFO(4) = 1) NOT TO&
-        & INTEGRATE PAST THE POINT TSTOP = '//xern4//' THESE INSTRUCTIONS CONFLICT.',14,1)
+      ERROR STOP 'DES : IN DEABM, YOU HAVE CALLED THE CODE WITH THAT VALUE OF TOUT &
+        & BUT YOU HAVE ALSO TOLD THE CODE (INFO(4) = 1) NOT TO&
+        & INTEGRATE PAST THE POINT TSTOP THESE INSTRUCTIONS CONFLICT.'
       Idid = -33
     END IF
   END IF
@@ -186,25 +182,25 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   IF( Init/=0 ) THEN
     IF( T==Tout ) THEN
       WRITE (xern3,'(1PE15.6)') T
-      CALL XERMSG('DES','IN DEABM, YOU HAVE CALLED THE CODE WITH  T =&
-        & TOUT = '//xern3//'$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
+      ERROR STOP 'DES : IN DEABM, YOU HAVE CALLED THE CODE WITH  T = TOUT&
+        & THIS IS NOT ALLOWED ON CONTINUATION CALLS.'
       Idid = -33
     END IF
     !
     IF( T/=Told ) THEN
       WRITE (xern3,'(1PE15.6)') Told
       WRITE (xern4,'(1PE15.6)') T
-      CALL XERMSG('DES','IN DEABM, YOU HAVE CHANGED THE VALUE OF T FROM '&
-        //xern3//' TO '//xern4//'  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
+      ERROR STOP 'DES : IN DEABM, YOU HAVE CHANGED THE VALUE OF T  THIS IS NOT&
+        & ALLOWED ON CONTINUATION CALLS.'
       Idid = -33
     END IF
     !
     IF( Init/=1 ) THEN
       IF( Delsgn*(Tout-T)<0. ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
-        CALL XERMSG('DES','IN DEABM, BY CALLING THE CODE WITH TOUT = '&
-          //xern3//' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.&
-          &$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
+        ERROR STOP 'DES : IN DEABM, BY CALLING THE CODE WITH THAT VALUE OF TOUT &
+          & YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.&
+          & THIS IS NOT ALLOWED WITHOUT RESTARTING.'
         Idid = -33
       END IF
     END IF
@@ -217,9 +213,9 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       Iquit = -33
       Info(1) = -1
     ELSE
-      CALL XERMSG('DES','IN DEABM, INVALID INPUT WAS DETECTED ON&
+      ERROR STOP 'DES : IN DEABM, INVALID INPUT WAS DETECTED ON&
         & SUCCESSIVE ENTRIES.  IT IS IMPOSSIBLE TO PROCEED BECAUSE YOU HAVE NOT&
-        & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.',12,2)
+        & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.'
     END IF
     RETURN
   END IF
@@ -438,5 +434,6 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   Told = T
   Info(1) = -1
   Intout = .FALSE.
+  !
   RETURN
 END SUBROUTINE DES

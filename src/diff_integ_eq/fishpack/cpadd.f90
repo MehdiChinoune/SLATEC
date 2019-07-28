@@ -32,9 +32,14 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE CCBLK, ONLY : cnv_com, eps_com, ncmplx_com
-  INTEGER :: Ierror, N
-  REAL(SP) :: A(N), Bh(N), Bp(N), C(N)
-  COMPLEX(SP) :: Cbp(N)
+  !
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A(N), C(N)
+  REAL(SP), INTENT(INOUT) :: Bp(N)
+  REAL(SP), INTENT(OUT) :: Bh(N)
+  COMPLEX(SP), INTENT(OUT) :: Cbp(N)
+  !
   INTEGER :: i3, icv, if, ig, is, it, iz, j, modiz, nhalf, nt
   REAL(SP) :: db, psg, scnv, sgn, xl, xm, xr
   COMPLEX(SP) :: cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3
@@ -196,5 +201,6 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   END DO
   RETURN
   300  Ierror = 4
+  !
   RETURN
 END SUBROUTINE CPADD

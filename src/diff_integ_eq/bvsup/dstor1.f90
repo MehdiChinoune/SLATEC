@@ -26,14 +26,16 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : c_com, inhomo_com, ncomp_com, nfc_com
-  INTEGER :: Ndisk, Ntape, Ntemp
-  REAL(DP) :: U(:), V(:), Yh(:), Yp(:)
+  !
+  INTEGER, INTENT(IN) :: Ndisk, Ntape, Ntemp
+  REAL(DP), INTENT(IN) :: Yh(:), Yp(:)
+  REAL(DP), INTENT(OUT) :: U(:), V(:)
+  !
   INTEGER :: j, nctnf
   !     BEGIN BLOCK PERMITTING ...EXITS TO 80
   !* FIRST EXECUTABLE STATEMENT  DSTOR1

@@ -1,5 +1,5 @@
 !** DPRVEC
-REAL(DP) FUNCTION DPRVEC(M,U,V)
+REAL(DP) PURE FUNCTION DPRVEC(M,U,V)
   !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
@@ -26,10 +26,12 @@ REAL(DP) FUNCTION DPRVEC(M,U,V)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !
-  INTEGER :: M
-  REAL(DP) :: U(M), V(M)
+  INTEGER, INTENT(IN) :: M
+  REAL(DP), INTENT(IN) :: U(M), V(M)
+  !
   INTEGER :: n
   !* FIRST EXECUTABLE STATEMENT  DPRVEC
   n = M/2
   DPRVEC = DOT_PRODUCT(U(n+1:2*n),V(1:n)) - DOT_PRODUCT(U(1:n),V(n+1:2*n))
+  !
 END FUNCTION DPRVEC

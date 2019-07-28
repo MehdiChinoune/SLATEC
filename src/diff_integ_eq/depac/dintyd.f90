@@ -1,5 +1,5 @@
 !** DINTYD
-SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
+PURE SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   !> Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC
@@ -49,9 +49,12 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DDEBD1, ONLY : h_com, hu_com, tn_com, uround_com, l_com, n_com, nq_com
   !
-  INTEGER :: Iflag, K, Nyh
-  REAL(DP) :: T
-  REAL(DP) :: Dky(Nyh), Yh(Nyh,nq_com+1)
+  INTEGER, INTENT(IN) :: K, Nyh
+  INTEGER, INTENT(OUT) :: Iflag
+  REAL(DP), INTENT(IN) :: T
+  REAL(DP), INTENT(IN) :: Yh(Nyh,nq_com+1)
+  REAL(DP), INTENT(OUT) :: Dky(Nyh)
+  !
   INTEGER :: i, ic, j, jb, jb2, jj, jj1, jp1
   REAL(DP) :: c, r, s, tp
   !
@@ -106,7 +109,6 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
       Iflag = -2
     END IF
   END IF
-  !     ----------------------- END OF SUBROUTINE DINTYD
-  !     -----------------------
+  !----------------------- END OF SUBROUTINE DINTYD -----------------------
   RETURN
 END SUBROUTINE DINTYD

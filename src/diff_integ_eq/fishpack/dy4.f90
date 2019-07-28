@@ -1,5 +1,5 @@
 !** DY4
-SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
+PURE SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
@@ -26,8 +26,10 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPL4, ONLY : l_com, dly4_com, kswy_com, tdly3_com
-  INTEGER :: I, Idmn, J
-  REAL(SP) :: U(Idmn,l_com), Uyyy, Uyyyy
+  !
+  INTEGER, INTENT(IN) :: I, Idmn, J
+  REAL(SP), INTENT(IN) :: U(Idmn,l_com)
+  REAL(SP), INTENT(OUT) :: Uyyy, Uyyyy
   !* FIRST EXECUTABLE STATEMENT  DY4
   IF( J>2 .AND. J<(l_com-1) ) THEN
     !
@@ -64,7 +66,8 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
           !     PERIODIC AT Y=D-DLY
           !
           Uyyy = (-U(I,l_com-3)+2._SP*U(I,l_com-2)-2._SP*U(I,1)+U(I,2))/tdly3_com
-          Uyyyy = (U(I,l_com-3)-4._SP*U(I,l_com-2)+6._SP*U(I,l_com-1)-4._SP*U(I,1)+U(I,2))/dly4_com
+          Uyyyy = (U(I,l_com-3)-4._SP*U(I,l_com-2)+6._SP*U(I,l_com-1)&
+            -4._SP*U(I,1)+U(I,2))/dly4_com
           RETURN
         ELSE
           Uyyy = (U(I,l_com-4)-6._SP*U(I,l_com-3)+12._SP*U(I,l_com-2)-10._SP*U(I,l_com-1)&
@@ -77,10 +80,10 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT Y=D
         !
-        Uyyy = -(3._SP*U(I,l_com-4)-14._SP*U(I,l_com-3)+24._SP*U(I,l_com-2)-18._SP*U(I,l_com-1)&
-          +5._SP*U(I,l_com))/tdly3_com
-        Uyyyy = (-2._SP*U(I,l_com-5)+11._SP*U(I,l_com-4)-24._SP*U(I,l_com-3)+26._SP*U(I,l_com-2)&
-          -14._SP*U(I,l_com-1)+3._SP*U(I,l_com))/dly4_com
+        Uyyy = -(3._SP*U(I,l_com-4)-14._SP*U(I,l_com-3)+24._SP*U(I,l_com-2)&
+          -18._SP*U(I,l_com-1)+5._SP*U(I,l_com))/tdly3_com
+        Uyyyy = (-2._SP*U(I,l_com-5)+11._SP*U(I,l_com-4)-24._SP*U(I,l_com-3)&
+          +26._SP*U(I,l_com-2)-14._SP*U(I,l_com-1)+3._SP*U(I,l_com))/dly4_com
         RETURN
       END IF
     END IF
@@ -99,5 +102,6 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   !
   Uyyy = (-U(I,l_com-2)+2._SP*U(I,l_com-1)-2._SP*U(I,2)+U(I,3))/tdly3_com
   Uyyyy = (U(I,l_com-2)-4._SP*U(I,l_com-1)+6._SP*U(I,1)-4._SP*U(I,2)+U(I,3))/dly4_com
+  !
   RETURN
 END SUBROUTINE DY4

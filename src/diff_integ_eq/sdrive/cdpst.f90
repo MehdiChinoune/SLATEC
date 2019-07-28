@@ -1,8 +1,8 @@
 !** CDPST
-SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
+PURE SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     T,USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,Ier,Ipvt,Save1,Iswflg,Bnd,Jstate)
   !> Subroutine CDPST evaluates the Jacobian matrix of the right
-  !            hand side of the differential equations.
+  !  hand side of the differential equations.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -30,39 +30,49 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !   900329  Initial submission to SLATEC.
   USE blas, ONLY : SCNRM2
   USE linpack, ONLY : CGBFA, CGEFA
+  !
   INTERFACE
-    SUBROUTINE F(N,T,Y,Ydot)
+    PURE SUBROUTINE F(N,T,Y,Ydot)
       IMPORT SP
-      INTEGER :: N
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(:), Ydot(:)
+      INTEGER, INTENT(IN) :: N
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(:)
+      COMPLEX(SP), INTENT(OUT) :: Ydot(:)
     END SUBROUTINE F
-    SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+    PURE SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
       IMPORT SP
-      INTEGER :: N, Matdim, Ml, Mu
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(N), Dfdy(Matdim,N)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(N)
+      COMPLEX(SP), INTENT(OUT) :: Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
-    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    PURE SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT SP
-      INTEGER :: Impl, N, Nde, iflag
-      REAL(SP) :: T, H, El
-      COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, iflag
+      REAL(SP), INTENT(IN) :: T, H, El
+      COMPLEX(SP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      COMPLEX(SP), INTENT(INOUT) :: Save1(N), Save2(N)
     END SUBROUTINE USERS
-    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    PURE SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IMPORT SP
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(N), A(:,:)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(N)
+      COMPLEX(SP), INTENT(INOUT) :: A(:,:)
     END SUBROUTINE FA
   END INTERFACE
-  INTEGER :: Impl, info, Iswflg, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nfe, Nje, Nq
-  INTEGER :: Ipvt(N)
-  REAL(SP) :: Bnd, H, T, Uround, El(13,12)
-  COMPLEX(SP) :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), &
-    Yh(N,Nq+1), Ywt(N)
-  LOGICAL :: Ier
-  INTEGER :: i, iflag, imax, j, j2, k, mw
+  INTEGER, INTENT(IN) :: Impl, Iswflg, Matdim, Miter, Ml, Mu, N, Nde, Nq
+  INTEGER, INTENT(INOUT) :: Nje, Nfe
+  INTEGER, INTENT(OUT) :: Jstate
+  INTEGER, INTENT(OUT) :: Ipvt(N)
+  REAL(SP), INTENT(IN) :: H, T, Uround, El(13,12)
+  REAL(SP), INTENT(OUT) :: Bnd
+  COMPLEX(SP), INTENT(IN) :: Yh(N,Nq+1), Ywt(N)
+  COMPLEX(SP), INTENT(INOUT) :: A(Matdim,N), Fac(N), Y(N+1), Save2(N)
+  COMPLEX(SP), INTENT(OUT) :: Dfdy(Matdim,N), Save1(N)
+  LOGICAL, INTENT(OUT) :: Ier
+  !
+  INTEGER :: i, iflag, imax, j, j2, k, mw, info
   REAL(SP) :: bl, bp, br, dfdymx, diff, facmin, factor, scalee, zmax, zmin
   COMPLEX(SP) :: cfctr, dy, yj, ys
   REAL(SP), PARAMETER :: FACMAX = 0.5_SP, BU = 0.5_SP
@@ -117,7 +127,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           DO i = 1, N
             Dfdy(i,j) = (Save1(i)-Save2(i))*cfctr
           END DO
-          !                                                                 Step 1
+          !  Step 1
           diff = ABS(Save2(1)-Save1(1))
           imax = 1
           DO i = 2, N
@@ -126,15 +136,15 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
               diff = ABS(Save2(i)-Save1(i))
             END IF
           END DO
-          !                                                                 Step 2
+          !  Step 2
           IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0._SP ) THEN
             scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
-            !                                                                 Step 3
+            !  Step 3
             IF( diff>BU*scalee ) THEN
               Fac(j) = MAX(facmin,REAL(Fac(j))*.5_SP)
             ELSEIF( br*scalee<=diff .AND. diff<=bl*scalee ) THEN
               Fac(j) = MIN(REAL(Fac(j))*2._SP,FACMAX)
-              !                                                                 Step 4
+              !  Step 4
             ELSEIF( diff<br*scalee ) THEN
               Fac(j) = MIN(bp*REAL(Fac(j)),FACMAX)
             END IF
@@ -239,7 +249,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           DO i = MAX(Ml+1,mw+1-k), MIN(mw+N-k,mw+Ml)
             Dfdy(i,k) = cfctr*(Save1(i+k-mw)-Save2(i+k-mw))
           END DO
-          !                                                                 Step 1
+          !  Step 1
           imax = MAX(1,k-Mu)
           diff = ABS(Save2(imax)-Save1(imax))
           DO i = MAX(1,k-Mu) + 1, MIN(k+Ml,N)
@@ -248,15 +258,15 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
               diff = ABS(Save2(i)-Save1(i))
             END IF
           END DO
-          !                                                                 Step 2
+          !  Step 2
           IF( MIN(ABS(Save2(imax)),ABS(Save1(imax)))>0._SP ) THEN
             scalee = MAX(ABS(Save2(imax)),ABS(Save1(imax)))
-            !                                                                 Step 3
+            !  Step 3
             IF( diff>BU*scalee ) THEN
               Fac(j) = MAX(facmin,REAL(Fac(j))*.5_SP)
             ELSEIF( br*scalee<=diff .AND. diff<=bl*scalee ) THEN
               Fac(j) = MIN(REAL(Fac(j))*2._SP,FACMAX)
-              !                                                                 Step 4
+              !  Step 4
             ELSEIF( diff<br*scalee ) THEN
               Fac(k) = MIN(bp*REAL(Fac(k)),FACMAX)
             END IF
@@ -336,4 +346,5 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       RETURN
     END IF
   END IF
+  !
 END SUBROUTINE CDPST

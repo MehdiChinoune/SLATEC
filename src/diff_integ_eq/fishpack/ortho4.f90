@@ -1,5 +1,5 @@
 !** ORTHO4
-SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
+PURE SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
@@ -25,8 +25,12 @@ SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPL4, ONLY : is_com, js_com, ms_com, ns_com
-  INTEGER :: Idmn
-  REAL(SP) :: Pertrb, Usol(Idmn,ns_com), Zm(ms_com), Zn(ns_com)
+  !
+  INTEGER, INTENT(IN) :: Idmn
+  REAL(SP), INTENT(IN) :: Zm(ms_com), Zn(ns_com)
+  REAL(SP), INTENT(INOUT) :: Usol(Idmn,ns_com)
+  REAL(SP), INTENT(OUT) :: Pertrb
+  !
   INTEGER :: i, ifnl, ii, istr, j, jfnl, jj, jstr
   REAL(SP) :: ete, ute
   !* FIRST EXECUTABLE STATEMENT  ORTHO4
@@ -59,4 +63,5 @@ SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
       Usol(i,j) = Usol(i,j) - Pertrb
     END DO
   END DO
+  !
 END SUBROUTINE ORTHO4

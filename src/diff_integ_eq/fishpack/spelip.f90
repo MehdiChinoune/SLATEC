@@ -32,21 +32,28 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   USE SPLPCM, ONLY : l_com, ait_com, bit_com, cit_com, dit_com, dlx_com, dlx4_com, &
     dly_com, dly4_com, is_com, js_com, k_com, kswx_com, kswy_com, mit_com, ms_com, &
     nit_com, ns_com, tdlx3_com, tdly3_com
+  !
   INTERFACE
-    SUBROUTINE COFX(X,A,B,C)
+    PURE SUBROUTINE COFX(X,A,B,C)
       IMPORT SP
-      REAL(SP) :: X, A, B, C
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(OUT) :: A, B, C
     END SUBROUTINE COFX
-    SUBROUTINE COFY(Y,D,E,F)
+    PURE SUBROUTINE COFY(Y,D,E,F)
       IMPORT SP
-      REAL(SP) :: Y, D, E, F
+      REAL(SP), INTENT(IN) :: Y
+      REAL(SP), INTENT(OUT) :: D, E, F
     END SUBROUTINE COFY
   END INTERFACE
-  INTEGER :: Idmn, Ierror, Intl, Iorder, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, Alpha, B, Beta, C, D, Gama, Pertrb, Xnu
-  REAL(SP) :: Am(M), An(N), Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Bm(M), Bn(N), Cm(M), &
-    Cn(N), Dm(M), Dn(N), Grhs(Idmn,N+1), Um(M), Un(N), Usol(Idmn,N+1), W(:), &
-    Zm(M), Zn(N)
+  INTEGER, INTENT(IN) :: Idmn, Intl, Iorder, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, Alpha, B, Beta, C, D, Gama, Xnu
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1)
+  REAL(SP), INTENT(INOUT) :: Grhs(Idmn,N), Usol(Idmn,N+1), W(:)
+  REAL(SP), INTENT(OUT) :: Am(M+1), An(N+1), Bm(M+1), Bn(N+1), Cm(M+1), Cn(N+1), &
+    Dm(M+1), Dn(N+1), Um(M+1), Un(N+1), Zm(M+1), Zn(N+1)
+  !
   INTEGER :: i, i1, iord, j, mp, np
   REAL(SP) :: ai, ax1, axi, bi, bxi, ci, cxi, cxm, dj, dy1, dyj, ej, eyj, fj, fyj, &
     fyn, xi, yj
@@ -89,10 +96,14 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
       Usol(i,l_com) = Grhs(i,l_com)
     END DO
   END IF
-  IF( kswx_com/=2 .AND. kswx_com/=3 .AND. kswy_com/=2 .AND. kswy_com/=3 ) Usol(1,1) = Grhs(1,1)
-  IF( kswx_com/=2 .AND. kswx_com/=5 .AND. kswy_com/=2 .AND. kswy_com/=3 ) Usol(k_com,1) = Grhs(k_com,1)
-  IF( kswx_com/=2 .AND. kswx_com/=3 .AND. kswy_com/=2 .AND. kswy_com/=5 ) Usol(1,l_com) = Grhs(1,l_com)
-  IF( kswx_com/=2 .AND. kswx_com/=5 .AND. kswy_com/=2 .AND. kswy_com/=5 ) Usol(k_com,l_com) = Grhs(k_com,l_com)
+  IF( kswx_com/=2 .AND. kswx_com/=3 .AND. kswy_com/=2 .AND. kswy_com/=3 ) &
+    Usol(1,1) = Grhs(1,1)
+  IF( kswx_com/=2 .AND. kswx_com/=5 .AND. kswy_com/=2 .AND. kswy_com/=3 ) &
+    Usol(k_com,1) = Grhs(k_com,1)
+  IF( kswx_com/=2 .AND. kswx_com/=3 .AND. kswy_com/=2 .AND. kswy_com/=5 ) &
+    Usol(1,l_com) = Grhs(1,l_com)
+  IF( kswx_com/=2 .AND. kswx_com/=5 .AND. kswy_com/=2 .AND. kswy_com/=5 ) &
+    Usol(k_com,l_com) = Grhs(k_com,l_com)
   i1 = 1
   !
   !     SET SWITCHES FOR PERIODIC OR NON-PERIODIC BOUNDARIES
@@ -336,4 +347,5 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !
   CALL DEFER(COFX,COFY,Idmn,Usol,Grhs)
   GOTO 100
+  !
 END SUBROUTINE SPELIP

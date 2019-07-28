@@ -1,5 +1,5 @@
 !** GVEC
-SUBROUTINE GVEC(X,G)
+PURE SUBROUTINE GVEC(X,G)
   !> Subsidiary to
   !***
   ! **Library:**   SLATEC
@@ -12,8 +12,10 @@ SUBROUTINE GVEC(X,G)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(SP) :: X, G(2)
+  REAL(SP), INTENT(IN) :: X
+  REAL(SP), INTENT(OUT) :: G(2)
   !* FIRST EXECUTABLE STATEMENT  GVEC
   G(1) = 0._SP
   G(2) = 1._SP + COS(X)
+  !
 END SUBROUTINE GVEC

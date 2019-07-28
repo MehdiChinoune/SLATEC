@@ -1,5 +1,5 @@
 !** DBKSOL
-SUBROUTINE DBKSOL(N,A,X)
+PURE SUBROUTINE DBKSOL(N,A,X)
   !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
@@ -34,8 +34,10 @@ SUBROUTINE DBKSOL(N,A,X)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !
-  INTEGER :: N
-  REAL(DP) :: A(N*(N+1)), X(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(DP), INTENT(IN) :: A(N*(N+1))
+  REAL(DP), INTENT(INOUT) :: X(N)
+  !
   INTEGER :: j, k, m, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  DBKSOL

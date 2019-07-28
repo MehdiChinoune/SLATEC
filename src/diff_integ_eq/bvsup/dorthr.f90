@@ -1,5 +1,5 @@
 !** DORTHR
-SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
+PURE SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !> Subsidiary to DBVSUP and DSUDS
   !***
   ! **Library:**   SLATEC
@@ -73,10 +73,13 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, eps_dp
+  USE service, ONLY : eps_dp
   !
-  INTEGER :: Iflag, Irank, Iscale, M, N, Nrda, Kpivot(N)
-  REAL(DP) :: A(Nrda,M), Diag(N), Rows(N), Rs(N), Scales(M)
+  INTEGER, INTENT(IN) :: Iscale, M, N, Nrda
+  INTEGER, INTENT(INOUT) :: Iflag
+  INTEGER, INTENT(OUT) :: Irank, Kpivot(N)
+  REAL(DP), INTENT(INOUT) :: A(Nrda,M)
+  REAL(DP), INTENT(OUT) :: Diag(N), Rows(N), Rs(N), Scales(M)
   !
   INTEGER :: j, jrow, k, kp, l, mk
   REAL(DP) :: acc, akk, anorm, as, asave, diagk, dum(1), rss, sad, sig, sigma, &
@@ -191,16 +194,14 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
         !              RANK DEFICIENT PROBLEM
         Iflag = 3
         Irank = k - 1
-        CALL XERMSG('DORTHR',&
-          'RANK OF MATRIX IS LESS THAN THE NUMBER OF ROWS.',1,1)
+        ERROR STOP 'DORTHR : RANK OF MATRIX IS LESS THAN THE NUMBER OF ROWS.'
         !        ......EXIT
         EXIT
       END IF
     END DO
   ELSE
     Iflag = 2
-    CALL XERMSG('DORTHR','INVALID INPUT PARAMETERS.',2,1)
+    ERROR STOP 'DORTHR : INVALID INPUT PARAMETERS.'
   END IF
-  !
   !
 END SUBROUTINE DORTHR

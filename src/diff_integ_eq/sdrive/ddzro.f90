@@ -1,10 +1,9 @@
 !** DDZRO
-SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
-  !> DDZRO searches for a zero of a function F(N, T, Y, IROOT)
-  !            between the given values B and C until the width of the
-  !            interval (B, C) has collapsed to within a tolerance
-  !            specified by the stopping criterion,
-  !              ABS(B - C) <= 2.*(RW*ABS(B) + AE).
+PURE SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
+  !> DDZRO searches for a zero of a function F(N, T, Y, IROOT) between the given
+  !  values B and C until the width of the interval (B, C) has collapsed to within
+  !  a tolerance specified by the stopping criterion,
+  !    ABS(B - C) <= 2.*(RW*ABS(B) + AE).
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -59,15 +58,18 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !   900329  Initial submission to SLATEC.
 
   INTERFACE
-    REAL(DP) FUNCTION F(N,T,Y,Iroot)
+    REAL(DP) PURE FUNCTION F(N,T,Y,Iroot)
       IMPORT DP
-      INTEGER :: N, Iroot
-      REAL(DP) :: T, Y(N)
+      INTEGER, INTENT(IN) :: N, Iroot
+      REAL(DP), INTENT(IN) :: T, Y(N)
     END FUNCTION F
   END INTERFACE
-  INTEGER :: Iroot, N, Nq
-  REAL(DP) :: Ae, B, C, Fb, Fc, H, Re, T, Uround
-  REAL(DP) :: Y(N), Yh(N,Nq+1)
+  INTEGER, INTENT(IN) :: Iroot, N, Nq
+  REAL(DP), INTENT(IN) :: Ae, H, Re, T, Uround
+  REAL(DP), INTENT(INOUT) :: B, C, Fb, Fc
+  REAL(DP), INTENT(IN) :: Yh(N,Nq+1)
+  REAL(DP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: ic, kount
   REAL(DP) :: a, acbs, acmb, cmb, er, fa, p, q, rw, tol
   !* FIRST EXECUTABLE STATEMENT  DDZRO
@@ -145,4 +147,5 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
     Fc = fa
   END IF
   GOTO 100
+  !
 END SUBROUTINE DDZRO

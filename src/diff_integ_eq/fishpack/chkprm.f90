@@ -1,5 +1,5 @@
 !** CHKPRM
-SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
+PURE SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
@@ -24,17 +24,21 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   !   900402  Added TYPE section.  (WRB)
 
   INTERFACE
-    SUBROUTINE COFX(X,A,B,C)
+    PURE SUBROUTINE COFX(X,A,B,C)
       IMPORT SP
-      REAL(SP) :: X, A, B, C
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(OUT) :: A, B, C
     END SUBROUTINE COFX
-    SUBROUTINE COFY(Y,D,E,F)
+    PURE SUBROUTINE COFY(Y,D,E,F)
       IMPORT SP
-      REAL(SP) :: Y, D, E, F
+      REAL(SP), INTENT(IN) :: Y
+      REAL(SP), INTENT(OUT) :: D, E, F
     END SUBROUTINE COFY
   END INTERFACE
-  INTEGER :: Idmn, Ierror, Intl, Iorder, M, Mbdcnd, Nbdcnd, N
-  REAL(SP) :: A, B, C, D
+  INTEGER, INTENT(IN) :: Idmn, Intl, Iorder, M, Mbdcnd, Nbdcnd, N
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, B, C, D
+  !
   INTEGER :: i, j
   REAL(SP) :: ai, bi, ci, dj, dlx, dly, ej, fj, xi, yj
   !* FIRST EXECUTABLE STATEMENT  CHKPRM

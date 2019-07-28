@@ -1,5 +1,5 @@
 !** DEFE4
-SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
+PURE SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
@@ -39,14 +39,17 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !   900402  Added TYPE section.  (WRB)
   USE SPL4, ONLY : l_com, ait_com, dlx_com, dly_com, is_com, js_com, k_com, &
     kswx_com, kswy_com, ms_com, ns_com
+  !
   INTERFACE
-    SUBROUTINE COFX(X,A,B,C)
+    PURE SUBROUTINE COFX(X,A,B,C)
       IMPORT SP
-      REAL(SP) :: X, A, B, C
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(OUT) :: A, B, C
     END SUBROUTINE COFX
   END INTERFACE
-  INTEGER :: Idmn
-  REAL(SP) :: Grhs(Idmn,ns_com), Usol(Idmn,ns_com)
+  INTEGER, INTENT(IN) :: Idmn
+  REAL(SP), INTENT(INOUT) :: Grhs(Idmn,ns_com), Usol(Idmn,ns_com)
+  !
   INTEGER :: i, j
   REAL(SP) :: ai, bi, ci, tx, ty, uxxx, uxxxx, uyyy, uyyyy, xi
   !* FIRST EXECUTABLE STATEMENT  DEFE4
@@ -78,4 +81,5 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
       Usol(i,j) = Grhs(i,j)
     END DO
   END DO
+  !
 END SUBROUTINE DEFE4

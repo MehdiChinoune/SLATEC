@@ -1,5 +1,5 @@
 !** BKSOL
-SUBROUTINE BKSOL(N,A,X)
+PURE SUBROUTINE BKSOL(N,A,X)
   !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
@@ -32,8 +32,11 @@ SUBROUTINE BKSOL(N,A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  INTEGER :: N
-  REAL(SP) :: A(N*(N+1)), X(N)
+  !
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: A(N*(N+1))
+  REAL(SP), INTENT(INOUT) :: X(N)
+  !
   INTEGER :: j, k, m
   !* FIRST EXECUTABLE STATEMENT  BKSOL
   m = (N*(N+1))/2

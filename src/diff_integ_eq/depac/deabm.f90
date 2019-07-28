@@ -1,7 +1,7 @@
 !** DEABM
 SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !> Solve an initial value problem in ordinary differential
-  !            equations using an Adams-Bashforth method.
+  !  equations using an Adams-Bashforth method.
   !***
   ! **Library:**   SLATEC (DEPAC)
   !***
@@ -569,18 +569,22 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
+
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Uprime(:)
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE F
   END INTERFACE
-  INTEGER :: Idid, Liw, Lrw, Neq
-  INTEGER :: Info(15), Iwork(Liw)
-  REAL(SP) :: T, Tout
-  REAL(SP) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  INTEGER, INTENT(IN) :: Liw, Lrw, Neq
+  INTEGER, INTENT(OUT) :: Idid
+  INTEGER, INTENT(INOUT) :: Info(15), Iwork(Liw)
+  REAL(SP), INTENT(IN) :: Tout
+  REAL(SP), INTENT(INOUT) :: T
+  REAL(SP), INTENT(INOUT) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  !
   INTEGER :: ialpha, ibeta, idelsn, ifouru, ig, igi, ihold, ip, iphi, ipsi, isig, &
     itold, itstar, itwou, iv, iw, iwt, ixold, iyp, iypout, iyy
   LOGICAL :: start, phase1, nornd, stiff, intout
@@ -594,10 +598,10 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   IF( Iwork(Liw)>=5 ) THEN
     IF( T==Rwork(21+Neq) ) THEN
       WRITE (xern3,'(1PE15.6)') T
-      CALL XERMSG('DEABM','AN APPARENT INFINITE LOOP HAS BEEN DETECTED.&
-        &$$YOU HAVE MADE REPEATED CALLS AT T = '//xern3//' AND THE INTEGRATION&
-        & HAS NOT ADVANCED.  CHECK THE WAY YOU HAVE SET PARAMETERS FOR THE CALL TO THE CODE,&
-        & PARTICULARLY INFO(1).',13,2)
+      ERROR STOP 'DEABM : AN APPARENT INFINITE LOOP HAS BEEN DETECTED.&
+        & YOU HAVE MADE REPEATED CALLS AT T AND THE INTEGRATION HAS NOT ADVANCED.&
+        & CHECK THE WAY YOU HAVE SET PARAMETERS FOR THE CALL TO THE CODE,&
+        & PARTICULARLY INFO(1).'
       RETURN
     END IF
   END IF
@@ -607,15 +611,13 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   Idid = 0
   IF( Lrw<130+21*Neq ) THEN
     WRITE (xern1,'(I8)') Lrw
-    CALL XERMSG('DEABM','THE LENGTH OF THE RWORK ARRAY MUST BE AT LEAST 130&
-      & + 21*NEQ.$$YOU HAVE CALLED THE CODE WITH LRW = '//xern1,1,1)
+    ERROR STOP 'DEABM : THE LENGTH OF THE RWORK ARRAY MUST BE AT LEAST 130 + 21*NEQ.'
     Idid = -33
   END IF
   !
   IF( Liw<51 ) THEN
     WRITE (xern1,'(I8)') Liw
-    CALL XERMSG('DEABM','THE LENGTH OF THE IWORK ARRAY MUST BE AT LEAST 51.&
-      &$$YOU HAVE CALLED THE CODE WITH LIW = '//xern1,2,1)
+    ERROR STOP 'DEABM : THE LENGTH OF THE IWORK ARRAY MUST BE AT LEAST 51.'
     Idid = -33
   END IF
   !

@@ -1,5 +1,5 @@
 !** INTYD
-SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
+PURE SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   !> Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC
@@ -49,9 +49,12 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DEBDF1, ONLY : h_com, hu_com, tn_com, uround_com, l_com, n_com, nq_com
   !
-  INTEGER :: K, Nyh, Iflag
-  REAL(SP) :: T
-  REAL(SP) :: Yh(Nyh,nq_com+1), Dky(Nyh)
+  INTEGER, INTENT(IN) :: K, Nyh
+  INTEGER, INTENT(OUT) :: Iflag
+  REAL(SP), INTENT(IN) :: T
+  REAL(SP), INTENT(IN) :: Yh(Nyh,nq_com+1)
+  REAL(SP), INTENT(OUT) :: Dky(Nyh)
+  !
   INTEGER :: i, ic, j, jb, jb2, jj, jj1, jp1
   REAL(SP) :: c, r, s, tp
   !
@@ -105,7 +108,6 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   DO i = 1, n_com
     Dky(i) = r*Dky(i)
   END DO
-  RETURN
   !----------------------- END OF SUBROUTINE INTYD -----------------------
   RETURN
 END SUBROUTINE INTYD

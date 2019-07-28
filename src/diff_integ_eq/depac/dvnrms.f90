@@ -1,5 +1,5 @@
 !** DVNRMS
-REAL(DP) FUNCTION DVNRMS(N,V,W)
+REAL(DP) PURE FUNCTION DVNRMS(N,V,W)
   !> Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC
@@ -26,16 +26,9 @@ REAL(DP) FUNCTION DVNRMS(N,V,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
 
-  INTEGER :: N
-  REAL(DP) :: V(N), W(N)
-  INTEGER :: i
-  REAL(DP) :: summ
+  INTEGER, INTENT(IN) :: N
+  REAL(DP), INTENT(IN) :: V(N), W(N)
   !* FIRST EXECUTABLE STATEMENT  DVNRMS
-  summ = 0._DP
-  DO i = 1, N
-    summ = summ + (V(i)/W(i))**2
-  END DO
-  DVNRMS = SQRT(summ/N)
-  !     ----------------------- END OF FUNCTION DVNRMS
-  !     ------------------------
+  DVNRMS = NORM2( V/W ) / SQRT(1._DP*N)
+  !----------------------- END OF FUNCTION DVNRMS ------------------------
 END FUNCTION DVNRMS

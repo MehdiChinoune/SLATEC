@@ -1,5 +1,5 @@
 !** CMPTRX
-SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
+PURE SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !> Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC
@@ -26,8 +26,11 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Idegbr, Idegcr, M
-  COMPLEX(SP) :: A(M), B(M), C(M), Y(:), Tcos(:), D(M), W(M)
+  INTEGER, INTENT(IN) :: Idegbr, Idegcr, M
+  COMPLEX(SP), INTENT(IN) :: A(M), B(M), C(M), Tcos(:)
+  COMPLEX(SP), INTENT(INOUT) :: Y(:)
+  COMPLEX(SP), INTENT(OUT) :: D(M), W(M)
+  !
   INTEGER :: i, ip, k, l, lint, mm1, kb, kc
   COMPLEX(SP) :: x, xx, z
   !* FIRST EXECUTABLE STATEMENT  CMPTRX
@@ -72,4 +75,5 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
       l = (lint*kb)/kc
     END IF
   END DO
+  !
 END SUBROUTINE CMPTRX

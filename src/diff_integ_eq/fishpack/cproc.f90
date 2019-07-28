@@ -1,5 +1,5 @@
 !** CPROC
-SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
+PURE SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
@@ -33,9 +33,11 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Na, Nd, Nm1, Nm2, M
-  REAL(SP) :: Aa(Na), Bm1(Nm1), Bm2(Nm2)
-  COMPLEX(SP) :: Y(M), D(M), W(M), Bd(Nd), X(M), A(M), B(M), C(M), Yy(M)
+  INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+  REAL(SP), INTENT(IN) :: Aa(Na), Bm1(Nm1), Bm2(Nm2)
+  COMPLEX(SP), INTENT(IN) :: Bd(Nd), X(M), A(M), B(M), C(M)
+  COMPLEX(SP), INTENT(OUT) :: Y(M), D(M), W(M), Yy(M)
+  !
   INTEGER :: ia, id, iflg, j, k, m1, m2, mm
   REAL(SP) :: rt
   COMPLEX(SP) :: crt, den, y1, y2
@@ -118,5 +120,6 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   Y(M-1) = y1
   iflg = 1
   GOTO 100
+  !
   RETURN
 END SUBROUTINE CPROC

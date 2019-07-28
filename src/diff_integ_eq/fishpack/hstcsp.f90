@@ -1,10 +1,9 @@
 !** HSTCSP
 SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !> Solve the standard five-point finite difference
-  !            approximation on a staggered grid to the modified Helmholtz
-  !            equation in spherical coordinates assuming axisymmetry
-  !            (no dependence on longitude).
+  !> Solve the standard five-point finite difference approximation on a staggered
+  !  grid to the modified Helmholtz equation in spherical coordinates assuming
+  !  axisymmetry (no dependence on longitude).
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -403,9 +402,13 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Idimf, Ierror, Intl, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
-  REAL(SP) :: Bda(N), Bdb(N), Bdc(M), Bdd(M), F(Idimf,N), W(:)
+  INTEGER, INTENT(IN) :: Idimf, Intl, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, B, C, D, Elmbda
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N), Bdb(N), Bdc(M), Bdd(M)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N), W(:)
+  !
   INTEGER :: ierr1, iwan, iwbm, iwbn, iwcm, iwcn, iwrsq, iwsnth, iwwrk
   REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
   !* FIRST EXECUTABLE STATEMENT  HSTCSP
@@ -446,4 +449,5 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(1) = W(iwwrk) + iwwrk - 1
     Ierror = ierr1
   END IF
+  !
 END SUBROUTINE HSTCSP

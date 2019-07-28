@@ -1,5 +1,5 @@
 !** PRVEC
-REAL(SP) FUNCTION PRVEC(M,U,V)
+REAL(SP) PURE FUNCTION PRVEC(M,U,V)
   !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
@@ -23,10 +23,12 @@ REAL(SP) FUNCTION PRVEC(M,U,V)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  INTEGER :: M
-  REAL(SP) :: U(M), V(M)
+  INTEGER, INTENT(IN) :: M
+  REAL(SP), INTENT(IN) :: U(M), V(M)
+  !
   INTEGER :: n
   !* FIRST EXECUTABLE STATEMENT  PRVEC
   n = M/2
   PRVEC = DOT_PRODUCT(U(n+1:2*n),V(1:n)) - DOT_PRODUCT(U(1:n),V(n+1:2*n))
+  !
 END FUNCTION PRVEC

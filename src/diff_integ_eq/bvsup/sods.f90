@@ -1,5 +1,5 @@
 !** SODS
-SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
+PURE SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
@@ -102,8 +102,10 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Iflag, Neq, Nrda, Nuk, Iwork(*)
-  REAL(SP) :: A(Nrda,Nuk), B(Neq), Work(*), X(Nuk)
+  INTEGER, INTENT(IN) :: Neq, Nrda, Nuk
+  INTEGER, INTENT(INOUT) :: Iflag, Iwork(*)
+  REAL(SP), INTENT(INOUT) :: A(Nrda,Nuk), B(Neq), Work(*), X(Nuk)
+  !
   INTEGER :: ip, is, iter, kc, kd, ks, kt, kv, kz
   !
   !* FIRST EXECUTABLE STATEMENT  SODS

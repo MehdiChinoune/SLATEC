@@ -1,5 +1,5 @@
 !** SDASLV
-SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
+PURE SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   !> Linear system solver for SDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)
@@ -32,9 +32,9 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   !           cosmetic changes to prologue.  (FNF)
   USE lapack, ONLY : SGBTRS, SGETRS
   !
-  INTEGER :: Neq, Iwm(:)
-  REAL(SP) :: Wm(:)
-  REAL(SP), TARGET :: Delta(Neq)
+  INTEGER, INTENT(IN) :: Neq, Iwm(:)
+  REAL(SP), INTENT(IN) :: Wm(:)
+  REAL(SP), TARGET, INTENT(INOUT) :: Delta(Neq)
   !
   INTEGER :: meband, mtype, info
   REAL(SP), POINTER :: delta2(:,:)
@@ -62,7 +62,6 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   !
   !     DENSE MATRIX
   CALL SGETRS('N',Neq,1,Wm,Neq,Iwm(LIPVT:LIPVT+Neq-1),delta2,Neq,info)
-  RETURN
   !------END OF SUBROUTINE SDASLV------
   RETURN
 END SUBROUTINE SDASLV

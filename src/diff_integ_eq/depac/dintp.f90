@@ -1,9 +1,8 @@
 !** DINTP
 SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
     Ow,Ox,Oy)
-  !> Approximate the solution at XOUT by evaluating the
-  !            polynomial computed in DSTEPS at XOUT.  Must be used in
-  !            conjunction with DSTEPS.
+  !> Approximate the solution at XOUT by evaluating the polynomial computed
+  !  in DSTEPS at XOUT.  Must be used in conjunction with DSTEPS.
   !***
   ! **Library:**   SLATEC (DEPAC)
   !***
@@ -59,10 +58,11 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Ivc, Kgi, Kold, Neqn, Iv(10)
-  REAL(DP) :: Ox, X, Xout
-  REAL(DP) :: Alpha(12), Gi(11), Og(13), Ow(12), Oy(Neqn), Phi(Neqn,16), Y(Neqn), &
-    Yout(Neqn), Ypout(Neqn)
+  INTEGER, INTENT(IN) :: Ivc, Kgi, Kold, Neqn, Iv(10)
+  REAL(DP), INTENT(IN) :: Ox, X, Xout
+  REAL(DP), INTENT(IN) :: Alpha(12), Gi(11), Og(13), Ow(12), Oy(Neqn), Phi(Neqn,16), Y(Neqn)
+  REAL(DP), INTENT(OUT) :: Yout(Neqn), Ypout(Neqn)
+  !
   INTEGER :: i, iq, iw, j, jq, kp1, kp2, l, m
   REAL(DP) :: alp, c(13), g(13), gdi, gdif, gama, h, hi, hmu, rmu, sigma, temp1, &
     temp2, temp3, w(13), xi, xim1, xiq

@@ -1,9 +1,8 @@
 !** HSTCRT
-SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
+PURE SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !> Solve the standard five-point finite difference
-  !            approximation on a staggered grid to the Helmholtz equation
-  !            in Cartesian coordinates.
+  !> Solve the standard five-point finite difference approximation on a staggered
+  !  grid to the Helmholtz equation in Cartesian coordinates.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -289,9 +288,13 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
-  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  INTEGER, INTENT(IN) :: Idimf, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, B, C, D, Elmbda
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N+1), W(:)
+  !
   INTEGER :: i, id2, id3, id4, ierr1, j, mp, mperod, np, nperod
   REAL(SP) :: deltax, deltay, delxsq, delysq, s, st2, twdelx, twdely, twdysq
   !* FIRST EXECUTABLE STATEMENT  HSTCRT
@@ -440,4 +443,5 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       ierr1,W(id4+1:))
   END IF
   W(1) = W(id4+1) + 3*M
+  !
 END SUBROUTINE HSTCRT

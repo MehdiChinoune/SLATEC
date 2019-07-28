@@ -1,5 +1,5 @@
 !** DCSCAL
-SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,Ic)
+PURE SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,Ic)
   !> Subsidiary to DBVSUP and DSUDS
   !***
   ! **Library:**   SLATEC
@@ -26,9 +26,11 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  INTEGER :: Ic, Iscale, Ncol, Nrda, Nrow
-  REAL(DP) :: Anorm, A(Nrda,Ncol), Cols(Ncol), Colsav(Ncol), Rows(Nrow), Rowsav(Nrow), &
-    Scales(Ncol)
+  !
+  INTEGER, INTENT(IN) :: Ic, Iscale, Ncol, Nrda, Nrow
+  REAL(DP), INTENT(INOUT) :: A(Nrda,Ncol), Anorm, Cols(Ncol)
+  REAL(DP), INTENT(OUT) :: Colsav(Ncol), Rows(Nrow), Rowsav(Nrow), Scales(Ncol)
+  !
   INTEGER :: ip, j, k
   REAL(DP) :: alog2, ascale, cs, p, s
   REAL(DP), PARAMETER :: ten4 = 1.E4_DP, ten20 = 1.E20_DP
@@ -91,5 +93,6 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,I
       Anorm = Anorm + Rows(k)
     END DO
   END IF
+  !
   RETURN
 END SUBROUTINE DCSCAL

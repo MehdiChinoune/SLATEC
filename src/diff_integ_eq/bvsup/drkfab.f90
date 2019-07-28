@@ -29,8 +29,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
 
   !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
@@ -38,10 +37,13 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     xend_com, xop_com, info_com, kop_com, ae_com, re_com, nopg_com, ndisk_com, &
     ntape_com, neq_com, integ_com, nps_com, numort_com
   !
-  INTEGER :: Iflag, Mxnon, Ncomp, Nfc, Nfcc, Niv, Ntp, Nxpts
-  INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
-  REAL(DP) :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
-    V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
+  INTEGER, INTENT(IN) :: Mxnon, Ncomp, Nfc, Nfcc, Ntp, Nxpts
+  INTEGER, INTENT(INOUT) :: Iflag, Niv
+  INTEGER, INTENT(INOUT) :: Ip(Nfcc,Mxnon+1), Iwork(*)
+  REAL(DP), INTENT(IN) :: Xpts(Nxpts)
+  REAL(DP), INTENT(INOUT) :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
+    V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
+  !
   INTEGER :: idid, ipar(1), j, jflag, jon, kod, kopp, nfcp1, non
   REAL(DP) :: xxop, ret(1), aet(1)
   !
@@ -98,15 +100,15 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         !
         ret(1) = re_com
         aet(1) = ae_com
-        CALL DDEABM(DBVDER_2,neq_com,x_com,Yhp,xxop,info_com,ret,aet,idid,Work,kkkint_com,Iwork,&
-          lllint_com)
+        CALL DDEABM(DBVDER_2,neq_com,x_com,Yhp,xxop,info_com,ret,aet,idid,Work,&
+          kkkint_com,Iwork,lllint_com)
       ELSE
         !                       DDERKF INTEGRATOR
         !
         ret(1) = re_com
         aet(1) = ae_com
-        CALL DDERKF(DBVDER_2,neq_com,x_com,Yhp,xxop,info_com,ret,aet,idid,Work,kkkint_com,Iwork,&
-          lllint_com)
+        CALL DDERKF(DBVDER_2,neq_com,x_com,Yhp,xxop,info_com,ret,aet,idid,Work,&
+          kkkint_com,Iwork,lllint_com)
       END IF
       IF( idid>=1 ) THEN
         !
@@ -221,11 +223,14 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
 
 CONTAINS
   SUBROUTINE DBVDER_2(X,Y,Yp)
-    REAL(DP) :: X
-    REAL(DP) :: Y(:), Yp(:)
+    REAL(DP), INTENT(IN) :: X
+    REAL(DP), INTENT(IN) :: Y(:)
+    REAL(DP), INTENT(OUT) :: Yp(:)
+    !
     REAL(DP) :: g(SIZE(Y))
-
+    !
     g = 0._SP
-    CALL DBVDER(X,Y,Yp,G)
+    CALL DBVDER(X,Y,Yp,g)
+    !
   END SUBROUTINE DBVDER_2
 END SUBROUTINE DRKFAB

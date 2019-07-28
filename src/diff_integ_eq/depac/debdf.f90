@@ -1,8 +1,7 @@
 !** DEBDF
 SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
-  !> Solve an initial value problem in ordinary differential
-  !            equations using backward differentiation formulas.  It is
-  !            intended primarily for stiff problems.
+  !> Solve an initial value problem in ordinary differential equations using
+  !  backward differentiation formulas.  It is intended primarily for stiff problems.
   !***
   ! **Library:**   SLATEC (DEPAC)
   !***
@@ -742,25 +741,29 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE DEBDF1, ONLY : h_com, tn_com, iyh_com, iewt_com, iacor_com, isavf_com, &
     iwm_com, ibegin_com, itol_com, iinteg_com, itstop_com, ijac_com, iband_com
-  USE service, ONLY : XERMSG
   !
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Uprime(:)
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE F
-    SUBROUTINE JAC(X,U,Pd,Nrowpd)
+    PURE SUBROUTINE JAC(X,U,Pd,Nrowpd)
       IMPORT SP
-      INTEGER :: Nrowpd
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Pd(:,:)
+      INTEGER, INTENT(IN) :: Nrowpd
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Pd(:,:)
     END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Idid, Liw, Lrw, Neq
-  INTEGER :: Info(15), Iwork(Liw)
-  REAL(SP) :: T, Tout
-  REAL(SP) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  INTEGER, INTENT(IN) :: Liw, Lrw, Neq
+  INTEGER, INTENT(OUT) :: Idid
+  INTEGER, INTENT(INOUT) :: Info(15), Iwork(Liw)
+  REAL(SP), INTENT(IN) :: Tout
+  REAL(SP), INTENT(INOUT) :: T
+  REAL(SP), INTENT(INOUT) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  !
   INTEGER :: icomi, icomr, idelsn, iinout, ilrw, itstar, iypout, ml, mu
   LOGICAL :: intout
   CHARACTER(8) :: xern1, xern2
@@ -774,10 +777,10 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   IF( Iwork(Liw)>=5 ) THEN
     IF( T==Rwork(21+Neq) ) THEN
       WRITE (xern3,'(1PE15.6)') T
-      CALL XERMSG('DEBDF','AN APPARENT INFINITE LOOP HAS BEEN DETECTED.&
-        &$$YOU HAVE MADE REPEATED CALLS AT T = '//xern3//' AND THE INTEGRATION&
-        & HAS NOT ADVANCED.  CHECK THE WAY YOU HAVE SET PARAMETERS FOR THE CALL&
-        & TO THE CODE PARTICULARLY INFO(1).',13,2)
+      ERROR STOP 'DEBDF : AN APPARENT INFINITE LOOP HAS BEEN DETECTED.&
+        & YOU HAVE MADE REPEATED CALLS AT T AND THE INTEGRATION HAS NOT ADVANCED.&
+        & CHECK THE WAY YOU HAVE SET PARAMETERS FOR THE CALL TO THE CODE,&
+        & PARTICULARLY INFO(1).'
       RETURN
     END IF
   END IF
@@ -788,52 +791,46 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   !
   IF( Info(1)/=0 .AND. Info(1)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(1)
-    CALL XERMSG('DEBDF','INFO(1) MUST BE SET TO 0 FOR THE  START OF&
+    ERROR STOP 'DEBDF : INFO(1) MUST BE SET TO 0 FOR THE  START OF&
       & A NEW PROBLEM, AND MUST BE SET TO 1 FOLLOWING AN INTERRUPTED TASK.&
-      & YOU ARE ATTEMPTING TO CONTINUE THE INTEGRATION ILLEGALLY BY CALLING&
-      & THE CODE WITH  INFO(1) = '//xern1,3,1)
+      & YOU ARE ATTEMPTING TO CONTINUE THE INTEGRATION ILLEGALLY'
     Idid = -33
   END IF
   !
   IF( Info(2)/=0 .AND. Info(2)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(2)
-    CALL XERMSG('DEBDF','INFO(2) MUST BE 0 OR 1 INDICATING SCALAR&
-      & AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
-      & YOU HAVE CALLED THE CODE WITH INFO(2) = '//xern1,4,1)
+    ERROR STOP 'DEBDF : INFO(2) MUST BE 0 OR 1 INDICATING SCALAR&
+      & AND VECTOR ERROR TOLERANCES, RESPECTIVELY.'
     Idid = -33
   END IF
   !
   IF( Info(3)/=0 .AND. Info(3)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(3)
-    CALL XERMSG('DEBDF','INFO(3) MUST BE 0 OR 1 INDICATING THE INTERVAL&
-      & OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.&
-      & YOU HAVE CALLED THE CODE WITH  INFO(3) = '//xern1,5,1)
+    ERROR STOP 'DEBDF : INFO(3) MUST BE 0 OR 1 INDICATING THE INTERVAL&
+      & OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.'
     Idid = -33
   END IF
   !
   IF( Info(4)/=0 .AND. Info(4)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(4)
-    CALL XERMSG('DEBDF','INFO(4) MUST BE 0 OR 1 INDICATING WHETHER OR&
-      & NOT THE INTEGRATION INTERVAL IS TO BE RESTRICTED BY A POINT TSTOP.&
-      & YOU HAVE CALLED THE CODE  WITH INFO(4) = '//xern1,14,1)
+    ERROR STOP 'DEBDF : INFO(4) MUST BE 0 OR 1 INDICATING WHETHER OR&
+      & NOT THE INTEGRATION INTERVAL IS TO BE RESTRICTED BY A POINT TSTOP.'
     Idid = -33
   END IF
   !
   IF( Info(5)/=0 .AND. Info(5)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(5)
-    CALL XERMSG('DEBDF','INFO(5) MUST BE 0 OR 1 INDICATING WHETHER THE&
+    ERROR STOP 'DEBDF : INFO(5) MUST BE 0 OR 1 INDICATING WHETHER THE&
       & CODE IS TOLD TO FORM THE JACOBIAN MATRIX BY NUMERICAL DIFFERENCING OR&
-      & YOU PROVIDE A SUBROUTINE TO EVALUATE IT ANALYTICALLY.  YOU HAVE CALLED&
-      & THE CODE WITH INFO(5) = '//xern1,15,1)
+      & YOU PROVIDE A SUBROUTINE TO EVALUATE IT ANALYTICALLY.'
     Idid = -33
   END IF
   !
   IF( Info(6)/=0 .AND. Info(6)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(6)
-    CALL XERMSG('DEBDF','INFO(6) MUST BE 0 OR 1 INDICATING WHETHER&
+    ERROR STOP 'DEBDF : INFO(6) MUST BE 0 OR 1 INDICATING WHETHER&
       & THE CODE IS TOLD TO TREAT THE JACOBIAN AS A FULL (DENSE) MATRIX OR AS&
-      & HAVING A SPECIAL BANDED STRUCTURE.  YOU HAVE CALLED THE CODE WITH INFO(6) = '&
-      //xern1,16,1)
+      & HAVING A SPECIAL BANDED STRUCTURE.'
     Idid = -33
   END IF
   !
@@ -849,11 +846,10 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
     IF( ml<0 .OR. ml>=Neq .OR. mu<0 .OR. mu>=Neq ) THEN
       WRITE (xern1,'(I8)') ml
       WRITE (xern2,'(I8)') mu
-      CALL XERMSG('DEBDF','YOU HAVE SET INFO(6) = 1, TELLING THE CODE&
+      ERROR STOP 'DEBDF : YOU HAVE SET INFO(6) = 1, TELLING THE CODE&
         & THAT THE JACOBIAN MATRIX HAS A SPECIAL BANDED STRUCTURE.  HOWEVER,&
         & THE LOWER (UPPER) BANDWIDTHS  ML (MU) VIOLATE THE CONSTRAINTS&
-        & ML,MU >= 0 AND  ML,MU < NEQ.  YOU HAVE CALLED THE CODE WITH ML = '&
-        //xern1//' AND MU = '//xern2,17,1)
+        & ML,MU >= 0 AND  ML,MU < NEQ.'
       Idid = -33
     END IF
   END IF
@@ -863,18 +859,18 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   IF( Lrw<250+(10+ilrw)*Neq ) THEN
     WRITE (xern1,'(I8)') Lrw
     IF( Info(6)==0 ) THEN
-      CALL XERMSG('DEBDF','LENGTH OF ARRAY RWORK MUST BE AT LEAST 250&
-        & + 10*NEQ + NEQ*NEQ.$$YOU HAVE CALLED THE CODE WITH  LRW = '//xern1,1,1)
+      ERROR STOP 'DEBDF : LENGTH OF ARRAY RWORK MUST BE AT LEAST 250&
+        & + 10*NEQ + NEQ*NEQ.'
     ELSE
-      CALL XERMSG('DEBDF','LENGTH OF ARRAY RWORK MUST BE AT LEAST 250 +&
-        & 10*NEQ + (2*ML+MU+1)*NEQ.$$YOU HAVE CALLED THE CODE WITH  LRW = '//xern1,18,1)
+      ERROR STOP 'DEBDF : LENGTH OF ARRAY RWORK MUST BE AT LEAST 250 +&
+        & 10*NEQ + (2*ML+MU+1)*NEQ.'
     END IF
     Idid = -33
   END IF
   !
   IF( Liw<56+Neq ) THEN
     WRITE (xern1,'(I8)') Liw
-    CALL XERMSG('DEBDF','LENGTH OF ARRAY IWORK BE AT LEAST  56 + NEQ.  YOU HAVE CALLED THE CODE WITH LIW = '//xern1,2,1)
+    ERROR STOP 'DEBDF : LENGTH OF ARRAY IWORK BE AT LEAST  56 + NEQ.'
     Idid = -33
   END IF
   !
@@ -907,8 +903,9 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,JAC)
   Rwork(itstar) = T
   !
   CALL LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Rwork(iypout),Rwork(iyh_com),&
-    Rwork(iyh_com),Rwork(iewt_com:isavf_com-1),Rwork(isavf_com:iacor_com-1),Rwork(iacor_com:iwm_com-1),&
-    Rwork(iwm_com:idelsn),Iwork,JAC,intout,Rwork(1),Rwork(12),Rwork(idelsn))
+    Rwork(iyh_com),Rwork(iewt_com:isavf_com-1),Rwork(isavf_com:iacor_com-1),&
+    Rwork(iacor_com:iwm_com-1),Rwork(iwm_com:idelsn),Iwork,JAC,intout,Rwork(1),&
+    Rwork(12),Rwork(idelsn))
   !
   Iwork(iinout) = -1
   IF( intout ) Iwork(iinout) = 1

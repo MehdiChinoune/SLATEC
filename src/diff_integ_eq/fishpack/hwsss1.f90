@@ -1,5 +1,5 @@
 !** HWSSS1
-SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
+PURE SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Am,Bm,Cm,Sn,Ss,Sint,D)
   !> Subsidiary to HWSSSP
   !***
@@ -19,10 +19,13 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Idimf, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: Elmbda, Pertrb, Pf, Ps, Tf, Ts
-  REAL(SP) :: Am(M+1), Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), Bm(M+1), Cm(M+1), &
-    D(:), F(Idimf,N+1), Sint(M+1), Sn(M+1), Ss(M+1)
+  INTEGER, INTENT(IN) :: Idimf, M, Mbdcnd, N, Nbdcnd
+  REAL(SP), INTENT(IN) :: Elmbda, Pf, Ps, Tf, Ts
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N+1)
+  REAL(SP), INTENT(OUT) :: Am(M+1), Bm(M+1), Cm(M+1), D(:), Sint(M+1), Sn(M+1), Ss(M+1)
+  !
   INTEGER :: i, ierror, ii, iid, inp, ising, isp, itf, itfm, its, itsp, j, jpf, &
     jpfm, jps, jpsp, mbr, mp1, munk, nbr, np1, nunk
   REAL(SP) :: at, cf, cnp, cp, csp, ct, den, dfn, dfs, dnn, dns, dphi, dphi2, dsn, &
@@ -384,4 +387,5 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
       F(i,jpf+1) = F(i,jps)
     END DO
   END IF
+  !
 END SUBROUTINE HWSSS1

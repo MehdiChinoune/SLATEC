@@ -1,5 +1,5 @@
 !** COSGEN
-SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
+PURE SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
   !> Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC
@@ -40,9 +40,10 @@ SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Ijump, N
-  REAL(SP) :: Fden, Fnum
-  REAL(SP) :: A(N)
+  INTEGER, INTENT(IN) :: Ijump, N
+  REAL(SP), INTENT(IN) :: Fden, Fnum
+  REAL(SP), INTENT(OUT) :: A(N)
+  !
   INTEGER :: i, k, k1, k2, k3, k4, k5, np1
   REAL(SP) :: pibyn, x, y
   REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
@@ -70,4 +71,5 @@ SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
       END DO
     END IF
   END IF
+  !
 END SUBROUTINE COSGEN

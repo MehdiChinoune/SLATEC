@@ -1,5 +1,5 @@
 !** DDAWTS
-SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt)
+PURE SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt)
   !> Set error weight vector for DDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)
@@ -25,23 +25,16 @@ SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-
   !
-  INTEGER :: Neq, Iwt
-  REAL(DP) :: Rtol(Neq), Atol(Neq), Y(Neq), Wt(Neq)
-  !
-  INTEGER :: i
-  REAL(DP) :: atoli, rtoli
+  INTEGER, INTENT(IN) :: Neq, Iwt
+  REAL(DP), INTENT(IN) :: Rtol(Neq), Atol(Neq), Y(Neq)
+  REAL(DP), INTENT(OUT) :: Wt(Neq)
   !
   !* FIRST EXECUTABLE STATEMENT  DDAWTS
-  rtoli = Rtol(1)
-  atoli = Atol(1)
-  DO i = 1, Neq
-    IF( Iwt/=0 ) THEN
-      rtoli = Rtol(i)
-      atoli = Atol(i)
-    END IF
-    Wt(i) = rtoli*ABS(Y(i)) + atoli
-  END DO
+  IF( Iwt==0 ) THEN
+    Wt = Rtol(1)*ABS(Y) + Atol(1)
+  ELSE
+    Wt = Rtol*ABS(Y) + Atol
+  END IF
   !-----------END OF SUBROUTINE DDAWTS------------------------------------
 END SUBROUTINE DDAWTS

@@ -1,9 +1,8 @@
 !** HWSCRT
-SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
+PURE SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !> Solves the standard five-point finite difference
-  !            approximation to the Helmholtz equation in Cartesian
-  !            coordinates.
+  !> Solves the standard five-point finite difference approximation to the Helmholtz
+  !  equation in Cartesian coordinates.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -288,9 +287,13 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
-  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), W(:), F(Idimf,N+1)
+  INTEGER, INTENT(IN) :: Idimf, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, B, C, D, Elmbda
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N+1), W(:)
+  !
   REAL(SP) :: a1, a2, deltax, deltay, delxsq, delysq, s, s1, st2, twdelx, twdely
   INTEGER :: i, id2, id3, id4, ierr1, j, mp, mp1, mperod, mskip, msp1, mstart, &
     mstm1, mstop, munk, np, np1, nperod, nskip, nsp1, nstart, nstm1, nstop, nunk
@@ -500,4 +503,5 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     END DO
     IF( Nbdcnd==0 ) F(mp1,np1) = F(1,np1)
   END IF
+  !
 END SUBROUTINE HWSCRT

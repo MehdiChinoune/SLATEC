@@ -1,5 +1,5 @@
 !** VNWRMS
-REAL(SP) FUNCTION VNWRMS(N,V,W)
+REAL(SP) PURE FUNCTION VNWRMS(N,V,W)
   !> Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC
@@ -26,22 +26,15 @@ REAL(SP) FUNCTION VNWRMS(N,V,W)
   !   900328  Added TYPE section.  (WRB)
 
   !
-  !
   !-----------------------------------------------------------------------
   ! THIS FUNCTION ROUTINE COMPUTES THE WEIGHTED ROOT-MEAN-SQUARE NORM
   ! OF THE VECTOR OF LENGTH N CONTAINED IN THE ARRAY V, WITH WEIGHTS
   ! CONTAINED IN THE ARRAY W OF LENGTH N..
   !   VNWRMS = SQRT( (1/N) * SUM( V(I)/W(I) )**2 )
   !-----------------------------------------------------------------------
-  INTEGER :: N
-  REAL(SP) :: V(N), W(N)
-  INTEGER :: i
-  REAL(SP) :: summ
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: V(N), W(N)
   !* FIRST EXECUTABLE STATEMENT  VNWRMS
-  summ = 0._SP
-  DO i = 1, N
-    summ = summ + (V(i)/W(i))**2
-  END DO
-  VNWRMS = SQRT(summ/N)
+  VNWRMS = NORM2( V/W ) / SQRT(1._SP*N)
   !----------------------- END OF FUNCTION VNWRMS ------------------------
 END FUNCTION VNWRMS

@@ -1,8 +1,8 @@
 !** DDNTP
-SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
-  !> Subroutine DDNTP interpolates the K-th derivative of Y at
-  !            TOUT, using the data in the YH array.  If K has a value
-  !            greater than NQ, the NQ-th derivative is calculated.
+PURE SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
+  !> Subroutine DDNTP interpolates the K-th derivative of Y at TOUT,
+  !  using the data in the YH array.
+  !  If K has a value greater than NQ, the NQ-th derivative is calculated.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -22,9 +22,11 @@ SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  INTEGER :: K, N, Nq
-  REAL(DP) :: H, T, Tout
-  REAL(DP) :: Y(N), Yh(N,Nq+1)
+  INTEGER, INTENT(IN) :: K, N, Nq
+  REAL(DP), INTENT(IN) :: H, T, Tout
+  REAL(DP), INTENT(IN) :: Yh(N,Nq+1)
+  REAL(DP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, j, jj, kk, kused
   REAL(DP) :: factor, r
   !* FIRST EXECUTABLE STATEMENT  DDNTP
@@ -63,4 +65,5 @@ SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
       Y(i) = Y(i)*H**(-kused)
     END DO
   END IF
+  !
 END SUBROUTINE DDNTP

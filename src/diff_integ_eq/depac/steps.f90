@@ -183,16 +183,20 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Uprime(:)
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE F
   END INTERFACE
-  INTEGER :: Neqn, Ns, Ivc, K, Kgi, Kold, Kprev, Ksteps
-  INTEGER :: Iv(10)
-  REAL(SP) :: Eps, Fouru, H, Hold, Twou, X, Xold
-  REAL(SP) :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
-    Sig(13), W(12), V(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
-  LOGICAL :: Start, Crash, Phase1, Nornd
+  INTEGER, INTENT(IN) :: Neqn
+  INTEGER, INTENT(INOUT) :: Ivc, K, Kgi, Kold, Kprev, Ksteps, Ns
+  INTEGER, INTENT(INOUT) :: Iv(10)
+  REAL(SP), INTENT(IN) :: Fouru, Twou
+  REAL(SP), INTENT(INOUT) :: Eps, H, Hold, X, Xold
+  REAL(SP), INTENT(IN) :: Wt(Neqn)
+  REAL(SP), INTENT(INOUT) :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), &
+    Phi(Neqn,16), Psi(12), Sig(13), V(12), W(12), Y(Neqn), Yp(Neqn)
+  LOGICAL, INTENT(INOUT) :: Start, Crash, Phase1, Nornd
   !
   INTEGER :: i, ifail, im1, ip1, iq, j, jv, km1, km2, knew, kp1, kp2, l, limit1, &
     limit2, nsm2, nsp1, nsp2

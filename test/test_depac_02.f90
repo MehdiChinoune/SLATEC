@@ -4,7 +4,7 @@ MODULE TEST44_MOD
 
 CONTAINS
   !** DJAC
-  SUBROUTINE DJAC(T,U,Pd,Nrowpd)
+  PURE SUBROUTINE DJAC(T,U,Pd,Nrowpd)
     !> Evaluate Jacobian for DDEBDF quick check.
     !***
     ! **Library:**   SLATEC
@@ -21,8 +21,10 @@ CONTAINS
     !   900415  Minor clean-up of prologue and code and name changed from
     !           DDJAC to DJAC.  (WRB)
 
-    INTEGER :: Nrowpd
-    REAL(DP) :: T, U(:), Pd(:,:)
+    INTEGER, INTENT(IN) :: Nrowpd
+    REAL(DP), INTENT(IN) :: T, U(:)
+    REAL(DP), INTENT(OUT) :: Pd(:,:)
+    !
     REAL(DP) :: r, r5, rsq, u1sq, u2sq, u1u2
     !* FIRST EXECUTABLE STATEMENT  DJAC
     u1sq = U(1)*U(1)
@@ -58,7 +60,8 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    REAL(DP) :: T, U(:), Uprime(:)
+    REAL(DP), INTENT(IN) :: T, U(:)
+    REAL(DP), INTENT(OUT) :: Uprime(:)
     !
     !     Declare local variables.
     !
@@ -547,9 +550,17 @@ CONTAINS
     IF( iflag==-2 ) itmp(kont) = 1
     kont = kont + 1
     !-----STORAGE ALLOCATION IS INSUFFICIENT
-    kount = 6
-    nrowb = 2
-    ndiw = 17
+    itmp(kont) = 1
+    kont = kont + 1
+!    kount = 6
+!    nrowb = 2
+!    ndiw = 17
+    !-----INCORRECT ORDERING OF XPTS
+    kount = 7
+    ndiw = 100
+    sve = xpts(1)
+    xpts(1) = xpts(4)
+    xpts(4) = sve
     GOTO 100
     !
     !-----SEE IF IFLAG TESTS PASSED

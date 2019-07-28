@@ -1,5 +1,5 @@
 !** CMPOSP
-SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
+PURE SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !> Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC
@@ -10,8 +10,7 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !***
   ! **Description:**
   !
-  !     Subroutine to solve Poisson's equation with periodic boundary
-  !     conditions.
+  !     Subroutine to solve Poisson's equation with periodic boundary conditions.
   !
   !***
   ! **See also:**  CMGNBN
@@ -24,9 +23,12 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Idimq, M, N
-  COMPLEX(SP) :: A(M), Bb(M), C(M), Q(Idimq,N), B(M), B2(M), B3(M), W(M), W2(M), &
-    W3(M), D(M), Tcos(4*N), P(:)
+  INTEGER, INTENT(IN) :: Idimq, M, N
+  COMPLEX(SP), INTENT(IN) :: A(M), Bb(M), C(M)
+  COMPLEX(SP), INTENT(INOUT) :: Q(Idimq,N)
+  COMPLEX(SP), INTENT(OUT) :: B(M), B2(M), B3(M), W(M), W2(M), W3(M), D(M), &
+    P(:), Tcos(4*N)
+  !
   INTEGER :: i, ipstor, j, lh, mr, nr, nrm1, nrmj, nrpj
   COMPLEX(SP) :: s, t
   !* FIRST EXECUTABLE STATEMENT  CMPOSP
@@ -123,4 +125,5 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !     RETURN STORAGE REQUIREMENTS FOR P VECTORS.
   !
   W(1) = CMPLX(REAL(ipstor,SP),0._SP,SP)
+  !
 END SUBROUTINE CMPOSP

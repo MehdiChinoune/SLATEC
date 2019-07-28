@@ -1,5 +1,5 @@
 !** TEVLC
-SUBROUTINE TEVLC(N,D,E2,Ierr)
+PURE SUBROUTINE TEVLC(N,D,E2,Ierr)
   !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
@@ -54,8 +54,11 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   !   900402  Added TYPE section.  (WRB)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
   USE CCBLK, ONLY : eps_com
-  INTEGER :: N, Ierr
-  REAL(SP) :: D(N), E2(N)
+  !
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(INOUT) :: D(N), E2(N)
+  !
   INTEGER :: nhalf, ntop, i, j, l, m, ii, l1, mml
   REAL(SP) :: dhold, b, c, f, g, h, p, r, s
   !* FIRST EXECUTABLE STATEMENT  TEVLC

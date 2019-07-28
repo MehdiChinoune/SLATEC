@@ -47,8 +47,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
@@ -56,8 +55,12 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     xend_com, xot_com, knswot_com, lotjp_com, mnswot_com, nswot_com, tol_com, &
     nps_com, nfcc_com
   !
-  INTEGER :: Iflag, Ncomp, Niv, Ip(:)
-  REAL(DP) :: P(:), S(:), Stowa(:), W(:), Y(:,:), Yhp(:,:), Yp(:)
+  INTEGER, INTENT(IN) :: Ncomp
+  INTEGER, INTENT(INOUT) :: Iflag
+  INTEGER, INTENT(OUT) :: Niv, Ip(:)
+  REAL(DP), INTENT(INOUT) :: Y(:,:), Yhp(:,:), Yp(:)
+  REAL(DP), INTENT(OUT) :: P(:), S(:), Stowa(:), W(:)
+  !
   INTEGER :: ijk, j, k, kk, l, mflag, nfcp
   REAL(DP) :: dnd, dndt, dx, srp, vnorm, wcnd, ypnm
   !

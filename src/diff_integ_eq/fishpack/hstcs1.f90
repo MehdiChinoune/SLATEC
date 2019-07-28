@@ -19,10 +19,14 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Idimf, Ierr1, Intl, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
-  REAL(SP) :: Am(M), An(N), Bda(N), Bdb(N), Bdc(M), Bdd(M), Bm(M), Bn(N), Cm(M), Cn(N), &
-    F(Idimf,N), Rsq(N), Snth(M), Wrk(:)
+  INTEGER, INTENT(IN) :: Idimf, Intl, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierr1
+  REAL(SP), INTENT(IN) :: A, B, C, D, Elmbda
+  REAL(SP), INTENT(OUT) ::Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N), Bdb(N), Bdc(M), Bdd(M)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N), Wrk(:)
+  REAL(SP), INTENT(OUT) :: Am(M), An(N), Bm(M), Bn(N), Cm(M), Cn(N), Rsq(N), Snth(M)
+  !
   INTEGER :: i, isw, j, nb
   REAL(SP) :: a1, a2, a3, dr, dth, dthsq, x, y
   !* FIRST EXECUTABLE STATEMENT  HSTCS1
@@ -204,4 +208,5 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       END DO
     END DO
   END IF
+  !
 END SUBROUTINE HSTCS1

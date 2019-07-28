@@ -1,11 +1,10 @@
 !** SEPELI
 SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,Grhs,Usol,Idmn,W,Pertrb,Ierror)
-  !> Discretize and solve a second and, optionally, a fourth
-  !            order finite difference approximation on a uniform grid to
-  !            the general separable elliptic partial differential
-  !            equation on a rectangle with any combination of periodic or
-  !            mixed boundary conditions.
+  !> Discretize and solve a second and, optionally, a fourth order finite difference
+  !  approximation on a uniform grid to the general separable elliptic partial
+  !  differential equation on a rectangle with any combination of periodic or
+  !  mixed boundary conditions.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -385,8 +384,7 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !                          than AFUN/DLX**2).  In this case solution may
   !                          fail.  This cannot happen in the limit as
   !                          DLX, DLY approach zero.  Hence, the condition
-  !                          may be remedied by taking larger values for M
-  !                          or N.
+  !                          may be remedied by taking larger values for M or N.
   !
   ! Entry Points           SEPELI, SPELIP, CHKPRM, CHKSNG, ORTHOG, MINSOL,
   !                        TRISP, DEFER, DX, DY, BLKTRI, BLKTR1, INDXB,
@@ -474,18 +472,24 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTERFACE
-    SUBROUTINE COFX(X,A,B,C)
+    PURE SUBROUTINE COFX(X,A,B,C)
       IMPORT SP
-      REAL(SP) :: X, A, B, C
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(OUT) :: A, B, C
     END SUBROUTINE COFX
-    SUBROUTINE COFY(Y,D,E,F)
+    PURE SUBROUTINE COFY(Y,D,E,F)
       IMPORT SP
-      REAL(SP) :: Y, D, E, F
+      REAL(SP), INTENT(IN) :: Y
+      REAL(SP), INTENT(OUT) :: D, E, F
     END SUBROUTINE COFY
   END INTERFACE
-  INTEGER :: Idmn, Ierror, Intl, Iorder, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, Alpha, B, Beta, C, D, Gama, Pertrb, Xnu
-  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Grhs(Idmn,N+1), Usol(Idmn,N+1), W(:)
+  INTEGER, INTENT(IN) :: Idmn, Intl, Iorder, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, Alpha, B, Beta, C, D, Gama, Xnu
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1)
+  REAL(SP), INTENT(INOUT) :: Grhs(Idmn,N), W(:), Usol(Idmn,N+1)
+  !
   INTEGER :: i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, k, l, length, linput, ll, logb2n, loutpt
   !* FIRST EXECUTABLE STATEMENT  SEPELI
@@ -528,4 +532,5 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Gama,Bdd,Xnu,COFX,COFY,W(i1:i2-1),W(i2:i3-1),W(i3:i4-1),W(i4:i5-1),W(i5:i6-1),&
     W(i6:i7-1),W(i7:i8-1),W(i8:i9-1),W(i9:i10-1),W(i10:i11-1),W(i11:i12-1),W(i12:),&
     Grhs,Usol,Idmn,W(i13:i1-1),Pertrb,Ierror)
+  !
 END SUBROUTINE SEPELI

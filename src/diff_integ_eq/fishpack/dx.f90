@@ -1,5 +1,5 @@
 !** DX
-SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
+PURE SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
   !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
@@ -26,8 +26,10 @@ SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : dlx4_com, kswx_com, tdlx3_com, k_com, l_com
-  INTEGER :: I, Idmn, J
-  REAL(SP) :: U(Idmn,l_com), Uxxx, Uxxxx
+  !
+  INTEGER, INTENT(IN) :: I, Idmn, J
+  REAL(SP), INTENT(IN) :: U(Idmn,l_com)
+  REAL(SP), INTENT(OUT) :: Uxxx, Uxxxx
   !* FIRST EXECUTABLE STATEMENT  DX
   IF( I>2 .AND. I<(k_com-1) ) THEN
     !
@@ -64,7 +66,8 @@ SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
           !     PERIODIC AT X=B-DLX
           !
           Uxxx = (-U(k_com-3,J)+2._SP*U(k_com-2,J)-2._SP*U(1,J)+U(2,J))/tdlx3_com
-          Uxxxx = (U(k_com-3,J)-4._SP*U(k_com-2,J)+6._SP*U(k_com-1,J)-4._SP*U(1,J)+U(2,J))/dlx4_com
+          Uxxxx = (U(k_com-3,J)-4._SP*U(k_com-2,J)+6._SP*U(k_com-1,J)&
+            -4._SP*U(1,J)+U(2,J))/dlx4_com
           RETURN
         ELSE
           Uxxx = (U(k_com-4,J)-6._SP*U(k_com-3,J)+12._SP*U(k_com-2,J)-10._SP*U(k_com-1,J)&
@@ -77,10 +80,10 @@ SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
         !
         !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT X=B
         !
-        Uxxx = -(3._SP*U(k_com-4,J)-14._SP*U(k_com-3,J)+24._SP*U(k_com-2,J)-18._SP*U(k_com-1,J)&
-          +5._SP*U(k_com,J))/tdlx3_com
-        Uxxxx = (-2._SP*U(k_com-5,J)+11._SP*U(k_com-4,J)-24._SP*U(k_com-3,J)+26._SP*U(k_com-2,J)&
-          -14._SP*U(k_com-1,J)+3._SP*U(k_com,J))/dlx4_com
+        Uxxx = -(3._SP*U(k_com-4,J)-14._SP*U(k_com-3,J)+24._SP*U(k_com-2,J)&
+          -18._SP*U(k_com-1,J)+5._SP*U(k_com,J))/tdlx3_com
+        Uxxxx = (-2._SP*U(k_com-5,J)+11._SP*U(k_com-4,J)-24._SP*U(k_com-3,J)&
+          +26._SP*U(k_com-2,J)-14._SP*U(k_com-1,J)+3._SP*U(k_com,J))/dlx4_com
         RETURN
       END IF
     END IF
@@ -99,5 +102,6 @@ SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
   !
   Uxxx = (-U(k_com-2,J)+2._SP*U(k_com-1,J)-2._SP*U(2,J)+U(3,J))/(tdlx3_com)
   Uxxxx = (U(k_com-2,J)-4._SP*U(k_com-1,J)+6._SP*U(1,J)-4._SP*U(2,J)+U(3,J))/dlx4_com
+  !
   RETURN
 END SUBROUTINE DX

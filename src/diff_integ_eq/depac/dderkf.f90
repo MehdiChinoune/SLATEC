@@ -1,7 +1,7 @@
 !** DDERKF
 SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !> Solve an initial value problem in ordinary differential
-  !            equations using a Runge-Kutta-Fehlberg scheme.
+  !  equations using a Runge-Kutta-Fehlberg scheme.
   !***
   ! **Library:**   SLATEC (DEPAC)
   !***
@@ -607,19 +607,23 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   !   900510  Convert XERRWV calls to XERMSG calls, make Prologue comments
   !           consistent with DERKF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG
+
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
       IMPORT DP
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Uprime(:)
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE DF
   END INTERFACE
-  INTEGER :: Idid, Liw, Lrw, Neq
-  INTEGER :: Info(15), Iwork(Liw)
-  REAL(DP) :: T, Tout
-  REAL(DP) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  INTEGER, INTENT(IN) :: Liw, Lrw, Neq
+  INTEGER, INTENT(OUT) :: Idid
+  INTEGER, INTENT(INOUT) :: Info(15), Iwork(Liw)
+  REAL(DP), INTENT(IN) :: Tout
+  REAL(DP), INTENT(INOUT) :: T
+  REAL(DP), INTENT(INOUT) :: Atol(:), Rtol(:), Rwork(Lrw), Y(Neq)
+  !
   INTEGER ::  kdi, kf1, kf2, kf3, kf4, kf5, kh, krer, ktf, kto, ktstar, ku, kyp, kys
   LOGICAL :: stiff, nonstf
   CHARACTER(8) :: xern1
@@ -632,10 +636,10 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   IF( Iwork(Liw)>=5 ) THEN
     IF( T==Rwork(21+Neq) ) THEN
       WRITE (xern3,'(1PE15.6)') T
-      CALL XERMSG('DDERKF','AN APPARENT INFINITE LOOP HAS BEEN DETECTED.&
-        &$$YOU HAVE MADE REPEATED CALLS AT  T = '//xern3//' AND THE INTEGRATION&
+      ERROR STOP 'DDERKF : AN APPARENT INFINITE LOOP HAS BEEN DETECTED.&
+        & YOU HAVE MADE REPEATED CALLS AT  T  AND THE INTEGRATION&
         & HAS NOT ADVANCED. CHECK THE WAY YOU HAVE SET PARAMETERS FOR THE CALL&
-        & TO THE CODE, PARTICULARLY INFO(1).',13,2)
+        & TO THE CODE, PARTICULARLY INFO(1).'
       RETURN
     END IF
   END IF
@@ -645,14 +649,13 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw)
   Idid = 0
   IF( Lrw<30+7*Neq ) THEN
     WRITE (xern1,'(I8)') Lrw
-    CALL XERMSG('DDERKF','LENGTH OF RWORK ARRAY MUST BE AT LEAST&
-      & 30 + 7*NEQ.  YOU HAVE CALLED THE CODE WITH LRW = '//xern1,1,1)
+    ERROR STOP 'DDERKF : LENGTH OF RWORK ARRAY MUST BE AT LEAST 30 + 7*NEQ.'
     Idid = -33
   END IF
   !
   IF( Liw<34 ) THEN
     WRITE (xern1,'(I8)') Liw
-    CALL XERMSG('DDERKF','LENGTH OF IWORK ARRAY MUST BE AT LEAST 34.  YOU HAVE CALLED THE CODE WITH LIW = '//xern1,2,1)
+    ERROR STOP 'DDERKF : LENGTH OF IWORK ARRAY MUST BE AT LEAST 34.'
     Idid = -33
   END IF
   !

@@ -1,5 +1,5 @@
 !** CMPOSD
-SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
+PURE SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !> Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC
@@ -10,8 +10,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !***
   ! **Description:**
   !
-  !     Subroutine to solve Poisson's equation for Dirichlet boundary
-  !     conditions.
+  !     Subroutine to solve Poisson's equation for Dirichlet boundary conditions.
   !
   !     ISTAG = 1 if the last diagonal block is the matrix A.
   !     ISTAG = 2 if the last diagonal block is the matrix A+I.
@@ -26,12 +25,15 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !   920130  Modified to use merge routine C1MERG rather than deleted
-  !           routine CMPMRG.  (WRB)
+  !   920130  Modified to use merge routine C1MERG rather than deleted routine CMPMRG.  (WRB)
   USE data_handling, ONLY : C1MERG
-  INTEGER :: Idimq, Mr, Nr
-  COMPLEX(SP) :: Ba(Mr), Bb(Mr), Bc(Mr), Q(Idimq,Nr), B(:), W(Mr), D(Mr), Tcos(4*Nr), P(:)
-  INTEGER :: i, ideg, ip, ip1, ipstor, irreg, Istag, j, jdeg, jm1, jm2, jm3, &
+  !
+  INTEGER, INTENT(IN) :: Idimq, Mr, Nr, Istag
+  COMPLEX(SP), INTENT(IN) :: Ba(Mr), Bb(Mr), Bc(Mr)
+  COMPLEX(SP), INTENT(INOUT) :: Q(Idimq,Nr)
+  COMPLEX(SP), INTENT(OUT) :: B(:), P(:), Tcos(4*Nr), W(Mr), D(Mr)
+  !
+  INTEGER :: i, ideg, ip, ip1, ipstor, irreg, j, jdeg, jm1, jm2, jm3, &
     jp1, jp2, jp3, jsh, jsp, jst, jstsav, kr, krpi, l, lr, m, n, nodd, noddpr, nun
   REAL(SP) :: fi
   COMPLEX(SP) :: t
@@ -345,5 +347,6 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       l = l/2
     END IF
   END DO
+  !
   RETURN
 END SUBROUTINE CMPOSD

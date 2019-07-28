@@ -1,6 +1,5 @@
 !** CSCALE
-SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
-    Iscale,Ic)
+PURE SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,Ic)
   !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
@@ -25,9 +24,11 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  INTEGER :: Ic, Iscale, Ncol, Nrda, Nrow
-  REAL(SP) :: Anorm, A(Nrda,Ncol), Cols(Ncol), Colsav(Ncol), Rows(Nrow), Rowsav(Nrow), &
-    Scales(Ncol)
+  !
+  INTEGER, INTENT(IN) :: Ic, Iscale, Ncol, Nrda, Nrow
+  REAL(SP), INTENT(INOUT) :: A(Nrda,Ncol), Anorm, Cols(Ncol)
+  REAL(SP), INTENT(OUT) :: Colsav(Ncol), Rows(Nrow), Rowsav(Nrow), Scales(Ncol)
+  !
   INTEGER :: ip, j, k
   REAL(SP) :: alog2, ascale, cs, p, s
   !
@@ -84,4 +85,5 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     Rowsav(k) = Rows(k)
     Anorm = Anorm + Rows(k)
   END DO
+  !
 END SUBROUTINE CSCALE

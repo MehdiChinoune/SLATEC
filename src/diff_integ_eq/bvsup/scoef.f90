@@ -1,5 +1,5 @@
 !** SCOEF
-SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
+PURE SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
   !> Subsidiary to BVSUP
   !***
@@ -70,20 +70,23 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : eps_com
   USE service, ONLY : control_xer
-  INTEGER :: Iflag, Inhomo, Ncomp, Nfc, Nfcc, Nrowb, Iwork(*)
-  REAL(SP) :: Ae, Re
-  REAL(SP) :: B(Nrowb,Ncomp), Beta(Nrowb), By(Nfcc,Ncomp), Coef(Nfcc), Cvec(Nrowb), &
-    Work(*), Yh(Ncomp,Nfcc), Yp(Ncomp)
+  !
+  INTEGER, INTENT(IN) :: Inhomo, Ncomp, Nfc, Nfcc, Nrowb
+  INTEGER, INTENT(OUT) :: Iflag
+  INTEGER, INTENT(INOUT) :: Iwork(*)
+  REAL(SP), INTENT(IN) :: Ae, Re
+  REAL(SP), INTENT(IN) :: B(Nrowb,Ncomp), Beta(Nrowb), Yh(Ncomp,Nfcc), Yp(Ncomp)
+  REAL(SP), INTENT(INOUT) :: Work(*)
+  REAL(SP), INTENT(OUT) :: By(Nfcc,Ncomp), Cvec(Nrowb), Coef(Nfcc)
+  !
   INTEGER :: i, j, k, kflag, ki, l, mlso, ncomp2, nf, nfccm1
-  REAL(SP) :: bbn, bn, brn, bykl, bys, cons, &
-    gam, un, ypn
+  REAL(SP) :: bbn, bn, brn, bykl, bys, cons, gam, un, ypn
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP
   !
@@ -125,12 +128,10 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   IF( Inhomo==3 ) mlso = 1
   kflag = INT( 0.5_SP*LOG10(eps_com) )
   nf = control_xer
-  control_xer = 0
   DO
     CALL SUDS(By,Coef,Cvec,Nfcc,Nfcc,Nfcc,kflag,mlso,Work,Iwork)
     IF( kflag/=3 ) THEN
       IF( kflag==4 ) Iflag = 2
-      control_xer = nf
       IF( Nfcc==1 ) THEN
         !
         !- *********************************************************************
@@ -186,5 +187,6 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   IF( cons>10._SP*brn ) Iflag = 2
   IF( cons<=Re*ABS(Beta(1))+Ae+(Re*ypn+Ae)*bn ) Iflag = 1
   IF( Inhomo==3 ) Coef(1) = 1._SP
+  !
   RETURN
 END SUBROUTINE SCOEF

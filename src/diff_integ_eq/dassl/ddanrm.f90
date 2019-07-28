@@ -1,5 +1,5 @@
 !** DDANRM
-REAL(DP) FUNCTION DDANRM(Neq,V,Wt)
+REAL(DP) PURE FUNCTION DDANRM(Neq,V,Wt)
   !> Compute vector norm for DDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)
@@ -25,26 +25,10 @@ REAL(DP) FUNCTION DDANRM(Neq,V,Wt)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-
   !
-  INTEGER :: Neq
-  REAL(DP) :: V(Neq), Wt(Neq)
-  !
-  INTEGER :: i
-  REAL(DP) :: summ, vmax
-  !
+  INTEGER, INTENT(IN) :: Neq
+  REAL(DP), INTENT(IN) :: V(Neq), Wt(Neq)
   !* FIRST EXECUTABLE STATEMENT  DDANRM
-  DDANRM = 0._DP
-  vmax = 0._DP
-  DO i = 1, Neq
-    IF( ABS(V(i)/Wt(i))>vmax ) vmax = ABS(V(i)/Wt(i))
-  END DO
-  IF( vmax>0._DP ) THEN
-    summ = 0._DP
-    DO i = 1, Neq
-      summ = summ + ((V(i)/Wt(i))/vmax)**2
-    END DO
-    DDANRM = vmax*SQRT(summ/Neq)
-  END IF
+  DDANRM = NORM2( V/Wt ) / SQRT(1._DP*Neq)
   !------END OF FUNCTION DDANRM------
 END FUNCTION DDANRM

@@ -25,14 +25,16 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
 
   !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : c_com, inhomo_com, ncomp_com, nfc_com
-  INTEGER :: Ndisk, Ntape, Ntemp
-  REAL(SP) :: U(:), V(:), Yh(:), Yp(:)
+  !
+  INTEGER, INTENT(IN) :: Ndisk, Ntape, Ntemp
+  REAL(SP), INTENT(IN) :: Yh(:), Yp(:)
+  REAL(SP), INTENT(OUT) :: U(:), V(:)
+  !
   INTEGER :: j, nctnf
   !
   !- *********************************************************************

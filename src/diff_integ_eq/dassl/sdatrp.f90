@@ -1,5 +1,5 @@
 !** SDATRP
-SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
+PURE SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   !> Interpolation routine for SDASSL.
   !***
   ! **Library:**   SLATEC (DASSL)
@@ -38,11 +38,11 @@ SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-
   !
-  INTEGER :: Neq, Kold
-  REAL(SP) :: X, Xout
-  REAL(SP) :: Yout(Neq), Ypout(Neq), Phi(Neq,Kold+1), Psi(Kold+1)
+  INTEGER, INTENT(IN) :: Neq, Kold
+  REAL(SP), INTENT(IN) :: X, Xout
+  REAL(SP), INTENT(IN) :: Phi(Neq,Kold+1), Psi(Kold+1)
+  REAL(SP), INTENT(OUT) :: Yout(Neq), Ypout(Neq)
   !
   INTEGER :: i, j, koldp1
   REAL(SP) :: c, d, gama, temp1

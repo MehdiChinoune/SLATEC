@@ -1,5 +1,5 @@
 !** TEVLS
-SUBROUTINE TEVLS(N,D,E2,Ierr)
+PURE SUBROUTINE TEVLS(N,D,E2,Ierr)
   !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
@@ -54,8 +54,11 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
   !   900402  Added TYPE section.  (WRB)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
   USE CBLKT, ONLY : eps_com
-  INTEGER :: N, Ierr
-  REAL(SP) :: D(N), E2(N)
+  !
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Ierr
+  REAL(SP), INTENT(INOUT) :: D(N), E2(N)
+  !
   INTEGER :: nhalf, ntop, i, j, l, m, ii, l1, mml
   REAL(SP) :: dhold, b, c, f, g, h, p, r, s
   !* FIRST EXECUTABLE STATEMENT  TEVLS
@@ -172,8 +175,7 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
     END IF
     RETURN
     !
-    !     ********** SET ERROR -- NO CONVERGENCE TO AN
-    !                EIGENVALUE AFTER 30 ITERATIONS **********
+    !********** SET ERROR -- NO CONVERGENCE TO AN EIGENVALUE AFTER 30 ITERATIONS **********
     !
     50  Ierr = l
   END IF

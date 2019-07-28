@@ -1,5 +1,5 @@
 !** DEFER
-SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
+PURE SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
@@ -39,18 +39,22 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : l_com, ait_com, cit_com, dlx_com, dly_com, is_com, js_com, &
     k_com, kswx_com, kswy_com, ms_com, ns_com
+  !
   INTERFACE
-    SUBROUTINE COFX(X,A,B,C)
+    PURE SUBROUTINE COFX(X,A,B,C)
       IMPORT SP
-      REAL(SP) :: X, A, B, C
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(OUT) :: A, B, C
     END SUBROUTINE COFX
-    SUBROUTINE COFY(Y,D,E,F)
+    PURE SUBROUTINE COFY(Y,D,E,F)
       IMPORT SP
-      REAL(SP) :: Y, D, E, F
+      REAL(SP), INTENT(IN) :: Y
+      REAL(SP), INTENT(OUT) :: D, E, F
     END SUBROUTINE COFY
   END INTERFACE
-  INTEGER :: Idmn
-  REAL(SP) :: Grhs(Idmn,ns_com), Usol(Idmn,ns_com)
+  INTEGER, INTENT(IN) :: Idmn
+  REAL(SP), INTENT(INOUT) :: Grhs(Idmn,ns_com), Usol(Idmn,ns_com)
+  !
   INTEGER :: i, j
   REAL(SP) :: ai, bi, ci, dj, ej, fj, tx, ty, uxxx, uxxxx, uyyy, uyyyy, xi, yj
   !* FIRST EXECUTABLE STATEMENT  DEFER
@@ -85,4 +89,5 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
       Usol(i,j) = Grhs(i,j)
     END DO
   END DO
+  !
 END SUBROUTINE DEFER

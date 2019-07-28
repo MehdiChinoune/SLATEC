@@ -1,5 +1,5 @@
 !** INDXB
-SUBROUTINE INDXB(I,Ir,Idx,Idp)
+PURE SUBROUTINE INDXB(I,Ir,Idx,Idp)
   !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
@@ -20,7 +20,10 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
   !   900402  Added TYPE section.  (WRB)
   !   920422  Added statement so IDX would always be defined.  (WRB)
   USE CBLKT, ONLY : ik_com, nm_com
-  INTEGER :: I, Idp, Idx, Ir
+  !
+  INTEGER, INTENT(IN) :: I, Ir
+  INTEGER, INTENT(OUT) :: Idp, Idx
+  !
   INTEGER :: id, ipl, izh
   !* FIRST EXECUTABLE STATEMENT  INDXB
   Idx = max(I,1)
@@ -43,5 +46,6 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
     END IF
   END IF
   Idp = 0
+  !
   RETURN
 END SUBROUTINE INDXB

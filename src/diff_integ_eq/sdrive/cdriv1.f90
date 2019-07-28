@@ -1,10 +1,8 @@
 !** CDRIV1
 SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
-  !> The function of CDRIV1 is to solve N (200 or fewer)
-  !            ordinary differential equations of the form
-  !            dY(I)/dT = F(Y(I),T), given the initial conditions
-  !            Y(I) = YI.  CDRIV1 allows complex-valued differential
-  !            equations.
+  !> The function of CDRIV1 is to solve N (200 or fewer) ordinary differential
+  !  equations of the form dY(I)/dT = F(Y(I),T), given the initial conditions
+  !  Y(I) = YI.  CDRIV1 allows complex-valued differential equations.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -294,18 +292,23 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    SUBROUTINE F(N,T,Y,Ydot)
+    PURE SUBROUTINE F(N,T,Y,Ydot)
       IMPORT SP
-      INTEGER :: N
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(:), Ydot(:)
+      INTEGER, INTENT(IN) :: N
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(:)
+      COMPLEX(SP), INTENT(OUT) :: Ydot(:)
     END SUBROUTINE F
   END INTERFACE
-  INTEGER :: Ierflg, Lenw, Mstate, N
-  REAL(SP) :: Eps, T, Tout
-  COMPLEX(SP) :: Work(Lenw), Y(N+1)
+  INTEGER, INTENT(IN) :: Lenw, N
+  INTEGER, INTENT(INOUT) :: Mstate
+  INTEGER, INTENT(OUT) :: Ierflg
+  REAL(SP), INTENT(IN) :: Tout
+  REAL(SP), INTENT(INOUT) :: Eps, T
+  COMPLEX(SP), INTENT(INOUT) :: Work(Lenw), Y(N+1)
+  !
   INTEGER :: i, leniw, lenwcm, lnwchk, ml, mu, nde, nstate, ntask
   REAL(SP) :: hmax
   CHARACTER(8) :: intgr1
@@ -318,20 +321,20 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   IF( ABS(Mstate)==0 .OR. ABS(Mstate)>7 ) THEN
     WRITE (intgr1,'(I8)') Mstate
     Ierflg = 26
-    CALL XERMSG('CDRIV1','Illegal input.  The magnitude of MSTATE, '//intgr1//&
-      ', is not in the range 1 to 6 .',Ierflg,1)
+    ERROR STOP 'CDRIV1 : Illegal input.  The magnitude of MSTATE&
+      & is not in the range 1 to 6 .'
     Mstate = SIGN(7,Mstate)
     RETURN
   ELSEIF( ABS(Mstate)==7 ) THEN
     Ierflg = 999
-    CALL XERMSG('CDRIV1','Illegal input.  The magnitude of MSTATE is 7 .',Ierflg,2)
+    ERROR STOP 'CDRIV1 : Illegal input.  The magnitude of MSTATE is 7 .'
     RETURN
   END IF
   IF( N>MXN ) THEN
     WRITE (intgr1,'(I8)') N
     Ierflg = 21
-    CALL XERMSG('CDRIV1','Illegal input.  The number of equations, '//intgr1//&
-      ', is greater than the maximum allowed: 200 .',Ierflg,1)
+    ERROR STOP 'CDRIV1 : Illegal input.  The number of equations&
+      & is greater than the maximum allowed: 200 .'
     Mstate = SIGN(7,Mstate)
     RETURN
   END IF
@@ -349,8 +352,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     lnwchk = N*N + 10*N + 250 + leniw
     WRITE (intgr1,'(I8)') lnwchk
     Ierflg = 32
-    CALL XERMSG('CDRIV1','Insufficient storage allocated for the work array.&
-      & The required storage is at least '//intgr1//' .',Ierflg,1)
+    ERROR STOP 'CDRIV1 : Insufficient storage allocated for the work array.'
     Mstate = SIGN(7,Mstate)
     RETURN
   END IF
@@ -374,36 +376,34 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   ELSEIF( Ierflg>11 ) THEN
     Mstate = SIGN(7,Mstate)
   END IF
-
+  !
 CONTAINS
-  REAL(SP) FUNCTION dum_G(N,T,Y,Iroot)
-    INTEGER :: N, Iroot
-    REAL(SP) :: T
-    COMPLEX(SP) :: Y(N)
-    Iroot = 0
-    dum_G = SUM(REAL(Y))+ T
+  REAL(SP) PURE FUNCTION dum_G(N,T,Y,Iroot)
+    INTEGER, INTENT(IN) :: N, Iroot
+    REAL(SP), INTENT(IN) :: T
+    COMPLEX(SP), INTENT(IN) :: Y(N)
+    dum_G = SUM(REAL(Y))+ T + Iroot
   END FUNCTION dum_G
-  SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
-    INTEGER :: N, Matdim, Ml, Mu
-    REAL(SP) :: T
-    COMPLEX(SP) :: Y(N), Dfdy(Matdim,N)
-    Dfdy = T
-    Y = Ml + Mu
+  PURE SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+    INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+    REAL(SP), INTENT(IN) :: T
+    COMPLEX(SP), INTENT(IN) :: Y(N)
+    COMPLEX(SP), INTENT(OUT) :: Dfdy(Matdim,N)
+    Dfdy = T + Y(1) + Ml + Mu
   END SUBROUTINE dum_JACOBN
-  SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
-    INTEGER :: Impl, N, Nde, Iflag
-    REAL(SP) :: T, H, El
-    COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
-    Y = Ywt + Save1 + Save2
-    Yh = T + H + El
-    Impl = Nde + Iflag
+  PURE SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    INTEGER, INTENT(IN) :: Impl, N, Nde, Iflag
+    REAL(SP), INTENT(IN) :: T, H, El
+    COMPLEX(SP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+    COMPLEX(SP), INTENT(INOUT) :: Save1(N), Save2(N)
+    Save1 = Yh(:,1) + Y + Ywt
+    Save2 = T + H + El + Impl + Nde + Iflag
   END SUBROUTINE dum_USERS
-  SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-    INTEGER :: N, Matdim, Ml, Mu, Nde
-    REAL(SP) :: T
-    COMPLEX(SP) :: Y(N), A(:,:)
-    T = Matdim + Ml + Mu + Nde
-    Y = 0._SP
-    A = 0._SP
+  PURE SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+    REAL(SP), INTENT(IN) :: T
+    COMPLEX(SP), INTENT(IN) :: Y(N)
+    COMPLEX(SP), INTENT(INOUT) :: A(:,:)
+    A = Y(1) + T + Matdim + Ml + Mu + Nde
   END SUBROUTINE dum_FA
 END SUBROUTINE CDRIV1

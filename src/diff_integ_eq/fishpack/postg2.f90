@@ -1,5 +1,5 @@
 !** POSTG2
-SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
+PURE SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   !> Subsidiary to POISTG
   !***
   ! **Library:**   SLATEC
@@ -22,12 +22,15 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !   920130  Modified to use merge routine S1MERG rather than deleted
-  !           routine MERGE.  (WRB)
+  !   920130  Modified to use merge routine S1MERG rather than deleted routine MERGE.  (WRB)
   USE data_handling, ONLY : S1MERG
-  INTEGER :: M, N, Nperod, Idimq
-  REAL(SP) :: A(M), B(M), B2(M), B3(M), Bb(M), C(M), D(M), P(:), Q(Idimq,N), &
-    Tcos(4*N), W(M), W2(M), W3(M)
+  !
+  INTEGER, INTENT(IN) :: M, N, Nperod, Idimq
+  REAL(SP), INTENT(IN) :: A(M), Bb(M), C(M)
+  REAL(SP), INTENT(INOUT) :: Q(Idimq,N)
+  REAL(SP), INTENT(OUT) :: B(M), B2(M), B3(M), D(M), P(:), Tcos(4*N), W(M), &
+    W2(M), W3(M)
+  !
   INTEGER :: kr, lr, mr, nlast, nlastp, np, nr, nrod, nrodpr, i, i2r, &
     i2rby2, ii, ijump, ip, ipstor, j, jm1, jm2, jm3, jp1, jp2, jp3, jr, &
     jstart, jstep, jstop, k(4)
@@ -545,4 +548,5 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
       IF( nlastp/=nlast ) GOTO 300
     END IF
   END DO
+  !
 END SUBROUTINE POSTG2

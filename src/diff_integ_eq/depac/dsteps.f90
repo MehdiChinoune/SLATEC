@@ -2,8 +2,7 @@
 SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     Psi,Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,&
     Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi)
-  !> Integrate a system of first order ordinary differential
-  !            equations one step.
+  !> Integrate a system of first order ordinary differential equations one step.
   !***
   ! **Library:**   SLATEC (DEPAC)
   !***
@@ -51,19 +50,16 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !      NEQN -- number of equations to be integrated
   !      Y(*) -- solution vector at X
   !      X -- independent variable
-  !      H -- appropriate step size for next step.  Normally determined by
-  !           code
+  !      H -- appropriate step size for next step.  Normally determined by code
   !      EPS -- local error tolerance
   !      WT(*) -- vector of weights for error criterion
-  !      START -- logical variable set .TRUE. for first step,  .FALSE.
-  !           otherwise
+  !      START -- logical variable set .TRUE. for first step,  .FALSE. otherwise
   !      HOLD -- step size used for last successful step
   !      K -- appropriate order for next step (determined by code)
   !      KOLD -- order used for last successful step
   !      CRASH -- logical variable set .TRUE. when no step can be taken,
   !           .FALSE. otherwise.
-  !      YP(*) -- derivative of solution vector at  X  after successful
-  !           step
+  !      YP(*) -- derivative of solution vector at  X  after successful step
   !      KSTEPS -- counter on attempted steps
   !      TWOU -- 2.*U where U is machine unit roundoff quantity
   !      FOURU -- 4.*U where U is machine unit roundoff quantity
@@ -178,20 +174,26 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, eps_dp, huge_dp
+  USE service, ONLY : eps_dp, huge_dp
+  !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
       IMPORT DP
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Uprime(:)
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE DF
   END INTERFACE
-  INTEGER :: Ivc, K, Kgi, Kold, Kprev, Ksteps, Neqn, Ns
-  INTEGER :: Iv(10)
-  REAL(DP) :: Eps, Fouru, H, Hold, Twou, X, Xold
-  REAL(DP) :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), Phi(Neqn,16), Psi(12), &
-    Sig(13), V(12), W(12), Wt(Neqn), Y(Neqn), Yp(Neqn)
-  LOGICAL :: Start, Crash, Phase1, Nornd
+  INTEGER, INTENT(IN) :: Neqn
+  INTEGER, INTENT(INOUT) :: Ivc, K, Kgi, Kold, Kprev, Ksteps, Ns
+  INTEGER, INTENT(INOUT) :: Iv(10)
+  REAL(DP), INTENT(IN) :: Fouru, Twou
+  REAL(DP), INTENT(INOUT) :: Eps, H, Hold, X, Xold
+  REAL(DP), INTENT(IN) :: Wt(Neqn)
+  REAL(DP), INTENT(INOUT) :: Alpha(12), Beta(12), G(13), Gi(11), P(Neqn), &
+    Phi(Neqn,16), Psi(12), Sig(13), V(12), W(12), Y(Neqn), Yp(Neqn)
+  LOGICAL, INTENT(INOUT) :: Start, Crash, Phase1, Nornd
+  !
   INTEGER :: i, ifail, im1, ip1, jv, iq, j, km1, km2, knew, &
     kp1, kp2, l, limit1, limit2, nsm2, nsp1, nsp2
   REAL(DP) :: absh, big, erk, erkm1, erkm2, erkp1, err, hnew, p5eps, r, reali, &
@@ -246,8 +248,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         !
         u = eps_dp
         big = SQRT(huge_dp)
-        CALL DHSTRT(DF,Neqn,X,X+H,Y,Yp,Wt,1,u,big,Phi(1,3),Phi(1,4),Phi(1,5)&
-          ,Phi(1,6),H)
+        CALL DHSTRT(DF,Neqn,X,X+H,Y,Yp,Wt,1,u,big,Phi(1,3),Phi(1,4),Phi(1,5),Phi(1,6),H)
         !
         Hold = 0._DP
         K = 1

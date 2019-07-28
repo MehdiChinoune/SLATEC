@@ -1,5 +1,5 @@
 !** CPROCP
-SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
+PURE SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
   !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
@@ -34,9 +34,11 @@ SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: M, Na, Nd, Nm1, Nm2
-  REAL(SP) :: Aa(Na), Bm1(Nm1), Bm2(Nm2)
-  COMPLEX(SP) :: Y(M), D(M), U(M), Bd(Nd), X(M), A(M), B(M), C(M), Yy(M)
+  INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+  REAL(SP), INTENT(IN) :: Aa(Na), Bm1(Nm1), Bm2(Nm2)
+  COMPLEX(SP), INTENT(IN) :: Bd(Nd), X(M), A(M), B(M), C(M)
+  COMPLEX(SP), INTENT(OUT) :: Y(M), D(M), U(M), Yy(M)
+  !
   INTEGER :: ia, id, iflg, j, k, m1, m2, mm, mm2
   REAL(SP) :: rt
   COMPLEX(SP) :: v, den, bh, ym, am, y1, y2, yh, crt
@@ -140,5 +142,6 @@ SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
   Y(M-1) = y1
   iflg = 1
   GOTO 100
+  !
   RETURN
 END SUBROUTINE CPROCP

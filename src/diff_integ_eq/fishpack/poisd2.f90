@@ -1,5 +1,5 @@
 !** POISD2
-SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
+PURE SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !> Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC
@@ -10,8 +10,7 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !***
   ! **Description:**
   !
-  !     Subroutine to solve Poisson's equation for Dirichlet boundary
-  !     conditions.
+  !     Subroutine to solve Poisson's equation for Dirichlet boundary conditions.
   !
   !     ISTAG = 1 if the last diagonal block is the matrix A.
   !     ISTAG = 2 if the last diagonal block is the matrix A+I.
@@ -26,11 +25,14 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !   920130  Modified to use merge routine S1MERG rather than deleted
-  !           routine MERGE.  (WRB)
+  !   920130  Modified to use merge routine S1MERG rather than deleted routine MERGE.  (WRB)
   USE data_handling, ONLY : S1MERG
-  INTEGER :: Idimq, Istag, Mr, Nr
-  REAL(SP) :: B(Mr), Ba(Mr), Bb(Mr), Bc(Mr), D(Mr), P(:), Q(Idimq,Nr), Tcos(4*Nr), W(Mr)
+  !
+  INTEGER, INTENT(IN) :: Idimq, Mr, Nr, Istag
+  REAL(SP), INTENT(IN) :: Ba(Mr), Bb(Mr), Bc(Mr)
+  REAL(SP), INTENT(INOUT) :: Q(Idimq,Nr)
+  REAL(SP), INTENT(OUT) :: B(:), P(:), Tcos(4*Nr), W(Mr), D(Mr)
+  !
   INTEGER :: i, ideg, ip, ip1, ipstor, irreg, j, jdeg, jm1, jm2, jm3, jp1, jp2, &
     jp3, jsh, jsp, jst, jstsav, kr, krpi, l, lr, m, n, nodd, noddpr, nun
   REAL(SP) :: fi, t
@@ -344,5 +346,6 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       l = l/2
     END IF
   END DO
+  !
   RETURN
 END SUBROUTINE POISD2

@@ -1,5 +1,5 @@
 !** DDAINI
-SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
+PURE SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
   !> Initialization routine for DDASSL.
   !***
@@ -55,23 +55,28 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
   !   901030  Minor corrections to declarations.  (FNF)
-
   !
   INTERFACE
-    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+    PURE SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
       IMPORT DP
-      INTEGER :: Ires
-      REAL(DP) :: T, Y(:), Yprime(:), Delta(:)
-    END SUBROUTINE
-    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      INTEGER, INTENT(INOUT) :: Ires
+      REAL(DP), INTENT(IN) :: T, Y(:), Yprime(:)
+      REAL(DP), INTENT(OUT) :: Delta(:)
+    END SUBROUTINE RES
+    PURE SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
       IMPORT DP
-      REAL(DP) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
-    END SUBROUTINE
+      REAL(DP), INTENT(IN) :: T, Cj, Y(:), Yprime(:)
+      REAL(DP), INTENT(OUT) :: Pd(:,:)
+    END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Neq, Idid, Nonneg, Ntemp
-  INTEGER :: Iwm(:)
-  REAL(DP) :: X, H, Hmin, Uround
-  REAL(DP) :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), Wm(:)
+  INTEGER, INTENT(IN) :: Neq, Nonneg, Ntemp
+  INTEGER, INTENT(OUT) :: Idid
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(DP), INTENT(IN) :: Hmin, Uround
+  REAL(DP), INTENT(INOUT) :: X, H
+  REAL(DP), INTENT(IN) :: Wt(:)
+  REAL(DP), INTENT(INOUT) :: Y(Neq), Yprime(Neq), Wm(:)
+  REAL(DP), INTENT(OUT) :: Phi(Neq,*), Delta(:), E(:)
   !
   INTEGER :: i, ier, ires, jcalc, m, ncf, nef, nsf
   REAL(DP) :: cj, delnrm, err, oldnrm, r, rate, s, xold, ynorm
@@ -296,6 +301,5 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Phi,Delta,E,&
   END IF
   Idid = -12
   RETURN
-  !
   !-------------END OF SUBROUTINE DDAINI----------------------
 END SUBROUTINE DDAINI

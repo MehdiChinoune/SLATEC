@@ -1,8 +1,7 @@
 !** DDAJAC
-SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
+PURE SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
     Uround,JAC,Ntemp)
-  !> Compute the iteration matrix for DDASSL and form the
-  !            LU-decomposition.
+  !> Compute the iteration matrix for DDASSL and form the LU-decomposition.
   !***
   ! **Library:**   SLATEC (DASSL)
   !***
@@ -60,25 +59,29 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   USE linpack, ONLY : DGBFA, DGEFA
   !
   INTERFACE
-    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+    PURE SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
       IMPORT DP
-      INTEGER :: Ires
-      REAL(DP) :: T, Y(:), Yprime(:), Delta(:)
-    END SUBROUTINE
-    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      INTEGER, INTENT(INOUT) :: Ires
+      REAL(DP), INTENT(IN) :: T, Y(:), Yprime(:)
+      REAL(DP), INTENT(OUT) :: Delta(:)
+    END SUBROUTINE RES
+    PURE SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
       IMPORT DP
-      REAL(DP) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
-    END SUBROUTINE
+      REAL(DP), INTENT(IN) :: T, Cj, Y(:), Yprime(:)
+      REAL(DP), INTENT(OUT) :: Pd(:,:)
+    END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Neq, Ier, Ires
-  INTEGER :: Iwm(:), Ntemp
-  REAL(DP) :: X, Cj, H, Uround
-  REAL(DP) :: Y(Neq), Yprime(Neq), Delta(:), Wt(:), E(:), Wm(:)
+  INTEGER, INTENT(IN) :: Neq, Ntemp
+  INTEGER, INTENT(OUT) :: Ier, Ires
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(DP), INTENT(IN) :: X, Cj, H, Uround
+  REAL(DP), INTENT(IN) :: Delta(:), Wt(:)
+  REAL(DP), INTENT(INOUT) :: E(:), Y(Neq), Yprime(Neq), Wm(:)
   !
   INTEGER :: i, i1, i2, ii, ipsave, isave, j, k, l, mba, mband, meb1, &
     meband, msave, mtype, n, npdm1, nrow
   REAL(DP) :: del, delinv, squr, ypsave, ysave
-  REAL(DP), ALLOCATABLE :: Pd(:,:)
+  REAL(DP), ALLOCATABLE :: pd(:,:)
   !
   INTEGER, PARAMETER :: NPD = 1
   INTEGER, PARAMETER :: LML = 1

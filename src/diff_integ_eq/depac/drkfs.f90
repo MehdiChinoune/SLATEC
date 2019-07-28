@@ -1,7 +1,6 @@
 !** DRKFS
 SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
-    F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,Stiff,&
-    Nonstf,Ntstep,Nstifs)
+    F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,Stiff,Nonstf,Ntstep,Nstifs)
   !> Subsidiary to DDERKF
   !***
   ! **Library:**   SLATEC
@@ -46,24 +45,30 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   891024  Changed references from DVNORM to DHVNRM.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !   900510  Convert XERRWV calls to XERMSG calls, change GOTOs to
-  !           IF-THEN-ELSEs.  (RWC)
+  !   900510  Convert XERRWV calls to XERMSG calls, change GOTOs to IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  USE service, ONLY : XERMSG, eps_dp, huge_dp
+  USE service, ONLY : eps_dp, huge_dp
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
       IMPORT DP
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Uprime(:)
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE DF
   END INTERFACE
-  INTEGER :: Idid, Init, Iquit, Kop, Ksteps, Neq, Nstifs, Ntstep
-  INTEGER :: Info(15)
-  REAL(DP) :: Dtsign, H, Rer, T, Told, Tolfac, Tout, U26
-  REAL(DP) :: Atol(:), F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), &
-    Rtol(:), Y(Neq), Yp(Neq), Ys(Neq)
-  LOGICAL :: Stiff, Nonstf
+  INTEGER, INTENT(IN) :: Neq
+  INTEGER, INTENT(INOUT) :: Init, Iquit, Kop, Ksteps, Nstifs, Ntstep
+  INTEGER, INTENT(OUT) :: Idid
+  INTEGER, INTENT(INOUT) :: Info(15)
+  REAL(DP), INTENT(IN) :: Tout
+  REAL(DP), INTENT(INOUT) :: Dtsign, H, Rer, T, Told, U26
+  REAL(DP), INTENT(OUT) :: Tolfac
+  REAL(DP), INTENT(INOUT) :: Atol(:), Rtol(:), Y(Neq)
+  REAL(DP), INTENT(OUT) :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), &
+    Yp(Neq), Ys(Neq)
+  LOGICAL, INTENT(INOUT) :: Stiff, Nonstf
+  !
   INTEGER :: k, ktol, natolp, nrtolp
   REAL(DP) :: a, big, dt, dy, ee, eeoet, es, estiff, esttol, et, hmin, s, &
     tol, u, ute, yavg
@@ -112,24 +117,24 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !        VALUES SET IN D1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
     !
     u = eps_dp
-    !                       -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
+    !  -- SET ASSOCIATED MACHINE DEPENDENT PARAMETERS
     U26 = 26._DP*u
     Rer = 2._DP*u + remin
-    !                       -- SET TERMINATION FLAG
+    !  -- SET TERMINATION FLAG
     Iquit = 0
-    !                       -- SET INITIALIZATION INDICATOR
+    !  -- SET INITIALIZATION INDICATOR
     Init = 0
-    !                       -- SET COUNTER FOR IMPACT OF OUTPUT POINTS
+    !  -- SET COUNTER FOR IMPACT OF OUTPUT POINTS
     Kop = 0
-    !                       -- SET COUNTER FOR ATTEMPTED STEPS
+    !  -- SET COUNTER FOR ATTEMPTED STEPS
     Ksteps = 0
-    !                       -- SET INDICATORS FOR STIFFNESS DETECTION
+    !  -- SET INDICATORS FOR STIFFNESS DETECTION
     Stiff = .FALSE.
     Nonstf = .FALSE.
-    !                       -- SET STEP COUNTERS FOR STIFFNESS DETECTION
+    !  -- SET STEP COUNTERS FOR STIFFNESS DETECTION
     Ntstep = 0
     Nstifs = 0
-    !                       -- RESET INFO(1) FOR SUBSEQUENT CALLS
+    !  -- RESET INFO(1) FOR SUBSEQUENT CALLS
     Info(1) = 1
   END IF
   !
@@ -139,33 +144,31 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   IF( Info(1)/=0 .AND. Info(1)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(1)
-    CALL XERMSG('DRKFS','IN DDERKF, INFO(1) MUST BE SET TO 0 FOR&
-      & THE START OF A NEW PROBLEM, AND MUST BE SET TO 1 FOLLOWING AN&
-      & INTERRUPTED TASK.  YOU ARE ATTEMPTING TO CONTINUE THE INTEGRATION&
-      & ILLEGALLY BY CALLING THE CODE WITH  INFO(1) = '//xern1,3,1)
+    ERROR STOP 'DRKFS : IN DDERKF, INFO(1) MUST BE SET TO 0 FOR THE START OF&
+      & A NEW PROBLEM, AND MUST BE SET TO 1 FOLLOWING AN INTERRUPTED TASK.&
+      & YOU ARE ATTEMPTING TO CONTINUE THE INTEGRATION&
+      & ILLEGALLY BY CALLING THE CODE WITH  INFO(1) /= 0 OR 1'
     Idid = -33
   END IF
   !
   IF( Info(2)/=0 .AND. Info(2)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(2)
-    CALL XERMSG('DRKFS','IN DDERKF, INFO(2) MUST BE 0 OR 1 INDICATING&
-      & SCALAR AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
-      & YOU HAVE CALLED THE CODE WITH INFO(2) = '//xern1,4,1)
+    ERROR STOP 'DRKFS : IN DDERKF, INFO(2) MUST BE 0 OR 1 INDICATING&
+      & SCALAR AND VECTOR ERROR TOLERANCES, RESPECTIVELY.'
     Idid = -33
   END IF
   !
   IF( Info(3)/=0 .AND. Info(3)/=1 ) THEN
     WRITE (xern1,'(I8)') Info(3)
-    CALL XERMSG('DRKFS','IN DDERKF, INFO(3) MUST BE 0 OR 1 INDICATING&
-      & THE INTERVAL OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.&
-      & YOU HAVE CALLED THE CODE WITH  INFO(3) = '//xern1,5,1)
+    ERROR STOP 'DRKFS : IN DDERKF, INFO(3) MUST BE 0 OR 1 INDICATING&
+      & THE INTERVAL OR INTERMEDIATE-OUTPUT MODE OF INTEGRATION, RESPECTIVELY.'
     Idid = -33
   END IF
   !
   IF( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
-    CALL XERMSG('DRKFS','IN DDERKF, THE NUMBER OF EQUATIONS NEQ MUST&
-      & BE A POSITIVE INTEGER.  YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,6,1)
+    ERROR STOP 'DRKFS : IN DDERKF, THE NUMBER OF EQUATIONS NEQ MUST&
+      & BE A POSITIVE INTEGER.'
     Idid = -33
   END IF
   !
@@ -175,10 +178,9 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     IF( nrtolp==0 .AND. Rtol(k)<0._DP ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
-      CALL XERMSG('DRKFS','IN DDERKF, THE RELATIVE ERROR TOLERANCES&
-        & RTOL MUST BE NON-NEGATIVE.  YOU HAVE CALLED THE CODE WITH  RTOL('//xern1//') = '&
-        //xern3//'.  IN THE CASE OF VECTOR ERROR TOLERANCES, NO FURTHER CHECKING&
-        & OF RTOL COMPONENTS IS DONE.',7,1)
+      ERROR STOP 'DRKFS : IN DDERKF, THE RELATIVE ERROR TOLERANCES RTOL MUST BE&
+        & NON-NEGATIVE. IN THE CASE OF VECTOR ERROR TOLERANCES, NO FURTHER CHECKING&
+        & OF RTOL COMPONENTS IS DONE.'
       Idid = -33
       nrtolp = 1
     END IF
@@ -186,10 +188,9 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     IF( natolp==0 .AND. Atol(k)<0._DP ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
-      CALL XERMSG('DRKFS','IN DDERKF, THE ABSOLUTE ERROR TOLERANCES&
-        & ATOL MUST BE NON-NEGATIVE.  YOU HAVE CALLED THE CODE WITH  ATOL('//xern1//') = '&
-        //xern3//'.  IN THE CASE OF VECTOR ERROR TOLERANCES, NO FURTHER CHECKING&
-        & OF ATOL COMPONENTS IS DONE.',8,1)
+      ERROR STOP 'DRKFS : IN DDERKF, THE ABSOLUTE ERROR TOLERANCES ATOL MUST BE&
+        & NON-NEGATIVE. IN THE CASE OF VECTOR ERROR TOLERANCES, NO FURTHER CHECKING&
+        & OF ATOL COMPONENTS IS DONE.'
       Idid = -33
       natolp = 1
     END IF
@@ -204,25 +205,24 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   IF( Init/=0 ) THEN
     IF( T==Tout ) THEN
       WRITE (xern3,'(1PE15.6)') T
-      CALL XERMSG('DRKFS','IN DDERKF, YOU HAVE CALLED THE CODE WITH&
-        & T = TOUT = '//xern3//'$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
+      ERROR STOP 'DRKFS : IN DDERKF, YOU HAVE CALLED THE CODE WITH&
+        & T = TOUT. THIS IS NOT ALLOWED ON CONTINUATION CALLS.'
       Idid = -33
     END IF
     !
     IF( T/=Told ) THEN
       WRITE (xern3,'(1PE15.6)') Told
       WRITE (xern4,'(1PE15.6)') T
-      CALL XERMSG('DRKFS','IN DDERKF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '//xern4//&
-        '$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
+      ERROR STOP 'DRKFS : IN DDERKF, YOU HAVE CHANGED THE VALUE OF T. &
+        &THIS IS NOT ALLOWED ON CONTINUATION CALLS.'
       Idid = -33
     END IF
     !
     IF( Init/=1 ) THEN
       IF( Dtsign*(Tout-T)<0._DP ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
-        CALL XERMSG('DRKFS',&
-          'IN DDERKF, BY CALLING THE CODE WITH TOUT = '//xern3//&
-          ' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
+        ERROR STOP 'DRKFS : INVALID VALUE OF TOUT. YOU ARE ATTEMPTING TO CHANGE&
+          & THE DIRECTION OF INTEGRATION. THIS IS NOT ALLOWED WITHOUT RESTARTING.'
         Idid = -33
       END IF
     END IF
@@ -235,9 +235,9 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       Iquit = -33
       GOTO 200
     ELSE
-      CALL XERMSG('DRKFS','IN DDERKF, INVALID INPUT WAS DETECTED ON&
+      ERROR STOP 'DRKFS : IN DDERKF, INVALID INPUT WAS DETECTED ON&
         & SUCCESSIVE ENTRIES.  IT IS IMPOSSIBLE TO PROCEED BECAUSE YOU HAVE NOT&
-        & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.',12,2)
+        & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.'
       RETURN
     END IF
   END IF
@@ -261,28 +261,28 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   IF( Idid/=(-2) ) THEN
     !
-    !                       BRANCH ON STATUS OF INITIALIZATION INDICATOR
-    !                              INIT=0 MEANS INITIAL DERIVATIVES AND
-    !                              STARTING STEP SIZE
-    !                                     NOT YET COMPUTED
-    !                              INIT=1 MEANS STARTING STEP SIZE NOT YET
-    !                              COMPUTED INIT=2 MEANS NO FURTHER
-    !                              INITIALIZATION REQUIRED
+    !  BRANCH ON STATUS OF INITIALIZATION INDICATOR
+    !   INIT=0 MEANS INITIAL DERIVATIVES AND
+    !   STARTING STEP SIZE
+    !          NOT YET COMPUTED
+    !   INIT=1 MEANS STARTING STEP SIZE NOT YET
+    !   COMPUTED INIT=2 MEANS NO FURTHER
+    !   INITIALIZATION REQUIRED
     !
     IF( Init==0 ) THEN
       !
-      !                       ................................................
+      !  ................................................
       !
-      !                            MORE INITIALIZATION --
-      !                                                -- EVALUATE INITIAL
-      !                                                DERIVATIVES
+      !       MORE INITIALIZATION --
+      !  -- EVALUATE INITIAL
+      !  DERIVATIVES
       !
       Init = 1
       a = T
       CALL DF(a,Y,Yp)
       IF( T==Tout ) THEN
         !
-        !                          INTERVAL MODE
+        !     INTERVAL MODE
         Idid = 2
         T = Tout
         Told = T
@@ -316,16 +316,15 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     CALL DHSTRT(DF,Neq,T,Tout,Y,Yp,F1,4,u,big,F2,F3,F4,F5,H)
   ELSE
     !
-    !              RTOL=ATOL=0 ON INPUT, SO RTOL WAS CHANGED TO A
-    !                                       SMALL POSITIVE VALUE
+    !  RTOL=ATOL=0 ON INPUT, SO RTOL WAS CHANGED TO A SMALL POSITIVE VALUE
     Tolfac = 1._DP
     GOTO 200
   END IF
   !
-  !                 ......................................................
+  !......................................................
   !
-  !                      SET STEP SIZE FOR INTEGRATION IN THE DIRECTION
-  !                      FROM T TO TOUT AND SET OUTPUT POINT INDICATOR
+  ! SET STEP SIZE FOR INTEGRATION IN THE DIRECTION
+  ! FROM T TO TOUT AND SET OUTPUT POINT INDICATOR
   !
   100  dt = Tout - T
   H = SIGN(H,dt)
@@ -339,20 +338,20 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     !
     IF( ABS(dt)>U26*ABS(T) ) THEN
       DO
-        !                       BEGIN BLOCK PERMITTING ...EXITS TO 490
+        !  BEGIN BLOCK PERMITTING ...EXITS TO 490
         !
-        !                          *********************************************
-        !                          *********************************************
-        !                               STEP BY STEP INTEGRATION
+        !     *********************************************
+        !     *********************************************
+        !    STEP BY STEP INTEGRATION
         !
-        !                             BEGIN BLOCK PERMITTING ...EXITS TO 480
+        !  BEGIN BLOCK PERMITTING ...EXITS TO 480
         hfaild = .FALSE.
         !
-        !                                TO PROTECT AGAINST IMPOSSIBLE ACCURACY
-        !                                REQUESTS, COMPUTE A TOLERANCE FACTOR
-        !                                BASED ON THE REQUESTED ERROR TOLERANCE
-        !                                AND A LEVEL OF ACCURACY ACHIEVABLE AT
-        !                                LIMITING PRECISION
+        !     TO PROTECT AGAINST IMPOSSIBLE ACCURACY
+        !     REQUESTS, COMPUTE A TOLERANCE FACTOR
+        !     BASED ON THE REQUESTED ERROR TOLERANCE
+        !     AND A LEVEL OF ACCURACY ACHIEVABLE AT
+        !     LIMITING PRECISION
         !
         Tolfac = 0._DP
         ktol = 1
@@ -367,17 +366,17 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         END DO
         IF( Tolfac<=1._DP ) THEN
           !
-          !                                SET SMALLEST ALLOWABLE STEP SIZE
+          !     SET SMALLEST ALLOWABLE STEP SIZE
           !
           hmin = U26*ABS(T)
           !
-          !                                ADJUST STEP SIZE IF NECESSARY TO HIT
-          !                                THE OUTPUT POINT -- LOOK AHEAD TWO
-          !                                STEPS TO AVOID DRASTIC CHANGES IN THE
-          !                                STEP SIZE AND THUS LESSEN THE IMPACT OF
-          !                                OUTPUT POINTS ON THE CODE.  STRETCH THE
-          !                                STEP SIZE BY, AT MOST, AN AMOUNT EQUAL
-          !                                TO THE SAFETY FACTOR OF 9/10.
+          !     ADJUST STEP SIZE IF NECESSARY TO HIT
+          !     THE OUTPUT POINT -- LOOK AHEAD TWO
+          !     STEPS TO AVOID DRASTIC CHANGES IN THE
+          !     STEP SIZE AND THUS LESSEN THE IMPACT OF
+          !     OUTPUT POINTS ON THE CODE.  STRETCH THE
+          !     STEP SIZE BY, AT MOST, AN AMOUNT EQUAL
+          !     TO THE SAFETY FACTOR OF 9/10.
           !
           dt = Tout - T
           IF( ABS(dt)<2._DP*ABS(H) ) THEN
@@ -386,9 +385,9 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               H = 0.5_DP*dt
             ELSE
               !
-              !                                      THE NEXT STEP, IF SUCCESSFUL,
-              !                                      WILL COMPLETE THE INTEGRATION TO
-              !                                      THE OUTPUT POINT
+              !           THE NEXT STEP, IF SUCCESSFUL,
+              !           WILL COMPLETE THE INTEGRATION TO
+              !           THE OUTPUT POINT
               !
               output = .TRUE.
               H = dt
@@ -396,70 +395,70 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           END IF
           !
           !
-          !                                ***************************************
-          !                                     CORE INTEGRATOR FOR TAKING A
-          !                                     SINGLE STEP
-          !                                ***************************************
-          !                                     TO AVOID PROBLEMS WITH ZERO
-          !                                     CROSSINGS, RELATIVE ERROR IS
-          !                                     MEASURED USING THE AVERAGE OF THE
-          !                                     MAGNITUDES OF THE SOLUTION AT THE
-          !                                     BEGINNING AND END OF A STEP.
-          !                                     THE ERROR ESTIMATE FORMULA HAS
-          !                                     BEEN GROUPED TO CONTROL LOSS OF
-          !                                     SIGNIFICANCE.
-          !                                     LOCAL ERROR ESTIMATES FOR A FIRST
-          !                                     ORDER METHOD USING THE SAME
-          !                                     STEP SIZE AS THE FEHLBERG METHOD
-          !                                     ARE CALCULATED AS PART OF THE
-          !                                     TEST FOR STIFFNESS.
-          !                                     TO DISTINGUISH THE VARIOUS
-          !                                     ARGUMENTS, H IS NOT PERMITTED
-          !                                     TO BECOME SMALLER THAN 26 UNITS OF
-          !                                     ROUNDOFF IN T.  PRACTICAL LIMITS
-          !                                     ON THE CHANGE IN THE STEP SIZE ARE
-          !                                     ENFORCED TO SMOOTH THE STEP SIZE
-          !                                     SELECTION PROCESS AND TO AVOID
-          !                                     EXCESSIVE CHATTERING ON PROBLEMS
-          !                                     HAVING DISCONTINUITIES.  TO
-          !                                     PREVENT UNNECESSARY FAILURES, THE
-          !                                     CODE USES 9/10 THE STEP SIZE
-          !                                     IT ESTIMATES WILL SUCCEED.
-          !                                     AFTER A STEP FAILURE, THE STEP
-          !                                     SIZE IS NOT ALLOWED TO INCREASE
-          !                                     FOR THE NEXT ATTEMPTED STEP. THIS
-          !                                     MAKES THE CODE MORE EFFICIENT ON
-          !                                     PROBLEMS HAVING DISCONTINUITIES
-          !                                     AND MORE EFFECTIVE IN GENERAL
-          !                                     SINCE LOCAL EXTRAPOLATION IS BEING
-          !                                     USED AND EXTRA CAUTION SEEMS
-          !                                     WARRANTED.
-          !                                .......................................
+          !  ***************************************
+          !       CORE INTEGRATOR FOR TAKING A
+          !       SINGLE STEP
+          !  ***************************************
+          !       TO AVOID PROBLEMS WITH ZERO
+          !       CROSSINGS, RELATIVE ERROR IS
+          !       MEASURED USING THE AVERAGE OF THE
+          !       MAGNITUDES OF THE SOLUTION AT THE
+          !       BEGINNING AND END OF A STEP.
+          !       THE ERROR ESTIMATE FORMULA HAS
+          !       BEEN GROUPED TO CONTROL LOSS OF
+          !       SIGNIFICANCE.
+          !       LOCAL ERROR ESTIMATES FOR A FIRST
+          !       ORDER METHOD USING THE SAME
+          !       STEP SIZE AS THE FEHLBERG METHOD
+          !       ARE CALCULATED AS PART OF THE
+          !       TEST FOR STIFFNESS.
+          !       TO DISTINGUISH THE VARIOUS
+          !       ARGUMENTS, H IS NOT PERMITTED
+          !       TO BECOME SMALLER THAN 26 UNITS OF
+          !       ROUNDOFF IN T.  PRACTICAL LIMITS
+          !       ON THE CHANGE IN THE STEP SIZE ARE
+          !       ENFORCED TO SMOOTH THE STEP SIZE
+          !       SELECTION PROCESS AND TO AVOID
+          !       EXCESSIVE CHATTERING ON PROBLEMS
+          !       HAVING DISCONTINUITIES.  TO
+          !       PREVENT UNNECESSARY FAILURES, THE
+          !       CODE USES 9/10 THE STEP SIZE
+          !       IT ESTIMATES WILL SUCCEED.
+          !       AFTER A STEP FAILURE, THE STEP
+          !       SIZE IS NOT ALLOWED TO INCREASE
+          !       FOR THE NEXT ATTEMPTED STEP. THIS
+          !       MAKES THE CODE MORE EFFICIENT ON
+          !       PROBLEMS HAVING DISCONTINUITIES
+          !       AND MORE EFFECTIVE IN GENERAL
+          !       SINCE LOCAL EXTRAPOLATION IS BEING
+          !       USED AND EXTRA CAUTION SEEMS
+          !       WARRANTED.
+          !  .......................................
           !
-          !                                     MONITOR NUMBER OF STEPS ATTEMPTED
+          !       MONITOR NUMBER OF STEPS ATTEMPTED
           !
           DO WHILE( Ksteps<=mxstep )
             !
-            !                                   ADVANCE AN APPROXIMATE SOLUTION OVER
-            !                                   ONE STEP OF LENGTH H
+            !     ADVANCE AN APPROXIMATE SOLUTION OVER
+            !     ONE STEP OF LENGTH H
             !
             CALL DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
             Ksteps = Ksteps + 1
             !
-            !                                   ....................................
+            !     ....................................
             !
-            !                                        COMPUTE AND TEST ALLOWABLE
-            !                                        TOLERANCES VERSUS LOCAL ERROR
-            !                                        ESTIMATES.  NOTE THAT RELATIVE
-            !                                        ERROR IS MEASURED WITH RESPECT
-            !                                        TO THE AVERAGE OF THE
-            !                                        MAGNITUDES OF THE SOLUTION AT
-            !                                        THE BEGINNING AND END OF THE
-            !                                        STEP.  LOCAL ERROR ESTIMATES
-            !                                        FOR A SPECIAL FIRST ORDER
-            !                                        METHOD ARE CALCULATED ONLY WHEN
-            !                                        THE STIFFNESS DETECTION IS
-            !                                        TURNED ON.
+            !          COMPUTE AND TEST ALLOWABLE
+            !          TOLERANCES VERSUS LOCAL ERROR
+            !          ESTIMATES.  NOTE THAT RELATIVE
+            !          ERROR IS MEASURED WITH RESPECT
+            !          TO THE AVERAGE OF THE
+            !          MAGNITUDES OF THE SOLUTION AT
+            !          THE BEGINNING AND END OF THE
+            !          STEP.  LOCAL ERROR ESTIMATES
+            !          FOR A SPECIAL FIRST ORDER
+            !          METHOD ARE CALCULATED ONLY WHEN
+            !          THE STIFFNESS DETECTION IS
+            !          TURNED ON.
             !
             eeoet = 0._DP
             estiff = 0._DP
@@ -482,7 +481,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               ELSE
                 !
                 !           PURE RELATIVE ERROR INAPPROPRIATE WHEN SOLUTION
-                !                                                  VANISHES
+                !                    VANISHES
                 Idid = -3
                 !              ...........................EXIT
                 GOTO 200
@@ -491,15 +490,15 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             !
             esttol = ABS(H)*eeoet/752400._DP
             !
-            !                                ...EXIT
+            !  ...EXIT
             IF( esttol<=1._DP ) THEN
               !
-              !                                .......................................
+              !  .......................................
               !
-              !                                SUCCESSFUL STEP
-              !                                                  STORE SOLUTION AT T+H
-              !                                                  AND EVALUATE
-              !                                                  DERIVATIVES THERE
+              !  SUCCESSFUL STEP
+              !                    STORE SOLUTION AT T+H
+              !                    AND EVALUATE
+              !                    DERIVATIVES THERE
               !
               T = T + H
               DO k = 1, Neq
@@ -508,90 +507,90 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               a = T
               CALL DF(a,Y,Yp)
               !
-              !                                CHOOSE NEXT STEP SIZE
-              !                                THE INCREASE IS LIMITED TO A FACTOR OF
-              !                                5 IF STEP FAILURE HAS JUST OCCURRED,
-              !                                NEXT
-              !                                   STEP SIZE IS NOT ALLOWED TO INCREASE
+              !  CHOOSE NEXT STEP SIZE
+              !  THE INCREASE IS LIMITED TO A FACTOR OF
+              !  5 IF STEP FAILURE HAS JUST OCCURRED,
+              !  NEXT
+              !     STEP SIZE IS NOT ALLOWED TO INCREASE
               !
               s = 5._DP
               IF( esttol>1.889568D-4 ) s = 0.9_DP/esttol**0.2_DP
               IF( hfaild ) s = MIN(s,1._DP)
               H = SIGN(MAX(s*ABS(H),hmin),H)
               !
-              !                                .......................................
+              !  .......................................
               !
-              !                                     CHECK FOR STIFFNESS (IF NOT
-              !                                     ALREADY DETECTED)
+              !       CHECK FOR STIFFNESS (IF NOT
+              !       ALREADY DETECTED)
               !
-              !                                     IN A SEQUENCE OF 50 SUCCESSFUL
-              !                                     STEPS BY THE FEHLBERG METHOD, 25
-              !                                     SUCCESSFUL STEPS BY THE FIRST
-              !                                     ORDER METHOD INDICATES STIFFNESS
-              !                                     AND TURNS THE TEST OFF. IF 26
-              !                                     FAILURES BY THE FIRST ORDER METHOD
-              !                                     OCCUR, THE TEST IS TURNED OFF
-              !                                     UNTIL THIS SEQUENCE OF 50 STEPS BY
-              !                                     THE FEHLBERG METHOD IS COMPLETED.
+              !       IN A SEQUENCE OF 50 SUCCESSFUL
+              !       STEPS BY THE FEHLBERG METHOD, 25
+              !       SUCCESSFUL STEPS BY THE FIRST
+              !       ORDER METHOD INDICATES STIFFNESS
+              !       AND TURNS THE TEST OFF. IF 26
+              !       FAILURES BY THE FIRST ORDER METHOD
+              !       OCCUR, THE TEST IS TURNED OFF
+              !       UNTIL THIS SEQUENCE OF 50 STEPS BY
+              !       THE FEHLBERG METHOD IS COMPLETED.
               !
-              !                             ...EXIT
+              !  ...EXIT
               IF( .NOT. (Stiff) ) THEN
                 Ntstep = MOD(Ntstep+1,50)
                 IF( Ntstep==1 ) Nonstf = .FALSE.
-                !                             ...EXIT
+                !  ...EXIT
                 IF( .NOT. (Nonstf) ) THEN
                   IF( estiff<=1._DP ) THEN
                     !
-                    !                                   SUCCESSFUL STEP WITH FIRST ORDER
-                    !                                   METHOD
+                    !     SUCCESSFUL STEP WITH FIRST ORDER
+                    !     METHOD
                     Nstifs = Nstifs + 1
-                    !                                   TURN TEST OFF AFTER 25 INDICATIONS
-                    !                                   OF STIFFNESS
+                    !     TURN TEST OFF AFTER 25 INDICATIONS
+                    !     OF STIFFNESS
                     IF( Nstifs==25 ) Stiff = .TRUE.
                     !
-                    !                                UNSUCCESSFUL STEP WITH FIRST ORDER
-                    !                                METHOD
+                    !  UNSUCCESSFUL STEP WITH FIRST ORDER
+                    !  METHOD
                   ELSEIF( Ntstep-Nstifs>25 ) THEN
                     !               TURN STIFFNESS DETECTION OFF FOR THIS BLOCK OF
-                    !                                                  FIFTY STEPS
+                    !                    FIFTY STEPS
                     Nonstf = .TRUE.
-                    !                                   RESET STIFF STEP COUNTER
+                    !     RESET STIFF STEP COUNTER
                     Nstifs = 0
                   END IF
                 END IF
               END IF
               !
-              !                             ******************************************
-              !                                  END OF CORE INTEGRATOR
-              !                             ******************************************
+              !  ******************************************
+              !    END OF CORE INTEGRATOR
+              !  ******************************************
               !
               !
-              !                                  SHOULD WE TAKE ANOTHER STEP
+              !       SHOULD WE TAKE ANOTHER STEP
               !
-              !                       ......EXIT
+              !  ......EXIT
               IF( output ) GOTO 150
               IF( Info(3)==0 ) GOTO 120
               !
-              !                          *********************************************
-              !                          *********************************************
+              !     *********************************************
+              !     *********************************************
               !
-              !                               INTEGRATION SUCCESSFULLY COMPLETED
+              !    INTEGRATION SUCCESSFULLY COMPLETED
               !
-              !                                           ONE-STEP MODE
+              !                ONE-STEP MODE
               Idid = 1
               Told = T
               !     .....................EXIT
               RETURN
               !
-              !                                   ....................................
+              !        ....................................
               !
-              !                                        UNSUCCESSFUL STEP
+              !             UNSUCCESSFUL STEP
               !
             ELSEIF( ABS(H)>hmin ) THEN
               !
-              !                                   REDUCE THE STEP SIZE, TRY AGAIN
-              !                                   THE DECREASE IS LIMITED TO A FACTOR
-              !                                   OF 1/10
+              !        REDUCE THE STEP SIZE, TRY AGAIN
+              !        THE DECREASE IS LIMITED TO A FACTOR
+              !        OF 1/10
               !
               hfaild = .TRUE.
               output = .FALSE.
@@ -600,8 +599,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               H = SIGN(MAX(s*ABS(H),hmin),H)
             ELSE
               !
-              !                             REQUESTED ERROR UNATTAINABLE AT SMALLEST
-              !                                                  ALLOWABLE STEP SIZE
+              !  REQUESTED ERROR UNATTAINABLE AT SMALLEST
+              !  ALLOWABLE STEP SIZE
               Tolfac = 1.69_DP*esttol
               Idid = -2
               !              ........................EXIT
@@ -609,14 +608,14 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             END IF
           END DO
           !
-          !                                      A SIGNIFICANT AMOUNT OF WORK HAS
-          !                                      BEEN EXPENDED
+          !           A SIGNIFICANT AMOUNT OF WORK HAS
+          !           BEEN EXPENDED
           Idid = -1
           Ksteps = 0
           !              ........................EXIT
           IF( Stiff ) THEN
             !
-            !                                      PROBLEM APPEARS TO BE STIFF
+            !           PROBLEM APPEARS TO BE STIFF
             Idid = -4
             Stiff = .FALSE.
             Nonstf = .FALSE.
@@ -627,8 +626,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           GOTO 200
         ELSE
           !
-          !                          REQUESTED ERROR UNATTAINABLE DUE TO LIMITED
-          !                                                  PRECISION AVAILABLE
+          !     REQUESTED ERROR UNATTAINABLE DUE TO LIMITED
+          !  PRECISION AVAILABLE
           Tolfac = 2._DP*Tolfac
           Idid = -2
           !              .....................EXIT
@@ -638,8 +637,8 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       END DO
     ELSE
       !
-      !                       IF TOO CLOSE TO OUTPUT POINT,EXTRAPOLATE AND
-      !                       RETURN
+      !  IF TOO CLOSE TO OUTPUT POINT,EXTRAPOLATE AND
+      !  RETURN
       !
       DO k = 1, Neq
         Y(k) = Y(k) + dt*Yp(k)
@@ -658,7 +657,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   ELSE
     !
     !                    UNNECESSARY FREQUENCY OF OUTPUT IS RESTRICTING
-    !                                              THE STEP SIZE CHOICE
+    !                   THE STEP SIZE CHOICE
     Idid = -5
     Kop = 0
   END IF
@@ -682,5 +681,6 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       END DO
     END IF
   END IF
+  !
   RETURN
 END SUBROUTINE DRKFS

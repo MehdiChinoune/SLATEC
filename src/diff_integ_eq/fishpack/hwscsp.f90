@@ -1,9 +1,8 @@
 !** HWSCSP
 SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
-  !> Solve a finite difference approximation to the modified
-  !            Helmholtz equation in spherical coordinates assuming
-  !            axisymmetry  (no dependence on longitude).
+  !> Solve a finite difference approximation to the modified Helmholtz equation
+  !  in spherical coordinates assuming axisymmetry  (no dependence on longitude).
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -352,9 +351,13 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Idimf, Ierror, Intl, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: Elmbda, Pertrb, Rf, Rs, Tf, Ts
-  REAL(SP) :: Bdrf(M+1), Bdrs(M+1), Bdtf(N+1), Bdts(N+1), F(Idimf,N+1), W(:)
+  INTEGER, INTENT(IN) :: Idimf, Intl, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: Elmbda, Rf, Rs, Tf, Ts
+  REAL(SP), INTENT(out) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bdrf(M+1), Bdrs(M+1), Bdtf(N+1), Bdts(N+1)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N+1), W(:)
+  !
   INTEGER :: i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, k, l, mp1, nck, np1
   REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
   !* FIRST EXECUTABLE STATEMENT  HWSCSP
@@ -413,4 +416,5 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       EXIT
     END IF
   END DO
+  !
 END SUBROUTINE HWSCSP

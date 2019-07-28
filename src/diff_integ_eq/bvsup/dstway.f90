@@ -24,16 +24,17 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : ncomp_com, nfc_com, x_com, xop_com, info_com, istkop_com, &
     kop_com, ndisk_com, ntape_com, neqivp_com
   !
-  INTEGER :: Inout
-  REAL(DP) :: Stowa(:), U(:), V(:), Yhp(:)
+  INTEGER, INTENT(IN) :: Inout
+  REAL(DP), INTENT(IN) :: U(:), V(:)
+  REAL(DP), INTENT(INOUT) :: Stowa(:), Yhp(:)
+  !
   INTEGER :: j, k, ko, ks, ksj
   !* FIRST EXECUTABLE STATEMENT  DSTWAY
   IF( Inout==1 ) THEN
@@ -77,4 +78,5 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     istkop_com = kop_com
     IF( xop_com==x_com ) istkop_com = kop_com + 1
   END IF
+  !
 END SUBROUTINE DSTWAY

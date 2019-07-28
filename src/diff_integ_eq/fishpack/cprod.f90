@@ -1,5 +1,5 @@
 !** CPROD
-SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
+PURE SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
   !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
@@ -33,9 +33,12 @@ SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: M, Na, Nd, Nm1, Nm2
-  REAL(SP) :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
-  COMPLEX(SP) :: Y(M), D(M), W(M), Bd(Nd)
+  INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+  REAL(SP), INTENT(IN) :: Aa(Na), Bm1(Nm1), Bm2(Nm2), X(M), A(M), B(M), C(M)
+  COMPLEX(SP), INTENT(IN) :: Bd(Nd)
+  REAL(SP), INTENT(OUT) :: Yy(M)
+  COMPLEX(SP), INTENT(OUT) :: Y(M), D(M), W(M)
+  !
   INTEGER :: ia, id, iflg, j, k, m1, m2, mm
   REAL(SP) :: rt
   COMPLEX(SP) :: crt, den, y1, y2
@@ -121,5 +124,6 @@ SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
   Y(M-1) = y1
   iflg = 1
   GOTO 100
+  !
   RETURN
 END SUBROUTINE CPROD

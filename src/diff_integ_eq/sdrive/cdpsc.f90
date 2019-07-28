@@ -1,9 +1,8 @@
 !** CDPSC
-SUBROUTINE CDPSC(Ksgn,N,Nq,Yh)
-  !> Subroutine CDPSC computes the predicted YH values by
-  !            effectively multiplying the YH array by the Pascal triangle
-  !            matrix when KSGN is +1, and performs the inverse function
-  !            when KSGN is -1.
+PURE SUBROUTINE CDPSC(Ksgn,N,Nq,Yh)
+  !> Subroutine CDPSC computes the predicted YH values by effectively multiplying
+  !  the YH array by the Pascal triangle matrix when KSGN is +1,
+  !  and performs the inverse function when KSGN is -1.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -23,8 +22,9 @@ SUBROUTINE CDPSC(Ksgn,N,Nq,Yh)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  INTEGER :: Ksgn, N, Nq
-  COMPLEX(SP) :: Yh(N,Nq+1)
+  INTEGER, INTENT(IN) :: Ksgn, N, Nq
+  COMPLEX(SP), INTENT(INOUT) :: Yh(N,Nq+1)
+  !
   INTEGER :: i, j, j1, j2
   !* FIRST EXECUTABLE STATEMENT  CDPSC
   IF( Ksgn>0 ) THEN
@@ -46,4 +46,5 @@ SUBROUTINE CDPSC(Ksgn,N,Nq,Yh)
       END DO
     END DO
   END IF
+  !
 END SUBROUTINE CDPSC

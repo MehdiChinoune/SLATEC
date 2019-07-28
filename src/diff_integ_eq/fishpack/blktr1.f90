@@ -1,5 +1,5 @@
 !** BLKTR1
-SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
+PURE SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
@@ -32,23 +32,29 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE CBLKT, ONLY : k_com, ncmplx_com, nm_com, npp_com
+  !
   INTERFACE
-    SUBROUTINE PRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
+    PURE SUBROUTINE PRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
       IMPORT SP
-      INTEGER :: M, Na, Nd, Nm1, Nm2
-      REAL(SP) :: A(M), Aa(Na), B(M), Bd(Nd), Bm1(Nm1), Bm2(Nm2), C(M), D(M), U(M), &
-        W(M), X(M), Y(M)
+      INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+      REAL(SP), INTENT(IN) :: Aa(Na), Bd(Nd), Bm1(Nm1), Bm2(Nm2)
+      REAL(SP), INTENT(IN) :: X(M), A(M), B(M), C(M)
+      REAL(SP), INTENT(OUT) :: Y(M), D(M), W(M), U(M)
     END SUBROUTINE PRDCT
-    SUBROUTINE CPRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
+    PURE SUBROUTINE CPRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
       IMPORT SP
-      INTEGER :: M, Na, Nd, Nm1, Nm2
-      REAL(SP) :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
-      COMPLEX(SP) :: Y(M), D(M), W(M), Bd(Nd)
+      INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+      REAL(SP), INTENT(IN) :: Aa(Na), Bm1(Nm1), Bm2(Nm2), X(M), A(M), B(M), C(M)
+      COMPLEX(SP), INTENT(IN) :: Bd(Nd)
+      REAL(SP), INTENT(OUT) :: Yy(M)
+      COMPLEX(SP), INTENT(OUT) :: Y(M), D(M), W(M)
     END SUBROUTINE CPRDCT
   END INTERFACE
-  INTEGER :: Idimy, M
-  REAL(SP) :: Am(M), An(nm_com), B(:), Bm(M), Cm(M), Cn(nm_com), W1(M), W2(M), W3(M), &
-    Wd(M), Wu(M), Ww(M), Y(Idimy,nm_com)
+  INTEGER, INTENT(IN) :: Idimy, M
+  REAL(SP), INTENT(IN) :: An(nm_com), Cn(nm_com), B(:), Am(M), Bm(M), Cm(M)
+  REAL(SP), INTENT(INOUT) :: Y(Idimy,nm_com)
+  REAL(SP), INTENT(OUT) :: W1(M), W2(M), W3(M), Wd(M), Ww(M), Wu(M)
+  !
   INTEGER :: i, i1, i2, i3, i4, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, &
     ll, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
@@ -279,4 +285,5 @@ SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
       END IF
     END DO
   END DO
+  !
 END SUBROUTINE BLKTR1

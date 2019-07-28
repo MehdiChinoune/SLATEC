@@ -1,8 +1,8 @@
 !** HWSPLR
-SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
+PURE SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   !> Solve a finite difference approximation to the Helmholtz
-  !            equation in polar coordinates.
+  !  equation in polar coordinates.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -316,11 +316,15 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Idimf, Ierror, M, Mbdcnd, N
-  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
-  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  INTEGER, INTENT(IN) :: Idimf, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, B, C, D, Elmbda
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N+1), W(:)
+  !
   INTEGER :: i, id2, id3, id4, id5, id6, ierr1, ij, ip, iwstor, j, k, l, lp, &
-    mp1, mstart, mstop, munk, Nbdcnd, np, np1, nstart, nstop, nunk
+    mp1, mstart, mstop, munk, np, np1, nstart, nstop, nunk
   REAL(SP) :: a1, a2, deltar, deltht, dlrby2, dlrsq, dlthsq, r, s, s1, s2, ypole
   !* FIRST EXECUTABLE STATEMENT  HWSPLR
   Ierror = 0
@@ -607,4 +611,5 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     END DO
   END IF
   W(1) = iwstor
+  !
 END SUBROUTINE HWSPLR

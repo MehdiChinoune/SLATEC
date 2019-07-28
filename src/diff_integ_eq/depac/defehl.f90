@@ -54,13 +54,16 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys)
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Uprime(:)
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE F
   END INTERFACE
-  INTEGER :: Neq
-  REAL(SP) :: H, T
-  REAL(SP) :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Y(Neq), Yp(Neq), Ys(Neq)
+  INTEGER, INTENT(IN) :: Neq
+  REAL(SP), INTENT(IN) :: H, T
+  REAL(SP), INTENT(IN) :: Y(Neq), Yp(Neq)
+  REAL(SP), INTENT(OUT) :: F1(Neq), F2(Neq), F3(Neq), F4(Neq), F5(Neq), Ys(Neq)
+  !
   INTEGER :: k
   REAL(SP) :: ch
   !

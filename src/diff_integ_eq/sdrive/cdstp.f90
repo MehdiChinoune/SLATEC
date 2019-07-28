@@ -1,12 +1,10 @@
 !** CDSTP
 SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
-    Miter,Ml,Mu,N,Nde,Ywt,Uround,USERS,Avgh,Avgord,H,Hused,&
-    Jtask,Mntold,Mtrold,Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,&
-    Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
-    Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
+    Miter,Ml,Mu,N,Nde,Ywt,Uround,USERS,Avgh,Avgord,H,Hused,Jtask,Mntold,Mtrold,&
+    Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,&
+    Nq,Nwait,Rc,Rmax,Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
   !> CDSTP performs one step of the integration of an initial
-  !            value problem for a system of ordinary differential
-  !            equations.
+  !  value problem for a system of ordinary differential equations.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -74,39 +72,46 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !   900329  Initial submission to SLATEC.
   USE blas, ONLY : SCNRM2
   INTERFACE
-    SUBROUTINE F(N,T,Y,Ydot)
+    PURE SUBROUTINE F(N,T,Y,Ydot)
       IMPORT SP
-      INTEGER :: N
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(:), Ydot(:)
+      INTEGER, INTENT(IN) :: N
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(:)
+      COMPLEX(SP), INTENT(OUT) :: Ydot(:)
     END SUBROUTINE F
-    SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+    PURE SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
       IMPORT SP
-      INTEGER :: N, Matdim, Ml, Mu
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(N), Dfdy(Matdim,N)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(N)
+      COMPLEX(SP), INTENT(OUT) :: Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
-    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    PURE SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT SP
-      INTEGER :: Impl, N, Nde, iflag
-      REAL(SP) :: T, H, El
-      COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, iflag
+      REAL(SP), INTENT(IN) :: T, H, El
+      COMPLEX(SP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      COMPLEX(SP), INTENT(INOUT) :: Save1(N), Save2(N)
     END SUBROUTINE USERS
-    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    PURE SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IMPORT SP
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(N), A(:,:)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(N)
+      COMPLEX(SP), INTENT(INOUT) :: A(:,:)
     END SUBROUTINE FA
   END INTERFACE
-  INTEGER :: Ierror, Impl, Iswflg, Jstate, Jstepl, Jtask, Matdim, Maxord, Mint, &
-    Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, Nfe, Nje, Nq, Nqused, &
-    Nstep, Nwait, Ipvt(N)
-  REAL(SP) :: Avgh, Avgord, Eps, H, Hmax, Hold, Hused, Rc, Rmax, T, Trend, Uround
-  REAL(SP) :: Tq(3,12), El(13,12)
-  COMPLEX(SP) :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), &
-    Yh(N,13), Ywt(N)
-  LOGICAL :: Convrg
+  INTEGER, INTENT(IN) :: Ierror, Impl, Iswflg, Matdim, Ml, Mtrsv, Mu, N, Nde
+  INTEGER, INTENT(INOUT) :: Jstepl, Jtask, Maxord, Mint, Miter, Mntold, &
+    Mtrold, Mxrdsv, Nje, Nfe, Nq, Nstep, Nwait
+  INTEGER, INTENT(OUT) :: Jstate, Nqused, Ipvt(N)
+  REAL(SP), INTENT(IN) :: Eps, Hmax, Uround
+  REAL(SP), INTENT(INOUT) :: Avgh, Avgord, H, Hold, Hused, Rc, Rmax, T, Trend
+  REAL(SP), INTENT(INOUT) :: Tq(3,12), El(13,12)
+  COMPLEX(SP), INTENT(INOUT) :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), &
+    Save2(N), Y(N+1), Yh(N,13), Ywt(N)
+  LOGICAL, INTENT(INOUT) :: Convrg
+  !
   INTEGER :: i, iter, j, nfail, nsv, ntry
   REAL(SP) :: bnd, ctest, d, denom, d1, erdn, erup, etest, hn, hs, numer, rh, rh1, &
     rh2, rh3, told, y0nrm
@@ -167,20 +172,20 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Save1(i) = 0._SP
   END DO
   DO
-    !                      Up to MXITER corrector iterations are taken.
-    !                      Convergence is tested by requiring the r.m.s.
-    !                      norm of changes to be less than EPS.  The sum of
-    !                      the corrections is accumulated in the vector
-    !                      SAVE1(I).  It is approximately equal to the L-th
-    !                      derivative of Y multiplied by
-    !                      H**L/(factorial(L-1)*EL(L,NQ)), and is thus
-    !                      proportional to the actual errors to the lowest
-    !                      power of H present (H**L).  The YH array is not
-    !                      altered in the correction loop.  The norm of the
-    !                      iterate difference is stored in D.  If
-    !                      ITER > 0, an estimate of the convergence rate
-    !                      constant is stored in TREND, and this is used in
-    !                      the convergence test.
+    !  Up to MXITER corrector iterations are taken.
+    !  Convergence is tested by requiring the r.m.s.
+    !  norm of changes to be less than EPS.  The sum of
+    !  the corrections is accumulated in the vector
+    !  SAVE1(I).  It is approximately equal to the L-th
+    !  derivative of Y multiplied by
+    !  H**L/(factorial(L-1)*EL(L,NQ)), and is thus
+    !  proportional to the actual errors to the lowest
+    !  power of H present (H**L).  The YH array is not
+    !  altered in the correction loop.  The norm of the
+    !  iterate difference is stored in D.  If
+    !  ITER > 0, an estimate of the convergence rate
+    !  constant is stored in TREND, and this is used in
+    !  the convergence test.
     !
     CALL CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,Nq,T,&
       USERS,Y,Yh,Ywt,evalfa,Save1,Save2,A,d,Jstate)
@@ -252,10 +257,10 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   IF( rh*H==0._SP ) GOTO 500
   CALL CDSCL(Hmax,N,Nq,Rmax,H,Rc,rh,Yh)
   GOTO 100
-  !                          The corrector has converged.  CONVRG is set
-  !                          to .TRUE. if partial derivatives were used,
-  !                          to indicate that they may need updating on
-  !                          subsequent steps.  The error test is made.
+  !      The corrector has converged.  CONVRG is set
+  !      to .TRUE. if partial derivatives were used,
+  !      to indicate that they may need updating on
+  !      subsequent steps.  The error test is made.
   400  Convrg = (Miter/=0)
   IF( Ierror==1 .OR. Ierror==5 ) THEN
     DO i = 1, Nde
@@ -268,11 +273,11 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   END IF
   etest = SCNRM2(Nde,Save2,1)/(Tq(2,Nq)*SQRT(REAL(Nde,SP)))
   !
-  !                           The error test failed.  NFAIL keeps track of
-  !                           multiple failures.  Restore T and the YH
-  !                           array to their previous values, and prepare
-  !                           to try the step again.  Compute the optimum
-  !                           step size for this or one lower order.
+  !       The error test failed.  NFAIL keeps track of
+  !       multiple failures.  Restore T and the YH
+  !       array to their previous values, and prepare
+  !       to try the step again.  Compute the optimum
+  !       step size for this or one lower order.
   IF( etest>Eps ) THEN
     T = told
     CALL CDPSC(-1,N,Nq,Yh)
@@ -327,7 +332,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     IF( .NOT. (ier) ) GOTO 100
     GOTO 600
   END IF
-  !                          After a successful step, update the YH array.
+  !      After a successful step, update the YH array.
   Nstep = Nstep + 1
   Hused = H
   Nqused = Nq
@@ -341,8 +346,8 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   DO i = 1, N
     Y(i) = Yh(i,1)
   END DO
-  !                                          If ISWFLG is 3, consider
-  !                                          changing integration methods.
+  !                      If ISWFLG is 3, consider
+  !                      changing integration methods.
   IF( Iswflg==3 ) THEN
     IF( bnd/=0._SP ) THEN
       IF( Mint==1 .AND. Nq<=5 ) THEN
@@ -393,10 +398,10 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     CALL CDCST(Maxord,Mint,Iswflg,El,Tq)
     Nwait = Nq + 2
   END IF
-  !                           Consider changing H if NWAIT = 1.  Otherwise
-  !                           decrease NWAIT by 1.  If NWAIT is then 1 and
-  !                           NQ<MAXORD, then SAVE1 is saved for use in
-  !                           a possible order increase on the next step.
+  !       Consider changing H if NWAIT = 1.  Otherwise
+  !       decrease NWAIT by 1.  If NWAIT is then 1 and
+  !       NQ<MAXORD, then SAVE1 is saved for use in
+  !       a possible order increase on the next step.
   !
   IF( Jtask==0 .OR. Jtask==2 ) THEN
     rh = 1._SP/MAX(Uround,BIAS2*(etest/Eps)**(1._SP/(Nq+1)))

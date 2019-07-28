@@ -1,5 +1,5 @@
 !** TRIDQ
-SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
+PURE SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   !> Subsidiary to POIS3D
   !***
   ! **Library:**   SLATEC
@@ -18,8 +18,10 @@ SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   !   900308  Renamed routine from TRID to TRIDQ.  (WRB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Mr
-  REAL(SP) :: A(Mr), B(Mr), C(Mr), D(Mr), Y(Mr)
+  INTEGER, INTENT(IN) :: Mr
+  REAL(SP), INTENT(IN) :: A(Mr), B(Mr), C(Mr)
+  REAL(SP), INTENT(INOUT) :: Y(Mr)
+  REAL(SP), INTENT(OUT) :: D(Mr)
   INTEGER :: i, ip, m, mm1
   REAL(SP) :: z
   !* FIRST EXECUTABLE STATEMENT  TRIDQ
@@ -43,4 +45,5 @@ SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
     i = m - ip
     Y(i) = Y(i) - D(i)*Y(i+1)
   END DO
+  !
 END SUBROUTINE TRIDQ

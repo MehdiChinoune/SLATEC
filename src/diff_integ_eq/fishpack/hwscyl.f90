@@ -1,8 +1,8 @@
 !** HWSCYL
-SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
+PURE SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   !> Solve a standard finite difference approximation
-  !            to the Helmholtz equation in cylindrical coordinates.
+  !  to the Helmholtz equation in cylindrical coordinates.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -306,9 +306,13 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
-  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  INTEGER, INTENT(IN) :: Idimf, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, B, C, D, Elmbda
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N+1), W(:)
+  !
   INTEGER :: i, id2, id3, id4, id5, id6, ierr1, ij, istart, j, k, l, mp1, mstart, &
     mstop, munk, np, np1, nsp1, nstart, nstm1, nstop, nunk
   REAL(SP) :: a1, a2, deltar, deltht, dlrby2, dlrsq, dlthsq, r, s, s1, s2
@@ -541,4 +545,5 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       F(i,np1) = F(i,1)
     END DO
   END IF
+  !
 END SUBROUTINE HWSCYL

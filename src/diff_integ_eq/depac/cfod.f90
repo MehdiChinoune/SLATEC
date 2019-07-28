@@ -1,5 +1,5 @@
 !** CFOD
-SUBROUTINE CFOD(Meth,Elco,Tesco)
+PURE SUBROUTINE CFOD(Meth,Elco,Tesco)
   !> Subsidiary to DEBDF
   !***
   ! **Library:**   SLATEC
@@ -22,11 +22,12 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
   !
+  INTEGER, INTENT(IN) :: Meth
+  REAL(SP), INTENT(OUT) :: Elco(13,12), Tesco(3,12)
   !
-  INTEGER :: Meth, i, ib, nq, nqm1, nqp1
-  REAL(SP) :: Elco(13,12), Tesco(3,12), agamq, fnq, fnqm1, pc(12), pint, ragq, rqfac, &
+  INTEGER :: i, ib, nq, nqm1, nqp1
+  REAL(SP) :: agamq, fnq, fnqm1, pc(12), pint, ragq, rqfac, &
     rq1fac, tsign, xpin
   !-----------------------------------------------------------------------
   ! CFOD  IS CALLED BY THE INTEGRATOR ROUTINE TO SET COEFFICIENTS
@@ -135,7 +136,6 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     IF( nq<12 ) Tesco(1,nqp1) = ragq*rqfac/nqp1
     Tesco(3,nqm1) = ragq
   END DO
-  RETURN
   !----------------------- END OF SUBROUTINE CFOD  -----------------------
   RETURN
 END SUBROUTINE CFOD

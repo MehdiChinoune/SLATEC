@@ -49,8 +49,7 @@ CONTAINS
     !* FIRST EXECUTABLE STATEMENT  SDQCK
     eps = eps_sp**(1._SP/3._SP)
     Ipass = 1
-    !                                            Exercise SDRIV1 for problem
-    !                                            with known solution.
+    !  Exercise SDRIV1 for problem with known solution.
     y(4) = ALFA
     t = 0._SP
     y(1) = 10._SP
@@ -119,52 +118,51 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     num_xer = 0
-    !                                         Run SDRIV1 with invalid input.
-    nx = 201
-    t = 0._SP
-    y(1) = 10._SP
-    y(2) = 0._SP
-    y(3) = 10._SP
-    y(4) = ALFA
-    tout = 10._SP
-    mstate = 1
-    lenw = 342
-    CALL SDRIV1(nx,t,y,SDF,tout,mstate,eps,work,lenw,ierflg)
-    IF( ierflg/=21 ) THEN
-      IF( Kprint==1 ) THEN
-        WRITE (Lun,&
-          '('' SDRIV1:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF( Kprint>=2 ) THEN
-        WRITE (Lun,&
-          '('' SDRIV1:An invalid parameter has not been correctly detected.'')')
-        WRITE (Lun,*) ' The value of N was set to ', nx
-        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-        WRITE (Lun,&
-          '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS ', eps, ', LENW ', lenw
-        WRITE (Lun,*) ' T ', t
-        WRITE (Lun,*) ' Y(1) ', y(1)
-        WRITE (Lun,*) ' Y(2) ', y(2)
-        WRITE (Lun,*) ' Y(3) ', y(3)
-        WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
-        WRITE (Lun,'(//)')
-      END IF
-      Ipass = 0
-    ELSEIF( Kprint==2 ) THEN
-      WRITE (Lun,&
-        '('' SDRIV1:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF( Kprint==3 ) THEN
-      WRITE (Lun,&
-        '('' SDRIV1:An invalid parameter has been correctly detected.'')')
-      WRITE (Lun,*) ' The value of N was set to ', nx
-      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-      WRITE (Lun,'(/)')
-    END IF
-    num_xer = 0
-    !                                            Exercise SDRIV2 for problem
-    !                                            with known solution.
+    !  Run SDRIV1 with invalid input.
+!    nx = 201
+!    t = 0._SP
+!    y(1) = 10._SP
+!    y(2) = 0._SP
+!    y(3) = 10._SP
+!    y(4) = ALFA
+!    tout = 10._SP
+!    mstate = 1
+!    lenw = 342
+!    CALL SDRIV1(nx,t,y,SDF,tout,mstate,eps,work,lenw,ierflg)
+!    IF( ierflg/=21 ) THEN
+!      IF( Kprint==1 ) THEN
+!        WRITE (Lun,&
+!          '('' SDRIV1:An invalid parameter has not been correctly detected.'' //)')
+!      ELSEIF( Kprint>=2 ) THEN
+!        WRITE (Lun,&
+!          '('' SDRIV1:An invalid parameter has not been correctly detected.'')')
+!        WRITE (Lun,*) ' The value of N was set to ', nx
+!        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!        WRITE (Lun,&
+!          '('' The values of parameters, results, and statistical quantities are:'')')
+!        WRITE (Lun,*) ' EPS ', eps, ', LENW ', lenw
+!        WRITE (Lun,*) ' T ', t
+!        WRITE (Lun,*) ' Y(1) ', y(1)
+!        WRITE (Lun,*) ' Y(2) ', y(2)
+!        WRITE (Lun,*) ' Y(3) ', y(3)
+!        WRITE (Lun,*) ' Number of steps taken is  ', nstep
+!        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+!        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
+!        WRITE (Lun,'(//)')
+!      END IF
+!      Ipass = 0
+!    ELSEIF( Kprint==2 ) THEN
+!      WRITE (Lun,&
+!        '('' SDRIV1:An invalid parameter has been correctly detected.'' //)')
+!    ELSEIF( Kprint==3 ) THEN
+!      WRITE (Lun,&
+!        '('' SDRIV1:An invalid parameter has been correctly detected.'')')
+!      WRITE (Lun,*) ' The value of N was set to ', nx
+!      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!      WRITE (Lun,'(/)')
+!    END IF
+!    num_xer = 0
+    !  Exercise SDRIV2 for problem with known solution.
     t = 0._SP
     y(1) = 10._SP
     y(2) = 0._SP
@@ -237,55 +235,54 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     num_xer = 0
-    !                                         Run SDRIV2 with invalid input.
-    t = 0._SP
-    y(1) = 10._SP
-    y(2) = 0._SP
-    y(3) = 10._SP
-    y(4) = ALFA
-    tout = 10._SP
-    mstate = 1
-    mint = 1
-    lenwx = 1
-    leniw = 50
-    CALL SDRIV2(N,t,y,SDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
-      leniw,dum_G,ierflg)
-    IF( ierflg/=32 ) THEN
-      IF( Kprint==1 ) THEN
-        WRITE (Lun,&
-          '('' SDRIV2:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF( Kprint>=2 ) THEN
-        WRITE (Lun,&
-          '('' SDRIV2:An invalid parameter has not been correctly detected.'')')
-        WRITE (Lun,*) ' The value of LENW was set to ', lenwx
-        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-        WRITE (Lun,&
-          '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS ', eps, ', MINT ', mint, ', LENW ', lenw, &
-          ', LENIW ', leniw
-        WRITE (Lun,*) ' T ', t
-        WRITE (Lun,*) ' Y(1) ', y(1)
-        WRITE (Lun,*) ' Y(2) ', y(2)
-        WRITE (Lun,*) ' Y(3) ', y(3)
-        WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
-        WRITE (Lun,'(//)')
-      END IF
-      Ipass = 0
-    ELSEIF( Kprint==2 ) THEN
-      WRITE (Lun,&
-        '('' SDRIV2:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF( Kprint==3 ) THEN
-      WRITE (Lun,&
-        '('' SDRIV2:An invalid parameter has been correctly detected.'')')
-      WRITE (Lun,*) ' The value of LENW was set to ', lenwx
-      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-      WRITE (Lun,'(/)')
-    END IF
-    num_xer = 0
-    !                                            Exercise SDRIV3 for problem
-    !                                            with known solution.
+    !  Run SDRIV2 with invalid input.
+!    t = 0._SP
+!    y(1) = 10._SP
+!    y(2) = 0._SP
+!    y(3) = 10._SP
+!    y(4) = ALFA
+!    tout = 10._SP
+!    mstate = 1
+!    mint = 1
+!    lenwx = 1
+!    leniw = 50
+!    CALL SDRIV2(N,t,y,SDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
+!      leniw,dum_G,ierflg)
+!    IF( ierflg/=32 ) THEN
+!      IF( Kprint==1 ) THEN
+!        WRITE (Lun,&
+!          '('' SDRIV2:An invalid parameter has not been correctly detected.'' //)')
+!      ELSEIF( Kprint>=2 ) THEN
+!        WRITE (Lun,&
+!          '('' SDRIV2:An invalid parameter has not been correctly detected.'')')
+!        WRITE (Lun,*) ' The value of LENW was set to ', lenwx
+!        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!        WRITE (Lun,&
+!          '('' The values of parameters, results, and statistical quantities are:'')')
+!        WRITE (Lun,*) ' EPS ', eps, ', MINT ', mint, ', LENW ', lenw, &
+!          ', LENIW ', leniw
+!        WRITE (Lun,*) ' T ', t
+!        WRITE (Lun,*) ' Y(1) ', y(1)
+!        WRITE (Lun,*) ' Y(2) ', y(2)
+!        WRITE (Lun,*) ' Y(3) ', y(3)
+!        WRITE (Lun,*) ' Number of steps taken is  ', nstep
+!        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+!        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
+!        WRITE (Lun,'(//)')
+!      END IF
+!      Ipass = 0
+!    ELSEIF( Kprint==2 ) THEN
+!      WRITE (Lun,&
+!        '('' SDRIV2:An invalid parameter has been correctly detected.'' //)')
+!    ELSEIF( Kprint==3 ) THEN
+!      WRITE (Lun,&
+!        '('' SDRIV2:An invalid parameter has been correctly detected.'')')
+!      WRITE (Lun,*) ' The value of LENW was set to ', lenwx
+!      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!      WRITE (Lun,'(/)')
+!    END IF
+!    num_xer = 0
+    !  Exercise SDRIV3 for problem with known solution.
     t = 0._SP
     y(1) = 10._SP
     y(2) = 0._SP
@@ -360,87 +357,85 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     num_xer = 0
-    !                                         Run SDRIV3 with invalid input.
-    t = 0._SP
-    y(1) = 10._SP
-    y(2) = 0._SP
-    y(3) = 10._SP
-    y(4) = ALFA
-    nstate = 1
-    tout = 10._SP
-    mint = 2
-    lenw = 301
-    leniwx = 1
-    CALL SDRIV3(N,t,y,SDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
-      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
-      MXSTEP,dum_G,dum_USERS,ierflg)
-    IF( ierflg/=33 ) THEN
-      IF( Kprint==1 ) THEN
-        WRITE (Lun,&
-          '('' SDRIV3:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF( Kprint>=2 ) THEN
-        WRITE (Lun,&
-          '('' SDRIV3:An invalid parameter has not been correctly detected.'')')
-        WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
-        WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
-        WRITE (Lun,&
-          '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', IERROR
-        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', IMPL
-        WRITE (Lun,*) ' T ', t
-        WRITE (Lun,*) ' Y(1) ', y(1)
-        WRITE (Lun,*) ' Y(2) ', y(2)
-        WRITE (Lun,*) ' Y(3) ', y(3)
-        WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
-        WRITE (Lun,'(//)')
-      END IF
-      Ipass = 0
-    ELSEIF( Kprint==2 ) THEN
-      WRITE (Lun,&
-        '('' SDRIV3:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF( Kprint==3 ) THEN
-      WRITE (Lun,&
-        '('' SDRIV3:An invalid parameter has been correctly detected.'')')
-      WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
-      WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
-      WRITE (Lun,'(/)')
-    END IF
-    num_xer = 0
+    !  Run SDRIV3 with invalid input.
+!    t = 0._SP
+!    y(1) = 10._SP
+!    y(2) = 0._SP
+!    y(3) = 10._SP
+!    y(4) = ALFA
+!    nstate = 1
+!    tout = 10._SP
+!    mint = 2
+!    lenw = 301
+!    leniwx = 1
+!    CALL SDRIV3(N,t,y,SDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
+!      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
+!      MXSTEP,dum_G,dum_USERS,ierflg)
+!    IF( ierflg/=33 ) THEN
+!      IF( Kprint==1 ) THEN
+!        WRITE (Lun,&
+!          '('' SDRIV3:An invalid parameter has not been correctly detected.'' //)')
+!      ELSEIF( Kprint>=2 ) THEN
+!        WRITE (Lun,&
+!          '('' SDRIV3:An invalid parameter has not been correctly detected.'')')
+!        WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
+!        WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
+!        WRITE (Lun,&
+!          '('' The values of parameters, results, and statistical quantities are:'')')
+!        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', IERROR
+!        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', IMPL
+!        WRITE (Lun,*) ' T ', t
+!        WRITE (Lun,*) ' Y(1) ', y(1)
+!        WRITE (Lun,*) ' Y(2) ', y(2)
+!        WRITE (Lun,*) ' Y(3) ', y(3)
+!        WRITE (Lun,*) ' Number of steps taken is  ', nstep
+!        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+!        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
+!        WRITE (Lun,'(//)')
+!      END IF
+!      Ipass = 0
+!    ELSEIF( Kprint==2 ) THEN
+!      WRITE (Lun,'('' SDRIV3:An invalid parameter has been correctly detected.'' //)')
+!    ELSEIF( Kprint==3 ) THEN
+!      WRITE (Lun,'('' SDRIV3:An invalid parameter has been correctly detected.'')')
+!      WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
+!      WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
+!      WRITE (Lun,'(/)')
+!    END IF
+!    num_xer = 0
 
   CONTAINS
-    REAL(SP) FUNCTION dum_G(N,T,Y,Iroot)
-      INTEGER :: N, Iroot
-      REAL(SP) :: T
-      REAL(SP) :: Y(N)
-      dum_G = SUM(Y) + T
+    REAL(SP) PURE FUNCTION dum_G(N,T,Y,Iroot)
+      INTEGER, INTENT(IN) :: N, Iroot
+      REAL(SP), INTENT(IN) :: T
+      REAL(SP), INTENT(IN) :: Y(N)
+      dum_G = SUM(REAL(Y))+ T + Iroot
     END FUNCTION dum_G
-    SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
-      INTEGER :: N, Matdim, Ml, Mu
-      REAL(SP) :: T
-      REAL(SP) :: Y(N), Dfdy(Matdim,N)
-      Dfdy = T
-      Y = Ml + Mu
+    PURE SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+      REAL(SP), INTENT(IN) :: T
+      REAL(SP), INTENT(IN) :: Y(N)
+      REAL(SP), INTENT(OUT) :: Dfdy(Matdim,N)
+      Dfdy = T + Y(1) + Ml + Mu
     END SUBROUTINE dum_JACOBN
-    SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
-      INTEGER :: Impl, N, Nde, Iflag
-      REAL(SP) :: T, H, El
-      REAL(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
-      Y = Ywt + Save1 + Save2
-      Yh = T + H + El
-      Impl = Nde + Iflag
+    PURE SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, Iflag
+      REAL(SP), INTENT(IN) :: T, H, El
+      REAL(SP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      REAL(SP), INTENT(INOUT) :: Save1(N), Save2(N)
+      Save1 = Yh(:,1) + Y + Ywt
+      Save2 = T + H + El + Impl + Nde + Iflag
     END SUBROUTINE dum_USERS
-    SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(SP) :: T, Y(N), A(:,:)
-      T = Matdim + Ml + Mu + Nde
-      Y = 0._SP
-      A = 0._SP
+    PURE SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(SP), INTENT(IN) :: T
+      REAL(SP), INTENT(IN) :: Y(N)
+      REAL(SP), INTENT(INOUT) :: A(:,:)
+      A = Y(1) + T + Matdim + Ml + Mu + Nde
     END SUBROUTINE dum_FA
   END SUBROUTINE SDQCK
   !** SDF
-  SUBROUTINE SDF(N,T,Y,Yp)
+  PURE SUBROUTINE SDF(N,T,Y,Yp)
     !> Quick check for SLATEC routines SDRIV1, SDRIV2 and SDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
@@ -467,15 +462,19 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
 
-    INTEGER :: N
-    REAL(SP) :: T, Y(:), Yp(:)
+    INTEGER, INTENT(IN) :: N
+    REAL(SP), INTENT(IN) :: T, Y(:)
+    REAL(SP), INTENT(OUT) :: Yp(:)
+    !
     REAL(SP) :: alfa
     !* FIRST EXECUTABLE STATEMENT  SDF
     alfa = Y(N+1)
     Yp(1) = 1._SP + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)
     Yp(2) = alfa*(Y(1)-Y(2)) - Y(2)*Y(3)
     Yp(3) = 1._SP - Y(3)*(Y(1)+Y(2))
+    !
   END SUBROUTINE SDF
+  !
 END MODULE TEST45_MOD
 !** TEST45
 PROGRAM TEST45

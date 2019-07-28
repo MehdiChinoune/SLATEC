@@ -1,5 +1,5 @@
 !** CHKSN4
-SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
+PURE SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
@@ -26,15 +26,18 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPL4, ONLY : ait_com, dlx_com, is_com, ms_com
+  !
   INTERFACE
-    SUBROUTINE COFX(X,A,B,C)
+    PURE SUBROUTINE COFX(X,A,B,C)
       IMPORT SP
-      REAL(SP) :: X, A, B, C
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(OUT) :: A, B, C
     END SUBROUTINE COFX
   END INTERFACE
-  INTEGER :: Mbdcnd, Nbdcnd
-  REAL(SP) :: Alpha, Beta
-  LOGICAL :: Singlr
+  INTEGER, INTENT(IN) :: Mbdcnd, Nbdcnd
+  REAL(SP), INTENT(IN) :: Alpha, Beta
+  LOGICAL, INTENT(OUT) :: Singlr
+  !
   INTEGER :: i
   REAL(SP) :: ai, bi, ci, xi
   !* FIRST EXECUTABLE STATEMENT  CHKSN4
@@ -63,4 +66,5 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !     THE OPERATOR MUST BE SINGULAR IF THIS POINT IS REACHED
   !
   Singlr = .TRUE.
+  !
 END SUBROUTINE CHKSN4

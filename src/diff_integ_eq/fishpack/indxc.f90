@@ -1,5 +1,5 @@
 !** INDXC
-SUBROUTINE INDXC(I,Ir,Idxc,Nc)
+PURE SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
@@ -19,9 +19,12 @@ SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE CBLKT, ONLY : nm_com
-  INTEGER :: I, Idxc, Ir, Nc
+  !
+  INTEGER, INTENT(IN) :: I, Ir
+  INTEGER, INTENT(OUT) :: Idxc, Nc
   !* FIRST EXECUTABLE STATEMENT  INDXC
   Nc = 2**Ir
   Idxc = I
   IF( Idxc+Nc-1>nm_com ) Nc = 0
+  !
 END SUBROUTINE INDXC

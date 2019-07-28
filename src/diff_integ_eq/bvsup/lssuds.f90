@@ -1,5 +1,5 @@
 !** LSSUDS
-SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
+PURE SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     Kpivot,S,Div,Td,Isflg,Scales)
   !> Subsidiary to BVSUP
   !***
@@ -117,11 +117,14 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900510  Fixed an error message.  (RWC)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, control_xer, max_xer, eps_sp
+  USE service, ONLY : control_xer, max_xer, eps_sp
   !
-  INTEGER :: Iflag, Irank, Iscale, Isflg, M, Mlso, N, Nrda, Nrdu, Kpivot(N)
-  REAL(SP) :: A(Nrda,M), B(N), Diag(N), Div(N), Q(Nrda,M), S(N), Scales(M), Td(N), &
-    U(Nrdu,M), X(M)
+  INTEGER, INTENT(IN) :: Iscale, M, Mlso, N, Nrda, Nrdu
+  INTEGER, INTENT(INOUT) :: Iflag, Irank, Isflg
+  INTEGER, INTENT(OUT) :: Kpivot(N)
+  REAL(SP), INTENT(IN) :: A(Nrda,M), B(N)
+  REAL(SP), INTENT(INOUT) :: Q(Nrda,M), U(Nrdu,M), X(M)
+  REAL(SP), INTENT(OUT) :: Diag(N), Div(N), S(N), Scales(M), Td(N)
   !
   INTEGER :: i, irp, j, jr, k, kp, l, nmir, nu, maxmes, nfat, nfatal
   REAL(SP) :: gam, gama, res, ss, uro
@@ -147,8 +150,6 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           Isflg = Iflag
           nfat = -1
           IF( nfatal==0 ) nfat = 0
-          control_xer = nfat
-          max_xer = 1
         END IF
         !
         !     COPY MATRIX A INTO MATRIX Q
@@ -164,8 +165,6 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         !
         CALL ORTHOR(Q,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Div,Td)
         !
-        control_xer = nfatal
-        max_xer = maxmes
         IF( Irank==N ) THEN
           !
           !     STORE DIVISORS FOR THE TRIANGULAR SOLUTION
@@ -190,7 +189,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !
   !     INVALID INPUT FOR LSSUDS
   Iflag = 2
-  CALL XERMSG('LSSUDS','INVALID INPUT PARAMETERS.',2,1)
+  ERROR STOP 'LSSUDS : INVALID INPUT PARAMETERS.'
   RETURN
   !
   !

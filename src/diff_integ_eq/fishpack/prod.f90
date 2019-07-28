@@ -1,5 +1,5 @@
 !** PROD
-SUBROUTINE PROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
+PURE SUBROUTINE PROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
@@ -33,9 +33,11 @@ SUBROUTINE PROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: M, Na, Nd, Nm1, Nm2
-  REAL(SP) :: A(M), Aa(Na), B(M), Bd(Nd), Bm1(Nm1), Bm2(Nm2), C(M), D(M), U(M), W(M), &
-    X(M), Y(M)
+  INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+  REAL(SP), INTENT(IN) :: Aa(Na), Bd(Nd), Bm1(Nm1), Bm2(Nm2)
+  REAL(SP), INTENT(IN) :: X(M), A(M), B(M), C(M)
+  REAL(SP), INTENT(OUT) :: Y(M), D(M), W(M), U(M)
+  !
   INTEGER :: ia, ibr, id, j, k, m1, m2, mm
   REAL(SP) :: den, rt
   !* FIRST EXECUTABLE STATEMENT  PROD
@@ -118,5 +120,6 @@ SUBROUTINE PROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
     Y(j) = Y(j) + rt*W(j)
   END DO
   GOTO 100
+  !
   RETURN
 END SUBROUTINE PROD

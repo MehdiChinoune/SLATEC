@@ -4,7 +4,7 @@ MODULE TEST43_MOD
 
 CONTAINS
   !** JAC
-  SUBROUTINE JAC(T,U,Pd,Nrowpd)
+  PURE SUBROUTINE JAC(T,U,Pd,Nrowpd)
     !> Evaluate Jacobian for DEBDF quick check.
     !***
     ! **Library:**   SLATEC
@@ -20,8 +20,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Minor clean-up of prologue and code.  (WRB)
 
-    INTEGER :: Nrowpd
-    REAL(SP) :: T, U(:), Pd(:,:)
+    INTEGER, INTENT(IN) :: Nrowpd
+    REAL(SP), INTENT(IN) :: T, U(:)
+    REAL(SP), INTENT(OUT) :: Pd(:,:)
+    !
     REAL(SP) :: r, r5, rsq, u1sq, u2sq, u1u2
     !* FIRST EXECUTABLE STATEMENT  JAC
     u1sq = U(1)*U(1)
@@ -57,7 +59,8 @@ CONTAINS
     !
     !     Declare arguments.
     !
-    REAL(SP) :: T, U(:), Uprime(:)
+    REAL(SP), INTENT(IN) :: T, U(:)
+    REAL(SP), INTENT(OUT) :: Uprime(:)
     !
     !     Declare local variables.
     !
@@ -423,8 +426,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !   901014  Made editorial changes and added correct result to
-    !           output.  (RWC)
+    !   901014  Made editorial changes and added correct result to output.  (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     USE SAVEX, ONLY : xsave_com
     USE slatec, ONLY : BVSUP
@@ -637,9 +639,17 @@ CONTAINS
     IF( iflag==-2 ) itmp(kont) = 1
     kont = kont + 1
     !-----STORAGE ALLOCATION IS INSUFFICIENT
-    kount = 6
-    nrowb = 2
-    ndiw = 17
+    itmp(kont) = 1
+    kont = kont + 1
+!    kount = 6
+!    nrowb = 2
+!    ndiw = 17
+    !-----INCORRECT ORDERING OF XPTS
+    kount = 7
+    ndiw = 100
+    sve = xpts(1)
+    xpts(1) = xpts(4)
+    xpts(4) = sve
     GOTO 100
     !
     !-----SEE IF IFLAG TESTS PASSED

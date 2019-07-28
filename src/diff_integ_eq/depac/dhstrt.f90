@@ -149,14 +149,17 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,H)
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
       IMPORT DP
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Uprime(:)
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE DF
   END INTERFACE
-  INTEGER :: Morder, Neq
-  REAL(DP) :: A, B, Big, H, Small
-  REAL(DP) :: Etol(Neq), Pv(Neq), Sf(Neq), Spy(Neq), Y(Neq), Yp(Neq), &
-    Yprime(Neq)
+  INTEGER, INTENT(IN) :: Morder, Neq
+  REAL(DP), INTENT(IN) :: A, B, Big, Small
+  REAL(DP), INTENT(OUT) :: H
+  REAL(DP), INTENT(IN) :: Etol(Neq), Y(Neq), Yprime(Neq)
+  REAL(DP), INTENT(OUT) :: Pv(Neq), Sf(Neq), Spy(Neq), Yp(Neq)
+  !
   INTEGER :: j, k, lk
   REAL(DP) :: absdx, da, delf, dely, dfdub, dfdxb, dx, dy, fbnd, relper, srydpb, &
     tolexp, tolmin, tolp, tolsum, ydpb

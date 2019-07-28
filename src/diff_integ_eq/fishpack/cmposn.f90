@@ -1,5 +1,5 @@
 !** CMPOSN
-SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
+PURE SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !> Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC
@@ -10,8 +10,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !***
   ! **Description:**
   !
-  !     Subroutine to solve Poisson's equation with Neumann boundary
-  !     conditions.
+  !     Subroutine to solve Poisson's equation with Neumann boundary conditions.
   !
   !     ISTAG = 1 if the last diagonal block is A.
   !     ISTAG = 2 if the last diagonal block is A-I.
@@ -29,12 +28,15 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !   920130  Modified to use merge routine C1MERG rather than deleted
-  !           routine CMPMRG.  (WRB)
+  !   920130  Modified to use merge routine C1MERG rather than deleted routine CMPMRG.  (WRB)
   USE data_handling, ONLY : C1MERG
-  INTEGER :: Idimq, Istag, M, Mixbnd, N
-  COMPLEX(SP) :: A(M), Bb(M), C(M), Q(Idimq,N), B(M), B2(M), B3(M), W(M), W2(M), &
-    W3(M), D(M), Tcos(4*N), P(:)
+  !
+  INTEGER, INTENT(IN) :: Idimq, Istag, M, Mixbnd, N
+  COMPLEX(SP), INTENT(IN) :: A(M), Bb(M), C(M)
+  COMPLEX(SP), INTENT(INOUT) :: Q(Idimq,N)
+  COMPLEX(SP), INTENT(OUT) :: B(M), D(M), Tcos(4*N), P(:), B2(M), B3(M), W(M), &
+    W2(M), W3(M)
+  !
   INTEGER :: i, i1, i2, i2r, i2rby2, ii, ip, ipstor, j, jm1, jm2, jm3, jp1, jp2, &
     jp3, jr, jr2, jstart, jstep, jstop, k(4), kr, lr, mr, nlast, nlastp, nr, &
     nrod, nrodpr
@@ -553,4 +555,5 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       IF( nlastp/=nlast ) GOTO 400
     END IF
   END DO
+  !
 END SUBROUTINE CMPOSN

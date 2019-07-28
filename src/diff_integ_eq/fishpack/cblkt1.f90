@@ -1,5 +1,5 @@
 !** CBLKT1
-SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
+PURE SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
@@ -33,22 +33,27 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   USE CCBLK, ONLY : k_com, ncmplx_com, nm_com, npp_com
   !
   INTERFACE
-    SUBROUTINE PRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
+    PURE SUBROUTINE PRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
       IMPORT SP
-      INTEGER :: M, Na, Nd, Nm1, Nm2
-      REAL(SP) :: Aa(Na), Bd(Nd), Bm1(Nm1), Bm2(Nm2)
-      COMPLEX(SP) :: X(M), Y(M), A(M), B(M), C(M), D(M), U(M), W(M)
+      INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+      REAL(SP), INTENT(IN) :: Aa(Na), Bd(Nd), Bm1(Nm1), Bm2(Nm2)
+      COMPLEX(SP), INTENT(IN) :: X(M), A(M), B(M), C(M)
+      COMPLEX(SP), INTENT(OUT) :: Y(M), D(M), W(M), U(M)
     END SUBROUTINE PRDCT
-    SUBROUTINE CPRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
+    PURE SUBROUTINE CPRDCT(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
       IMPORT SP
-      INTEGER :: Na, Nd, Nm1, Nm2, M
-      REAL(SP) :: Aa(Na), Bm1(Nm1), Bm2(Nm2)
-      COMPLEX(SP) :: Y(M), D(M), W(M), Bd(Nd), X(M), A(M), B(M), C(M), Yy(M)
+      INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+      REAL(SP), INTENT(IN) :: Aa(Na), Bm1(Nm1), Bm2(Nm2)
+      COMPLEX(SP), INTENT(IN) :: Bd(Nd), X(M), A(M), B(M), C(M)
+      COMPLEX(SP), INTENT(OUT) :: Y(M), D(M), W(M), Yy(M)
     END SUBROUTINE CPRDCT
   END INTERFACE
-  INTEGER :: Idimy, M
-  REAL(SP) :: An(nm_com), Cn(nm_com), B(:)
-  COMPLEX(SP) :: Am(M), Bm(M), Cm(M), W1(M), W2(M), W3(M), Wd(M), Ww(M), Wu(M), Y(Idimy,nm_com)
+  INTEGER, INTENT(IN) :: Idimy, M
+  REAL(SP), INTENT(IN) :: An(nm_com), Cn(nm_com), B(:)
+  COMPLEX(SP), INTENT(IN) :: Am(M), Bm(M), Cm(M)
+  COMPLEX(SP), INTENT(INOUT) :: Y(Idimy,nm_com)
+  COMPLEX(SP), INTENT(OUT) :: W1(M), W2(M), W3(M), Wd(M), Ww(M), Wu(M)
+  !
   INTEGER :: i, i1, i2, i3, i4, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, ll, &
     na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
@@ -276,4 +281,5 @@ SUBROUTINE CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
       END IF
     END DO
   END DO
+  !
 END SUBROUTINE CBLKT1

@@ -1,5 +1,5 @@
 !** DDCOR
-SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
+PURE SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
   !> Subroutine DDCOR computes corrections to the Y array.
   !***
@@ -21,8 +21,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !  result of the last call to F.
   !  In the case of the chord method, compute the corrector error and
   !  solve the linear system with that as right hand side and DFDY as
-  !  coefficient matrix, using the LU decomposition if MITER is 1, 2, 4,
-  !  or 5.
+  !  coefficient matrix, using the LU decomposition if MITER is 1, 2, 4, or 5.
   !
   !***
   ! **Routines called:**  DGBSL, DGESL, DNRM2
@@ -31,25 +30,32 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE lapack, ONLY : DGBTRS, DGETRS
+  !
   INTERFACE
-    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    PURE SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT DP
-      INTEGER :: Impl, N, Nde, iflag
-      REAL(DP) :: T, H, El
-      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, iflag
+      REAL(DP), INTENT(IN) :: T, H, El
+      REAL(DP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      REAL(DP), INTENT(INOUT) :: Save1(N), Save2(N)
     END SUBROUTINE USERS
-    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    PURE SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IMPORT DP
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(DP) :: T, Y(N), A(:,:)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(DP), INTENT(IN) :: T, Y(N)
+      REAL(DP), INTENT(INOUT) :: A(:,:)
     END SUBROUTINE FA
   END INTERFACE
-  INTEGER :: Ierror, Impl, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nq
-  INTEGER :: Ipvt(N)
-  REAL(DP) :: D, H, T
-  REAL(DP) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Save1(N), Save2(N), Y(N), &
-    Yh(N,13), Ywt(N)
-  LOGICAL :: Evalfa
+
+  INTEGER, INTENT(IN) :: Ierror, Impl, Matdim, Miter, Ml, Mu, N, Nde, Nq
+  INTEGER, INTENT(OUT) :: Jstate
+  INTEGER, INTENT(IN) :: Ipvt(N)
+  REAL(DP), INTENT(IN) :: H, T, El(13,12)
+  REAL(DP), INTENT(OUT) :: D
+  REAL(DP), INTENT(IN) :: Dfdy(Matdim,N), Y(N), Yh(N,13), Ywt(N)
+  REAL(DP), INTENT(INOUT) :: A(Matdim,N), Save1(N), Save2(N)
+  LOGICAL, INTENT(INOUT) :: Evalfa
+  !
   INTEGER :: i, iflag, j, mw, info
   !* FIRST EXECUTABLE STATEMENT  DDCOR
   IF( Miter==0 ) THEN
@@ -224,4 +230,5 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     END IF
     D = NORM2(Save2(1:N))/SQRT(REAL(N, DP))
   END IF
+  !
 END SUBROUTINE DDCOR

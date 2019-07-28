@@ -1,7 +1,6 @@
 !** CDSCL
-SUBROUTINE CDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
-  !> Subroutine CDSCL rescales the YH array whenever the step
-  !            size is changed.
+PURE SUBROUTINE CDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
+  !> Subroutine CDSCL rescales the YH array whenever the stepw size is changed.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -21,9 +20,11 @@ SUBROUTINE CDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  INTEGER :: N, Nq
-  REAL(SP) :: H, Hmax, Rc, Rh, Rmax
-  COMPLEX(SP) :: Yh(N,Nq+1)
+  INTEGER, INTENT(IN) :: N, Nq
+  REAL(SP), INTENT(IN) :: Hmax, Rmax
+  REAL(SP), INTENT(INOUT) :: H, Rc, Rh
+  COMPLEX(SP), INTENT(INOUT) :: Yh(N,Nq+1)
+  !
   INTEGER :: i, j
   REAL(SP) :: r1
   !* FIRST EXECUTABLE STATEMENT  CDSCL
@@ -41,4 +42,5 @@ SUBROUTINE CDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   END DO
   H = H*Rh
   Rc = Rc*Rh
+  !
 END SUBROUTINE CDSCL

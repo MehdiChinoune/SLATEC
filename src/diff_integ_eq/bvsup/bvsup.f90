@@ -1,9 +1,8 @@
 !** BVSUP
 SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
-  !> Solve a linear two-point boundary value problem using
-  !            superposition coupled with an orthonormalization procedure
-  !            and a variable-step integration scheme.
+  !> Solve a linear two-point boundary value problem using superposition coupled
+  !  with an orthonormalization procedure and a variable-step integration scheme.
   !***
   ! **Library:**   SLATEC
   !***
@@ -401,8 +400,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   890921  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
@@ -413,12 +411,15 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     igofx_com, ndisk_com, mxnon_com, needw_com, nfcc_com, ncomp_com, neediw_com, &
     neqivp_com, nps_com, ntp_com, xbeg_com, xsav_com, xend_com, nfc_com, nic_com, &
     nopg_com, nxpts_com, ntape_com, kkkint_com
-  USE service, ONLY : XERMSG
-  INTEGER :: Ndw, Neqivp, Nfc, Nic, Nrowa, Nrowb, Nrowy, Iflag, Igofx, Ncomp, &
-    Ndiw, Nxpts, Iwork(Ndiw)
-  REAL(SP) :: Ae, Re
-  REAL(SP) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Work(Ndw), &
-    Xpts(Nxpts), Y(Nrowy,Nxpts)
+  !
+  INTEGER, INTENT(IN) :: Igofx, Ncomp, Ndiw, Ndw, Neqivp, Nic, Nrowa, Nrowb, &
+    Nrowy, Nxpts
+  INTEGER, INTENT(INOUT) :: Iflag, Iwork(Ndiw), Nfc
+  REAL(SP), INTENT(IN) :: Ae, Re
+  REAL(SP), INTENT(IN) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Xpts(Nxpts)
+  REAL(SP), INTENT(INOUT) :: Work(Ndw)
+  REAL(SP), INTENT(OUT) :: Y(Nrowy,Nxpts)
+  !
   INTEGER :: nitemp, non, nrtemp, is, j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, &
     kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, &
     lllsud, lllsvc, mxnoni, mxnonr, ndeq, nxptsm
@@ -597,15 +598,13 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     WRITE (xern2,'(I8)') kkkzpw_com
     WRITE (xern3,'(I8)') neediw_com
     WRITE (xern4,'(I8)') lllip
-    CALL XERMSG('BVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '//&
-      xern1//' + '//xern2//&
-      '*(EXPECTED NUMBER OF ORTHONORMALIZATIONS) $$REQUIRED STORAGE FOR IWORK ARRAY IS '&
-      //xern3//' + '//xern4//'*(EXPECTED NUMBER OF ORTHONORMALIZATIONS)',1,0)
+    ERROR STOP 'BVSUP : REQUIRED STORAGE FOR WORK NOT SATISFIED.&
+      & REQUIRED STORAGE FOR IWORK ARRAY NOT SATISFIED.'
   ELSE
     WRITE (xern1,'(I8)') needw_com
     WRITE (xern2,'(I8)') neediw_com
-    CALL XERMSG('BVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '//&
-      xern1//' + NUMBER OF ORTHONOMALIZATIONS. $$REQUIRED STORAGE FOR IWORK ARRAY IS '//xern2,1,0)
+    ERROR STOP 'BVSUP : REQUIRED STORAGE FOR WORK NOT SATISFIED.&
+      & REQUIRED STORAGE FOR IWORK ARRAY NOT SATISFIED'
   END IF
   RETURN
   !
@@ -680,4 +679,5 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   CALL EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   Nfc = nfcc_com
   Iwork(17) = Iwork(l1_com)
+  !
 END SUBROUTINE BVSUP

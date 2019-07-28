@@ -1,5 +1,5 @@
 !** CHKSNG
-SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
+PURE SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
@@ -26,19 +26,23 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : ait_com, cit_com, dlx_com, dly_com, is_com, js_com, ms_com, ns_com
+  !
   INTERFACE
-    SUBROUTINE COFX(X,A,B,C)
+    PURE SUBROUTINE COFX(X,A,B,C)
       IMPORT SP
-      REAL(SP) :: X, A, B, C
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(OUT) :: A, B, C
     END SUBROUTINE COFX
-    SUBROUTINE COFY(Y,D,E,F)
+    PURE SUBROUTINE COFY(Y,D,E,F)
       IMPORT SP
-      REAL(SP) :: Y, D, E, F
+      REAL(SP), INTENT(IN) :: Y
+      REAL(SP), INTENT(OUT) :: D, E, F
     END SUBROUTINE COFY
   END INTERFACE
-  INTEGER :: Mbdcnd, Nbdcnd
-  REAL(SP) :: Alpha, Beta, Gama, Xnu
-  LOGICAL :: Singlr
+  INTEGER, INTENT(IN) :: Mbdcnd, Nbdcnd
+  REAL(SP), INTENT(IN) :: Alpha, Beta, Gama, Xnu
+  LOGICAL, INTENT(OUT) :: Singlr
+  !
   INTEGER :: i, j
   REAL(SP) :: ai, bi, ci, dj, ej, fj, xi, yj
   !* FIRST EXECUTABLE STATEMENT  CHKSNG
@@ -75,4 +79,5 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !     THE OPERATOR MUST BE SINGULAR IF THIS POINT IS REACHED
   !
   Singlr = .TRUE.
+  !
 END SUBROUTINE CHKSNG

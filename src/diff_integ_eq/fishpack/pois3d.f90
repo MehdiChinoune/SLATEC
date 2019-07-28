@@ -1,9 +1,8 @@
 !** POIS3D
-SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
-  !> Solve a three-dimensional block tridiagonal linear system
-  !            which arises from a finite difference approximation to a
-  !            three-dimensional Poisson equation using the Fourier
-  !            transform package FFTPAK written by Paul Swarztrauber.
+PURE SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
+  !> Solve a three-dimensional block tridiagonal linear system which arises from
+  !  a finite difference approximation to a three-dimensional Poisson equation
+  !  using the Fourier transform package FFTPAK written by Paul Swarztrauber.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -237,11 +236,14 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: Ierror, L, Ldimf, Lperod, M, Mdimf, Mperod, N
-  REAL(SP) :: C1, C2
-  REAL(SP) :: A(N), B(N), C(N), F(Ldimf,Mdimf,N), W(:)
+  INTEGER, INTENT(IN) :: L, Ldimf, Lperod, M, Mdimf, Mperod, N, Nperod
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: C1, C2
+  REAL(SP), INTENT(INOUT) :: A(N), B(N), C(N), W(:)
+  REAL(SP), INTENT(INOUT) :: F(Ldimf,Mdimf,N)
+  !
   INTEGER :: i, iwbb, iwd, iwt, iwx, iwy, iwyrt, j, k, lp, mp, nh, nhm1, nhmk, &
-    nhpk, nodd, np, Nperod
+    nhpk, nodd, np
   REAL(SP) :: save(6)
   !* FIRST EXECUTABLE STATEMENT  POIS3D
   lp = Lperod + 1
@@ -342,4 +344,5 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
       A(N) = save(6)
     END IF
   END IF
+  !
 END SUBROUTINE POIS3D

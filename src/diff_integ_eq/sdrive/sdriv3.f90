@@ -2,12 +2,11 @@
 SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Miter,Impl,Ml,Mu,Mxord,Hmax,Work,Lenw,Iwork,Leniw,&
     JACOBN,FA,Nde,Mxstep,G,USERS,Ierflg)
-  !> The function of SDRIV3 is to solve N ordinary differential
-  !            equations of the form dY(I)/dT = F(Y(I),T), given the
-  !            initial conditions Y(I) = YI.  The program has options to
-  !            allow the solution of both stiff and non-stiff differential
-  !            equations.  Other important options are available.  SDRIV3
-  !            uses single precision arithmetic.
+  !> The function of SDRIV3 is to solve N ordinary differential equations of the
+  !  form dY(I)/dT = F(Y(I),T), given the initial conditions Y(I) = YI.
+  !  The program has options to allow the solution of both stiff and non-stiff
+  !  differential equations.  Other important options are available.
+  !  SDRIV3 uses single precision arithmetic.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -16,8 +15,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   ! **Type:**      SINGLE PRECISION (SDRIV3-S, DDRIV3-D, CDRIV3-C)
   !***
   ! **Keywords:**  GEAR'S METHOD, INITIAL VALUE PROBLEMS, ODE,
-  !             ORDINARY DIFFERENTIAL EQUATIONS, SDRIVE, SINGLE PRECISION,
-  !             STIFF
+  !             ORDINARY DIFFERENTIAL EQUATIONS, SDRIVE, SINGLE PRECISION, STIFF
   !***
   ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
@@ -726,42 +724,49 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE service, ONLY : XERMSG, eps_sp, tiny_sp
+  USE service, ONLY : eps_sp, tiny_sp
   USE linpack, ONLY : SGBFA, SGEFA
   USE lapack, ONLY : SGBTRS, SGETRS
   !
   INTERFACE
-    REAL(SP) FUNCTION G(N,T,Y,Iroot)
+    REAL(SP) PURE FUNCTION G(N,T,Y,Iroot)
       IMPORT SP
-      INTEGER :: N, Iroot
-      REAL(SP) :: T, Y(N)
+      INTEGER, INTENT(IN) :: N, Iroot
+      REAL(SP), INTENT(IN) :: T, Y(N)
     END FUNCTION G
-    SUBROUTINE F(N,T,Y,Ydot)
+    PURE SUBROUTINE F(N,T,Y,Ydot)
       IMPORT SP
-      INTEGER :: N
-      REAL(SP) :: T, Y(:), Ydot(:)
+      INTEGER, INTENT(IN) :: N
+      REAL(SP), INTENT(IN) :: T, Y(:)
+      REAL(SP), INTENT(OUT) :: Ydot(:)
     END SUBROUTINE F
-    SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+    PURE SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
       IMPORT SP
-      INTEGER :: N, Matdim, Ml, Mu
-      REAL(SP) :: T, Y(N), Dfdy(Matdim,N)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+      REAL(SP), INTENT(IN) :: T, Y(N)
+      REAL(SP), INTENT(OUT) :: Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
-    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    PURE SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT SP
-      INTEGER :: Impl, N, Nde, iflag
-      REAL(SP) :: T, H, El
-      REAL(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, Iflag
+      REAL(SP), INTENT(IN) :: T, H, El
+      REAL(SP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      REAL(SP), INTENT(INOUT) :: Save1(N), Save2(N)
     END SUBROUTINE USERS
-    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    PURE SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IMPORT SP
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(SP) :: T, Y(N), A(:,:)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(SP), INTENT(IN) :: T, Y(N)
+      REAL(SP), INTENT(INOUT) :: A(:,:)
     END SUBROUTINE FA
   END INTERFACE
-  INTEGER :: Ierflg, Ierror, Impl, Leniw, Lenw, Mint, Miter, Ml, Mu, Mxord, &
-    Mxstep, N, Nde, Nroot, Nstate, Ntask, Iwork(Leniw+N)
-  REAL(SP) :: Eps, Hmax, T, Tout
-  REAL(SP) :: Ewt(N), Work(Lenw+Leniw), Y(N+1)
+  INTEGER, INTENT(IN) :: Ierror, Impl, Leniw, Lenw, Mint, Miter, Ml, Mu, Mxord, &
+    Mxstep, N, Nde, Nroot, Ntask
+  INTEGER, INTENT(INOUT) :: Nstate, Iwork(Leniw+N)
+  INTEGER, INTENT(OUT) :: Ierflg
+  REAL(SP), INTENT(IN) :: Hmax, Tout, Ewt(N)
+  REAL(SP), INTENT(INOUT) :: Eps, T
+  REAL(SP), INTENT(INOUT) :: Work(Lenw+Leniw), Y(N+1)
   !
   INTEGER :: i, ia, idfdy, ifac, iflag, ignow, imxerr, info, iroot, isave1, isave2, &
     itroot,iywt, j, jstate, jtroot, lenchk, liwchk, matdim, maxord, ndecom, npar, nstepl
@@ -781,14 +786,12 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* FIRST EXECUTABLE STATEMENT  SDRIV3
   IF( Nstate==12 ) THEN
     Ierflg = 999
-    CALL XERMSG('SDRIV3',&
-      'Illegal input.  The value of NSTATE is 12 .',Ierflg,2)
+    ERROR STOP 'SDRIV3 : Illegal input.  The value of NSTATE is 12 .'
     RETURN
   ELSEIF( Nstate<1 .OR. Nstate>12 ) THEN
     WRITE (intgr1,'(I8)') Nstate
     Ierflg = 26
-    CALL XERMSG('SDRIV3',&
-      'Illegal input.  Improper value for NSTATE(= '//intgr1//').',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  Improper value for NSTATE'
     Nstate = 12
     RETURN
   END IF
@@ -796,68 +799,60 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF( Eps<0._SP ) THEN
     WRITE (rl1,'(E16.8)') Eps
     Ierflg = 27
-    CALL XERMSG('SDRIV3','Illegal input.  EPS, '//rl1//', is negative.',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  EPS is negative.'
     Nstate = 12
     RETURN
   END IF
   IF( N<=0 ) THEN
     WRITE (intgr1,'(I8)') N
     Ierflg = 22
-    CALL XERMSG('SDRIV3','Illegal input.  Number of equations, '//&
-      intgr1//', is not positive.',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  Number of equations is not positive.'
     Nstate = 12
     RETURN
   END IF
   IF( Mxord<=0 ) THEN
     WRITE (intgr1,'(I8)') Mxord
     Ierflg = 28
-    CALL XERMSG('SDRIV3','Illegal input.  Maximum order, '//&
-      intgr1//', is not positive.',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  Maximum order is not positive.'
     Nstate = 12
     RETURN
   END IF
   IF( Mint<1 .OR. Mint>3 ) THEN
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
-    CALL XERMSG('SDRIV3',&
-      'Illegal input.  Improper value for the integration method flag, '&
-      //intgr1//' .',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  Improper value for the integration method flag'
     Nstate = 12
     RETURN
   ELSEIF( Miter<0 .OR. Miter>5 ) THEN
     WRITE (intgr1,'(I8)') Miter
     Ierflg = 24
-    CALL XERMSG('SDRIV3',&
-      'Illegal input.  Improper value for MITER(= '//intgr1//').',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  Improper value for MITER'
     Nstate = 12
     RETURN
   ELSEIF( Impl<0 .OR. Impl>3 ) THEN
     WRITE (intgr1,'(I8)') Impl
     Ierflg = 25
-    CALL XERMSG('SDRIV3',&
-      'Illegal input.  Improper value for IMPL(= '//intgr1//').',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  Improper value for IMPL'
     Nstate = 12
     RETURN
   ELSEIF( Mint==3 .AND. (Miter==0 .OR. Miter==3 .OR. Impl/=0) ) THEN
     WRITE (intgr1,'(I8)') Miter
     WRITE (intgr2,'(I8)') Impl
     Ierflg = 29
-    CALL XERMSG('SDRIV3','Illegal input.  For MINT = 3, the value of MITER, '//&
-      intgr1//', and/or IMPL, '//intgr2//', is not allowed.',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  For MINT = 3, the value of MITER and/or&
+      & IMPL is not allowed.'
     Nstate = 12
     RETURN
   ELSEIF( (Impl>=1 .AND. Impl<=3) .AND. Miter==0 ) THEN
     WRITE (intgr1,'(I8)') Impl
     Ierflg = 30
-    CALL XERMSG('SDRIV3','Illegal input.  For MITER = 0, the value of IMPL, '//&
-      intgr1//', is not allowed.',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  For MITER = 0, the value of IMPL is not allowed.'
     Nstate = 12
     RETURN
   ELSEIF( (Impl==2 .OR. Impl==3) .AND. Mint==1 ) THEN
     WRITE (intgr1,'(I8)') Impl
     Ierflg = 31
-    CALL XERMSG('SDRIV3','Illegal input.  For MINT = 1, the value of IMPL, '//&
-      intgr1//', is not allowed.',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input. For MINT = 1, the value of IMPL is not allowed.'
     Nstate = 12
     RETURN
   END IF
@@ -869,9 +864,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF( Leniw<liwchk ) THEN
     WRITE (intgr1,'(I8)') liwchk
     Ierflg = 33
-    CALL XERMSG('SDRIV3','Illegal input.  Insufficient storage allocated&
-      & for the IWORK array.  Based on the value of the input parameters involved,&
-      & the required storage is '//intgr1//' .',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  Insufficient storage allocated&
+      & for the IWORK array.'
     Nstate = 12
     RETURN
   END IF
@@ -934,9 +928,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF( Lenw<lenchk ) THEN
     WRITE (intgr1,'(I8)') lenchk
     Ierflg = 32
-    CALL XERMSG('SDRIV3','Illegal input.  Insufficient storage&
-      & allocated for the WORK array.  Based on the value of the input&
-      & parameters involved, the required storage is '//intgr1//' .',Ierflg,1)
+    ERROR STOP 'SDRIV3 : Illegal input.  Insufficient storage&
+      & allocated for the WORK array.'
     Nstate = 12
     RETURN
   END IF
@@ -1118,9 +1111,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         WRITE (rl1,'(E16.8)') T
         WRITE (rl2,'(E16.8)') Tout
         Ierflg = 11
-        CALL XERMSG('SDRIV3',&
-          'While integrating exactly to TOUT, T, '//rl1//&
-          ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.',Ierflg,0)
+        ! 'SDRIV3 : While integrating exactly to TOUT, T, '//rl1//&
+          ! ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.'
         Nstate = 11
         CALL SDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
         T = Tout
@@ -1157,9 +1149,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         WRITE (rl1,'(E16.8)') T
         WRITE (rl2,'(E16.8)') Tout
         Ierflg = 11
-        CALL XERMSG('SDRIV3',&
-          'While integrating exactly to TOUT, T, '//rl1//&
-          ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.',Ierflg,0)
+        ! 'SDRIV3 : While integrating exactly to TOUT, T, '//rl1//&
+          ! ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.'
         Nstate = 11
         CALL SDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
         T = Tout
@@ -1325,9 +1316,9 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (rl1,'(E16.8)') T
     WRITE (rl2,'(E16.8)') Eps
     Ierflg = 4
-    CALL XERMSG('SDRIV3','At T, '//rl1//', the requested accuracy,&
-      & EPS, was not obtainable with the machine precision.&
-      & EPS has been increased to '//rl2//' .',Ierflg,0)
+    ! 'SDRIV3','At T, '//rl1//', the requested accuracy,&
+      ! & EPS, was not obtainable with the machine precision.&
+      ! & EPS has been increased to '//rl2//' .'
     Nstate = 4
     GOTO 400
   END IF
@@ -1337,9 +1328,9 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (rl1,'(E16.8)') T
     WRITE (rl2,'(E16.8)') h
     Ierflg = 15
-    CALL XERMSG('SDRIV3','At T, '//rl1//', the step size, '//rl2//&
-      ', is smaller than the roundoff level of T. This may occur if there is&
-      & an abrupt change in the right hand side of the differential equations.',Ierflg,0)
+    ! 'SDRIV3','At T, '//rl1//', the step size, '//rl2//&
+      ! ', is smaller than the roundoff level of T. This may occur if there is&
+      ! & an abrupt change in the right hand side of the differential equations.'
     Iwork(INDPRT) = 1
   END IF
   IF( Ntask/=2 ) THEN
@@ -1348,8 +1339,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       WRITE (intgr1,'(I8)') Mxstep
       WRITE (rl2,'(E16.8)') Tout
       Ierflg = 3
-      CALL XERMSG('SDRIV3','At T, '//rl1//', '//intgr1//&
-        ' steps have been taken without reaching TOUT, '//rl2//' .',Ierflg,0)
+      ! 'SDRIV3','At T, '//rl1//', '//intgr1//&
+        ! ' steps have been taken without reaching TOUT, '//rl2//' .'
       Nstate = 3
       GOTO 400
     END IF
@@ -1386,9 +1377,9 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       !
       WRITE (rl1,'(E16.8)') T
       Ierflg = 42
-      CALL XERMSG('SDRIV3','At T, '//rl1//', the step size has been reduced about 50 '//&
-        'times without advancing the solution.&
-        & Often this occurs if the problem setup is incorrect.',Ierflg,1)
+      ERROR STOP 'SDRIV3 : At T the step size has been reduced about 50&
+        & times without advancing the solution.&
+        & Often this occurs if the problem setup is incorrect.'
       Nstate = 12
       RETURN
     CASE (4,5)
@@ -1526,14 +1517,14 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !
   600  WRITE (rl1,'(E16.8)') T
   Ierflg = 41
-  CALL XERMSG('SDRIV3','At T, '//rl1//', the attempted step size has gone to zero.&
-    & Often this occurs if the problem setup is incorrect.',Ierflg,1)
+  ERROR STOP 'SDRIV3 : At T, the attempted step size has gone to zero.&
+    & Often this occurs if the problem setup is incorrect.'
   Nstate = 12
   RETURN
   !
   700  WRITE (rl1,'(E16.8)') T
   Ierflg = 43
-  CALL XERMSG('SDRIV3',&
-    'At T, '//rl1//', while solving A*YDOT = F, A is singular.',Ierflg,1)
+  ERROR STOP 'SDRIV3 : At T while solving A*YDOT = F, A is singular.'
   Nstate = 12
+  !
 END SUBROUTINE SDRIV3

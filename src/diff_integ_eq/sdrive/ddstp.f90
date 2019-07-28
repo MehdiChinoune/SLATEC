@@ -1,12 +1,10 @@
 !** DDSTP
 SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
-    Miter,Ml,Mu,N,Nde,Ywt,Uround,USERS,Avgh,Avgord,H,Hused,&
-    Jtask,Mntold,Mtrold,Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,&
-    Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
-    Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
+    Miter,Ml,Mu,N,Nde,Ywt,Uround,USERS,Avgh,Avgord,H,Hused,Jtask,Mntold,Mtrold,&
+    Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,&
+    Nq,Nwait,Rc,Rmax,Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
   !> DDSTP performs one step of the integration of an initial
-  !            value problem for a system of ordinary differential
-  !            equations.
+  !  value problem for a system of ordinary differential equations.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -73,35 +71,43 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   INTERFACE
-    SUBROUTINE F(N,T,Y,Ydot)
+    PURE SUBROUTINE F(N,T,Y,Ydot)
       IMPORT DP
-      INTEGER :: N
-      REAL(DP) :: T, Y(:), Ydot(:)
+      INTEGER, INTENT(IN) :: N
+      REAL(DP), INTENT(IN) :: T, Y(:)
+      REAL(DP), INTENT(OUT) :: Ydot(:)
     END SUBROUTINE F
-    SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+    PURE SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
       IMPORT DP
-      INTEGER :: N, Matdim, Ml, Mu
-      REAL(DP) :: T, Y(N), Dfdy(Matdim,N)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+      REAL(DP), INTENT(IN) :: T, Y(N)
+      REAL(DP), INTENT(OUT) :: Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
-    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    PURE SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT DP
-      INTEGER :: Impl, N, Nde, iflag
-      REAL(DP) :: T, H, El
-      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, iflag
+      REAL(DP), INTENT(IN) :: T, H, El
+      REAL(DP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      REAL(DP), INTENT(INOUT) :: Save1(N), Save2(N)
     END SUBROUTINE USERS
-    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    PURE SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IMPORT DP
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(DP) :: T, Y(N), A(:,:)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(DP), INTENT(IN) :: T, Y(N)
+      REAL(DP), INTENT(INOUT) :: A(:,:)
     END SUBROUTINE FA
   END INTERFACE
-  INTEGER :: Ierror, Impl, Iswflg, Jstate, Jstepl, Jtask, Matdim, Maxord, Mint, &
-    Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, Nfe, Nje, Nq, Nqused, &
-    Nstep, Nwait, Ipvt(N)
-  REAL(DP) :: Avgh, Avgord, Eps, H, Hmax, Hold, Hused, Rc, Rmax, T, Trend, Uround
-  REAL(DP) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), &
-    Tq(3,12), Y(N+1), Yh(N,13), Ywt(N)
-  LOGICAL :: Convrg
+  INTEGER, INTENT(IN) :: Ierror, Impl, Iswflg, Matdim, Ml, Mtrsv, Mu, N, Nde
+  INTEGER, INTENT(INOUT) :: Jstepl, Jtask, Maxord, Mint, Miter, Mntold, &
+    Mtrold, Mxrdsv, Nje, Nfe, Nq, Nstep, Nwait
+  INTEGER, INTENT(OUT) :: Jstate, Nqused, Ipvt(N)
+  REAL(DP), INTENT(IN) :: Eps, Hmax, Uround
+  REAL(DP), INTENT(INOUT) :: Avgh, Avgord, H, Hold, Hused, Rc, Rmax, T, Trend
+  REAL(DP), INTENT(INOUT) :: Tq(3,12), El(13,12)
+  REAL(DP), INTENT(INOUT) :: A(Matdim,N), Dfdy(Matdim,N), Fac(N), Save1(N), &
+    Save2(N), Y(N+1), Yh(N,13), Ywt(N)
+  LOGICAL, INTENT(INOUT) :: Convrg
+  !
   INTEGER :: i, iter, j, nfail, nsv, ntry
   REAL(DP) :: bnd, ctest, d, denom, d1, erdn, erup, etest, hn, hs, numer, rh, rh1, &
     rh2, rh3, told, y0nrm
@@ -493,4 +499,5 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Y(i) = Yh(i,1)
   END DO
   800  Hold = H
+  !
 END SUBROUTINE DDSTP

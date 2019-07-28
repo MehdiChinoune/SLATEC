@@ -1,9 +1,8 @@
 !** HWSSSP
-SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
+PURE SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
-  !> Solve a finite difference approximation to the Helmholtz
-  !            equation in spherical coordinates and on the surface of the
-  !            unit sphere (radius of 1).
+  !> Solve a finite difference approximation to the Helmholtz equation in spherical
+  !  coordinates and on the surface of the unit sphere (radius of 1).
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -373,9 +372,13 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: Elmbda, Pertrb, Pf, Ps, Tf, Ts
-  REAL(SP) :: Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1), F(Idimf,N+1), W(:)
+  INTEGER, INTENT(IN) :: Idimf, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: Elmbda, Pf, Ps, Tf, Ts
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bdpf(M+1), Bdps(M+1), Bdtf(N+1), Bdts(N+1)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N+1), W(:)
+  !
   REAL(SP) :: tpi
   REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
   !* FIRST EXECUTABLE STATEMENT  HWSSSP
@@ -401,4 +404,5 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Idimf,Pertrb,W,W(M+2:2*M+2),W(2*M+3:3*M+3),W(3*M+4:4*M+4),W(4*M+5:5*M+5),&
     W(5*M+6:6*M+6),W(6*M+7:))
   W(1) = W(6*M+7) + 6*(M+1)
+  !
 END SUBROUTINE HWSSSP

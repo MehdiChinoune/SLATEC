@@ -1,8 +1,7 @@
 !** CBLKTR
 SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
-  !> Solve a block tridiagonal system of linear equations
-  !            (usually resulting from the discretization of separable
-  !            two-dimensional elliptic equations).
+  !> Solve a block tridiagonal system of linear equations (usually resulting from
+  !  the discretization of separable two-dimensional elliptic equations).
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -205,12 +204,18 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE CCBLK, ONLY : k_com, ik_com, nm_com, npp_com
   !
-  INTEGER :: Idimy, Ierror, Iflg, M, Mp, N, Np
-  REAL(SP) :: An(N), Bn(N), Cn(N), W(:)
-  COMPLEX(SP) :: Am(M), Bm(M), Cm(M), Y(Idimy,N), WC(100)
-  INTEGER :: iw1, iw2, iw3, iwah, iwbh, iwd, i, iwu, iww, m2, nh, nl
+  INTEGER, INTENT(IN) :: Idimy, Iflg, M, Mp, N, Np
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: An(N), Bn(N), Cn(N)
+  REAL(SP), INTENT(INOUT) :: W(:)
+  COMPLEX(SP), INTENT(IN) :: Am(M), Bm(M), Cm(M)
+  COMPLEX(SP), INTENT(INOUT) :: Y(Idimy,N)
+  !
+  INTEGER :: iw1, iw2, iw3, iwah, iwbh, iwd, i, iwu, iww, m2, nh, nl, nw
+  COMPLEX(SP) :: wc(SIZE(W))
   !* FIRST EXECUTABLE STATEMENT  CBLKTR
-  WC = [ ( CMPLX(W(i),W(i+1),SP), i=1,199,2 ) ]
+  nw = SIZE(W)
+  wc = [ ( CMPLX(W(i),W(i+1),SP), i=1,nw,2 ) ]
   nm_com = N
   m2 = M + M
   Ierror = 0
@@ -262,19 +267,20 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
             !
             ! SUBROUTINE CBLKT1 SOLVES THE LINEAR SYSTEM
             !
-            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2:iw1/2-1),Wc(iw1/2:iw2/2-1),&
-              Wc(iw2/2:iw3/2-1),Wc(iw3/2:iwd-1),Wc(iwd:iww-1),Wc(iww:iwu-1),&
-              Wc(iwu:),PROC,CPROC)
-            W(1:200) = [ ( [REAL(Wc(i)),AIMAG(Wc(i))], i=1,100 ) ]
+            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2:iw1/2-1),wc(iw1/2:iw2/2-1),&
+              wc(iw2/2:iw3/2-1),wc(iw3/2:iwd-1),wc(iwd:iww-1),wc(iww:iwu-1),&
+              wc(iwu:),PROC,CPROC)
+            W(1:nw) = [ ( [REAL(wc(i)),AIMAG(wc(i))], i=1,nw/2 ) ]
           ELSE
-            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2:iw1/2-1),Wc(iw1/2:iw2/2-1),&
-              Wc(iw2/2:iw3/2-1),Wc(iw3/2:iwd-1),Wc(iwd:iww-1),Wc(iww:iwu-1),&
-              Wc(iwu:),PROCP,CPROCP)
-            W(1:200) = [ ( [REAL(Wc(i)),AIMAG(Wc(i))], i=1,100 ) ]
+            CALL CBLKT1(An,Cn,M,Am,Bm,Cm,Idimy,Y,W(2:iw1/2-1),wc(iw1/2:iw2/2-1),&
+              wc(iw2/2:iw3/2-1),wc(iw3/2:iwd-1),wc(iwd:iww-1),wc(iww:iwu-1),&
+              wc(iwu:),PROCP,CPROCP)
+            W(1:nw) = [ ( [REAL(wc(i)),AIMAG(wc(i))], i=1,nw/2 ) ]
           END IF
         END IF
         EXIT
       END IF
     END DO
   END IF
+  !
 END SUBROUTINE CBLKTR

@@ -1,5 +1,5 @@
 !** MINSOL
-SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm)
+PURE SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm)
   !> Subsidiary to SEPELI
   !***
   ! **Library:**   SLATEC
@@ -13,9 +13,8 @@ SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm)
   !     This subroutine orthogonalizes the array USOL with respect to
   !     the constant array in a weighted least squares norm.
   !
-  !     Entry at MINSOL occurs when the final solution is
-  !     to be minimized with respect to the weighted
-  !     least squares norm.
+  !     Entry at MINSOL occurs when the final solution is to be
+  !     minimized with respect to the weighted least squares norm.
   !
   !***
   ! **See also:**  SEPELI
@@ -29,8 +28,11 @@ SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE SPLPCM, ONLY : l_com, is_com, js_com, k_com, ms_com, ns_com
-  INTEGER :: Idmn
-  REAL(SP) :: Usol(Idmn,l_com), Zm(ms_com), Zn(ns_com)
+  !
+  INTEGER, INTENT(IN) :: Idmn
+  REAL(SP), INTENT(IN) :: Zm(ms_com), Zn(ns_com)
+  REAL(SP), INTENT(INOUT) :: Usol(Idmn,l_com)
+  !
   INTEGER :: i, ifnl, ii, istr, j, jfnl, jj, jstr
   REAL(SP) :: ete, pertrb, ute
   !* FIRST EXECUTABLE STATEMENT  MINSOL
@@ -63,4 +65,5 @@ SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm)
       Usol(i,j) = Usol(i,j) - pertrb
     END DO
   END DO
+  !
 END SUBROUTINE MINSOL

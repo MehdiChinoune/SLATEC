@@ -1,11 +1,9 @@
 !** SEPX4
 SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,Grhs,Usol,Idmn,W,Pertrb,Ierror)
-  !> Solve for either the second or fourth order finite
-  !            difference approximation to the solution of a separable
-  !            elliptic partial differential equation on a rectangle.
-  !            Any combination of periodic or mixed boundary conditions is
-  !            allowed.
+  !> Solve for either the second or fourth order finite difference approximation to
+  !  the solution of a separable elliptic partial differential equation on a rectangle.
+  !  Any combination of periodic or mixed boundary conditions is allowed.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -411,14 +409,19 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTERFACE
-    SUBROUTINE COFX(X,A,B,C)
+    PURE SUBROUTINE COFX(X,A,B,C)
       IMPORT SP
-      REAL(SP) :: X, A, B, C
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(OUT) :: A, B, C
     END SUBROUTINE COFX
   END INTERFACE
-  INTEGER :: Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, Alpha, B, Beta, C, D, Pertrb
-  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), Grhs(Idmn,N), Usol(Idmn,N+1), W(:)
+  INTEGER, INTENT(IN) :: Idmn, Iorder, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, Alpha, B, Beta, C, D
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1)
+  REAL(SP), INTENT(INOUT) :: Grhs(Idmn,N), W(:), Usol(Idmn,N+1)
+  !
   INTEGER :: i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, k, l, length, linput, log2n, loutpt
   !* FIRST EXECUTABLE STATEMENT  SEPX4
@@ -460,4 +463,5 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     COFX,W(i1:i2-1),W(i2:i3-1),W(i3:i4-1),W(i4:i5-1),W(i5:i6-1),W(i6:i7-1),W(i7:i8-1),&
     W(i8:i9-1),W(i9:i10-1),W(i10:i11-1),W(i11:i12-1),W(i12:i13-1),Grhs,Usol,Idmn,&
     W(i13:),Pertrb,Ierror)
+  !
 END SUBROUTINE SEPX4

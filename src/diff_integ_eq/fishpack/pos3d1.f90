@@ -1,5 +1,5 @@
 !** POS3D1
-SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
+PURE SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   !> Subsidiary to POIS3D
   !***
   ! **Library:**   SLATEC
@@ -11,8 +11,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   ! **See also:**  POIS3D
   !***
   ! **Routines called:**  COSQB, COSQF, COSQI, COST, COSTI, PIMACH, RFFTB,
-  !                    RFFTF, RFFTI, SINQB, SINQF, SINQI, SINT, SINTI,
-  !                    TRIDQ
+  !                    RFFTF, RFFTI, SINQB, SINQF, SINQI, SINT, SINTI, TRIDQ
 
   !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
@@ -23,10 +22,13 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   !   900402  Added TYPE section.  (WRB)
   USE integ_trans, ONLY : COSQB, COSQF, COSQI, COST, COSTI, RFFTB, RFFTF, RFFTI, &
     SINQB, SINQF, SINQI, SINT, SINTI
-  INTEGER :: L, Ldimf, Lp, M, Mdimf, Mp, N
-  REAL(SP) :: C1, C2
-  REAL(SP) :: A(N), B(N), Bb(N), C(N), D(N), F(Ldimf,Mdimf,N), T(:), Wx(:), Wy(:), &
-    Xrt(L), Yrt(M)
+  !
+  INTEGER, INTENT(IN) :: L, Ldimf, Lp, M, Mdimf, Mp, N
+  REAL(SP), INTENT(IN) :: C1, C2
+  REAL(SP), INTENT(IN) :: A(N), B(N), C(N)
+  REAL(SP), INTENT(INOUT) :: F(Ldimf,Mdimf,N)
+  REAL(SP), INTENT(OUT) :: Bb(N), T(:), Xrt(L), Yrt(M), Wx(:), Wy(:), D(N)
+  !
   INTEGER :: i, ifwrd, j, k, lr, lrdel, mr, mrdel, nr
   REAL(SP) :: di, dj, dx, dy, scalx, scaly
   REAL(SP), PARAMETER :: pi = 3.14159265358979_SP
@@ -110,7 +112,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
       CALL SINTI(mr,Wy)
   END SELECT
   200 CONTINUE
-  IFwrd = 1
+  ifwrd = 1
   DO
     !
     !     TRANSFORM X
@@ -217,4 +219,5 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
       END DO
     END IF
   END DO
+  !
 END SUBROUTINE POS3D1

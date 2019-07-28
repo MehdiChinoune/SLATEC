@@ -33,26 +33,33 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     iquit_com, init_com, ksteps_com, ibegin_com, itol_com, iinteg_com, itstop_com, &
     ijac_com, iband_com, jstart_com, kflag_com, meth_com, miter_com, maxord_com, &
     n_com, nq_com, nst_com, nfe_com, nje_com
-  USE service, ONLY : XERMSG, eps_sp, huge_sp
+  USE service, ONLY : eps_sp, huge_sp
+  !
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Uprime(:)
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE F
-    SUBROUTINE JAC(X,U,Pd,Nrowpd)
+    PURE SUBROUTINE JAC(X,U,Pd,Nrowpd)
       IMPORT SP
-      INTEGER :: Nrowpd
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Pd(:,:)
+      INTEGER, INTENT(IN) :: Nrowpd
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Pd(:,:)
     END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Neq, Idid
-  INTEGER :: Iwm(:)
-  REAL(SP) :: Delsgn, T, Tolfac, Tout, Tstop
-  REAL(SP) :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
-    Yh(Neq,6) , Yh1(6*Neq), Ypout(Neq)
-  LOGICAL :: Intout
+  INTEGER, INTENT(IN) :: Neq
+  INTEGER, INTENT(OUT) :: Idid
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(SP), INTENT(IN) :: Tout, Tstop
+  REAL(SP), INTENT(INOUT) :: Delsgn, T
+  REAL(SP), INTENT(OUT) :: Tolfac
+  REAL(SP), INTENT(INOUT) :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), &
+    Y(Neq), Yh(Neq,6), Yh1(6*Neq), Ypout(Neq), Wm(:)
+  LOGICAL, INTENT(INOUT) :: Intout
+  !
   INTEGER :: ltol, natolp, nrtolp, intflg, k, l
   REAL(SP) :: absdel, big, del, dt, ha, tol
   CHARACTER(8) :: xern1
@@ -118,8 +125,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !
   IF( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
-    CALL XERMSG('LSOD',&
-      'IN DEBDF, THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.$$YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,6,1)
+    ERROR STOP 'LSOD : IN DEBDF, THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.'
     Idid = -33
   END IF
   !
@@ -130,10 +136,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       IF( Rtol(k)<0. ) THEN
         WRITE (xern1,'(I8)') k
         WRITE (xern3,'(1PE15.6)') Rtol(k)
-        CALL XERMSG('LSOD','IN DEBDF, THE RELATIVE ERROR TOLERANCES&
-         & MUST BE NON-NEGATIVE.$$YOU HAVE CALLED THE CODE WITH RTOL('//xern1//') = '&
-         //xern3//'$$IN THE CASE OF VECTOR ERROR TOLERANCES,&
-         & NO FURTHER CHECKING OF RTOL COMPONENTS IS DONE.',7,1)
+        ERROR STOP 'LSOD : IN DEBDF, THE RELATIVE ERROR TOLERANCES&
+         & MUST BE NON-NEGATIVE. IN THE CASE OF VECTOR ERROR TOLERANCES,&
+         & NO FURTHER CHECKING OF RTOL COMPONENTS IS DONE.'
         Idid = -33
         IF( natolp>0 ) EXIT
         nrtolp = 1
@@ -145,10 +150,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     IF( Atol(k)<0. ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
-      CALL XERMSG('LSOD','IN DEBDF, THE ABSOLUTE ERROR TOLERANCES MUST&
-        & BE NON-NEGATIVE.$$YOU HAVE CALLED THE CODE WITH ATOL('//xern1//') = '&
-        //xern3//'$$IN THE CASE OF VECTOR ERROR TOLERANCES,&
-        & NO FURTHER CHECKING OF ATOL COMPONENTS IS DONE.',8,1)
+      ERROR STOP 'LSOD : IN DEBDF, THE ABSOLUTE ERROR TOLERANCES MUST&
+        & BE NON-NEGATIVE. IN THE CASE OF VECTOR ERROR TOLERANCES,&
+        & NO FURTHER CHECKING OF ATOL COMPONENTS IS DONE.'
       Idid = -33
       IF( nrtolp>0 ) EXIT
       natolp = 1
@@ -160,9 +164,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     IF( SIGN(1._SP,Tout-T)/=SIGN(1._SP,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
-      CALL XERMSG('LSOD','IN DEBDF, YOU HAVE CALLED THE CODE WITH TOUT = '&
-        //xern3//'$$BUT YOU HAVE ALSO TOLD THE CODE NOT TO INTEGRATE PAST THE POINT&
-        & TSTOP = '//xern4//' BY SETTING INFO(4) = 1.  THESE INSTRUCTIONS CONFLICT.',14,1)
+      ERROR STOP 'LSOD : IN DEBDF, YOU HAVE CALLED THE CODE WITH THAT VALUE OF TOUT&
+        & BUT YOU HAVE ALSO TOLD THE CODE NOT TO INTEGRATE PAST THE POINT&
+        & TSTOP BY SETTING INFO(4) = 1.  THESE INSTRUCTIONS CONFLICT.'
       Idid = -33
     END IF
   END IF
@@ -172,27 +176,25 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   IF( init_com/=0 ) THEN
     IF( T==Tout ) THEN
       WRITE (xern3,'(1PE15.6)') T
-      CALL XERMSG('LSOD',&
-        'IN DEBDF, YOU HAVE CALLED THE CODE WITH T = TOUT = '//&
-        xern3//'  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
+      ERROR STOP 'LSOD : IN DEBDF, YOU HAVE CALLED THE CODE WITH T = TOUT &
+        & THIS IS NOT ALLOWED ON CONTINUATION CALLS.'
       Idid = -33
     END IF
     !
     IF( T/=told_com ) THEN
       WRITE (xern3,'(1PE15.6)') told_com
       WRITE (xern4,'(1PE15.6)') T
-      CALL XERMSG('LSOD',&
-        'IN DEBDF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '//xern4//&
-        '  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
+      ERROR STOP 'LSOD : IN DEBDF, YOU HAVE CHANGED THE VALUE OF T,&
+        & THIS IS NOT ALLOWED ON CONTINUATION CALLS.'
       Idid = -33
     END IF
     !
     IF( init_com/=1 ) THEN
       IF( Delsgn*(Tout-T)<0. ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
-        CALL XERMSG('LSOD',&
-          'IN DEBDF, BY CALLING THE CODE WITH TOUT = '//xern3//&
-          ' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
+        ERROR STOP 'LSOD : IN DEBDF, BY CALLING THE CODE WITH THAT VALUE OF TOUT &
+          & YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION. &
+          & THIS IS NOT ALLOWED WITHOUT RESTARTING.'
         Idid = -33
       END IF
     END IF
@@ -204,9 +206,9 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       iquit_com = -33
       ibegin_com = -1
     ELSE
-      CALL XERMSG('LSOD','IN DEBDF, INVALID INPUT WAS DETECTED ON&
+      ERROR STOP 'LSOD : IN DEBDF, INVALID INPUT WAS DETECTED ON&
         & SUCCESSIVE ENTRIES.  IT IS IMPOSSIBLE TO PROCEED BECAUSE YOU HAVE NOT&
-        & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.',12,2)
+        & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.'
     END IF
     RETURN
   END IF
@@ -425,4 +427,5 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   T = tn_com
   told_com = T
   Intout = .FALSE.
+  !
 END SUBROUTINE LSOD

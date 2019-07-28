@@ -30,13 +30,14 @@ SUBROUTINE CCMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
   USE CCBLK, ONLY : k_com, cnv_com, eps_com, nm_com, npp_com
   USE service, ONLY : eps_sp
   !
-  INTEGER :: Ierror
-  REAL(SP) :: Ah(:), An(nm_com), B(:), Bh(:), Bn(nm_com), Cn(nm_com)
-  COMPLEX(SP) :: Bc(500)
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: An(nm_com), Bn(nm_com), Cn(nm_com)
+  REAL(SP), INTENT(OUT) :: Ah(:), B(:), Bh(:)
   !
   INTEGER :: i, i2, i4, ib, if, ifd, ipl, ir, j, j1, j2, jf, js, kdo, l, l1, &
     l2, lh, ls, n2m2, nb, nmp
   REAL(SP) :: arg, bnorm, d1, d2, d3
+  COMPLEX(SP) :: bc(2*nm_com)
   !* FIRST EXECUTABLE STATEMENT  CCMPB
   eps_com = eps_sp
   bnorm = ABS(Bn(1))
@@ -114,10 +115,11 @@ SUBROUTINE CCMPB(Ierror,An,Bn,Cn,B,Ah,Bh)
     B(lh) = B(n2m2+1)
     CALL INXCB(if,k_com-1,j1,j2)
     j2 = j1 + nmp + nmp
-    CALL CPADD(nm_com+1,Ierror,An,Cn,Bc(j1),B(j1:j2-1),B(j2:))
+    CALL CPADD(nm_com+1,Ierror,An,Cn,bc(j1),B(j1:j2-1),B(j2:))
   END IF
   RETURN
   100  Ierror = 4
   RETURN
   200  Ierror = 5
+  !
 END SUBROUTINE CCMPB

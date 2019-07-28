@@ -1,5 +1,5 @@
 !** LSSODS
-SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
+PURE SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     Resnrm,Xnorm,Z,R,Div,Td,Scales)
   !> Subsidiary to BVSUP
   !***
@@ -119,15 +119,17 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, control_xer, max_xer, eps_2_sp
+  USE service, ONLY : control_xer, max_xer, eps_2_sp
   !
-  INTEGER :: Iflag, Irank, Iter, M, N, Nrda, Kpivot(N)
-  REAL(SP) :: Resnrm, Xnorm
-  REAL(SP) :: A(Nrda,N), B(M), Diag(N), Div(N), Q(Nrda,N), R(M), Scales(N), Td(N), &
-    X(N), Z(N)
+  INTEGER, INTENT(IN) :: Iscale, M, N, Nrda
+  INTEGER, INTENT(INOUT) :: Iflag, Iter
+  INTEGER, INTENT(OUT) :: Irank, Kpivot(N)
+  REAL(SP), INTENT(OUT) :: Resnrm, Xnorm
+  REAL(SP), INTENT(IN) :: A(Nrda,N), B(M)
+  REAL(SP), INTENT(INOUT) :: Q(Nrda,N), X(N)
+  REAL(SP), INTENT(OUT) :: Diag(N), Div(N), R(M), Scales(N), Td(N), Z(N)
   !
-  INTEGER :: irm, irp, Iscale, it, iterp, j, k, kp, l, nfatal, nmir, maxmes, &
-    mmir, nfat
+  INTEGER :: irm, irp, it, iterp, j, k, kp, l, nfatal, nmir, maxmes, mmir, nfat
   REAL(SP) :: acc, gam, gama, uro, znrm0, znorm
   !
   !- *********************************************************************
@@ -149,8 +151,6 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         IF( Iflag/=0 ) THEN
           nfat = -1
           IF( nfatal==0 ) nfat = 0
-          control_xer = nfat
-          max_xer = 1
         END IF
         !
         !     COPY MATRIX A INTO MATRIX Q
@@ -166,8 +166,6 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !
         CALL ORTHOL(Q,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Z,Td)
         !
-        control_xer = nfatal
-        max_xer = maxmes
         IF( Irank==N ) THEN
           !
           !     STORE DIVISORS FOR THE TRIANGULAR SOLUTION
@@ -192,7 +190,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !
   !     INVALID INPUT FOR LSSODS
   Iflag = 2
-  CALL XERMSG('LSSODS','INVALID INPUT PARAMETERS.',2,1)
+  ERROR STOP 'LSSODS : INVALID INPUT PARAMETERS.'
   RETURN
   !
   100  irm = Irank - 1
@@ -294,14 +292,14 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
             IF( it==2 ) THEN
               !
               Iflag = 5
-              CALL XERMSG('LSSODS',&
-                'PROBLEM IS VERY ILL-CONDITIONED.  ITERATIVE IMPROVEMENT IS INEFFECTIVE.',8,1)
+              ERROR STOP 'LSSODS : PROBLEM IS VERY ILL-CONDITIONED.&
+                & ITERATIVE IMPROVEMENT IS INEFFECTIVE.'
               RETURN
             ELSE
               !
               Iflag = 4
-              CALL XERMSG('LSSODS',&
-                'PROBLEM MAY BE ILL-CONDITIONED.  MAXIMAL MACHINE ACCURACY IS NOT ACHIEVABLE.',3,1)
+              ERROR STOP 'LSSODS : PROBLEM MAY BE ILL-CONDITIONED.&
+                & MAXIMAL MACHINE ACCURACY IS NOT ACHIEVABLE.'
               RETURN
             END IF
           END IF
@@ -329,8 +327,8 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     !
     !- *********************************************************************
     Iflag = 6
-    CALL XERMSG('LSSODS',&
-      'CONVERGENCE HAS NOT BEEN OBTAINED WITH ALLOWABLE NUMBER OF ITERATIVE IMPROVEMENT STEPS.',8,1)
+    ERROR STOP 'LSSODS : CONVERGENCE HAS NOT BEEN OBTAINED WITH ALLOWABLE NUMBER&
+      & OF ITERATIVE IMPROVEMENT STEPS.'
     RETURN
   END IF
   !
@@ -338,5 +336,6 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   Iter = 0
   Xnorm = 0._SP
   Resnrm = NORM2(B(1:M))
+  !
   RETURN
 END SUBROUTINE LSSODS

@@ -257,7 +257,7 @@ CONTAINS
       ' ERROR OVERRUN =',1P,E10.2)
   END SUBROUTINE SDASQC
   !** SDJAC1
-  SUBROUTINE SDJAC1(T,Y,Yprime,Pd,Cj)
+  PURE SUBROUTINE SDJAC1(T,Y,Yprime,Pd,Cj)
     !> First Jacobian evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -275,15 +275,17 @@ CONTAINS
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
 
-    REAL(SP) :: T, Y(:), Yprime(:), Pd(:,:), Cj
+    REAL(SP), INTENT(IN) :: T, Y(:), Yprime(:), Cj
+    REAL(SP), INTENT(OUT) :: Pd(:,:)
     !* FIRST EXECUTABLE STATEMENT  SDJAC1
     Pd(1,1) = Cj + 10._SP
     Pd(1,2) = 0._SP
     Pd(2,1) = 1._SP
     Pd(2,2) = 1._SP
+    !
   END SUBROUTINE SDJAC1
   !** SDJAC2
-  SUBROUTINE SDJAC2(T,Y,Yprime,Pd,Cj)
+  PURE SUBROUTINE SDJAC2(T,Y,Yprime,Pd,Cj)
     !> Second Jacobian evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -304,7 +306,9 @@ CONTAINS
     !           including MBAND+n in expressions.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
 
-    REAL(SP) :: T, Y(:), Yprime(:), Pd(:,:), Cj
+    REAL(SP), INTENT(IN) :: T, Y(:), Yprime(:), Cj
+    REAL(SP), INTENT(OUT) :: Pd(:,:)
+    !
     INTEGER :: j, mband
     REAL(SP), PARAMETER :: alph1 = 1._SP, alph2 = 1._SP
     INTEGER, PARAMETER :: ng = 5
@@ -322,9 +326,10 @@ CONTAINS
     DO j = 1, neq, ng
       Pd(mband+1,j) = 0._SP
     END DO
+    !
   END SUBROUTINE SDJAC2
   !** SDRES1
-  SUBROUTINE SDRES1(T,Y,Yprime,Delta,Ires)
+  PURE SUBROUTINE SDRES1(T,Y,Yprime,Delta,Ires)
     !> First residual evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -342,14 +347,16 @@ CONTAINS
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
 
-    INTEGER :: Ires
-    REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
+    INTEGER, INTENT(INOUT) :: Ires
+    REAL(SP), INTENT(IN) :: T, Y(:), Yprime(:)
+    REAL(SP), INTENT(OUT) :: Delta(:)
     !* FIRST EXECUTABLE STATEMENT  SDRES1
     Delta(1) = Yprime(1) + 10._SP*Y(1)
     Delta(2) = Y(2) + Y(1) - 1._SP
+    !
   END SUBROUTINE SDRES1
   !** SDRES2
-  SUBROUTINE SDRES2(T,Y,Yprime,Delta,Ires)
+  PURE SUBROUTINE SDRES2(T,Y,Yprime,Delta,Ires)
     !> Second residual evaluator for SDASQC.
     !***
     ! **Library:**   SLATEC (DASSL)
@@ -368,8 +375,10 @@ CONTAINS
     !           declarations explicit.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
 
-    INTEGER :: Ires
-    REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
+    INTEGER, INTENT(INOUT) :: Ires
+    REAL(SP), INTENT(IN) :: T, Y(:), Yprime(:)
+    REAL(SP), INTENT(OUT) :: Delta(:)
+    !
     INTEGER :: i, j, k
     REAL(SP) :: d
     REAL(SP), PARAMETER :: alph1 = 1._SP, alph2 = 1._SP
@@ -384,7 +393,9 @@ CONTAINS
         Delta(k) = d - Yprime(k)
       END DO
     END DO
+    !
   END SUBROUTINE SDRES2
+  !
 END MODULE TEST48_MOD
 !** TEST48
 PROGRAM TEST48

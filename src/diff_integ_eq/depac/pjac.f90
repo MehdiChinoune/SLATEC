@@ -30,22 +30,28 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC)
   USE DEBDF1, ONLY : el0_com, h_com, tn_com, uround_com, ier_com, miter_com, &
     n_com, nfe_com, nje_com
   USE linpack, ONLY : SGBFA, SGEFA
+  !
   INTERFACE
     SUBROUTINE F(X,U,Uprime)
       IMPORT SP
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Uprime(:)
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE F
-    SUBROUTINE JAC(X,U,Pd,Nrowpd)
+    PURE SUBROUTINE JAC(X,U,Pd,Nrowpd)
       IMPORT SP
-      INTEGER :: Nrowpd
-      REAL(SP) :: X
-      REAL(SP) :: U(:), Pd(:,:)
+      INTEGER, INTENT(IN) :: Nrowpd
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(IN) :: U(:)
+      REAL(SP), INTENT(OUT) :: Pd(:,:)
     END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Neq, Nyh
-  INTEGER :: Iwm(:)
-  REAL(SP) :: Y(Neq), Yh(Nyh,n_com), Ewt(n_com), Ftem(n_com), Savf(n_com), Wm(:)
+  INTEGER, INTENT(IN) :: Neq, Nyh
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(SP), INTENT(IN) :: Yh(Nyh,n_com), Ewt(n_com), Savf(n_com)
+  REAL(SP), INTENT(INOUT) :: Y(Neq), Wm(:)
+  REAL(SP), INTENT(OUT) :: Ftem(n_com)
+  !
   INTEGER :: i, i1, i2, ii, j, j1, jj, mba, mband, meb1, meband, ml, ml3, mu
   REAL(SP) :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
   REAL(SP), ALLOCATABLE :: pd(:,:)

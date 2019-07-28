@@ -1,5 +1,5 @@
 !** DGVEC
-SUBROUTINE DGVEC(X,G)
+PURE SUBROUTINE DGVEC(X,G)
   !> Subsidiary to
   !***
   ! **Library:**   SLATEC
@@ -12,8 +12,10 @@ SUBROUTINE DGVEC(X,G)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(DP) :: X, G(2)
+  REAL(DP), INTENT(IN) :: X
+  REAL(DP), INTENT(OUT) :: G(2)
   !* FIRST EXECUTABLE STATEMENT  DGVEC
   G(1) = 0._DP
   G(2) = 1._DP + COS(X)
+  !
 END SUBROUTINE DGVEC

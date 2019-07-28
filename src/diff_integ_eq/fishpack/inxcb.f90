@@ -1,5 +1,5 @@
 !** INXCB
-SUBROUTINE INXCB(I,Ir,Idx,Idp)
+PURE SUBROUTINE INXCB(I,Ir,Idx,Idp)
   !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
@@ -19,7 +19,10 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   USE CCBLK, ONLY : ik_com, nm_com
-  INTEGER :: I, Idp, Idx, Ir
+  !
+  INTEGER, INTENT(IN) :: I, Ir
+  INTEGER, INTENT(OUT) :: Idp, Idx
+  !
   INTEGER :: id, ipl, izh
   !* FIRST EXECUTABLE STATEMENT  INXCB
   Idp = 0
@@ -41,5 +44,6 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
     END IF
   END IF
   Idp = 0
+  !
   RETURN
 END SUBROUTINE INXCB

@@ -1,8 +1,8 @@
 !** DDPST
-SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
+PURE SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     T,USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,Ier,Ipvt,Save1,Iswflg,Bnd,Jstate)
   !> Subroutine DDPST evaluates the Jacobian matrix of the right
-  !            hand side of the differential equations.
+  !  hand side of the differential equations.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -29,35 +29,45 @@ SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linpack, ONLY : DGBFA, DGEFA
+  !
   INTERFACE
-    SUBROUTINE F(N,T,Y,Ydot)
+    PURE SUBROUTINE F(N,T,Y,Ydot)
       IMPORT DP
-      INTEGER :: N
-      REAL(DP) :: T, Y(:), Ydot(:)
+      INTEGER, INTENT(IN) :: N
+      REAL(DP), INTENT(IN) :: T, Y(:)
+      REAL(DP), INTENT(OUT) :: Ydot(:)
     END SUBROUTINE F
-    SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+    PURE SUBROUTINE JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
       IMPORT DP
-      INTEGER :: N, Matdim, Ml, Mu
-      REAL(DP) :: T, Y(N), Dfdy(Matdim,N)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+      REAL(DP), INTENT(IN) :: T, Y(N)
+      REAL(DP), INTENT(OUT) :: Dfdy(Matdim,N)
     END SUBROUTINE JACOBN
-    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    PURE SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT DP
-      INTEGER :: Impl, N, Nde, iflag
-      REAL(DP) :: T, H, El
-      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, iflag
+      REAL(DP), INTENT(IN) :: T, H, El
+      REAL(DP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      REAL(DP), INTENT(INOUT) :: Save1(N), Save2(N)
     END SUBROUTINE USERS
-    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    PURE SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IMPORT DP
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(DP) :: T, Y(N), A(:,:)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(DP), INTENT(IN) :: T, Y(N)
+      REAL(DP), INTENT(INOUT) :: A(:,:)
     END SUBROUTINE FA
   END INTERFACE
-  INTEGER :: Impl, Iswflg, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nfe, Nje, Nq
-  INTEGER :: Ipvt(N)
-  REAL(DP) :: Bnd, H, T, Uround
-  REAL(DP) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Fac(N), Save1(N), Save2(N), &
-    Y(N+1), Yh(N,Nq+1), Ywt(N)
-  LOGICAL :: Ier
+  INTEGER, INTENT(IN) :: Impl, Iswflg, Matdim, Miter, Ml, Mu, N, Nde, Nq
+  INTEGER, INTENT(INOUT) :: Nje, Nfe
+  INTEGER, INTENT(OUT) :: Jstate
+  INTEGER, INTENT(OUT) :: Ipvt(N)
+  REAL(DP), INTENT(IN) :: H, T, Uround, El(13,12)
+  REAL(DP), INTENT(OUT) :: Bnd
+  REAL(DP), INTENT(IN) :: Yh(N,Nq+1), Ywt(N)
+  REAL(DP), INTENT(INOUT) :: A(Matdim,N), Fac(N), Y(N+1), Save2(N)
+  REAL(DP), INTENT(OUT) :: Dfdy(Matdim,N), Save1(N)
+  LOGICAL, INTENT(OUT) :: Ier
+  !
   INTEGER :: i, iflag, imax, info, j, j2, k, mw
   REAL(DP) :: bl, bp, br, dfdymx, diff, dy, facmin, factor, scalee, yj, ys
   REAL(DP), PARAMETER :: FACMAX = 0.5_DP, BU = 0.5_DP
@@ -337,4 +347,5 @@ SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       RETURN
     END IF
   END IF
+  !
 END SUBROUTINE DDPST

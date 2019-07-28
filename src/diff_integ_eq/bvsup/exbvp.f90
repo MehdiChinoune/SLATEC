@@ -22,8 +22,7 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
 
   !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
@@ -32,9 +31,14 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     mxnon_com, ndisk_com, ntp_com, nfcc_com, x_com, xbeg_com, xend_com, kkkzpw_com, &
     needw_com, neediw_com, k1_com, k2_com, k3_com, k4_com, k5_com, k6_com, k7_com, &
     k8_com, k9_com, k10_com, l1_com, lpar_com
-  USE service, ONLY : XERMSG
-  INTEGER :: Nrowa, Nrowb, Nrowy, Iflag, Iwork(*)
-  REAL(SP) :: A(:,:), Alpha(:), B(:,:), Beta(:), Work(*), Xpts(:), Y(:,:)
+  !
+  INTEGER, INTENT(IN) :: Nrowa, Nrowb, Nrowy
+  INTEGER, INTENT(OUT) :: Iflag
+  INTEGER, INTENT(INOUT) :: Iwork(*)
+  REAL(SP), INTENT(IN) :: A(:,:), Alpha(:), B(:,:), Beta(:), Xpts(:)
+  REAL(SP), INTENT(INOUT) :: Work(*)
+  REAL(SP), INTENT(OUT) :: Y(:,:)
+  !
   INTEGER :: nsafiw, nsafw, iexp, inc, kotc
   REAL(SP) :: xl, zquit
   CHARACTER(8) :: xern1, xern2
@@ -54,10 +58,10 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     !- *********************************************************************
     !- *********************************************************************
     !
-    CALL BVPOR(Y,Nrowy,ncomp_com,Xpts,nxpts_com,A,Nrowa,Alpha,nic_com,B,Nrowb,Beta,nfc_com,&
-      Iflag,Work(1),mxnon_com,Work(k1_com),ntp_com,Iwork(18),Work(k2_com),Iwork(16)&
-      ,Work(k3_com),Work(k4_com),Work(k5_com),Work(k6_com),Work(k7_com),Work(k8_com:k9_com-1),&
-      Work(k10_com),Iwork(l1_com),nfcc_com)
+    CALL BVPOR(Y,Nrowy,ncomp_com,Xpts,nxpts_com,A,Nrowa,Alpha,nic_com,B,Nrowb,Beta,&
+      nfc_com,Iflag,Work(1),mxnon_com,Work(k1_com),ntp_com,Iwork(18),Work(k2_com),&
+      Iwork(16),Work(k3_com),Work(k4_com),Work(k5_com),Work(k6_com),Work(k7_com),&
+      Work(k8_com:k9_com-1),Work(k10_com),Iwork(l1_com),nfcc_com)
     !
     !- *********************************************************************
     !- *********************************************************************
@@ -86,9 +90,8 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
         !
         WRITE (xern1,'(I8)') nsafw
         WRITE (xern2,'(I8)') nsafiw
-        CALL XERMSG('EXBVP',&
-          'IN BVSUP, PREDICTED STORAGE ALLOCATION FOR WORK ARRAY IS '&
-          //xern1//', PREDICTED STORAGE ALLOCATION FOR IWORK ARRAY IS '//xern2,1,0)
+        ERROR STOP 'EXBVP : IN BVSUP, THE MAXIMUM NUMBER OF ORTHONORMALIZATIONS&
+          & HAS BEEN ATTAINED AND WE CANNOT CONTINUE'
       END IF
       !
       Iwork(1) = mxnon_com
@@ -101,4 +104,5 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
       iexp = iexp - 2
     END IF
   END DO
+  !
 END SUBROUTINE EXBVP

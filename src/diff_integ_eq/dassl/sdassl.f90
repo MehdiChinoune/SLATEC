@@ -1,8 +1,8 @@
 !** SDASSL
-SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
+PURE SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     Iwork,Liw,JAC)
-  !> This code solves a system of differential/algebraic
-  !            equations of the form G(T,Y,YPRIME) = 0.
+  !> This code solves a system of differential/algebraic equations of the form
+  !  G(T,Y,YPRIME) = 0.
   !***
   ! **Library:**   SLATEC (DASSL)
   !***
@@ -924,25 +924,28 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !           and improved XERMSG calls.  (FNF)
   !   901030  Added ERROR MESSAGES section and reworked other sections to
   !           be of more uniform format.  (FNF)
-  !   910624  Fixed minor bug related to HMAX (six lines after label
-  !           525).  (LRP)
-  USE service, ONLY : XERMSG, eps_sp
+  !   910624  Fixed minor bug related to HMAX (six lines after label 525).  (LRP)
+  USE service, ONLY : eps_sp
   !     Declare arguments.
   INTERFACE
-    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+    PURE SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
       IMPORT SP
-      INTEGER :: Ires
-      REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
-    END SUBROUTINE
-    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      INTEGER, INTENT(INOUT) :: Ires
+      REAL(SP), INTENT(IN) :: T, Y(:), Yprime(:)
+      REAL(SP), INTENT(OUT) :: Delta(:)
+    END SUBROUTINE RES
+    PURE SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
       IMPORT SP
-      REAL(SP) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
-    END SUBROUTINE
+      REAL(SP), INTENT(IN) :: T, Cj, Y(:), Yprime(:)
+      REAL(SP), INTENT(OUT) :: Pd(:,:)
+    END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Neq, Idid, Lrw, Liw
-  INTEGER :: Info(15), Iwork(Liw)
-  REAL(SP) :: T, Tout
-  REAL(SP) :: Y(Neq), Yprime(Neq), Rtol(:), Atol(:), Rwork(Lrw)
+  INTEGER, INTENT(IN) :: Neq, Lrw, Liw
+  INTEGER, INTENT(OUT) :: Idid
+  INTEGER, INTENT(INOUT) :: Info(15), Iwork(Liw)
+  REAL(SP), INTENT(IN) :: Tout
+  REAL(SP), INTENT(INOUT) :: T
+  REAL(SP), INTENT(INOUT) :: Y(Neq), Yprime(Neq), Rtol(:), Atol(:), Rwork(Lrw)
   !
   !     Declare local variables.
   !
@@ -985,7 +988,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     IF( Neq<=0 ) THEN
       !
       WRITE (xern1,'(I8)') Neq
-      CALL XERMSG('SDASSL','NEQ = '//xern1//' <= 0',2,1)
+      ERROR STOP 'SDASSL : NEQ <= 0'
       GOTO 1200
     ELSE
       !
@@ -996,7 +999,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         IF( mxord<1 .OR. mxord>5 ) THEN
           !
           WRITE (xern1,'(I8)') mxord
-          CALL XERMSG('SDASSL','MAXORD = '//xern1//' NOT IN RANGE',3,1)
+          ERROR STOP 'SDASSL : MAXORD NOT IN RANGE'
           GOTO 1200
         END IF
       END IF
@@ -1014,14 +1017,12 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       ELSEIF( Iwork(LML)<0 .OR. Iwork(LML)>=Neq ) THEN
         !
         WRITE (xern1,'(I8)') Iwork(LML)
-        CALL XERMSG('SDASSL','ML = '//xern1//&
-          ' ILLEGAL.  EITHER < 0 OR > NEQ',17,1)
+        ERROR STOP 'SDASSL : ML ILLEGAL.  EITHER < 0 OR > NEQ'
         GOTO 1200
       ELSEIF( Iwork(LMU)<0 .OR. Iwork(LMU)>=Neq ) THEN
         !
         WRITE (xern1,'(I8)') Iwork(LMU)
-        CALL XERMSG('SDASSL','MU = '//xern1//&
-          ' ILLEGAL.  EITHER < 0 OR > NEQ',18,1)
+        ERROR STOP 'SDASSL : MU ILLEGAL.  EITHER < 0 OR > NEQ'
         GOTO 1200
       ELSE
         lenpd = (2*Iwork(LML)+Iwork(LMU)+1)*Neq
@@ -1043,15 +1044,13 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         WRITE (xern1,'(I8)') lenrw
         WRITE (xern2,'(I8)') Lrw
-        CALL XERMSG('SDASSL','RWORK LENGTH NEEDED, LENRW = '//&
-          xern1//', EXCEEDS LRW = '//xern2,4,1)
+        ERROR STOP 'SDASSL : RWORK LENGTH NEEDED, LENRW EXCEEDS LRW'
         GOTO 1200
       ELSEIF( Liw<leniw ) THEN
         !
         WRITE (xern1,'(I8)') leniw
         WRITE (xern2,'(I8)') Liw
-        CALL XERMSG('SDASSL','IWORK LENGTH NEEDED, LENIW = '//&
-          xern1//', EXCEEDS LIW = '//xern2,5,1)
+        ERROR STOP 'SDASSL : IWORK LENGTH NEEDED, LENIW EXCEEDS LIW'
         GOTO 1200
       ELSE
         !
@@ -1064,7 +1063,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF( hmax<=0._SP ) THEN
             !
             WRITE (xern3,'(1P,E15.6)') hmax
-            CALL XERMSG('SDASSL','HMAX = '//xern3//' < 0.0',10,1)
+            ERROR STOP 'SDASSL : HMAX < 0.0'
             GOTO 1200
           END IF
         END IF
@@ -1096,9 +1095,8 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     !     APPROPRIATE ACTION WAS NOT TAKEN. THIS
     !     IS A FATAL ERROR.
     WRITE (xern1,'(I8)') Idid
-    CALL XERMSG('SDASSL',&
-      'THE LAST STEP TERMINATED WITH A NEGATIVE VALUE OF IDID = '&
-      //xern1//' AND NO APPROPRIATE ACTION WAS TAKEN.  RUN TERMINATED',-998,2)
+    ERROR STOP 'SDASSL : THE LAST STEP TERMINATED WITH A NEGATIVE VALUE OF IDID&
+      & AND NO APPROPRIATE ACTION WAS TAKEN.  RUN TERMINATED'
     RETURN
   END IF
   !
@@ -1122,7 +1120,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   END DO
   IF( nzflg==0 ) THEN
     !
-    CALL XERMSG('SDASSL','ALL ELEMENTS OF RTOL AND ATOL ARE ZERO',8,1)
+    ERROR STOP 'SDASSL : ALL ELEMENTS OF RTOL AND ATOL ARE ZERO'
     GOTO 1200
   ELSE
     !
@@ -1248,8 +1246,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         WRITE (xern3,'(1P,E15.6)') Tout
         WRITE (xern4,'(1P,E15.6)') T
-        CALL XERMSG('SDASSL','TOUT = '//xern3//&
-          ' TOO CLOSE TO T = '//xern4//' TO START INTEGRATION',14,1)
+        ERROR STOP 'SDASSL : TOUT TOO CLOSE TO T TO START INTEGRATION'
         GOTO 1200
       ELSE
         !
@@ -1267,7 +1264,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF( (Tout-T)*ho<0._SP ) GOTO 800
           IF( ho==0._SP ) THEN
             !
-            CALL XERMSG('SDASSL','INFO(8)=1 AND H0=0.0',12,1)
+            ERROR STOP 'SDASSL : INFO(8)=1 AND H0=0.0'
             GOTO 1200
           END IF
         END IF
@@ -1382,71 +1379,68 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         !     TOO MUCH ACCURACY FOR MACHINE PRECISION
         WRITE (xern3,'(1P,E15.6)') tn
-        CALL XERMSG('SDASSL','AT T = '//xern3//&
-          ' TOO MUCH ACCURACY REQUESTED FOR PRECISION OF MACHINE. RTOL AND ATOL WERE INCREASED TO APPROPRIATE VALUES',Idid,1)
+        ERROR STOP 'SDASSL : AT T TOO MUCH ACCURACY REQUESTED FOR PRECISION OF&
+          & MACHINE. RTOL AND ATOL WERE INCREASED TO APPROPRIATE VALUES'
       CASE (3)
         !
         !     WT(I) <= 0.0 FOR SOME I (NOT AT START OF PROBLEM)
         WRITE (xern3,'(1P,E15.6)') tn
-        CALL XERMSG('SDASSL','AT T = '//xern3//&
-          ' SOME ELEMENT OF WT HAS BECOME <= 0.0',Idid,1)
+        ERROR STOP 'SDASSL : AT T SOME ELEMENT OF WT HAS BECOME <= 0.0'
       CASE (4,5)
       CASE (6)
         !
         !     ERROR TEST FAILED REPEATEDLY OR WITH H=HMIN
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-          xern4//' THE ERROR TEST FAILED REPEATEDLY OR WITH ABS(H)=HMIN',Idid,1)
+        ERROR STOP 'SDASSL : AT T AND STEPSIZE H THE ERROR TEST FAILED&
+          & REPEATEDLY OR WITH ABS(H)=HMIN'
       CASE (7)
         !
         !     CORRECTOR CONVERGENCE FAILED REPEATEDLY OR WITH H=HMIN
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
-          ' THE CORRECTOR FAILED TO CONVERGE REPEATEDLY OR WITH ABS(H)=HMIN',Idid,1)
+        ERROR STOP 'SDASSL : AT T AND STEPSIZE H THE CORRECTOR FAILED TO CONVERGE&
+          & REPEATEDLY OR WITH ABS(H)=HMIN'
       CASE (8)
         !
         !     THE ITERATION MATRIX IS SINGULAR
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-          xern4//' THE ITERATION MATRIX IS SINGULAR',Idid,1)
+        ERROR STOP 'SDASSL : AT T AND STEPSIZE H THE ITERATION MATRIX IS SINGULAR'
       CASE (9)
         !
         !     CORRECTOR FAILURE PRECEDED BY ERROR TEST FAILURES.
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
-          ' THE CORRECTOR COULD NOT CONVERGE.  ALSO, THE ERROR TEST FAILED REPEATEDLY.',Idid,1)
+        ERROR STOP 'SDASSL : AT T AND STEPSIZE H THE CORRECTOR COULD NOT CONVERGE.&
+          & ALSO, THE ERROR TEST FAILED REPEATEDLY.'
       CASE (10)
         !
         !     CORRECTOR FAILURE BECAUSE IRES = -1
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
-          ' THE CORRECTOR COULD NOT CONVERGE BECAUSE IRES WAS EQUAL TO MINUS ONE',Idid,1)
+        ERROR STOP 'SDASSL : AT T AND STEPSIZE H THE CORRECTOR COULD NOT CONVERGE&
+          & BECAUSE IRES WAS EQUAL TO MINUS ONE'
       CASE (11)
         !
         !     FAILURE BECAUSE IRES = -2
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') h
-        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-          xern4//' IRES WAS EQUAL TO MINUS TWO',Idid,1)
+        ERROR STOP 'SDASSL : AT T AND STEPSIZE H IRES WAS EQUAL TO MINUS TWO'
       CASE (12)
         !
         !     FAILED TO COMPUTE INITIAL YPRIME
         WRITE (xern3,'(1P,E15.6)') tn
         WRITE (xern4,'(1P,E15.6)') ho
-        CALL XERMSG('SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-          xern4//' THE INITIAL YPRIME COULD NOT BE COMPUTED',Idid,1)
+        ERROR STOP 'SDASSL : AT T AND STEPSIZE H THE INITIAL YPRIME COULD NOT&
+          & BE COMPUTED'
       CASE DEFAULT
         !
         !     THE MAXIMUM NUMBER OF STEPS WAS TAKEN BEFORE
         !     REACHING TOUT
         WRITE (xern3,'(1P,E15.6)') tn
-        CALL XERMSG('SDASSL','AT CURRENT T = '//xern3//&
-          ' 500 STEPS TAKEN ON THIS CALL BEFORE REACHING TOUT',Idid,1)
+        ERROR STOP 'SDASSL : AT CURRENT T 500 STEPS TAKEN ON THIS CALL BEFORE&
+          & REACHING TOUT'
     END SELECT
     !
     Info(1) = -1
@@ -1523,43 +1517,39 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !     SUCCESSION, EXECUTION IS TERMINATED
   !
   !-----------------------------------------------------------------------
-  400  CALL XERMSG('SDASSL',&
-    'SOME ELEMENT OF INFO VECTOR IS NOT ZERO OR ONE',1,1)
+  400  ERROR STOP 'SDASSL : SOME ELEMENT OF INFO VECTOR IS NOT ZERO OR ONE'
   GOTO 1200
   !
-  500  CALL XERMSG('SDASSL','SOME ELEMENT OF RTOL IS < 0',6,1)
+  500  ERROR STOP 'SDASSL : SOME ELEMENT OF RTOL IS < 0'
   GOTO 1200
   !
-  600  CALL XERMSG('SDASSL','SOME ELEMENT OF ATOL IS < 0',7,1)
+  600  ERROR STOP 'SDASSL : SOME ELEMENT OF ATOL IS < 0'
   GOTO 1200
   !
   700  WRITE (xern3,'(1P,E15.6)') tstop
   WRITE (xern4,'(1P,E15.6)') Tout
-  CALL XERMSG('SDASSL','INFO(4) = 1 AND TSTOP = '//xern3//&
-    ' BEHIND TOUT = '//xern4,9,1)
+  ERROR STOP 'SDASSL : INFO(4) = 1 AND TSTOP BEHIND TOUT'
   GOTO 1200
   !
   800  WRITE (xern3,'(1P,E15.6)') Tout
   WRITE (xern4,'(1P,E15.6)') T
-  CALL XERMSG('SDASSL','TOUT = '//xern3//' BEHIND T = '//xern4,11,1)
+  ERROR STOP 'SDASSL : TOUT BEHIND T'
   GOTO 1200
   !
-  900  CALL XERMSG('SDASSL','SOME ELEMENT OF WT IS <= 0.0',13,1)
+  900  ERROR STOP 'SDASSL : SOME ELEMENT OF WT IS <= 0.0'
   GOTO 1200
   !
   1000 WRITE (xern3,'(1P,E15.6)') tstop
   WRITE (xern4,'(1P,E15.6)') T
-  CALL XERMSG('SDASSL','INFO(4)=1 AND TSTOP = '//xern3//&
-    ' BEHIND T = '//xern4,15,1)
+  ERROR STOP 'SDASSL : INFO(4)=1 AND TSTOP BEHIND T'
   GOTO 1200
   !
   1100 WRITE (xern3,'(1P,E15.6)') Tout
-  CALL XERMSG('SDASSL','TOUT = T = '//xern3,19,1)
+  ERROR STOP 'SDASSL : TOUT = T'
   !
   1200 Idid = -33
-  IF( Info(1)==-1 ) CALL XERMSG('SDASSL',&
-    'REPEATED OCCURRENCES OF ILLEGAL INPUT$$RUN TERMINATED. APPARENT INFINITE LOOP',&
-    -999,2)
+  IF( Info(1)==-1 ) ERROR STOP 'SDASSL : REPEATED OCCURRENCES OF ILLEGAL INPUT&
+    & RUN TERMINATED. APPARENT INFINITE LOOP'
   !
   Info(1) = -1
   !-----------END OF SUBROUTINE SDASSL------------------------------------

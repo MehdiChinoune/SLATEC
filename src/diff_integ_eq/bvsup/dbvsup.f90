@@ -1,9 +1,8 @@
 !** DBVSUP
 SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
-  !> Solve a linear two-point boundary value problem using
-  !            superposition coupled with an orthonormalization procedure
-  !            and a variable-step integration scheme.
+  !> Solve a linear two-point boundary value problem using superposition coupled
+  !  with an orthonormalization procedure and a variable-step integration scheme.
   !***
   ! **Library:**   SLATEC
   !***
@@ -108,20 +107,19 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     NDW = actual dimension of work array allocated by user.
   !           An estimate for NDW can be computed from the following
   !            NDW = 130 + NCOMP**2 * (6 + NXPTS/2 + expected number of
-  !                                           orthonormalizations/8)
+  !                                        orthonormalizations/8)
   !           For the disk or tape storage mode,
   !            NDW = 6 * NCOMP**2 + 10 * NCOMP + 130
   !  However, when the ADAMS integrator is to be used, the estimates are
   !            NDW = 130 + NCOMP**2 * (13 + NXPTS/2 + expected number of
-  !                                           orthonormalizations/8)
+  !                                       orthonormalizations/8)
   !    and     NDW = 13 * NCOMP**2 + 22 * NCOMP + 130  , respectively.
   !
   !     IWORK(NDIW) = integer array used for internal storage.
   !
   !     NDIW = actual dimension of IWORK array allocated by user.
   !            An estimate for NDIW can be computed from the following
-  !            NDIW = 68 + NCOMP * (1 + expected number of
-  !                                            orthonormalizations)
+  !            NDIW = 68 + NCOMP * (1 + expected number of orthonormalizations)
   !- *NOTE --  the amount of storage required is problem dependent and may
   !            be difficult to predict in advance.  Experience has shown
   !            that for most problems 20 or fewer orthonormalizations
@@ -336,8 +334,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !                range from 21 to 25.
   !            =30 solution vectors form a dependent set.
   !
-  !     WORK(1),...,WORK(IWORK(1)) = orthonormalization points
-  !                                  determined by DBVPOR.
+  !     WORK(1),...,WORK(IWORK(1)) = orthonormalization points determined by DBVPOR.
   !
   !     IWORK(1) = number of orthonormalizations performed by DBVPOR.
   !
@@ -404,12 +401,10 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   890921  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900510  Convert XERRWV calls to XERMSG calls, remove some extraneous
-  !           comments.  (RWC)
+  !   900510  Convert XERRWV calls to XERMSG calls, remove some extraneous comments.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE DML, ONLY : xsav_com, igofx_com, inhomo_com, ncomp_com, nfc_com , &
     kkkzpw_com, needw_com, neediw_com, k1_com, k2_com, k3_com, k4_com, k5_com, &
@@ -417,13 +412,15 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     lllint_com, xbeg_com, xend_com, mnswot_com, ae_com, re_com, nxpts_com, &
     nic_com, nopg_com, mxnon_com, ndisk_com, ntape_com, indpvt_com, integ_com, &
     nps_com, ntp_com, neqivp_com => neqivp_com, nfcc_com, icoco_com
-  USE service, ONLY : XERMSG
   !- *********************************************************************
-  INTEGER :: Iflag, Igofx, Ncomp, Ndiw, Ndw, Neqivp, Nfc, Nic, Nrowa, Nrowb, &
-    Nrowy, Nxpts, Iwork(Ndiw)
-  REAL(DP) :: Ae, Re
-  REAL(DP) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Work(Ndw), &
-    Xpts(Nxpts), Y(Nrowy,Nxpts)
+  INTEGER, INTENT(IN) :: Igofx, Ncomp, Ndiw, Ndw, Neqivp, Nic, Nrowa, Nrowb, &
+    Nrowy, Nxpts
+  INTEGER, INTENT(INOUT) :: Iflag, Iwork(Ndiw), Nfc
+  REAL(DP), INTENT(IN) :: Ae, Re
+  REAL(DP), INTENT(IN) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nxpts), Xpts(Nxpts)
+  REAL(DP), INTENT(INOUT) :: Work(Ndw)
+  REAL(DP), INTENT(OUT) :: Y(Nrowy,Nxpts)
+  !
   INTEGER :: is, j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, kkksud, kkksvc, kkku, &
     kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, lllsud, lllsvc, mxnoni, &
     mxnonr, ndeq, nitemp, non, nrtemp, nxptsm
@@ -448,22 +445,22 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                   IF( Re>=0._DP ) THEN
                     IF( Ae>=0._DP ) THEN
                       IF( Re/=0._DP .OR. Ae/=0._DP ) THEN
-                        !                          BEGIN BLOCK PERMITTING ...EXITS TO 70
+                        !  BEGIN BLOCK PERMITTING ...EXITS TO 70
                         is = 1
                         IF( Xpts(Nxpts)<Xpts(1) ) is = 2
                         nxptsm = Nxpts - 1
                         DO k = 1, nxptsm
                           IF( is==2 ) THEN
-                            !                          .........EXIT
+                            !  .........EXIT
                             IF( Xpts(k)<=Xpts(k+1) ) GOTO 100
-                            !                          .........EXIT
+                            !  .........EXIT
                           ELSEIF( Xpts(k+1)<=Xpts(k) ) THEN
                             GOTO 100
                           END IF
                         END DO
                         !
-                        !                             ******************************************
-                        !                                 CHECK FOR DISK STORAGE
+                        !     ******************************************
+                        !         CHECK FOR DISK STORAGE
                         !
                         kpts = Nxpts
                         ndisk_com = 0
@@ -473,15 +470,15 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                           ndisk_com = 1
                         END IF
                         !
-                        !                             ******************************************
-                        !                                 SET INTEG PARAMETER ACCORDING TO
-                        !                                 CHOICE OF INTEGRATOR.
+                        !     ******************************************
+                        !         SET INTEG PARAMETER ACCORDING TO
+                        !         CHOICE OF INTEGRATOR.
                         !
                         integ_com = 1
                         IF( Iwork(9)==2 ) integ_com = 2
                         !
-                        !                             ******************************************
-                        !                                 COMPUTE INHOMO
+                        !     ******************************************
+                        !         COMPUTE INHOMO
                         !
                         !                 ............EXIT
                         IF( Igofx==1 ) GOTO 300
@@ -620,15 +617,13 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     WRITE (xern2,'(I8)') kkkzpw_com
     WRITE (xern3,'(I8)') neediw_com
     WRITE (xern4,'(I8)') lllip
-    CALL XERMSG('DBVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '&
-      //xern1//' + '//xern2//&
-      '*(EXPECTED NUMBER OF ORTHONORMALIZATIONS) $$REQUIRED STORAGE FOR IWORK ARRAY IS '&
-      //xern3//' + '//xern4//'*(EXPECTED NUMBER OF ORTHONORMALIZATIONS)',1,0)
+    ERROR STOP 'DBVSUP : REQUIRED STORAGE FOR WORK ARRAY NOT SATISFIED.&
+      & REQUIRED STORAGE FOR IWORK ARRAY NOT SATISFIED.'
   ELSE
     WRITE (xern1,'(I8)') needw_com
     WRITE (xern2,'(I8)') neediw_com
-    CALL XERMSG('DBVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '//&
-      xern1//' + NUMBER OF ORTHONOMALIZATIONS. $$REQUIRED STORAGE FOR IWORK ARRAY IS '//xern2,1,0)
+    ERROR STOP 'DBVSUP : REQUIRED STORAGE FOR WORK ARRAY NOT SATISFIED.&
+      & REQUIRED STORAGE FOR IWORK ARRAY NOT SATISFIED.'
   END IF
   RETURN
   !
@@ -703,5 +698,6 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   CALL DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   Nfc = nfcc_com
   Iwork(17) = Iwork(l1_com)
+  !
   RETURN
 END SUBROUTINE DBVSUP

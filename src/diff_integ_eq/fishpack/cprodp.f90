@@ -1,5 +1,5 @@
 !** CPRODP
-SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
+PURE SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
@@ -11,8 +11,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   ! **Description:**
   !
   ! PRODP applies a sequence of matrix operations to the vector X and
-  ! stores the result in YY. (Periodic boundary conditions and COMPLEX
-  ! case)
+  ! stores the result in YY. (Periodic boundary conditions and COMPLEX case)
   !
   ! BD,BM1,BM2     are arrays containing roots of certain B polynomials.
   ! ND,NM1,NM2     are the lengths of the arrays BD,BM1,BM2 respectively.
@@ -35,9 +34,12 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: M, Na, Nd, Nm1, Nm2
-  REAL(SP) :: A(M), Aa(Na), B(M), Bm1(Nm1), Bm2(Nm2), C(M), X(M), Yy(M)
-  COMPLEX(SP) :: Y(M), D(M), U(M), Bd(Nd)
+  INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+  REAL(SP), INTENT(IN) :: Aa(Na), Bm1(Nm1), Bm2(Nm2), X(M), A(M), B(M), C(M)
+  COMPLEX(SP), INTENT(IN) :: Bd(Nd)
+  REAL(SP), INTENT(OUT) :: Yy(M)
+  COMPLEX(SP), INTENT(OUT) :: Y(M), D(M), U(M)
+  !
   INTEGER :: ia, id, iflg, j, k, m1, m2, mm, mm2
   REAL(SP) :: rt
   COMPLEX(SP) :: v, den, bh, ym, am, y1, y2, yh, crt
@@ -144,5 +146,6 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   Y(M-1) = y1
   iflg = 1
   GOTO 100
+  !
   RETURN
 END SUBROUTINE CPRODP

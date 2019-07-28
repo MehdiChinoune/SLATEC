@@ -1,11 +1,9 @@
 !** CDNTL
-SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
-    Ml,Mu,N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,&
-    Nfe,Rc,Yh,A,Convrg,El,Fac,Ier,Ipvt,Nq,Nwait,Rh,Rmax,&
-    Save2,Tq,Trend,Iswflg,Jstate)
-  !> Subroutine CDNTL is called to set parameters on the first
-  !            call to CDSTP, on an internal restart, or when the user has
-  !            altered MINT, MITER, and/or H.
+PURE SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
+    Ml,Mu,N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,Nfe,Rc,Yh,A,Convrg,&
+    El,Fac,Ier,Ipvt,Nq,Nwait,Rh,Rmax,Save2,Tq,Trend,Iswflg,Jstate)
+  !> Subroutine CDNTL is called to set parameters on the first call to CDSTP,
+  !  on an internal restart, or when the user has altered MINT, MITER, and/or H.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -44,32 +42,43 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   USE blas, ONLY : SCNRM2
   USE linpack, ONLY : CGBFA, CGEFA
   USE lapack, ONLY : CGBTRS, CGETRS
+  !
   INTERFACE
-    SUBROUTINE F(N,T,Y,Ydot)
+    PURE SUBROUTINE F(N,T,Y,Ydot)
       IMPORT SP
-      INTEGER :: N
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(:), Ydot(:)
+      INTEGER, INTENT(IN) :: N
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(:)
+      COMPLEX(SP), INTENT(OUT) :: Ydot(:)
     END SUBROUTINE F
-    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    PURE SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT SP
-      INTEGER :: Impl, N, Nde, iflag
-      REAL(SP) :: T, H, El
-      COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, iflag
+      REAL(SP), INTENT(IN) :: T, H, El
+      COMPLEX(SP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      COMPLEX(SP), INTENT(INOUT) :: Save1(N), Save2(N)
     END SUBROUTINE USERS
-    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    PURE SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IMPORT SP
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(N), A(:,:)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(N)
+      COMPLEX(SP), INTENT(INOUT) :: A(:,:)
     END SUBROUTINE FA
   END INTERFACE
-  INTEGER :: Impl, Iswflg, Jstate, Jtask, Matdim, Maxord, Mint, Miter, Ml, &
-    Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
-  REAL(SP) :: Eps, H, Hmax, Hold, Rc, Rh, Rmax, T, Trend, Uround, El(13,12), Tq(3,12)
-  COMPLEX(SP) :: A(Matdim,N), Fac(N), Save1(N), Save2(N), Y(N+1), Yh(N,13), Ywt(N)
-  INTEGER :: Ipvt(N)
-  LOGICAL :: Convrg, Ier
+  INTEGER, INTENT(IN) :: Impl, Iswflg, Jtask, Matdim, Maxord, Mint, Miter, Ml, &
+    Mu, N, Nde
+  INTEGER, INTENT(INOUT) :: Mntold, Mtrold, Nfe, Nq
+  INTEGER, INTENT(OUT) :: Jstate, Nwait
+  INTEGER, INTENT(OUT) :: Ipvt(N)
+  REAL(SP), INTENT(IN) :: Eps, Hmax, T, Uround
+  REAL(SP), INTENT(INOUT) :: H, Hold, Rc, Rh, Rmax, Trend
+  REAL(SP), INTENT(INOUT) :: El(13,12), Tq(3,12)
+  COMPLEX(SP), INTENT(IN) :: Y(N+1), Ywt(N)
+  COMPLEX(SP), INTENT(INOUT) :: A(Matdim,N), Fac(N), Save1(N), Save2(N), Yh(N,13)
+  LOGICAL, INTENT(INOUT) :: Convrg
+  LOGICAL, INTENT(OUT) :: Ier
+  !
   INTEGER :: i, iflag, info
   REAL(SP) :: oldl0, summ
   REAL(SP), PARAMETER :: RMINIT = 10000._SP
@@ -206,4 +215,5 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
       CALL CDSCL(Hmax,N,Nq,Rmax,Hold,Rc,Rh,Yh)
     END IF
   END IF
+  !
 END SUBROUTINE CDNTL

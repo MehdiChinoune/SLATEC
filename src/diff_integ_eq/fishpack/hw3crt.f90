@@ -1,9 +1,8 @@
 !** HW3CRT
-SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
+PURE SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     N,Nbdcnd,Bdzs,Bdzf,Elmbda,Ldimf,Mdimf,F,Pertrb,Ierror,W)
-  !> Solve the standard seven-point finite difference
-  !            approximation to the Helmholtz equation in Cartesian
-  !            coordinates.
+  !> Solve the standard seven-point finite difference approximation to the Helmholtz
+  !  equation in Cartesian coordinates.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -367,10 +366,15 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: Ierror, L, Lbdcnd, Ldimf, M, Mbdcnd, Mdimf, N, Nbdcnd
-  REAL(SP) :: Elmbda, Pertrb, Xf, Xs, Yf, Ys, Zf, Zs
-  REAL(SP) :: Bdxf(Mdimf,N+1), Bdxs(Mdimf,N+1), Bdyf(Ldimf,N+1), Bdys(Ldimf,N+1), &
-    Bdzf(Ldimf,M+1), Bdzs(Ldimf,M+1), F(Ldimf,Mdimf,N+1), W(:)
+  INTEGER, INTENT(IN) :: L, Lbdcnd, Ldimf, M, Mbdcnd, Mdimf, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: Elmbda, Xf, Xs, Yf, Ys, Zf, Zs
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bdxf(Mdimf,N+1), Bdxs(Mdimf,N+1), Bdyf(Ldimf,N+1), &
+    Bdys(Ldimf,N+1), Bdzf(Ldimf,M+1), Bdzs(Ldimf,M+1)
+  REAL(SP), INTENT(INOUT) :: F(Ldimf,Mdimf,N+1)
+  REAL(SP), INTENT(OUT) :: W(:)
+  !
   INTEGER :: i, ir, iwb, iwc, iww, j, k, lp, lp1, lstart, lstop, lstpm1, lunk, &
     mp, mp1, mstart, mstop, mstpm1, munk, np, np1, nperod, nstart, nstop, nstpm1, nunk
   REAL(SP) :: c1, c2, c3, dx, dy, dz, s, s1, s2, twbydx, twbydy, twbydz, xlp, ylp, zlp
@@ -688,4 +692,5 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       END DO
     END IF
   END IF
+  !
 END SUBROUTINE HW3CRT

@@ -1,7 +1,6 @@
 !** DDSCL
-SUBROUTINE DDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
-  !> Subroutine DDSCL rescales the YH array whenever the step
-  !            size is changed.
+PURE SUBROUTINE DDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
+  !> Subroutine DDSCL rescales the YH array whenever the step size is changed.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -21,8 +20,11 @@ SUBROUTINE DDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  INTEGER :: N, Nq
-  REAL(DP) :: H, Hmax, Rc, Rh, Rmax, Yh(N,Nq+1)
+  INTEGER, INTENT(IN) :: N, Nq
+  REAL(DP), INTENT(IN) :: Hmax, Rmax
+  REAL(DP), INTENT(INOUT) :: H, Rc, Rh
+  REAL(DP), INTENT(INOUT) :: Yh(N,Nq+1)
+  !
   INTEGER :: i, j
   REAL(DP) :: r1
   !* FIRST EXECUTABLE STATEMENT  DDSCL
@@ -40,4 +42,5 @@ SUBROUTINE DDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   END DO
   H = H*Rh
   Rc = Rc*Rh
+  !
 END SUBROUTINE DDSCL

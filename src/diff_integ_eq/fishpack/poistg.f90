@@ -1,8 +1,7 @@
 !** POISTG
-SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
-  !> Solve a block tridiagonal system of linear equations
-  !            that results from a staggered grid finite difference
-  !            approximation to 2-D elliptic PDE's.
+PURE SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
+  !> Solve a block tridiagonal system of linear equations that results from
+  !  a staggered grid finite difference approximation to 2-D elliptic PDE's.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -225,8 +224,11 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Idimy, Ierror, M, Mperod, N, Nperod
-  REAL(SP) :: A(M), B(M), C(M), W(:), Y(Idimy,N)
+  INTEGER, INTENT(IN) :: Idimy, M, Mperod, N, Nperod
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A(M), B(M), C(M)
+  REAL(SP), INTENT(INOUT) :: W(:), Y(Idimy,N)
+  !
   INTEGER :: i, ipstor, irev, iwb2, iwb3, iwba, iwbb, iwbc, iwd, iwp, iwtcos, &
     iww1, iww2, iww3, j, k, mh, mhm1, mhmi, mhpi, modd, mp, mskip, nby2, np
   REAL(SP) :: a1
@@ -358,4 +360,5 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !     RETURN STORAGE REQUIREMENTS FOR W ARRAY.
   !
   800  W(1) = ipstor + iwp - 1
+  !
 END SUBROUTINE POISTG

@@ -25,8 +25,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   890921  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
@@ -36,10 +35,15 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     k1_com, k2_com, k3_com, k4_com, k5_com, k6_com, k7_com, k8_com, k9_com, k10_com, &
     l1_com, x_com, xbeg_com, xend_com, tol_com, nxpts_com, nic_com, nopg_com, &
     mxnon_com, ndisk_com, ntp_com, nfcc_com
-  USE service, ONLY : XERMSG
+
   !
-  INTEGER :: Iflag, Nrowa, Nrowb, Nrowy, Iwork(*)
-  REAL(DP) :: A(:,:), Alpha(:), B(:,:), Beta(:), Work(*), Xpts(:), Y(:,:)
+  INTEGER, INTENT(IN) :: Nrowa, Nrowb, Nrowy
+  INTEGER, INTENT(OUT) :: Iflag
+  INTEGER, INTENT(INOUT) :: Iwork(*)
+  REAL(DP), INTENT(IN) :: A(:,:), Alpha(:), B(:,:), Beta(:), Xpts(:)
+  REAL(DP), INTENT(INOUT) :: Work(*)
+  REAL(DP), INTENT(OUT) :: Y(:,:)
+  !
   INTEGER :: iexp, inc, kotc, nsafiw, nsafw
   REAL(DP) :: xl, zquit
   CHARACTER(8) :: xern1, xern2
@@ -91,9 +95,8 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
         !
         WRITE (xern1,'(I8)') nsafw
         WRITE (xern2,'(I8)') nsafiw
-        CALL XERMSG('DEXBVP',&
-          'IN DBVSUP, PREDICTED STORAGE ALLOCATION FOR WORK ARRAY IS '&
-          //xern1//', PREDICTED STORAGE ALLOCATION FOR IWORK ARRAY IS '//xern2,1,0)
+        ERROR STOP 'DEXBVP : IN DBVSUP, THE MAXIMUM NUMBER OF ORTHONORMALIZATIONS&
+          & HAS BEEN ATTAINED AND WE CANNOT CONTINUE'
       END IF
       !
       Iwork(1) = mxnon_com
@@ -106,4 +109,5 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
       iexp = iexp - 2
     END IF
   END DO
+  !
 END SUBROUTINE DEXBVP

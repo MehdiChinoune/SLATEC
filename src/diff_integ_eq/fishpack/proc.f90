@@ -1,5 +1,5 @@
 !** PROC
-SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
+PURE SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   !> Subsidiary to CBLKTR
   !***
   ! **Library:**   SLATEC
@@ -33,9 +33,11 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: M, Na, Nd, Nm1, Nm2
-  REAL(SP) :: Aa(Na), Bd(Nd), Bm1(Nm1), Bm2(Nm2)
-  COMPLEX(SP) :: X(M), Y(M), A(M), B(M), C(M), D(M), W(M), U(M)
+  INTEGER, INTENT(IN) :: M, Na, Nd, Nm1, Nm2
+  REAL(SP), INTENT(IN) :: Aa(Na), Bd(Nd), Bm1(Nm1), Bm2(Nm2)
+  COMPLEX(SP), INTENT(IN) :: X(M), A(M), B(M), C(M)
+  COMPLEX(SP), INTENT(OUT) :: Y(M), D(M), W(M), U(M)
+  !
   INTEGER :: ia, ibr, id, j, k, m1, m2, mm
   REAL(SP) :: rt
   COMPLEX(SP) :: den
@@ -119,5 +121,6 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
     Y(j) = Y(j) + rt*W(j)
   END DO
   GOTO 100
+  !
   RETURN
 END SUBROUTINE PROC

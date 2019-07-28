@@ -1,5 +1,5 @@
 !** DHVNRM
-REAL(DP) FUNCTION DHVNRM(V,Ncomp)
+REAL(DP) PURE FUNCTION DHVNRM(V,Ncomp)
   !> Subsidiary to DDEABM, DDEBDF and DDERKF
   !***
   ! **Library:**   SLATEC
@@ -29,12 +29,9 @@ REAL(DP) FUNCTION DHVNRM(V,Ncomp)
   !   910722  Updated AUTHOR section.  (ALS)
 
   !
-  INTEGER :: Ncomp
-  REAL(DP) :: V(Ncomp)
-  INTEGER :: k
+  INTEGER, INTENT(IN) :: Ncomp
+  REAL(DP), INTENT(IN) :: V(Ncomp)
   !* FIRST EXECUTABLE STATEMENT  DHVNRM
-  DHVNRM = 0._DP
-  DO k = 1, Ncomp
-    DHVNRM = MAX(DHVNRM,ABS(V(k)))
-  END DO
+  DHVNRM = MAXVAL(ABS(V))
+  !
 END FUNCTION DHVNRM

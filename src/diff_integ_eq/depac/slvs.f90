@@ -29,8 +29,9 @@ SUBROUTINE SLVS(Wm,Iwm,X)
   USE DEBDF1, ONLY : el0_com, h_com, ier_com, miter_com, n_com
   USE lapack, ONLY : SGBTRS, SGETRS
   !
-  INTEGER :: Iwm(:)
-  REAL(SP) :: Wm(:), X(n_com)
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(SP), INTENT(INOUT) :: Wm(:), X(n_com)
+  !
   INTEGER :: i, meband, ml, mu, info
   REAL(SP) :: di, hl0, phl0, r
   !-----------------------------------------------------------------------
@@ -90,7 +91,6 @@ SUBROUTINE SLVS(Wm,Iwm,X)
       RETURN
   END SELECT
   100  ier_com = -1
-  RETURN
   !----------------------- END OF SUBROUTINE SLVS -----------------------
   RETURN
 END SUBROUTINE SLVS

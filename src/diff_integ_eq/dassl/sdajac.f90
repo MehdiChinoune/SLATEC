@@ -1,8 +1,7 @@
 !** SDAJAC
-SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
+PURE SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
     Uround,JAC,Ntemp)
-  !> Compute the iteration matrix for SDASSL and form the
-  !            LU-decomposition.
+  !> Compute the iteration matrix for SDASSL and form the LU-decomposition.
   !***
   ! **Library:**   SLATEC (DASSL)
   !***
@@ -60,25 +59,29 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   USE linpack, ONLY : SGBFA, SGEFA
   !
   INTERFACE
-    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+    PURE SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
       IMPORT SP
-      INTEGER :: Ires
-      REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
-    END SUBROUTINE
-    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      INTEGER, INTENT(INOUT) :: Ires
+      REAL(SP), INTENT(IN) :: T, Y(:), Yprime(:)
+      REAL(SP), INTENT(OUT) :: Delta(:)
+    END SUBROUTINE RES
+    PURE SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
       IMPORT SP
-      REAL(SP) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
-    END SUBROUTINE
+      REAL(SP), INTENT(IN) :: T, Cj, Y(:), Yprime(:)
+      REAL(SP), INTENT(OUT) :: Pd(:,:)
+    END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Neq, Ier, Ires
-  INTEGER :: Iwm(:), Ntemp
-  REAL(SP) :: X, Cj, H, Uround
-  REAL(SP) :: Y(Neq), Yprime(Neq), Delta(:), Wt(:), E(:), Wm(:)
+  INTEGER, INTENT(IN) :: Neq, Ntemp
+  INTEGER, INTENT(OUT) :: Ier, Ires
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(SP), INTENT(IN) :: X, Cj, H, Uround
+  REAL(SP), INTENT(IN) :: Delta(:), Wt(:)
+  REAL(SP), INTENT(INOUT) :: E(:), Y(Neq), Yprime(Neq), Wm(:)
   !
   INTEGER :: i, i1, i2, ii, ipsave, isave, j, k, l, mba, mband, meb1, meband, &
     msave, mtype, n, npdm1, nrow
   REAL(SP) :: del, delinv, squr, ypsave, ysave
-  REAL(SP), ALLOCATABLE :: Pd(:,:)
+  REAL(SP), ALLOCATABLE :: pd(:,:)
   !
   INTEGER, PARAMETER :: NPD = 1
   INTEGER, PARAMETER :: LML = 1
@@ -203,7 +206,6 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !     DO DENSE-MATRIX LU DECOMPOSITION ON PD
   CALL SGEFA(Wm,Neq,Neq,Iwm(LIPVT:),Ier)
   !CALL DGETRF(Neq,Neq,Wm,Neq,Iwm(LIPVT:),Ier)
-  RETURN
   !------END OF SUBROUTINE SDAJAC------
   RETURN
 END SUBROUTINE SDAJAC

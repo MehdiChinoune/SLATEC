@@ -50,8 +50,7 @@ CONTAINS
     alfa = (1._SP,1._SP)
     eps = eps_sp**(1._SP/3._SP)
     Ipass = 1
-    !                                            Exercise CDRIV1 for problem
-    !                                            with known solution.
+    !  Exercise CDRIV1 for problem with known solution.
     y(4) = alfa
     t = 0._SP
     y(1) = 10._SP
@@ -121,52 +120,51 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     num_xer = 0
-    !                                         Run CDRIV1 with invalid input.
-    nx = 201
-    t = 0._SP
-    y(1) = 10._SP
-    y(2) = 0._SP
-    y(3) = 10._SP
-    y(4) = alfa
-    tout = 10._SP
-    mstate = 1
-    lenw = 342
-    CALL CDRIV1(nx,t,y,CDF,tout,mstate,eps,work,lenw,ierflg)
-    IF( ierflg/=21 ) THEN
-      IF( Kprint==1 ) THEN
-        WRITE (Lun,&
-          '('' CDRIV1:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF( Kprint>=2 ) THEN
-        WRITE (Lun,&
-          '('' CDRIV1:An invalid parameter has not been correctly detected.'')')
-        WRITE (Lun,*) ' The value of N was set to ', nx
-        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-        WRITE (Lun,&
-          '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS ', eps, ', LENW ', lenw
-        WRITE (Lun,*) ' T ', t
-        WRITE (Lun,*) ' Y(1) ', y(1)
-        WRITE (Lun,*) ' Y(2) ', y(2)
-        WRITE (Lun,*) ' Y(3) ', y(3)
-        WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
-        WRITE (Lun,'(/)')
-      END IF
-      Ipass = 0
-    ELSEIF( Kprint==2 ) THEN
-      WRITE (Lun,&
-        '('' CDRIV1:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF( Kprint==3 ) THEN
-      WRITE (Lun,&
-        '('' CDRIV1:An invalid parameter has been correctly detected.'')')
-      WRITE (Lun,*) ' The value of N was set to ', nx
-      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-      WRITE (Lun,'(/)')
-    END IF
-    num_xer = 0
-    !                                            Exercise CDRIV2 for problem
-    !                                            with known solution.
+    !  Run CDRIV1 with invalid input.
+!    nx = 201
+!    t = 0._SP
+!    y(1) = 10._SP
+!    y(2) = 0._SP
+!    y(3) = 10._SP
+!    y(4) = alfa
+!    tout = 10._SP
+!    mstate = 1
+!    lenw = 342
+!    CALL CDRIV1(nx,t,y,CDF,tout,mstate,eps,work,lenw,ierflg)
+!    IF( ierflg/=21 ) THEN
+!      IF( Kprint==1 ) THEN
+!        WRITE (Lun,&
+!          '('' CDRIV1:An invalid parameter has not been correctly detected.'' //)')
+!      ELSEIF( Kprint>=2 ) THEN
+!        WRITE (Lun,&
+!          '('' CDRIV1:An invalid parameter has not been correctly detected.'')')
+!        WRITE (Lun,*) ' The value of N was set to ', nx
+!        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!        WRITE (Lun,&
+!          '('' The values of parameters, results, and statistical quantities are:'')')
+!        WRITE (Lun,*) ' EPS ', eps, ', LENW ', lenw
+!        WRITE (Lun,*) ' T ', t
+!        WRITE (Lun,*) ' Y(1) ', y(1)
+!        WRITE (Lun,*) ' Y(2) ', y(2)
+!        WRITE (Lun,*) ' Y(3) ', y(3)
+!        WRITE (Lun,*) ' Number of steps taken is  ', nstep
+!        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+!        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
+!        WRITE (Lun,'(/)')
+!      END IF
+!      Ipass = 0
+!    ELSEIF( Kprint==2 ) THEN
+!      WRITE (Lun,&
+!        '('' CDRIV1:An invalid parameter has been correctly detected.'' //)')
+!    ELSEIF( Kprint==3 ) THEN
+!      WRITE (Lun,&
+!        '('' CDRIV1:An invalid parameter has been correctly detected.'')')
+!      WRITE (Lun,*) ' The value of N was set to ', nx
+!      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!      WRITE (Lun,'(/)')
+!    END IF
+!    num_xer = 0
+    !  Exercise CDRIV2 for problem with known solution.
     t = 0._SP
     y(1) = 10._SP
     y(2) = 0._SP
@@ -241,54 +239,53 @@ CONTAINS
     END IF
     num_xer = 0
     !                                         Run CDRIV2 with invalid input.
-    t = 0._SP
-    y(1) = 10._SP
-    y(2) = 0._SP
-    y(3) = 10._SP
-    y(4) = alfa
-    tout = 10._SP
-    mstate = 1
-    mint = 1
-    lenwx = 1
-    leniw = 50
-    CALL CDRIV2(N,t,y,CDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
-      leniw,dum_G,ierflg)
-    IF( ierflg/=32 ) THEN
-      IF( Kprint==1 ) THEN
-        WRITE (Lun,&
-          '('' CDRIV2:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF( Kprint>=2 ) THEN
-        WRITE (Lun,&
-          '('' CDRIV2:An invalid parameter has not been correctly detected.'')')
-        WRITE (Lun,*) ' The value of LENW was set to ', lenwx
-        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-        WRITE (Lun,&
-          '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS ', eps, ', MINT ', mint, ', LENW ', lenw, &
-          ', LENIW ', leniw
-        WRITE (Lun,*) ' T ', t
-        WRITE (Lun,*) ' Y(1) ', y(1)
-        WRITE (Lun,*) ' Y(2) ', y(2)
-        WRITE (Lun,*) ' Y(3) ', y(3)
-        WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
-        WRITE (Lun,'(/)')
-      END IF
-      Ipass = 0
-    ELSEIF( Kprint==2 ) THEN
-      WRITE (Lun,&
-        '('' CDRIV2:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF( Kprint==3 ) THEN
-      WRITE (Lun,&
-        '('' CDRIV2:An invalid parameter has been correctly detected.'')')
-      WRITE (Lun,*) ' The value of LENW was set to ', lenwx
-      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-      WRITE (Lun,'(/)')
-    END IF
-    num_xer = 0
-    !                                            Exercise CDRIV3 for problem
-    !                                            with known solution.
+!    t = 0._SP
+!    y(1) = 10._SP
+!    y(2) = 0._SP
+!    y(3) = 10._SP
+!    y(4) = alfa
+!    tout = 10._SP
+!    mstate = 1
+!    mint = 1
+!    lenwx = 1
+!    leniw = 50
+!    CALL CDRIV2(N,t,y,CDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
+!      leniw,dum_G,ierflg)
+!    IF( ierflg/=32 ) THEN
+!      IF( Kprint==1 ) THEN
+!        WRITE (Lun,&
+!          '('' CDRIV2:An invalid parameter has not been correctly detected.'' //)')
+!      ELSEIF( Kprint>=2 ) THEN
+!        WRITE (Lun,&
+!          '('' CDRIV2:An invalid parameter has not been correctly detected.'')')
+!        WRITE (Lun,*) ' The value of LENW was set to ', lenwx
+!        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!        WRITE (Lun,&
+!          '('' The values of parameters, results, and statistical quantities are:'')')
+!        WRITE (Lun,*) ' EPS ', eps, ', MINT ', mint, ', LENW ', lenw, &
+!          ', LENIW ', leniw
+!        WRITE (Lun,*) ' T ', t
+!        WRITE (Lun,*) ' Y(1) ', y(1)
+!        WRITE (Lun,*) ' Y(2) ', y(2)
+!        WRITE (Lun,*) ' Y(3) ', y(3)
+!        WRITE (Lun,*) ' Number of steps taken is  ', nstep
+!        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+!        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
+!        WRITE (Lun,'(/)')
+!      END IF
+!      Ipass = 0
+!    ELSEIF( Kprint==2 ) THEN
+!      WRITE (Lun,&
+!        '('' CDRIV2:An invalid parameter has been correctly detected.'' //)')
+!    ELSEIF( Kprint==3 ) THEN
+!      WRITE (Lun,&
+!        '('' CDRIV2:An invalid parameter has been correctly detected.'')')
+!      WRITE (Lun,*) ' The value of LENW was set to ', lenwx
+!      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!      WRITE (Lun,'(/)')
+!    END IF
+!    num_xer = 0
+    !  Exercise CDRIV3 for problem with known solution.
     t = 0._SP
     y(1) = 10._SP
     y(2) = 0._SP
@@ -364,88 +361,87 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     num_xer = 0
-    !                                         Run CDRIV3 with invalid input.
-    t = 0._SP
-    y(1) = 10._SP
-    y(2) = 0._SP
-    y(3) = 10._SP
-    y(4) = alfa
-    nstate = 1
-    tout = 10._SP
-    mint = 2
-    lenw = 301
-    leniwx = 1
-    CALL CDRIV3(N,t,y,CDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
-      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
-      MXSTEP,dum_G,dum_USERS,ierflg)
-    IF( ierflg/=33 ) THEN
-      IF( Kprint==1 ) THEN
-        WRITE (Lun,&
-          '('' CDRIV3:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF( Kprint>=2 ) THEN
-        WRITE (Lun,&
-          '('' CDRIV3:An invalid parameter has not been correctly detected.'')')
-        WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
-        WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
-        WRITE (Lun,&
-          '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', IERROR
-        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', IMPL
-        WRITE (Lun,*) ' T ', t
-        WRITE (Lun,*) ' Y(1) ', y(1)
-        WRITE (Lun,*) ' Y(2) ', y(2)
-        WRITE (Lun,*) ' Y(3) ', y(3)
-        WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
-        WRITE (Lun,'(/)')
-      END IF
-      Ipass = 0
-    ELSEIF( Kprint==2 ) THEN
-      WRITE (Lun,&
-        '('' CDRIV3:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF( Kprint==3 ) THEN
-      WRITE (Lun,&
-        '('' CDRIV3:An invalid parameter has been correctly detected.'')')
-      WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
-      WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
-      WRITE (Lun,'(/)')
-    END IF
-    num_xer = 0
+    !  Run CDRIV3 with invalid input.
+!    t = 0._SP
+!    y(1) = 10._SP
+!    y(2) = 0._SP
+!    y(3) = 10._SP
+!    y(4) = alfa
+!    nstate = 1
+!    tout = 10._SP
+!    mint = 2
+!    lenw = 301
+!    leniwx = 1
+!    CALL CDRIV3(N,t,y,CDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
+!      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
+!      MXSTEP,dum_G,dum_USERS,ierflg)
+!    IF( ierflg/=33 ) THEN
+!      IF( Kprint==1 ) THEN
+!        WRITE (Lun,&
+!          '('' CDRIV3:An invalid parameter has not been correctly detected.'' //)')
+!      ELSEIF( Kprint>=2 ) THEN
+!        WRITE (Lun,&
+!          '('' CDRIV3:An invalid parameter has not been correctly detected.'')')
+!        WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
+!        WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
+!        WRITE (Lun,&
+!          '('' The values of parameters, results, and statistical quantities are:'')')
+!        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', IERROR
+!        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', IMPL
+!        WRITE (Lun,*) ' T ', t
+!        WRITE (Lun,*) ' Y(1) ', y(1)
+!        WRITE (Lun,*) ' Y(2) ', y(2)
+!        WRITE (Lun,*) ' Y(3) ', y(3)
+!        WRITE (Lun,*) ' Number of steps taken is  ', nstep
+!        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+!        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
+!        WRITE (Lun,'(/)')
+!      END IF
+!      Ipass = 0
+!    ELSEIF( Kprint==2 ) THEN
+!      WRITE (Lun,&
+!        '('' CDRIV3:An invalid parameter has been correctly detected.'' //)')
+!    ELSEIF( Kprint==3 ) THEN
+!      WRITE (Lun,&
+!        '('' CDRIV3:An invalid parameter has been correctly detected.'')')
+!      WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
+!      WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
+!      WRITE (Lun,'(/)')
+!    END IF
+!    num_xer = 0
 
   CONTAINS
-    REAL(SP) FUNCTION dum_G(N,T,Y,Iroot)
-      INTEGER :: N, Iroot
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(N)
-      dum_G = SUM(REAL(Y))+ T
+    REAL(SP) PURE FUNCTION dum_G(N,T,Y,Iroot)
+      INTEGER, INTENT(IN) :: N, Iroot
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(N)
+      dum_G = SUM(REAL(Y))+ T + Iroot
     END FUNCTION dum_G
-    SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
-      INTEGER :: N, Matdim, Ml, Mu
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(N), Dfdy(Matdim,N)
-      Dfdy = T
-      Y = Ml + Mu
+    PURE SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(N)
+      COMPLEX(SP), INTENT(OUT) :: Dfdy(Matdim,N)
+      Dfdy = T + Y(1) + Ml + Mu
     END SUBROUTINE dum_JACOBN
-    SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
-      INTEGER :: Impl, N, Nde, Iflag
-      REAL(SP) :: T, H, El
-      COMPLEX(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
-      Y = Ywt + Save1 + Save2
-      Yh = T + H + El
-      Impl = Nde + Iflag
+    PURE SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, Iflag
+      REAL(SP), INTENT(IN) :: T, H, El
+      COMPLEX(SP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      COMPLEX(SP), INTENT(INOUT) :: Save1(N), Save2(N)
+      Save1 = Yh(:,1) + Y + Ywt
+      Save2 = T + H + El + Impl + Nde + Iflag
     END SUBROUTINE dum_USERS
-    SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(SP) :: T
-      COMPLEX(SP) :: Y(N), A(:,:)
-      T = Matdim + Ml + Mu + Nde
-      Y = 0._SP
-      A = 0._SP
+    PURE SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(SP), INTENT(IN) :: T
+      COMPLEX(SP), INTENT(IN) :: Y(N)
+      COMPLEX(SP), INTENT(INOUT) :: A(:,:)
+      A = Y(1) + T + Matdim + Ml + Mu + Nde
     END SUBROUTINE dum_FA
   END SUBROUTINE CDQCK
   !** CDF
-  SUBROUTINE CDF(N,T,Y,Yp)
+  PURE SUBROUTINE CDF(N,T,Y,Yp)
     !> Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
@@ -472,16 +468,19 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
 
-    INTEGER :: N
-    REAL(SP) :: T
-    COMPLEX(SP) :: Y(:), Yp(:)
+    INTEGER, INTENT(IN) :: N
+    REAL(SP), INTENT(IN) :: T
+    COMPLEX(SP), INTENT(IN) :: Y(:)
+    COMPLEX(SP), INTENT(OUT) :: Yp(:)
     COMPLEX(SP) :: alfa
     !* FIRST EXECUTABLE STATEMENT  CDF
     alfa = Y(N+1)
     Yp(1) = 1._SP + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)
     Yp(2) = alfa*(Y(1)-Y(2)) - Y(2)*Y(3)
     Yp(3) = 1._SP - Y(3)*(Y(1)+Y(2))
+    !
   END SUBROUTINE CDF
+  !
 END MODULE TEST47_MOD
 !** TEST47
 PROGRAM TEST47

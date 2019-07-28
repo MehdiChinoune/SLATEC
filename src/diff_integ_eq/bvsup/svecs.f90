@@ -25,14 +25,16 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
 
   !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY: indpvt_com, nfcc_com
-  INTEGER :: Iflag, Inhomo, Lnfc, Ncomp, Iwork(*)
-  REAL(SP) :: Work(*), Yhp(:,:)
+  !
+  INTEGER, INTENT(IN) :: Inhomo, Ncomp
+  INTEGER, INTENT(INOUT) :: Iflag, Lnfc, Iwork(*)
+  REAL(SP), INTENT(INOUT) :: Work(*), Yhp(:,:)
+  !
   INTEGER :: idp, k, kp, niv
   REAL(SP) :: dum
   !* FIRST EXECUTABLE STATEMENT  SVECS
@@ -57,4 +59,5 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     Yhp(k,Lnfc+1) = Yhp(k,nfcc_com+1)
   END DO
   Iflag = 1
+  !
 END SUBROUTINE SVECS

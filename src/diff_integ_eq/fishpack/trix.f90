@@ -1,5 +1,5 @@
 !** TRIX
-SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
+PURE SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !> Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC
@@ -24,8 +24,11 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Idegbr, Idegcr, M
-  REAL(SP) :: A(M), B(M), C(M), D(M), Tcos(:), W(M), Y(:)
+  INTEGER, INTENT(IN) :: Idegbr, Idegcr, M
+  REAL(SP), INTENT(IN) :: A(M), B(M), C(M), Tcos(:)
+  REAL(SP), INTENT(INOUT) :: Y(:)
+  REAL(SP), INTENT(OUT) :: D(M), W(M)
+  !
   INTEGER :: i, ip, k, l, lint, mm1, kb, kc
   REAL(SP) :: x, xx, z
   !* FIRST EXECUTABLE STATEMENT  TRIX
@@ -70,4 +73,5 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
       l = (lint*kb)/kc
     END IF
   END DO
+  !
 END SUBROUTINE TRIX

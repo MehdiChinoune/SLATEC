@@ -1,5 +1,5 @@
 !** SDASTP
-SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
+PURE SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
     Delta,E,Wm,Iwm,Alpha,Beta,Gama,Psi,Sigma,Cj,Cjold,Hold,&
     S,Hmin,Uround,Iphase,Jcalc,K,Kold,Ns,Nonneg,Ntemp)
   !> Perform one step of the SDASSL integration.
@@ -93,24 +93,30 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-
   !
   INTERFACE
-    SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
+    PURE SUBROUTINE RES(T,Y,Yprime,Delta,Ires)
       IMPORT SP
-      INTEGER :: Ires
-      REAL(SP) :: T, Y(:), Yprime(:), Delta(:)
-    END SUBROUTINE
-    SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
+      INTEGER, INTENT(INOUT) :: Ires
+      REAL(SP), INTENT(IN) :: T, Y(:), Yprime(:)
+      REAL(SP), INTENT(OUT) :: Delta(:)
+    END SUBROUTINE RES
+    PURE SUBROUTINE JAC(T,Y,Yprime,Pd,Cj)
       IMPORT SP
-      REAL(SP) :: T, Cj, Pd(:,:), Y(:), Yprime(:)
-    END SUBROUTINE
+      REAL(SP), INTENT(IN) :: T, Cj, Y(:), Yprime(:)
+      REAL(SP), INTENT(OUT) :: Pd(:,:)
+    END SUBROUTINE JAC
   END INTERFACE
-  INTEGER :: Neq, Jstart, Idid, Iphase, Jcalc, K, Kold, Ns, Nonneg, Ntemp
-  INTEGER :: Iwm(:)
-  REAL(SP) :: X, H, Cj, Cjold, Hold, S, Hmin, Uround
-  REAL(SP) :: Y(Neq), Yprime(Neq), Wt(:), Phi(Neq,*), Delta(:), E(:), Wm(:), &
-    Alpha(:), Beta(:), Gama(:), Psi(:), Sigma(:)
+  INTEGER, INTENT(IN) :: Neq, Nonneg, Ntemp
+  INTEGER, INTENT(INOUT) :: Jstart, Iphase, Jcalc, K, Kold, Ns
+  INTEGER, INTENT(OUT) :: Idid
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(SP), INTENT(IN) :: Hmin, Uround
+  REAL(SP), INTENT(INOUT) :: X, H, Cj, Cjold, Hold, S
+  REAL(SP), INTENT(IN) :: Wt(:)
+  REAL(SP), INTENT(INOUT) :: Alpha(:), Beta(:), Gama(:), Sigma(:), Phi(Neq,*), &
+    Psi(:), Wm(:)
+  REAL(SP), INTENT(OUT) :: Y(Neq), Yprime(Neq), Delta(:), E(:)
   !
   INTEGER :: i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, ncf, nef, nsf, nsp1
   REAL(SP) :: alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, &
@@ -127,11 +133,6 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Phi,&
   !
   INTEGER, PARAMETER :: maxit = 4
   REAL(SP), PARAMETER :: xrate = 0.25_SP
-  !
-  !
-  !
-  !
-  !
   !-----------------------------------------------------------------------
   !     BLOCK 1.
   !     INITIALIZE. ON THE FIRST CALL,SET

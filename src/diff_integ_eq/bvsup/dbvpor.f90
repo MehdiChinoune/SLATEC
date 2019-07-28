@@ -127,8 +127,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
@@ -137,13 +136,16 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     ae_com, re_com, tol_com, ndisk_com, ntape_com, neq_com, neqivp_com, numort_com, &
     icoco_com
   !
-  INTEGER :: Iflag, Mxnon, Ncomp, Nfc, Nfcc, Nic, Niv, Nrowa, Nrowb, Nrowy, Ntp, &
-    Nxpts
-  INTEGER :: Ip(Nfcc,Mxnon+1), Iwork(*)
-  REAL(DP) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nfc), Coef(Nfcc), &
-    P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
-    V(Ncomp,Nxpts), W(Nfcc,Mxnon), Work(*), Xpts(Nxpts), Y(Nrowy,Nxpts), &
-    Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
+  INTEGER, INTENT(IN) :: Ncomp, Nfcc, Nic, Nrowa, Nrowb, Nrowy, Ntp, Nxpts
+  INTEGER, INTENT(INOUT) :: Mxnon, Nfc
+  INTEGER, INTENT(OUT) :: Iflag, Niv
+  INTEGER, INTENT(INOUT) :: Ip(Nfcc,Mxnon+1), Iwork(*)
+  REAL(DP), INTENT(IN) :: A(Nrowa,Ncomp), Alpha(:), B(Nrowb,Ncomp), Beta(Nfc), &
+    Xpts(Nxpts)
+  REAL(DP), INTENT(OUT) :: Coef(Nfcc), P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), &
+    U(Ncomp,Nfc,Nxpts), V(Ncomp,Nxpts), W(Nfcc,Mxnon), Work(*), Yhp(Ncomp,Nfc+1), &
+    Y(Nrowy,Nxpts), Z(Mxnon+1)
+  !
   INTEGER :: i, i1, i2, ic, ira, isflg, j, k, kod, kpts, kwc, kwd, kws, kwt, &
     l, m, n, ncomp2, ndw, nfcp1, nfcp2, nn, non
   !
@@ -309,8 +311,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   ELSE
     Iflag = -4
   END IF
-  !
   !     ******************************************************************
-  !
   Mxnon = numort_com
+  !
 END SUBROUTINE DBVPOR

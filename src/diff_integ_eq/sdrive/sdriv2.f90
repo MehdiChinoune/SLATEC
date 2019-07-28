@@ -1,11 +1,10 @@
 !** SDRIV2
 SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
-  !> The function of SDRIV2 is to solve N ordinary differential
-  !            equations of the form dY(I)/dT = F(Y(I),T), given the
-  !            initial conditions Y(I) = YI.  The program has options to
-  !            allow the solution of both stiff and non-stiff differential
-  !            equations.  SDRIV2 uses single precision arithmetic.
+  !> The function of SDRIV2 is to solve N ordinary differential equations of the
+  !  form dY(I)/dT = F(Y(I),T), given the initial conditions Y(I) = YI.
+  !  The program has options to allow the solution of both stiff and non-stiff
+  !  differential equations.  SDRIV2 uses single precision arithmetic.
   !***
   ! **Library:**   SLATEC (SDRIVE)
   !***
@@ -344,23 +343,28 @@ SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  USE service, ONLY : XERMSG
+
   INTERFACE
-    REAL(SP) FUNCTION G(N,T,Y,Iroot)
+    REAL(SP) PURE FUNCTION G(N,T,Y,Iroot)
       IMPORT SP
-      INTEGER :: N, Iroot
-      REAL(SP) :: T, Y(N)
+      INTEGER, INTENT(IN) :: N, Iroot
+      REAL(SP), INTENT(IN) :: T, Y(N)
     END FUNCTION G
-    SUBROUTINE F(N,T,Y,Ydot)
+    PURE SUBROUTINE F(N,T,Y,Ydot)
       IMPORT SP
-      INTEGER :: N
-      REAL(SP) :: T, Y(:), Ydot(:)
+      INTEGER, INTENT(IN) :: N
+      REAL(SP), INTENT(IN) :: T, Y(:)
+      REAL(SP), INTENT(OUT) :: Ydot(:)
     END SUBROUTINE F
   END INTERFACE
-  INTEGER :: Ierflg, Leniw, Lenw, Mint, Mstate, N, Nroot
-  INTEGER :: Iwork(Leniw+N)
-  REAL(SP) :: Eps, Ewt, T, Tout
-  REAL(SP) :: Work(Lenw), Y(N+1)
+  INTEGER, INTENT(IN) :: Leniw, Lenw, Mint, N, Nroot
+  INTEGER, INTENT(INOUT) :: Mstate
+  INTEGER, INTENT(OUT) :: Ierflg
+  INTEGER, INTENT(INOUT) :: Iwork(Leniw+N)
+  REAL(SP), INTENT(IN) :: Ewt, Tout
+  REAL(SP), INTENT(INOUT) :: Eps, T
+  REAL(SP), INTENT(INOUT) :: Work(Lenw), Y(N+1)
+  !
   INTEGER :: ierror, miter, ml, mu, mxord, nde, nstate, ntask
   REAL(SP) :: ewtcom(1), hmax
   CHARACTER(8) :: intgr1
@@ -368,23 +372,20 @@ SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !* FIRST EXECUTABLE STATEMENT  SDRIV2
   IF( ABS(Mstate)==9 ) THEN
     Ierflg = 999
-    CALL XERMSG('SDRIV2',&
-      'Illegal input.  The magnitude of MSTATE IS 9 .',Ierflg,2)
+    ERROR STOP 'SDRIV2 : Illegal input.  The magnitude of MSTATE IS 9 .'
     RETURN
   ELSEIF( ABS(Mstate)==0 .OR. ABS(Mstate)>9 ) THEN
     WRITE (intgr1,'(I8)') Mstate
     Ierflg = 26
-    CALL XERMSG('SDRIV2',&
-      'Illegal input.  The magnitude of MSTATE, '//intgr1//&
-      ' is not in the range 1 to 8 .',Ierflg,1)
+    ERROR STOP 'SDRIV2 : Illegal input.  The magnitude of MSTATE is not in the&
+      & range 1 to 8 .'
     Mstate = SIGN(9,Mstate)
     RETURN
   END IF
   IF( Mint<1 .OR. Mint>3 ) THEN
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
-    CALL XERMSG('SDRIV2',&
-      'Illegal input.  Improper value for the integration method flag, '//intgr1//' .',Ierflg,1)
+    ERROR STOP 'SDRIV2 : Illegal input. Improper value for the integration method flag.'
     Mstate = SIGN(9,Mstate)
     RETURN
   END IF
@@ -422,28 +423,27 @@ SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   ELSEIF( nstate>11 ) THEN
     Mstate = SIGN(9,Mstate)
   END IF
-
+  !
 CONTAINS
-  SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
-    INTEGER :: N, Matdim, Ml, Mu
-    REAL(SP) :: T
-    REAL(SP) :: Y(N), Dfdy(Matdim,N)
-    Dfdy = T
-    Y = Ml + Mu
+  PURE SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+    INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+    REAL(SP), INTENT(IN) :: T
+    REAL(SP), INTENT(IN) :: Y(N)
+    REAL(SP), INTENT(OUT) :: Dfdy(Matdim,N)
+    Dfdy = T + Y(1) + Ml + Mu
   END SUBROUTINE dum_JACOBN
-  SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
-    INTEGER :: Impl, N, Nde, Iflag
-    REAL(SP) :: T, H, El
-    REAL(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
-    Y = Ywt + Save1 + Save2
-    Yh = T + H + El
-    Impl = Nde + Iflag
+  PURE SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    INTEGER, INTENT(IN) :: Impl, N, Nde, Iflag
+    REAL(SP), INTENT(IN) :: T, H, El
+    REAL(SP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+    REAL(SP), INTENT(INOUT) :: Save1(N), Save2(N)
+    Save1 = Yh(:,1) + Y + Ywt
+    Save2 =  T + H + El + Nde + Iflag + Impl
   END SUBROUTINE dum_USERS
-  SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-    INTEGER :: N, Matdim, Ml, Mu, Nde
-    REAL(SP) :: T, Y(N), A(:,:)
-    T = Matdim + Ml + Mu + Nde
-    Y = 0._SP
-    A = 0._SP
+  PURE SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+    REAL(SP), INTENT(IN) :: T, Y(N)
+    REAL(SP), INTENT(INOUT) :: A(:,:)
+    A = Y(1) + T + Matdim + Ml + Mu + Nde
   END SUBROUTINE dum_FA
 END SUBROUTINE SDRIV2

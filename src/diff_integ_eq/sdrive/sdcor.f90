@@ -1,5 +1,5 @@
 !** SDCOR
-SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
+PURE SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
   !> Subroutine SDCOR computes corrections to the Y array.
   !***
@@ -21,8 +21,7 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !  result of the last call to F.
   !  In the case of the chord method, compute the corrector error and
   !  solve the linear system with that as right hand side and DFDY as
-  !  coefficient matrix, using the LU decomposition if MITER is 1, 2, 4,
-  !  or 5.
+  !  coefficient matrix, using the LU decomposition if MITER is 1, 2, 4, or 5.
   !***
   ! **Routines called:**  SGBSL, SGESL, SNRM2
 
@@ -30,26 +29,32 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   USE linpack, ONLY : SGBSL, SGESL
-  USE lapack, ONLY : SGBTRS, SGETRS
+!  USE lapack, ONLY : SGBTRS, SGETRS
+  !
   INTERFACE
-    SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+    PURE SUBROUTINE USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
       IMPORT SP
-      INTEGER :: Impl, N, Nde, iflag
-      REAL(SP) :: T, H, El
-      REAL(SP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, Iflag
+      REAL(SP), INTENT(IN) :: T, H, El
+      REAL(SP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      REAL(SP), INTENT(INOUT) :: Save1(N), Save2(N)
     END SUBROUTINE USERS
-    SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+    PURE SUBROUTINE FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
       IMPORT SP
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(SP) :: T, Y(N), A(:,:)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(SP), INTENT(IN) :: T, Y(N)
+      REAL(SP), INTENT(INOUT) :: A(:,:)
     END SUBROUTINE FA
   END INTERFACE
-  INTEGER :: Ierror, Impl, Jstate, Matdim, Miter, Ml, Mu, N, Nde, Nq
-  INTEGER :: Ipvt(N)
-  REAL(SP) :: D, H, T
-  REAL(SP) :: A(Matdim,N), Dfdy(Matdim,N), El(13,12), Save1(N), Save2(N), Y(N), &
-    Yh(N,13), Ywt(N)
-  LOGICAL :: Evalfa
+  INTEGER, INTENT(IN) :: Ierror, Impl, Matdim, Miter, Ml, Mu, N, Nde, Nq
+  INTEGER, INTENT(OUT) :: Jstate
+  INTEGER, INTENT(IN) :: Ipvt(N)
+  REAL(SP), INTENT(IN) :: H, T, El(13,12)
+  REAL(SP), INTENT(OUT) :: D
+  REAL(SP), INTENT(IN) :: Dfdy(Matdim,N), Y(N), Yh(N,13), Ywt(N)
+  REAL(SP), INTENT(INOUT) :: A(Matdim,N), Save1(N), Save2(N)
+  LOGICAL, INTENT(INOUT) :: Evalfa
+  !
   INTEGER :: i, iflag, j, mw
   !* FIRST EXECUTABLE STATEMENT  SDCOR
   IF( Miter==0 ) THEN
@@ -123,8 +128,6 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     END IF
     CALL SGESL(Dfdy,Matdim,N,Ipvt,Save2,0)
     !CALL SGETRS('N',N,1,Dfdy,Matdim,Ipvt,Save2,N,info)
-    print*,'E',N
-    print'(F18.11)', Save2
     IF( Ierror==1 .OR. Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
@@ -196,8 +199,6 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     END IF
     CALL SGBSL(Dfdy,Matdim,N,Ml,Mu,Ipvt,Save2,0)
     !CALL SGBTRS('N',N,Ml,Mu,1,Dfdy,Matdim,Ipvt,Save2,N,info)
-    print*,'B',N
-    print'(F18.11)', Save2
     IF( Ierror==1 .OR. Ierror==5 ) THEN
       DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
@@ -230,4 +231,5 @@ SUBROUTINE SDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     END IF
     D = NORM2(Save2(1:N))/SQRT(REAL(N,SP))
   END IF
+  !
 END SUBROUTINE SDCOR

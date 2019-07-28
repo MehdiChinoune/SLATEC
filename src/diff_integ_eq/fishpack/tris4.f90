@@ -1,5 +1,5 @@
 !** TRIS4
-SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
+PURE SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
@@ -27,8 +27,10 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: N
-  REAL(SP) :: A(N), B(N), C(N), D(N), U(N), Z(N)
+  INTEGER, INTENT(IN) :: N
+  REAL(SP), INTENT(IN) :: A(N), B(N), C(N)
+  REAL(SP), INTENT(OUT) :: D(N), U(N), Z(N)
+  !
   INTEGER :: j, k, nm1, nm2
   REAL(SP) :: an, bn, den, v
   !* FIRST EXECUTABLE STATEMENT  TRIS4
@@ -59,4 +61,5 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
     k = N - j
     Z(k) = -D(k)*Z(k+1) - U(k)*Z(N)
   END DO
+  !
 END SUBROUTINE TRIS4

@@ -1,9 +1,8 @@
 !** HSTPLR
-SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
+PURE SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
-  !> Solve the standard five-point finite difference
-  !            approximation on a staggered grid to the Helmholtz equation
-  !            in polar coordinates.
+  !> Solve the standard five-point finite difference approximation on a staggered
+  !  grid to the Helmholtz equation in polar coordinates.
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -326,9 +325,13 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER :: Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, B, C, D, Elmbda, Pertrb
-  REAL(SP) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1), F(Idimf,N+1), W(:)
+  INTEGER, INTENT(IN) :: Idimf, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, B, C, D, Elmbda
+  REAL(SP), INTENT(OUT) :: Pertrb
+  REAL(SP), INTENT(IN) :: Bda(N+1), Bdb(N+1), Bdc(M+1), Bdd(M+1)
+  REAL(SP), INTENT(INOUT) :: F(Idimf,N+1), W(:)
+  !
   INTEGER :: i, ierr1, isw, iwb, iwc, iwr, j, k, lp, mb, np
   REAL(SP) :: a1, a2, deltar, deltht, dlrsq, dlthsq
   !* FIRST EXECUTABLE STATEMENT  HSTPLR
@@ -519,4 +522,5 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       END DO
     END DO
   END IF
+  !
 END SUBROUTINE HSTPLR

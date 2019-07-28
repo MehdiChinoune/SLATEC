@@ -1,5 +1,5 @@
 !** DMGSBV
-SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
+PURE SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !> Subsidiary to DBVSUP
   !***
   ! **Library:**   SLATEC
@@ -62,16 +62,19 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   890921  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : sru_com, eps_com, indpvt_com, nfcc_com
   !
-  INTEGER :: Ia, Iflag, Inhomo, M, N, Niv, Ip(2*N)
-  REAL(DP) :: Wcnd, A(Ia,M), P(N*(2*N+1)), S(M), V(M), W(M)
+  INTEGER, INTENT(IN) :: Ia, Inhomo, M, N
+  INTEGER, INTENT(INOUT) :: Niv
+  INTEGER, INTENT(OUT) :: Iflag, Ip(2*N)
+  REAL(DP), INTENT(INOUT) :: A(Ia,M), V(M)
+  REAL(DP), INTENT(OUT) :: Wcnd, P(N*(2*N+1)), S(M), W(M)
+  !
   INTEGER :: i, ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, kj, kp, l, lix, lr, &
     m2, nivn, nmnr, nn, np1, nr, nrm1
   REAL(DP) :: dot, pjp, psave, ry, sv, t, vl, vnorm, y
@@ -296,5 +299,6 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   ELSE
     Iflag = 1
   END IF
+  !
   RETURN
 END SUBROUTINE DMGSBV

@@ -1,5 +1,5 @@
 !** DDCST
-SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
+PURE SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   !> DDCST sets coefficients used by the core integrator DDSTP.
   !***
   ! **Library:**   SLATEC (SDRIVE)
@@ -37,8 +37,11 @@ SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  REAL(DP) :: El(13,12), factrl(12), gama(14), summ, Tq(3,12)
-  INTEGER :: i, Iswflg, j, Maxord, Mint, mxrd
+  INTEGER, INTENT(IN) :: Iswflg, Maxord, Mint
+  REAL(DP), INTENT(OUT) :: El(13,12), Tq(3,12)
+  !
+  REAL(DP) :: factrl(12), gama(14), summ
+  INTEGER :: i, j, mxrd
   !* FIRST EXECUTABLE STATEMENT  DDCST
   factrl(1) = 1._DP
   DO i = 2, Maxord
@@ -122,4 +125,5 @@ SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
       El(1+i,1) = -(i+1)*summ*gama(i+1)
     END DO
   END IF
+  !
 END SUBROUTINE DDCST

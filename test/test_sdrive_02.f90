@@ -49,8 +49,7 @@ CONTAINS
     !* FIRST EXECUTABLE STATEMENT  DDQCK
     eps = eps_dp**(1._DP/3._DP)
     Ipass = 1
-    !                                            Exercise DDRIV1 for problem
-    !                                            with known solution.
+    !  Exercise DDRIV1 for problem with known solution.
     y(4) = ALFA
     t = 0._DP
     y(1) = 10._DP
@@ -119,52 +118,51 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     num_xer = 0
-    !                                         Run DDRIV1 with invalid input.
-    nx = 201
-    t = 0._DP
-    y(1) = 10._DP
-    y(2) = 0._DP
-    y(3) = 10._DP
-    y(4) = ALFA
-    tout = 10._DP
-    mstate = 1
-    lenw = 342
-    CALL DDRIV1(nx,t,y,DDF,tout,mstate,eps,work,lenw,ierflg)
-    IF( ierflg/=21 ) THEN
-      IF( Kprint==1 ) THEN
-        WRITE (Lun,&
-          '('' DDRIV1:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF( Kprint>=2 ) THEN
-        WRITE (Lun,&
-          '('' DDRIV1:An invalid parameter has not been correctly detected.'')')
-        WRITE (Lun,*) ' The value of N was set to ', nx
-        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-        WRITE (Lun,&
-          '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS ', eps, ', LENW ', lenw
-        WRITE (Lun,*) ' T ', t
-        WRITE (Lun,*) ' Y(1) ', y(1)
-        WRITE (Lun,*) ' Y(2) ', y(2)
-        WRITE (Lun,*) ' Y(3) ', y(3)
-        WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
-        WRITE (Lun,'(//)')
-      END IF
-      Ipass = 0
-    ELSEIF( Kprint==2 ) THEN
-      WRITE (Lun,&
-        '('' DDRIV1:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF( Kprint==3 ) THEN
-      WRITE (Lun,&
-        '('' DDRIV1:An invalid parameter has been correctly detected.'')')
-      WRITE (Lun,*) ' The value of N was set to ', nx
-      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-      WRITE (Lun,'(/)')
-    END IF
-    num_xer = 0
-    !                                            Exercise DDRIV2 for problem
-    !                                            with known solution.
+    !  Run DDRIV1 with invalid input.
+!    nx = 201
+!    t = 0._DP
+!    y(1) = 10._DP
+!    y(2) = 0._DP
+!    y(3) = 10._DP
+!    y(4) = ALFA
+!    tout = 10._DP
+!    mstate = 1
+!    lenw = 342
+!    CALL DDRIV1(nx,t,y,DDF,tout,mstate,eps,work,lenw,ierflg)
+!    IF( ierflg/=21 ) THEN
+!      IF( Kprint==1 ) THEN
+!        WRITE (Lun,&
+!          '('' DDRIV1:An invalid parameter has not been correctly detected.'' //)')
+!      ELSEIF( Kprint>=2 ) THEN
+!        WRITE (Lun,&
+!          '('' DDRIV1:An invalid parameter has not been correctly detected.'')')
+!        WRITE (Lun,*) ' The value of N was set to ', nx
+!        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!        WRITE (Lun,&
+!          '('' The values of parameters, results, and statistical quantities are:'')')
+!        WRITE (Lun,*) ' EPS ', eps, ', LENW ', lenw
+!        WRITE (Lun,*) ' T ', t
+!        WRITE (Lun,*) ' Y(1) ', y(1)
+!        WRITE (Lun,*) ' Y(2) ', y(2)
+!        WRITE (Lun,*) ' Y(3) ', y(3)
+!        WRITE (Lun,*) ' Number of steps taken is  ', nstep
+!        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+!        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
+!        WRITE (Lun,'(//)')
+!      END IF
+!      Ipass = 0
+!    ELSEIF( Kprint==2 ) THEN
+!      WRITE (Lun,&
+!        '('' DDRIV1:An invalid parameter has been correctly detected.'' //)')
+!    ELSEIF( Kprint==3 ) THEN
+!      WRITE (Lun,&
+!        '('' DDRIV1:An invalid parameter has been correctly detected.'')')
+!      WRITE (Lun,*) ' The value of N was set to ', nx
+!      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!      WRITE (Lun,'(/)')
+!    END IF
+!    num_xer = 0
+    !  Exercise DDRIV2 for problem with known solution.
     t = 0._DP
     y(1) = 10._DP
     y(2) = 0._DP
@@ -238,55 +236,54 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     num_xer = 0
-    !                                         Run DDRIV2 with invalid input.
-    t = 0._DP
-    y(1) = 10._DP
-    y(2) = 0._DP
-    y(3) = 10._DP
-    y(4) = ALFA
-    tout = 10._DP
-    mstate = 1
-    mint = 1
-    lenwx = 1
-    leniw = 50
-    CALL DDRIV2(N,t,y,DDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
-      leniw,dum_G,ierflg)
-    IF( ierflg/=32 ) THEN
-      IF( Kprint==1 ) THEN
-        WRITE (Lun,&
-          '('' DDRIV2:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF( Kprint>=2 ) THEN
-        WRITE (Lun,&
-          '('' DDRIV2:An invalid parameter has not been correctly detected.'')')
-        WRITE (Lun,*) ' The value of LENW was set to ', lenwx
-        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-        WRITE (Lun,&
-          '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS ', eps, ', MINT ', mint, ', LENW ', lenw, &
-          ', LENIW ', leniw
-        WRITE (Lun,*) ' T ', t
-        WRITE (Lun,*) ' Y(1) ', y(1)
-        WRITE (Lun,*) ' Y(2) ', y(2)
-        WRITE (Lun,*) ' Y(3) ', y(3)
-        WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
-        WRITE (Lun,'(//)')
-      END IF
-      Ipass = 0
-    ELSEIF( Kprint==2 ) THEN
-      WRITE (Lun,&
-        '('' DDRIV2:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF( Kprint==3 ) THEN
-      WRITE (Lun,&
-        '('' DDRIV2:An invalid parameter has been correctly detected.'')')
-      WRITE (Lun,*) ' The value of LENW was set to ', lenwx
-      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
-      WRITE (Lun,'(/)')
-    END IF
-    num_xer = 0
-    !                                            Exercise DDRIV3 for problem
-    !                                            with known solution.
+    !  Run DDRIV2 with invalid input.
+!    t = 0._DP
+!    y(1) = 10._DP
+!    y(2) = 0._DP
+!    y(3) = 10._DP
+!    y(4) = ALFA
+!    tout = 10._DP
+!    mstate = 1
+!    mint = 1
+!    lenwx = 1
+!    leniw = 50
+!    CALL DDRIV2(N,t,y,DDF,tout,mstate,NROOT,eps,ewt(1),mint,work,lenwx,iwork,&
+!      leniw,dum_G,ierflg)
+!    IF( ierflg/=32 ) THEN
+!      IF( Kprint==1 ) THEN
+!        WRITE (Lun,&
+!          '('' DDRIV2:An invalid parameter has not been correctly detected.'' //)')
+!      ELSEIF( Kprint>=2 ) THEN
+!        WRITE (Lun,&
+!          '('' DDRIV2:An invalid parameter has not been correctly detected.'')')
+!        WRITE (Lun,*) ' The value of LENW was set to ', lenwx
+!        WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!        WRITE (Lun,&
+!          '('' The values of parameters, results, and statistical quantities are:'')')
+!        WRITE (Lun,*) ' EPS ', eps, ', MINT ', mint, ', LENW ', lenw, &
+!          ', LENIW ', leniw
+!        WRITE (Lun,*) ' T ', t
+!        WRITE (Lun,*) ' Y(1) ', y(1)
+!        WRITE (Lun,*) ' Y(2) ', y(2)
+!        WRITE (Lun,*) ' Y(3) ', y(3)
+!        WRITE (Lun,*) ' Number of steps taken is  ', nstep
+!        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+!        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
+!        WRITE (Lun,'(//)')
+!      END IF
+!      Ipass = 0
+!    ELSEIF( Kprint==2 ) THEN
+!      WRITE (Lun,&
+!        '('' DDRIV2:An invalid parameter has been correctly detected.'' //)')
+!    ELSEIF( Kprint==3 ) THEN
+!      WRITE (Lun,&
+!        '('' DDRIV2:An invalid parameter has been correctly detected.'')')
+!      WRITE (Lun,*) ' The value of LENW was set to ', lenwx
+!      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+!      WRITE (Lun,'(/)')
+!    END IF
+!    num_xer = 0
+    !  Exercise DDRIV3 for problem with known solution.
     t = 0._DP
     y(1) = 10._DP
     y(2) = 0._DP
@@ -361,87 +358,87 @@ CONTAINS
       WRITE (Lun,'(/)')
     END IF
     num_xer = 0
-    !                                         Run DDRIV3 with invalid input.
-    t = 0._DP
-    y(1) = 10._DP
-    y(2) = 0._DP
-    y(3) = 10._DP
-    y(4) = ALFA
-    nstate = 1
-    tout = 10._DP
-    mint = 2
-    lenw = 301
-    leniwx = 1
-    CALL DDRIV3(N,t,y,DDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
-      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
-      MXSTEP,dum_G,dum_USERS,ierflg)
-    IF( ierflg/=33 ) THEN
-      IF( Kprint==1 ) THEN
-        WRITE (Lun,&
-          '('' DDRIV3:An invalid parameter has not been correctly detected.'' //)')
-      ELSEIF( Kprint>=2 ) THEN
-        WRITE (Lun,&
-          '('' DDRIV3:An invalid parameter has not been correctly detected.'')')
-        WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
-        WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
-        WRITE (Lun,&
-          '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', IERROR
-        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', IMPL
-        WRITE (Lun,*) ' T ', t
-        WRITE (Lun,*) ' Y(1) ', y(1)
-        WRITE (Lun,*) ' Y(2) ', y(2)
-        WRITE (Lun,*) ' Y(3) ', y(3)
-        WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
-        WRITE (Lun,'(//)')
-      END IF
-      Ipass = 0
-    ELSEIF( Kprint==2 ) THEN
-      WRITE (Lun,&
-        '('' DDRIV3:An invalid parameter has been correctly detected.'' //)')
-    ELSEIF( Kprint==3 ) THEN
-      WRITE (Lun,&
-        '('' DDRIV3:An invalid parameter has been correctly detected.'')')
-      WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
-      WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
-      WRITE (Lun,'(/)')
-    END IF
-    num_xer = 0
+    !  Run DDRIV3 with invalid input.
+!    t = 0._DP
+!    y(1) = 10._DP
+!    y(2) = 0._DP
+!    y(3) = 10._DP
+!    y(4) = ALFA
+!    nstate = 1
+!    tout = 10._DP
+!    mint = 2
+!    lenw = 301
+!    leniwx = 1
+!    CALL DDRIV3(N,t,y,DDF,nstate,tout,NTASK,NROOT,eps,ewt,IERROR,mint,MITER,&
+!      IMPL,ML,MU,MXORD,HMAX,work,lenw,iwork,leniwx,dum_JACOBN,dum_FA,nde,&
+!      MXSTEP,dum_G,dum_USERS,ierflg)
+!    IF( ierflg/=33 ) THEN
+!      IF( Kprint==1 ) THEN
+!        WRITE (Lun,&
+!          '('' DDRIV3:An invalid parameter has not been correctly detected.'' //)')
+!      ELSEIF( Kprint>=2 ) THEN
+!        WRITE (Lun,&
+!          '('' DDRIV3:An invalid parameter has not been correctly detected.'')')
+!        WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
+!        WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
+!        WRITE (Lun,&
+!          '('' The values of parameters, results, and statistical quantities are:'')')
+!        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', IERROR
+!        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', IMPL
+!        WRITE (Lun,*) ' T ', t
+!        WRITE (Lun,*) ' Y(1) ', y(1)
+!        WRITE (Lun,*) ' Y(2) ', y(2)
+!        WRITE (Lun,*) ' Y(3) ', y(3)
+!        WRITE (Lun,*) ' Number of steps taken is  ', nstep
+!        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+!        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
+!        WRITE (Lun,'(//)')
+!      END IF
+!      Ipass = 0
+!    ELSEIF( Kprint==2 ) THEN
+!      WRITE (Lun,&
+!        '('' DDRIV3:An invalid parameter has been correctly detected.'' //)')
+!    ELSEIF( Kprint==3 ) THEN
+!      WRITE (Lun,&
+!        '('' DDRIV3:An invalid parameter has been correctly detected.'')')
+!      WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
+!      WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
+!      WRITE (Lun,'(/)')
+!    END IF
+!    num_xer = 0
 
   CONTAINS
-    REAL(DP) FUNCTION dum_G(N,T,Y,Iroot)
-      INTEGER :: N, Iroot
-      REAL(DP) :: T
-      REAL(DP) :: Y(N)
-      dum_G = SUM(Y) + T
+    REAL(DP) PURE FUNCTION dum_G(N,T,Y,Iroot)
+      INTEGER, INTENT(IN) :: N, Iroot
+      REAL(DP), INTENT(IN) :: T
+      REAL(DP), INTENT(IN) :: Y(N)
+      dum_G = SUM(REAL(Y))+ T + Iroot
     END FUNCTION dum_G
-    SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
-      INTEGER :: N, Matdim, Ml, Mu
-      REAL(DP) :: T
-      REAL(DP) :: Y(N), Dfdy(Matdim,N)
-      Dfdy = T
-      Y = Ml + Mu
+    PURE SUBROUTINE dum_JACOBN(N,T,Y,Dfdy,Matdim,Ml,Mu)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu
+      REAL(DP), INTENT(IN) :: T
+      REAL(DP), INTENT(IN) :: Y(N)
+      REAL(DP), INTENT(OUT) :: Dfdy(Matdim,N)
+      Dfdy = T + Y(1) + Ml + Mu
     END SUBROUTINE dum_JACOBN
-    SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
-      INTEGER :: Impl, N, Nde, Iflag
-      REAL(DP) :: T, H, El
-      REAL(DP) :: Y(N), Yh(N,13), Ywt(N), Save1(N), Save2(N)
-      Y = Ywt + Save1 + Save2
-      Yh = T + H + El
-      Impl = Nde + Iflag
+    PURE SUBROUTINE dum_USERS(Y,Yh,Ywt,Save1,Save2,T,H,El,Impl,N,Nde,Iflag)
+      INTEGER, INTENT(IN) :: Impl, N, Nde, Iflag
+      REAL(DP), INTENT(IN) :: T, H, El
+      REAL(DP), INTENT(IN) :: Y(N), Yh(N,13), Ywt(N)
+      REAL(DP), INTENT(INOUT) :: Save1(N), Save2(N)
+      Save1 = Yh(:,1) + Y + Ywt
+      Save2 = T + H + El + Impl + Nde + Iflag
     END SUBROUTINE dum_USERS
-    SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
-      INTEGER :: N, Matdim, Ml, Mu, Nde
-      REAL(DP) :: T, Y(N), A(:,:)
-      T = Matdim + Ml + Mu + Nde
-      Y = 0._DP
-      A = 0._DP
+    PURE SUBROUTINE dum_FA(N,T,Y,A,Matdim,Ml,Mu,Nde)
+      INTEGER, INTENT(IN) :: N, Matdim, Ml, Mu, Nde
+      REAL(DP), INTENT(IN) :: T
+      REAL(DP), INTENT(IN) :: Y(N)
+      REAL(DP), INTENT(INOUT) :: A(:,:)
+      A = Y(1) + T + Matdim + Ml + Mu + Nde
     END SUBROUTINE dum_FA
   END SUBROUTINE DDQCK
   !** DDF
-  SUBROUTINE DDF(N,T,Y,Yp)
+  PURE SUBROUTINE DDF(N,T,Y,Yp)
     !> Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
     !***
     ! **Library:**   SLATEC (SDRIVE)
@@ -468,15 +465,19 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
 
-    INTEGER :: N
-    REAL(DP) :: T, Y(:), Yp(:)
+    INTEGER, INTENT(IN) :: N
+    REAL(DP), INTENT(IN) :: T, Y(:)
+    REAL(DP), INTENT(OUT) :: Yp(:)
+    !
     REAL(DP) :: alfa
     !* FIRST EXECUTABLE STATEMENT  DDF
     alfa = Y(N+1)
     Yp(1) = 1._DP + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)
     Yp(2) = alfa*(Y(1)-Y(2)) - Y(2)*Y(3)
     Yp(3) = 1._DP - Y(3)*(Y(1)+Y(2))
+    !
   END SUBROUTINE DDF
+  !
 END MODULE TEST46_MOD
 !** TEST46
 PROGRAM TEST46

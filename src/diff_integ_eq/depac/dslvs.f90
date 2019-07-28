@@ -30,8 +30,9 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
   USE DDEBD1, ONLY : el0_com, h_com, ier_com, miter_com, n_com
   USE lapack, ONLY : DGBTRS, DGETRS
   !
-  INTEGER :: Iwm(:)
-  REAL(DP) :: Wm(:), X(n_com)
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(DP), INTENT(INOUT) :: Wm(:), X(n_com)
+  !
   INTEGER :: i, meband, ml, mu, info
   REAL(DP) :: di, hl0, phl0, r
   !     ------------------------------------------------------------------
@@ -98,7 +99,6 @@ SUBROUTINE DSLVS(Wm,Iwm,X)
   RETURN
   !     ...EXIT
   100  ier_com = -1
-  !     ----------------------- END OF SUBROUTINE DSLVS
-  !     -----------------------
+  !----------------------- END OF SUBROUTINE DSLVS -----------------------
   RETURN
 END SUBROUTINE DSLVS

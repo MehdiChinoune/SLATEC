@@ -26,16 +26,17 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891009  Removed unreferenced statement label.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE DML, ONLY : indpvt_com, nfcc_com
   !
-  INTEGER :: Iflag, Inhomo, Iwork(*), Lnfc, Ncomp
-  REAL(DP) :: Work(*), Yhp(:,:)
+  INTEGER, INTENT(IN) :: Inhomo, Ncomp
+  INTEGER, INTENT(INOUT) :: Iflag, Lnfc, Iwork(*)
+  REAL(DP), INTENT(INOUT) :: Work(*), Yhp(:,:)
+  !
   INTEGER :: idp, k, kp, niv
   REAL(DP) :: dum
   !* FIRST EXECUTABLE STATEMENT  DVECS
@@ -65,4 +66,5 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     END DO
     Iflag = 1
   END IF
+  !
 END SUBROUTINE DVECS

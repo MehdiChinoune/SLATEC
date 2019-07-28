@@ -1,5 +1,5 @@
 !** ORTHOR
-SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
+PURE SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
@@ -77,10 +77,13 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, eps_sp
+  USE service, ONLY : eps_sp
   !
-  INTEGER :: Iflag, Irank, Iscale, M, N, Nrda, Kpivot(N)
-  REAL(SP) :: A(Nrda,M), Diag(N), Rows(N), Rs(N), Scales(M)
+  INTEGER, INTENT(IN) :: Iscale, M, N, Nrda
+  INTEGER, INTENT(INOUT) :: Iflag
+  INTEGER, INTENT(OUT) :: Irank, Kpivot(N)
+  REAL(SP), INTENT(INOUT) :: A(Nrda,M)
+  REAL(SP), INTENT(OUT) :: Diag(N), Rows(N), Rs(N), Scales(M)
   !
   INTEGER :: j, jrow, k, kp, l, mk
   REAL(SP) :: acc, akk, anorm, as, asave, diagk, dum(1), rss, sad, sig, sigma, &
@@ -192,17 +195,14 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
         !        RANK DEFICIENT PROBLEM
         Iflag = 3
         Irank = k - 1
-        CALL XERMSG('ORTHOR',&
-          'RANK OF MATRIX IS LESS THAN THE NUMBER OF ROWS.',1,1)
+        ERROR STOP 'ORTHOR : RANK OF MATRIX IS LESS THAN THE NUMBER OF ROWS.'
         RETURN
       END IF
     END DO
     RETURN
   END IF
   Iflag = 2
-  CALL XERMSG('ORTHOR','INVALID INPUT PARAMETERS.',2,1)
-  RETURN
-  !
+  ERROR STOP 'ORTHOR : INVALID INPUT PARAMETERS.'
   !
   RETURN
 END SUBROUTINE ORTHOR

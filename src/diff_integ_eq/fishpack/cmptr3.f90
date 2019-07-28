@@ -1,5 +1,5 @@
 !** CMPTR3
-SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
+PURE SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   !> Subsidiary to CMGNBN
   !***
   ! **Library:**   SLATEC
@@ -23,9 +23,11 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: K(4), M
-  COMPLEX(SP) :: A(M), B(M), C(M), Y1(M), Y2(M), Y3(M), Tcos(:), D(M), W1(M), W2(M), &
-    W3(M)
+  INTEGER, INTENT(IN) :: K(4), M
+  COMPLEX(SP), INTENT(IN) :: A(M), B(M), C(M), Tcos(:)
+  COMPLEX(SP), INTENT(INOUT) :: Y1(M), Y2(M), Y3(M)
+  COMPLEX(SP), INTENT(OUT) :: D(M), W1(M), W2(M), W3(M)
+  !
   COMPLEX(SP) :: x, xx, z
   INTEGER :: i, ip, k1, k2, k2k3k4, k3, k4, kint1, kint2, kint3, l1, l2, l3, &
     lint1, lint2, lint3, mm1, n, k1p1, k2p1, k3p1, k4p1
@@ -119,4 +121,5 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
       END IF
     END IF
   END DO
+  !
 END SUBROUTINE CMPTR3

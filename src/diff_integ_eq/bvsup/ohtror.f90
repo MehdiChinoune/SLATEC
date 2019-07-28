@@ -1,5 +1,5 @@
 !** OHTROR
-SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
+PURE SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   !> Subsidiary to BVSUP
   !***
   ! **Library:**   SLATEC
@@ -29,8 +29,12 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  INTEGER :: Irank, N, Nrda
-  REAL(SP) :: Diag(Irank), Div(Irank), Q(Nrda,Irank), Td(Irank)
+  !
+  INTEGER, INTENT(IN) :: Irank, N, Nrda
+  REAL(SP), INTENT(IN) :: Diag(Irank)
+  REAL(SP), INTENT(INOUT) :: Q(Nrda,Irank)
+  REAL(SP), INTENT(OUT) :: Div(Irank), Td(Irank)
+  !
   INTEGER :: irp, j, k, kir, kirm, l, nmir
   REAL(SP) :: dd, diagk, qs, sig, sqd, tdv
   !* FIRST EXECUTABLE STATEMENT  OHTROR
@@ -56,4 +60,5 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
       END DO
     END IF
   END DO
+  !
 END SUBROUTINE OHTROR

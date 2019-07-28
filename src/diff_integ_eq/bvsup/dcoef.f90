@@ -1,5 +1,5 @@
 !** DCOEF
-SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
+PURE SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
   !> Subsidiary to DBVSUP
   !***
@@ -32,11 +32,8 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !     AE = absolute error tolerance.
   !     BY = storage space for the matrix  B*YH
   !     CVEC = storage space for the vector  BETA-B*YP
-  !     WORK = double precision array of internal storage. Dimension must
-  !     be GE
-  !            NFCC*(NFCC+4)
-  !     IWORK = integer array of internal storage. Dimension must be GE
-  !             3+NFCC
+  !     WORK = double precision array of internal storage. Dimension must be >= NFCC*(NFCC+4)
+  !     IWORK = integer array of internal storage. Dimension must be >= 3+NFCC
   !
   !- *********************************************************************
   ! OUTPUT from DCOEF
@@ -71,8 +68,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   890921  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
@@ -80,10 +76,14 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   USE DML, ONLY : eps_com
   USE service, ONLY : control_xer
   !
-  INTEGER :: Iflag, Inhomo, Ncomp, Nfc, Nfcc, Nrowb, Iwork(*)
-  REAL(DP) :: Ae, Re
-  REAL(DP) :: B(Nrowb,Ncomp), Beta(Nrowb), By(Nfcc,Ncomp), Coef(Nfcc), Cvec(Nrowb), &
-    Work(*), Yh(Ncomp,Nfcc), Yp(Ncomp)
+  INTEGER, INTENT(IN) :: Inhomo, Ncomp, Nfc, Nfcc, Nrowb
+  INTEGER, INTENT(OUT) :: Iflag
+  INTEGER, INTENT(INOUT) :: Iwork(*)
+  REAL(DP), INTENT(IN) :: Ae, Re
+  REAL(DP), INTENT(IN) :: B(Nrowb,Ncomp), Beta(Nrowb), Yh(Ncomp,Nfcc), Yp(Ncomp)
+  REAL(DP), INTENT(INOUT) :: Work(*)
+  REAL(DP), INTENT(OUT) :: By(Nfcc,Ncomp), Cvec(Nrowb), Coef(Nfcc)
+  !
   INTEGER :: i, j, k, kflag, ki, l, mlso, ncomp2, nf, nfccm1
   REAL(DP) :: bbn, bn, brn, bykl, bys, cons, gam, un, ypn
   !* FIRST EXECUTABLE STATEMENT  DCOEF
@@ -127,12 +127,10 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
   IF( Inhomo==3 ) mlso = 1
   kflag = INT( 0.5_DP*LOG10(eps_com) )
   nf = control_xer
-  control_xer = 0
   DO
     CALL DSUDS(By,Coef,Cvec,Nfcc,Nfcc,Nfcc,kflag,mlso,Work,Iwork)
     IF( kflag/=3 ) THEN
       IF( kflag==4 ) Iflag = 2
-      control_xer = nf
       IF( Nfcc==1 ) THEN
         !
         !        ***************************************************************
@@ -186,4 +184,5 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,B,Beta,Coef,Inhomo,Re,Ae,By,&
       Iflag = 1
     END IF
   END DO
+  !
 END SUBROUTINE DCOEF

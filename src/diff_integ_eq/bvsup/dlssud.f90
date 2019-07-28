@@ -1,5 +1,5 @@
 !** DLSSUD
-SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
+PURE SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     Kpivot,S,Div,Td,Isflg,Scales)
   !> Subsidiary to DBVSUP and DSUDS
   !***
@@ -34,8 +34,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !     N -- Number of equations, N greater or equal to 1.
   !     M -- Number of unknowns, M greater or equal to N.
   !     NRDA -- Row dimension of A, NRDA greater or equal to N.
-  !     U -- Matrix used for solution, must be dimensioned NRDU by
-  !          (M - rank of A).
+  !     U -- Matrix used for solution, must be dimensioned NRDU by (M - rank of A).
   !          (storage for U may be ignored when only the minimal length
   !           solution X is desired)
   !     NRDU -- Row dimension of U, NRDU greater or equal to M.
@@ -60,8 +59,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !               If the scaling indicator is not equal to -1
   !               no scaling will be attempted.
   !            For most problems scaling will probably not be necessary.
-  !     Q -- Matrix used for the transformation, must be dimensioned
-  !            NRDA by M.
+  !     Q -- Matrix used for the transformation, must be dimensioned NRDA by M.
   !     DIAG,KPIVOT,S, -- Arrays of length at least N used for internal
   !      DIV,TD,SCALES    storage (except for SCALES which is M).
   !     ISFLG -- Storage for an internal variable.
@@ -115,10 +113,15 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : XERMSG, eps_dp, max_xer, control_xer
-  INTEGER :: Iflag, Irank, Iscale, Isflg, M, Mlso, N, Nrda, Nrdu, Kpivot(N)
-  REAL(DP) :: A(Nrda,M), B(N), Diag(N), Div(N), Q(Nrda,M), S(N), Scales(M), Td(N), &
-    U(Nrdu,M), X(M)
+  USE service, ONLY : eps_dp, max_xer, control_xer
+  !
+  INTEGER, INTENT(IN) :: Iscale, M, Mlso, N, Nrda, Nrdu
+  INTEGER, INTENT(INOUT) :: Iflag, Irank, Isflg
+  INTEGER, INTENT(OUT) :: Kpivot(N)
+  REAL(DP), INTENT(IN) :: A(Nrda,M), B(N)
+  REAL(DP), INTENT(INOUT) :: Q(Nrda,M), U(Nrdu,M), X(M)
+  REAL(DP), INTENT(OUT) :: Diag(N), Div(N), S(N), Scales(M), Td(N)
+  !
   INTEGER :: i, irp, j, jr, k, kp, l, maxmes, nfat, nfatal, nmir, nu
   REAL(DP) :: gam, gama, res, ss, uro
   !
@@ -145,11 +148,9 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           Isflg = Iflag
           nfat = -1
           IF( nfatal==0 ) nfat = 0
-          control_xer = nfat
-          max_xer = 1
         END IF
         !
-        !                 COPY MATRIX A INTO MATRIX Q
+        !  COPY MATRIX A INTO MATRIX Q
         !
         DO k = 1, M
           DO j = 1, N
@@ -162,8 +163,6 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         !
         CALL DORTHR(Q,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Div,Td)
         !
-        control_xer = nfatal
-        max_xer = maxmes
         IF( Irank==N ) THEN
           !
           !                 STORE DIVISORS FOR THE TRIANGULAR SOLUTION
@@ -191,7 +190,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !
   !           INVALID INPUT FOR DLSSUD
   Iflag = 2
-  CALL XERMSG('DLSSUD','INVALID IMPUT PARAMETERS.',2,1)
+  ERROR STOP 'DLSSUD : INVALID IMPUT PARAMETERS.'
   !     ......EXIT
   RETURN
   !

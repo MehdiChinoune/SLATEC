@@ -1,5 +1,5 @@
 !** POISN2
-SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
+PURE SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !> Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC
@@ -10,8 +10,7 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !***
   ! **Description:**
   !
-  !     Subroutine to solve Poisson's equation with Neumann boundary
-  !     conditions.
+  !     Subroutine to solve Poisson's equation with Neumann boundary conditions.
   !
   !     ISTAG = 1 if the last diagonal block is A.
   !     ISTAG = 2 if the last diagonal block is A-I.
@@ -32,9 +31,13 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
   USE data_handling, ONLY : S1MERG
-  INTEGER :: Idimq, Istag, M, Mixbnd, N
-  REAL(SP) :: A(M), B(M), B2(M), B3(M), Bb(M), C(M), D(M), P(:), Q(Idimq,N), &
-    Tcos(4*N), W(M), W2(M), W3(M)
+  !
+  INTEGER, INTENT(IN) :: Idimq, Istag, M, Mixbnd, N
+  REAL(SP), INTENT(IN) :: A(M), Bb(M), C(M)
+  REAL(SP), INTENT(INOUT) :: Q(Idimq,N)
+  REAL(SP), INTENT(OUT) :: B(M), D(M), Tcos(4*N), P(:), B2(M), B3(M), W(M), &
+    W2(M), W3(M)
+  !
   INTEGER :: i, i1, i2, i2r, i2rby2, ii, ip, ipstor, j, jm1, jm2, jm3, jp1, jp2, &
     jp3, jr, jr2, jstart, jstep, jstop, k(4), kr, lr, mr, nlast, nlastp, nr, &
     nrod, nrodpr
@@ -552,4 +555,5 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       IF( nlastp/=nlast ) GOTO 400
     END IF
   END DO
+  !
 END SUBROUTINE POISN2

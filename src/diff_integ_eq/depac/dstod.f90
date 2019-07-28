@@ -100,20 +100,24 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
       IMPORT DP
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Uprime(:)
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE DF
-    SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+    PURE SUBROUTINE DJAC(X,U,Pd,Nrowpd)
       IMPORT DP
-      INTEGER :: Nrowpd
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Pd(:,:)
+      INTEGER, INTENT(IN) :: Nrowpd
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Pd(:,:)
     END SUBROUTINE DJAC
   END INTERFACE
-  INTEGER :: Neq, Nyh
-  INTEGER :: Iwm(:)
-  REAL(DP) :: Acor(n_com), Ewt(n_com), Savf(n_com), Wm(:), Y(n_com), Yh(Nyh,maxord_com+1), &
-    Yh1(Nyh*maxord_com+Nyh)
+  INTEGER, INTENT(IN) :: Neq, Nyh
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(DP), INTENT(IN) :: Ewt(n_com)
+  REAL(DP), INTENT(INOUT) :: Yh(Nyh,maxord_com+1), Yh1(Nyh*maxord_com+Nyh), Wm(:)
+  REAL(DP), INTENT(OUT) :: Y(n_com), Savf(n_com), Acor(n_com)
+  !
   INTEGER :: i, i1, iredo, iret, j, jb, m, ncf, newq
   REAL(DP) :: dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, &
     rhsm, rhup, told
@@ -695,6 +699,5 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC)
   END IF
   1000 hold_com = h_com
   jstart_com = 1
-  !     ----------------------- END OF SUBROUTINE DSTOD
-  !     -----------------------
+  !----------------------- END OF SUBROUTINE DSTOD -----------------------
 END SUBROUTINE DSTOD

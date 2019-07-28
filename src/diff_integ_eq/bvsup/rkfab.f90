@@ -30,18 +30,21 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   USE ML, ONLY : c_com, inhomo_com, x_com, xbeg_com, xend_com, xop_com, info_com, &
     kop_com, ae_com, re_com, nopg_com, ndisk_com, ntape_com, neq_com, integ_com, &
     nps_com, numort_com, kkkint_com, lllint_com
-  INTEGER :: Ncomp, Nfc, Nfcc, Niv, Ntp, Iflag, Mxnon, Nxpts
-  INTEGER :: Iwork(*), Ip(Nfcc,Mxnon+1)
-  REAL(SP) :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
-    V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Xpts(Nxpts), Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
+  !
+  INTEGER, INTENT(IN) :: Mxnon, Ncomp, Nfc, Nfcc, Ntp, Nxpts
+  INTEGER, INTENT(INOUT) :: Iflag, Niv
+  INTEGER, INTENT(INOUT) :: Ip(Nfcc,Mxnon+1), Iwork(*)
+  REAL(SP), INTENT(IN) :: Xpts(Nxpts)
+  REAL(SP), INTENT(INOUT) :: P(Ntp,Mxnon+1), S(Nfc+1), Stowa(:), U(Ncomp,Nfc,Nxpts), &
+    V(Ncomp,Nxpts), W(Nfcc,Mxnon+1), Work(*), Yhp(Ncomp,Nfc+1), Z(Mxnon+1)
+  !
   INTEGER :: nfcp1, non, idid, ipar(1), j, jflag, jon, kod, kopp
   REAL(SP) :: xxop, ret(1), aet(1)
   !
@@ -180,11 +183,14 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
 
 CONTAINS
   SUBROUTINE BVDER_2(X,Y,Yp)
-    REAL(SP) :: X
-    REAL(SP) :: Y(:), Yp(:)
+    REAL(SP), INTENT(IN) :: X
+    REAL(SP), INTENT(IN) :: Y(:)
+    REAL(SP), INTENT(OUT) :: Yp(:)
+    !
     REAL(SP) :: g(SIZE(Y))
-
+    !
     g = 0._SP
-    CALL BVDER(X,Y,Yp,G)
+    CALL BVDER(X,Y,Yp,g)
+    !
   END SUBROUTINE BVDER_2
 END SUBROUTINE RKFAB

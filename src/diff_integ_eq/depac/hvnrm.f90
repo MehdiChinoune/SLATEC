@@ -1,5 +1,5 @@
 !** HVNRM
-REAL(SP) FUNCTION HVNRM(V,Ncomp)
+REAL(SP) PURE FUNCTION HVNRM(V,Ncomp)
   !> Subsidiary to DEABM, DEBDF and DERKF
   !***
   ! **Library:**   SLATEC
@@ -27,12 +27,9 @@ REAL(SP) FUNCTION HVNRM(V,Ncomp)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
 
-  INTEGER :: Ncomp
-  REAL(SP) :: V(Ncomp)
-  INTEGER :: k
+  INTEGER, INTENT(IN) :: Ncomp
+  REAL(SP), INTENT(IN) :: V(Ncomp)
   !* FIRST EXECUTABLE STATEMENT  HVNRM
-  HVNRM = 0._SP
-  DO k = 1, Ncomp
-    HVNRM = MAX(HVNRM,ABS(V(k)))
-  END DO
+  HVNRM = MAXVAL( ABS(V) )
+  !
 END FUNCTION HVNRM

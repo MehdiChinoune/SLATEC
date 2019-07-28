@@ -1,5 +1,5 @@
 !** DOHTRL
-SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
+PURE SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
   !> Subsidiary to DBVSUP and DSUDS
   !***
   ! **Library:**   SLATEC
@@ -30,8 +30,12 @@ SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  INTEGER :: Irank, N, Nrda
-  REAL(DP) :: Diag(Irank), Div(Irank), Q(Nrda,Irank), Td(Irank)
+  !
+  INTEGER, INTENT(IN) :: Irank, N, Nrda
+  REAL(DP), INTENT(IN) :: Diag(Irank)
+  REAL(DP), INTENT(INOUT) :: Q(Nrda,Irank)
+  REAL(DP), INTENT(OUT) :: Div(Irank), Td(Irank)
+  !
   INTEGER :: irp, j, k, kir, kirm, l, nmir
   REAL(DP) :: dd, diagk, qs, sig, sqd, tdv
   !* FIRST EXECUTABLE STATEMENT  DOHTRL
@@ -57,4 +61,5 @@ SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
       END DO
     END IF
   END DO
+  !
 END SUBROUTINE DOHTRL

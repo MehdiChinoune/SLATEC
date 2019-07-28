@@ -1,5 +1,5 @@
 !** DCFOD
-SUBROUTINE DCFOD(Meth,Elco,Tesco)
+PURE SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !> Subsidiary to DDEBDF
   !***
   ! **Library:**   SLATEC
@@ -22,12 +22,12 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-
   !
+  INTEGER, INTENT(IN) :: Meth
+  REAL(DP), INTENT(OUT) :: Elco(13,12), Tesco(3,12)
   !
-  INTEGER :: i, ib, Meth, nq, nqm1, nqp1
-  REAL(DP) :: agamq, Elco(13,12), fnq, fnqm1, pc(12), pint, ragq, rq1fac, &
-    rqfac, Tesco(3,12), tsign, xpin
+  INTEGER :: i, ib, nq, nqm1, nqp1
+  REAL(DP) :: agamq, fnq, fnqm1, pc(12), pint, ragq, rq1fac, rqfac, tsign, xpin
   !     ------------------------------------------------------------------
   !      DCFOD  IS CALLED BY THE INTEGRATOR ROUTINE TO SET COEFFICIENTS
   !      NEEDED THERE.  THE COEFFICIENTS FOR THE CURRENT METHOD, AS
@@ -140,6 +140,5 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       Tesco(3,nqm1) = ragq
     END DO
   END IF
-  !     ----------------------- END OF SUBROUTINE DCFOD
-  !     -----------------------
+  ! ----------------------- END OF SUBROUTINE DCFOD -----------------------
 END SUBROUTINE DCFOD

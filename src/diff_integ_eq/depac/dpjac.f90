@@ -35,19 +35,24 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
       IMPORT DP
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Uprime(:)
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE DF
-    SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+    PURE SUBROUTINE DJAC(X,U,Pd,Nrowpd)
       IMPORT DP
-      INTEGER :: Nrowpd
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Pd(:,:)
+      INTEGER, INTENT(IN) :: Nrowpd
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Pd(:,:)
     END SUBROUTINE DJAC
   END INTERFACE
-  INTEGER :: Neq, Nyh
-  INTEGER :: Iwm(:)
-  REAL(DP) :: Ewt(n_com), Ftem(n_com), Savf(n_com), Wm(:), Y(Neq), Yh(Nyh,n_com)
+  INTEGER, INTENT(IN) :: Neq, Nyh
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(DP), INTENT(IN) :: Yh(Nyh,n_com), Ewt(n_com), Savf(n_com)
+  REAL(DP), INTENT(INOUT) :: Y(Neq), Wm(:)
+  REAL(DP), INTENT(OUT) :: Ftem(n_com)
+  !
   INTEGER :: i, i1, i2, ii, j, j1, jj, mba, mband, meb1, meband, ml, ml3, mu
   REAL(DP) :: con, di, fac, hl0, r, r0, srur, yi, yj, yjj
   REAL(DP), ALLOCATABLE :: pd(:,:)
@@ -116,8 +121,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
       END DO
       nfe_com = nfe_com + n_com
     CASE (3)
-      !              IF MITER = 3, CONSTRUCT A DIAGONAL APPROXIMATION TO J AND
-      !              P. ---------
+      ! IF MITER = 3, CONSTRUCT A DIAGONAL APPROXIMATION TO J AND P. ---------
       Wm(2) = hl0
       ier_com = 0
       r = el0_com*0.1_DP
@@ -229,7 +233,6 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC)
   !        DO LU DECOMPOSITION OF P.
   !        --------------------------------------------
   CALL DGBFA(Wm(3:meband*n_com+2),meband,n_com,ml,mu,Iwm(21:n_com+20),ier_com)
-  !     ----------------------- END OF SUBROUTINE DPJAC
-  !     -----------------------
+  !----------------------- END OF SUBROUTINE DPJAC -----------------------
   RETURN
 END SUBROUTINE DPJAC

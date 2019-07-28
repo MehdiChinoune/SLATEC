@@ -33,27 +33,32 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     iquit_com, init_com, ksteps_com, ibegin_com, itol_com, iinteg_com, itstop_com, &
     ijac_com, iband_com, jstart_com, kflag_com, meth_com, miter_com, maxord_com, &
     n_com, nq_com, nst_com, nfe_com, nje_com
-  USE service, ONLY : XERMSG, eps_dp, huge_dp
+  USE service, ONLY : eps_dp, huge_dp
   !
   INTERFACE
     SUBROUTINE DF(X,U,Uprime)
       IMPORT DP
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Uprime(:)
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Uprime(:)
     END SUBROUTINE DF
-    SUBROUTINE DJAC(X,U,Pd,Nrowpd)
+    PURE SUBROUTINE DJAC(X,U,Pd,Nrowpd)
       IMPORT DP
-      INTEGER :: Nrowpd
-      REAL(DP) :: X
-      REAL(DP) :: U(:), Pd(:,:)
+      INTEGER, INTENT(IN) :: Nrowpd
+      REAL(DP), INTENT(IN) :: X
+      REAL(DP), INTENT(IN) :: U(:)
+      REAL(DP), INTENT(OUT) :: Pd(:,:)
     END SUBROUTINE DJAC
   END INTERFACE
-  INTEGER :: Idid, Neq
-  INTEGER :: Iwm(:)
-  REAL(DP) :: Delsgn, T, Tolfac, Tout, Tstop
-  REAL(DP) :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), Wm(:), Y(Neq), &
-    Yh(Neq,6), Yh1(6*Neq), Ypout(Neq)
-  LOGICAL :: Intout
+  INTEGER, INTENT(IN) :: Neq
+  INTEGER, INTENT(OUT) :: Idid
+  INTEGER, INTENT(INOUT) :: Iwm(:)
+  REAL(DP), INTENT(IN) :: Tout, Tstop
+  REAL(DP), INTENT(INOUT) :: Delsgn, T
+  REAL(DP), INTENT(OUT) :: Tolfac
+  REAL(DP), INTENT(INOUT) :: Acor(Neq), Atol(:), Ewt(Neq), Rtol(:), Savf(Neq), &
+    Y(Neq), Yh(Neq,6), Yh1(6*Neq), Ypout(Neq), Wm(:)
+  LOGICAL, INTENT(INOUT) :: Intout
   !
   INTEGER :: intflg, k, l, ltol, natolp, nrtolp
   REAL(DP) :: absdel, big, del, dt, ha, tol
@@ -120,8 +125,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !
   IF( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
-    CALL XERMSG('DLSOD',&
-      'IN DDEBDF, THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.$$YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,6,1)
+    ERROR STOP 'DLSOD : IN DDEBDF, THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.'
     Idid = -33
   END IF
   !
@@ -132,10 +136,9 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       IF( Rtol(k)<0. ) THEN
         WRITE (xern1,'(I8)') k
         WRITE (xern3,'(1PE15.6)') Rtol(k)
-        CALL XERMSG('DLSOD','IN DDEBDF, THE RELATIVE ERROR TOLERANCES&
-          & MUST BE NON-NEGATIVE.$$YOU HAVE CALLED THE CODE WITH&
-          & RTOL('//xern1//') = '//xern3//'$$IN THE CASE OF VECTOR ERROR&
-          & TOLERANCES, NO FURTHER CHECKING OF RTOL COMPONENTS IS DONE.',7,1)
+        ERROR STOP 'DLSOD : IN DDEBDF, THE RELATIVE ERROR TOLERANCES&
+          & MUST BE NON-NEGATIVE. IN THE CASE OF VECTOR ERROR TOLERANCES,&
+          & NO FURTHER CHECKING OF RTOL COMPONENTS IS DONE.'
         Idid = -33
         IF( natolp>0 ) EXIT
         nrtolp = 1
@@ -147,10 +150,9 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     IF( Atol(k)<0. ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Atol(k)
-      CALL XERMSG('DLSOD','IN DDEBDF, THE ABSOLUTE ERROR TOLERANCES&
-        & MUST BE NON-NEGATIVE.$$YOU HAVE CALLED THE CODE WITH ATOL('//xern1//') = '&
-        //xern3// '$$IN THE CASE OF VECTOR ERROR TOLERANCES,&
-        & NO FURTHER CHECKING OF ATOL COMPONENTS IS DONE.',8,1)
+      ERROR STOP 'DLSOD : IN DDEBDF, THE ABSOLUTE ERROR TOLERANCES&
+        & MUST BE NON-NEGATIVE. IN THE CASE OF VECTOR ERROR TOLERANCES,&
+        & NO FURTHER CHECKING OF ATOL COMPONENTS IS DONE.'
       Idid = -33
       IF( nrtolp>0 ) EXIT
       natolp = 1
@@ -159,13 +161,12 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   END DO
   !
   IF( itstop_com==1 ) THEN
-    IF( SIGN(1._DP,Tout-T)/=SIGN(1._DP,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T)&
-        ) THEN
+    IF( SIGN(1._DP,Tout-T)/=SIGN(1._DP,Tstop-T) .OR. ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
-      CALL XERMSG('DLSOD','IN DDEBDF, YOU HAVE CALLED THE CODE WITH&
-        & TOUT = '//xern3//'$$BUT YOU HAVE ALSO TOLD THE CODE NOT TO INTEGRATE&
-        & PAST THE POINT TSTOP = '//xern4//' BY SETTING INFO(4) = 1.$$THESE INSTRUCTIONS CONFLICT.',14,1)
+      ERROR STOP 'DLSOD : IN DDEBDF, YOU HAVE CALLED THE CODE WITH THAT VALUE OF&
+        & TOUT, BUT YOU HAVE ALSO TOLD THE CODE NOT TO INTEGRATE PAST THE POINT&
+        & TSTOP BY SETTING INFO(4) = 1. THESE INSTRUCTIONS CONFLICT.'
       Idid = -33
     END IF
   END IF
@@ -175,27 +176,25 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   IF( init_com/=0 ) THEN
     IF( T==Tout ) THEN
       WRITE (xern3,'(1PE15.6)') T
-      CALL XERMSG('DLSOD',&
-        'IN DDEBDF, YOU HAVE CALLED THE CODE WITH T = TOUT = '//&
-        xern3//'$$THIS IS NOT ALLOWED ON CONTINUATION CALLS.',9,1)
+      ERROR STOP 'DLSOD : IN DDEBDF, YOU HAVE CALLED THE CODE WITH T = TOUT&
+        & THIS IS NOT ALLOWED ON CONTINUATION CALLS.'
       Idid = -33
     END IF
     !
     IF( T/=told_com ) THEN
       WRITE (xern3,'(1PE15.6)') told_com
       WRITE (xern4,'(1PE15.6)') T
-      CALL XERMSG('DLSOD',&
-        'IN DDEBDF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '&
-        //xern4//'  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
+      ERROR STOP 'DLSOD : IN DDEBDF, YOU HAVE CHANGED THE VALUE OF T, &
+        &THIS IS NOT ALLOWED ON CONTINUATION CALLS.'
       Idid = -33
     END IF
     !
     IF( init_com/=1 ) THEN
       IF( Delsgn*(Tout-T)<0._DP ) THEN
         WRITE (xern3,'(1PE15.6)') Tout
-        CALL XERMSG('DLSOD',&
-          'IN DDEBDF, BY CALLING THE CODE WITH TOUT = '//xern3//&
-          ' YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.$$THIS IS NOT ALLOWED WITHOUT RESTARTING.',11,1)
+        ERROR STOP 'DLSOD : IN DDEBDF, BY CALLING THE CODE WITH THAT VALUE OFTOUT&
+          & YOU ARE ATTEMPTING TO CHANGE THE DIRECTION OF INTEGRATION.&
+          & THIS IS NOT ALLOWED WITHOUT RESTARTING.'
         Idid = -33
       END IF
     END IF
@@ -207,9 +206,9 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       iquit_com = -33
       ibegin_com = -1
     ELSE
-      CALL XERMSG('DLSOD','IN DDEBDF, INVALID INPUT WAS DETECTED ON&
+      ERROR STOP 'DLSOD : IN DDEBDF, INVALID INPUT WAS DETECTED ON&
         & SUCCESSIVE ENTRIES.  IT IS IMPOSSIBLE TO PROCEED BECAUSE YOU HAVE NOT&
-        & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.',12,2)
+        & CORRECTED THE PROBLEM, SO EXECUTION IS BEING TERMINATED.'
     END IF
     RETURN
   END IF
@@ -247,11 +246,10 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     !
     IF( init_com==0 ) THEN
       !
-      !                    ................................................
+      !................................................
       !
-      !                         MORE INITIALIZATION --
-      !                                             -- EVALUATE INITIAL
-      !                                             DERIVATIVES
+      ! MORE INITIALIZATION --
+      !  -- EVALUATE INITIAL DERIVATIVES
       !
       init_com = 1
       CALL DF(T,Y,Yh(:,2))
@@ -453,5 +451,6 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   T = tn_com
   told_com = T
   Intout = .FALSE.
+  !
   RETURN
 END SUBROUTINE DLSOD

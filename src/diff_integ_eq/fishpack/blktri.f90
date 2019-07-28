@@ -1,8 +1,7 @@
 !** BLKTRI
 SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
-  !> Solve a block tridiagonal system of linear equations
-  !            (usually resulting from the discretization of separable
-  !            two-dimensional elliptic equations).
+  !> Solve a block tridiagonal system of linear equations (usually resulting from
+  !  the discretization of separable two-dimensional elliptic equations).
   !***
   ! **Library:**   SLATEC (FISHPACK)
   !***
@@ -203,8 +202,12 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   USE CBLKT, ONLY : k_com, ik_com, nm_com, npp_com
-  INTEGER :: Idimy, Ierror, Iflg, M, Mp, N, Np
-  REAL(SP) :: Am(M), An(N), Bm(M), Bn(N), Cm(M), Cn(N), W(:), Y(Idimy,N)
+  !
+  INTEGER, INTENT(IN) :: Idimy, Iflg, M, Mp, N, Np
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: Am(M), An(N), Bm(M), Bn(N), Cm(M), Cn(N)
+  REAL(SP), INTENT(INOUT) :: W(:), Y(Idimy,N)
+  !
   INTEGER :: iw1, iw2, iw3, iwah, iwbh, iwd, iwu, iww, nh, nl
   !* FIRST EXECUTABLE STATEMENT  BLKTRI
   nm_com = N
@@ -268,4 +271,5 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
       END IF
     END DO
   END IF
+  !
 END SUBROUTINE BLKTRI

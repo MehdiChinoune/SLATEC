@@ -1,5 +1,5 @@
 !** POISP2
-SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
+PURE SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !> Subsidiary to GENBUN
   !***
   ! **Library:**   SLATEC
@@ -10,8 +10,7 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !***
   ! **Description:**
   !
-  !     Subroutine to solve Poisson equation with periodic boundary
-  !     conditions.
+  !     Subroutine to solve Poisson equation with periodic boundary conditions.
   !
   !***
   ! **See also:**  GENBUN
@@ -24,9 +23,12 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Idimq, M, N
-  REAL(SP) :: A(M), B(M), B2(M), B3(M), Bb(M), C(M), D(M), P(:), Q(Idimq,N), Tcos(4*N), &
-    W(M), W2(M), W3(M)
+  INTEGER, INTENT(IN) :: Idimq, M, N
+  REAL(SP), INTENT(IN) :: A(M), Bb(M), C(M)
+  REAL(SP), INTENT(INOUT) :: Q(Idimq,N)
+  REAL(SP), INTENT(OUT) :: B(M), B2(M), B3(M), W(M), W2(M), W3(M), D(M), &
+    P(:), Tcos(4*N)
+  !
   INTEGER :: i, ipstor, j, lh, mr, nr, nrm1, nrmj, nrpj
   REAL(SP) :: s, t
 
@@ -124,4 +126,5 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !     RETURN STORAGE REQUIREMENTS FOR P VECTORS.
   !
   W(1) = ipstor
+  !
 END SUBROUTINE POISP2

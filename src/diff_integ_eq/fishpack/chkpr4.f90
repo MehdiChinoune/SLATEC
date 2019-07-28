@@ -1,5 +1,5 @@
 !** CHKPR4
-SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
+PURE SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   !> Subsidiary to SEPX4
   !***
   ! **Library:**   SLATEC
@@ -24,13 +24,16 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   !   900402  Added TYPE section.  (WRB)
 
   INTERFACE
-    SUBROUTINE COFX(X,A,B,C)
+    PURE SUBROUTINE COFX(X,A,B,C)
       IMPORT SP
-      REAL(SP) :: X, A, B, C
+      REAL(SP), INTENT(IN) :: X
+      REAL(SP), INTENT(OUT) :: A, B, C
     END SUBROUTINE COFX
   END INTERFACE
-  INTEGER :: Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
-  REAL(SP) :: A, B, C, D
+  INTEGER, INTENT(IN) :: Idmn, Iorder, M, Mbdcnd, N, Nbdcnd
+  INTEGER, INTENT(OUT) :: Ierror
+  REAL(SP), INTENT(IN) :: A, B, C, D
+  !
   INTEGER :: i
   REAL(SP) :: ai, bi, ci, dlx, xi
   !* FIRST EXECUTABLE STATEMENT  CHKPR4

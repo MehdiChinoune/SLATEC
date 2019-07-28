@@ -53,8 +53,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
-  !   890921  Realigned order of variables in certain COMMON blocks.
-  !           (WRB)
+  !   890921  Realigned order of variables in certain COMMON blocks.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910701  Corrected ROUTINES CALLED section.  (WRB)
@@ -62,7 +61,10 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   USE DML, ONLY : nofst_com, c_com, xsav_com, igofx_com, inhomo_com, ivp_com, &
     ncomp_com, nfc_com
-  REAL(DP) :: X, Y(:), Yp(:), G(:)
+  !
+  REAL(DP), INTENT(IN) :: X, Y(:)
+  REAL(DP), INTENT(OUT) :: Yp(:), G(:)
+  !
   INTEGER :: j, k, l, na
   !- *********************************************************************
   !
@@ -96,4 +98,5 @@ SUBROUTINE DBVDER(X,Y,Yp,G)
     l = na + j - 1
     Yp(l) = Yp(l) + G(j)/c_com
   END DO
+  !
 END SUBROUTINE DBVDER

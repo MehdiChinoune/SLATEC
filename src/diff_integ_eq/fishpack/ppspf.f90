@@ -1,5 +1,5 @@
 !** PPSPF
-REAL(SP) FUNCTION PPSPF(X,Iz,C,A,Bh)
+REAL(SP) PURE FUNCTION PPSPF(X,Iz,C,A,Bh)
   !> Subsidiary to BLKTRI
   !***
   ! **Library:**   SLATEC
@@ -17,8 +17,9 @@ REAL(SP) FUNCTION PPSPF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER :: Iz
-  REAL(SP) :: X, A(Iz), Bh(Iz), C(Iz)
+  INTEGER, INTENT(IN) :: Iz
+  REAL(SP), INTENT(IN) :: X, A(Iz), Bh(Iz), C(Iz)
+  !
   INTEGER :: j
   REAL(SP) :: summ
   !* FIRST EXECUTABLE STATEMENT  PPSPF
@@ -27,4 +28,5 @@ REAL(SP) FUNCTION PPSPF(X,Iz,C,A,Bh)
     summ = summ + 1._SP/(X-Bh(j))
   END DO
   PPSPF = summ
+  !
 END FUNCTION PPSPF
