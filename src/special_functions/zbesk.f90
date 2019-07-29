@@ -1,9 +1,8 @@
 !** ZBESK
-SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
-  !> Compute a sequence of the Bessel functions K(a,z) for
-  !            complex argument z and real nonnegative orders a=b,b+1,
-  !            b+2,... where b>0.  A scaling option is available to
-  !            help avoid overflow.
+PURE SUBROUTINE ZBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
+  !> Compute a sequence of the Bessel functions K(a,z) for complex argument z
+  !  and real nonnegative orders a=b,b+1, b+2,... where b>0.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -162,18 +161,25 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : eps_dp, log10_radix_dp, tiny_dp, digits_dp, huge_int, &
     max_exp_dp, min_exp_dp
-  !     COMPLEX CY,Z
-  INTEGER :: Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz
-  REAL(DP) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, &
-    fn, Fnu, fnul, rl, r1m5, tol, ufl, Zi, Zr, bb
+  !
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(DP), INTENT(IN) :: Fnu
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Cy(N)
+  !
+  INTEGER :: k, k1, k2, mr, nn, nuf, nw
+  REAL(DP) :: aa, alim, aln, arg, az, dig, elim, fn, fnul, rl, &
+    r1m5, tol, ufl, xx, yy, bb
   !* FIRST EXECUTABLE STATEMENT  ZBESK
   Ierr = 0
   Nz = 0
-  IF( Zi==0._SP .AND. Zr==0._SP ) Ierr = 1
-  IF( Fnu<0._DP ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( N<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  xx = REAL(Z,DP)
+  yy = AIMAG(Z)
+  IF( Z==(0._DP,0._DP) .OR. Fnu<0._DP .OR. Kode<1 .OR. Kode>2 .OR. N<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
   nn = N
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
@@ -199,11 +205,11 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   alim = elim + MAX(-aa,-41.45_DP)
   fnul = 10._DP + 6._DP*(dig-3._DP)
   rl = 1.2_DP*dig + 3._DP
-  !-----------------------------------------------------------------------
-  !     TEST FOR PROPER RANGE
-  !-----------------------------------------------------------------------
-  az = ZABS(Zr,Zi)
+  az = ABS(Z)
   fn = Fnu + (nn-1)
+  !-----------------------------------------------------------------------
+  !     TEST FOR RANGE
+  !-----------------------------------------------------------------------
   aa = 0.5_DP/tol
   bb = huge_int*0.5_DP
   aa = MIN(aa,bb)
@@ -216,25 +222,25 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !     OVERFLOW TEST ON THE LAST MEMBER OF THE SEQUENCE
   !-----------------------------------------------------------------------
   !     UFL = EXP(-ELIM)
-  ufl = tiny_dp*1.E+3_DP
+  ufl = tiny_dp*1.E3_DP
   IF( az>=ufl ) THEN
     IF( Fnu>fnul ) THEN
       !-----------------------------------------------------------------------
       !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU>FNUL
       !-----------------------------------------------------------------------
       mr = 0
-      IF( Zr<0._DP ) THEN
+      IF( xx<0._DP ) THEN
         mr = 1
-        IF( Zi<0._DP ) mr = -1
+        IF( yy<0._DP ) mr = -1
       END IF
-      CALL ZBUNK(Zr,Zi,Fnu,Kode,mr,nn,Cyr,Cyi,nw,tol,elim,alim)
+      CALL ZBUNK(Z,Fnu,Kode,mr,nn,Cy,nw,tol,elim,alim)
       IF( nw<0 ) GOTO 200
       Nz = Nz + nw
       RETURN
     ELSE
       IF( fn>1._DP ) THEN
         IF( fn>2._DP ) THEN
-          CALL ZUOIK(Zr,Zi,Fnu,Kode,2,nn,Cyr,Cyi,nuf,tol,elim,alim)
+          CALL ZUOIK(Z,Fnu,Kode,2,nn,Cy,nuf,tol,elim,alim)
           IF( nuf<0 ) GOTO 100
           Nz = Nz + nuf
           nn = nn - nuf
@@ -243,7 +249,7 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
           !     IF NUF=NN, THEN CY(I)=CZERO FOR ALL I
           !-----------------------------------------------------------------------
           IF( nn==0 ) THEN
-            IF( Zr<0._DP ) GOTO 100
+            IF( xx<0._DP ) GOTO 100
             RETURN
           END IF
         ELSEIF( az<=tol ) THEN
@@ -252,11 +258,11 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
           IF( aln>elim ) GOTO 100
         END IF
       END IF
-      IF( Zr>=0._DP ) THEN
+      IF( xx>=0._DP ) THEN
         !-----------------------------------------------------------------------
         !     RIGHT HALF PLANE COMPUTATION, REAL(Z)>=0.
         !-----------------------------------------------------------------------
-        CALL ZBKNU(Zr,Zi,Fnu,Kode,nn,Cyr,Cyi,nw,tol,elim,alim)
+        CALL ZBKNU(Z,Fnu,Kode,nn,Cy,nw,tol,elim,alim)
         IF( nw<0 ) GOTO 200
         Nz = nw
         RETURN
@@ -266,8 +272,8 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         !-----------------------------------------------------------------------
       ELSEIF( Nz==0 ) THEN
         mr = 1
-        IF( Zi<0._DP ) mr = -1
-        CALL ZACON(Zr,Zi,Fnu,Kode,mr,nn,Cyr,Cyi,nw,rl,fnul,tol,elim,alim)
+        IF( yy<0._DP ) mr = -1
+        CALL ZACON(Z,Fnu,Kode,mr,nn,Cy,nw,rl,fnul,tol,elim,alim)
         IF( nw<0 ) GOTO 200
         Nz = nw
         RETURN
@@ -284,4 +290,5 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   RETURN
   300  Nz = 0
   Ierr = 4
+  !
 END SUBROUTINE ZBESK

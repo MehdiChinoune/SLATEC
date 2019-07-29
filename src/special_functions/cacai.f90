@@ -106,5 +106,5 @@ PURE SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   END IF
   100  Nz = -1
   IF( nw==(-2) ) Nz = -2
-
+  !
 END SUBROUTINE CACAI

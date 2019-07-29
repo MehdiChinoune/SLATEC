@@ -1,6 +1,5 @@
 !** ZUNHJ
-SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
-    Zeta2r,Zeta2i,Asumr,Asumi,Bsumr,Bsumi)
+PURE SUBROUTINE ZUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -47,18 +46,18 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
   USE service, ONLY : tiny_dp
-  !     COMPLEX ARG,ASUM,BSUM,CFNU,CONE,CR,CZERO,DR,P,PHI,PRZTH,PTFN,
-  !    *RFN13,RTZTA,RZTH,SUMA,SUMB,TFN,T2,UP,W,W2,Z,ZA,ZB,ZC,ZETA,ZETA1,
-  !    *ZETA2,ZTH
-  REAL(DP) :: ang, ap(30), Argi, Argr, Asumi, Asumr, atol, aw2, azth, Bsumi, Bsumr, &
-    btol, cri(14), crr(14), dri(14), drr(14), Fnu, fn13, &
-    fn23, Phii, Phir, pi(30), pp, pr(30), przthi, przthr, ptfni, ptfnr, &
-    raw, raw2, razth, rfnu, rfnu2, rfn13, rtzti, rtztr, rzthi, rzthr, sti, str, &
-    sumai, sumar, sumbi, sumbr, test, tfni, tfnr, Tol, tzai, tzar, t2i, &
-    t2r, upi(14), upr(14), wi, wr, w2i, w2r, zai, zar, zbi, zbr, zci, zcr, &
-    zetai, zetar, Zeta1i, Zeta1r, Zeta2i, Zeta2r, Zi, Zr, zthi, zthr, ac
-  INTEGER :: ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
-    lr, lrp1, l1, l2, m
+  !
+  INTEGER, INTENT(IN) :: Ipmtr
+  REAL(DP), INTENT(IN) :: Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Arg, Asum, Bsum, Phi, Zeta1, Zeta2
+  !
+  INTEGER :: ias, ibs, is, j, jr, ju, k, kmax, kp1, ks, l, lr, lrp1, l1, l2, m
+  COMPLEX(DP) :: cfnu, cr(14), dr(14), p(30), przth, ptfn, rfn13, rtzta, rzth, &
+    suma, sumb, tfn, t2, up(14), w, w2, za, zb, zc, zeta, zth
+  REAL(DP) :: ang, ap(30), atol, aw2, azth, btol, fn13, fn23, pp, rfnu, rfnu2, &
+    wi, wr, zci, zcr, zetai, zetar, zthi, zthr, asumr, asumi, bsumr, bsumi, test, &
+    tstr, tsti, ac
   REAL(DP), PARAMETER :: ar(14) = [ 1.00000000000000000E+00_DP, 1.04166666666666667E-01_DP, &
     8.35503472222222222E-02_DP, 1.28226574556327160E-01_DP, 2.91849026464140464E-01_DP, &
     8.81627267443757652E-01_DP, 3.32140828186276754E+00_DP, 1.49957629868625547E+01_DP, &
@@ -70,40 +69,40 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     -8.22814390971859444E+01_DP, -4.92355370523670524E+02_DP, -3.31621856854797251E+03_DP, &
     -2.48276742452085896E+04_DP, -2.04526587315129788E+05_DP, -1.83844491706820990E+06_DP ]
   REAL(DP), PARAMETER :: c(105) = [ 1.00000000000000000E+00_DP, -2.08333333333333333E-01_DP, &
-    1.25000000000000000E-01_DP,  3.34201388888888889E-01_DP,-4.01041666666666667E-01_DP, &
+    1.25000000000000000E-01_DP, 3.34201388888888889E-01_DP, -4.01041666666666667E-01_DP, &
     7.03125000000000000E-02_DP, -1.02581259645061728E+00_DP, 1.84646267361111111E+00_DP, &
     -8.91210937500000000E-01_DP, 7.32421875000000000E-02_DP, 4.66958442342624743E+00_DP, &
-    -1.12070026162229938E+01_DP, 8.78912353515625000E+00_DP,-2.36408691406250000E+00_DP, &
+    -1.12070026162229938E+01_DP, 8.78912353515625000E+00_DP, -2.36408691406250000E+00_DP, &
     1.12152099609375000E-01_DP, -2.82120725582002449E+01_DP, 8.46362176746007346E+01_DP, &
-    -9.18182415432400174E+01_DP, 4.25349987453884549E+01_DP,-7.36879435947963170E+00_DP, &
-    2.27108001708984375E-01_DP,  2.12570130039217123E+02_DP,-7.65252468141181642E+02_DP, &
+    -9.18182415432400174E+01_DP, 4.25349987453884549E+01_DP, -7.36879435947963170E+00_DP, &
+    2.27108001708984375E-01_DP, 2.12570130039217123E+02_DP, -7.65252468141181642E+02_DP, &
     1.05999045252799988E+03_DP, -6.99579627376132541E+02_DP, 2.18190511744211590E+02_DP, &
-    -2.64914304869515555E+01_DP, 5.72501420974731445E-01_DP,-1.91945766231840700E+03_DP, &
+    -2.64914304869515555E+01_DP, 5.72501420974731445E-01_DP, -1.91945766231840700E+03_DP, &
     8.06172218173730938E+03_DP, -1.35865500064341374E+04_DP, 1.16553933368645332E+04_DP, &
-    -5.30564697861340311E+03_DP, 1.20090291321635246E+03_DP,-1.08090919788394656E+02_DP, &
-    1.72772750258445740E+00_DP,  2.02042913309661486E+04_DP,-9.69805983886375135E+04_DP, &
+    -5.30564697861340311E+03_DP, 1.20090291321635246E+03_DP, -1.08090919788394656E+02_DP, &
+    1.72772750258445740E+00_DP, 2.02042913309661486E+04_DP, -9.69805983886375135E+04_DP, &
     1.92547001232531532E+05_DP, -2.03400177280415534E+05_DP, 1.22200464983017460E+05_DP, &
-    -4.11926549688975513E+04_DP, 7.10951430248936372E+03_DP,-4.93915304773088012E+02_DP, &
+    -4.11926549688975513E+04_DP, 7.10951430248936372E+03_DP, -4.93915304773088012E+02_DP, &
     6.07404200127348304E+00_DP, -2.42919187900551333E+05_DP, 1.31176361466297720E+06_DP, &
-    -2.99801591853810675E+06_DP, 3.76327129765640400E+06_DP,-2.81356322658653411E+06_DP, &
+    -2.99801591853810675E+06_DP, 3.76327129765640400E+06_DP, -2.81356322658653411E+06_DP, &
     1.26836527332162478E+06_DP, -3.31645172484563578E+05_DP, 4.52187689813627263E+04_DP, &
     -2.49983048181120962E+03_DP, 2.43805296995560639E+01_DP, 3.28446985307203782E+06_DP, &
-    -1.97068191184322269E+07_DP, 5.09526024926646422E+07_DP,-7.41051482115326577E+07_DP, &
+    -1.97068191184322269E+07_DP, 5.09526024926646422E+07_DP, -7.41051482115326577E+07_DP, &
     6.63445122747290267E+07_DP, -3.75671766607633513E+07_DP, 1.32887671664218183E+07_DP, &
-    -2.78561812808645469E+06_DP, 3.08186404612662398E+05_DP,-1.38860897537170405E+04_DP, &
+    -2.78561812808645469E+06_DP, 3.08186404612662398E+05_DP, -1.38860897537170405E+04_DP, &
     1.10017140269246738E+02_DP, -4.93292536645099620E+07_DP, 3.25573074185765749E+08_DP, &
-    -9.39462359681578403E+08_DP, 1.55359689957058006E+09_DP,-1.62108055210833708E+09_DP, &
+    -9.39462359681578403E+08_DP, 1.55359689957058006E+09_DP, -1.62108055210833708E+09_DP, &
     1.10684281682301447E+09_DP, -4.95889784275030309E+08_DP, 1.42062907797533095E+08_DP, &
-    -2.44740627257387285E+07_DP, 2.24376817792244943E+06_DP,-8.40054336030240853E+04_DP, &
-    5.51335896122020586E+02_DP,  8.14789096118312115E+08_DP,-5.86648149205184723E+09_DP, &
+    -2.44740627257387285E+07_DP, 2.24376817792244943E+06_DP, -8.40054336030240853E+04_DP, &
+    5.51335896122020586E+02_DP, 8.14789096118312115E+08_DP, -5.86648149205184723E+09_DP, &
     1.86882075092958249E+10_DP, -3.46320433881587779E+10_DP, 4.12801855797539740E+10_DP, &
-    -3.30265997498007231E+10_DP, 1.79542137311556001E+10_DP,-6.56329379261928433E+09_DP, &
+    -3.30265997498007231E+10_DP, 1.79542137311556001E+10_DP, -6.56329379261928433E+09_DP, &
     1.55927986487925751E+09_DP, -2.25105661889415278E+08_DP, 1.73951075539781645E+07_DP, &
-    -5.49842327572288687E+05_DP, 3.03809051092238427E+03_DP,-1.46792612476956167E+10_DP, &
+    -5.49842327572288687E+05_DP, 3.03809051092238427E+03_DP, -1.46792612476956167E+10_DP, &
     1.14498237732025810E+11_DP, -3.99096175224466498E+11_DP, 8.19218669548577329E+11_DP, &
-    -1.09837515608122331E+12_DP, 1.00815810686538209E+12_DP,-6.45364869245376503E+11_DP, &
+    -1.09837515608122331E+12_DP, 1.00815810686538209E+12_DP, -6.45364869245376503E+11_DP, &
     2.87900649906150589E+11_DP, -8.78670721780232657E+10_DP, 1.76347306068349694E+10_DP, &
-    -2.16716498322379509E+09_DP, 1.43157876718888981E+08_DP,-3.87183344257261262E+06_DP, &
+    -2.16716498322379509E+09_DP, 1.43157876718888981E+08_DP, -3.87183344257261262E+06_DP, &
     1.82577554742931747E+04_DP ]
   REAL(DP), PARAMETER :: alfa(180) = [ -4.44444444444444444E-03_DP, -9.22077922077922078E-04_DP, &
     -8.84892884892884893E-05_DP, 1.65927687832449737E-04_DP, 2.46691372741792910E-04_DP, &
@@ -134,7 +133,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     7.82620866744496661E-06_DP, 3.59257485819351583E-06_DP, 1.44040049814251817E-07_DP, &
     -2.65396769697939116E-06_DP, -4.91346867098485910E-06_DP, -6.72739296091248287E-06_DP, &
     -8.17269379678657923E-06_DP, -9.31304715093561232E-06_DP, -1.02011418798016441E-05_DP, &
-    -1.08805962510592880E-05_DP, -1.13875481509603555E-05_DP, - 1.17519675674556414E-05_DP, &
+    -1.08805962510592880E-05_DP, -1.13875481509603555E-05_DP, -1.17519675674556414E-05_DP, &
     -1.19987364870944141E-05_DP, 3.78194199201772914E-04_DP, 2.02471952761816167E-04_DP, &
     -6.37938506318862408E-05_DP, -2.38598230603005903E-04_DP, -3.10916256027361568E-04_DP, &
     -3.13680115247576316E-04_DP, -2.78950273791323387E-04_DP, -2.28564082619141374E-04_DP, &
@@ -188,14 +187,14 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     1.95913450141179244E-05_DP, 1.90689367910436740E-05_DP, 1.85533719641636667E-05_DP, &
     1.80475722259674218E-05_DP, 5.52213076721292790E-04_DP, 4.47932581552384646E-04_DP, &
     2.79520653992020589E-04_DP, 1.52468156198446602E-04_DP, 6.93271105657043598E-05_DP, &
-    1.76258683069991397E-05_DP, - 1.35744996343269136E-05_DP, -3.17972413350427135E-05_DP, &
+    1.76258683069991397E-05_DP, -1.35744996343269136E-05_DP, -3.17972413350427135E-05_DP, &
     -4.18861861696693365E-05_DP, -4.69004889379141029E-05_DP, -4.87665447413787352E-05_DP, &
     -4.87010031186735069E-05_DP, -4.74755620890086638E-05_DP, -4.55813058138628452E-05_DP, &
     -4.33309644511266036E-05_DP, -4.09230193157750364E-05_DP, -3.84822638603221274E-05_DP, &
     -3.60857167535410501E-05_DP, -3.37793306123367417E-05_DP, -3.15888560772109621E-05_DP, &
     -2.95269561750807315E-05_DP, -2.75978914828335759E-05_DP, -2.58006174666883713E-05_DP, &
     -2.41308356761280200E-05_DP, -2.25823509518346033E-05_DP, -2.11479656768912971E-05_DP, &
-    -1.98200638885294927E-05_DP, -1.85909870801065077E-05_DP, - 1.74532699844210224E-05_DP, &
+    -1.98200638885294927E-05_DP, -1.85909870801065077E-05_DP, -1.74532699844210224E-05_DP, &
     -1.63997823854497997E-05_DP, -4.74617796559959808E-04_DP, -4.77864567147321487E-04_DP, &
     -3.20390228067037603E-04_DP, -1.61105016119962282E-04_DP, -4.25778101285435204E-05_DP, &
     3.44571294294967503E-05_DP, 7.97092684075674924E-05_DP, 1.03138236708272200E-04_DP, &
@@ -209,27 +208,27 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     8.79179954978479373E-06_DP, 7.36465810572578444E-04_DP, 8.72790805146193976E-04_DP, &
     6.22614862573135066E-04_DP, 2.85998154194304147E-04_DP, 3.84737672879366102E-06_DP, &
     -1.87906003636971558E-04_DP, -2.97603646594554535E-04_DP, -3.45998126832656348E-04_DP, &
-    -3.53382470916037712E-04_DP, -3.35715635775048757E-04_DP, - 3.04321124789039809E-04_DP, &
+    -3.53382470916037712E-04_DP, -3.35715635775048757E-04_DP, -3.04321124789039809E-04_DP, &
     -2.66722723047612821E-04_DP, -2.27654214122819527E-04_DP, -1.89922611854562356E-04_DP, &
     -1.55058918599093870E-04_DP, -1.23778240761873630E-04_DP, -9.62926147717644187E-05_DP, &
     -7.25178327714425337E-05_DP, -5.22070028895633801E-05_DP, -3.50347750511900522E-05_DP, &
     -2.06489761035551757E-05_DP, -8.70106096849767054E-06_DP, 1.13698686675100290E-06_DP, &
     9.16426474122778849E-06_DP, 1.56477785428872620E-05_DP, 2.08223629482466847E-05_DP, &
     2.48923381004595156E-05_DP, 2.80340509574146325E-05_DP, 3.03987774629861915E-05_DP, &
-    3.21156731406700616E-05_DP, - 1.80182191963885708E-03_DP, -2.43402962938042533E-03_DP, &
+    3.21156731406700616E-05_DP, -1.80182191963885708E-03_DP, -2.43402962938042533E-03_DP, &
     -1.83422663549856802E-03_DP, -7.62204596354009765E-04_DP, 2.39079475256927218E-04_DP, &
     9.49266117176881141E-04_DP, 1.34467449701540359E-03_DP, 1.48457495259449178E-03_DP, &
     1.44732339830617591E-03_DP, 1.30268261285657186E-03_DP, 1.10351597375642682E-03_DP, &
     8.86047440419791759E-04_DP, 6.73073208165665473E-04_DP, 4.77603872856582378E-04_DP, &
     3.05991926358789362E-04_DP, 1.60315694594721630E-04_DP, 4.00749555270613286E-05_DP, &
     -5.66607461635251611E-05_DP, -1.32506186772982638E-04_DP, -1.90296187989614057E-04_DP, &
-    - 2.32811450376937408E-04_DP, -2.62628811464668841E-04_DP, -2.82050469867598672E-04_DP, &
+    -2.32811450376937408E-04_DP, -2.62628811464668841E-04_DP, -2.82050469867598672E-04_DP, &
     -2.93081563192861167E-04_DP, -2.97435962176316616E-04_DP, -2.96557334239348078E-04_DP, &
     -2.91647363312090861E-04_DP, -2.83696203837734166E-04_DP, -2.73512317095673346E-04_DP, &
     -2.61750155806768580E-04_DP, 6.38585891212050914E-03_DP, 9.62374215806377941E-03_DP, &
     7.61878061207001043E-03_DP, 2.83219055545628054E-03_DP, -2.09841352012720090E-03_DP, &
     -5.73826764216626498E-03_DP, -7.70804244495414620E-03_DP, -8.21011692264844401E-03_DP, &
-    -7.65824520346905413E-03_DP, -6.47209729391045177E-03_DP, - 4.99132412004966473E-03_DP, &
+    -7.65824520346905413E-03_DP, -6.47209729391045177E-03_DP, -4.99132412004966473E-03_DP, &
     -3.45612289713133280E-03_DP, -2.01785580014170775E-03_DP, -7.59430686781961401E-04_DP, &
     2.84173631523859138E-04_DP, 1.10891667586337403E-03_DP, 1.72901493872728771E-03_DP, &
     2.16812590802684701E-03_DP, 2.45357710494539735E-03_DP, 2.61281821058334862E-03_DP, &
@@ -248,57 +247,61 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     1.50729501494095594E-02_DP, 1.44193250839954639E-02_DP, 1.38184805735341786E-02_DP, &
     1.32643378994276568E-02_DP, 1.27517121970498651E-02_DP, 1.22761545318762767E-02_DP, &
     1.18338262398482403E-02_DP ]
-  REAL(DP), PARAMETER :: ex1 = 3.33333333333333333E-01_DP, ex2 = 6.66666666666666667E-01_DP, &
-    hpi = 1.57079632679489662E+00_DP, gpi = 3.14159265358979324E+00_DP, &
-    thpi = 4.71238898038468986_DP
-  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
+  REAL(DP), PARAMETER :: ex1 = 3.33333333333333333E-01_DP, &
+    ex2 = 6.66666666666666667E-01_DP, thpi = 4.71238898038468986_DP, &
+    hpi = 1.57079632679489662E+00_DP, pi = 3.14159265358979324E+00_DP
   !* FIRST EXECUTABLE STATEMENT  ZUNHJ
   rfnu = 1._DP/Fnu
+  !     ZB = Z*CMPLX(RFNU,0.0E0)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST (Z/FNU TOO SMALL)
   !-----------------------------------------------------------------------
+  tstr = REAL(Z,DP)
+  tsti = AIMAG(Z)
   test = tiny_dp*1.E+3_DP
   ac = Fnu*test
-  IF( ABS(Zr)>ac .OR. ABS(Zi)>ac ) THEN
-    zbr = Zr*rfnu
-    zbi = Zi*rfnu
+  IF( ABS(tstr)>ac .OR. ABS(tsti)>ac ) THEN
+    zb = Z*CMPLX(rfnu,0._DP,DP)
     rfnu2 = rfnu*rfnu
     !-----------------------------------------------------------------------
     !     COMPUTE IN THE FOURTH QUADRANT
     !-----------------------------------------------------------------------
     fn13 = Fnu**ex1
     fn23 = fn13*fn13
-    rfn13 = 1._DP/fn13
-    w2r = coner - zbr*zbr + zbi*zbi
-    w2i = conei - zbr*zbi - zbr*zbi
-    aw2 = ZABS(w2r,w2i)
+    rfn13 = CMPLX(1._DP/fn13,0._DP,DP)
+    w2 = (1._DP,0._DP) - zb*zb
+    aw2 = ABS(w2)
     IF( aw2>0.25_DP ) THEN
       !-----------------------------------------------------------------------
-      !     ABS(W2)>0.25D0
+      !     ABS(W2)>0.25E0
       !-----------------------------------------------------------------------
-      CALL ZSQRT(w2r,w2i,wr,wi)
+      w = SQRT(w2)
+      wr = REAL(w,DP)
+      wi = AIMAG(w)
       IF( wr<0._DP ) wr = 0._DP
       IF( wi<0._DP ) wi = 0._DP
-      str = coner + wr
-      sti = wi
-      CALL ZDIV(str,sti,zbr,zbi,zar,zai)
-      CALL ZLOG(zar,zai,zcr,zci)
+      w = CMPLX(wr,wi,DP)
+      za = ((1._DP,0._DP)+w)/zb
+      zc = LOG(za)
+      zcr = REAL(zc,DP)
+      zci = AIMAG(zc)
       IF( zci<0._DP ) zci = 0._DP
       IF( zci>hpi ) zci = hpi
       IF( zcr<0._DP ) zcr = 0._DP
-      zthr = (zcr-wr)*1.5_DP
-      zthi = (zci-wi)*1.5_DP
-      Zeta1r = zcr*Fnu
-      Zeta1i = zci*Fnu
-      Zeta2r = wr*Fnu
-      Zeta2i = wi*Fnu
-      azth = ZABS(zthr,zthi)
+      zc = CMPLX(zcr,zci,DP)
+      zth = (zc-w)*CMPLX(1.5_DP,0._DP,DP)
+      cfnu = CMPLX(Fnu,0._DP,DP)
+      Zeta1 = zc*cfnu
+      Zeta2 = w*cfnu
+      azth = ABS(zth)
+      zthr = REAL(zth,DP)
+      zthi = AIMAG(zth)
       ang = thpi
       IF( zthr<0._DP .OR. zthi>=0._DP ) THEN
         ang = hpi
         IF( zthr/=0._DP ) THEN
           ang = ATAN(zthi/zthr)
-          IF( zthr<0._DP ) ang = ang + gpi
+          IF( zthr<0._DP ) ang = ang + pi
         END IF
       END IF
       pp = azth**ex2
@@ -306,50 +309,27 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
       zetar = pp*COS(ang)
       zetai = pp*SIN(ang)
       IF( zetai<0._DP ) zetai = 0._DP
-      Argr = zetar*fn23
-      Argi = zetai*fn23
-      CALL ZDIV(zthr,zthi,zetar,zetai,rtztr,rtzti)
-      CALL ZDIV(rtztr,rtzti,wr,wi,zar,zai)
-      tzar = zar + zar
-      tzai = zai + zai
-      CALL ZSQRT(tzar,tzai,str,sti)
-      Phir = str*rfn13
-      Phii = sti*rfn13
+      zeta = CMPLX(zetar,zetai,DP)
+      Arg = zeta*CMPLX(fn23,0._DP,DP)
+      rtzta = zth/zeta
+      za = rtzta/w
+      Phi = SQRT(za+za)*rfn13
       IF( Ipmtr/=1 ) THEN
-        raw = 1._DP/SQRT(aw2)
-        str = wr*raw
-        sti = -wi*raw
-        tfnr = str*rfnu*raw
-        tfni = sti*rfnu*raw
-        razth = 1._DP/azth
-        str = zthr*razth
-        sti = -zthi*razth
-        rzthr = str*razth*rfnu
-        rzthi = sti*razth*rfnu
-        zcr = rzthr*ar(2)
-        zci = rzthi*ar(2)
-        raw2 = 1._DP/aw2
-        str = w2r*raw2
-        sti = -w2i*raw2
-        t2r = str*raw2
-        t2i = sti*raw2
-        str = t2r*c(2) + c(3)
-        sti = t2i*c(2)
-        upr(2) = str*tfnr - sti*tfni
-        upi(2) = str*tfni + sti*tfnr
-        Bsumr = upr(2) + zcr
-        Bsumi = upi(2) + zci
-        Asumr = zeror
-        Asumi = zeroi
+        tfn = CMPLX(rfnu,0._DP,DP)/w
+        rzth = CMPLX(rfnu,0._DP,DP)/zth
+        zc = rzth*CMPLX(ar(2),0._DP,DP)
+        t2 = (1._DP,0._DP)/w2
+        up(2) = (t2*CMPLX(c(2),0._DP,DP)+CMPLX(c(3),0._DP,DP))*tfn
+        Bsum = up(2) + zc
+        Asum = (0._DP,0._DP)
         IF( rfnu>=Tol ) THEN
-          przthr = rzthr
-          przthi = rzthi
-          ptfnr = tfnr
-          ptfni = tfni
-          upr(1) = coner
-          upi(1) = conei
+          przth = rzth
+          ptfn = tfn
+          up(1) = (1._DP,0._DP)
           pp = 1._DP
-          btol = Tol*(ABS(Bsumr)+ABS(Bsumi))
+          bsumr = REAL(Bsum,DP)
+          bsumi = AIMAG(Bsum)
+          btol = Tol*(ABS(bsumr)+ABS(bsumi))
           ks = 0
           kp1 = 2
           l = 3
@@ -365,120 +345,88 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
               ks = ks + 1
               kp1 = kp1 + 1
               l = l + 1
-              zar = c(l)
-              zai = zeroi
+              za = CMPLX(c(l),0._DP,DP)
               DO j = 2, kp1
                 l = l + 1
-                str = zar*t2r - t2i*zai + c(l)
-                zai = zar*t2i + zai*t2r
-                zar = str
+                za = za*t2 + CMPLX(c(l),0._DP,DP)
               END DO
-              str = ptfnr*tfnr - ptfni*tfni
-              ptfni = ptfnr*tfni + ptfni*tfnr
-              ptfnr = str
-              upr(kp1) = ptfnr*zar - ptfni*zai
-              upi(kp1) = ptfni*zar + ptfnr*zai
-              crr(ks) = przthr*br(ks+1)
-              cri(ks) = przthi*br(ks+1)
-              str = przthr*rzthr - przthi*rzthi
-              przthi = przthr*rzthi + przthi*rzthr
-              przthr = str
-              drr(ks) = przthr*ar(ks+2)
-              dri(ks) = przthi*ar(ks+2)
+              ptfn = ptfn*tfn
+              up(kp1) = ptfn*za
+              cr(ks) = przth*CMPLX(br(ks+1),0._DP,DP)
+              przth = przth*rzth
+              dr(ks) = przth*CMPLX(ar(ks+2),0._DP,DP)
             END DO
             pp = pp*rfnu2
             IF( ias/=1 ) THEN
-              sumar = upr(lrp1)
-              sumai = upi(lrp1)
+              suma = up(lrp1)
               ju = lrp1
               DO jr = 1, lr
                 ju = ju - 1
-                sumar = sumar + crr(jr)*upr(ju) - cri(jr)*upi(ju)
-                sumai = sumai + crr(jr)*upi(ju) + cri(jr)*upr(ju)
+                suma = suma + cr(jr)*up(ju)
               END DO
-              Asumr = Asumr + sumar
-              Asumi = Asumi + sumai
-              test = ABS(sumar) + ABS(sumai)
+              Asum = Asum + suma
+              asumr = REAL(Asum,DP)
+              asumi = AIMAG(Asum)
+              test = ABS(asumr) + ABS(asumi)
               IF( pp<Tol .AND. test<Tol ) ias = 1
             END IF
             IF( ibs/=1 ) THEN
-              sumbr = upr(lr+2) + upr(lrp1)*zcr - upi(lrp1)*zci
-              sumbi = upi(lr+2) + upr(lrp1)*zci + upi(lrp1)*zcr
+              sumb = up(lr+2) + up(lrp1)*zc
               ju = lrp1
               DO jr = 1, lr
                 ju = ju - 1
-                sumbr = sumbr + drr(jr)*upr(ju) - dri(jr)*upi(ju)
-                sumbi = sumbi + drr(jr)*upi(ju) + dri(jr)*upr(ju)
+                sumb = sumb + dr(jr)*up(ju)
               END DO
-              Bsumr = Bsumr + sumbr
-              Bsumi = Bsumi + sumbi
-              test = ABS(sumbr) + ABS(sumbi)
-              IF( pp<btol .AND. test<btol ) ibs = 1
+              Bsum = Bsum + sumb
+              bsumr = REAL(Bsum,DP)
+              bsumi = AIMAG(Bsum)
+              test = ABS(bsumr) + ABS(bsumi)
+              IF( pp<btol .AND. test<Tol ) ibs = 1
             END IF
             IF( ias==1 .AND. ibs==1 ) EXIT
           END DO
         END IF
-        Asumr = Asumr + coner
-        str = -Bsumr*rfn13
-        sti = -Bsumi*rfn13
-        CALL ZDIV(str,sti,rtztr,rtzti,Bsumr,Bsumi)
+        Asum = Asum + (1._DP,0._DP)
+        Bsum = -Bsum*rfn13/rtzta
       END IF
     ELSE
       !-----------------------------------------------------------------------
-      !     POWER SERIES FOR ABS(W2)<=0.25D0
+      !     POWER SERIES FOR ABS(W2)<=0.25E0
       !-----------------------------------------------------------------------
       k = 1
-      pr(1) = coner
-      pi(1) = conei
-      sumar = gama(1)
-      sumai = zeroi
+      p(1) = (1._DP,0._DP)
+      suma = CMPLX(gama(1),0._DP,DP)
       ap(1) = 1._DP
       IF( aw2>=Tol ) THEN
         DO k = 2, 30
-          pr(k) = pr(k-1)*w2r - pi(k-1)*w2i
-          pi(k) = pr(k-1)*w2i + pi(k-1)*w2r
-          sumar = sumar + pr(k)*gama(k)
-          sumai = sumai + pi(k)*gama(k)
+          p(k) = p(k-1)*w2
+          suma = suma + p(k)*CMPLX(gama(k),0._DP,DP)
           ap(k) = ap(k-1)*aw2
           IF( ap(k)<Tol ) GOTO 20
         END DO
         k = 30
       END IF
       20  kmax = k
-      zetar = w2r*sumar - w2i*sumai
-      zetai = w2r*sumai + w2i*sumar
-      Argr = zetar*fn23
-      Argi = zetai*fn23
-      CALL ZSQRT(sumar,sumai,zar,zai)
-      CALL ZSQRT(w2r,w2i,str,sti)
-      Zeta2r = str*Fnu
-      Zeta2i = sti*Fnu
-      str = coner + ex2*(zetar*zar-zetai*zai)
-      sti = conei + ex2*(zetar*zai+zetai*zar)
-      Zeta1r = str*Zeta2r - sti*Zeta2i
-      Zeta1i = str*Zeta2i + sti*Zeta2r
-      zar = zar + zar
-      zai = zai + zai
-      CALL ZSQRT(zar,zai,str,sti)
-      Phir = str*rfn13
-      Phii = sti*rfn13
+      zeta = w2*suma
+      Arg = zeta*CMPLX(fn23,0._DP,DP)
+      za = SQRT(suma)
+      Zeta2 = SQRT(w2)*CMPLX(Fnu,0._DP,DP)
+      Zeta1 = Zeta2*((1._DP,0._DP)+zeta*za*CMPLX(ex2,0._DP,DP))
+      za = za + za
+      Phi = SQRT(za)*rfn13
       IF( Ipmtr/=1 ) THEN
         !-----------------------------------------------------------------------
         !     SUM SERIES FOR ASUM AND BSUM
         !-----------------------------------------------------------------------
-        sumbr = zeror
-        sumbi = zeroi
+        sumb = (0._DP,0._DP)
         DO k = 1, kmax
-          sumbr = sumbr + pr(k)*beta(k)
-          sumbi = sumbi + pi(k)*beta(k)
+          sumb = sumb + p(k)*CMPLX(beta(k),0._DP,DP)
         END DO
-        Asumr = zeror
-        Asumi = zeroi
-        Bsumr = sumbr
-        Bsumi = sumbi
+        Asum = (0._DP,0._DP)
+        Bsum = sumb
         l1 = 0
         l2 = 30
-        btol = Tol*(ABS(Bsumr)+ABS(Bsumi))
+        btol = Tol*ABS(Bsum)
         atol = Tol
         pp = 1._DP
         ias = 0
@@ -488,29 +436,23 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
             atol = atol/rfnu2
             pp = pp*rfnu2
             IF( ias/=1 ) THEN
-              sumar = zeror
-              sumai = zeroi
+              suma = (0._DP,0._DP)
               DO k = 1, kmax
                 m = l1 + k
-                sumar = sumar + pr(k)*alfa(m)
-                sumai = sumai + pi(k)*alfa(m)
+                suma = suma + p(k)*CMPLX(alfa(m),0._DP,DP)
                 IF( ap(k)<atol ) EXIT
               END DO
-              Asumr = Asumr + sumar*pp
-              Asumi = Asumi + sumai*pp
+              Asum = Asum + suma*CMPLX(pp,0._DP,DP)
               IF( pp<Tol ) ias = 1
             END IF
             IF( ibs/=1 ) THEN
-              sumbr = zeror
-              sumbi = zeroi
+              sumb = (0._DP,0._DP)
               DO k = 1, kmax
                 m = l2 + k
-                sumbr = sumbr + pr(k)*beta(m)
-                sumbi = sumbi + pi(k)*beta(m)
+                sumb = sumb + p(k)*CMPLX(beta(m),0._DP,DP)
                 IF( ap(k)<atol ) EXIT
               END DO
-              Bsumr = Bsumr + sumbr*pp
-              Bsumi = Bsumi + sumbi*pp
+              Bsum = Bsum + sumb*CMPLX(pp,0._DP,DP)
               IF( pp<btol ) ibs = 1
             END IF
             IF( ias==1 .AND. ibs==1 ) EXIT
@@ -518,22 +460,19 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
             l2 = l2 + 30
           END DO
         END IF
-        Asumr = Asumr + coner
-        pp = rfnu*rfn13
-        Bsumr = Bsumr*pp
-        Bsumi = Bsumi*pp
+        Asum = Asum + (1._DP,0._DP)
+        pp = rfnu*REAL(rfn13,DP)
+        Bsum = Bsum*CMPLX(pp,0._DP,DP)
       END IF
     END IF
   ELSE
-    Zeta1r = 2._DP*ABS(LOG(test)) + Fnu
-    Zeta1i = 0._DP
-    Zeta2r = Fnu
-    Zeta2i = 0._DP
-    Phir = 1._DP
-    Phii = 0._DP
-    Argr = 1._DP
-    Argi = 0._DP
+    ac = 2._DP*ABS(LOG(test)) + Fnu
+    Zeta1 = CMPLX(ac,0._DP,DP)
+    Zeta2 = CMPLX(Fnu,0._DP,DP)
+    Phi = (1._DP,0._DP)
+    Arg = (1._DP,0._DP)
     RETURN
   END IF
+  !
   RETURN
 END SUBROUTINE ZUNHJ

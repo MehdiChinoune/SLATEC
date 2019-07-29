@@ -30,10 +30,11 @@ ELEMENTAL SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Ascle, Tol
   COMPLEX(SP), INTENT(IN) :: Y
+  !
   REAL(SP) :: ss, st, yr, yi
   !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
-  yr = REAL(Y)
+  yr = REAL(Y,SP)
   yi = AIMAG(Y)
   yr = ABS(yr)
   yi = ABS(yi)
@@ -42,4 +43,5 @@ ELEMENTAL SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
   ss = MAX(yr,yi)
   st = st/Tol
   IF( ss<st ) Nz = 1
+  !
 END SUBROUTINE CUCHK

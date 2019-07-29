@@ -1,5 +1,5 @@
 !** ZACAI
-SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
+PURE SUBROUTINE ZACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !> Subsidiary to ZAIRY
   !***
   ! **Library:**   SLATEC
@@ -30,54 +30,58 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : tiny_dp
-  !     COMPLEX CSGN,CSPN,C1,C2,Y,Z,ZN,CY
-  INTEGER :: inu, iuf, Kode, Mr, N, nn, nw, Nz
-  REAL(DP) :: Alim, arg, ascle, az, csgnr, csgni, cspnr, cspni, &
-    c1r, c1i, c2r, c2i, cyr(2), cyi(2), dfnu, Elim, fmr, &
-    Fnu, Rl, sgn, Tol, yy, Yr(N), Yi(N), Zr, Zi, znr, zni
+  !
+  INTEGER, INTENT(IN) :: Kode, Mr, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Rl, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  INTEGER :: inu, iuf, nn, nw
+  COMPLEX(DP) :: csgn, cspn, c1, c2, zn, cy(2)
+  REAL(DP) :: arg, ascle, az, cpn, dfnu, fmr, sgn, spn, yy
   REAL(DP), PARAMETER :: pi = 3.14159265358979324_DP
   !* FIRST EXECUTABLE STATEMENT  ZACAI
   Nz = 0
-  znr = -Zr
-  zni = -Zi
-  az = ZABS(Zr,Zi)
+  zn = -Z
+  az = ABS(Z)
   nn = N
   dfnu = Fnu + (N-1)
   IF( az<=2._DP ) THEN
     !-----------------------------------------------------------------------
     !     POWER SERIES FOR THE I FUNCTION
     !-----------------------------------------------------------------------
-    CALL ZSERI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Tol,Elim,Alim)
-  ELSEIF( az*az*0.25D0>dfnu+1._DP ) THEN
+    CALL ZSERI(zn,Fnu,Kode,nn,Y,nw,Tol,Elim,Alim)
+  ELSEIF( az*az*0.25_DP>dfnu+1._DP ) THEN
     IF( az<Rl ) THEN
       !-----------------------------------------------------------------------
       !     MILLER ALGORITHM NORMALIZED BY THE SERIES FOR THE I FUNCTION
       !-----------------------------------------------------------------------
-      CALL ZMLRI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Tol)
+      CALL ZMLRI(zn,Fnu,Kode,nn,Y,nw,Tol)
       IF( nw<0 ) GOTO 100
     ELSE
       !-----------------------------------------------------------------------
       !     ASYMPTOTIC EXPANSION FOR LARGE Z FOR THE I FUNCTION
       !-----------------------------------------------------------------------
-      CALL ZASYI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Rl,Tol,Elim,Alim)
+      CALL ZASYI(zn,Fnu,Kode,nn,Y,nw,Rl,Tol,Elim,Alim)
       IF( nw<0 ) GOTO 100
     END IF
   ELSE
-    CALL ZSERI(znr,zni,Fnu,Kode,nn,Yr,Yi,nw,Tol,Elim,Alim)
+    CALL ZSERI(zn,Fnu,Kode,nn,Y,nw,Tol,Elim,Alim)
   END IF
   !-----------------------------------------------------------------------
   !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE FOR THE K FUNCTION
   !-----------------------------------------------------------------------
-  CALL ZBKNU(znr,zni,Fnu,Kode,1,cyr,cyi,nw,Tol,Elim,Alim)
+  CALL ZBKNU(zn,Fnu,Kode,1,cy,nw,Tol,Elim,Alim)
   IF( nw==0 ) THEN
     fmr = Mr
     sgn = -SIGN(pi,fmr)
-    csgnr = 0._DP
-    csgni = sgn
+    csgn = CMPLX(0._DP,sgn,DP)
     IF( Kode/=1 ) THEN
-      yy = -zni
-      csgnr = -csgni*SIN(yy)
-      csgni = csgni*COS(yy)
+      yy = -AIMAG(zn)
+      cpn = COS(yy)
+      spn = SIN(yy)
+      csgn = csgn*CMPLX(cpn,spn,DP)
     END IF
     !-----------------------------------------------------------------------
     !     CALCULATE CSPN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
@@ -85,26 +89,22 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     inu = INT( Fnu )
     arg = (Fnu-inu)*sgn
-    cspnr = COS(arg)
-    cspni = SIN(arg)
-    IF( MOD(inu,2)/=0 ) THEN
-      cspnr = -cspnr
-      cspni = -cspni
-    END IF
-    c1r = cyr(1)
-    c1i = cyi(1)
-    c2r = Yr(1)
-    c2i = Yi(1)
+    cpn = COS(arg)
+    spn = SIN(arg)
+    cspn = CMPLX(cpn,spn,DP)
+    IF( MOD(inu,2)==1 ) cspn = -cspn
+    c1 = cy(1)
+    c2 = Y(1)
     IF( Kode/=1 ) THEN
       iuf = 0
-      ascle = 1.E3_DP*tiny_dp/Tol
-      CALL ZS1S2(znr,zni,c1r,c1i,c2r,c2i,nw,ascle,Alim,iuf)
+      ascle = 1.E+3_DP*tiny_dp/Tol
+      CALL ZS1S2(zn,c1,c2,nw,ascle,Alim,iuf)
       Nz = Nz + nw
     END IF
-    Yr(1) = cspnr*c1r - cspni*c1i + csgnr*c2r - csgni*c2i
-    Yi(1) = cspnr*c1i + cspni*c1r + csgnr*c2i + csgni*c2r
+    Y(1) = cspn*c1 + csgn*c2
     RETURN
   END IF
   100  Nz = -1
   IF( nw==(-2) ) Nz = -2
+  !
 END SUBROUTINE ZACAI

@@ -1,5 +1,5 @@
 !** ZUNK2
-SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
+PURE SUBROUTINE ZUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !> Subsidiary to ZBESK
   !***
   ! **Library:**   SLATEC
@@ -28,25 +28,26 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : tiny_dp, huge_dp
-  !     COMPLEX AI,ARG,ARGD,ASUM,ASUMD,BSUM,BSUMD,CFN,CI,CIP,CK,CONE,CRSC,
-  !    *CR1,CR2,CS,CSCL,CSGN,CSPN,CSR,CSS,CY,CZERO,C1,C2,DAI,PHI,PHID,RZ,
-  !    *S1,S2,Y,Z,ZB,ZETA1,ZETA1D,ZETA2,ZETA2D,ZN,ZR
+  !
+  INTEGER, INTENT(IN) :: Kode, Mr, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
-    kk, Kode, Mr, N, nai, ndai, nw, Nz, idum, j, ipard, ic
-  REAL(DP) :: aarg, aii, air, Alim, ang, aphi, argdi, argdr, argi(2), argr(2), &
-    asc, ascle, asumdi, asumdr, asumi(2), asumr(2), bry(3), bsumdi, bsumdr, &
-    bsumi(2), bsumr(2), car, cki, ckr, crsc, cscl, csgni, csi, cspni, cspnr, &
-    csr, csrr(3), cssr(3), cyi(2), cyr(2), c1i, c1r, c2i, c2m, c2r, daii, dair, &
-    Elim, fmr, fn, fnf, Fnu, phidi, phidr, phii(2), phir(2), pti, ptr, rast, razr, &
-    rs1, rzi, rzr, sar, sgn, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), yy, &
-    zbi, zbr, zeta1i(2), zeta1r(2), zeta2i(2), zeta2r(2), zet1di, zet1dr, zet2di, &
-    zet2dr, Zi, zni, znr, Zr, zri, zrr
-  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, cr1r = 1._DP, &
-    cr1i = 1.73205080756887729_DP, cr2r = -0.5_DP, cr2i = -8.66025403784438647E-01_DP
-  REAL(DP), PARAMETER :: hpi = 1.57079632679489662E+00_DP, pi = 3.14159265358979324E+00_DP, &
+    kk, nai, ndai, nw, idum, j, ipard, ic
+  COMPLEX(DP) :: ai, arg(2), asum(2), bsum(2), cfn, ck, crsc, cs, cscl, csgn, cspn, &
+    csr(3), css(3), cy(2), c1, c2, dai, phi(2), rz, s1, s2, zb, zeta1(2), &
+    zeta2(2), zn, zr, phid, argd, zeta1d, zeta2d, asumd, bsumd
+  REAL(DP) :: aarg, ang, aphi, asc, ascle, bry(3), car, cpn, c2i, c2m, c2r, &
+    fmr, fn, fnf, rs1, sar, sgn, spn, x, yy
+  COMPLEX(DP), PARAMETER :: ci = (0._DP,1._DP), cr1 = (1._DP,1.73205080756887729E0_DP), &
+    cr2 = (-0.5_DP,-8.66025403784438647E-01_DP)
+  REAL(DP), PARAMETER :: hpi = 1.57079632679489662_DP, pi = 3.14159265358979324_DP, &
     aic = 1.26551212348464539_DP
-  REAL(DP), PARAMETER :: cipr(4) = [ 1._DP, 0._DP, -1._DP, 0._DP ]
-  REAL(DP), PARAMETER :: cipi(4) = [ 0._DP, -1._DP, 0._DP, 1._DP ]
+  COMPLEX(DP), PARAMETER :: cip(4) = [ (1._DP,0._DP), (0._DP,-1._DP), &
+    (-1._DP,0._DP), (0._DP,1._DP) ]
   !* FIRST EXECUTABLE STATEMENT  ZUNK2
   kdflg = 1
   Nz = 0
@@ -54,43 +55,36 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     EXP(-ALIM)=EXP(-ELIM)/TOL=APPROX. ONE PRECISION GREATER THAN
   !     THE UNDERFLOW LIMIT
   !-----------------------------------------------------------------------
-  cscl = 1._DP/Tol
-  crsc = Tol
-  cssr(1) = cscl
-  cssr(2) = coner
-  cssr(3) = crsc
-  csrr(1) = crsc
-  csrr(2) = coner
-  csrr(3) = cscl
-  bry(1) = 1.E3_DP*tiny_dp/Tol
+  cscl = CMPLX(1._DP/Tol,0._DP,DP)
+  crsc = CMPLX(Tol,0._DP,DP)
+  css(1) = cscl
+  css(2) = (1._DP,0._DP)
+  css(3) = crsc
+  csr(1) = crsc
+  csr(2) = (1._DP,0._DP)
+  csr(3) = cscl
+  bry(1) = 1.E+3_DP*tiny_dp/Tol
   bry(2) = 1._DP/bry(1)
   bry(3) = huge_dp
-  zrr = Zr
-  zri = Zi
-  IF( Zr<0._DP ) THEN
-    zrr = -Zr
-    zri = -Zi
-  END IF
-  yy = zri
-  znr = zri
-  zni = -zrr
-  zbr = zrr
-  zbi = zri
+  x = REAL(Z,DP)
+  zr = Z
+  IF( x<0._DP ) zr = -Z
+  yy = AIMAG(zr)
+  zn = -zr*ci
+  zb = zr
   inu = INT( Fnu )
   fnf = Fnu - inu
   ang = -hpi*fnf
   car = COS(ang)
   sar = SIN(ang)
-  c2r = hpi*sar
-  c2i = -hpi*car
+  cpn = -hpi*car
+  spn = -hpi*sar
+  c2 = CMPLX(-spn,cpn,DP)
   kk = MOD(inu,4) + 1
-  str = c2r*cipr(kk) - c2i*cipi(kk)
-  sti = c2r*cipi(kk) + c2i*cipr(kk)
-  csr = cr1r*str - cr1i*sti
-  csi = cr1r*sti + cr1i*str
+  cs = cr1*c2*cip(kk)
   IF( yy<=0._DP ) THEN
-    znr = -znr
-    zbi = -zbi
+    zn = CONJG(-zn)
+    zb = CONJG(zb)
   END IF
   !-----------------------------------------------------------------------
   !     K(FNU,Z) IS COMPUTED FROM H(2,FNU,-I*Z) WHERE Z IS IN THE FIRST
@@ -104,32 +98,25 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     j = 3 - j
     fn = Fnu + (i-1)
-    CALL ZUNHJ(znr,zni,fn,0,Tol,phir(j),phii(j),argr(j),argi(j),zeta1r(j),&
-      zeta1i(j),zeta2r(j),zeta2i(j),asumr(j),asumi(j),bsumr(j),bsumi(j))
+    CALL ZUNHJ(zn,fn,0,Tol,phi(j),arg(j),zeta1(j),zeta2(j),asum(j),bsum(j))
     IF( Kode==1 ) THEN
-      s1r = zeta1r(j) - zeta2r(j)
-      s1i = zeta1i(j) - zeta2i(j)
+      s1 = zeta1(j) - zeta2(j)
     ELSE
-      str = zbr + zeta2r(j)
-      sti = zbi + zeta2i(j)
-      rast = fn/ZABS(str,sti)
-      str = str*rast*rast
-      sti = -sti*rast*rast
-      s1r = zeta1r(j) - str
-      s1i = zeta1i(j) - sti
+      cfn = CMPLX(fn,0._DP,DP)
+      s1 = zeta1(j) - cfn*(cfn/(zb+zeta2(j)))
     END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
-    rs1 = s1r
+    rs1 = REAL(s1,DP)
     IF( ABS(rs1)<=Elim ) THEN
       IF( kdflg==1 ) kflag = 2
       IF( ABS(rs1)>=Alim ) THEN
         !-----------------------------------------------------------------------
         !     REFINE  TEST AND SCALE
         !-----------------------------------------------------------------------
-        aphi = ZABS(phir(j),phii(j))
-        aarg = ZABS(argr(j),argi(j))
+        aphi = ABS(phi(j))
+        aarg = ABS(arg(j))
         rs1 = rs1 + LOG(aphi) - 0.25_DP*LOG(aarg) - aic
         IF( ABS(rs1)>Elim ) GOTO 50
         IF( kdflg==1 ) kflag = 1
@@ -138,159 +125,119 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         END IF
       END IF
       !-----------------------------------------------------------------------
-      !     SCALE S1 TO KEEP INTERMEDIATE ARITHMETIC ON SCALE NEAR
-      !     EXPONENT EXTREMES
+      !  SCALE S1 TO KEEP INTERMEDIATE ARITHMETIC ON SCALE NEAR EXPONENT EXTREMES
       !-----------------------------------------------------------------------
-      c2r = argr(j)*cr2r - argi(j)*cr2i
-      c2i = argr(j)*cr2i + argi(j)*cr2r
-      CALL ZAIRY(c2r,c2i,0,2,air,aii,nai,idum)
-      CALL ZAIRY(c2r,c2i,1,2,dair,daii,ndai,idum)
-      str = dair*bsumr(j) - daii*bsumi(j)
-      sti = dair*bsumi(j) + daii*bsumr(j)
-      ptr = str*cr2r - sti*cr2i
-      pti = str*cr2i + sti*cr2r
-      str = ptr + (air*asumr(j)-aii*asumi(j))
-      sti = pti + (air*asumi(j)+aii*asumr(j))
-      ptr = str*phir(j) - sti*phii(j)
-      pti = str*phii(j) + sti*phir(j)
-      s2r = ptr*csr - pti*csi
-      s2i = ptr*csi + pti*csr
-      str = EXP(s1r)*cssr(kflag)
-      s1r = str*COS(s1i)
-      s1i = str*SIN(s1i)
-      str = s2r*s1r - s2i*s1i
-      s2i = s1r*s2i + s2r*s1i
-      s2r = str
+      c2 = arg(j)*cr2
+      CALL ZAIRY(c2,0,2,ai,nai,idum)
+      CALL ZAIRY(c2,1,2,dai,ndai,idum)
+      s2 = cs*phi(j)*(ai*asum(j)+cr2*dai*bsum(j))
+      c2r = REAL(s1,DP)
+      c2i = AIMAG(s1)
+      c2m = EXP(c2r)*REAL(css(kflag),DP)
+      s1 = CMPLX(c2m,0._DP,DP)*CMPLX(COS(c2i),SIN(c2i),DP)
+      s2 = s2*s1
       IF( kflag==1 ) THEN
-        CALL ZUCHK(s2r,s2i,nw,bry(1),Tol)
+        CALL ZUCHK(s2,nw,bry(1),Tol)
         IF( nw/=0 ) GOTO 50
       END IF
-      IF( yy<=0._DP ) s2i = -s2i
-      cyr(kdflg) = s2r
-      cyi(kdflg) = s2i
-      Yr(i) = s2r*csrr(kflag)
-      Yi(i) = s2i*csrr(kflag)
-      str = csi
-      csi = -csr
-      csr = str
+      IF( yy<=0._DP ) s2 = CONJG(s2)
+      cy(kdflg) = s2
+      Y(i) = s2*csr(kflag)
+      cs = -ci*cs
       IF( kdflg==2 ) GOTO 100
       kdflg = 2
       CYCLE
     END IF
     50  IF( rs1>0._DP ) GOTO 600
     !-----------------------------------------------------------------------
-    !     FOR ZR<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
+    !     FOR X<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
     !-----------------------------------------------------------------------
-    IF( Zr<0._DP ) GOTO 600
+    IF( x<0._DP ) GOTO 600
     kdflg = 1
-    Yr(i) = zeror
-    Yi(i) = zeroi
+    Y(i) = (0._DP,0._DP)
+    cs = -ci*cs
     Nz = Nz + 1
-    str = csi
-    csi = -csr
-    csr = str
     IF( i/=1 ) THEN
-      IF( (Yr(i-1)/=zeror) .OR. (Yi(i-1)/=zeroi) ) THEN
-        Yr(i-1) = zeror
-        Yi(i-1) = zeroi
+      IF( Y(i-1)/=(0._DP,0._DP) ) THEN
+        Y(i-1) = (0._DP,0._DP)
         Nz = Nz + 1
       END IF
     END IF
   END DO
   i = N
-  100  razr = 1._DP/ZABS(zrr,zri)
-  str = zrr*razr
-  sti = -zri*razr
-  rzr = (str+str)*razr
-  rzi = (sti+sti)*razr
-  ckr = fn*rzr
-  cki = fn*rzi
+  100  rz = CMPLX(2._DP,0._DP,DP)/zr
+  ck = CMPLX(fn,0._DP,DP)*rz
   ib = i + 1
   IF( N<ib ) GOTO 300
   !-----------------------------------------------------------------------
-  !     TEST LAST MEMBER FOR UNDERFLOW AND OVERFLOW. SET SEQUENCE TO ZERO
-  !     ON UNDERFLOW.
+  !  TEST LAST MEMBER FOR UNDERFLOW AND OVERFLOW, SET SEQUENCE TO ZERO ON UNDERFLOW
   !-----------------------------------------------------------------------
   fn = Fnu + (N-1)
   ipard = 1
   IF( Mr/=0 ) ipard = 0
-  CALL ZUNHJ(znr,zni,fn,ipard,Tol,phidr,phidi,argdr,argdi,zet1dr,zet1di,&
-    zet2dr,zet2di,asumdr,asumdi,bsumdr,bsumdi)
+  CALL ZUNHJ(zn,fn,ipard,Tol,phid,argd,zeta1d,zeta2d,asumd,bsumd)
   IF( Kode==1 ) THEN
-    s1r = zet1dr - zet2dr
-    s1i = zet1di - zet2di
+    s1 = zeta1d - zeta2d
   ELSE
-    str = zbr + zet2dr
-    sti = zbi + zet2di
-    rast = fn/ZABS(str,sti)
-    str = str*rast*rast
-    sti = -sti*rast*rast
-    s1r = zet1dr - str
-    s1i = zet1di - sti
+    cfn = CMPLX(fn,0._DP,DP)
+    s1 = zeta1d - cfn*(cfn/(zb+zeta2d))
   END IF
-  rs1 = s1r
+  rs1 = REAL(s1)
   IF( ABS(rs1)<=Elim ) THEN
     IF( ABS(rs1)<Alim ) GOTO 200
     !-----------------------------------------------------------------------
     !     REFINE ESTIMATE AND TEST
     !-----------------------------------------------------------------------
-    aphi = ZABS(phidr,phidi)
-    rs1 = rs1 + LOG(aphi)
+    aphi = ABS(phid)
+    aarg = ABS(argd)
+    rs1 = rs1 + LOG(aphi) - 0.25_DP*LOG(aarg) - aic
     IF( ABS(rs1)<Elim ) GOTO 200
   END IF
   IF( rs1>0._DP ) GOTO 600
   !-----------------------------------------------------------------------
-  !     FOR ZR<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
+  !     FOR X<0.0, THE I FUNCTION TO BE ADDED WILL OVERFLOW
   !-----------------------------------------------------------------------
-  IF( Zr<0._DP ) GOTO 600
+  IF( x<0._DP ) GOTO 600
   Nz = N
   DO i = 1, N
-    Yr(i) = zeror
-    Yi(i) = zeroi
+    Y(i) = (0._DP,0._DP)
   END DO
   RETURN
-  200  s1r = cyr(1)
-  s1i = cyi(1)
-  s2r = cyr(2)
-  s2i = cyi(2)
-  c1r = csrr(kflag)
+  !-----------------------------------------------------------------------
+  !     SCALED FORWARD RECURRENCE FOR REMAINDER OF THE SEQUENCE
+  !-----------------------------------------------------------------------
+  200  s1 = cy(1)
+  s2 = cy(2)
+  c1 = csr(kflag)
   ascle = bry(kflag)
   DO i = ib, N
-    c2r = s2r
-    c2i = s2i
-    s2r = ckr*c2r - cki*c2i + s1r
-    s2i = ckr*c2i + cki*c2r + s1i
-    s1r = c2r
-    s1i = c2i
-    ckr = ckr + rzr
-    cki = cki + rzi
-    c2r = s2r*c1r
-    c2i = s2i*c1r
-    Yr(i) = c2r
-    Yi(i) = c2i
+    c2 = s2
+    s2 = ck*s2 + s1
+    s1 = c2
+    ck = ck + rz
+    c2 = s2*c1
+    Y(i) = c2
     IF( kflag<3 ) THEN
-      str = ABS(c2r)
-      sti = ABS(c2i)
-      c2m = MAX(str,sti)
+      c2r = REAL(c2,DP)
+      c2i = AIMAG(c2)
+      c2r = ABS(c2r)
+      c2i = ABS(c2i)
+      c2m = MAX(c2r,c2i)
       IF( c2m>ascle ) THEN
         kflag = kflag + 1
         ascle = bry(kflag)
-        s1r = s1r*c1r
-        s1i = s1i*c1r
-        s2r = c2r
-        s2i = c2i
-        s1r = s1r*cssr(kflag)
-        s1i = s1i*cssr(kflag)
-        s2r = s2r*cssr(kflag)
-        s2i = s2i*cssr(kflag)
-        c1r = csrr(kflag)
+        s1 = s1*c1
+        s2 = c2
+        s1 = s1*css(kflag)
+        s2 = s2*css(kflag)
+        c1 = csr(kflag)
       END IF
     END IF
   END DO
   300 CONTINUE
   IF( Mr==0 ) RETURN
   !-----------------------------------------------------------------------
-  !     ANALYTIC CONTINUATION FOR RE(Z)<0.0D0
+  !     ANALYTIC CONTINUATION FOR RE(Z)<0.0E0
   !-----------------------------------------------------------------------
   Nz = 0
   fmr = Mr
@@ -298,88 +245,69 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     CSPN AND CSGN ARE COEFF OF K AND I FUNCTIONS RESP.
   !-----------------------------------------------------------------------
-  csgni = sgn
-  IF( yy<=0._DP ) csgni = -csgni
+  csgn = CMPLX(0._DP,sgn,DP)
+  IF( yy<=0._DP ) csgn = CONJG(csgn)
   ifn = inu + N - 1
   ang = fnf*sgn
-  cspnr = COS(ang)
-  cspni = SIN(ang)
-  IF( MOD(ifn,2)/=0 ) THEN
-    cspnr = -cspnr
-    cspni = -cspni
-  END IF
+  cpn = COS(ang)
+  spn = SIN(ang)
+  cspn = CMPLX(cpn,spn,DP)
+  IF( MOD(ifn,2)==1 ) cspn = -cspn
   !-----------------------------------------------------------------------
   !     CS=COEFF OF THE J FUNCTION TO GET THE I FUNCTION. I(FNU,Z) IS
   !     COMPUTED FROM EXP(I*FNU*HPI)*J(FNU,-I*Z) WHERE Z IS IN THE FIRST
   !     QUADRANT. FOURTH QUADRANT VALUES (YY<=0.0E0) ARE COMPUTED BY
   !     CONJUGATION SINCE THE I FUNCTION IS REAL ON THE POSITIVE REAL AXIS
   !-----------------------------------------------------------------------
-  csr = sar*csgni
-  csi = car*csgni
+  cs = CMPLX(car,-sar,DP)*csgn
   in = MOD(ifn,4) + 1
-  c2r = cipr(in)
-  c2i = cipi(in)
-  str = csr*c2r + csi*c2i
-  csi = -csr*c2i + csi*c2r
-  csr = str
+  c2 = cip(in)
+  cs = cs*CONJG(c2)
   asc = bry(1)
-  iuf = 0
   kk = N
   kdflg = 1
   ib = ib - 1
   ic = ib - 1
+  iuf = 0
   DO k = 1, N
-    fn = Fnu + (kk-1)
     !-----------------------------------------------------------------------
     !     LOGIC TO SORT OUT CASES WHOSE PARAMETERS WERE SET FOR THE K
     !     FUNCTION ABOVE
     !-----------------------------------------------------------------------
+    fn = Fnu + (kk-1)
     IF( N>2 ) THEN
       IF( (kk==N) .AND. (ib<N) ) GOTO 350
       IF( (kk/=ib) .AND. (kk/=ic) ) THEN
-        CALL ZUNHJ(znr,zni,fn,0,Tol,phidr,phidi,argdr,argdi,zet1dr,zet1di,&
-          zet2dr,zet2di,asumdr,asumdi,bsumdr,bsumdi)
+        CALL ZUNHJ(zn,fn,0,Tol,phid,argd,zeta1d,zeta2d,asumd,bsumd)
         GOTO 350
       END IF
     END IF
-    phidr = phir(j)
-    phidi = phii(j)
-    argdr = argr(j)
-    argdi = argi(j)
-    zet1dr = zeta1r(j)
-    zet1di = zeta1i(j)
-    zet2dr = zeta2r(j)
-    zet2di = zeta2i(j)
-    asumdr = asumr(j)
-    asumdi = asumi(j)
-    bsumdr = bsumr(j)
-    bsumdi = bsumi(j)
+    phid = phi(j)
+    argd = arg(j)
+    zeta1d = zeta1(j)
+    zeta2d = zeta2(j)
+    asumd = asum(j)
+    bsumd = bsum(j)
     j = 3 - j
     350 CONTINUE
     IF( Kode==1 ) THEN
-      s1r = -zet1dr + zet2dr
-      s1i = -zet1di + zet2di
+      s1 = -zeta1d + zeta2d
     ELSE
-      str = zbr + zet2dr
-      sti = zbi + zet2di
-      rast = fn/ZABS(str,sti)
-      str = str*rast*rast
-      sti = -sti*rast*rast
-      s1r = -zet1dr + str
-      s1i = -zet1di + sti
+      cfn = CMPLX(fn,0._DP,DP)
+      s1 = -zeta1d + cfn*(cfn/(zb+zeta2d))
     END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
-    rs1 = s1r
+    rs1 = REAL(s1,DP)
     IF( ABS(rs1)>Elim ) GOTO 450
     IF( kdflg==1 ) iflag = 2
     IF( ABS(rs1)>=Alim ) THEN
       !-----------------------------------------------------------------------
       !     REFINE  TEST AND SCALE
       !-----------------------------------------------------------------------
-      aphi = ZABS(phidr,phidi)
-      aarg = ZABS(argdr,argdi)
+      aphi = ABS(phid)
+      aarg = ABS(argd)
       rs1 = rs1 + LOG(aphi) - 0.25_DP*LOG(aarg) - aic
       IF( ABS(rs1)>Elim ) GOTO 450
       IF( kdflg==1 ) iflag = 1
@@ -387,54 +315,35 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
         IF( kdflg==1 ) iflag = 3
       END IF
     END IF
-    CALL ZAIRY(argdr,argdi,0,2,air,aii,nai,idum)
-    CALL ZAIRY(argdr,argdi,1,2,dair,daii,ndai,idum)
-    str = dair*bsumdr - daii*bsumdi
-    sti = dair*bsumdi + daii*bsumdr
-    str = str + (air*asumdr-aii*asumdi)
-    sti = sti + (air*asumdi+aii*asumdr)
-    ptr = str*phidr - sti*phidi
-    pti = str*phidi + sti*phidr
-    s2r = ptr*csr - pti*csi
-    s2i = ptr*csi + pti*csr
-    str = EXP(s1r)*cssr(iflag)
-    s1r = str*COS(s1i)
-    s1i = str*SIN(s1i)
-    str = s2r*s1r - s2i*s1i
-    s2i = s2r*s1i + s2i*s1r
-    s2r = str
+    CALL ZAIRY(argd,0,2,ai,nai,idum)
+    CALL ZAIRY(argd,1,2,dai,ndai,idum)
+    s2 = cs*phid*(ai*asumd+dai*bsumd)
+    c2r = REAL(s1,DP)
+    c2i = AIMAG(s1)
+    c2m = EXP(c2r)*REAL(css(iflag),DP)
+    s1 = CMPLX(c2m,0._DP,DP)*CMPLX(COS(c2i),SIN(c2i),DP)
+    s2 = s2*s1
     IF( iflag==1 ) THEN
-      CALL ZUCHK(s2r,s2i,nw,bry(1),Tol)
-      IF( nw/=0 ) THEN
-        s2r = zeror
-        s2i = zeroi
-      END IF
+      CALL ZUCHK(s2,nw,bry(1),Tol)
+      IF( nw/=0 ) s2 = CMPLX(0._DP,0._DP,DP)
     END IF
-    400  IF( yy<=0._DP ) s2i = -s2i
-    cyr(kdflg) = s2r
-    cyi(kdflg) = s2i
-    c2r = s2r
-    c2i = s2i
-    s2r = s2r*csrr(iflag)
-    s2i = s2i*csrr(iflag)
+    400  IF( yy<=0._DP ) s2 = CONJG(s2)
+    cy(kdflg) = s2
+    c2 = s2
+    s2 = s2*csr(iflag)
     !-----------------------------------------------------------------------
     !     ADD I AND K FUNCTIONS, K SEQUENCE IN Y(I), I=1,N
     !-----------------------------------------------------------------------
-    s1r = Yr(kk)
-    s1i = Yi(kk)
+    s1 = Y(kk)
     IF( Kode/=1 ) THEN
-      CALL ZS1S2(zrr,zri,s1r,s1i,s2r,s2i,nw,asc,Alim,iuf)
+      CALL ZS1S2(zr,s1,s2,nw,asc,Alim,iuf)
       Nz = Nz + nw
     END IF
-    Yr(kk) = s1r*cspnr - s1i*cspni + s2r
-    Yi(kk) = s1r*cspni + s1i*cspnr + s2i
+    Y(kk) = s1*cspn + s2
     kk = kk - 1
-    cspnr = -cspnr
-    cspni = -cspni
-    str = csi
-    csi = -csr
-    csr = str
-    IF( c2r/=0._DP .OR. c2i/=0._DP ) THEN
+    cspn = -cspn
+    cs = -cs*ci
+    IF( c2/=(0._DP,0._DP) ) THEN
       IF( kdflg==2 ) GOTO 500
       kdflg = 2
       CYCLE
@@ -443,8 +352,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       CYCLE
     END IF
     450  IF( rs1>0._DP ) GOTO 600
-    s2r = zeror
-    s2i = zeroi
+    s2 = (0._DP,0._DP)
     GOTO 400
   END DO
   k = N
@@ -455,55 +363,44 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     K FUNCTIONS, SCALING THE I SEQUENCE DURING RECURRENCE TO KEEP
   !     INTERMEDIATE ARITHMETIC ON SCALE NEAR EXPONENT EXTREMES.
   !-----------------------------------------------------------------------
-  s1r = cyr(1)
-  s1i = cyi(1)
-  s2r = cyr(2)
-  s2i = cyi(2)
-  csr = csrr(iflag)
+  s1 = cy(1)
+  s2 = cy(2)
+  cs = csr(iflag)
   ascle = bry(iflag)
   fn = inu + il
   DO i = 1, il
-    c2r = s2r
-    c2i = s2i
-    s2r = s1r + (fn+fnf)*(rzr*c2r-rzi*c2i)
-    s2i = s1i + (fn+fnf)*(rzr*c2i+rzi*c2r)
-    s1r = c2r
-    s1i = c2i
+    c2 = s2
+    s2 = s1 + CMPLX(fn+fnf,0._DP,DP)*rz*s2
+    s1 = c2
     fn = fn - 1._DP
-    c2r = s2r*csr
-    c2i = s2i*csr
-    ckr = c2r
-    cki = c2i
-    c1r = Yr(kk)
-    c1i = Yi(kk)
+    c2 = s2*cs
+    ck = c2
+    c1 = Y(kk)
     IF( Kode/=1 ) THEN
-      CALL ZS1S2(zrr,zri,c1r,c1i,c2r,c2i,nw,asc,Alim,iuf)
+      CALL ZS1S2(zr,c1,c2,nw,asc,Alim,iuf)
       Nz = Nz + nw
     END IF
-    Yr(kk) = c1r*cspnr - c1i*cspni + c2r
-    Yi(kk) = c1r*cspni + c1i*cspnr + c2i
+    Y(kk) = c1*cspn + c2
     kk = kk - 1
-    cspnr = -cspnr
-    cspni = -cspni
+    cspn = -cspn
     IF( iflag<3 ) THEN
-      c2r = ABS(ckr)
-      c2i = ABS(cki)
+      c2r = REAL(ck,DP)
+      c2i = AIMAG(ck)
+      c2r = ABS(c2r)
+      c2i = ABS(c2i)
       c2m = MAX(c2r,c2i)
       IF( c2m>ascle ) THEN
         iflag = iflag + 1
         ascle = bry(iflag)
-        s1r = s1r*csr
-        s1i = s1i*csr
-        s2r = ckr
-        s2i = cki
-        s1r = s1r*cssr(iflag)
-        s1i = s1i*cssr(iflag)
-        s2r = s2r*cssr(iflag)
-        s2i = s2i*cssr(iflag)
-        csr = csrr(iflag)
+        s1 = s1*cs
+        s2 = ck
+        s1 = s1*css(iflag)
+        s2 = s2*css(iflag)
+        cs = csr(iflag)
       END IF
     END IF
   END DO
   RETURN
   600  Nz = -1
+  !
 END SUBROUTINE ZUNK2

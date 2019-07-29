@@ -1,5 +1,5 @@
 !** ZKSCL
-SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
+PURE SUBROUTINE ZKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   !> Subsidiary to ZBESK
   !***
   ! **Library:**   SLATEC
@@ -24,105 +24,92 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
 
-  !     COMPLEX CK,CS,CY,CZERO,RZ,S1,S2,Y,ZR,ZD,CELM
-  INTEGER :: i, ic, kk, N, nn, nw, Nz
-  REAL(DP) :: acs, as, Ascle, cki, ckr, csi, csr, cyi(2), cyr(2), Elim, fn, Fnu, &
-    Rzi, Rzr, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), Zri, Zrr, zdr, zdi, &
-    celmr, elm, helim, alas
-  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP
+  INTEGER, INTENT(IN) :: N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Ascle, Elim, Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Rz, Zr
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  INTEGER :: i, ic, k, kk, nn, nw
+  COMPLEX(DP) :: ck, cs, cy(2), s1, s2, zd, celm
+  REAL(DP) :: aa, acs, as, csi, csr, fn, xx, zri, elm, alas, helim
   !* FIRST EXECUTABLE STATEMENT  ZKSCL
   Nz = 0
   ic = 0
+  xx = REAL(Zr,DP)
   nn = MIN(2,N)
   DO i = 1, nn
-    s1r = Yr(i)
-    s1i = Yi(i)
-    cyr(i) = s1r
-    cyi(i) = s1i
-    as = ZABS(s1r,s1i)
-    acs = -Zrr + LOG(as)
+    s1 = Y(i)
+    cy(i) = s1
+    as = ABS(s1)
+    acs = -xx + LOG(as)
     Nz = Nz + 1
-    Yr(i) = zeror
-    Yi(i) = zeroi
+    Y(i) = (0._DP,0._DP)
     IF( acs>=(-Elim) ) THEN
-      CALL ZLOG(s1r,s1i,csr,csi)
-      csr = csr - Zrr
-      csi = csi - Zri
-      str = EXP(csr)/Tol
-      csr = str*COS(csi)
-      csi = str*SIN(csi)
-      CALL ZUCHK(csr,csi,nw,Ascle,Tol)
+      cs = -Zr + LOG(s1)
+      csr = REAL(cs,DP)
+      csi = AIMAG(cs)
+      aa = EXP(csr)/Tol
+      cs = CMPLX(aa,0._DP,DP)*CMPLX(COS(csi),SIN(csi),DP)
+      CALL ZUCHK(cs,nw,Ascle,Tol)
       IF( nw==0 ) THEN
-        Yr(i) = csr
-        Yi(i) = csi
-        ic = i
+        Y(i) = cs
         Nz = Nz - 1
+        ic = i
       END IF
     END IF
   END DO
   IF( N==1 ) RETURN
   IF( ic<=1 ) THEN
-    Yr(1) = zeror
-    Yi(1) = zeroi
+    Y(1) = (0._DP,0._DP)
     Nz = 2
   END IF
   IF( N==2 ) RETURN
   IF( Nz==0 ) RETURN
   fn = Fnu + 1._DP
-  ckr = fn*Rzr
-  cki = fn*Rzi
-  s1r = cyr(1)
-  s1i = cyi(1)
-  s2r = cyr(2)
-  s2i = cyi(2)
+  ck = CMPLX(fn,0._DP,DP)*Rz
+  s1 = cy(1)
+  s2 = cy(2)
   helim = 0.5_DP*Elim
   elm = EXP(-Elim)
-  celmr = elm
-  zdr = Zrr
-  zdi = Zri
+  celm = CMPLX(elm,0._DP,DP)
+  zri = AIMAG(Zr)
+  zd = Zr
   !
   !     FIND TWO CONSECUTIVE Y VALUES ON SCALE. SCALE RECURRENCE IF
   !     S2 GETS LARGER THAN EXP(ELIM/2)
   !
   DO i = 3, N
     kk = i
-    csr = s2r
-    csi = s2i
-    s2r = ckr*csr - cki*csi + s1r
-    s2i = cki*csr + ckr*csi + s1i
-    s1r = csr
-    s1i = csi
-    ckr = ckr + Rzr
-    cki = cki + Rzi
-    as = ZABS(s2r,s2i)
+    cs = s2
+    s2 = ck*s2 + s1
+    s1 = cs
+    ck = ck + Rz
+    as = ABS(s2)
     alas = LOG(as)
-    acs = -zdr + alas
+    acs = -xx + alas
     Nz = Nz + 1
-    Yr(i) = zeror
-    Yi(i) = zeroi
+    Y(i) = (0._DP,0._DP)
     IF( acs>=(-Elim) ) THEN
-      CALL ZLOG(s2r,s2i,csr,csi)
-      csr = csr - zdr
-      csi = csi - zdi
-      str = EXP(csr)/Tol
-      csr = str*COS(csi)
-      csi = str*SIN(csi)
-      CALL ZUCHK(csr,csi,nw,Ascle,Tol)
+      cs = -zd + LOG(s2)
+      csr = REAL(cs,DP)
+      csi = AIMAG(cs)
+      aa = EXP(csr)/Tol
+      cs = CMPLX(aa,0._DP,DP)*CMPLX(COS(csi),SIN(csi),DP)
+      CALL ZUCHK(cs,nw,Ascle,Tol)
       IF( nw==0 ) THEN
-        Yr(i) = csr
-        Yi(i) = csi
+        Y(i) = cs
         Nz = Nz - 1
-        IF( ic==kk-1 ) GOTO 100
+        IF( ic==(kk-1) ) GOTO 100
         ic = kk
         CYCLE
       END IF
     END IF
     IF( alas>=helim ) THEN
-      zdr = zdr - Elim
-      s1r = s1r*celmr
-      s1i = s1i*celmr
-      s2r = s2r*celmr
-      s2i = s2i*celmr
+      xx = xx - Elim
+      s1 = s1*celm
+      s2 = s2*celm
+      zd = CMPLX(xx,zri,DP)
     END IF
   END DO
   Nz = N
@@ -130,8 +117,8 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   GOTO 200
   100  Nz = kk - 2
   200 CONTINUE
-  DO i = 1, Nz
-    Yr(i) = zeror
-    Yi(i) = zeroi
+  DO k = 1, Nz
+    Y(k) = (0._DP,0._DP)
   END DO
+  !
 END SUBROUTINE ZKSCL

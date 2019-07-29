@@ -1,5 +1,5 @@
 !** ZBUNI
-SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
+PURE SUBROUTINE ZBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -24,32 +24,40 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  USE service, ONLY : tiny_dp
-  !     COMPLEX CSCL,CSCR,CY,RZ,ST,S1,S2,Y,Z
-  INTEGER :: i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
-  REAL(DP) :: Alim, ax, ay, csclr, cscrr, cyi(2), cyr(2), dfnu, &
-    Elim, Fnu, fnui, Fnul, gnu, raz, rzi, rzr, sti, &
-    str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), Zi, Zr, ascle, bry(3), c1r, c1i, c1m
+  USE service, ONLY : tiny_dp, huge_dp
+  USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE
+  !
+  INTEGER, INTENT(IN) :: Kode, N, Nui
+  INTEGER, INTENT(OUT) :: Nlast, Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  INTEGER :: i, iflag, iform, k, nl, nw
+  COMPLEX(DP) :: cscl, cscr, cy(2), rz, st, s1, s2
+  REAL(DP) :: ax, ay, dfnu, fnui, gnu, xx, yy, ascle, bry(3), str, sti, stm
+  REAL(DP), PARAMETER :: sqrt_huge = SQRT( huge_dp )
   !* FIRST EXECUTABLE STATEMENT  ZBUNI
   Nz = 0
-  ax = ABS(Zr)*1.7321_DP
-  ay = ABS(Zi)
+  xx = REAL(Z,DP)
+  yy = AIMAG(Z)
+  ax = ABS(xx)*1.7321_DP
+  ay = ABS(yy)
   iform = 1
   IF( ay>ax ) iform = 2
   IF( Nui==0 ) THEN
     IF( iform==2 ) THEN
       !-----------------------------------------------------------------------
       !     ASYMPTOTIC EXPANSION FOR J(FNU,Z*EXP(M*HPI)) FOR LARGE FNU
-      !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I
-      !     AND HPI=PI/2
+      !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I AND HPI=PI/2
       !-----------------------------------------------------------------------
-      CALL ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,nw,Nlast,Fnul,Tol,Elim,Alim)
+      CALL ZUNI2(Z,Fnu,Kode,N,Y,nw,Nlast,Fnul,Tol,Elim,Alim)
     ELSE
       !-----------------------------------------------------------------------
       !     ASYMPTOTIC EXPANSION FOR I(FNU,Z) FOR LARGE FNU APPLIED IN
       !     -PI/3<=ARG(Z)<=PI/3
       !-----------------------------------------------------------------------
-      CALL ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,nw,Nlast,Fnul,Tol,Elim,Alim)
+      CALL ZUNI1(Z,Fnu,Kode,N,Y,nw,Nlast,Fnul,Tol,Elim,Alim)
     END IF
     IF( nw>=0 ) GOTO 100
   ELSE
@@ -59,117 +67,105 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
     IF( iform==2 ) THEN
       !-----------------------------------------------------------------------
       !     ASYMPTOTIC EXPANSION FOR J(FNU,Z*EXP(M*HPI)) FOR LARGE FNU
-      !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I
-      !     AND HPI=PI/2
+      !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I AND HPI=PI/2
       !-----------------------------------------------------------------------
-      CALL ZUNI2(Zr,Zi,gnu,Kode,2,cyr,cyi,nw,Nlast,Fnul,Tol,Elim,Alim)
+      CALL ZUNI2(Z,gnu,Kode,2,cy,nw,Nlast,Fnul,Tol,Elim,Alim)
     ELSE
       !-----------------------------------------------------------------------
       !     ASYMPTOTIC EXPANSION FOR I(FNU,Z) FOR LARGE FNU APPLIED IN
       !     -PI/3<=ARG(Z)<=PI/3
       !-----------------------------------------------------------------------
-      CALL ZUNI1(Zr,Zi,gnu,Kode,2,cyr,cyi,nw,Nlast,Fnul,Tol,Elim,Alim)
+      CALL ZUNI1(Z,gnu,Kode,2,cy,nw,Nlast,Fnul,Tol,Elim,Alim)
     END IF
     IF( nw>=0 ) THEN
       IF( nw/=0 ) THEN
         Nlast = N
         RETURN
       ELSE
-        str = ZABS(cyr(1),cyi(1))
+        ay = ABS(cy(1))
+        IF( .NOT. IEEE_IS_FINITE(ay) ) ay = ABS( cy(1)/sqrt_huge ) *sqrt_huge
         !----------------------------------------------------------------------
         !     SCALE BACKWARD RECURRENCE, BRY(3) IS DEFINED BUT NEVER USED
         !----------------------------------------------------------------------
-        bry(1) = 1.E3_DP*tiny_dp/Tol
+        bry(1) = 1.E+3_DP*tiny_dp/Tol
         bry(2) = 1._DP/bry(1)
         bry(3) = bry(2)
         iflag = 2
         ascle = bry(2)
-        csclr = 1._DP
-        IF( str<=bry(1) ) THEN
+        ax = 1._DP
+        cscl = CMPLX(ax,0._DP,DP)
+        IF( ay<=bry(1) ) THEN
           iflag = 1
           ascle = bry(1)
-          csclr = 1._DP/Tol
-        ELSEIF( str>=bry(2) ) THEN
+          ax = 1._DP/Tol
+          cscl = CMPLX(ax,0._DP,DP)
+        ELSEIF( ay>=bry(2) ) THEN
           iflag = 3
           ascle = bry(3)
-          csclr = Tol
+          ax = Tol
+          cscl = CMPLX(ax,0._DP,DP)
         END IF
-        cscrr = 1._DP/csclr
-        s1r = cyr(2)*csclr
-        s1i = cyi(2)*csclr
-        s2r = cyr(1)*csclr
-        s2i = cyi(1)*csclr
-        raz = 1._DP/ZABS(Zr,Zi)
-        str = Zr*raz
-        sti = -Zi*raz
-        rzr = (str+str)*raz
-        rzi = (sti+sti)*raz
+        ay = 1._DP/ax
+        cscr = CMPLX(ay,0._DP,DP)
+        s1 = cy(2)*cscl
+        s2 = cy(1)*cscl
+        rz = CMPLX(2._DP,0._DP,DP)/Z
         DO i = 1, Nui
-          str = s2r
-          sti = s2i
-          s2r = (dfnu+fnui)*(rzr*str-rzi*sti) + s1r
-          s2i = (dfnu+fnui)*(rzr*sti+rzi*str) + s1i
-          s1r = str
-          s1i = sti
+          st = s2
+          s2 = CMPLX(dfnu+fnui,0._DP,DP)*rz*s2 + s1
+          s1 = st
           fnui = fnui - 1._DP
           IF( iflag<3 ) THEN
-            str = s2r*cscrr
-            sti = s2i*cscrr
-            c1r = ABS(str)
-            c1i = ABS(sti)
-            c1m = MAX(c1r,c1i)
-            IF( c1m>ascle ) THEN
+            st = s2*cscr
+            str = REAL(st,DP)
+            sti = AIMAG(st)
+            str = ABS(str)
+            sti = ABS(sti)
+            stm = MAX(str,sti)
+            IF( stm>ascle ) THEN
               iflag = iflag + 1
               ascle = bry(iflag)
-              s1r = s1r*cscrr
-              s1i = s1i*cscrr
-              s2r = str
-              s2i = sti
-              csclr = csclr*Tol
-              cscrr = 1._DP/csclr
-              s1r = s1r*csclr
-              s1i = s1i*csclr
-              s2r = s2r*csclr
-              s2i = s2i*csclr
+              s1 = s1*cscr
+              s2 = st
+              ax = ax*Tol
+              ay = 1._DP/ax
+              cscl = CMPLX(ax,0._DP,DP)
+              cscr = CMPLX(ay,0._DP,DP)
+              s1 = s1*cscl
+              s2 = s2*cscl
             END IF
           END IF
         END DO
-        Yr(N) = s2r*cscrr
-        Yi(N) = s2i*cscrr
+        Y(N) = s2*cscr
         IF( N==1 ) RETURN
         nl = N - 1
         fnui = nl
         k = nl
         DO i = 1, nl
-          str = s2r
-          sti = s2i
-          s2r = (Fnu+fnui)*(rzr*str-rzi*sti) + s1r
-          s2i = (Fnu+fnui)*(rzr*sti+rzi*str) + s1i
-          s1r = str
-          s1i = sti
-          str = s2r*cscrr
-          sti = s2i*cscrr
-          Yr(k) = str
-          Yi(k) = sti
+          st = s2
+          s2 = CMPLX(Fnu+fnui,0._DP,DP)*rz*s2 + s1
+          s1 = st
+          st = s2*cscr
+          Y(k) = st
           fnui = fnui - 1._DP
           k = k - 1
           IF( iflag<3 ) THEN
-            c1r = ABS(str)
-            c1i = ABS(sti)
-            c1m = MAX(c1r,c1i)
-            IF( c1m>ascle ) THEN
+            str = REAL(st,DP)
+            sti = AIMAG(st)
+            str = ABS(str)
+            sti = ABS(sti)
+            stm = MAX(str,sti)
+            IF( stm>ascle ) THEN
               iflag = iflag + 1
               ascle = bry(iflag)
-              s1r = s1r*cscrr
-              s1i = s1i*cscrr
-              s2r = str
-              s2i = sti
-              csclr = csclr*Tol
-              cscrr = 1._DP/csclr
-              s1r = s1r*csclr
-              s1i = s1i*csclr
-              s2r = s2r*csclr
-              s2i = s2i*csclr
+              s1 = s1*cscr
+              s2 = st
+              ax = ax*Tol
+              ay = 1._DP/ax
+              cscl = CMPLX(ax,0._DP,DP)
+              cscr = CMPLX(ay,0._DP,DP)
+              s1 = s1*cscl
+              s2 = s2*cscl
             END IF
           END IF
         END DO
@@ -181,5 +177,6 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   IF( nw==(-2) ) Nz = -2
   RETURN
   100  Nz = nw
+  !
   RETURN
 END SUBROUTINE ZBUNI

@@ -1,5 +1,5 @@
 !** ZSERI
-SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
+PURE SUBROUTINE ZSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -28,134 +28,113 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
   USE service, ONLY : tiny_dp
-  !     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
-  INTEGER :: i, ib, iflag, il, k, Kode, l, m, N, nn, Nz, nw
-  REAL(DP) :: aa, acz, ak, ak1i, ak1r, Alim, arm, ascle, atol, az, cki, ckr, &
-    coefi, coefr, crscr, czi, czr, dfnu, Elim, Fnu, fnup, hzi, hzr, raz, rs, &
-    rtr1, rzi, rzr, s, ss, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), &
-    wi(2), wr(2), Zi, Zr
-  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
+  !
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  INTEGER :: i, ib, iflag, il, k, l, m, nn, nw
+  COMPLEX(DP) :: ak1, ck, coef, crsc, cz, hz, rz, s1, s2, w(2)
+  REAL(DP) :: aa, acz, ak, arm, ascle, atol, az, dfnu, &
+    fnup, rak1, rs, rtr1, s, ss, x
   !* FIRST EXECUTABLE STATEMENT  ZSERI
   Nz = 0
-  az = ZABS(Zr,Zi)
+  az = ABS(Z)
   IF( az==0._DP ) GOTO 500
-  arm = 1.E3_DP*tiny_dp
+  x = REAL(Z,DP)
+  arm = 1.E+3_DP*tiny_dp
   rtr1 = SQRT(arm)
-  crscr = 1._DP
+  crsc = CMPLX(1._DP,0._DP,DP)
   iflag = 0
   IF( az<arm ) THEN
     Nz = N
     IF( Fnu==0._DP ) Nz = Nz - 1
     GOTO 500
   ELSE
-    hzr = 0.5_DP*Zr
-    hzi = 0.5_DP*Zi
-    czr = zeror
-    czi = zeroi
-    IF( az>rtr1 ) CALL ZMLT(hzr,hzi,hzr,hzi,czr,czi)
-    acz = ZABS(czr,czi)
+    hz = Z*CMPLX(0.5_DP,0._DP,DP)
+    cz = (0._DP,0._DP)
+    IF( az>rtr1 ) cz = hz*hz
+    acz = ABS(cz)
     nn = N
-    CALL ZLOG(hzr,hzi,ckr,cki)
+    ck = LOG(hz)
   END IF
   100  dfnu = Fnu + (nn-1)
   fnup = dfnu + 1._DP
   !-----------------------------------------------------------------------
   !     UNDERFLOW TEST
   !-----------------------------------------------------------------------
-  ak1r = ckr*dfnu
-  ak1i = cki*dfnu
+  ak1 = ck*CMPLX(dfnu,0._DP,DP)
   ak = LOG_GAMMA(fnup)
-  ak1r = ak1r - ak
-  IF( Kode==2 ) ak1r = ak1r - Zr
-  IF( ak1r>(-Elim) ) THEN
-    IF( ak1r<=(-Alim) ) THEN
+  ak1 = ak1 - CMPLX(ak,0._DP,DP)
+  IF( Kode==2 ) ak1 = ak1 - CMPLX(x,0._DP,DP)
+  rak1 = REAL(ak1,DP)
+  IF( rak1>(-Elim) ) THEN
+    IF( rak1<=(-Alim) ) THEN
       iflag = 1
       ss = 1._DP/Tol
-      crscr = Tol
+      crsc = CMPLX(Tol,0._DP,DP)
       ascle = arm*ss
     END IF
-    aa = EXP(ak1r)
+    ak = AIMAG(ak1)
+    aa = EXP(rak1)
     IF( iflag==1 ) aa = aa*ss
-    coefr = aa*COS(ak1i)
-    coefi = aa*SIN(ak1i)
+    coef = CMPLX(aa,0._DP,DP)*CMPLX(COS(ak),SIN(ak),DP)
     atol = Tol*acz/fnup
     il = MIN(2,nn)
     DO i = 1, il
       dfnu = Fnu + (nn-i)
       fnup = dfnu + 1._DP
-      s1r = coner
-      s1i = conei
+      s1 = (1._DP,0._DP)
       IF( acz>=Tol*fnup ) THEN
-        ak1r = coner
-        ak1i = conei
+        ak1 = (1._DP,0._DP)
         ak = fnup + 2._DP
         s = fnup
         aa = 2._DP
         DO
           rs = 1._DP/s
-          str = ak1r*czr - ak1i*czi
-          sti = ak1r*czi + ak1i*czr
-          ak1r = str*rs
-          ak1i = sti*rs
-          s1r = s1r + ak1r
-          s1i = s1i + ak1i
+          ak1 = ak1*cz*CMPLX(rs,0._DP,DP)
+          s1 = s1 + ak1
           s = s + ak
           ak = ak + 2._DP
           aa = aa*acz*rs
           IF( aa<=atol ) EXIT
         END DO
       END IF
-      s2r = s1r*coefr - s1i*coefi
-      s2i = s1r*coefi + s1i*coefr
-      wr(i) = s2r
-      wi(i) = s2i
+      m = nn - i + 1
+      s2 = s1*coef
+      w(i) = s2
       IF( iflag/=0 ) THEN
-        CALL ZUCHK(s2r,s2i,nw,ascle,Tol)
+        CALL ZUCHK(s2,nw,ascle,Tol)
         IF( nw/=0 ) GOTO 200
       END IF
-      m = nn - i + 1
-      Yr(m) = s2r*crscr
-      Yi(m) = s2i*crscr
-      IF( i/=il ) THEN
-        CALL ZDIV(coefr,coefi,hzr,hzi,str,sti)
-        coefr = str*dfnu
-        coefi = sti*dfnu
-      END IF
+      Y(m) = s2*crsc
+      IF( i/=il ) coef = coef*CMPLX(dfnu,0._DP,DP)/hz
     END DO
     IF( nn<=2 ) RETURN
     k = nn - 2
     ak = k
-    raz = 1._DP/az
-    str = Zr*raz
-    sti = -Zi*raz
-    rzr = (str+str)*raz
-    rzi = (sti+sti)*raz
+    rz = (2._DP,0._DP)/Z
     IF( iflag==1 ) THEN
       !-----------------------------------------------------------------------
       !     RECUR BACKWARD WITH SCALED VALUES
       !-----------------------------------------------------------------------
       !-----------------------------------------------------------------------
       !     EXP(-ALIM)=EXP(-ELIM)/TOL=APPROX. ONE PRECISION ABOVE THE
-      !     UNDERFLOW LIMIT = ASCLE = tiny_dp*SS*1.0D+3
+      !     UNDERFLOW LIMIT = ASCLE = tiny_dp*CSCL*1.0E+3
       !-----------------------------------------------------------------------
-      s1r = wr(1)
-      s1i = wi(1)
-      s2r = wr(2)
-      s2i = wi(2)
+      s1 = w(1)
+      s2 = w(2)
       DO l = 3, nn
-        ckr = s2r
-        cki = s2i
-        s2r = s1r + (ak+Fnu)*(rzr*ckr-rzi*cki)
-        s2i = s1i + (ak+Fnu)*(rzr*cki+rzi*ckr)
-        s1r = ckr
-        s1i = cki
-        ckr = s2r*crscr
-        cki = s2i*crscr
-        Yr(k) = ckr
-        Yi(k) = cki
+        ck = s2
+        s2 = s1 + CMPLX(ak+Fnu,0._DP,DP)*rz*s2
+        s1 = ck
+        ck = s2*crsc
+        Y(k) = ck
         ak = ak - 1._DP
         k = k - 1
-        IF( ZABS(ckr,cki)>ascle ) GOTO 400
+        IF( ABS(ck)>ascle ) GOTO 400
       END DO
       RETURN
     ELSE
@@ -164,8 +143,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     END IF
   END IF
   200  Nz = Nz + 1
-  Yr(nn) = zeror
-  Yi(nn) = zeroi
+  Y(nn) = (0._DP,0._DP)
   IF( acz>dfnu ) THEN
     !-----------------------------------------------------------------------
     !     RETURN WITH NZ<0 IF ABS(Z*Z/4)>FNU+N-NZ-1 COMPLETE
@@ -180,8 +158,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   END IF
   300 CONTINUE
   DO i = ib, nn
-    Yr(k) = (ak+Fnu)*(rzr*Yr(k+1)-rzi*Yi(k+1)) + Yr(k+2)
-    Yi(k) = (ak+Fnu)*(rzr*Yi(k+1)+rzi*Yr(k+1)) + Yi(k+2)
+    Y(k) = CMPLX(ak+Fnu,0._DP,DP)*rz*Y(k+1) + Y(k+2)
     ak = ak - 1._DP
     k = k - 1
   END DO
@@ -189,16 +166,10 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   400  ib = l + 1
   IF( ib>nn ) RETURN
   GOTO 300
-  500  Yr(1) = zeror
-  Yi(1) = zeroi
-  IF( Fnu==0._DP ) THEN
-    Yr(1) = coner
-    Yi(1) = conei
-  END IF
+  500  Y(1) = (0._DP,0._DP)
+  IF( Fnu==0._DP ) Y(1) = (1._DP,0._DP)
   IF( N==1 ) RETURN
-  DO i = 2, N
-    Yr(i) = zeror
-    Yi(i) = zeroi
-  END DO
+  Y = (0._DP,0._DP)
+  !
   RETURN
 END SUBROUTINE ZSERI

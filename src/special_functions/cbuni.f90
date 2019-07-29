@@ -39,7 +39,7 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   REAL(SP), PARAMETER :: sqrt_huge = SQRT( huge_sp )
   !* FIRST EXECUTABLE STATEMENT  CBUNI
   Nz = 0
-  xx = REAL(Z)
+  xx = REAL(Z,SP)
   yy = AIMAG(Z)
   ax = ABS(xx)*1.7321_SP
   ay = ABS(yy)
@@ -49,8 +49,7 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
     IF( iform==2 ) THEN
       !-----------------------------------------------------------------------
       !     ASYMPTOTIC EXPANSION FOR J(FNU,Z*EXP(M*HPI)) FOR LARGE FNU
-      !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I
-      !     AND HPI=PI/2
+      !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I AND HPI=PI/2
       !-----------------------------------------------------------------------
       CALL CUNI2(Z,Fnu,Kode,N,Y,nw,Nlast,Fnul,Tol,Elim,Alim)
     ELSE
@@ -68,8 +67,7 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
     IF( iform==2 ) THEN
       !-----------------------------------------------------------------------
       !     ASYMPTOTIC EXPANSION FOR J(FNU,Z*EXP(M*HPI)) FOR LARGE FNU
-      !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I
-      !     AND HPI=PI/2
+      !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I AND HPI=PI/2
       !-----------------------------------------------------------------------
       CALL CUNI2(Z,gnu,Kode,2,cy,nw,Nlast,Fnul,Tol,Elim,Alim)
     ELSE
@@ -119,7 +117,7 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
           fnui = fnui - 1._SP
           IF( iflag<3 ) THEN
             st = s2*cscr
-            str = REAL(st)
+            str = REAL(st,SP)
             sti = AIMAG(st)
             str = ABS(str)
             sti = ABS(sti)
@@ -152,7 +150,7 @@ PURE SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
           fnui = fnui - 1._SP
           k = k - 1
           IF( iflag<3 ) THEN
-            str = REAL(st)
+            str = REAL(st,SP)
             sti = AIMAG(st)
             str = ABS(str)
             sti = ABS(sti)

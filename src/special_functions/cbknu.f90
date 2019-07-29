@@ -39,7 +39,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   REAL(SP), PARAMETER ::  r1 = 2._SP
   !
   REAL(SP), PARAMETER ::  pi = 3.14159265358979324_SP, rthpi = 1.25331413731550025_SP, &
-    spi= 1.90985931710274403_SP, hpi = 1.57079632679489662_SP, &
+    spi = 1.90985931710274403_SP, hpi = 1.57079632679489662_SP, &
     fpi = 1.89769999331517738_SP, tth = 6.66666666666666666E-01_SP
   !
   REAL(SP), PARAMETER :: cc(8) = [ 5.77215664901532861E-01_SP, -4.20026350340952355E-02_SP, &
@@ -47,7 +47,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     -2.01348547807882387E-05_SP, 1.13302723198169588E-06_SP, 6.11609510448141582E-09_SP ]
   !
   !* FIRST EXECUTABLE STATEMENT  CBKNU
-  xx = REAL(Z)
+  xx = REAL(Z,SP)
   yy = AIMAG(Z)
   caz = ABS(Z)
   cscl = CMPLX(1._SP/Tol,0._SP,SP)
@@ -139,7 +139,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
           END DO
         END IF
         kflag = 2
-        bk = REAL(smu)
+        bk = REAL(smu,SP)
         a1 = Fnu + 1._SP
         ak = a1*ABS(bk)
         IF( ak>Alim ) kflag = 3
@@ -182,8 +182,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     IFLAG=0 MEANS NO UNDERFLOW OCCURRED
   !     IFLAG=1 MEANS AN UNDERFLOW OCCURRED- COMPUTATION PROCEEDS WITH
-  !     KODED=2 AND A TEST FOR ON SCALE VALUES IS MADE DURING FORWARD
-  !     RECURSION
+  !     KODED=2 AND A TEST FOR ON SCALE VALUES IS MADE DURING FORWARD RECURSION
   !-----------------------------------------------------------------------
   coef = CMPLX(rthpi,0._SP,SP)/SQRT(Z)
   kflag = 2
@@ -197,7 +196,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       kflag = 2
     ELSE
       !     BLANK LINE
-      a1 = EXP(-xx)*REAL(css(kflag))
+      a1 = EXP(-xx)*REAL(css(kflag),SP)
       pt = CMPLX(a1,0._SP,SP)*CMPLX(COS(yy),-SIN(yy),SP)
       coef = coef*pt
     END IF
@@ -289,8 +288,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     fk = fk - 1._SP
   END DO
   !-----------------------------------------------------------------------
-  !     COMPUTE (P2/CS)=(P2/ABS(CS))*(CONJG(CS)/ABS(CS)) FOR BETTER
-  !     SCALING
+  !     COMPUTE (P2/CS)=(P2/ABS(CS))*(CONJG(CS)/ABS(CS)) FOR BETTER SCALING
   !-----------------------------------------------------------------------
   tm = ABS(cs)
   pt = CMPLX(1._SP/tm,0._SP,SP)
@@ -343,7 +341,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         p2r = -xd + alas
         IF( p2r>=(-Elim) ) THEN
           p2 = -zd + LOG(s2)
-          p2r = REAL(p2)
+          p2r = REAL(p2,SP)
           p2i = AIMAG(p2)
           p2m = EXP(p2r)/Tol
           p1 = CMPLX(p2m,0._SP,SP)*CMPLX(COS(p2i),SIN(p2i),SP)
@@ -381,7 +379,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     ck = ck + rz
     IF( kflag<3 ) THEN
       p2 = s2*p1
-      p2r = REAL(p2)
+      p2r = REAL(p2,SP)
       p2i = AIMAG(p2)
       p2r = ABS(p2r)
       p2i = ABS(p2i)
@@ -415,7 +413,7 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     p2 = s2*p1
     Y(i) = p2
     IF( kflag<3 ) THEN
-      p2r = REAL(p2)
+      p2r = REAL(p2,SP)
       p2i = AIMAG(p2)
       p2r = ABS(p2r)
       p2i = ABS(p2i)
@@ -464,5 +462,6 @@ PURE SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   800  s1 = coef
   s2 = coef
   GOTO 200
+  !
   RETURN
 END SUBROUTINE CBKNU

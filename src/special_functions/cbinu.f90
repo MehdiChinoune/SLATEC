@@ -26,6 +26,7 @@ PURE SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Rl, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Cy(N)
+  !
   INTEGER :: i, inw, nlast, nn, nui, nw
   REAL(SP) :: az, dfnu
   COMPLEX(SP) :: cw(2)
@@ -115,5 +116,5 @@ PURE SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   600  RETURN
   700  Nz = -1
   IF( nw==(-2) ) Nz = -2
-
+  !
 END SUBROUTINE CBINU

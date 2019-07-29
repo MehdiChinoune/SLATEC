@@ -1,5 +1,5 @@
 !** ZS1S2
-SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
+ELEMENTAL SUBROUTINE ZS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   !> Subsidiary to ZAIRY and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -27,40 +27,46 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
-
-  !     COMPLEX CZERO,C1,S1,S1D,S2,ZR
-  REAL(DP) :: aa, Alim, aln, Ascle, as1, as2, c1i, c1r, s1di, s1dr, S1i, S1r, &
-    S2i, S2r, Zri, Zrr
-  INTEGER :: Iuf, Nz
-  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP
+  USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE
+  !
+  INTEGER, INTENT(INOUT) :: Iuf
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alim, Ascle
+  COMPLEX(DP), INTENT(IN) :: Zr
+  COMPLEX(DP), INTENT(INOUT) :: S1, S2
+  !
+  COMPLEX(DP) :: c1, s1d
+  REAL(DP) :: aa, aln, as1, as2, xx
+  REAL(DP), PARAMETER :: sqrt_huge = SQRT( HUGE(1._DP) )
   !* FIRST EXECUTABLE STATEMENT  ZS1S2
   Nz = 0
-  as1 = ZABS(S1r,S1i)
-  as2 = ZABS(S2r,S2i)
-  IF( S1r/=0._DP .OR. S1i/=0._DP ) THEN
+  as1 = ABS(S1)
+  IF( .NOT. IEEE_IS_FINITE(as1) ) as1 = ABS(S1/sqrt_huge) * sqrt_huge
+  as2 = ABS(S2)
+  IF( .NOT. IEEE_IS_FINITE(as2) ) as2 = ABS(S2/sqrt_huge) * sqrt_huge
+  aa = REAL(S1,DP)
+  aln = AIMAG(S1)
+  IF( aa/=0._DP .OR. aln/=0._DP ) THEN
     IF( as1/=0._DP ) THEN
-      aln = -Zrr - Zrr + LOG(as1)
-      s1dr = S1r
-      s1di = S1i
-      S1r = zeror
-      S1i = zeroi
-      as1 = zeror
+      xx = REAL(Zr,DP)
+      aln = -xx - xx + LOG(as1)
+      s1d = S1
+      S1 = (0._DP,0._DP)
+      as1 = 0._DP
       IF( aln>=(-Alim) ) THEN
-        CALL ZLOG(s1dr,s1di,c1r,c1i)
-        c1r = c1r - Zrr - Zrr
-        c1i = c1i - Zri - Zri
-        CALL ZEXP(c1r,c1i,S1r,S1i)
-        as1 = ZABS(S1r,S1i)
+        c1 = LOG(s1d) - Zr - Zr
+        S1 = EXP(c1)
+        as1 = ABS(S1)
+        IF( .NOT. IEEE_IS_FINITE(as1) ) as1 = ABS(S1/sqrt_huge) * sqrt_huge
         Iuf = Iuf + 1
       END IF
     END IF
   END IF
   aa = MAX(as1,as2)
   IF( aa>Ascle ) RETURN
-  S1r = zeror
-  S1i = zeroi
-  S2r = zeror
-  S2i = zeroi
+  S1 = (0._DP,0._DP)
+  S2 = (0._DP,0._DP)
   Nz = 1
   Iuf = 0
+  !
 END SUBROUTINE ZS1S2

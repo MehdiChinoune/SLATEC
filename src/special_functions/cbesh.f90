@@ -1,9 +1,8 @@
 !** CBESH
 PURE SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
-  !> Compute a sequence of the Hankel functions H(m,a,z)
-  !  for superscript m=1 or 2, real nonnegative orders a=b,
-  !  b+1,... where b>0, and nonzero complex argument z.  A
-  !  scaling option is available to help avoid overflow.
+  !> Compute a sequence of the Hankel functions H(m,a,z) for superscript m=1 or 2,
+  !  real non-negative orders a=b, b+1,... where b>0, and nonzero complex argument z.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -175,7 +174,7 @@ PURE SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !
   !* FIRST EXECUTABLE STATEMENT  CBESH
   Nz = 0
-  xx = REAL(Z)
+  xx = REAL(Z,SP)
   yy = AIMAG(Z)
   Ierr = 0
   IF( Z==(0._SP,0._SP) .OR. Fnu<0._SP .OR. M<1 .OR. M>2 .OR. Kode<1 .OR. Kode>2 &
@@ -212,7 +211,7 @@ PURE SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   mm = 3 - M - M
   fmm = mm
   zn = Z*CMPLX(0._SP,-fmm,SP)
-  xn = REAL(zn)
+  xn = REAL(zn,SP)
   yn = AIMAG(zn)
   az = ABS(Z)
   !-----------------------------------------------------------------------
@@ -308,7 +307,7 @@ PURE SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
       !       CY(I) = CY(I)*ZN
       !       ZN = ZN*ZT
       zn = Cy(i)
-      aa = REAL(zn)
+      aa = REAL(zn,SP)
       bb = AIMAG(zn)
       atol = 1._SP
       IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
@@ -331,5 +330,5 @@ PURE SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   RETURN
   300  Nz = 0
   Ierr = 4
-
+  !
 END SUBROUTINE CBESH

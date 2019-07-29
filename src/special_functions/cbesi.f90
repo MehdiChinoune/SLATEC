@@ -1,8 +1,8 @@
 !** CBESI
 PURE SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
-  !> Compute a sequence of the Bessel functions I(a,z) for
-  !  complex argument z and real nonnegative orders a=b,b+1,
-  !  b+2,... where b>0.  A scaling option is available to help avoid overflow.
+  !> Compute a sequence of the Bessel functions I(a,z) for complex argument z
+  !  and real nonnegative orders a=b,b+1, b+2,... where b>0.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -178,7 +178,7 @@ PURE SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
     Ierr = 1
     RETURN
   END IF
-  xx = REAL(Z)
+  xx = REAL(Z,SP)
   yy = AIMAG(Z)
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
@@ -246,7 +246,7 @@ PURE SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         DO i = 1, nn
           !       CY(I) = CY(I)*CSGN
           zn = Cy(i)
-          aa = REAL(zn)
+          aa = REAL(zn,SP)
           bb = AIMAG(zn)
           atol = 1._SP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
@@ -271,5 +271,5 @@ PURE SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   END IF
   Nz = 0
   Ierr = 4
-
+  !
 END SUBROUTINE CBESI

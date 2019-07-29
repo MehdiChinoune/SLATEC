@@ -58,7 +58,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   bry(1) = 1.E+3_SP*tiny_sp/Tol
   bry(2) = 1._SP/bry(1)
   bry(3) = huge_sp
-  x = REAL(Z)
+  x = REAL(Z,SP)
   zr = Z
   IF( x<0._SP ) zr = -Z
   j = 2
@@ -79,7 +79,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
-    rs1 = REAL(s1)
+    rs1 = REAL(s1,SP)
     IF( ABS(rs1)<=Elim ) THEN
       IF( kdflg==1 ) kflag = 2
       IF( ABS(rs1)>=Alim ) THEN
@@ -99,9 +99,9 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       !     EXPONENT EXTREMES
       !-----------------------------------------------------------------------
       s2 = phi(j)*summ(j)
-      c2r = REAL(s1)
+      c2r = REAL(s1,SP)
       c2i = AIMAG(s1)
-      c2m = EXP(c2r)*REAL(css(kflag))
+      c2m = EXP(c2r)*REAL(css(kflag),SP)
       s1 = CMPLX(c2m,0._SP,SP)*CMPLX(COS(c2i),SIN(c2i),SP)
       s2 = s2*s1
       IF( kflag==1 ) THEN
@@ -135,8 +135,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   ib = i + 1
   IF( N<ib ) GOTO 300
   !-----------------------------------------------------------------------
-  !     TEST LAST MEMBER FOR UNDERFLOW AND OVERFLOW, SET SEQUENCE TO ZERO
-  !     ON UNDERFLOW
+  !  TEST LAST MEMBER FOR UNDERFLOW AND OVERFLOW, SET SEQUENCE TO ZERO ON UNDERFLOW
   !-----------------------------------------------------------------------
   fn = Fnu + (N-1)
   ipard = 1
@@ -149,7 +148,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     cfn = CMPLX(fn,0._SP,SP)
     s1 = zeta1d - cfn*(cfn/(zr+zeta2d))
   END IF
-  rs1 = REAL(s1)
+  rs1 = REAL(s1,SP)
   IF( ABS(rs1)<=Elim ) THEN
     IF( ABS(rs1)<Alim ) GOTO 200
     !-----------------------------------------------------------------------
@@ -184,7 +183,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     c2 = s2*c1
     Y(i) = c2
     IF( kflag<3 ) THEN
-      c2r = REAL(c2)
+      c2r = REAL(c2,SP)
       c2i = AIMAG(c2)
       c2r = ABS(c2r)
       c2i = ABS(c2i)
@@ -257,7 +256,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
-    rs1 = REAL(s1)
+    rs1 = REAL(s1,SP)
     IF( ABS(rs1)>Elim ) GOTO 450
     IF( kdflg==1 ) iflag = 2
     IF( ABS(rs1)>=Alim ) THEN
@@ -273,9 +272,9 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       END IF
     END IF
     s2 = csgn*phid*sumd
-    c2r = REAL(s1)
+    c2r = REAL(s1,SP)
     c2i = AIMAG(s1)
-    c2m = EXP(c2r)*REAL(css(iflag))
+    c2m = EXP(c2r)*REAL(css(iflag),SP)
     s1 = CMPLX(c2m,0._SP,SP)*CMPLX(COS(c2i),SIN(c2i),SP)
     s2 = s2*s1
     IF( iflag==1 ) THEN
@@ -337,7 +336,7 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     kk = kk - 1
     cspn = -cspn
     IF( iflag<3 ) THEN
-      c2r = REAL(ck)
+      c2r = REAL(ck,SP)
       c2i = AIMAG(ck)
       c2r = ABS(c2r)
       c2i = ABS(c2i)
@@ -355,5 +354,5 @@ PURE SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   END DO
   RETURN
   600  Nz = -1
-
+  !
 END SUBROUTINE CUNK1

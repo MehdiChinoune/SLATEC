@@ -28,13 +28,14 @@ PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   REAL(SP), INTENT(IN) :: Ascle, Elim, Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Rz, Zr
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   INTEGER :: i, ic, k, kk, nn, nw
   COMPLEX(SP) :: ck, cs, cy(2), s1, s2, zd, celm
   REAL(SP) :: aa, acs, as, csi, csr, fn, xx, zri, elm, alas, helim
-  !* FIRST EXECUTABLE STATEMENT  CUCHK
+  !* FIRST EXECUTABLE STATEMENT  CKSCL
   Nz = 0
   ic = 0
-  xx = REAL(Zr)
+  xx = REAL(Zr,SP)
   nn = MIN(2,N)
   DO i = 1, nn
     s1 = Y(i)
@@ -45,7 +46,7 @@ PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
     Y(i) = (0._SP,0._SP)
     IF( acs>=(-Elim) ) THEN
       cs = -Zr + LOG(s1)
-      csr = REAL(cs)
+      csr = REAL(cs,SP)
       csi = AIMAG(cs)
       aa = EXP(csr)/Tol
       cs = CMPLX(aa,0._SP,SP)*CMPLX(COS(csi),SIN(csi),SP)
@@ -90,7 +91,7 @@ PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
     Y(i) = (0._SP,0._SP)
     IF( acs>=(-Elim) ) THEN
       cs = -zd + LOG(s2)
-      csr = REAL(cs)
+      csr = REAL(cs,SP)
       csi = AIMAG(cs)
       aa = EXP(csr)/Tol
       cs = CMPLX(aa,0._SP,SP)*CMPLX(COS(csi),SIN(csi),SP)
@@ -118,5 +119,5 @@ PURE SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   DO k = 1, Nz
     Y(k) = (0._SP,0._SP)
   END DO
-
+  !
 END SUBROUTINE CKSCL

@@ -240,7 +240,7 @@ CONTAINS
               IF( ABS(st)<atol ) st = 0._SP
               z = CMPLX(r*ct,r*st,SP)
               zr = CMPLX(c23,0._SP,SP)*z*SQRT(z)
-              rzr = REAL(zr)
+              rzr = REAL(zr,SP)
               arzr = ABS(rzr)
               !-------------- Check for possible underflow or overflow
               IF( arzr/=0._SP ) THEN
@@ -627,16 +627,16 @@ CONTAINS
                   CALL CBESH(z,fnu,kode,2,n1,w,nz2,ierr)
                   !---------------- Underflow? - skip test for this case
                   IF( nz2==0 ) THEN
-                    !-----------------------------------------------------------------------
+                    !-----------------------------------------------------------------
                     !     Compare ZN/Z with the Wronskian of H1(Z,FNU) and H2(Z,FNU).
                     !     ZN = -4i/PI
-                    !-----------------------------------------------------------------------
+                    !-----------------------------------------------------------------
                     cv = zn/z
                     mflg = 0
                     DO i = 1, n
-                      !-----------------------------------------------------------------------
+                      !---------------------------------------------------------
                       !     Error relative to maximum term
-                      !-----------------------------------------------------------------------
+                      !---------------------------------------------------------
                       aw = ABS(w(i+1))
                       IF( .NOT. IEEE_IS_FINITE(aw) ) aw = ABS( w(i+1)/sqrt_huge ) *sqrt_huge
                       ay = ABS(y(i))

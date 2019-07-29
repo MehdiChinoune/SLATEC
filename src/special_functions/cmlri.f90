@@ -37,7 +37,7 @@ PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   scle = 1.E+3_SP*tiny_sp/Tol
   Nz = 0
   az = ABS(Z)
-  x = REAL(Z)
+  x = REAL(Z,SP)
   iaz = INT( az )
   ifnu = INT( Fnu )
   inu = ifnu + N - 1
@@ -168,6 +168,6 @@ PURE SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   pt = CONJG(p2)*p1
   cnorm = ck*pt
   Y = Y*cnorm
-
+  !
   RETURN
 END SUBROUTINE CMLRI

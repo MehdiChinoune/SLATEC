@@ -1,5 +1,5 @@
 !** ZUNI1
-SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
+PURE SUBROUTINE ZUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -28,14 +28,17 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : tiny_dp, huge_dp
-  !     COMPLEX CFN,CONE,CRSC,CSCL,CSR,CSS,CWRK,CZERO,C1,C2,PHI,RZ,SUM,S1,
-  !    *S2,Y,Z,ZETA1,ZETA2
-  INTEGER :: i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, Nz
-  REAL(DP) :: Alim, aphi, ascle, bry(3), crsc, cscl, csrr(3), cssr(3), &
-    cwrki(16), cwrkr(16), c1r, c2i, c2m, c2r, Elim, fn, Fnu, Fnul, phii, phir, &
-    rast, rs1, rzi, rzr, sti, str, sumi, sumr, s1i, s1r, s2i, s2r, Tol, &
-    Yi(N), Yr(N), zeta1i, zeta1r, zeta2i, zeta2r, Zi, Zr, cyr(2), cyi(2)
-  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP
+  !
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nlast, Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  INTEGER :: i, iflag, init, k, m, nd, nn, nuf, nw
+  COMPLEX(DP) :: cfn, crsc, cscl, csr(3), css(3), cwrk(16), c1, c2, &
+    phi, rz, summ, s1, s2, zeta1, zeta2, cy(2)
+  REAL(DP) :: aphi, ascle, bry(3), c2i, c2m, c2r, fn, rs1, yy
   !* FIRST EXECUTABLE STATEMENT  ZUNI1
   Nz = 0
   nd = N
@@ -45,41 +48,33 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !     NITUDE ARE SCALED TO KEEP INTERMEDIATE ARITHMETIC ON SCALE,
   !     EXP(ALIM)=EXP(ELIM)*TOL
   !-----------------------------------------------------------------------
-  cscl = 1._DP/Tol
-  crsc = Tol
-  cssr(1) = cscl
-  cssr(2) = coner
-  cssr(3) = crsc
-  csrr(1) = crsc
-  csrr(2) = coner
-  csrr(3) = cscl
-  bry(1) = 1.E3_DP*tiny_dp/Tol
+  cscl = CMPLX(1._DP/Tol,0._DP,DP)
+  crsc = CMPLX(Tol,0._DP,DP)
+  css(1) = cscl
+  css(2) = (1._DP,0._DP)
+  css(3) = crsc
+  csr(1) = crsc
+  csr(2) = (1._DP,0._DP)
+  csr(3) = cscl
+  bry(1) = 1.E+3_DP*tiny_dp/Tol
   !-----------------------------------------------------------------------
   !     CHECK FOR UNDERFLOW AND OVERFLOW ON FIRST MEMBER
   !-----------------------------------------------------------------------
   fn = MAX(Fnu,1._DP)
   init = 0
-  CALL ZUNIK(Zr,Zi,fn,1,1,Tol,init,phir,phii,zeta1r,zeta1i,zeta2r,zeta2i,&
-    sumr,sumi,cwrkr,cwrki)
+  CALL ZUNIK(Z,fn,1,1,Tol,init,phi,zeta1,zeta2,summ,cwrk)
   IF( Kode==1 ) THEN
-    s1r = -zeta1r + zeta2r
-    s1i = -zeta1i + zeta2i
+    s1 = -zeta1 + zeta2
   ELSE
-    str = Zr + zeta2r
-    sti = Zi + zeta2i
-    rast = fn/ZABS(str,sti)
-    str = str*rast*rast
-    sti = -sti*rast*rast
-    s1r = -zeta1r + str
-    s1i = -zeta1i + sti
+    cfn = CMPLX(fn,0._DP,DP)
+    s1 = -zeta1 + cfn*(cfn/(Z+zeta2))
   END IF
-  rs1 = s1r
+  rs1 = REAL(s1,DP)
   IF( ABS(rs1)>Elim ) THEN
     IF( rs1>0._DP ) GOTO 400
     Nz = N
     DO i = 1, N
-      Yr(i) = zeror
-      Yi(i) = zeroi
+      Y(i) = (0._DP,0._DP)
     END DO
     RETURN
   END IF
@@ -87,31 +82,25 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   DO i = 1, nn
     fn = Fnu + (nd-i)
     init = 0
-    CALL ZUNIK(Zr,Zi,fn,1,0,Tol,init,phir,phii,zeta1r,zeta1i,zeta2r,zeta2i,&
-      sumr,sumi,cwrkr,cwrki)
+    CALL ZUNIK(Z,fn,1,0,Tol,init,phi,zeta1,zeta2,summ,cwrk)
     IF( Kode==1 ) THEN
-      s1r = -zeta1r + zeta2r
-      s1i = -zeta1i + zeta2i
+      s1 = -zeta1 + zeta2
     ELSE
-      str = Zr + zeta2r
-      sti = Zi + zeta2i
-      rast = fn/ZABS(str,sti)
-      str = str*rast*rast
-      sti = -sti*rast*rast
-      s1r = -zeta1r + str
-      s1i = -zeta1i + sti + Zi
+      cfn = CMPLX(fn,0._DP,DP)
+      yy = AIMAG(Z)
+      s1 = -zeta1 + cfn*(cfn/(Z+zeta2)) + CMPLX(0._DP,yy,DP)
     END IF
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
-    rs1 = s1r
+    rs1 = REAL(s1,DP)
     IF( ABS(rs1)>Elim ) GOTO 300
     IF( i==1 ) iflag = 2
     IF( ABS(rs1)>=Alim ) THEN
       !-----------------------------------------------------------------------
       !     REFINE  TEST AND SCALE
       !-----------------------------------------------------------------------
-      aphi = ZABS(phir,phii)
+      aphi = ABS(phi)
       rs1 = rs1 + LOG(aphi)
       IF( ABS(rs1)>Elim ) GOTO 300
       IF( i==1 ) iflag = 1
@@ -122,69 +111,52 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     !     SCALE S1 IF ABS(S1)<ASCLE
     !-----------------------------------------------------------------------
-    s2r = phir*sumr - phii*sumi
-    s2i = phir*sumi + phii*sumr
-    str = EXP(s1r)*cssr(iflag)
-    s1r = str*COS(s1i)
-    s1i = str*SIN(s1i)
-    str = s2r*s1r - s2i*s1i
-    s2i = s2r*s1i + s2i*s1r
-    s2r = str
+    s2 = phi*summ
+    c2r = REAL(s1,DP)
+    c2i = AIMAG(s1)
+    c2m = EXP(c2r)*REAL(css(iflag),DP)
+    s1 = CMPLX(c2m,0._DP,DP)*CMPLX(COS(c2i),SIN(c2i),DP)
+    s2 = s2*s1
     IF( iflag==1 ) THEN
-      CALL ZUCHK(s2r,s2i,nw,bry(1),Tol)
+      CALL ZUCHK(s2,nw,bry(1),Tol)
       IF( nw/=0 ) GOTO 300
     END IF
-    cyr(i) = s2r
-    cyi(i) = s2i
     m = nd - i + 1
-    Yr(m) = s2r*csrr(iflag)
-    Yi(m) = s2i*csrr(iflag)
+    cy(i) = s2
+    Y(m) = s2*csr(iflag)
   END DO
   IF( nd>2 ) THEN
-    rast = 1._DP/ZABS(Zr,Zi)
-    str = Zr*rast
-    sti = -Zi*rast
-    rzr = (str+str)*rast
-    rzi = (sti+sti)*rast
+    rz = CMPLX(2._DP,0._DP,DP)/Z
     bry(2) = 1._DP/bry(1)
     bry(3) = huge_dp
-    s1r = cyr(1)
-    s1i = cyi(1)
-    s2r = cyr(2)
-    s2i = cyi(2)
-    c1r = csrr(iflag)
+    s1 = cy(1)
+    s2 = cy(2)
+    c1 = csr(iflag)
     ascle = bry(iflag)
     k = nd - 2
     fn = k
     DO i = 3, nd
-      c2r = s2r
-      c2i = s2i
-      s2r = s1r + (Fnu+fn)*(rzr*c2r-rzi*c2i)
-      s2i = s1i + (Fnu+fn)*(rzr*c2i+rzi*c2r)
-      s1r = c2r
-      s1i = c2i
-      c2r = s2r*c1r
-      c2i = s2i*c1r
-      Yr(k) = c2r
-      Yi(k) = c2i
+      c2 = s2
+      s2 = s1 + CMPLX(Fnu+fn,0._DP,DP)*rz*s2
+      s1 = c2
+      c2 = s2*c1
+      Y(k) = c2
       k = k - 1
       fn = fn - 1._DP
       IF( iflag<3 ) THEN
-        str = ABS(c2r)
-        sti = ABS(c2i)
-        c2m = MAX(str,sti)
+        c2r = REAL(c2,DP)
+        c2i = AIMAG(c2)
+        c2r = ABS(c2r)
+        c2i = ABS(c2i)
+        c2m = MAX(c2r,c2i)
         IF( c2m>ascle ) THEN
           iflag = iflag + 1
           ascle = bry(iflag)
-          s1r = s1r*c1r
-          s1i = s1i*c1r
-          s2r = c2r
-          s2i = c2i
-          s1r = s1r*cssr(iflag)
-          s1i = s1i*cssr(iflag)
-          s2r = s2r*cssr(iflag)
-          s2i = s2i*cssr(iflag)
-          c1r = csrr(iflag)
+          s1 = s1*c1
+          s2 = c2
+          s1 = s1*css(iflag)
+          s2 = s2*css(iflag)
+          c1 = csr(iflag)
         END IF
       END IF
     END DO
@@ -195,12 +167,11 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   300 CONTINUE
   IF( rs1<=0._DP ) THEN
-    Yr(nd) = zeror
-    Yi(nd) = zeroi
+    Y(nd) = (0._DP,0._DP)
     Nz = Nz + 1
     nd = nd - 1
     IF( nd==0 ) GOTO 200
-    CALL ZUOIK(Zr,Zi,Fnu,Kode,1,nd,Yr,Yi,nuf,Tol,Elim,Alim)
+    CALL ZUOIK(Z,Fnu,Kode,1,nd,Y,nuf,Tol,Elim,Alim)
     IF( nuf>=0 ) THEN
       nd = nd - nuf
       Nz = Nz + nuf
@@ -212,5 +183,6 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     END IF
   END IF
   400  Nz = -1
+  !
   RETURN
 END SUBROUTINE ZUNI1

@@ -53,7 +53,7 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !* FIRST EXECUTABLE STATEMENT  CUOIK
   Nuf = 0
   nn = N
-  x = REAL(Z)
+  x = REAL(Z,SP)
   zr = Z
   IF( x<0._SP ) zr = -Z
   zb = zr
@@ -87,7 +87,7 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   IF( Kode==2 ) cz = cz - zb
   IF( Ikflg==2 ) cz = -cz
   aphi = ABS(phi)
-  rcz = REAL(cz)
+  rcz = REAL(cz,SP)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST
   !-----------------------------------------------------------------------
@@ -145,7 +145,7 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   END IF
   IF( Kode==2 ) cz = cz - zb
   aphi = ABS(phi)
-  rcz = REAL(cz)
+  rcz = REAL(cz,SP)
   IF( rcz>=(-Elim) ) THEN
     IF( rcz>(-Alim) ) RETURN
     rcz = rcz + LOG(aphi)
@@ -166,6 +166,6 @@ PURE SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   Nuf = Nuf + 1
   IF( nn==0 ) RETURN
   GOTO 100
-
+  !
   RETURN
 END SUBROUTINE CUOIK

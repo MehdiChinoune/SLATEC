@@ -1,5 +1,5 @@
 !** ZSHCH
-SUBROUTINE ZSHCH(Zr,Zi,Cshr,Cshi,Cchr,Cchi)
+ELEMENTAL SUBROUTINE ZSHCH(Z,Csh,Cch)
   !> Subsidiary to ZBESH and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -21,16 +21,11 @@ SUBROUTINE ZSHCH(Zr,Zi,Cshr,Cshi,Cchr,Cchi)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  !
-  REAL(DP) :: Cchi, Cchr, ch, cn, Cshi, Cshr, sh, sn, Zi, Zr
+
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Cch, Csh
   !* FIRST EXECUTABLE STATEMENT  ZSHCH
-  sh = SINH(Zr)
-  ch = COSH(Zr)
-  sn = SIN(Zi)
-  cn = COS(Zi)
-  Cshr = sh*cn
-  Cshi = ch*sn
-  Cchr = ch*cn
-  Cchi = sh*sn
+  Csh = SINH( Z )
+  Cch = COSH( Z )
+  !
 END SUBROUTINE ZSHCH

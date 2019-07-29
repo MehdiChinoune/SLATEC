@@ -36,10 +36,9 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   COMPLEX(SP), INTENT(OUT) :: Y(N)
   !
   INTEGER :: i, inu, iuf, kflag, nn, nw
+  REAL(SP) :: arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, fmr, sgn, spn, yy
   COMPLEX(SP) :: ck, cs, cscl, cscr, csgn, cspn, css(3), csr(3), c1, c2, &
     rz, sc1, sc2, st, s1, s2, zn, cy(2)
-  REAL(SP) :: arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, &
-    fmr, sgn, spn, yy
   REAL(SP), PARAMETER :: pi = 3.14159265358979324_SP
   REAL(SP), PARAMETER :: sqrt_huge = SQRT( huge_sp )
   !* FIRST EXECUTABLE STATEMENT  CACON
@@ -150,7 +149,7 @@ PURE SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
         ck = ck + rz
         cspn = -cspn
         IF( kflag<3 ) THEN
-          c1r = REAL(c1)
+          c1r = REAL(c1,SP)
           c1i = AIMAG(c1)
           c1r = ABS(c1r)
           c1i = ABS(c1i)

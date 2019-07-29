@@ -1,10 +1,10 @@
 !** ZBUNK
-SUBROUTINE ZBUNK(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
+PURE SUBROUTINE ZBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !> Subsidiary to ZBESH and ZBESK
   !***
   ! **Library:**   SLATEC
   !***
-  ! **Type:**      ALL (CBUNI-A, ZBUNI-A)
+  ! **Type:**      ALL (CBUNK-A, ZBUNK-A)
   !***
   ! **Author:**  Amos, D. E., (SNL)
   !***
@@ -23,25 +23,31 @@ SUBROUTINE ZBUNK(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  !     COMPLEX Y,Z
-  INTEGER :: Kode, Mr, N, Nz
-  REAL(DP) :: Alim, ax, ay, Elim, Fnu, Tol, Yi(N), Yr(N), Zi, Zr
+  INTEGER, INTENT(IN) :: Kode, Mr, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  REAL(DP) :: ax, ay, xx, yy
   !* FIRST EXECUTABLE STATEMENT  ZBUNK
   Nz = 0
-  ax = ABS(Zr)*1.7321_DP
-  ay = ABS(Zi)
+  xx = REAL(Z,DP)
+  yy = AIMAG(Z)
+  ax = ABS(xx)*1.7321_DP
+  ay = ABS(yy)
   IF( ay>ax ) THEN
     !-----------------------------------------------------------------------
     !     ASYMPTOTIC EXPANSION FOR H(2,FNU,Z*EXP(M*HPI)) FOR LARGE FNU
-    !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I
-    !     AND HPI=PI/2
+    !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I AND HPI=PI/2
     !-----------------------------------------------------------------------
-    CALL ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
+    CALL ZUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   ELSE
     !-----------------------------------------------------------------------
     !     ASYMPTOTIC EXPANSION FOR K(FNU,Z) FOR LARGE FNU APPLIED IN
     !     -PI/3<=ARG(Z)<=PI/3
     !-----------------------------------------------------------------------
-    CALL ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
+    CALL ZUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   END IF
+  !
 END SUBROUTINE ZBUNK

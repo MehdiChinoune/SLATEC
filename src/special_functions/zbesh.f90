@@ -1,9 +1,8 @@
 !** ZBESH
-SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
-  !> Compute a sequence of the Hankel functions H(m,a,z)
-  !            for superscript m=1 or 2, real nonnegative orders a=b,
-  !            b+1,... where b>0, and nonzero complex argument z.  A
-  !            scaling option is available to help avoid overflow.
+PURE SUBROUTINE ZBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
+  !> Compute a sequence of the Hankel functions H(m,a,z) for superscript m=1 or 2,
+  !  real nonnegative orders a=b, b+1,... where b>0, and nonzero complex argument z.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -165,23 +164,29 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : eps_dp, log10_radix_dp, tiny_dp, digits_dp, huge_int, &
     max_exp_dp, min_exp_dp
-  !     COMPLEX CY,Z,ZN,ZT,CSGN
-  INTEGER :: i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, N, nn, nuf, nw, Nz
-  REAL(DP) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, fmm, fn, Fnu, &
-    fnul, rhpi, rl, r1m5, sgn, str, tol, ufl, Zi, zni, znr, Zr, zti, bb, ascle, &
-    rtol, atol, sti, csgnr, csgni
   !
+  INTEGER, INTENT(IN) :: Kode, M, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(DP), INTENT(IN) :: Fnu
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Cy(N)
+  !
+  INTEGER :: i, inu, inuh, ir, k, k1, k2, mm, mr, nn, nuf, nw
+  COMPLEX(DP) :: zn, zt, csgn
+  REAL(DP) :: aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, fnul, rhpi, rl, &
+    r1m5, sgn, spn, tol, ufl, xn, xx, yn, yy, bb, ascle, rtol, atol
   REAL(DP), PARAMETER :: hpi = 1.57079632679489662_DP
   !
   !* FIRST EXECUTABLE STATEMENT  ZBESH
-  Ierr = 0
   Nz = 0
-  IF( Zr==0._DP .AND. Zi==0._DP ) Ierr = 1
-  IF( Fnu<0._DP ) Ierr = 1
-  IF( M<1 .OR. M>2 ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( N<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  xx = REAL(Z,DP)
+  yy = AIMAG(Z)
+  Ierr = 0
+  IF( Z==(0._DP,0._DP) .OR. Fnu<0._DP .OR. M<1 .OR. M>2 .OR. Kode<1 .OR. Kode>2 &
+    .OR. N<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
   nn = N
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
@@ -210,12 +215,13 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   fn = Fnu + (nn-1)
   mm = 3 - M - M
   fmm = mm
-  znr = fmm*Zi
-  zni = -fmm*Zr
+  zn = Z*CMPLX(0._DP,-fmm,DP)
+  xn = REAL(zn,DP)
+  yn = AIMAG(zn)
+  az = ABS(Z)
   !-----------------------------------------------------------------------
-  !     TEST FOR PROPER RANGE
+  !     TEST FOR RANGE
   !-----------------------------------------------------------------------
-  az = ZABS(Zr,Zi)
   aa = 0.5_DP/tol
   bb = huge_int*0.5_DP
   aa = MIN(aa,bb)
@@ -234,20 +240,17 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
       !     UNIFORM ASYMPTOTIC EXPANSIONS FOR FNU>FNUL
       !-----------------------------------------------------------------------
       mr = 0
-      IF( .NOT. ((znr>=0._DP) .AND. (znr/=0._DP .OR. zni>=0._DP .OR. M/=2)) ) THEN
+      IF( .NOT. ((xn>=0._DP) .AND. (xn/=0._DP .OR. yn>=0._DP .OR. M/=2)) ) THEN
         mr = -mm
-        IF( znr==0._DP .AND. zni<0._DP ) THEN
-          znr = -znr
-          zni = -zni
-        END IF
+        IF( xn==0._DP .AND. yn<0._DP ) zn = -zn
       END IF
-      CALL ZBUNK(znr,zni,Fnu,Kode,mr,nn,Cyr,Cyi,nw,tol,elim,alim)
+      CALL ZBUNK(zn,Fnu,Kode,mr,nn,Cy,nw,tol,elim,alim)
       IF( nw<0 ) GOTO 200
       Nz = Nz + nw
     ELSE
       IF( fn>1._DP ) THEN
         IF( fn>2._DP ) THEN
-          CALL ZUOIK(znr,zni,Fnu,Kode,2,nn,Cyr,Cyi,nuf,tol,elim,alim)
+          CALL ZUOIK(zn,Fnu,Kode,2,nn,Cy,nuf,tol,elim,alim)
           IF( nuf<0 ) GOTO 100
           Nz = Nz + nuf
           nn = nn - nuf
@@ -256,7 +259,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
           !     IF NUF=NN, THEN CY(I)=CZERO FOR ALL I
           !-----------------------------------------------------------------------
           IF( nn==0 ) THEN
-            IF( znr<0._DP ) GOTO 100
+            IF( xn<0._DP ) GOTO 100
             RETURN
           END IF
         ELSEIF( az<=tol ) THEN
@@ -265,12 +268,12 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
           IF( aln>elim ) GOTO 100
         END IF
       END IF
-      IF( (znr<0._DP) .OR. (znr==0._DP .AND. zni<0._DP .AND. M==2) ) THEN
+      IF( (xn<0._DP) .OR. (xn==0._DP .AND. yn<0._DP .AND. M==2) ) THEN
         !-----------------------------------------------------------------------
         !     LEFT HALF PLANE COMPUTATION
         !-----------------------------------------------------------------------
         mr = -mm
-        CALL ZACON(znr,zni,Fnu,Kode,mr,nn,Cyr,Cyi,nw,rl,fnul,tol,elim,alim)
+        CALL ZACON(zn,Fnu,Kode,mr,nn,Cy,nw,rl,fnul,tol,elim,alim)
         IF( nw<0 ) GOTO 200
         Nz = nw
       ELSE
@@ -278,7 +281,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
         !     RIGHT HALF PLANE COMPUTATION, XN>=0. .AND. (XN/=0.  .OR.
         !     YN>=0. .OR. M=1)
         !-----------------------------------------------------------------------
-        CALL ZBKNU(znr,zni,Fnu,Kode,nn,Cyr,Cyi,Nz,tol,elim,alim)
+        CALL ZBKNU(zn,Fnu,Kode,nn,Cy,Nz,tol,elim,alim)
       END IF
     END IF
     !-----------------------------------------------------------------------
@@ -296,46 +299,34 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
     ir = inu - 2*inuh
     arg = (Fnu-(inu-ir))*sgn
     rhpi = 1._DP/sgn
-    !     ZNI = RHPI*COS(ARG)
-    !     ZNR = -RHPI*SIN(ARG)
-    csgni = rhpi*COS(arg)
-    csgnr = -rhpi*SIN(arg)
-    IF( MOD(inuh,2)/=0 ) THEN
-      !     ZNR = -ZNR
-      !     ZNI = -ZNI
-      csgnr = -csgnr
-      csgni = -csgni
-    END IF
-    zti = -fmm
+    cpn = rhpi*COS(arg)
+    spn = rhpi*SIN(arg)
+    !     ZN = CMPLX(-SPN,CPN)
+    csgn = CMPLX(-spn,cpn,DP)
+    !     IF(MOD(INUH,2)=1) ZN = -ZN
+    IF( MOD(inuh,2)==1 ) csgn = -csgn
+    zt = CMPLX(0._DP,-fmm,DP)
     rtol = 1._DP/tol
     ascle = ufl*rtol
     DO i = 1, nn
-      !       STR = CYR(I)*ZNR - CYI(I)*ZNI
-      !       CYI(I) = CYR(I)*ZNI + CYI(I)*ZNR
-      !       CYR(I) = STR
-      !       STR = -ZNI*ZTI
-      !       ZNI = ZNR*ZTI
-      !       ZNR = STR
-      aa = Cyr(i)
-      bb = Cyi(i)
+      !       CY(I) = CY(I)*ZN
+      !       ZN = ZN*ZT
+      zn = Cy(i)
+      aa = REAL(zn,DP)
+      bb = AIMAG(zn)
       atol = 1._DP
       IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
-        aa = aa*rtol
-        bb = bb*rtol
+        zn = zn*CMPLX(rtol,0._DP,DP)
         atol = tol
       END IF
-      str = aa*csgnr - bb*csgni
-      sti = aa*csgni + bb*csgnr
-      Cyr(i) = str*atol
-      Cyi(i) = sti*atol
-      str = -csgni*zti
-      csgni = csgnr*zti
-      csgnr = str
+      zn = zn*csgn
+      Cy(i) = zn*CMPLX(atol,0._DP,DP)
+      csgn = csgn*zt
     END DO
     RETURN
   END IF
-  100  Nz = 0
-  Ierr = 2
+  100  Ierr = 2
+  Nz = 0
   RETURN
   200 CONTINUE
   IF( nw==(-1) ) GOTO 100
@@ -344,4 +335,5 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   RETURN
   300  Nz = 0
   Ierr = 4
+  !
 END SUBROUTINE ZBESH

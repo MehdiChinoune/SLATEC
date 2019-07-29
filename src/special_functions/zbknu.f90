@@ -1,5 +1,5 @@
 !** ZBKNU
-SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
+PURE SUBROUTINE ZBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !> Subsidiary to ZAIRY, ZBESH, ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -24,46 +24,49 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   930122  Added ZEXP, ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
   USE service, ONLY : tiny_dp, huge_dp, log10_radix_dp, digits_dp
   !
-  INTEGER :: i, iflag, inu, k, kflag, kk, Kode, koded, N, Nz, j, ic, inub, nw
-  REAL(DP) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, cbi, cbr, cchi, &
-    cchr, cki, ckr, coefi, coefr, crscr, csclr, cshi, cshr, csi, csr, csrr(3), &
-    cssr(3), czi, czr, dnu, dnu2, Elim, etest, fc, fhs, fi, fk, fks, fmui, fmur, &
-    Fnu, fr, g1, g2, pi, pr, pti, ptr, p1i, p1r, p2i, p2m, p2r, qi, qr, rak, &
-    rcaz, rzi, rzr, s, smui, smur, sti, str, s1i, s1r, s2i, s2r, tm, Tol, t1, &
-    t2, Yi(N), Yr(N), Zi, Zr, elm, celmr, zdr, zdi, as, alas, helim, cyr(2), cyi(2)
-  !     COMPLEX Z,Y,A,B,RZ,SMU,FU,FMU,F,FLRZ,CZ,S1,S2,CSH,CCH
-  !     COMPLEX CK,P,Q,COEF,P1,P2,CBK,PT,CZERO,CONE,CTWO,ST,EZ,CS,DK
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  INTEGER :: i, iflag, inu, k, kflag, kk, koded, nw, j, ic, inub
+  COMPLEX(DP) :: cch, ck, coef, crsc, cs, cscl, csh, csr(3), css(3), cz, f, fmu, p, &
+    pt, p1, p2, q, rz, smu, st, s1, s2, zd, celm, cy(2)
+  REAL(DP) :: aa, ak, ascle, a1, a2, bb, bk, bry(3), caz, dnu, dnu2, etest, fc, &
+    fhs, fk, fks, g1, g2, p2i, p2m, p2r, rk, s, tm, t1, t2, xx, yy, helim, elm, &
+    xd, yd, alas, as
   !
   INTEGER, PARAMETER :: kmax = 30
-  REAL(DP), PARAMETER :: czeror = 0._DP, czeroi = 0._DP, coner = 1._DP, &
-    conei = 0._DP, ctwor = 2._DP, r1 = 2._DP
-  REAL(DP), PARAMETER :: dpi = 3.14159265358979324_DP, rthpi= 1.25331413731550025_DP, &
+  REAL(DP), PARAMETER ::  r1 = 2._DP
+  !
+  REAL(DP), PARAMETER ::  pi = 3.14159265358979324_DP, rthpi = 1.25331413731550025_DP, &
     spi = 1.90985931710274403_DP, hpi = 1.57079632679489662_DP, &
     fpi = 1.89769999331517738_DP, tth = 6.66666666666666666E-01_DP
+  !
   REAL(DP), PARAMETER :: cc(8) = [ 5.77215664901532861E-01_DP, -4.20026350340952355E-02_DP, &
-    -4.21977345555443367E-02_DP, 7.21894324666309954E-03_DP,-2.15241674114950973E-04_DP, &
+    -4.21977345555443367E-02_DP, 7.21894324666309954E-03_DP, -2.15241674114950973E-04_DP, &
     -2.01348547807882387E-05_DP, 1.13302723198169588E-06_DP, 6.11609510448141582E-09_DP ]
+  !
   !* FIRST EXECUTABLE STATEMENT  ZBKNU
-  caz = ZABS(Zr,Zi)
-  csclr = 1._DP/Tol
-  crscr = Tol
-  cssr(1) = csclr
-  cssr(2) = 1._DP
-  cssr(3) = crscr
-  csrr(1) = crscr
-  csrr(2) = 1._DP
-  csrr(3) = csclr
-  bry(1) = 1.E3_DP*tiny_dp/Tol
+  xx = REAL(Z,DP)
+  yy = AIMAG(Z)
+  caz = ABS(Z)
+  cscl = CMPLX(1._DP/Tol,0._DP,DP)
+  crsc = CMPLX(Tol,0._DP,DP)
+  css(1) = cscl
+  css(2) = (1._DP,0._DP)
+  css(3) = crsc
+  csr(1) = crsc
+  csr(2) = (1._DP,0._DP)
+  csr(3) = cscl
+  bry(1) = 1.E+3_DP*tiny_dp/Tol
   bry(2) = 1._DP/bry(1)
   bry(3) = huge_dp
   Nz = 0
   iflag = 0
   koded = Kode
-  rcaz = 1._DP/caz
-  str = Zr*rcaz
-  sti = -Zi*rcaz
-  rzr = (str+str)*rcaz
-  rzi = (sti+sti)*rcaz
+  rz = (2._DP,0._DP)/Z
   inu = INT( Fnu + 0.5_DP )
   dnu = Fnu - inu
   IF( ABS(dnu)/=0.5_DP ) THEN
@@ -74,15 +77,13 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       !     SERIES FOR ABS(Z)<=R1
       !-----------------------------------------------------------------------
       fc = 1._DP
-      CALL ZLOG(rzr,rzi,smur,smui)
-      fmur = smur*dnu
-      fmui = smui*dnu
-      CALL ZSHCH(fmur,fmui,cshr,cshi,cchr,cchi)
+      smu = LOG(rz)
+      fmu = smu*CMPLX(dnu,0._DP,DP)
+      CALL ZSHCH(fmu,csh,cch)
       IF( dnu/=0._DP ) THEN
-        fc = dnu*dpi
+        fc = dnu*pi
         fc = fc/SIN(fc)
-        smur = cshr/dnu
-        smui = cshi/dnu
+        smu = csh*CMPLX(1._DP/dnu,0._DP,DP)
       END IF
       a2 = 1._DP + dnu
       !-----------------------------------------------------------------------
@@ -106,72 +107,51 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         END DO
         g1 = -s
       END IF
-      g2 = (t1+t2)*0.5_DP
-      fr = fc*(cchr*g1+smur*g2)
-      fi = fc*(cchi*g1+smui*g2)
-      CALL ZEXP(fmur,fmui,str,sti)
-      pr = 0.5_DP*str/t2
-      pi = 0.5_DP*sti/t2
-      CALL ZDIV(0.5_DP,0._DP,str,sti,ptr,pti)
-      qr = ptr/t1
-      qi = pti/t1
-      s1r = fr
-      s1i = fi
-      s2r = pr
-      s2i = pi
+      g2 = 0.5_DP*(t1+t2)*fc
+      g1 = g1*fc
+      f = CMPLX(g1,0._DP,DP)*cch + smu*CMPLX(g2,0._DP,DP)
+      pt = EXP(fmu)
+      p = CMPLX(0.5_DP/t2,0._DP,DP)*pt
+      q = CMPLX(0.5_DP/t1,0._DP,DP)/pt
+      s1 = f
+      s2 = p
       ak = 1._DP
       a1 = 1._DP
-      ckr = coner
-      cki = conei
+      ck = (1._DP,0._DP)
       bk = 1._DP - dnu2
       IF( inu>0 .OR. N>1 ) THEN
         !-----------------------------------------------------------------------
         !     GENERATE K(DNU,Z) AND K(DNU+1,Z) FOR FORWARD RECURRENCE
         !-----------------------------------------------------------------------
         IF( caz>=Tol ) THEN
-          CALL ZMLT(Zr,Zi,Zr,Zi,czr,czi)
-          czr = 0.25_DP*czr
-          czi = 0.25_DP*czi
+          cz = Z*Z*CMPLX(0.25_DP,0._DP,DP)
           t1 = 0.25_DP*caz*caz
           DO
-            fr = (fr*ak+pr+qr)/bk
-            fi = (fi*ak+pi+qi)/bk
-            str = 1._DP/(ak-dnu)
-            pr = pr*str
-            pi = pi*str
-            str = 1._DP/(ak+dnu)
-            qr = qr*str
-            qi = qi*str
-            str = ckr*czr - cki*czi
-            rak = 1._DP/ak
-            cki = (ckr*czi+cki*czr)*rak
-            ckr = str*rak
-            s1r = ckr*fr - cki*fi + s1r
-            s1i = ckr*fi + cki*fr + s1i
-            str = pr - fr*ak
-            sti = pi - fi*ak
-            s2r = ckr*str - cki*sti + s2r
-            s2i = ckr*sti + cki*str + s2i
-            a1 = a1*t1*rak
+            f = (f*CMPLX(ak,0._DP,DP)+p+q)*CMPLX(1._DP/bk,0._DP,DP)
+            p = p*CMPLX(1._DP/(ak-dnu),0._DP,DP)
+            q = q*CMPLX(1._DP/(ak+dnu),0._DP,DP)
+            rk = 1._DP/ak
+            ck = ck*cz*CMPLX(rk,0._DP,DP)
+            s1 = s1 + ck*f
+            s2 = s2 + ck*(p-f*CMPLX(ak,0._DP,DP))
+            a1 = a1*t1*rk
             bk = bk + ak + ak + 1._DP
             ak = ak + 1._DP
             IF( a1<=Tol ) EXIT
           END DO
         END IF
         kflag = 2
+        bk = REAL(smu,DP)
         a1 = Fnu + 1._DP
-        ak = a1*ABS(smur)
+        ak = a1*ABS(bk)
         IF( ak>Alim ) kflag = 3
-        str = cssr(kflag)
-        p2r = s2r*str
-        p2i = s2i*str
-        CALL ZMLT(p2r,p2i,rzr,rzi,s2r,s2i)
-        s1r = s1r*str
-        s1i = s1i*str
+        p2 = s2*css(kflag)
+        s2 = p2*rz
+        s1 = s1*css(kflag)
         IF( koded/=1 ) THEN
-          CALL ZEXP(Zr,Zi,fr,fi)
-          CALL ZMLT(s1r,s1i,fr,fi,s1r,s1i)
-          CALL ZMLT(s2r,s2i,fr,fi,s2r,s2i)
+          f = EXP(Z)
+          s1 = s1*f
+          s2 = s2*f
         END IF
         GOTO 200
       ELSE
@@ -179,36 +159,24 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         !     GENERATE K(FNU,Z), 0.0D0 <= FNU < 0.5D0 AND N=1
         !-----------------------------------------------------------------------
         IF( caz>=Tol ) THEN
-          CALL ZMLT(Zr,Zi,Zr,Zi,czr,czi)
-          czr = 0.25_DP*czr
-          czi = 0.25_DP*czi
+          cz = Z*Z*CMPLX(0.25_DP,0._DP,DP)
           t1 = 0.25_DP*caz*caz
           DO
-            fr = (fr*ak+pr+qr)/bk
-            fi = (fi*ak+pi+qi)/bk
-            str = 1._DP/(ak-dnu)
-            pr = pr*str
-            pi = pi*str
-            str = 1._DP/(ak+dnu)
-            qr = qr*str
-            qi = qi*str
-            str = ckr*czr - cki*czi
-            rak = 1._DP/ak
-            cki = (ckr*czi+cki*czr)*rak
-            ckr = str*rak
-            s1r = ckr*fr - cki*fi + s1r
-            s1i = ckr*fi + cki*fr + s1i
-            a1 = a1*t1*rak
+            f = (f*CMPLX(ak,0._DP,DP)+p+q)*CMPLX(1._DP/bk,0._DP,DP)
+            p = p*CMPLX(1._DP/(ak-dnu),0._DP,DP)
+            q = q*CMPLX(1._DP/(ak+dnu),0._DP,DP)
+            rk = 1._DP/ak
+            ck = ck*cz*CMPLX(rk,0._DP,DP)
+            s1 = s1 + ck*f
+            a1 = a1*t1*rk
             bk = bk + ak + ak + 1._DP
             ak = ak + 1._DP
             IF( a1<=Tol ) EXIT
           END DO
         END IF
-        Yr(1) = s1r
-        Yi(1) = s1i
+        Y(1) = s1
         IF( koded==1 ) RETURN
-        CALL ZEXP(Zr,Zi,str,sti)
-        CALL ZMLT(s1r,s1i,str,sti,Yr(1),Yi(1))
+        Y(1) = s1*EXP(Z)
         RETURN
       END IF
     END IF
@@ -216,14 +184,12 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     IFLAG=0 MEANS NO UNDERFLOW OCCURRED
   !     IFLAG=1 MEANS AN UNDERFLOW OCCURRED- COMPUTATION PROCEEDS WITH
-  !     KODED=2 AND A TEST FOR ON SCALE VALUES IS MADE DURING FORWARD
-  !     RECURSION
+  !     KODED=2 AND A TEST FOR ON SCALE VALUES IS MADE DURING FORWARD RECURSION
   !-----------------------------------------------------------------------
-  CALL ZSQRT(Zr,Zi,str,sti)
-  CALL ZDIV(rthpi,czeroi,str,sti,coefr,coefi)
+  coef = CMPLX(rthpi,0._DP,DP)/SQRT(Z)
   kflag = 2
   IF( koded/=2 ) THEN
-    IF( Zr>Alim ) THEN
+    IF( xx>Alim ) THEN
       !-----------------------------------------------------------------------
       !     SCALE BY EXP(Z), IFLAG = 1 CASES
       !-----------------------------------------------------------------------
@@ -232,34 +198,32 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       kflag = 2
     ELSE
       !     BLANK LINE
-      str = EXP(-Zr)*cssr(kflag)
-      sti = -str*SIN(Zi)
-      str = str*COS(Zi)
-      CALL ZMLT(coefr,coefi,str,sti,coefr,coefi)
+      a1 = EXP(-xx)*REAL(css(kflag),DP)
+      pt = CMPLX(a1,0._DP,DP)*CMPLX(COS(yy),-SIN(yy),DP)
+      coef = coef*pt
     END IF
   END IF
   IF( ABS(dnu)==0.5_DP ) GOTO 800
   !-----------------------------------------------------------------------
   !     MILLER ALGORITHM FOR ABS(Z)>R1
   !-----------------------------------------------------------------------
-  ak = COS(dpi*dnu)
+  ak = COS(pi*dnu)
   ak = ABS(ak)
-  IF( ak==czeror ) GOTO 800
+  IF( ak==0._DP ) GOTO 800
   fhs = ABS(0.25_DP-dnu2)
-  IF( fhs==czeror ) GOTO 800
+  IF( fhs==0._DP ) GOTO 800
   !-----------------------------------------------------------------------
   !     COMPUTE R2=F(E). IF ABS(Z)>=R2, USE FORWARD RECURRENCE TO
   !     DETERMINE THE BACKWARD INDEX K. R2=F(E) IS A STRAIGHT LINE ON
   !     12<=E<=60. E IS COMPUTED FROM 2**(-E)=B**(1-digits_dp)=
   !     TOL WHERE B IS THE BASE OF THE ARITHMETIC.
   !-----------------------------------------------------------------------
-  t1 = digits_dp - 1
-  t1 = t1*log10_radix_dp*3.321928094_DP
+  t1 = (digits_dp-1)*log10_radix_dp*3.321928094_DP
   t1 = MAX(t1,12._DP)
   t1 = MIN(t1,60._DP)
   t2 = tth*t1 - 6._DP
-  IF( Zr/=0._DP ) THEN
-    t1 = ATAN(Zi/Zr)
+  IF( xx/=0._DP ) THEN
+    t1 = ATAN(yy/xx)
     t1 = ABS(t1)
   ELSE
     t1 = hpi
@@ -278,103 +242,81 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     !     FORWARD RECURRENCE LOOP WHEN ABS(Z)>=R2
     !-----------------------------------------------------------------------
-    etest = ak/(dpi*caz*Tol)
-    fk = coner
-    IF( etest<coner ) GOTO 100
-    fks = ctwor
-    ckr = caz + caz + ctwor
-    p1r = czeror
-    p2r = coner
+    etest = ak/(pi*caz*Tol)
+    fk = 1._DP
+    IF( etest<1._DP ) GOTO 100
+    fks = 2._DP
+    rk = caz + caz + 2._DP
+    a1 = 0._DP
+    a2 = 1._DP
     DO i = 1, kmax
       ak = fhs/fks
-      cbr = ckr/(fk+coner)
-      ptr = p2r
-      p2r = cbr*p2r - p1r*ak
-      p1r = ptr
-      ckr = ckr + ctwor
-      fks = fks + fk + fk + ctwor
+      bk = rk/(fk+1._DP)
+      tm = a2
+      a2 = bk*a2 - ak*a1
+      a1 = tm
+      rk = rk + 2._DP
+      fks = fks + fk + fk + 2._DP
       fhs = fhs + fk + fk
-      fk = fk + coner
-      str = ABS(p2r)*fk
-      IF( etest<str ) GOTO 50
+      fk = fk + 1._DP
+      tm = ABS(a2)*fk
+      IF( etest<tm ) GOTO 50
     END DO
-    !
-    !
     Nz = -2
     RETURN
     50  fk = fk + spi*t1*SQRT(t2/caz)
     fhs = ABS(0.25_DP-dnu2)
   END IF
+  100  k = INT( fk )
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE LOOP FOR MILLER ALGORITHM
   !-----------------------------------------------------------------------
-  100  k = INT( fk )
   fk = k
   fks = fk*fk
-  p1r = czeror
-  p1i = czeroi
-  p2r = Tol
-  p2i = czeroi
-  csr = p2r
-  csi = p2i
+  p1 = (0._DP,0._DP)
+  p2 = CMPLX(Tol,0._DP,DP)
+  cs = p2
   DO i = 1, k
     a1 = fks - fk
-    ak = (fks+fk)/(a1+fhs)
-    rak = 2._DP/(fk+coner)
-    cbr = (fk+Zr)*rak
-    cbi = Zi*rak
-    ptr = p2r
-    pti = p2i
-    p2r = (ptr*cbr-pti*cbi-p1r)*ak
-    p2i = (pti*cbr+ptr*cbi-p1i)*ak
-    p1r = ptr
-    p1i = pti
-    csr = csr + p2r
-    csi = csi + p2i
-    fks = a1 - fk + coner
-    fk = fk - coner
+    a2 = (fks+fk)/(a1+fhs)
+    rk = 2._DP/(fk+1._DP)
+    t1 = (fk+xx)*rk
+    t2 = yy*rk
+    pt = p2
+    p2 = (p2*CMPLX(t1,t2,DP)-p1)*CMPLX(a2,0._DP,DP)
+    p1 = pt
+    cs = cs + p2
+    fks = a1 - fk + 1._DP
+    fk = fk - 1._DP
   END DO
   !-----------------------------------------------------------------------
-  !     COMPUTE (P2/CS)=(P2/ABS(CS))*(CONJG(CS)/ABS(CS)) FOR BETTER
-  !     SCALING
+  !     COMPUTE (P2/CS)=(P2/ABS(CS))*(CONJG(CS)/ABS(CS)) FOR BETTER SCALING
   !-----------------------------------------------------------------------
-  tm = ZABS(csr,csi)
-  ptr = 1._DP/tm
-  s1r = p2r*ptr
-  s1i = p2i*ptr
-  csr = csr*ptr
-  csi = -csi*ptr
-  CALL ZMLT(coefr,coefi,s1r,s1i,str,sti)
-  CALL ZMLT(str,sti,csr,csi,s1r,s1i)
+  tm = ABS(cs)
+  pt = CMPLX(1._DP/tm,0._DP,DP)
+  s1 = pt*p2
+  cs = CONJG(cs)*pt
+  s1 = coef*s1*cs
   IF( inu>0 .OR. N>1 ) THEN
     !-----------------------------------------------------------------------
     !     COMPUTE P1/P2=(P1/ABS(P2)*CONJG(P2)/ABS(P2) FOR SCALING
     !-----------------------------------------------------------------------
-    tm = ZABS(p2r,p2i)
-    ptr = 1._DP/tm
-    p1r = p1r*ptr
-    p1i = p1i*ptr
-    p2r = p2r*ptr
-    p2i = -p2i*ptr
-    CALL ZMLT(p1r,p1i,p2r,p2i,ptr,pti)
-    str = dnu + 0.5_DP - ptr
-    sti = -pti
-    CALL ZDIV(str,sti,Zr,Zi,str,sti)
-    str = str + 1._DP
-    CALL ZMLT(str,sti,s1r,s1i,s2r,s2i)
+    tm = ABS(p2)
+    pt = CMPLX(1._DP/tm,0._DP,DP)
+    p1 = pt*p1
+    p2 = CONJG(p2)*pt
+    pt = p1*p2
+    s2 = s1*((1._DP,0._DP)+(CMPLX(dnu+0.5_DP,0._DP,DP)-pt)/Z)
   ELSE
-    zdr = Zr
-    zdi = Zi
+    zd = Z
     IF( iflag/=1 ) GOTO 400
     GOTO 700
   END IF
   !-----------------------------------------------------------------------
-  !     FORWARD RECURSION ON THE THREE TERM RECURSION WITH RELATION WITH
+  !     FORWARD RECURSION ON THE THREE TERM RECURSION RELATION WITH
   !     SCALING NEAR EXPONENT EXTREMES ON KFLAG=1 OR KFLAG=3
   !-----------------------------------------------------------------------
-  200  str = dnu + 1._DP
-  ckr = str*rzr
-  cki = str*rzi
+  200  ck = CMPLX(dnu+1._DP,0._DP,DP)*rz
   IF( N==1 ) inu = inu - 1
   IF( inu>0 ) THEN
     inub = 1
@@ -384,195 +326,144 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       helim = 0.5_DP*Elim
       elm = EXP(-Elim)
-      celmr = elm
+      celm = CMPLX(elm,0._DP,DP)
       ascle = bry(1)
-      zdr = Zr
-      zdi = Zi
+      zd = Z
+      xd = xx
+      yd = yy
       ic = -1
       j = 2
       DO i = 1, inu
-        str = s2r
-        sti = s2i
-        s2r = str*ckr - sti*cki + s1r
-        s2i = sti*ckr + str*cki + s1i
-        s1r = str
-        s1i = sti
-        ckr = ckr + rzr
-        cki = cki + rzi
-        as = ZABS(s2r,s2i)
+        st = s2
+        s2 = ck*s2 + s1
+        s1 = st
+        ck = ck + rz
+        as = ABS(s2)
         alas = LOG(as)
-        p2r = -zdr + alas
+        p2r = -xd + alas
         IF( p2r>=(-Elim) ) THEN
-          CALL ZLOG(s2r,s2i,str,sti)
-          p2r = -zdr + str
-          p2i = -zdi + sti
+          p2 = -zd + LOG(s2)
+          p2r = REAL(p2,DP)
+          p2i = AIMAG(p2)
           p2m = EXP(p2r)/Tol
-          p1r = p2m*COS(p2i)
-          p1i = p2m*SIN(p2i)
-          CALL ZUCHK(p1r,p1i,nw,ascle,Tol)
+          p1 = CMPLX(p2m,0._DP,DP)*CMPLX(COS(p2i),SIN(p2i),DP)
+          CALL ZUCHK(p1,nw,ascle,Tol)
           IF( nw==0 ) THEN
             j = 3 - j
-            cyr(j) = p1r
-            cyi(j) = p1i
+            cy(j) = p1
             IF( ic==(i-1) ) GOTO 600
             ic = i
             CYCLE
           END IF
         END IF
         IF( alas>=helim ) THEN
-          zdr = zdr - Elim
-          s1r = s1r*celmr
-          s1i = s1i*celmr
-          s2r = s2r*celmr
-          s2i = s2i*celmr
+          xd = xd - Elim
+          s1 = s1*celm
+          s2 = s2*celm
+          zd = CMPLX(xd,yd,DP)
         END IF
       END DO
-      IF( N==1 ) THEN
-        s1r = s2r
-        s1i = s2i
-      END IF
+      IF( N==1 ) s1 = s2
       GOTO 700
     END IF
   ELSE
-    IF( N<=1 ) THEN
-      s1r = s2r
-      s1i = s2i
-    END IF
-    zdr = Zr
-    zdi = Zi
+    IF( N==1 ) s1 = s2
+    zd = Z
     IF( iflag/=1 ) GOTO 400
     GOTO 700
   END IF
-  300  p1r = csrr(kflag)
+  300  p1 = csr(kflag)
   ascle = bry(kflag)
   DO i = inub, inu
-    str = s2r
-    sti = s2i
-    s2r = ckr*str - cki*sti + s1r
-    s2i = ckr*sti + cki*str + s1i
-    s1r = str
-    s1i = sti
-    ckr = ckr + rzr
-    cki = cki + rzi
+    st = s2
+    s2 = ck*s2 + s1
+    s1 = st
+    ck = ck + rz
     IF( kflag<3 ) THEN
-      p2r = s2r*p1r
-      p2i = s2i*p1r
-      str = ABS(p2r)
-      sti = ABS(p2i)
-      p2m = MAX(str,sti)
+      p2 = s2*p1
+      p2r = REAL(p2,DP)
+      p2i = AIMAG(p2)
+      p2r = ABS(p2r)
+      p2i = ABS(p2i)
+      p2m = MAX(p2r,p2i)
       IF( p2m>ascle ) THEN
         kflag = kflag + 1
         ascle = bry(kflag)
-        s1r = s1r*p1r
-        s1i = s1i*p1r
-        s2r = p2r
-        s2i = p2i
-        str = cssr(kflag)
-        s1r = s1r*str
-        s1i = s1i*str
-        s2r = s2r*str
-        s2i = s2i*str
-        p1r = csrr(kflag)
+        s1 = s1*p1
+        s2 = p2
+        s1 = s1*css(kflag)
+        s2 = s2*css(kflag)
+        p1 = csr(kflag)
       END IF
     END IF
   END DO
-  IF( N==1 ) THEN
-    s1r = s2r
-    s1i = s2i
-  END IF
-  400  str = csrr(kflag)
-  Yr(1) = s1r*str
-  Yi(1) = s1i*str
+  IF( N==1 ) s1 = s2
+  400  Y(1) = s1*csr(kflag)
   IF( N==1 ) RETURN
-  Yr(2) = s2r*str
-  Yi(2) = s2i*str
+  Y(2) = s2*csr(kflag)
   IF( N==2 ) RETURN
   kk = 2
   500  kk = kk + 1
   IF( kk>N ) RETURN
-  p1r = csrr(kflag)
+  p1 = csr(kflag)
   ascle = bry(kflag)
   DO i = kk, N
-    p2r = s2r
-    p2i = s2i
-    s2r = ckr*p2r - cki*p2i + s1r
-    s2i = cki*p2r + ckr*p2i + s1i
-    s1r = p2r
-    s1i = p2i
-    ckr = ckr + rzr
-    cki = cki + rzi
-    p2r = s2r*p1r
-    p2i = s2i*p1r
-    Yr(i) = p2r
-    Yi(i) = p2i
+    p2 = s2
+    s2 = ck*s2 + s1
+    s1 = p2
+    ck = ck + rz
+    p2 = s2*p1
+    Y(i) = p2
     IF( kflag<3 ) THEN
-      str = ABS(p2r)
-      sti = ABS(p2i)
-      p2m = MAX(str,sti)
+      p2r = REAL(p2,DP)
+      p2i = AIMAG(p2)
+      p2r = ABS(p2r)
+      p2i = ABS(p2i)
+      p2m = MAX(p2r,p2i)
       IF( p2m>ascle ) THEN
         kflag = kflag + 1
         ascle = bry(kflag)
-        s1r = s1r*p1r
-        s1i = s1i*p1r
-        s2r = p2r
-        s2i = p2i
-        str = cssr(kflag)
-        s1r = s1r*str
-        s1i = s1i*str
-        s2r = s2r*str
-        s2i = s2i*str
-        p1r = csrr(kflag)
+        s1 = s1*p1
+        s2 = p2
+        s1 = s1*css(kflag)
+        s2 = s2*css(kflag)
+        p1 = csr(kflag)
       END IF
     END IF
   END DO
   RETURN
   600  kflag = 1
   inub = i + 1
-  s2r = cyr(j)
-  s2i = cyi(j)
+  s2 = cy(j)
   j = 3 - j
-  s1r = cyr(j)
-  s1i = cyi(j)
+  s1 = cy(j)
   IF( inub<=inu ) GOTO 300
-  IF( N==1 ) THEN
-    s1r = s2r
-    s1i = s2i
-  END IF
+  IF( N==1 ) s1 = s2
   GOTO 400
-  700  Yr(1) = s1r
-  Yi(1) = s1i
-  IF( N/=1 ) THEN
-    Yr(2) = s2r
-    Yi(2) = s2i
-  END IF
+  700  Y(1) = s1
+  IF( N/=1 ) Y(2) = s2
   ascle = bry(1)
-  CALL ZKSCL(zdr,zdi,Fnu,N,Yr,Yi,Nz,rzr,rzi,ascle,Tol,Elim)
+  CALL ZKSCL(zd,Fnu,N,Y,Nz,rz,ascle,Tol,Elim)
   inu = N - Nz
   IF( inu<=0 ) RETURN
   kk = Nz + 1
-  s1r = Yr(kk)
-  s1i = Yi(kk)
-  Yr(kk) = s1r*csrr(1)
-  Yi(kk) = s1i*csrr(1)
+  s1 = Y(kk)
+  Y(kk) = s1*csr(1)
   IF( inu==1 ) RETURN
   kk = Nz + 2
-  s2r = Yr(kk)
-  s2i = Yi(kk)
-  Yr(kk) = s2r*csrr(1)
-  Yi(kk) = s2i*csrr(1)
+  s2 = Y(kk)
+  Y(kk) = s2*csr(1)
   IF( inu==2 ) RETURN
   t2 = Fnu + (kk-1)
-  ckr = t2*rzr
-  cki = t2*rzi
+  ck = CMPLX(t2,0._DP,DP)*rz
   kflag = 1
   GOTO 500
   !-----------------------------------------------------------------------
   !     FNU=HALF ODD INTEGER CASE, DNU=-0.5
   !-----------------------------------------------------------------------
-  800  s1r = coefr
-  s1i = coefi
-  s2r = coefr
-  s2i = coefi
+  800  s1 = coef
+  s2 = coef
   GOTO 200
+  !
   RETURN
 END SUBROUTINE ZBKNU

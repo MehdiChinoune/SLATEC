@@ -1,5 +1,5 @@
 !** ZUOIK
-SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
+PURE SUBROUTINE ZUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !> Subsidiary to ZBESH, ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -40,28 +40,27 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
   USE service, ONLY : tiny_dp
-  !     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
-  !    *ZR
-  INTEGER :: i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
-  REAL(DP) :: aarg, Alim, aphi, argi, argr, asumi, asumr, ascle, ax, ay, bsumi, &
-    bsumr, cwrki(16), cwrkr(16), czi, czr, Elim, fnn, Fnu, gnn, gnu, phii, phir, &
-    rcz, str, sti, sumi, sumr, Tol, Yi(N), Yr(N), zbi, zbr, zeta1i, zeta1r, &
-    zeta2i, zeta2r, Zi, zni, znr, Zr, zri, zrr
-  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP
+  !
+  INTEGER, INTENT(IN) :: Ikflg, Kode, N
+  INTEGER, INTENT(OUT) :: Nuf
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  INTEGER :: i, iform, init, nn, nw
+  COMPLEX(DP) :: arg, asum, bsum, cwrk(16), cz, phi, summ, zb, zeta1, zeta2, zn, zr
+  REAL(DP) :: aarg, aphi, ascle, ax, ay, fnn, gnn, gnu, rcz, x, yy
   REAL(DP), PARAMETER :: aic = 1.265512123484645396_DP
   !* FIRST EXECUTABLE STATEMENT  ZUOIK
   Nuf = 0
   nn = N
-  zrr = Zr
-  zri = Zi
-  IF( Zr<0._DP ) THEN
-    zrr = -Zr
-    zri = -Zi
-  END IF
-  zbr = zrr
-  zbi = zri
-  ax = ABS(Zr)*1.7321_DP
-  ay = ABS(Zi)
+  x = REAL(Z,DP)
+  zr = Z
+  IF( x<0._DP ) zr = -Z
+  zb = zr
+  yy = AIMAG(zr)
+  ax = ABS(x)*1.7321_DP
+  ay = ABS(yy)
   iform = 1
   IF( ay>ax ) iform = 2
   gnu = MAX(Fnu,1._DP)
@@ -76,31 +75,20 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !     THE SIGN OF THE IMAGINARY PART CORRECT.
   !-----------------------------------------------------------------------
   IF( iform==2 ) THEN
-    znr = zri
-    zni = -zrr
-    IF( Zi<=0._DP ) znr = -znr
-    CALL ZUNHJ(znr,zni,gnu,1,Tol,phir,phii,argr,argi,zeta1r,zeta1i,zeta2r,&
-      zeta2i,asumr,asumi,bsumr,bsumi)
-    czr = -zeta1r + zeta2r
-    czi = -zeta1i + zeta2i
-    aarg = ZABS(argr,argi)
+    zn = -zr*CMPLX(0._DP,1._DP,DP)
+    IF( yy<=0._DP ) zn = CONJG(-zn)
+    CALL ZUNHJ(zn,gnu,1,Tol,phi,arg,zeta1,zeta2,asum,bsum)
+    cz = -zeta1 + zeta2
+    aarg = ABS(arg)
   ELSE
     init = 0
-    CALL ZUNIK(zrr,zri,gnu,Ikflg,1,Tol,init,phir,phii,zeta1r,zeta1i,zeta2r,&
-      zeta2i,sumr,sumi,cwrkr,cwrki)
-    czr = -zeta1r + zeta2r
-    czi = -zeta1i + zeta2i
+    CALL ZUNIK(zr,gnu,Ikflg,1,Tol,init,phi,zeta1,zeta2,summ,cwrk)
+    cz = -zeta1 + zeta2
   END IF
-  IF( Kode/=1 ) THEN
-    czr = czr - zbr
-    czi = czi - zbi
-  END IF
-  IF( Ikflg/=1 ) THEN
-    czr = -czr
-    czi = -czi
-  END IF
-  aphi = ZABS(phir,phii)
-  rcz = czr
+  IF( Kode==2 ) cz = cz - zb
+  IF( Ikflg==2 ) cz = -cz
+  aphi = ABS(phi)
+  rcz = REAL(cz,DP)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST
   !-----------------------------------------------------------------------
@@ -117,26 +105,18 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
         rcz = rcz + LOG(aphi)
         IF( iform==2 ) rcz = rcz - 0.25_DP*LOG(aarg) - aic
         IF( rcz>(-Elim) ) THEN
-          ascle = 1.E3_DP*tiny_dp/Tol
-          CALL ZLOG(phir,phii,str,sti)
-          czr = czr + str
-          czi = czi + sti
-          IF( iform/=1 ) THEN
-            CALL ZLOG(argr,argi,str,sti)
-            czr = czr - 0.25_DP*str - aic
-            czi = czi - 0.25_DP*sti
-          END IF
+          ascle = 1.E+3_DP*tiny_dp/Tol
+          cz = cz + LOG(phi)
+          IF( iform/=1 ) cz = cz - CMPLX(0.25_DP,0._DP,DP)*LOG(arg)- CMPLX(aic,0._DP,DP)
           ax = EXP(rcz)/Tol
-          ay = czi
-          czr = ax*COS(ay)
-          czi = ax*SIN(ay)
-          CALL ZUCHK(czr,czi,nw,ascle,Tol)
-          IF( nw==0 ) GOTO 50
+          ay = AIMAG(cz)
+          cz = CMPLX(ax,0._DP,DP)*CMPLX(COS(ay),SIN(ay),DP)
+          CALL ZUCHK(cz,nw,ascle,Tol)
+          IF( nw/=1 ) GOTO 50
         END IF
       END IF
       DO i = 1, nn
-        Yr(i) = zeror
-        Yi(i) = zeroi
+        Y(i) = (0._DP,0._DP)
       END DO
       Nuf = nn
       RETURN
@@ -156,51 +136,37 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   100  gnu = Fnu + (nn-1)
   IF( iform==2 ) THEN
-    CALL ZUNHJ(znr,zni,gnu,1,Tol,phir,phii,argr,argi,zeta1r,zeta1i,zeta2r,&
-      zeta2i,asumr,asumi,bsumr,bsumi)
-    czr = -zeta1r + zeta2r
-    czi = -zeta1i + zeta2i
-    aarg = ZABS(argr,argi)
+    CALL ZUNHJ(zn,gnu,1,Tol,phi,arg,zeta1,zeta2,asum,bsum)
+    cz = -zeta1 + zeta2
+    aarg = ABS(arg)
   ELSE
     init = 0
-    CALL ZUNIK(zrr,zri,gnu,Ikflg,1,Tol,init,phir,phii,zeta1r,zeta1i,zeta2r,&
-      zeta2i,sumr,sumi,cwrkr,cwrki)
-    czr = -zeta1r + zeta2r
-    czi = -zeta1i + zeta2i
+    CALL ZUNIK(zr,gnu,Ikflg,1,Tol,init,phi,zeta1,zeta2,summ,cwrk)
+    cz = -zeta1 + zeta2
   END IF
-  IF( Kode/=1 ) THEN
-    czr = czr - zbr
-    czi = czi - zbi
-  END IF
-  aphi = ZABS(phir,phii)
-  rcz = czr
+  IF( Kode==2 ) cz = cz - zb
+  aphi = ABS(phi)
+  rcz = REAL(cz,DP)
   IF( rcz>=(-Elim) ) THEN
     IF( rcz>(-Alim) ) RETURN
     rcz = rcz + LOG(aphi)
     IF( iform==2 ) rcz = rcz - 0.25_DP*LOG(aarg) - aic
     IF( rcz>(-Elim) ) THEN
-      ascle = 1.E3_DP*tiny_dp/Tol
-      CALL ZLOG(phir,phii,str,sti)
-      czr = czr + str
-      czi = czi + sti
-      IF( iform/=1 ) THEN
-        CALL ZLOG(argr,argi,str,sti)
-        czr = czr - 0.25_DP*str - aic
-        czi = czi - 0.25_DP*sti
-      END IF
+      ascle = 1.E+3_DP*tiny_dp/Tol
+      cz = cz + LOG(phi)
+      IF( iform/=1 ) cz = cz - CMPLX(0.25_DP,0._DP,DP)*LOG(arg)- CMPLX(aic,0._DP,DP)
       ax = EXP(rcz)/Tol
-      ay = czi
-      czr = ax*COS(ay)
-      czi = ax*SIN(ay)
-      CALL ZUCHK(czr,czi,nw,ascle,Tol)
-      IF( nw==0 ) RETURN
+      ay = AIMAG(cz)
+      cz = CMPLX(ax,0._DP,DP)*CMPLX(COS(ay),SIN(ay),DP)
+      CALL ZUCHK(cz,nw,ascle,Tol)
+      IF( nw/=1 ) RETURN
     END IF
   END IF
-  Yr(nn) = zeror
-  Yi(nn) = zeroi
+  Y(nn) = (0._DP,0._DP)
   nn = nn - 1
   Nuf = Nuf + 1
   IF( nn==0 ) RETURN
   GOTO 100
+  !
   RETURN
 END SUBROUTINE ZUOIK

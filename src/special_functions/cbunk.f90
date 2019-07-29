@@ -28,18 +28,18 @@ PURE SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Y(N)
+  !
   REAL(SP) :: ax, ay, xx, yy
   !* FIRST EXECUTABLE STATEMENT  CBUNK
   Nz = 0
-  xx = REAL(Z)
+  xx = REAL(Z,SP)
   yy = AIMAG(Z)
   ax = ABS(xx)*1.7321_SP
   ay = ABS(yy)
   IF( ay>ax ) THEN
     !-----------------------------------------------------------------------
     !     ASYMPTOTIC EXPANSION FOR H(2,FNU,Z*EXP(M*HPI)) FOR LARGE FNU
-    !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I
-    !     AND HPI=PI/2
+    !     APPLIED IN PI/3<ABS(ARG(Z))<=PI/2 WHERE M=+I OR -I AND HPI=PI/2
     !-----------------------------------------------------------------------
     CALL CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   ELSE
@@ -49,4 +49,5 @@ PURE SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     CALL CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   END IF
+  !
 END SUBROUTINE CBUNK

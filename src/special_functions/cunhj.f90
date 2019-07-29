@@ -255,7 +255,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST (Z/FNU TOO SMALL)
   !-----------------------------------------------------------------------
-  tstr = REAL(Z)
+  tstr = REAL(Z,SP)
   tsti = AIMAG(Z)
   test = tiny_sp*1.E+3_SP
   ac = Fnu*test
@@ -275,14 +275,14 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       !     ABS(W2)>0.25E0
       !-----------------------------------------------------------------------
       w = SQRT(w2)
-      wr = REAL(w)
+      wr = REAL(w,SP)
       wi = AIMAG(w)
       IF( wr<0._SP ) wr = 0._SP
       IF( wi<0._SP ) wi = 0._SP
       w = CMPLX(wr,wi,SP)
       za = ((1._SP,0._SP)+w)/zb
       zc = LOG(za)
-      zcr = REAL(zc)
+      zcr = REAL(zc,SP)
       zci = AIMAG(zc)
       IF( zci<0._SP ) zci = 0._SP
       IF( zci>hpi ) zci = hpi
@@ -293,7 +293,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
       Zeta1 = zc*cfnu
       Zeta2 = w*cfnu
       azth = ABS(zth)
-      zthr = REAL(zth)
+      zthr = REAL(zth,SP)
       zthi = AIMAG(zth)
       ang = thpi
       IF( zthr<0._SP .OR. zthi>=0._SP ) THEN
@@ -326,7 +326,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
           ptfn = tfn
           up(1) = (1._SP,0._SP)
           pp = 1._SP
-          bsumr = REAL(Bsum)
+          bsumr = REAL(Bsum,SP)
           bsumi = AIMAG(Bsum)
           btol = Tol*(ABS(bsumr)+ABS(bsumi))
           ks = 0
@@ -364,7 +364,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
                 suma = suma + cr(jr)*up(ju)
               END DO
               Asum = Asum + suma
-              asumr = REAL(Asum)
+              asumr = REAL(Asum,SP)
               asumi = AIMAG(Asum)
               test = ABS(asumr) + ABS(asumi)
               IF( pp<Tol .AND. test<Tol ) ias = 1
@@ -377,7 +377,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
                 sumb = sumb + dr(jr)*up(ju)
               END DO
               Bsum = Bsum + sumb
-              bsumr = REAL(Bsum)
+              bsumr = REAL(Bsum,SP)
               bsumi = AIMAG(Bsum)
               test = ABS(bsumr) + ABS(bsumi)
               IF( pp<btol .AND. test<Tol ) ibs = 1
@@ -460,7 +460,7 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
           END DO
         END IF
         Asum = Asum + (1._SP,0._SP)
-        pp = rfnu*REAL(rfn13)
+        pp = rfnu*REAL(rfn13,SP)
         Bsum = Bsum*CMPLX(pp,0._SP,SP)
       END IF
     END IF
@@ -472,5 +472,6 @@ PURE SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
     Arg = (1._SP,0._SP)
     RETURN
   END IF
+  !
   RETURN
 END SUBROUTINE CUNHJ

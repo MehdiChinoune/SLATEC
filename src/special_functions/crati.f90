@@ -30,6 +30,7 @@ PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   REAL(SP), INTENT(IN) :: Fnu, Tol
   COMPLEX(SP), INTENT(IN) :: Z
   COMPLEX(SP), INTENT(OUT) :: Cy(N)
+  !
   INTEGER :: i, id, idnu, inu, itime, k, kk, magz
   COMPLEX(SP) :: cdfnu, pt, p1, p2, rz, t1
   REAL(SP) :: ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, fnup, &
@@ -54,7 +55,7 @@ PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   ap2 = ABS(p2)
   ap1 = ABS(p1)
   !-----------------------------------------------------------------------
-  !     THE OVERFLOW TEST ON K(FNU+I-1,Z) BEFORE THE CALL TO CBKNX
+  !     THE OVERFLOW TEST ON K(FNU+I-1,Z) BEFORE THE CALL TO CBKNU
   !     GUARANTEES THAT P2 IS ON SCALE. SCALE TEST1 AND ALL SUBSEQUENT
   !     P2 VALUES BY AP1 TO ENSURE THAT AN OVERFLOW DOES NOT OCCUR
   !     PREMATURELY.
@@ -89,7 +90,7 @@ PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
           p2 = pt
           t1 = t1 - (1._SP,0._SP)
         END DO
-        IF( REAL(p1)==0._SP .AND. AIMAG(p1)==0._SP ) p1 = CMPLX(Tol,Tol,SP)
+        IF( REAL(p1,SP)==0._SP .AND. AIMAG(p1)==0._SP ) p1 = CMPLX(Tol,Tol,SP)
         Cy(N) = p2/p1
         IF( N==1 ) RETURN
         k = N - 1
@@ -98,7 +99,7 @@ PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
         cdfnu = CMPLX(Fnu,0._SP,SP)*rz
         DO i = 2, N
           pt = cdfnu + t1*rz + Cy(k+1)
-          IF( REAL(pt)==0._SP .AND. AIMAG(pt)==0._SP ) pt = CMPLX(Tol,Tol,SP)
+          IF( REAL(pt,SP)==0._SP .AND. AIMAG(pt)==0._SP ) pt = CMPLX(Tol,Tol,SP)
           Cy(k) = (1._SP,0._SP)/pt
           t1 = t1 - (1._SP,0._SP)
           k = k - 1
@@ -113,5 +114,5 @@ PURE SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
       END IF
     END IF
   END DO
-
+  !
 END SUBROUTINE CRATI

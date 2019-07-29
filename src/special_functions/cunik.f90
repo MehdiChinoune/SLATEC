@@ -98,7 +98,7 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
     !-----------------------------------------------------------------------
     !     OVERFLOW TEST (ZR/FNU TOO SMALL)
     !-----------------------------------------------------------------------
-    tstr = REAL(Zr)
+    tstr = REAL(Zr,SP)
     tsti = AIMAG(Zr)
     test = tiny_sp*1.E+3_SP
     ac = Fnu*test
@@ -129,7 +129,7 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
         crfn = crfn*sr
         Cwrk(k) = crfn*s
         ac = ac*rfn
-        tstr = REAL(Cwrk(k))
+        tstr = REAL(Cwrk(k),SP)
         tsti = AIMAG(Cwrk(k))
         test = ABS(tstr) + ABS(tsti)
         IF( ac<Tol .AND. test<Tol ) GOTO 20
@@ -167,6 +167,6 @@ PURE SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Summ,Cwrk)
   END DO
   Summ = s
   Phi = Cwrk(16)*con(1)
-
+  !
   RETURN
 END SUBROUTINE CUNIK

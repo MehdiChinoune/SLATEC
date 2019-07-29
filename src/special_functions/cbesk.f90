@@ -1,8 +1,8 @@
 !** CBESK
 PURE SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
-  !> Compute a sequence of the Bessel functions K(a,z) for
-  !  complex argument z and real nonnegative orders a=b,b+1,
-  !  b+2,... where b>0.  A scaling option is available to help avoid overflow.
+  !> Compute a sequence of the Bessel functions K(a,z) for complex argument z
+  !  and real nonnegative orders a=b,b+1, b+2,... where b>0.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -170,7 +170,7 @@ PURE SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !* FIRST EXECUTABLE STATEMENT  CBESK
   Ierr = 0
   Nz = 0
-  xx = REAL(Z)
+  xx = REAL(Z,SP)
   yy = AIMAG(Z)
   IF( Z==(0._SP,0._SP) .OR. Fnu<0._SP .OR. Kode<1 .OR. Kode>2 .OR. N<1 ) THEN
     Ierr = 1
@@ -286,5 +286,5 @@ PURE SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   RETURN
   300  Nz = 0
   Ierr = 4
-
+  !
 END SUBROUTINE CBESK

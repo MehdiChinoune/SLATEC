@@ -210,17 +210,17 @@ ELEMENTAL SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
       iflag = 0
       sfac = 1._SP
       zi = AIMAG(Z)
-      zr = REAL(Z)
+      zr = REAL(Z,SP)
       ak = AIMAG(zta)
       IF( zr<0._SP ) THEN
-        bk = REAL(zta)
+        bk = REAL(zta,SP)
         ck = -ABS(bk)
         zta = CMPLX(ck,ak,SP)
       END IF
       IF( zi==0._SP ) THEN
         IF( zr<=0._SP ) zta = CMPLX(0._SP,ak,SP)
       END IF
-      aa = REAL(zta)
+      aa = REAL(zta,SP)
       IF( aa<0._SP .OR. zr<=0._SP ) THEN
         IF( Kode/=2 ) THEN
           !-----------------------------------------------------------------------
@@ -324,7 +324,7 @@ ELEMENTAL SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
         ad = MIN(d1,d2)
         ak = 24._SP + 9._SP*fid
         bk = 30._SP - 9._SP*fid
-        z3r = REAL(z3)
+        z3r = REAL(z3,SP)
         z3i = AIMAG(z3)
         DO k = 1, 25
           trm1 = trm1*CMPLX(z3r/d1,z3i/d1,SP)
@@ -358,6 +358,6 @@ ELEMENTAL SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   END IF
   100  Nz = 0
   Ierr = 5
-
+  !
   RETURN
 END SUBROUTINE CAIRY

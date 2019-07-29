@@ -1,7 +1,6 @@
 !** ZUCHK
-SUBROUTINE ZUCHK(Yr,Yi,Nz,Ascle,Tol)
-  !> Subsidiary to SERI, ZUOIK, ZUNK1, ZUNK2, ZUNI1, ZUNI2 and
-  !            ZKSCL
+ELEMENTAL SUBROUTINE ZUCHK(Y,Nz,Ascle,Tol)
+  !> Subsidiary to SERI, ZUOIK, ZUNK1, ZUNK2, ZUNI1, ZUNI2 and ZKSCL
   !***
   ! **Library:**   SLATEC
   !***
@@ -27,18 +26,22 @@ SUBROUTINE ZUCHK(Yr,Yi,Nz,Ascle,Tol)
   !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Ascle, Tol
+  COMPLEX(DP), INTENT(IN) :: Y
   !
-  !     COMPLEX Y
-  REAL(DP) :: Ascle, ss, st, Tol, wr, wi, Yr, Yi
-  INTEGER :: Nz
+  REAL(DP) :: ss, st, yr, yi
   !* FIRST EXECUTABLE STATEMENT  ZUCHK
   Nz = 0
-  wr = ABS(Yr)
-  wi = ABS(Yi)
-  st = MIN(wr,wi)
+  yr = REAL(Y,DP)
+  yi = AIMAG(Y)
+  yr = ABS(yr)
+  yi = ABS(yi)
+  st = MIN(yr,yi)
   IF( st>Ascle ) RETURN
-  ss = MAX(wr,wi)
+  ss = MAX(yr,yi)
   st = st/Tol
   IF( ss<st ) Nz = 1
+  !
 END SUBROUTINE ZUCHK

@@ -1,5 +1,5 @@
 !** ZMLRI
-SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
+PURE SUBROUTINE ZMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -23,32 +23,31 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
   USE service, ONLY : tiny_dp
-  !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
-  INTEGER :: i, iaz, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
-  REAL(DP) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, cnormr, fkap, fkk, flam, &
-    fnf, Fnu, pti, ptr, p1i, p1r, p2i, p2r, raz, rho, rho2, rzi, rzr, scle, sti, &
-    str, sumi, sumr, tfnf, Tol, tst, Yi(N), Yr(N), Zi, Zr
-  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
-  !* FIRST EXECUTABLE STATEMENT  ZMLRI
+  !
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  INTEGER :: i, iaz, ifnu, inu, itime, k, kk, km, m
+  COMPLEX(DP) :: ck, cnorm, pt, p1, p2, rz, summ
+  REAL(DP) :: ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, rho, &
+    rho2, scle, tfnf, tst, x
+  !* FIRST EXECUTABLE STATEMENT  CMLRI
   scle = tiny_dp/Tol
   Nz = 0
-  az = ZABS(Zr,Zi)
+  az = ABS(Z)
+  x = REAL(Z,DP)
   iaz = INT( az )
   ifnu = INT( Fnu )
   inu = ifnu + N - 1
   at = iaz + 1._DP
-  raz = 1._DP/az
-  str = Zr*raz
-  sti = -Zi*raz
-  ckr = str*at*raz
-  cki = sti*at*raz
-  rzr = (str+str)*raz
-  rzi = (sti+sti)*raz
-  p1r = zeror
-  p1i = zeroi
-  p2r = coner
-  p2i = conei
-  ack = (at+1._DP)*raz
+  ck = CMPLX(at,0._DP,DP)/Z
+  rz = (2._DP,0._DP)/Z
+  p1 = (0._DP,0._DP)
+  p2 = (1._DP,0._DP)
+  ack = (at+1._DP)/az
   rho = ack + SQRT(ack*ack-1._DP)
   rho2 = rho*rho
   tst = (rho2+rho2)/((rho2-1._DP)*(rho-1._DP))
@@ -58,15 +57,11 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !-----------------------------------------------------------------------
   ak = at
   DO i = 1, 80
-    ptr = p2r
-    pti = p2i
-    p2r = p1r - (ckr*ptr-cki*pti)
-    p2i = p1i - (cki*ptr+ckr*pti)
-    p1r = ptr
-    p1i = pti
-    ckr = ckr + rzr
-    cki = cki + rzi
-    ap = ZABS(p2r,p2i)
+    pt = p2
+    p2 = p1 - ck*p2
+    p1 = pt
+    ck = ck + rz
+    ap = ABS(p2)
     IF( ap>tst*ak*ak ) GOTO 100
     ak = ak + 1._DP
   END DO
@@ -78,33 +73,24 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     !-----------------------------------------------------------------------
     !     COMPUTE RELATIVE TRUNCATION ERROR FOR RATIOS
     !-----------------------------------------------------------------------
-    p1r = zeror
-    p1i = zeroi
-    p2r = coner
-    p2i = conei
+    p1 = (0._DP,0._DP)
+    p2 = (1._DP,0._DP)
     at = inu + 1._DP
-    str = Zr*raz
-    sti = -Zi*raz
-    ckr = str*at*raz
-    cki = sti*at*raz
-    ack = at*raz
+    ck = CMPLX(at,0._DP,DP)/Z
+    ack = at/az
     tst = SQRT(ack/Tol)
     itime = 1
     DO k = 1, 80
-      ptr = p2r
-      pti = p2i
-      p2r = p1r - (ckr*ptr-cki*pti)
-      p2i = p1i - (ckr*pti+cki*ptr)
-      p1r = ptr
-      p1i = pti
-      ckr = ckr + rzr
-      cki = cki + rzi
-      ap = ZABS(p2r,p2i)
+      pt = p2
+      p2 = p1 - ck*p2
+      p1 = pt
+      ck = ck + rz
+      ap = ABS(p2)
       IF( ap>=tst ) THEN
         IF( itime==2 ) GOTO 200
-        ack = ZABS(ckr,cki)
+        ack = ABS(ck)
         flam = ack + SQRT(ack*ack-1._DP)
-        fkap = ap/ZABS(p1r,p1i)
+        fkap = ap/ABS(p1)
         rho = MIN(flam,fkap)
         tst = tst*SQRT(rho/(rho*rho-1._DP))
         itime = 2
@@ -119,98 +105,70 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   200  k = k + 1
   kk = MAX(i+iaz,k+inu)
   fkk = kk
-  p1r = zeror
-  p1i = zeroi
+  p1 = (0._DP,0._DP)
   !-----------------------------------------------------------------------
   !     SCALE P2 AND SUM BY SCLE
   !-----------------------------------------------------------------------
-  p2r = scle
-  p2i = zeroi
+  p2 = CMPLX(scle,0._DP,DP)
   fnf = Fnu - ifnu
   tfnf = fnf + fnf
-  bk = LOG_GAMMA(fkk+tfnf+1._DP) - LOG_GAMMA(fkk+1._DP) - LOG_GAMMA(tfnf+1._DP)
+  bk = LOG_GAMMA(fkk+tfnf+1._DP) - LOG_GAMMA(fkk+1._DP)- LOG_GAMMA(tfnf+1._DP)
   bk = EXP(bk)
-  sumr = zeror
-  sumi = zeroi
+  summ = (0._DP,0._DP)
   km = kk - inu
   DO i = 1, km
-    ptr = p2r
-    pti = p2i
-    p2r = p1r + (fkk+fnf)*(rzr*ptr-rzi*pti)
-    p2i = p1i + (fkk+fnf)*(rzi*ptr+rzr*pti)
-    p1r = ptr
-    p1i = pti
+    pt = p2
+    p2 = p1 + CMPLX(fkk+fnf,0._DP,DP)*rz*p2
+    p1 = pt
     ak = 1._DP - tfnf/(fkk+tfnf)
     ack = bk*ak
-    sumr = sumr + (ack+bk)*p1r
-    sumi = sumi + (ack+bk)*p1i
+    summ = summ + CMPLX(ack+bk,0._DP,DP)*p1
     bk = ack
     fkk = fkk - 1._DP
   END DO
-  Yr(N) = p2r
-  Yi(N) = p2i
+  Y(N) = p2
   IF( N/=1 ) THEN
     DO i = 2, N
-      ptr = p2r
-      pti = p2i
-      p2r = p1r + (fkk+fnf)*(rzr*ptr-rzi*pti)
-      p2i = p1i + (fkk+fnf)*(rzi*ptr+rzr*pti)
-      p1r = ptr
-      p1i = pti
+      pt = p2
+      p2 = p1 + CMPLX(fkk+fnf,0._DP,DP)*rz*p2
+      p1 = pt
       ak = 1._DP - tfnf/(fkk+tfnf)
       ack = bk*ak
-      sumr = sumr + (ack+bk)*p1r
-      sumi = sumi + (ack+bk)*p1i
+      summ = summ + CMPLX(ack+bk,0._DP,DP)*p1
       bk = ack
       fkk = fkk - 1._DP
       m = N - i + 1
-      Yr(m) = p2r
-      Yi(m) = p2i
+      Y(m) = p2
     END DO
   END IF
   IF( ifnu>0 ) THEN
     DO i = 1, ifnu
-      ptr = p2r
-      pti = p2i
-      p2r = p1r + (fkk+fnf)*(rzr*ptr-rzi*pti)
-      p2i = p1i + (fkk+fnf)*(rzr*pti+rzi*ptr)
-      p1r = ptr
-      p1i = pti
+      pt = p2
+      p2 = p1 + CMPLX(fkk+fnf,0._DP,DP)*rz*p2
+      p1 = pt
       ak = 1._DP - tfnf/(fkk+tfnf)
       ack = bk*ak
-      sumr = sumr + (ack+bk)*p1r
-      sumi = sumi + (ack+bk)*p1i
+      summ = summ + CMPLX(ack+bk,0._DP,DP)*p1
       bk = ack
       fkk = fkk - 1._DP
     END DO
   END IF
-  ptr = Zr
-  pti = Zi
-  IF( Kode==2 ) ptr = zeror
-  CALL ZLOG(rzr,rzi,str,sti)
-  p1r = -fnf*str + ptr
-  p1i = -fnf*sti + pti
+  pt = Z
+  IF( Kode==2 ) pt = pt - CMPLX(x,0._DP,DP)
+  p1 = -CMPLX(fnf,0._DP,DP)*LOG(rz) + pt
   ap = LOG_GAMMA(1._DP+fnf)
-  ptr = p1r - ap
-  pti = p1i
+  pt = p1 - CMPLX(ap,0._DP,DP)
   !-----------------------------------------------------------------------
   !     THE DIVISION EXP(PT)/(SUM+P2) IS ALTERED TO AVOID OVERFLOW
   !     IN THE DENOMINATOR BY SQUARING LARGE QUANTITIES
   !-----------------------------------------------------------------------
-  p2r = p2r + sumr
-  p2i = p2i + sumi
-  ap = ZABS(p2r,p2i)
-  p1r = 1._DP/ap
-  CALL ZEXP(ptr,pti,str,sti)
-  ckr = str*p1r
-  cki = sti*p1r
-  ptr = p2r*p1r
-  pti = -p2i*p1r
-  CALL ZMLT(ckr,cki,ptr,pti,cnormr,cnormi)
-  DO i = 1, N
-    str = Yr(i)*cnormr - Yi(i)*cnormi
-    Yi(i) = Yr(i)*cnormi + Yi(i)*cnormr
-    Yr(i) = str
-  END DO
+  p2 = p2 + summ
+  ap = ABS(p2)
+  p1 = CMPLX(1._DP/ap,0._DP,DP)
+  ck = EXP(pt)*p1
+  pt = CONJG(p2)*p1
+  cnorm = ck*pt
+  Y = Y*cnorm
+  !
   RETURN
 END SUBROUTINE ZMLRI

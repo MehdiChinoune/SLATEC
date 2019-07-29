@@ -1,9 +1,8 @@
 !** ZBESI
-SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
-  !> Compute a sequence of the Bessel functions I(a,z) for
-  !            complex argument z and real nonnegative orders a=b,b+1,
-  !            b+2,... where b>0.  A scaling option is available to
-  !            help avoid overflow.
+PURE SUBROUTINE ZBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
+  !> Compute a sequence of the Bessel functions I(a,z) for complex argument z
+  !  and real nonnegative orders a=b,b+1, b+2,... where b>0.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -164,20 +163,28 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : eps_dp, log10_radix_dp, tiny_dp, digits_dp, huge_int, &
     max_exp_dp, min_exp_dp
-  !     COMPLEX CONE,CSGN,CW,CY,CZERO,Z,ZN
-  INTEGER :: i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn
-  REAL(DP) :: aa, alim, arg, csgni, csgnr, Cyi(N), Cyr(N), dig, elim, Fnu, fnul, &
-    rl, r1m5, str, tol, Zi, zni, znr, Zr, az, bb, fn, ascle, rtol, atol, sti
+  !
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(DP), INTENT(IN) :: Fnu
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Cy(N)
+  !
+  INTEGER :: i, inu, k, k1, k2, nn
+  COMPLEX(DP) :: csgn, zn
+  REAL(DP) :: aa, alim, arg, dig, elim, fnul, rl, r1m5, s1, &
+    s2, tol, xx, yy, az, fn, bb, ascle, rtol, atol
   REAL(DP), PARAMETER :: pi = 3.14159265358979324_DP
-  REAL(DP), PARAMETER :: coner = 1._DP, conei = 0._DP
   !
   !* FIRST EXECUTABLE STATEMENT  ZBESI
   Ierr = 0
   Nz = 0
-  IF( Fnu<0._DP ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( N<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
+  IF( Fnu<0._DP .OR. Kode<1 .OR. Kode>2 .OR. N<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
+  xx = REAL(Z,DP)
+  yy = AIMAG(Z)
   !-----------------------------------------------------------------------
   !     SET PARAMETERS RELATED TO MACHINE CONSTANTS.
   !     TOL IS THE APPROXIMATE UNIT ROUNDOFF LIMITED TO 1.0E-18.
@@ -202,68 +209,58 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   alim = elim + MAX(-aa,-41.45_DP)
   rl = 1.2_DP*dig + 3._DP
   fnul = 10._DP + 6._DP*(dig-3._DP)
+  az = ABS(Z)
   !-----------------------------------------------------------------------
-  !     TEST FOR PROPER RANGE
+  !     TEST FOR RANGE
   !-----------------------------------------------------------------------
-  az = ZABS(Zr,Zi)
-  fn = Fnu + (N-1)
   aa = 0.5_DP/tol
   bb = huge_int*0.5_DP
   aa = MIN(aa,bb)
   IF( az<=aa ) THEN
+    fn = Fnu + (N-1)
     IF( fn<=aa ) THEN
       aa = SQRT(aa)
       IF( az>aa ) Ierr = 3
       IF( fn>aa ) Ierr = 3
-      znr = Zr
-      zni = Zi
-      csgnr = coner
-      csgni = conei
-      IF( Zr<0._DP ) THEN
-        znr = -Zr
-        zni = -Zi
+      zn = Z
+      csgn = (1._DP,0._DP)
+      IF( xx<0._DP ) THEN
+        zn = -Z
         !-----------------------------------------------------------------------
         !     CALCULATE CSGN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
         !     WHEN FNU IS LARGE
         !-----------------------------------------------------------------------
         inu = INT( Fnu )
         arg = (Fnu-inu)*pi
-        IF( Zi<0._DP ) arg = -arg
-        csgnr = COS(arg)
-        csgni = SIN(arg)
-        IF( MOD(inu,2)/=0 ) THEN
-          csgnr = -csgnr
-          csgni = -csgni
-        END IF
+        IF( yy<0._DP ) arg = -arg
+        s1 = COS(arg)
+        s2 = SIN(arg)
+        csgn = CMPLX(s1,s2,DP)
+        IF( MOD(inu,2)==1 ) csgn = -csgn
       END IF
-      CALL ZBINU(znr,zni,Fnu,Kode,N,Cyr,Cyi,Nz,rl,fnul,tol,elim,alim)
+      CALL ZBINU(zn,Fnu,Kode,N,Cy,Nz,rl,fnul,tol,elim,alim)
       IF( Nz>=0 ) THEN
-        IF( Zr>=0._DP ) RETURN
+        IF( xx>=0._DP ) RETURN
         !-----------------------------------------------------------------------
         !     ANALYTIC CONTINUATION TO THE LEFT HALF PLANE
         !-----------------------------------------------------------------------
         nn = N - Nz
         IF( nn==0 ) RETURN
         rtol = 1._DP/tol
-        ascle = tiny_dp*rtol*1.E+3_DP
+        ascle = tiny_dp*rtol*1.E3_DP
         DO i = 1, nn
-          !       STR = CYR(I)*CSGNR - CYI(I)*CSGNI
-          !       CYI(I) = CYR(I)*CSGNI + CYI(I)*CSGNR
-          !       CYR(I) = STR
-          aa = Cyr(i)
-          bb = Cyi(i)
+          !       CY(I) = CY(I)*CSGN
+          zn = Cy(i)
+          aa = REAL(zn,DP)
+          bb = AIMAG(zn)
           atol = 1._DP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
-            aa = aa*rtol
-            bb = bb*rtol
+            zn = zn*CMPLX(rtol,0._DP,DP)
             atol = tol
           END IF
-          str = aa*csgnr - bb*csgni
-          sti = aa*csgni + bb*csgnr
-          Cyr(i) = str*atol
-          Cyi(i) = sti*atol
-          csgnr = -csgnr
-          csgni = -csgni
+          zn = zn*csgn
+          Cy(i) = zn*CMPLX(atol,0._DP,DP)
+          csgn = -csgn
         END DO
         RETURN
       ELSEIF( Nz==(-2) ) THEN
@@ -279,4 +276,5 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   END IF
   Nz = 0
   Ierr = 4
+  !
 END SUBROUTINE ZBESI

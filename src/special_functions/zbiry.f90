@@ -1,8 +1,7 @@
 !** ZBIRY
-SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
-  !> Compute the Airy function Bi(z) or its derivative dBi/dz
-  !            for complex argument z.  A scaling option is available
-  !            to help avoid overflow.
+ELEMENTAL SUBROUTINE ZBIRY(Z,Id,Kode,Bi,Ierr)
+  !> Compute the Airy function Bi(z) or its derivative dBi/dz for complex argument z.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -140,26 +139,30 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   !   920811  Prologue revised.  (DWL)
   !   930122  Added ZSQRT to EXTERNAL statement.  (RWC)
   USE service, ONLY : eps_dp, log10_radix_dp, digits_dp, huge_int, max_exp_dp, min_exp_dp
-  !     COMPLEX BI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
-  REAL(DP) :: aa, ad, ak, alim, atrm, az, az3, bb, Bii, Bir, bk, cc, ck, &
-    csqi, csqr, cyi(2), cyr(2), dig, dk, d1, d2, eaa, elim, fid, fmr, &
-    fnu, fnul, rl, r1m5, sfac, sti, str, s1i, s1r, s2i, s2r, tol, trm1i, &
-    trm1r, trm2i, trm2r, Zi, Zr, ztai, ztar, z3i, z3r
-  INTEGER :: Id, Ierr, k, Kode, k1, k2, nz
+  !
+  INTEGER, INTENT(IN) :: Id, Kode
+  INTEGER, INTENT(OUT) :: Ierr
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Bi
+  !
+  INTEGER :: k, k1, k2, nz
+  REAL(DP) :: aa, ad, ak, alim, atrm, az, az3, bb, bk, ck, dig, dk, d1, d2, elim, fid, &
+    fmr, fnu, fnul, rl, r1m5, sfac, tol, zi, zr, z3i, z3r
+  COMPLEX(DP) :: csq, cy(2), s1, s2, trm1, trm2, zta, z3
   REAL(DP), PARAMETER :: tth = 6.66666666666666667E-01_DP, c1 = 6.14926627446000736E-01_DP, &
     c2 = 4.48288357353826359E-01_DP, coef = 5.77350269189625765E-01_DP, &
     pi = 3.14159265358979324_DP
-  REAL(DP), PARAMETER :: coner = 1._DP, conei = 0._DP
   !* FIRST EXECUTABLE STATEMENT  ZBIRY
   Ierr = 0
   nz = 0
-  IF( Id<0 .OR. Id>1 ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
-  az = ZABS(Zr,Zi)
+  IF( Id<0 .OR. Id>1 .OR. Kode<1 .OR. Kode>2 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
+  az = ABS(Z)
   tol = MAX(eps_dp,1.E-18_DP)
   fid = Id
-  IF( az>1._SP ) THEN
+  IF( az>1._DP ) THEN
     !-----------------------------------------------------------------------
     !     CASE FOR ABS(Z)>1.0
     !-----------------------------------------------------------------------
@@ -191,7 +194,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     !     TEST FOR RANGE
     !-----------------------------------------------------------------------
     aa = 0.5_DP/tol
-    bb = huge_int*0.5_DP
+    bb = 0.5_DP*huge_int
     aa = MIN(aa,bb)
     aa = aa**tth
     IF( az>aa ) THEN
@@ -201,25 +204,22 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     ELSE
       aa = SQRT(aa)
       IF( az>aa ) Ierr = 3
-      CALL ZSQRT(Zr,Zi,csqr,csqi)
-      ztar = tth*(Zr*csqr-Zi*csqi)
-      ztai = tth*(Zr*csqi+Zi*csqr)
+      csq = SQRT(Z)
+      zta = Z*csq*CMPLX(tth,0._DP,DP)
       !-----------------------------------------------------------------------
       !     RE(ZTA)<=0 WHEN RE(Z)<0, ESPECIALLY WHEN IM(Z) IS SMALL
       !-----------------------------------------------------------------------
       sfac = 1._DP
-      ak = ztai
-      IF( Zr<0._DP ) THEN
-        bk = ztar
+      zi = AIMAG(Z)
+      zr = REAL(Z,DP)
+      ak = AIMAG(zta)
+      IF( zr<0._DP ) THEN
+        bk = REAL(zta,DP)
         ck = -ABS(bk)
-        ztar = ck
-        ztai = ak
+        zta = CMPLX(ck,ak,DP)
       END IF
-      IF( Zi==0._DP .AND. Zr<=0._DP ) THEN
-        ztar = 0._DP
-        ztai = ak
-      END IF
-      aa = ztar
+      IF( zi==0._DP .AND. zr<=0._DP ) zta = CMPLX(0._DP,ak,DP)
+      aa = REAL(zta,DP)
       IF( Kode/=2 ) THEN
         !-----------------------------------------------------------------------
         !     OVERFLOW TEST
@@ -232,88 +232,63 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         END IF
       END IF
       fmr = 0._DP
-      IF( aa<0._DP .OR. Zr<=0._DP ) THEN
+      IF( aa<0._DP .OR. zr<=0._DP ) THEN
         fmr = pi
-        IF( Zi<0._DP ) fmr = -pi
-        ztar = -ztar
-        ztai = -ztai
+        IF( zi<0._DP ) fmr = -pi
+        zta = -zta
       END IF
       !-----------------------------------------------------------------------
       !     AA=FACTOR FOR ANALYTIC CONTINUATION OF I(FNU,ZTA)
-      !     KODE=2 RETURNS EXP(-ABS(XZTA))*I(FNU,ZTA) FROM CBESI
+      !     KODE=2 RETURNS EXP(-ABS(XZTA))*I(FNU,ZTA) FROM ZBINU
       !-----------------------------------------------------------------------
-      CALL ZBINU(ztar,ztai,fnu,Kode,1,cyr,cyi,nz,rl,fnul,tol,elim,alim)
+      CALL ZBINU(zta,fnu,Kode,1,cy,nz,rl,fnul,tol,elim,alim)
       IF( nz>=0 ) THEN
         aa = fmr*fnu
-        z3r = sfac
-        str = COS(aa)
-        sti = SIN(aa)
-        s1r = (str*cyr(1)-sti*cyi(1))*z3r
-        s1i = (str*cyi(1)+sti*cyr(1))*z3r
+        z3 = CMPLX(sfac,0._DP,DP)
+        s1 = cy(1)*CMPLX(COS(aa),SIN(aa),DP)*z3
         fnu = (2._DP-fid)/3._DP
-        CALL ZBINU(ztar,ztai,fnu,Kode,2,cyr,cyi,nz,rl,fnul,tol,elim,alim)
-        cyr(1) = cyr(1)*z3r
-        cyi(1) = cyi(1)*z3r
-        cyr(2) = cyr(2)*z3r
-        cyi(2) = cyi(2)*z3r
+        CALL ZBINU(zta,fnu,Kode,2,cy,nz,rl,fnul,tol,elim,alim)
+        cy(1) = cy(1)*z3
+        cy(2) = cy(2)*z3
         !-----------------------------------------------------------------------
         !     BACKWARD RECUR ONE STEP FOR ORDERS -1/3 OR -2/3
         !-----------------------------------------------------------------------
-        CALL ZDIV(cyr(1),cyi(1),ztar,ztai,str,sti)
-        s2r = (fnu+fnu)*str + cyr(2)
-        s2i = (fnu+fnu)*sti + cyi(2)
+        s2 = cy(1)*CMPLX(fnu+fnu,0._DP,DP)/zta + cy(2)
         aa = fmr*(fnu-1._DP)
-        str = COS(aa)
-        sti = SIN(aa)
-        s1r = coef*(s1r+s2r*str-s2i*sti)
-        s1i = coef*(s1i+s2r*sti+s2i*str)
+        s1 = (s1+s2*CMPLX(COS(aa),SIN(aa),DP))*CMPLX(coef,0._DP,DP)
         IF( Id==1 ) THEN
-          str = Zr*s1r - Zi*s1i
-          s1i = Zr*s1i + Zi*s1r
-          s1r = str
-          Bir = s1r/sfac
-          Bii = s1i/sfac
+          s1 = Z*s1
+          Bi = s1*CMPLX(1._DP/sfac,0._DP,DP)
           RETURN
         ELSE
-          str = csqr*s1r - csqi*s1i
-          s1i = csqr*s1i + csqi*s1r
-          s1r = str
-          Bir = s1r/sfac
-          Bii = s1i/sfac
+          s1 = csq*s1
+          Bi = s1*CMPLX(1._DP/sfac,0._DP,DP)
           RETURN
         END IF
       ELSEIF( nz/=(-1) ) THEN
         GOTO 100
       END IF
     END IF
-    50  Ierr = 2
-    nz = 0
+    50  nz = 0
+    Ierr = 2
     RETURN
   ELSE
     !-----------------------------------------------------------------------
     !     POWER SERIES FOR ABS(Z)<=1.
     !-----------------------------------------------------------------------
-    s1r = coner
-    s1i = conei
-    s2r = coner
-    s2i = conei
+    s1 = (1._DP,0._DP)
+    s2 = (1._DP,0._DP)
     IF( az<tol ) THEN
       aa = c1*(1._DP-fid) + fid*c2
-      Bir = aa
-      Bii = 0._DP
+      Bi = CMPLX(aa,0._DP,DP)
       RETURN
     ELSE
       aa = az*az
       IF( aa>=tol/az ) THEN
-        trm1r = coner
-        trm1i = conei
-        trm2r = coner
-        trm2i = conei
+        trm1 = (1._DP,0._DP)
+        trm2 = (1._DP,0._DP)
         atrm = 1._DP
-        str = Zr*Zr - Zi*Zi
-        sti = Zr*Zi + Zi*Zr
-        z3r = str*Zr - sti*Zi
-        z3i = str*Zi + sti*Zr
+        z3 = Z*Z*Z
         az3 = az*aa
         ak = 2._DP + fid
         bk = 3._DP - fid - fid
@@ -324,17 +299,13 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         ad = MIN(d1,d2)
         ak = 24._DP + 9._DP*fid
         bk = 30._DP - 9._DP*fid
+        z3r = REAL(z3,DP)
+        z3i = AIMAG(z3)
         DO k = 1, 25
-          str = (trm1r*z3r-trm1i*z3i)/d1
-          trm1i = (trm1r*z3i+trm1i*z3r)/d1
-          trm1r = str
-          s1r = s1r + trm1r
-          s1i = s1i + trm1i
-          str = (trm2r*z3r-trm2i*z3i)/d2
-          trm2i = (trm2r*z3i+trm2i*z3r)/d2
-          trm2r = str
-          s2r = s2r + trm2r
-          s2i = s2i + trm2i
+          trm1 = trm1*CMPLX(z3r/d1,z3i/d1,DP)
+          s1 = s1 + trm1
+          trm2 = trm2*CMPLX(z3r/d2,z3i/d2,DP)
+          s2 = s2 + trm2
           atrm = atrm*az3/ad
           d1 = d1 + ak
           d2 = d2 + bk
@@ -345,42 +316,27 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
         END DO
       END IF
       IF( Id==1 ) THEN
-        Bir = s2r*c2
-        Bii = s2i*c2
-        IF( az>tol ) THEN
-          cc = c1/(1._DP+fid)
-          str = s1r*Zr - s1i*Zi
-          sti = s1r*Zi + s1i*Zr
-          Bir = Bir + cc*(str*Zr-sti*Zi)
-          Bii = Bii + cc*(str*Zi+sti*Zr)
-        END IF
+        Bi = s2*CMPLX(c2,0._DP,DP)
+        IF( az>tol ) Bi = Bi + Z*Z*s1*CMPLX(c1/(1._DP+fid),0._DP,DP)
         IF( Kode==1 ) RETURN
-        CALL ZSQRT(Zr,Zi,str,sti)
-        ztar = tth*(Zr*str-Zi*sti)
-        ztai = tth*(Zr*sti+Zi*str)
-        aa = ztar
+        zta = Z*SQRT(Z)*CMPLX(tth,0._DP,DP)
+        aa = REAL(zta,DP)
         aa = -ABS(aa)
-        eaa = EXP(aa)
-        Bir = Bir*eaa
-        Bii = Bii*eaa
+        Bi = Bi*CMPLX(EXP(aa),0._DP,DP)
         RETURN
       ELSE
-        Bir = c1*s1r + c2*(Zr*s2r-Zi*s2i)
-        Bii = c1*s1i + c2*(Zr*s2i+Zi*s2r)
+        Bi = s1*CMPLX(c1,0._DP,DP) + Z*s2*CMPLX(c2,0._DP,DP)
         IF( Kode==1 ) RETURN
-        CALL ZSQRT(Zr,Zi,str,sti)
-        ztar = tth*(Zr*str-Zi*sti)
-        ztai = tth*(Zr*sti+Zi*str)
-        aa = ztar
+        zta = Z*SQRT(Z)*CMPLX(tth,0._DP,DP)
+        aa = REAL(zta,DP)
         aa = -ABS(aa)
-        eaa = EXP(aa)
-        Bir = Bir*eaa
-        Bii = Bii*eaa
+        Bi = Bi*CMPLX(EXP(aa),0._DP,DP)
         RETURN
       END IF
     END IF
   END IF
   100  nz = 0
   Ierr = 5
+  !
   RETURN
 END SUBROUTINE ZBIRY

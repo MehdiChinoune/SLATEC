@@ -1,5 +1,5 @@
 !** ZRATI
-SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
+PURE SUBROUTINE ZRATI(Z,Fnu,N,Cy,Tol)
   !> Subsidiary to ZBESH, ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -26,39 +26,36 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: i, id, idnu, inu, itime, k, kk, magz, N
-  REAL(DP) :: ak, amagz, ap1, ap2, arg, az, cdfnui, cdfnur, Cyi(N), Cyr(N), dfnu, &
-    fdnu, flam, Fnu, fnup, pti, ptr, p1i, p1r, p2i, p2r, rak, rap1, rho, rzi, &
-    rzr, test, test1, Tol, tti, ttr, t1i, t1r, Zi, Zr
-  REAL(DP), PARAMETER :: czeror = 0._DP, czeroi = 0._DP, coner = 1._DP, conei = 0._DP, &
-    rt2 = 1.41421356237309505_DP
+  INTEGER, INTENT(IN) :: N
+  REAL(DP), INTENT(IN) :: Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Cy(N)
+  !
+  INTEGER :: i, id, idnu, inu, itime, k, kk, magz
+  COMPLEX(DP) :: cdfnu, pt, p1, p2, rz, t1
+  REAL(DP) :: ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, fnup, &
+    rap1, rho, test, test1
   !* FIRST EXECUTABLE STATEMENT  ZRATI
-  az = ZABS(Zr,Zi)
+  az = ABS(Z)
   inu = INT( Fnu )
   idnu = inu + N - 1
+  fdnu = idnu
   magz = INT( az )
   amagz = magz + 1
-  fdnu = idnu
   fnup = MAX(amagz,fdnu)
   id = idnu - magz - 1
   itime = 1
   k = 1
-  ptr = 1._DP/az
-  rzr = ptr*(Zr+Zr)*ptr
-  rzi = -ptr*(Zi+Zi)*ptr
-  t1r = rzr*fnup
-  t1i = rzi*fnup
-  p2r = -t1r
-  p2i = -t1i
-  p1r = coner
-  p1i = conei
-  t1r = t1r + rzr
-  t1i = t1i + rzi
+  rz = (2._DP,0._DP)/Z
+  t1 = CMPLX(fnup,0._DP,DP)*rz
+  p2 = -t1
+  p1 = (1._DP,0._DP)
+  t1 = t1 + rz
   IF( id>0 ) id = 0
-  ap2 = ZABS(p2r,p2i)
-  ap1 = ZABS(p1r,p1i)
+  ap2 = ABS(p2)
+  ap1 = ABS(p1)
   !-----------------------------------------------------------------------
-  !     THE OVERFLOW TEST ON K(FNU+I-1,Z) BEFORE THE CALL TO CBKNU
+  !     THE OVERFLOW TEST ON K(FNU+I-1,Z) BEFORE THE CALL TO ZBKNU
   !     GUARANTEES THAT P2 IS ON SCALE. SCALE TEST1 AND ALL SUBSEQUENT
   !     P2 VALUES BY AP1 TO ENSURE THAT AN OVERFLOW DOES NOT OCCUR
   !     PREMATURELY.
@@ -67,76 +64,49 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   test1 = SQRT(arg)
   test = test1
   rap1 = 1._DP/ap1
-  p1r = p1r*rap1
-  p1i = p1i*rap1
-  p2r = p2r*rap1
-  p2i = p2i*rap1
+  p1 = p1*CMPLX(rap1,0._DP,DP)
+  p2 = p2*CMPLX(rap1,0._DP,DP)
   ap2 = ap2*rap1
   DO
     k = k + 1
     ap1 = ap2
-    ptr = p2r
-    pti = p2i
-    p2r = p1r - (t1r*ptr-t1i*pti)
-    p2i = p1i - (t1r*pti+t1i*ptr)
-    p1r = ptr
-    p1i = pti
-    t1r = t1r + rzr
-    t1i = t1i + rzi
-    ap2 = ZABS(p2r,p2i)
+    pt = p2
+    p2 = p1 - t1*p2
+    p1 = pt
+    t1 = t1 + rz
+    ap2 = ABS(p2)
     IF( ap1>test ) THEN
       IF( itime==2 ) THEN
         kk = k + 1 - id
         ak = kk
-        t1r = ak
-        t1i = czeroi
         dfnu = Fnu + (N-1)
-        p1r = 1._DP/ap2
-        p1i = czeroi
-        p2r = czeror
-        p2i = czeroi
+        cdfnu = CMPLX(dfnu,0._DP,DP)
+        t1 = CMPLX(ak,0._DP,DP)
+        p1 = CMPLX(1._DP/ap2,0._DP,DP)
+        p2 = (0._DP,0._DP)
         DO i = 1, kk
-          ptr = p1r
-          pti = p1i
-          rap1 = dfnu + t1r
-          ttr = rzr*rap1
-          tti = rzi*rap1
-          p1r = (ptr*ttr-pti*tti) + p2r
-          p1i = (ptr*tti+pti*ttr) + p2i
-          p2r = ptr
-          p2i = pti
-          t1r = t1r - coner
+          pt = p1
+          p1 = rz*(cdfnu+t1)*p1 + p2
+          p2 = pt
+          t1 = t1 - (1._DP,0._DP)
         END DO
-        IF( p1r==czeror .AND. p1i==czeroi ) THEN
-          p1r = Tol
-          p1i = Tol
-        END IF
-        CALL ZDIV(p2r,p2i,p1r,p1i,Cyr(N),Cyi(N))
+        IF( REAL(p1,DP)==0._DP .AND. AIMAG(p1)==0._DP ) p1 = CMPLX(Tol,Tol,DP)
+        Cy(N) = p2/p1
         IF( N==1 ) RETURN
         k = N - 1
         ak = k
-        t1r = ak
-        t1i = czeroi
-        cdfnur = Fnu*rzr
-        cdfnui = Fnu*rzi
+        t1 = CMPLX(ak,0._DP,DP)
+        cdfnu = CMPLX(Fnu,0._DP,DP)*rz
         DO i = 2, N
-          ptr = cdfnur + (t1r*rzr-t1i*rzi) + Cyr(k+1)
-          pti = cdfnui + (t1r*rzi+t1i*rzr) + Cyi(k+1)
-          ak = ZABS(ptr,pti)
-          IF( ak==czeror ) THEN
-            ptr = Tol
-            pti = Tol
-            ak = Tol*rt2
-          END IF
-          rak = coner/ak
-          Cyr(k) = rak*ptr*rak
-          Cyi(k) = -rak*pti*rak
-          t1r = t1r - coner
+          pt = cdfnu + t1*rz + Cy(k+1)
+          IF( REAL(pt,DP)==0._DP .AND. AIMAG(pt)==0._DP ) pt = CMPLX(Tol,Tol,DP)
+          Cy(k) = (1._DP,0._DP)/pt
+          t1 = t1 - (1._DP,0._DP)
           k = k - 1
         END DO
         EXIT
       ELSE
-        ak = ZABS(t1r,t1i)*0.5_DP
+        ak = ABS(t1)*0.5_DP
         flam = ak + SQRT(ak*ak-1._DP)
         rho = MIN(ap2/ap1,flam)
         test = test1*SQRT(rho/(rho*rho-1._DP))
@@ -144,4 +114,5 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
       END IF
     END IF
   END DO
+  !
 END SUBROUTINE ZRATI

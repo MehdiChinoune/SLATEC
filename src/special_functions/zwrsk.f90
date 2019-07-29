@@ -1,5 +1,5 @@
 !** ZWRSK
-SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
+PURE SUBROUTINE ZWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -22,35 +22,40 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : tiny_dp
-  !     COMPLEX CINU,CSCL,CT,CW,C1,C2,RCT,ST,Y,ZR
-  INTEGER :: i, Kode, N, nw, Nz
-  REAL(DP) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
-    ctr, Cwi(2), Cwr(2), c1i, c1r, c2i, c2r, Elim, Fnu, &
-    pti, ptr, ract, sti, str, Tol, Yi(N), Yr(N), Zri, Zrr
+  !
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Tol
+  COMPLEX(DP), INTENT(IN) :: Zr
+  COMPLEX(DP), INTENT(OUT) :: Cw(2), Y(N)
+  !
+  INTEGER :: i, nw
+  COMPLEX(DP) :: cinu, cscl, ct, c1, c2, rct, st
+  REAL(DP) :: act, acw, ascle, s1, s2, yy
   !* FIRST EXECUTABLE STATEMENT  ZWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS
-  !     Y(I)=I(FNU+I,Z)/I(FNU+I-1,Z) FROM CRATI NORMALIZED BY THE
-  !     WRONSKIAN WITH K(FNU,Z) AND K(FNU+1,Z) FROM CBKNU.
+  !     Y(I)=I(FNU+I,Z)/I(FNU+I-1,Z) FROM ZRATI NORMALIZED BY THE
+  !     WRONSKIAN WITH K(FNU,Z) AND K(FNU+1,Z) FROM ZBKNU.
   !-----------------------------------------------------------------------
-  !
   Nz = 0
-  CALL ZBKNU(Zrr,Zri,Fnu,Kode,2,Cwr,Cwi,nw,Tol,Elim,Alim)
+  CALL ZBKNU(Zr,Fnu,Kode,2,Cw,nw,Tol,Elim,Alim)
   IF( nw/=0 ) THEN
     Nz = -1
     IF( nw==(-2) ) Nz = -2
     RETURN
   ELSE
-    CALL ZRATI(Zrr,Zri,Fnu,N,Yr,Yi,Tol)
+    CALL ZRATI(Zr,Fnu,N,Y,Tol)
     !-----------------------------------------------------------------------
     !     RECUR FORWARD ON I(FNU+1,Z) = R(FNU,Z)*I(FNU,Z),
     !     R(FNU+J-1,Z)=Y(J),  J=1,...,N
     !-----------------------------------------------------------------------
-    cinur = 1._DP
-    cinui = 0._DP
+    cinu = CMPLX(1._DP,0._DP,DP)
     IF( Kode/=1 ) THEN
-      cinur = COS(Zri)
-      cinui = SIN(Zri)
+      yy = AIMAG(Zr)
+      s1 = COS(yy)
+      s2 = SIN(yy)
+      cinu = CMPLX(s1,s2,DP)
     END IF
     !-----------------------------------------------------------------------
     !     ON LOW EXPONENT MACHINES THE K FUNCTIONS CAN BE CLOSE TO BOTH
@@ -58,51 +63,35 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     !     SCALED TO PREVENT OVER OR UNDERFLOW. CUOIK HAS DETERMINED THAT
     !     THE RESULT IS ON SCALE.
     !-----------------------------------------------------------------------
-    acw = ZABS(Cwr(2),Cwi(2))
-    ascle = 1.E3_DP*tiny_dp/Tol
-    csclr = 1._DP
+    acw = ABS(Cw(2))
+    ascle = 1.E+3_DP*tiny_dp/Tol
+    cscl = CMPLX(1._DP,0._DP,DP)
     IF( acw>ascle ) THEN
       ascle = 1._DP/ascle
-      IF( acw>=ascle ) csclr = Tol
+      IF( acw>=ascle ) cscl = CMPLX(Tol,0._DP,DP)
     ELSE
-      csclr = 1._DP/Tol
+      cscl = CMPLX(1._DP/Tol,0._DP,DP)
     END IF
   END IF
-  c1r = Cwr(1)*csclr
-  c1i = Cwi(1)*csclr
-  c2r = Cwr(2)*csclr
-  c2i = Cwi(2)*csclr
-  str = Yr(1)
-  sti = Yi(1)
+  c1 = Cw(1)*cscl
+  c2 = Cw(2)*cscl
+  st = Y(1)
   !-----------------------------------------------------------------------
-  !     CINU=CINU*(CONJG(CT)/ABS(CT))*(1.0D0/ABS(CT) PREVENTS
+  !     CINU=CINU*(CONJG(CT)/ABS(CT))*(1.0E0/ABS(CT) PREVENTS
   !     UNDER- OR OVERFLOW PREMATURELY BY SQUARING ABS(CT)
   !-----------------------------------------------------------------------
-  ptr = str*c1r - sti*c1i
-  pti = str*c1i + sti*c1r
-  ptr = ptr + c2r
-  pti = pti + c2i
-  ctr = Zrr*ptr - Zri*pti
-  cti = Zrr*pti + Zri*ptr
-  act = ZABS(ctr,cti)
-  ract = 1._DP/act
-  ctr = ctr*ract
-  cti = -cti*ract
-  ptr = cinur*ract
-  pti = cinui*ract
-  cinur = ptr*ctr - pti*cti
-  cinui = ptr*cti + pti*ctr
-  Yr(1) = cinur*csclr
-  Yi(1) = cinui*csclr
+  ct = Zr*(c2+st*c1)
+  act = ABS(ct)
+  rct = CMPLX(1._DP/act,0._DP,DP)
+  ct = CONJG(ct)*rct
+  cinu = cinu*rct*ct
+  Y(1) = cinu*cscl
   IF( N==1 ) RETURN
   DO i = 2, N
-    ptr = str*cinur - sti*cinui
-    cinui = str*cinui + sti*cinur
-    cinur = ptr
-    str = Yr(i)
-    sti = Yi(i)
-    Yr(i) = cinur*csclr
-    Yi(i) = cinui*csclr
+    cinu = st*cinu
+    st = Y(i)
+    Y(i) = cinu*cscl
   END DO
+  !
   RETURN
 END SUBROUTINE ZWRSK

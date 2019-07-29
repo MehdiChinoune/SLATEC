@@ -1,5 +1,5 @@
 !** ZASYI
-SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
+PURE SUBROUTINE ZASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !> Subsidiary to ZBESI and ZBESK
   !***
   ! **Library:**   SLATEC
@@ -25,17 +25,22 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
   USE service, ONLY : tiny_dp
-  !     COMPLEX AK1,CK,CONE,CS1,CS2,CZ,CZERO,DK,EZ,P1,RZ,S2,Y,Z
-  INTEGER :: i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
-  REAL(DP) :: aa, aez, ak, ak1i, ak1r, Alim, arg, arm, atol, az, bb, bk, cki, &
-    ckr, cs1i, cs1r, cs2i, cs2r, czi, czr, dfnu, dki, dkr, dnu2, Elim, ezi, &
-    ezr, fdn, Fnu, p1i, p1r, raz, Rl, rtr1, rzi, rzr, s, sgn, sqk, sti, str, &
-    s2i, s2r, Tol, tzi, tzr, Yi(N), Yr(N), Zi, Zr
-  REAL(DP), PARAMETER :: pi = 3.14159265358979324_DP, rtpi = 0.159154943091895336_DP
-  REAL(DP), PARAMETER ::  zeror = 0._DP, zeroi = 0._DP, coner = 1._DP, conei = 0._DP
+  !
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Rl, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Y(N)
+  !
+  INTEGER :: i, ib, il, inu, j, jl, k, koded, m, nn
+  COMPLEX(DP) :: ak1, ck, cs1, cs2, cz, dk, ez, p1, rz, s2
+  REAL(DP) :: aa, acz, aez, ak, arg, arm, atol, az, bb, bk, dfnu, &
+    dnu2, fdn, rtr1, s, sgn, sqk, x, yy
+  REAL(DP), PARAMETER ::  pi = 3.14159265358979324_DP, rtpi = 0.159154943091895336_DP
   !* FIRST EXECUTABLE STATEMENT  ZASYI
   Nz = 0
-  az = ZABS(Zr,Zi)
+  az = ABS(Z)
+  x = REAL(Z,DP)
   arm = 1.E3_DP*tiny_dp
   rtr1 = SQRT(arm)
   il = MIN(2,N)
@@ -43,33 +48,24 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST
   !-----------------------------------------------------------------------
-  raz = 1._DP/az
-  str = Zr*raz
-  sti = -Zi*raz
-  ak1r = rtpi*str*raz
-  ak1i = rtpi*sti*raz
-  CALL ZSQRT(ak1r,ak1i,ak1r,ak1i)
-  czr = Zr
-  czi = Zi
-  IF( Kode==2 ) THEN
-    czr = zeror
-    czi = Zi
-  END IF
-  IF( ABS(czr)>Elim ) THEN
+  ak1 = CMPLX(rtpi,0._DP,DP)/Z
+  ak1 = SQRT(ak1)
+  cz = Z
+  IF( Kode==2 ) cz = Z - CMPLX(x,0._DP,DP)
+  acz = REAL(cz,DP)
+  IF( ABS(acz)>Elim ) THEN
     Nz = -1
     RETURN
   ELSE
     dnu2 = dfnu + dfnu
     koded = 1
-    IF( (ABS(czr)<=Alim) .OR. (N<=2) ) THEN
+    IF( (ABS(acz)<=Alim) .OR. (N<=2) ) THEN
       koded = 0
-      CALL ZEXP(czr,czi,str,sti)
-      CALL ZMLT(ak1r,ak1i,str,sti,ak1r,ak1i)
+      ak1 = ak1*EXP(cz)
     END IF
     fdn = 0._DP
     IF( dnu2>rtr1 ) fdn = dnu2*dnu2
-    ezr = Zr*8._DP
-    ezi = Zi*8._DP
+    ez = Z*CMPLX(8._DP,0._DP,DP)
     !-----------------------------------------------------------------------
     !     WHEN Z IS IMAGINARY, THE ERROR TEST MUST BE MADE RELATIVE TO THE
     !     FIRST RECIPROCAL POWER SINCE THIS IS THE LEADING TERM OF THE
@@ -78,9 +74,9 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     aez = 8._DP*az
     s = Tol/aez
     jl = INT( Rl + Rl ) + 2
-    p1r = zeror
-    p1i = zeroi
-    IF( Zi/=0._DP ) THEN
+    yy = AIMAG(Z)
+    p1 = (0._DP,0._DP)
+    IF( yy/=0._DP ) THEN
       !-----------------------------------------------------------------------
       !     CALCULATE EXP(PI*(0.5+FNU+N-IL)*I) TO MINIMIZE LOSSES OF
       !     SIGNIFICANCE WHEN FNU OR N IS LARGE
@@ -90,40 +86,27 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       inu = inu + N - il
       ak = -SIN(arg)
       bk = COS(arg)
-      IF( Zi<0._DP ) bk = -bk
-      p1r = ak
-      p1i = bk
-      IF( MOD(inu,2)/=0 ) THEN
-        p1r = -p1r
-        p1i = -p1i
-      END IF
+      IF( yy<0._DP ) bk = -bk
+      p1 = CMPLX(ak,bk,DP)
+      IF( MOD(inu,2)==1 ) p1 = -p1
     END IF
     DO k = 1, il
       sqk = fdn - 1._DP
       atol = s*ABS(sqk)
       sgn = 1._DP
-      cs1r = coner
-      cs1i = conei
-      cs2r = coner
-      cs2i = conei
-      ckr = coner
-      cki = conei
+      cs1 = (1._DP,0._DP)
+      cs2 = (1._DP,0._DP)
+      ck = (1._DP,0._DP)
       ak = 0._DP
       aa = 1._DP
       bb = aez
-      dkr = ezr
-      dki = ezi
+      dk = ez
       DO j = 1, jl
-        CALL ZDIV(ckr,cki,dkr,dki,str,sti)
-        ckr = str*sqk
-        cki = sti*sqk
-        cs2r = cs2r + ckr
-        cs2i = cs2i + cki
+        ck = ck*CMPLX(sqk,0._DP,DP)/dk
+        cs2 = cs2 + ck
         sgn = -sgn
-        cs1r = cs1r + ckr*sgn
-        cs1i = cs1i + cki*sgn
-        dkr = dkr + ezr
-        dki = dki + ezi
+        cs1 = cs1 + ck*CMPLX(sgn,0._DP,DP)
+        dk = dk + ez
         aa = aa*ABS(sqk)/bb
         bb = bb + aez
         ak = ak + 8._DP
@@ -131,47 +114,31 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
         IF( aa<=atol ) GOTO 20
       END DO
       GOTO 100
-      20  s2r = cs1r
-      s2i = cs1i
-      IF( Zr+Zr<Elim ) THEN
-        tzr = Zr + Zr
-        tzi = Zi + Zi
-        CALL ZEXP(-tzr,-tzi,str,sti)
-        CALL ZMLT(str,sti,p1r,p1i,str,sti)
-        CALL ZMLT(str,sti,cs2r,cs2i,str,sti)
-        s2r = s2r + str
-        s2i = s2i + sti
-      END IF
+      20  s2 = cs1
+      IF( x+x<Elim ) s2 = s2 + p1*cs2*EXP(-Z-Z)
       fdn = fdn + 8._DP*dfnu + 4._DP
-      p1r = -p1r
-      p1i = -p1i
+      p1 = -p1
       m = N - il + k
-      Yr(m) = s2r*ak1r - s2i*ak1i
-      Yi(m) = s2r*ak1i + s2i*ak1r
+      Y(m) = s2*ak1
     END DO
     IF( N<=2 ) RETURN
     nn = N
     k = nn - 2
     ak = k
-    str = Zr*raz
-    sti = -Zi*raz
-    rzr = (str+str)*raz
-    rzi = (sti+sti)*raz
+    rz = (2._DP,0._DP)/Z
     ib = 3
     DO i = ib, nn
-      Yr(k) = (ak+Fnu)*(rzr*Yr(k+1)-rzi*Yi(k+1)) + Yr(k+2)
-      Yi(k) = (ak+Fnu)*(rzr*Yi(k+1)+rzi*Yr(k+1)) + Yi(k+2)
+      Y(k) = CMPLX(ak+Fnu,0._DP,DP)*rz*Y(k+1) + Y(k+2)
       ak = ak - 1._DP
       k = k - 1
     END DO
     IF( koded==0 ) RETURN
-    CALL ZEXP(czr,czi,ckr,cki)
+    ck = EXP(cz)
     DO i = 1, nn
-      str = Yr(i)*ckr - Yi(i)*cki
-      Yi(i) = Yr(i)*cki + Yi(i)*ckr
-      Yr(i) = str
+      Y(i) = Y(i)*ck
     END DO
     RETURN
   END IF
   100  Nz = -2
+  !
 END SUBROUTINE ZASYI

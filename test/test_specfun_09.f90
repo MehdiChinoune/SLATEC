@@ -63,8 +63,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-    USE slatec, ONLY : ZAIRY, ZBIRY, ZABS, ZSQRT, ZEXP, eps_dp, log10_radix_dp, &
-      min_exp_dp, max_exp_dp
+    USE slatec, ONLY : ZAIRY, ZBIRY, eps_dp, log10_radix_dp, min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -82,12 +81,10 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(DP) :: con1r, con1i, con2r, con2i, con3r, con3i, cvr, &
-      cvi, cwr, cwi, cyr, cyi, wr(20), wi(20), yr(20), yi(20), zr, zi, zrr, zri
-    REAL(DP) :: aa, ab, acw, acy, alim, arg, atol, av, azrr, &
-      a1, a2, ct, c23, dig, elim, eps, er, ertol, &
-      film, fnul, fpi, hpi, pi, pi3, ptr, r, rl, rm, &
-      rpi, rtpi, r1m4, r1m5, slak, spi, st, sti, str, t(20), tol, tpi, tpi3, ts
+    REAL(DP) :: aa, ab, acw, acy, alim, arg, atol, av, azrr, a1, a2, ct, c23, &
+      dig, elim, eps, er, ertol, film, fnul, fpi, hpi, pi, pi3, r, rl, rm, &
+      rpi, rtpi, r1m4, r1m5, slak, spi, st, t(20), tol, tpi, tpi3, ts
+    COMPLEX(DP) :: con1, con2, con3, cv, cw, cy, w(20), y(20), z, zr
     INTEGER :: i, icase, icl, ierr, il, ir, irb, irset, it, itl, k, &
       kdo(20), keps(20), kode, k1, k2, lflg, nz1, nz2, nz3, nz4
     !
@@ -149,12 +146,9 @@ CONTAINS
     rtpi = 1._DP/tpi
     a1 = rtpi*COS(spi)
     a2 = rtpi*SIN(spi)
-    con1r = COS(tpi3)
-    con1i = SIN(tpi3)
-    con2r = a1
-    con2i = -a2
-    con3r = rpi
-    con3i = 0._DP
+    con1 = CMPLX( COS(tpi3), SIN(tpi3), DP)
+    con2 = CMPLX( a1, -a2, DP )
+    con3 = CMPLX( rpi, 0._DP, DP )
     c23 = 2._DP/3._DP
     !-----------------------------------------------------------------------
     !     KDO(K), K = 1,IL  determines which of the IL angles in -PI to PI
@@ -246,13 +240,9 @@ CONTAINS
               st = SIN(t(it))
               IF( ABS(ct)<atol ) ct = 0._DP
               IF( ABS(st)<atol ) st = 0._DP
-              zr = r*ct
-              zi = r*st
-              CALL ZSQRT(zr,zi,str,sti)
-              ptr = (zr*str-zi*sti)*c23
-              zri = (zr*sti+zi*str)*c23
-              zrr = ptr
-              azrr = ABS(zrr)
+              z = r*CMPLX(ct,st,DP)
+              zr = z*SQRT(z)*c23
+              azrr = ABS(REAL(zr,DP))
               !-------------- Check for possible underflow or overflow
               IF( azrr/=0._DP ) THEN
                 arg = -azrr - 0.5_DP*LOG(azrr) + 0.226_DP
@@ -260,12 +250,12 @@ CONTAINS
                 !---------------- Skip test for this case?
                 IF( arg<(-elim) ) CYCLE
               END IF
-              CALL ZAIRY(zr,zi,0,kode,yr(1),yi(1),nz1,ierr)
-              CALL ZAIRY(zr,zi,1,kode,yr(2),yi(2),nz2,ierr)
+              CALL ZAIRY(z,0,kode,y(1),nz1,ierr)
+              CALL ZAIRY(z,1,kode,y(2),nz2,ierr)
               IF( icase==1 ) THEN
                 !---------------- Compare 1/PI with Wronskian of ZAIRY(Z) and ZBIRY(Z).
-                CALL ZBIRY(zr,zi,0,kode,wr(1),wi(1),ierr)
-                CALL ZBIRY(zr,zi,1,kode,wr(2),wi(2),ierr)
+                CALL ZBIRY(z,0,kode,w(1),ierr)
+                CALL ZBIRY(z,1,kode,w(2),ierr)
                 IF( kode==2 ) THEN
                   !-----------------------------------------------------------------------
                   !     When KODE = 2, the scaling factor exp(-zeta1-zeta2) is 1.0 for
@@ -275,59 +265,41 @@ CONTAINS
                   !     square root.
                   !-----------------------------------------------------------------------
                   !------------------ Adjust scaling factor.
-                  cvr = azrr - zrr
-                  cvi = -zri
-                  CALL ZEXP(cvr,cvi,cvr,cvi)
-                  str = wr(1)*cvr - wi(1)*cvi
-                  wi(1) = wr(1)*cvi + wi(1)*cvr
-                  wr(1) = str
-                  str = wr(2)*cvr - wi(2)*cvi
-                  wi(2) = wr(2)*cvi + wi(2)*cvr
-                  wr(2) = str
+                  cv = azrr - zr
+                  cv = EXP(cv)
+                  w(1) = w(1)*cv
+                  w(2) = w(2)*cv
                 END IF
-                cvr = con3r
-                cvi = con3i
+                cv = con3
               ELSE
-                !---------------- Compare exp(-i*PI/6)/2PI with Wronskian of ZAIRY(Z)
+                !-- Compare exp(-i*PI/6)/2PI with Wronskian of ZAIRY(Z)
                 !                 and ZAIRY(Z*exp(2i*PI/3)).
-                cvr = zr*con1r - zi*con1i
-                cvi = zr*con1i + zi*con1r
-                CALL ZAIRY(cvr,cvi,0,kode,wr(1),wi(1),nz3,ierr)
-                CALL ZAIRY(cvr,cvi,1,kode,wr(2),wi(2),nz4,ierr)
+                cv = z*con1
+                CALL ZAIRY(cv,0,kode,w(1),nz3,ierr)
+                CALL ZAIRY(cv,1,kode,w(2),nz4,ierr)
                 IF( kode==2 ) THEN
                   IF( t(it)>=pi3 ) THEN
                     !-------------------- Adjust scaling factor.
-                    cvr = zrr + zrr
-                    cvi = zri + zri
-                    CALL ZEXP(-cvr,-cvi,cvr,cvi)
-                    str = wr(1)*cvr - wi(1)*cvi
-                    wi(1) = wr(1)*cvi + wi(1)*cvr
-                    wr(1) = str
-                    str = wr(2)*cvr - wi(2)*cvi
-                    wi(2) = wr(2)*cvi + wi(2)*cvr
-                    wr(2) = str
+                    cv = 2._DP*zr
+                    cv = EXP(-cv)
+                    w(1) = w(1)*cv
+                    w(2) = w(2)*cv
                   END IF
                 END IF
-                str = wr(2)*con1r - wi(2)*con1i
-                wi(2) = wr(2)*con1i + wi(2)*con1r
-                wr(2) = str
-                cvr = con2r
-                cvi = con2i
+                w(2) = w(2)*con1
+                cv = con2
               END IF
               !-----------------------------------------------------------------------
               !     Error relative to maximum term
               !-----------------------------------------------------------------------
-              av = ZABS(cvr,cvi)
-              cwr = yr(1)*wr(2) - yi(1)*wi(2)
-              cwi = yr(1)*wi(2) + yi(1)*wr(2)
-              cyr = yr(2)*wr(1) - yi(2)*wi(1)
-              cyi = yr(2)*wi(1) + yi(2)*wr(1)
-              cyr = cwr - cyr - cvr
-              cyi = cwi - cyi - cvi
-              acy = ZABS(yr(1),yi(1))*ZABS(wr(2),wi(2))
-              acw = ZABS(wr(1),wi(1))*ZABS(yr(2),yi(2))
+              av = ABS(cv)
+              cw = y(1)*w(2)
+              cy = y(2)*w(1)
+              cy = cw - cy - cv
+              acy = ABS(y(1))*ABS(w(2))
+              acw = ABS(w(1))*ABS(y(2))
               av = MAX(acw,acy,av)
-              er = ZABS(cyr,cyi)/av
+              er = ABS(cy)/av
               IF( er>=ertol ) THEN
                 IF( lflg==0 ) THEN
                   IF( Kprint>=2 ) THEN
@@ -348,21 +320,21 @@ CONTAINS
                 END IF
                 lflg = 1
                 IF( Kprint>=2 ) THEN
-                  WRITE (Lun,99010) zr, zi, er
+                  WRITE (Lun,99010) z, er
                   99010 FORMAT (12X,'INPUT:    Z=',2D12.4,5X,'ERROR:   ER=',D12.4)
                 END IF
                 IF( Kprint>=3 ) THEN
-                  WRITE (Lun,99011) cvr, cvi, cyr, cyi
+                  WRITE (Lun,99011) cv, cy
                   99011 FORMAT (' COMPARISON VALUE:   CV=',2D12.4/8X,&
                     'WRONSKIAN:   CY=',2D12.4)
-                  WRITE (Lun,99012) nz1, yr(1), yi(1), nz2, yr(2), yi(2)
+                  WRITE (Lun,99012) nz1, y(1), nz2, y(2)
                   99012 FORMAT (10X,'RESULTS:  NZ1=',I3,4X,'Y(1)=',2D12.4/20X,&
                     'NZ2=',I3,4X,'Y(2)=',2D12.4)
                   IF( icase==1 ) THEN
-                    WRITE (Lun,99013) wr(1), wi(1), wr(2), wi(2)
+                    WRITE (Lun,99013) w(1), w(2)
                     99013 FORMAT (31X,'W(1)=',2D12.4/31X,'W(2)=',2D12.4)
                   ELSE
-                    WRITE (Lun,99014) nz3, wr(1), wi(1), nz4, wr(2), wi(2)
+                    WRITE (Lun,99014) nz3, w(1), nz4, w(2)
                     99014 FORMAT (20X,'NZ3=',I3,4X,'W(1)=',2D12.4/20X,'NZ4=',I3,4X,&
                       'W(2)=',2D12.4)
                   END IF
@@ -455,8 +427,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-    USE slatec, ONLY : ZBESH, ZUOIK, ZABS, ZDIV, eps_dp, log10_radix_dp, &
-      min_exp_dp, max_exp_dp
+    USE slatec, ONLY : ZBESH, ZUOIK, eps_dp, log10_radix_dp, min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -474,8 +445,7 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(DP) :: cvr, cvi, cwr, cwi, cyr, cyi, wr(20), wi(20), yr(20), yi(20), &
-      zr, zi, znr, zni
+    COMPLEX(DP) :: cv, cw, cy, w(20), y(20), z, zn
     REAL(DP) :: aa, ab, acw, acy, aer(20), alim, atol, av, aw, ay, &
       az, ct, dig, elim, eps, er, ertol, film, fnu, fnul, fpi, hpi, pi, r, rfpi, &
       rl, rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20)
@@ -533,8 +503,7 @@ CONTAINS
     hpi = fpi + fpi
     pi = hpi + hpi
     rfpi = 1._DP/fpi
-    znr = 0._DP
-    zni = -rfpi
+    zn = CMPLX( 0._DP, -rfpi, DP )
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
     !-----------------------------------------------------------------------
@@ -640,55 +609,49 @@ CONTAINS
                 st = SIN(t(it))
                 IF( ABS(ct)<atol ) ct = 0._DP
                 IF( ABS(st)<atol ) st = 0._DP
-                zr = r*ct
-                zi = r*st
+                z = r*CMPLX(ct,st,DP)
                 IF( fnu>=2._DP ) THEN
                   !------------------ Check for possible overflow condition
-                  cvr = -zi
-                  cvi = zr
-                  CALL ZUOIK(cvr,cvi,fnu,kode,2,n1,wr,wi,nz2,tol,elim,alim)
+                  cv = z*(0._DP,1._DP)
+                  CALL ZUOIK(cv,fnu,kode,2,n1,w,nz2,tol,elim,alim)
                   !------------------ Overflow detected? - skip test for this case
                   IF( nz2==(-1) ) CYCLE
-                  cvr = -cvr
-                  cvi = -cvi
-                  CALL ZUOIK(cvr,cvi,fnu,kode,2,n1,wr,wi,nz2,tol,elim,alim)
+                  cv = -cv
+                  CALL ZUOIK(cv,fnu,kode,2,n1,w,nz2,tol,elim,alim)
                   !------------------ Overflow detected? - skip test for this case
                   IF( nz2==(-1) ) CYCLE
                 END IF
                 !---------------- No overflow - calculate H1(Z,FNU) and H2(Z,FNU)
-                CALL ZBESH(zr,zi,fnu,kode,1,n1,yr,yi,nz1,ierr)
+                CALL ZBESH(z,fnu,kode,1,n1,y,nz1,ierr)
                 !---------------- Underflow? - skip test for this case
                 IF( nz1==0 ) THEN
-                  CALL ZBESH(zr,zi,fnu,kode,2,n1,wr,wi,nz2,ierr)
+                  CALL ZBESH(z,fnu,kode,2,n1,w,nz2,ierr)
                   !---------------- Underflow? - skip test for this case
                   IF( nz2==0 ) THEN
-                    !-----------------------------------------------------------------------
-                    !     Compare ZN/Z with the Wronskian of H1(Z,FNU) and H2(Z,FNU).
-                    !     ZN = -4i/PI
-                    !-----------------------------------------------------------------------
-                    CALL ZDIV(znr,zni,zr,zi,cvr,cvi)
+                    !--------------------------------------------------------------
+                    !  Compare ZN/Z with the Wronskian of H1(Z,FNU) and H2(Z,FNU).
+                    !  ZN = -4i/PI
+                    !--------------------------------------------------------------
+                    cv = zn/z
                     mflg = 0
                     DO i = 1, n
-                      !-----------------------------------------------------------------------
+                      !--------------------------------------------------------
                       !     Error relative to maximum term
-                      !-----------------------------------------------------------------------
-                      aw = ZABS(wr(i+1),wi(i+1))
-                      ay = ZABS(yr(i),yi(i))
+                      !--------------------------------------------------------
+                      aw = ABS(w(i+1))
+                      ay = ABS(y(i))
                       az = LOG(aw) + LOG(ay)
                       az = ABS(az)
                       IF( az<=alim ) THEN
                         !-------------------- No scaling problem - do error analysis
-                        av = ZABS(cvr,cvi)
-                        cwr = wr(i)*yr(i+1) - wi(i)*yi(i+1)
-                        cwi = wr(i)*yi(i+1) + wi(i)*yr(i+1)
-                        cyr = wr(i+1)*yr(i) - wi(i+1)*yi(i)
-                        cyi = wr(i+1)*yi(i) + wi(i+1)*yr(i)
-                        cyr = cwr - cyr - cvr
-                        cyi = cwi - cyi - cvi
+                        av = ABS(cv)
+                        cw = w(i)*y(i+1)
+                        cy = w(i+1)*y(i)
+                        cy = cw - cy - cv
                         acy = aw*ay
-                        acw = ZABS(wr(i),wi(i))*ZABS(yr(i+1),yi(i+1))
+                        acw = ABS(w(i))*ABS(y(i+1))
                         av = MAX(acw,acy,av)
-                        er = ZABS(cyr,cyi)/av
+                        er = ABS(cy)/av
                         aer(i) = er
                         IF( er>ertol ) mflg = 1
                       END IF
@@ -715,7 +678,7 @@ CONTAINS
                       END IF
                       lflg = lflg + 1
                       IF( Kprint>=2 ) THEN
-                        WRITE (Lun,99010) zr, zi, fnu, kode, n
+                        WRITE (Lun,99010) z, fnu, kode, n
                         99010 FORMAT ('   INPUT:    Z=',2D12.4,4X,'FNU=',D12.4,4X,&
                           'KODE=',I3,4X,'N=',I3)
                       END IF
@@ -724,7 +687,7 @@ CONTAINS
                         99011 FORMAT ('   ERROR:   AER(K)=',4D12.4)
                         kk = MAX(nz1,nz2) + 1
                         kk = MIN(n,kk)
-                        WRITE (Lun,99012) nz1, yr(kk), yi(kk), nz2, wr(kk), wi(kk)
+                        WRITE (Lun,99012) nz1, y(kk), nz2, w(kk)
                         99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2D12.4/11X,&
                           'NZ2=',I3,4X,'W(KK)=',2D12.4)
                         WRITE (Lun,99013) it, ir, icase
@@ -819,7 +782,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-    USE slatec, ONLY : ZBESI, ZBESK, ZWRSK, ZABS, ZDIV, eps_dp, log10_radix_dp, &
+    USE slatec, ONLY : ZBESI, ZBESK, ZWRSK, eps_dp, log10_radix_dp, &
       min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
@@ -838,12 +801,10 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(DP) :: ckr(20), cki(20), coner, conei, csgnr, csgni, cwr, cwi, &
-      cyr, cyi, wr(20), wi(20), yr(20), yi(20), zr, zi, znr, zni, ztr, zti
-    REAL(DP) :: aa, ab, aer(20), alim, arg, atol, aw, carg, ct, &
-      dig, elim, eps, er, ertol, film, fnu, fnul, gnu, &
-      hpi, pi, r, rl, rlt, rm, r1, r1m4, r1m5, r2, &
-      sarg, slak, st, sti, str, t(20), tol, ts, zscr, zzr
+    COMPLEX(DP) :: ck(20), csgn, cw, cy, w(20), y(20), z, zn, zt
+    REAL(DP) :: aa, ab, aer(20), alim, arg, atol, aw, carg, ct, dig, elim, eps, &
+      er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, rlt, rm, r1, r1m4, r1m5, &
+      r2, sarg, slak, st, t(20), tol, ts, zscr, zzr
     INTEGER :: i, icase, ierr, il, inu, iprnt, ir, it, itl, k, kdo(20), &
       keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nzi, nzk, nz1, nz2, n1
     !
@@ -887,8 +848,8 @@ CONTAINS
     r1 = 2._DP*SQRT(fnul+1._DP)
     IF( Kprint>=2 ) THEN
       WRITE (Lun,99002)
-      99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
-        8X,'DIG')
+      99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,&
+        'FNUL',8X,'DIG')
       WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
       99003 FORMAT (1X,6D12.4/)
     END IF
@@ -896,8 +857,6 @@ CONTAINS
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
     zzr = 1._DP/tol
-    coner = 1._DP
-    conei = 0._DP
     hpi = 2._DP*ATAN(1._DP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
@@ -1010,73 +969,58 @@ CONTAINS
               st = SIN(t(it))
               IF( ABS(ct)<atol ) ct = 0._DP
               IF( ABS(st)<atol ) st = 0._DP
-              zr = r*ct
-              zi = r*st
-              CALL ZBESI(zr,zi,fnu,kode,n1,yr,yi,nz1,ierr)
+              z = r*CMPLX(ct,st,DP)
+              CALL ZBESI(z,fnu,kode,n1,y,nz1,ierr)
               IF( nz1==0 ) THEN
                 !-----------------------------------------------------------------------
                 !     Compare values from ZBESI with values from ZWRSK, an alternative
                 !     method for calculating the complex Bessel I function.
                 !-----------------------------------------------------------------------
-                znr = zr
-                zni = zi
-                IF( zr>=0._DP ) THEN
-                  CALL ZWRSK(znr,zni,fnu,kode,n,wr,wi,nz2,ckr,cki,tol,elim,alim)
+                zn = z
+                IF( REAL(z,DP)>=0._DP ) THEN
+                  CALL ZWRSK(zn,fnu,kode,n,w,nz2,ck,tol,elim,alim)
                   IF( nz2/=0 ) CYCLE
                 ELSE
-                  znr = -zr
-                  zni = -zi
+                  zn = -z
                   inu = INT(fnu)
                   arg = (fnu-inu)*pi
-                  IF( zi<0._DP ) arg = -arg
+                  IF( AIMAG(z)<0._DP ) arg = -arg
                   carg = COS(arg)
                   sarg = SIN(arg)
-                  csgnr = carg
-                  csgni = sarg
+                  csgn = CMPLX(carg,sarg,DP)
                   IF( MOD(inu,2)==1 ) THEN
-                    csgnr = -csgnr
-                    csgni = -csgni
+                    csgn = -csgn
                   END IF
-                  CALL ZWRSK(znr,zni,fnu,kode,n,wr,wi,nz2,ckr,cki,tol,elim,alim)
+                  CALL ZWRSK(zn,fnu,kode,n,w,nz2,ck,tol,elim,alim)
                   IF( nz2/=0 ) CYCLE
                   DO i = 1, n
-                    str = wr(i)*csgnr - wi(i)*csgni
-                    wi(i) = wr(i)*csgni + wi(i)*csgnr
-                    wr(i) = str
-                    csgnr = -csgnr
-                    csgni = -csgni
+                    w(i) = w(i)*csgn
+                    csgn = -csgn
                   END DO
                 END IF
                 mflg = 0
                 DO i = 1, n
                   ab = fnu + i - 1
                   aa = MAX(2._DP,ab)
-                  ztr = wr(i)
-                  zti = wi(i)
-                  IF( ABS(ztr)>1._DP .OR. ABS(zti)>1._DP ) THEN
+                  zt = w(i)
+                  IF( ABS(REAL(zt,DP))>1._DP .OR. ABS(AIMAG(zt))>1._DP ) THEN
                     zscr = tol
                   ELSE
                     zscr = zzr
                     !------------------ ZZR = 1._DP/TOL
                   END IF
-                  cwr = wr(i)*zscr
-                  cwi = wi(i)*zscr
-                  cyr = yr(i)*zscr
-                  cyi = yi(i)*zscr
-                  str = cyr - cwr
-                  sti = cyi - cwi
-                  er = ZABS(str,sti)
-                  aw = ZABS(cwr,cwi)
+                  cw = w(i)*zscr
+                  cy = y(i)*zscr
+                  er = ABS(cy-cw)
+                  aw = ABS(cw)
                   IF( aw==0._DP ) THEN
-                    er = ZABS(yr(i),yi(i))
-                  ELSEIF( zr/=0._DP ) THEN
+                    er = ABS(y(i))
+                  ELSEIF( REAL(z,DP)/=0._DP ) THEN
                     er = er/aw
-                  ELSEIF( ABS(zi)<aa ) THEN
+                  ELSEIF( ABS(AIMAG(z))<aa ) THEN
                     er = er/aw
                   ELSE
-                    str = yr(i) - wr(i)
-                    sti = yi(i) - wi(i)
-                    er = ZABS(str,sti)
+                    er = ABS(y(i)-w(i))
                   END IF
                   aer(i) = er
                   IF( er>ertol ) mflg = 1
@@ -1106,7 +1050,7 @@ CONTAINS
                   END IF
                   lflg = lflg + 1
                   IF( Kprint>=2 ) THEN
-                    WRITE (Lun,99010) zr, zi, fnu, kode, n
+                    WRITE (Lun,99010) z, fnu, kode, n
                     99010 FORMAT ('   INPUT:    Z=',2D12.4,4X,'FNU=',D12.4,4X,&
                       'KODE=',I3,4X,'N=',I3)
                   END IF
@@ -1115,7 +1059,7 @@ CONTAINS
                     99011 FORMAT ('   ERROR:  AER(K)=',4D12.4)
                     kk = MAX(nz1,nz2) + 1
                     kk = MIN(n,kk)
-                    WRITE (Lun,99012) nz1, yr(kk), yi(kk), nz2, wr(kk), wi(kk)
+                    WRITE (Lun,99012) nz1, y(kk), nz2, w(kk)
                     99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2D12.4,/11X,&
                       'NZ2=',I3,4X,'W(KK)=',2D12.4)
                     WRITE (Lun,99013) it, ir, icase
@@ -1152,8 +1096,7 @@ CONTAINS
         WRITE (Lun,99015)
         99015 FORMAT (/' CHECKS NEAR UNDERFLOW AND OVERFLOW LIMITS'/)
       END IF
-      zr = 1.4_DP
-      zi = 1.4_DP
+      z = CMPLX(1.4_DP,1.4_DP,DP)
       kode = 1
       n = 20
       DO i = 1, 2
@@ -1162,7 +1105,7 @@ CONTAINS
           !-----------------------------------------------------------------------
           !       Adjust FNU by repeating until 0<NZI<10
           !-----------------------------------------------------------------------
-          CALL ZBESI(zr,zi,fnu,kode,n,yr,yi,nzi,ierr)
+          CALL ZBESI(z,fnu,kode,n,y,nzi,ierr)
           IF( nzi==0 ) THEN
             fnu = fnu + 5._DP
             CYCLE
@@ -1171,15 +1114,12 @@ CONTAINS
             CYCLE
           END IF
           !------ End repeat
-          CALL ZBESK(zr,zi,fnu,kode,2,wr,wi,nzk,ierr)
-          CALL ZDIV(coner,conei,zr,zi,ztr,zti)
-          cyr = wr(1)*yr(2) - wi(1)*yi(2)
-          cyi = wr(1)*yi(2) + wi(1)*yr(2)
-          cwr = wr(2)*yr(1) - wi(2)*yi(1)
-          cwi = wr(2)*yi(1) + wi(2)*yr(1)
-          cwr = cwr + cyr - ztr
-          cwi = cwi + cyi - zti
-          er = ZABS(cwr,cwi)/ZABS(ztr,zti)
+          CALL ZBESK(z,fnu,kode,2,w,nzk,ierr)
+          zt = (1._DP,0._DP)/z
+          cy = w(1)*y(2)
+          cw = w(2)*y(1)
+          cw = cw + cy - zt
+          er = ABS(cw)/ABS(zt)
           !-----------------------------------------------------------------------
           !     Write failure reports for KPRINT>=2 and KPRINT>=3
           !-----------------------------------------------------------------------
@@ -1189,15 +1129,14 @@ CONTAINS
               IF( Kprint>=3 ) WRITE (Lun,99021)
             END IF
             iprnt = 1
-            IF( Kprint>=2 ) WRITE (Lun,99022) zr, zi, fnu, kode, n
+            IF( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
             IF( Kprint>=3 ) THEN
-              WRITE (Lun,99023) ztr, zti, cwr + cyr, cwi + cyi
+              WRITE (Lun,99023) zt, cw+cy
               WRITE (Lun,99024) er
             END IF
           END IF
           rlt = rl + rl
-          zr = rlt
-          zi = 0._DP
+          z = CMPLX(rlt,0._DP,DP)
           EXIT
         END DO
       END DO
@@ -1206,15 +1145,14 @@ CONTAINS
       !     Compare 1/Z with I(Z,FNU)*K(Z,FNU+1) + I(Z,FNU+1)*K(Z,FNU) and
       !     report cases for which the relative error is greater than ERTOL.
       !-----------------------------------------------------------------------
-      zr = elim
-      zi = 0._DP
+      z = CMPLX(elim,0._DP,DP)
       fnu = 0._DP
       DO
         !-----------------------------------------------------------------------
         !     Adjust FNU by repeating until NZK<10
         !     N = 20 set before DO 280 loop
         !-----------------------------------------------------------------------
-        CALL ZBESK(zr,zi,fnu,kode,n,yr,yi,nzk,ierr)
+        CALL ZBESK(z,fnu,kode,n,y,nzk,ierr)
         IF( nzk>=10 ) THEN
           IF( nzk==n ) THEN
             fnu = fnu + 3._DP
@@ -1225,24 +1163,21 @@ CONTAINS
         END IF
         !---- End repeat
         gnu = fnu + (n-2)
-        CALL ZBESI(zr,zi,gnu,kode,2,wr,wi,nzi,ierr)
-        CALL ZDIV(coner,conei,zr,zi,ztr,zti)
-        cyr = yr(n-1)*wr(2) - yi(n-1)*wi(2)
-        cyi = yr(n-1)*wi(2) + yi(n-1)*wr(2)
-        cwr = yr(n)*wr(1) - yi(n)*wi(1)
-        cwi = yr(n)*wi(1) + yi(n)*wr(1)
-        cwr = cwr + cyr - ztr
-        cwi = cwi + cyi - zti
-        er = ZABS(cwr,cwi)/ZABS(ztr,zti)
+        CALL ZBESI(z,gnu,kode,2,w,nzi,ierr)
+        zt = (1._DP,0._DP)/z
+        cy = y(n-1)*w(2)
+        cw = y(n)*w(1)
+        cw = cw + cy -zt
+        er = ABS(cw)/ABS(zt)
         IF( er>=ertol ) THEN
           IF( iprnt==0 ) THEN
             IF( Kprint>=2 ) WRITE (Lun,99020)
             IF( Kprint>=3 ) WRITE (Lun,99021)
           END IF
           iprnt = 1
-          IF( Kprint>=2 ) WRITE (Lun,99022) zr, zi, fnu, kode, n
+          IF( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
           IF( Kprint>=3 ) THEN
-            WRITE (Lun,99023) ztr, zti, cwr + cyr, cwi + cyi
+            WRITE (Lun,99023) zt, cw+cy
             WRITE (Lun,99024) er
           END IF
         END IF
@@ -1343,7 +1278,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL statement.  (RWC)
-    USE slatec, ONLY : ZBESH, ZBESJ, ZABS, ZEXP, eps_dp, log10_radix_dp, &
+    USE slatec, ONLY : ZBESH, ZBESJ, eps_dp, log10_radix_dp, &
       min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
@@ -1362,11 +1297,10 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(DP) :: coe1r, coe1i, coe2r, coe2i, cwr, cwi, halfr, &
-      halfi, vr(20), vi(20), wr(20), wi(20), yr(20), yi(20), zr, zi
-    REAL(DP) :: aa, ab, aer(20), ai, alim, ar, atol, av, cc, ct, &
-      dd, dig, elim, eps, er, ertol, film, fnu, fnul, &
-      gnu, hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, st, str, t(20), tol, ts, xnu(20)
+    COMPLEX(DP) :: coe1, coe2, cw, half, v(20), w(20), y(20), z, a
+    REAL(DP) :: aa, ab, aer(20), alim, atol, av, cc, ct, dd, dig, elim, eps, er, &
+      ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, st, &
+      t(20), tol, ts, xnu(20)
     INTEGER :: i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
       kk, kode, k1, k2, lflg, m, mflg, n, nl, nu, nul, nz, nz1, nz2
     !
@@ -1417,8 +1351,7 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    halfr = 0.5_DP
-    halfi = 0._DP
+    half = CMPLX(0.5_DP,0._DP,DP)
     hpi = 2._DP*ATAN(1._DP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
@@ -1526,54 +1459,44 @@ CONTAINS
                 st = SIN(t(it))
                 IF( ABS(ct)<atol ) ct = 0._DP
                 IF( ABS(st)<atol ) st = 0._DP
-                zr = r*ct
-                zi = r*st
+                z = r*CMPLX(ct,st,DP)
                 IF( r>=gnu ) THEN
                   !------------------ Cases for abs(Z)>=FNU+N-1
-                  CALL ZBESJ(zr,zi,fnu,kode,n,vr,vi,nz,ierr)
+                  CALL ZBESJ(z,fnu,kode,n,v,nz,ierr)
                   !------------------ Underflow - skip test for this case.
                   IF( nz/=0 ) CYCLE
-                  CALL ZBESH(zr,zi,fnu,kode,1,n,wr,wi,nz1,ierr)
-                  CALL ZBESH(zr,zi,fnu,kode,2,n,yr,yi,nz2,ierr)
+                  CALL ZBESH(z,fnu,kode,1,n,w,nz1,ierr)
+                  CALL ZBESH(z,fnu,kode,2,n,y,nz2,ierr)
                   IF( kode==2 ) THEN
                     !-------------------- Adjust scaling of H functions.
-                    cc = -zi - ABS(zi)
+                    cc = -AIMAG(z) - ABS(AIMAG(z))
                     IF( cc>(-alim) ) THEN
-                      cwr = cc
-                      cwi = zr
-                      CALL ZEXP(cwr,cwi,coe1r,coe1i)
+                      cw = CMPLX( cc, REAL(z,DP), DP )
+                      coe1 = EXP(cw)
                     ELSE
-                      coe1r = 0._DP
-                      coe1i = 0._DP
+                      coe1 = (0._DP,0._DP)
                     END IF
-                    dd = zi - ABS(zi)
+                    dd = AIMAG(z) - ABS(AIMAG(z))
                     IF( dd>(-alim) ) THEN
-                      cwr = dd
-                      cwi = -zr
-                      CALL ZEXP(cwr,cwi,coe2r,coe2i)
+                      cw = CMPLX(dd,-REAL(z,DP),DP)
+                      coe2 = EXP(cw)
                     ELSE
-                      coe2r = 0._DP
-                      coe2i = 0._DP
+                      coe2 = (0._DP,0._DP)
                     END IF
                     DO kk = 1, n
-                      str = yr(kk)*coe2r - yi(kk)*coe2i
-                      yi(kk) = yr(kk)*coe2i + yi(kk)*coe2r
-                      yr(kk) = str
-                      str = wr(kk)*coe1r - wi(kk)*coe1i
-                      wi(kk) = wr(kk)*coe1i + wi(kk)*coe1r
-                      wr(kk) = str
+                      y(kk) = y(kk)*coe2
+                      w(kk) = w(kk)*coe1
                     END DO
                   END IF
                 ELSE
                   !------------------ Cases for abs(Z)<FNU+N-1
                   m = n + 16
-                  CALL ZBESJ(zr,zi,fnu,kode,m,vr,vi,nz,ierr)
+                  CALL ZBESJ(z,fnu,kode,m,v,nz,ierr)
                   !------------------ Underflow at end of sequence - skip test
                   IF( nz>10 ) CYCLE
-                  CALL ZBESJ(zr,zi,fnu,kode,n,wr,wi,nz,ierr)
+                  CALL ZBESJ(z,fnu,kode,n,w,nz,ierr)
                   DO kk = 1, n
-                    yr(kk) = wr(kk)
-                    yi(kk) = wi(kk)
+                    y(kk) = w(kk)
                   END DO
                 END IF
                 !-----------------------------------------------------------------------
@@ -1588,15 +1511,13 @@ CONTAINS
                 DO i = 1, n
                   ab = fnu + i - 1
                   aa = MAX(2._DP,ab)
-                  cwr = (wr(i)+yr(i))*halfr - (wi(i)+yi(i))*halfi
-                  cwi = (wr(i)+yr(i))*halfi + (wi(i)+yi(i))*halfr
-                  av = ZABS(vr(i),vi(i))
-                  ar = cwr - vr(i)
-                  ai = cwi - vi(i)
-                  er = ZABS(ar,ai)
+                  cw = (w(i)+y(i))*half
+                  av = ABS(v(i))
+                  a = cw - v(i)
+                  er = ABS(a)
                   IF( av/=0._DP ) THEN
-                    IF( zi==0._DP ) THEN
-                      IF( ABS(zr)<aa ) er = er/av
+                    IF( AIMAG(z)==0._DP ) THEN
+                      IF( ABS(REAL(z))<aa ) er = er/av
                     ELSE
                       er = er/av
                     END IF
@@ -1634,7 +1555,7 @@ CONTAINS
                   END IF
                   lflg = lflg + 1
                   IF( Kprint>=2 ) THEN
-                    WRITE (Lun,99013) zr, zi, fnu, kode, n
+                    WRITE (Lun,99013) z, fnu, kode, n
                     99013 FORMAT ('   INPUT:   Z=',2D12.4,3X,'FNU=',D12.4,3X,&
                       'KODE=',I3,3X,'N=',I3)
                   END IF
@@ -1644,15 +1565,15 @@ CONTAINS
                     IF( r>=gnu ) THEN
                       kk = MAX(nz1,nz2) + 1
                       kk = MIN(n,kk)
-                      WRITE (Lun,99015) nz, vr(kk), vi(kk)
+                      WRITE (Lun,99015) nz, v(kk)
                       99015 FORMAT (' RESULTS:   NZ=',I3,3X,'V(KK)=',2D12.4)
-                      WRITE (Lun,99016) nz1, wr(kk), wi(kk)
+                      WRITE (Lun,99016) nz1, w(kk)
                       99016 FORMAT (' RESULTS:  NZ1=',I3,3X,'W(KK)=',2D12.4)
-                      WRITE (Lun,99017) nz2, yr(kk), yi(kk)
+                      WRITE (Lun,99017) nz2, y(kk)
                       99017 FORMAT (' RESULTS:  NZ2=',I3,3X,'Y(KK)=',2D12.4)
                     ELSE
                       kk = n - nz
-                      WRITE (Lun,99018) nz, wr(kk), wi(kk)
+                      WRITE (Lun,99018) nz, w(kk)
                       99018 FORMAT (' RESULTS:   NZ=',I3,3X,'W(KK)=',2D12.4)
                     END IF
                     WRITE (Lun,99019) ir, it, icase
@@ -1745,7 +1666,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standard
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-    USE slatec, ONLY : ZBESI, ZBESK, ZABS, ZDIV, ZEXP, eps_dp, log10_radix_dp, &
+    USE slatec, ONLY : ZBESI, ZBESK, eps_dp, log10_radix_dp, &
       min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
@@ -1764,11 +1685,10 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(DP) :: coner, conei, csgnr, csgni, cvr, cvi, cwr, cwi, &
-      cyr, cyi, wr(20), wi(20), yr(20), yi(20), zr, zi, znr, zni
-    REAL(DP) :: aa, ab, aer(20), alim, arg, atol, axx, ct, dig, &
-      elim, eps, er, ertol, ffnu, film, fnu, fnul, &
-      hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, st, sti, str, t(20), tol, ts, xnu(20)
+    COMPLEX(DP) :: csgn, cv, cw, cy, w(20), y(20), z, zn, stt
+    REAL(DP) :: aa, ab, aer(20), alim, arg, atol, axx, ct, dig, elim, eps, er, &
+      ertol, ffnu, film, fnu, fnul, hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, &
+      st, t(20), tol, ts, xnu(20)
     INTEGER :: i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo(20), &
       keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, nz2, n1
     !
@@ -1819,8 +1739,6 @@ CONTAINS
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
     !-----------------------------------------------------------------------
-    coner = 1._DP
-    conei = 0._DP
     hpi = 2._DP*ATAN(1._DP)
     pi = hpi + hpi
     !-----------------------------------------------------------------------
@@ -1912,11 +1830,9 @@ CONTAINS
           ifnu = INT(fnu)
           ffnu = fnu - ifnu
           arg = pi*ffnu
-          csgnr = COS(arg)
-          csgni = SIN(arg)
+          csgn = CMPLX(COS(arg),SIN(arg),DP)
           IF( MOD(ifnu,2)==1 ) THEN
-            csgnr = -csgnr
-            csgni = -csgni
+            csgn = -csgn
           END IF
           DO icase = 1, 3
             irb = MIN(2,icase)
@@ -1937,9 +1853,8 @@ CONTAINS
                 st = SIN(t(it))
                 IF( ABS(ct)<atol ) ct = 0._DP
                 IF( ABS(st)<atol ) st = 0._DP
-                zr = r*ct
-                zi = r*st
-                CALL ZBESI(zr,zi,fnu,kode,n1,wr,wi,nz2,ierr)
+                z = r*CMPLX(ct,st,DP)
+                CALL ZBESI(z,fnu,kode,n1,w,nz2,ierr)
                 !---------------- Underflow? - skip test for this case.
                 IF( nz2==0 ) THEN
                   !-----------------------------------------------------------------------
@@ -1951,55 +1866,43 @@ CONTAINS
                   !-----------------------------------------------------------------------
                   IF( icase==1 .OR. ct>=0._DP ) THEN
                     !------------------ Z is in the right half plane
-                    CALL ZBESK(zr,zi,fnu,kode,n1,yr,yi,nz1,ierr)
-                    CALL ZDIV(coner,conei,zr,zi,cvr,cvi)
+                    CALL ZBESK(z,fnu,kode,n1,y,nz1,ierr)
+                    cv = (1._DP,0._DP)/z
                     IF( kode==2 ) THEN
                       !-------------------- Adjust Wronskian due to scaled I and K functions
-                      axx = ABS(zr)
-                      znr = -axx
-                      zni = 0._DP
-                      cvr = znr + zr
-                      cvi = zni + zi
-                      CALL ZEXP(cvr,cvi,str,sti)
-                      CALL ZDIV(str,sti,zr,zi,cvr,cvi)
+                      axx = ABS(REAL(z,DP))
+                      zn = CMPLX(-axx,0._DP,DP)
+                      cv = zn + z
+                      stt = EXP(cv)
+                      cv = stt/z
                     END IF
                   ELSE
                     !------------------ Z is in the left half plane
-                    znr = -zr
-                    zni = -zi
-                    CALL ZBESK(znr,zni,fnu,kode,n1,yr,yi,nz1,ierr)
-                    znr = csgnr
-                    zni = csgni
+                    zn = -z
+                    CALL ZBESK(zn,fnu,kode,n1,y,nz1,ierr)
+                    zn = csgn
                     !------------------ CSGNR and CSGNI set near top of DO 180 loop
-                    IF( st>0._DP .OR. (st==0._DP .AND. ct<0._DP) ) zni = -zni
+                    IF( st>0._DP .OR. (st==0._DP .AND. ct<0._DP) ) zn = CONJG(zn)
                     DO kk = 1, n1
-                      str = yr(kk)*znr - yi(kk)*zni
-                      yi(kk) = yr(kk)*zni + yi(kk)*znr
-                      yr(kk) = str
-                      znr = -znr
-                      zni = -zni
+                      y(kk) = y(kk)*zn
+                      zn = -zn
                     END DO
-                    CALL ZDIV(coner,conei,zr,zi,cvr,cvi)
+                    cv = (1._DP,0._DP)/z
                     IF( kode==2 ) THEN
                       !-------------------- Adjust Wronskian due to scaled I and K functions
-                      axx = ABS(zr)
-                      znr = -axx
-                      zni = 0._DP
-                      cvr = znr - zr
-                      cvi = zni - zi
-                      CALL ZEXP(cvr,cvi,str,sti)
-                      CALL ZDIV(str,sti,zr,zi,cvr,cvi)
+                      axx = ABS(REAL(z,DP))
+                      zn = CMPLX(-axx,0._DP,DP)
+                      cv = zn - z
+                      stt = EXP(cv)
+                      cv = stt/z
                     END IF
                   END IF
                   mflg = 0
                   DO i = 1, n
-                    cwr = wr(i)*yr(i+1) - wi(i)*yi(i+1)
-                    cwi = wr(i)*yi(i+1) + wi(i)*yr(i+1)
-                    cyr = wr(i+1)*yr(i) - wi(i+1)*yi(i)
-                    cyi = wr(i+1)*yi(i) + wi(i+1)*yr(i)
-                    cyr = cyr + cwr - cvr
-                    cyi = cyi + cwi - cvi
-                    er = ZABS(cyr,cyi)/ZABS(cvr,cvi)
+                    cw = w(i)*y(i+1)
+                    cy = w(i+1)*y(i)
+                    cy = cy + cw - cv
+                    er = ABS(cy)/ABS(cv)
                     aer(i) = er
                     IF( er>ertol ) mflg = 1
                   END DO
@@ -2025,7 +1928,7 @@ CONTAINS
                     END IF
                     lflg = lflg + 1
                     IF( Kprint>=2 ) THEN
-                      WRITE (Lun,99010) zr, zi, fnu, kode, n
+                      WRITE (Lun,99010) z, fnu, kode, n
                       99010 FORMAT ('   INPUT:    Z=',2D12.4,4X,'FNU=',D12.4,4X,&
                         'KODE=',I3,4X,'N=',I3)
                     END IF
@@ -2034,7 +1937,7 @@ CONTAINS
                       99011 FORMAT ('   ERROR:  AER(K)=',4D12.4)
                       kk = MAX(nz1,nz2) + 1
                       kk = MIN(n,kk)
-                      WRITE (Lun,99012) nz1, yr(kk), yi(kk), nz2, wr(kk), wi(kk)
+                      WRITE (Lun,99012) nz1, y(kk), nz2, w(kk)
                       99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2D12.4,/11X,&
                         'NZ2=',I3,4X,'W(KK)=',2D12.4)
                       WRITE (Lun,99013) it, ir, icase
@@ -2133,7 +2036,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-    USE slatec, ONLY : ZBESI, ZBESK, ZBESY, ZABS, ZEXP, eps_dp, log10_radix_dp, &
+    USE slatec, ONLY : ZBESI, ZBESK, ZBESY, eps_dp, log10_radix_dp, &
       min_exp_dp, max_exp_dp
     !
     !*Internal Notes:
@@ -2151,17 +2054,16 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(DP) :: coe1r, coe1i, coe2r, coe2i, csgnr, csgni, cspnr, cspni, cwr, &
-      cwi, cwrkr(20), cwrki(20), vr(20), vi(20), wr(20), wi(20), yr(20), yi(20), &
-      zr, zi, znr, zni
-    REAL(DP) :: aa, ab, aer(20), ai, alim, ar, arg, atol, av, cc, &
+    COMPLEX(DP) :: coe1, coe2, csgn, cspn, cw, cwrk(20), v(20), w(20), y(20), z, &
+      zn, stt, a
+    REAL(DP) :: aa, ab, aer(20), alim, arg, atol, av, cc, &
       ct, dig, elim, eps, er, ertol, ffnu, film, fnu, &
-      fnul, hpi, pi, ptr, r, rhpi, rl, rm, r1m4, &
-      r1m5, r2, slak, st, sti, str, t(20), tol, ts, xnu(20)
+      fnul, hpi, pi, r, rhpi, rl, rm, r1m4, &
+      r1m5, r2, slak, st, t(20), tol, ts, xnu(20)
     INTEGER :: i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
       kdo(20), keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz, nz1, nz2
-    REAL(DP), PARAMETER :: cipr(4) = [ 1._DP, 0._DP, -1._DP, 0._DP ]
-    REAL(DP), PARAMETER :: cipi(4) = [ 0._DP, 1._DP, 0._DP, -1._DP ]
+    COMPLEX(DP), PARAMETER :: cip(4) = [ (1._DP,0._DP), (0._DP,1._DP), &
+      (-1._DP,0._DP), (0._DP,-1._DP) ]
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCBY
     IF( Kprint>=2 ) THEN
@@ -2307,18 +2209,12 @@ CONTAINS
           ifnu = INT(fnu)
           ffnu = fnu - ifnu
           arg = hpi*ffnu
-          csgnr = COS(arg)
-          csgni = SIN(arg)
+          csgn = CMPLX( COS(arg), SIN(arg), DP )
           i4 = MOD(ifnu,4) + 1
-          str = csgnr*cipr(i4) - csgni*cipi(i4)
-          csgni = csgnr*cipi(i4) + csgni*cipr(i4)
-          csgnr = str
-          cspnr = csgnr*rhpi
-          cspni = -csgni*rhpi
+          csgn = csgn*cip(i4)
+          cspn = CONJG(csgn)*rhpi
           !---------- CSGN=CSGN*CI in CQCBY
-          str = -csgni
-          csgni = csgnr
-          csgnr = str
+          csgn = (0._DP,1._DP)*csgn
           DO icase = 1, 3
             irb = MIN(2,icase)
             DO ir = irb, 4
@@ -2338,74 +2234,56 @@ CONTAINS
                 st = SIN(t(it))
                 IF( ABS(ct)<atol ) ct = 0._DP
                 IF( ABS(st)<atol ) st = 0._DP
-                zr = r*ct
-                zi = r*st
-                CALL ZBESI(zr,zi,fnu,kode,n,wr,wi,nz2,ierr)
+                z = r*CMPLX(ct,st,DP)
+                CALL ZBESI(z,fnu,kode,n,w,nz2,ierr)
                 !---------------- Underflow in ZBESI - skip test for this case.
                 IF( nz2==0 ) THEN
-                  CALL ZBESK(zr,zi,fnu,kode,n,yr,yi,nz1,ierr)
+                  CALL ZBESK(z,fnu,kode,n,y,nz1,ierr)
                   !---------------- Underflow in ZBESK - skip test for this case.
                   IF( nz1==0 ) THEN
-                    znr = -zi
-                    zni = zr
-                    CALL ZBESY(znr,zni,fnu,kode,n,vr,vi,nz,cwrkr,cwrki,ierr)
+                    zn = (0._DP,1._DP)*z
+                    CALL ZBESY(zn,fnu,kode,n,v,nz,cwrk,ierr)
                     !---------------- Underflow in ZBESY - skip test for this case.
                     IF( nz==0 ) THEN
-                      coe1r = csgnr
-                      coe1i = csgni
-                      coe2r = cspnr
-                      coe2i = cspni
+                      coe1 = csgn
+                      coe2 = cspn
                       IF( kode==2 ) THEN
                         !------------------ Adjust scale for I and K functions.
-                        cc = -zr - ABS(zr)
+                        cc = -REAL(z,DP) - ABS(REAL(z,DP))
                         IF( cc>(-alim) ) THEN
-                          znr = cc
-                          zni = -zi
-                          CALL ZEXP(znr,zni,str,sti)
-                          ptr = str*coe2r - sti*coe2i
-                          coe2i = str*coe2i + sti*coe2r
-                          coe2r = ptr
+                          zn = CMPLX( cc, -AIMAG(z), DP )
+                          stt = EXP(zn)
+                          coe2 = stt*coe2
                         ELSE
                           !-------------------- Scaling problem - skip test for this case
-                          coe2r = 0._DP
-                          coe2i = 0._DP
+                          coe2 = (0._DP,0._DP)
                           CYCLE
                         END IF
                       END IF
                       DO kk = 1, n
-                        str = yr(kk)*coe2r - yi(kk)*coe2i
-                        yi(kk) = yr(kk)*coe2i + yi(kk)*coe2r
-                        yr(kk) = str
-                        str = wr(kk)*coe1r - wi(kk)*coe1i
-                        wi(kk) = wr(kk)*coe1i + wi(kk)*coe1r
-                        wr(kk) = str
-                        str = -coe1i
-                        coe1i = coe1r
-                        coe1r = str
-                        str = coe2i
-                        coe2i = -coe2r
-                        coe2r = str
+                        y(kk) = y(kk)*coe2
+                        w(kk) = w(kk)*coe1
+                        coe1 = (0._DP,1._DP)*coe1
+                        coe2 = (0._DP,-1._DP)*coe2
                       END DO
-                      !-----------------------------------------------------------------------
+                      !---------------------------------------------------------
                       !     Compare Y(ZN,FNU) with COE1*I(Z,FNU)-COE2*K(Z,FNU).
-                      !-----------------------------------------------------------------------
+                      !---------------------------------------------------------
                       mflg = 0
                       DO i = 1, n
                         ab = fnu + i - 1
                         aa = MAX(0.5_DP,ab)
-                        cwr = wr(i) - yr(i)
-                        cwi = wi(i) - yi(i)
-                        av = ZABS(vr(i),vi(i))
-                        ar = cwr - vr(i)
-                        ai = cwi - vi(i)
-                        er = ZABS(ar,ai)
+                        cw = w(i) - y(i)
+                        av = ABS(v(i))
+                        a = cw - v(i)
+                        er = ABS(a)
                         IF( av/=0._DP ) THEN
-                          IF( zni/=0._DP ) THEN
+                          IF( AIMAG(zn)/=0._DP ) THEN
                             er = er/av
-                          ELSEIF( znr>0._DP ) THEN
-                            IF( ABS(znr)<aa ) er = er/av
+                          ELSEIF( REAL(zn,DP)>0._DP ) THEN
+                            IF( ABS(REAL(zn,DP))<aa ) er = er/av
                           ELSEIF( ABS(ffnu-0.5_DP)<0.125_DP ) THEN
-                            IF( ABS(znr)<aa ) er = er/av
+                            IF( ABS(REAL(zn,DP))<aa ) er = er/av
                           ELSE
                             er = er/av
                           END IF
@@ -2440,20 +2318,19 @@ CONTAINS
                         END IF
                         lflg = lflg + 1
                         IF( Kprint>=2 ) THEN
-                          WRITE (Lun,99011) znr, zni, fnu, kode, n
+                          WRITE (Lun,99011) zn, fnu, kode, n
                           99011 FORMAT ('   INPUT:   ZN=',2D12.4,3X,'FNU=',D12.4,3X,&
                             'KODE=',I3,3X,'N=',I3)
                         END IF
                         IF( Kprint>=3 ) THEN
                           WRITE (Lun,99012) (aer(k),k=1,n)
                           99012 FORMAT ('   ERROR:   AER(K)=',4D12.4)
-                          WRITE (Lun,99013) zr, zi, coe1r, coe1i, coe2r, coe2r
+                          WRITE (Lun,99013) z, coe1, coe2
                           99013 FORMAT (12X,'Z=',2D12.4/12X,'COE1=',2D12.4,3X,&
                             'COE2=',2D12.4)
                           kk = MAX(nz1,nz2) + 1
                           kk = MIN(n,kk)
-                          WRITE (Lun,99014) vr(kk), vi(kk), wr(kk), wi(kk)&
-                            , yr(kk), yi(kk)
+                          WRITE (Lun,99014) v(kk), w(kk), y(kk)
                           99014 FORMAT (' RESULTS:   V(KK)=',2D12.4/12X,'W(KK)=',&
                             2D12.4/12X,'Y(KK)=',2D12.4)
                           WRITE (Lun,99015) ir, it, icase

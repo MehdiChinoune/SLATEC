@@ -24,7 +24,7 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   USE service, ONLY : tiny_sp
-  !S
+  !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
   REAL(SP), INTENT(IN) :: Alim, Elim, Fnu, Rl, Tol
@@ -39,7 +39,7 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !* FIRST EXECUTABLE STATEMENT  CASYI
   Nz = 0
   az = ABS(Z)
-  x = REAL(Z)
+  x = REAL(Z,SP)
   arm = 1.E+3_SP*tiny_sp
   rtr1 = SQRT(arm)
   il = MIN(2,N)
@@ -51,7 +51,7 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   ak1 = SQRT(ak1)
   cz = Z
   IF( Kode==2 ) cz = Z - CMPLX(x,0._SP,SP)
-  acz = REAL(cz)
+  acz = REAL(cz,SP)
   IF( ABS(acz)>Elim ) THEN
     Nz = -1
     RETURN
@@ -139,5 +139,5 @@ PURE SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
     RETURN
   END IF
   100  Nz = -2
-
+  !
 END SUBROUTINE CASYI

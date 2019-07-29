@@ -1,5 +1,5 @@
 !** ZBINU
-SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
+PURE SUBROUTINE ZBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   !> Subsidiary to ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK and ZBIRY
   !***
   ! **Library:**   SLATEC
@@ -21,22 +21,27 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER :: i, inw, Kode, N, nlast, nn, nui, nw, Nz
-  REAL(DP) :: Alim, az, cwi(2), cwr(2), Cyi(N), Cyr(N), dfnu, Elim, Fnu, &
-    Fnul, Rl, Tol, Zi, Zr
-  REAL(DP), PARAMETER :: zeror = 0._DP, zeroi = 0._DP
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Nz
+  REAL(DP), INTENT(IN) :: Alim, Elim, Fnu, Fnul, Rl, Tol
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Cy(N)
+  !
+  INTEGER :: i, inw, nlast, nn, nui, nw
+  REAL(DP) :: az, dfnu
+  COMPLEX(DP) :: cw(2)
   !* FIRST EXECUTABLE STATEMENT  ZBINU
   Nz = 0
-  az = ZABS(Zr,Zi)
+  az = ABS(Z)
   nn = N
   dfnu = Fnu + (N-1)
   IF( az>2._DP ) THEN
-    IF( az*az*0.25D0>dfnu+1._DP ) GOTO 100
+    IF( az*az*0.25_DP>dfnu+1._DP ) GOTO 100
   END IF
   !-----------------------------------------------------------------------
   !     POWER SERIES
   !-----------------------------------------------------------------------
-  CALL ZSERI(Zr,Zi,Fnu,Kode,nn,Cyr,Cyi,nw,Tol,Elim,Alim)
+  CALL ZSERI(Z,Fnu,Kode,nn,Cy,nw,Tol,Elim,Alim)
   inw = ABS(nw)
   Nz = Nz + inw
   nn = nn - inw
@@ -51,7 +56,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     !     ASYMPTOTIC EXPANSION FOR LARGE Z
     !-----------------------------------------------------------------------
-    CALL ZASYI(Zr,Zi,Fnu,Kode,nn,Cyr,Cyi,nw,Rl,Tol,Elim,Alim)
+    CALL ZASYI(Z,Fnu,Kode,nn,Cy,nw,Rl,Tol,Elim,Alim)
     IF( nw>=0 ) GOTO 600
     GOTO 700
   ELSEIF( dfnu<=1._DP ) THEN
@@ -60,7 +65,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     OVERFLOW AND UNDERFLOW TEST ON I SEQUENCE FOR MILLER ALGORITHM
   !-----------------------------------------------------------------------
-  200  CALL ZUOIK(Zr,Zi,Fnu,Kode,1,nn,Cyr,Cyi,nw,Tol,Elim,Alim)
+  200  CALL ZUOIK(Z,Fnu,Kode,1,nn,Cy,nw,Tol,Elim,Alim)
   IF( nw<0 ) GOTO 700
   Nz = Nz + nw
   nn = nn - nw
@@ -76,17 +81,16 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     !     OVERFLOW TEST ON K FUNCTIONS USED IN WRONSKIAN
     !-----------------------------------------------------------------------
-    CALL ZUOIK(Zr,Zi,Fnu,Kode,2,2,cwr,cwi,nw,Tol,Elim,Alim)
+    CALL ZUOIK(Z,Fnu,Kode,2,2,cw,nw,Tol,Elim,Alim)
     IF( nw>=0 ) THEN
       IF( nw>0 ) GOTO 700
-      CALL ZWRSK(Zr,Zi,Fnu,Kode,nn,Cyr,Cyi,nw,cwr,cwi,Tol,Elim,Alim)
+      CALL ZWRSK(Z,Fnu,Kode,nn,Cy,nw,cw,Tol,Elim,Alim)
       IF( nw>=0 ) GOTO 600
       GOTO 700
     ELSE
       Nz = nn
       DO i = 1, nn
-        Cyr(i) = zeror
-        Cyi(i) = zeroi
+        Cy(i) = (0._DP,0._DP)
       END DO
       RETURN
     END IF
@@ -94,7 +98,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     MILLER ALGORITHM NORMALIZED BY THE SERIES
   !-----------------------------------------------------------------------
-  400  CALL ZMLRI(Zr,Zi,Fnu,Kode,nn,Cyr,Cyi,nw,Tol)
+  400  CALL ZMLRI(Z,Fnu,Kode,nn,Cy,nw,Tol)
   IF( nw>=0 ) GOTO 600
   GOTO 700
   !-----------------------------------------------------------------------
@@ -102,7 +106,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   500  nui = INT( Fnul - dfnu ) + 1
   nui = MAX(nui,0)
-  CALL ZBUNI(Zr,Zi,Fnu,Kode,nn,Cyr,Cyi,nw,nui,nlast,Fnul,Tol,Elim,Alim)
+  CALL ZBUNI(Z,Fnu,Kode,nn,Cy,nw,nui,nlast,Fnul,Tol,Elim,Alim)
   IF( nw<0 ) GOTO 700
   Nz = Nz + nw
   IF( nlast/=0 ) THEN
@@ -112,4 +116,5 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   600  RETURN
   700  Nz = -1
   IF( nw==(-2) ) Nz = -2
+  !
 END SUBROUTINE ZBINU

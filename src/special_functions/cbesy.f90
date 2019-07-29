@@ -1,8 +1,8 @@
 !** CBESY
 PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
-  !> Compute a sequence of the Bessel functions Y(a,z) for
-  !  complex argument z and real nonnegative orders a=b,b+1,
-  !  b+2,... where b>0.  A scaling option is available to help avoid overflow.
+  !> Compute a sequence of the Bessel functions Y(a,z) for complex argument z
+  !  and real non-negative orders a=b,b+1, b+2,... where b>0.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -165,20 +165,19 @@ PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   COMPLEX(SP), INTENT(OUT) :: Cwrk(N), Cy(N)
   !
   INTEGER :: i, k, k1, k2, nz1, nz2
-  COMPLEX(SP) :: c1, c2, ex, hci, zu, zv
-  REAL(SP) :: elim, ey, r1, r2, tay, xx, yy, r1m5, ascle, &
-    rtol, atol, tol, aa, bb
+  COMPLEX(SP) :: c1, c2, ex, zu, zv
+  REAL(SP) :: elim, ey, r1, r2, tay, xx, yy, r1m5, ascle, rtol, atol, tol, aa, bb
+  COMPLEX(SP), PARAMETER :: hci = (0._SP,0.5_SP)
   !* FIRST EXECUTABLE STATEMENT  CBESY
-  xx = REAL(Z)
-  yy = AIMAG(Z)
   Ierr = 0
   Nz = 0
   IF( Z==(0._SP,0._SP)  .OR. Fnu<0._SP .OR. Kode<1 .OR. Kode>2 .OR. N<1 ) THEN
     Ierr = 1
     RETURN
   END IF
-  hci = CMPLX(0._SP,0.5_SP,SP)
   CALL CBESH(Z,Fnu,Kode,1,N,Cy,nz1,Ierr)
+  xx = REAL(Z,SP)
+  yy = AIMAG(Z)
   IF( Ierr/=0 .AND. Ierr/=3 ) THEN
     Nz = 0
   ELSE
@@ -216,7 +215,7 @@ PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
         DO i = 1, N
           !       CY(I) = HCI*(C2*CWRK(I)-C1*CY(I))
           zv = Cwrk(i)
-          aa = REAL(zv)
+          aa = REAL(zv,SP)
           bb = AIMAG(zv)
           atol = 1._SP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
@@ -226,7 +225,7 @@ PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
           zv = zv*c2*hci
           zv = zv*CMPLX(atol,0._SP,SP)
           zu = Cy(i)
-          aa = REAL(zu)
+          aa = REAL(zu,SP)
           bb = AIMAG(zu)
           atol = 1._SP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
@@ -247,5 +246,5 @@ PURE SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
       END IF
     END IF
   END IF
-
+  !
 END SUBROUTINE CBESY

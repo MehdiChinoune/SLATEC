@@ -69,7 +69,7 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     cfn = CMPLX(fn,0._SP,SP)
     s1 = -zeta1 + cfn*(cfn/(Z+zeta2))
   END IF
-  rs1 = REAL(s1)
+  rs1 = REAL(s1,SP)
   IF( ABS(rs1)>Elim ) THEN
     IF( rs1>0._SP ) GOTO 400
     Nz = N
@@ -93,7 +93,7 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     !     TEST FOR UNDERFLOW AND OVERFLOW
     !-----------------------------------------------------------------------
-    rs1 = REAL(s1)
+    rs1 = REAL(s1,SP)
     IF( ABS(rs1)>Elim ) GOTO 300
     IF( i==1 ) iflag = 2
     IF( ABS(rs1)>=Alim ) THEN
@@ -112,9 +112,9 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     !     SCALE S1 IF ABS(S1)<ASCLE
     !-----------------------------------------------------------------------
     s2 = phi*summ
-    c2r = REAL(s1)
+    c2r = REAL(s1,SP)
     c2i = AIMAG(s1)
-    c2m = EXP(c2r)*REAL(css(iflag))
+    c2m = EXP(c2r)*REAL(css(iflag),SP)
     s1 = CMPLX(c2m,0._SP,SP)*CMPLX(COS(c2i),SIN(c2i),SP)
     s2 = s2*s1
     IF( iflag==1 ) THEN
@@ -144,7 +144,7 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
       k = k - 1
       fn = fn - 1._SP
       IF( iflag<3 ) THEN
-        c2r = REAL(c2)
+        c2r = REAL(c2,SP)
         c2i = AIMAG(c2)
         c2r = ABS(c2r)
         c2i = ABS(c2i)
@@ -183,5 +183,6 @@ PURE SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     END IF
   END IF
   400  Nz = -1
+  !
   RETURN
 END SUBROUTINE CUNI1

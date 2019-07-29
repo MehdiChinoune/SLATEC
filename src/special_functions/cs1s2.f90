@@ -33,24 +33,24 @@ ELEMENTAL SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   REAL(SP), INTENT(IN) :: Alim, Ascle
   COMPLEX(SP), INTENT(IN) :: Zr
   COMPLEX(SP), INTENT(INOUT) :: S1, S2
+  !
   COMPLEX(SP) :: c1, s1d
   REAL(SP) :: aa, aln, as1, as2, xx
-  COMPLEX(SP), PARAMETER :: czero  = (0._SP,0._SP)
   REAL(SP), PARAMETER :: sqrt_huge = SQRT( HUGE(1._SP) )
   !* FIRST EXECUTABLE STATEMENT  CS1S2
   Nz = 0
   as1 = ABS(S1)
-  as2 = ABS(S2)
   IF( .NOT. IEEE_IS_FINITE(as1) ) as1 = ABS(S1/sqrt_huge) * sqrt_huge
+  as2 = ABS(S2)
   IF( .NOT. IEEE_IS_FINITE(as2) ) as2 = ABS(S2/sqrt_huge) * sqrt_huge
-  aa = REAL(S1)
+  aa = REAL(S1,SP)
   aln = AIMAG(S1)
   IF( aa/=0._SP .OR. aln/=0._SP ) THEN
     IF( as1/=0._SP ) THEN
-      xx = REAL(Zr)
+      xx = REAL(Zr,SP)
       aln = -xx - xx + LOG(as1)
       s1d = S1
-      S1 = czero
+      S1 = (0._SP,0._SP)
       as1 = 0._SP
       IF( aln>=(-Alim) ) THEN
         c1 = LOG(s1d) - Zr - Zr
@@ -63,8 +63,8 @@ ELEMENTAL SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   END IF
   aa = MAX(as1,as2)
   IF( aa>Ascle ) RETURN
-  S1 = czero
-  S2 = czero
+  S1 = (0._SP,0._SP)
+  S2 = (0._SP,0._SP)
   Nz = 1
   Iuf = 0
   !

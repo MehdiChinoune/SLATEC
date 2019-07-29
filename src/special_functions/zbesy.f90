@@ -1,9 +1,8 @@
 !** ZBESY
-SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
-  !> Compute a sequence of the Bessel functions Y(a,z) for
-  !            complex argument z and real nonnegative orders a=b,b+1,
-  !            b+2,... where b>0.  A scaling option is available to
-  !            help avoid overflow.
+PURE SUBROUTINE ZBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
+  !> Compute a sequence of the Bessel functions Y(a,z) for complex argument z
+  !  and real nonnegative orders a=b,b+1, b+2,... where b>0.
+  !  A scaling option is available to help avoid overflow.
   !***
   ! **Library:**   SLATEC
   !***
@@ -163,25 +162,31 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   USE service, ONLY : eps_dp, log10_radix_dp, tiny_dp, max_exp_dp, min_exp_dp
-  !     COMPLEX CWRK,CY,C1,C2,EX,HCI,Z,ZU,ZV
-  INTEGER :: i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2
-  REAL(DP) :: Cwrki(N), Cwrkr(N), Cyi(N), Cyr(N), c1i, c1r, c2i, c2r, &
-    elim, exi, exr, ey, Fnu, hcii, sti, str, tay, &
-    Zi, Zr, ascle, rtol, atol, aa, bb, tol, r1m5
+  !
+  INTEGER, INTENT(IN) :: Kode, N
+  INTEGER, INTENT(OUT) :: Ierr, Nz
+  REAL(DP), INTENT(IN) :: Fnu
+  COMPLEX(DP), INTENT(IN) :: Z
+  COMPLEX(DP), INTENT(OUT) :: Cwrk(N), Cy(N)
+  !
+  INTEGER :: i, k, k1, k2, nz1, nz2
+  COMPLEX(DP) :: c1, c2, ex, zu, zv
+  REAL(DP) :: elim, ey, r1, r2, tay, xx, yy, r1m5, ascle, rtol, atol, tol, aa, bb
+  COMPLEX(DP), PARAMETER :: hci = (0._DP,0.5_DP)
   !* FIRST EXECUTABLE STATEMENT  ZBESY
   Ierr = 0
   Nz = 0
-  IF( Zr==0._DP .AND. Zi==0._DP ) Ierr = 1
-  IF( Fnu<0._DP ) Ierr = 1
-  IF( Kode<1 .OR. Kode>2 ) Ierr = 1
-  IF( N<1 ) Ierr = 1
-  IF( Ierr/=0 ) RETURN
-  hcii = 0.5_DP
-  CALL ZBESH(Zr,Zi,Fnu,Kode,1,N,Cyr,Cyi,nz1,Ierr)
+  IF( Z==(0._DP,0._DP)  .OR. Fnu<0._DP .OR. Kode<1 .OR. Kode>2 .OR. N<1 ) THEN
+    Ierr = 1
+    RETURN
+  END IF
+  CALL ZBESH(Z,Fnu,Kode,1,N,Cy,nz1,Ierr)
+  xx = REAL(Z,DP)
+  yy = AIMAG(Z)
   IF( Ierr/=0 .AND. Ierr/=3 ) THEN
     Nz = 0
   ELSE
-    CALL ZBESH(Zr,Zi,Fnu,Kode,2,N,Cwrkr,Cwrki,nz2,Ierr)
+    CALL ZBESH(Z,Fnu,Kode,2,N,Cwrk,nz2,Ierr)
     IF( Ierr/=0 .AND. Ierr/=3 ) THEN
       Nz = 0
     ELSE
@@ -196,66 +201,55 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
         !     ELIM IS THE APPROXIMATE EXPONENTIAL UNDER- AND OVERFLOW LIMIT
         !-----------------------------------------------------------------------
         elim = 2.303_DP*(k*r1m5-3._DP)
-        exr = COS(Zr)
-        exi = SIN(Zr)
+        r1 = COS(xx)
+        r2 = SIN(xx)
+        ex = CMPLX(r1,r2,DP)
         ey = 0._DP
-        tay = ABS(Zi+Zi)
+        tay = ABS(yy+yy)
         IF( tay<elim ) ey = EXP(-tay)
-        IF( Zi<0._DP ) THEN
-          c1r = exr
-          c1i = exi
-          c2r = exr*ey
-          c2i = -exi*ey
+        IF( yy<0._DP ) THEN
+          c1 = ex
+          c2 = CONJG(ex)*CMPLX(ey,0._DP,DP)
         ELSE
-          c1r = exr*ey
-          c1i = exi*ey
-          c2r = exr
-          c2i = -exi
+          c1 = ex*CMPLX(ey,0._DP,DP)
+          c2 = CONJG(ex)
         END IF
         Nz = 0
         rtol = 1._DP/tol
         ascle = tiny_dp*rtol*1.E+3_DP
         DO i = 1, N
-          !       STR = C1R*CYR(I) - C1I*CYI(I)
-          !       STI = C1R*CYI(I) + C1I*CYR(I)
-          !       STR = -STR + C2R*CWRKR(I) - C2I*CWRKI(I)
-          !       STI = -STI + C2R*CWRKI(I) + C2I*CWRKR(I)
-          !       CYR(I) = -STI*HCII
-          !       CYI(I) = STR*HCII
-          aa = Cwrkr(i)
-          bb = Cwrki(i)
+          !       CY(I) = HCI*(C2*CWRK(I)-C1*CY(I))
+          zv = Cwrk(i)
+          aa = REAL(zv,DP)
+          bb = AIMAG(zv)
           atol = 1._DP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
-            aa = aa*rtol
-            bb = bb*rtol
+            zv = zv*CMPLX(rtol,0._DP,DP)
             atol = tol
           END IF
-          str = (aa*c2r-bb*c2i)*atol
-          sti = (aa*c2i+bb*c2r)*atol
-          aa = Cyr(i)
-          bb = Cyi(i)
+          zv = zv*c2*hci
+          zv = zv*CMPLX(atol,0._DP,DP)
+          zu = Cy(i)
+          aa = REAL(zu,DP)
+          bb = AIMAG(zu)
           atol = 1._DP
           IF( MAX(ABS(aa),ABS(bb))<=ascle ) THEN
-            aa = aa*rtol
-            bb = bb*rtol
+            zu = zu*CMPLX(rtol,0._DP,DP)
             atol = tol
           END IF
-          str = str - (aa*c1r-bb*c1i)*atol
-          sti = sti - (aa*c1i+bb*c1r)*atol
-          Cyr(i) = -sti*hcii
-          Cyi(i) = str*hcii
-          IF( str==0._DP .AND. sti==0._DP .AND. ey==0._DP ) Nz = Nz + 1
+          zu = zu*c1*hci
+          zu = zu*CMPLX(atol,0._DP,DP)
+          Cy(i) = zv - zu
+          IF( Cy(i)==CMPLX(0._DP,0._DP,DP) .AND. ey==0._DP ) Nz = Nz + 1
         END DO
         RETURN
       ELSE
         DO i = 1, N
-          str = Cwrkr(i) - Cyr(i)
-          sti = Cwrki(i) - Cyi(i)
-          Cyr(i) = -sti*hcii
-          Cyi(i) = str*hcii
+          Cy(i) = hci*(Cwrk(i)-Cy(i))
         END DO
         RETURN
       END IF
     END IF
   END IF
+  !
 END SUBROUTINE ZBESY

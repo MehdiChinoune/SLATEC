@@ -146,7 +146,7 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   COMPLEX(SP) :: csq, cy(2), s1, s2, trm1, trm2, zta, z3
   REAL(SP), PARAMETER :: tth = 6.66666666666666667E-01_SP, c1 = 6.14926627446000736E-01_SP, &
     c2 = 4.48288357353826359E-01_SP, coef = 5.77350269189625765E-01_SP, &
-    pi =  3.14159265358979324_SP
+    pi = 3.14159265358979324_SP
   !* FIRST EXECUTABLE STATEMENT  CBIRY
   Ierr = 0
   nz = 0
@@ -206,15 +206,15 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
       !-----------------------------------------------------------------------
       sfac = 1._SP
       zi = AIMAG(Z)
-      zr = REAL(Z)
+      zr = REAL(Z,SP)
       ak = AIMAG(zta)
       IF( zr<0._SP ) THEN
-        bk = REAL(zta)
+        bk = REAL(zta,SP)
         ck = -ABS(bk)
         zta = CMPLX(ck,ak,SP)
       END IF
       IF( zi==0._SP .AND. zr<=0._SP ) zta = CMPLX(0._SP,ak,SP)
-      aa = REAL(zta)
+      aa = REAL(zta,SP)
       IF( Kode/=2 ) THEN
         !-----------------------------------------------------------------------
         !     OVERFLOW TEST
@@ -294,7 +294,7 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         ad = MIN(d1,d2)
         ak = 24._SP + 9._SP*fid
         bk = 30._SP - 9._SP*fid
-        z3r = REAL(z3)
+        z3r = REAL(z3,SP)
         z3i = AIMAG(z3)
         DO k = 1, 25
           trm1 = trm1*CMPLX(z3r/d1,z3i/d1,SP)
@@ -315,7 +315,7 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         IF( az>tol ) Bi = Bi + Z*Z*s1*CMPLX(c1/(1._SP+fid),0._SP,SP)
         IF( Kode==1 ) RETURN
         zta = Z*SQRT(Z)*CMPLX(tth,0._SP,SP)
-        aa = REAL(zta)
+        aa = REAL(zta,SP)
         aa = -ABS(aa)
         Bi = Bi*CMPLX(EXP(aa),0._SP,SP)
         RETURN
@@ -323,7 +323,7 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         Bi = s1*CMPLX(c1,0._SP,SP) + Z*s2*CMPLX(c2,0._SP,SP)
         IF( Kode==1 ) RETURN
         zta = Z*SQRT(Z)*CMPLX(tth,0._SP,SP)
-        aa = REAL(zta)
+        aa = REAL(zta,SP)
         aa = -ABS(aa)
         Bi = Bi*CMPLX(EXP(aa),0._SP,SP)
         RETURN
@@ -332,6 +332,6 @@ ELEMENTAL SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   END IF
   100  nz = 0
   Ierr = 5
-
+  !
   RETURN
 END SUBROUTINE CBIRY

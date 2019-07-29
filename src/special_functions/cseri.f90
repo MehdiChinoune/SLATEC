@@ -42,7 +42,7 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   Nz = 0
   az = ABS(Z)
   IF( az==0._SP ) GOTO 500
-  x = REAL(Z)
+  x = REAL(Z,SP)
   arm = 1.E+3_SP*tiny_sp
   rtr1 = SQRT(arm)
   crsc = CMPLX(1._SP,0._SP,SP)
@@ -68,7 +68,7 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   ak = LOG_GAMMA(fnup)
   ak1 = ak1 - CMPLX(ak,0._SP,SP)
   IF( Kode==2 ) ak1 = ak1 - CMPLX(x,0._SP,SP)
-  rak1 = REAL(ak1)
+  rak1 = REAL(ak1,SP)
   IF( rak1>(-Elim) ) THEN
     IF( rak1<=(-Alim) ) THEN
       iflag = 1
@@ -169,6 +169,6 @@ PURE SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   IF( Fnu==0._SP ) Y(1) = (1._SP,0._SP)
   IF( N==1 ) RETURN
   Y = (0._SP,0._SP)
-
+  !
   RETURN
 END SUBROUTINE CSERI
