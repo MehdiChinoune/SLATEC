@@ -1,14 +1,9 @@
- Documentation for FFTPACK, a collection of Fast Fourier Transform routines.
+  Documentation for FFTPACK, a collection of Fast Fourier
+            Transform routines.
 ***
- ****Category:****  J1, Z
+ **Author:**  Swarztrauber, P. N., (NCAR)
 ***
- ****Type:****      ALL (FFTDOC-A)
-***
- ****Keywords:****  DOCUMENTATION, FAST FOURIER TRANSFORM, FFT
-***
- ****Author:****  Swarztrauber, P. N., (NCAR)
-***
- ****Description:****
+ **Description:**
 
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
                        Version 3  June 1979
@@ -52,3 +47,12 @@
      17.  CFFTI     Initialize CFFTF and CFFTB
      18.  CFFTF     Forward transform of a complex periodic sequence
      19.  CFFTB     Unnormalized inverse of CFFTF
+
+***
+ **References:**  (NONE)
+
+* REVISION HISTORY  (YYMMDD)
+   780201  DATE WRITTEN
+   861211  REVISION DATE from Version 3.2
+   891214  Prologue converted to Version 4.0 format.  (BAB)
+   900723  PURPOSE section revised.  (WRB)

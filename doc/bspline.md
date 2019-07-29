@@ -1,15 +1,9 @@
- Documentation for BSPLINE, a package of subprograms for working with piecewise 
- polynomial functions in B-representation.
-*****
- ****Category:****  E, E1A, K, Z
-*****
- ****Type:****      ALL (BSPDOC-A)
-*****
- ****Keywords:****  B-SPLINE, DOCUMENTATION, SPLINES
-*****
- ****Author:****  Amos, D. E., (SNLA)
-*****
- ****Description:****
+  Documentation for BSPLINE, a package of subprograms for
+  working with piecewise polynomial functions in B-representation.
+***
+ **Author:**  Amos, D. E., (SNLA)
+***
+ **Description:**
 
      Abstract
          BSPDOC is a non-executable, B-spline documentary routine.
@@ -139,7 +133,7 @@
      Then the PP-representation (C,XI,LXI,K) of Y(X), denoted
      by Y(J,X) on each interval XI(J)<=X<XI(J+1), is
 
-     Y(J,X) = sum( C(I,J)*((X-XI(J))****(I-1))/factorial(I-1), I=1,K)
+     Y(J,X) = sum( C(I,J)*((X-XI(J))**(I-1))/factorial(I-1), I=1,K)
 
      for J=1,...,LXI.  One must view this conversion from the B-
      to the PP-representation with some skepticism because the
@@ -262,12 +256,32 @@
 
                       I1MACH, R1MACH, D1MACH
 
-*****
- ****References:****   
-    1. D. E. Amos, Computation with splines and B-splines, Report SAND78-1968, Sandia Laboratories, March 1979.   
-    2. D. E. Amos, Quadrature subroutines for splines and B-splines, Report SAND79-1825, Sandia Laboratories, December 1979.   
-    3. Carl de Boor, A Practical Guide to Splines, Applied Mathematics Series 27, Springer-Verlag, New York, 1978.   
-    4. Carl de Boor, On calculating with B-Splines, Journal of Approximation Theory 6, (1972), pp. 50-62.   
-    5. Carl de Boor, Package for calculating with B-splines, SIAM Journal on Numerical Analysis 14, 3 (June 1977), pp. 441-472.   
-    6. R. J. Hanson, Constrained least squares curve fitting to discrete data using B-splines, a users guide,  Report SAND78-1291, Sandia Laboratories, December 1978.   
-    7. F. N. Fritsch and R. E. Carlson, Monotone piecewise cubic interpolation, SIAM Journal on Numerical Analysis 17, 2 (April 1980), pp. 238-246.
+***
+ **References:**  1. D. E. Amos, Computation with splines and
+                 B-splines, Report SAND78-1968, Sandia
+                 Laboratories, March 1979.
+               2. D. E. Amos, Quadrature subroutines for splines and
+                 B-splines, Report SAND79-1825, Sandia Laboratories,
+                 December 1979.
+               3. Carl de Boor, A Practical Guide to Splines, Applied
+                 Mathematics Series 27, Springer-Verlag, New York,
+                 1978.
+               4. Carl de Boor, On calculating with B-Splines, Journal
+                 of Approximation Theory 6, (1972), pp. 50-62.
+               5. Carl de Boor, Package for calculating with B-splines,
+                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
+                 pp. 441-472.
+               6. R. J. Hanson, Constrained least squares curve fitting
+                 to discrete data using B-splines, a users guide,
+                 Report SAND78-1291, Sandia Laboratories, December
+                 1978.
+               7. F. N. Fritsch and R. E. Carlson, Monotone piecewise
+                 cubic interpolation, SIAM Journal on Numerical Ana-
+                 lysis 17, 2 (April 1980), pp. 238-246.
+
+* REVISION HISTORY  (YYMMDD)
+   810223  DATE WRITTEN
+   861211  REVISION DATE from Version 3.2
+   891214  Prologue converted to Version 4.0 format.  (BAB)
+   900723  PURPOSE section revised.  (WRB)
+   920501  Reformatted the REFERENCES section.  (WRB)

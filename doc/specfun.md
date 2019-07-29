@@ -1,10 +1,5 @@
- Documentation for FNLIB, a collection of routines for evaluating elementary and special functions.
-***
- **Category:**  C, Z
-***
- **Type:**      ALL (FUNDOC-A)
-***
- **Keywords:**  DOCUMENTATION, ELEMENTARY FUNCTIONS, SPECIAL FUNCTIONS
+  Documentation for FNLIB, a collection of routines for
+            evaluating elementary and special functions.
 ***
  **Author:**  Kahaner, D. K., (NBS)
 ***
@@ -37,7 +32,7 @@
 
                   ***Elementary Functions***
  Argument = theta in      z = \ z \ *          --         --    CARG(Z)
-  radians                 \exp(i * theta)
+  radians                 e**(i * theta)
  Cube root                                   CBRT(X)    DCBRT   CCBRT
  Relative error exponen-  ((e**x) -1) / x    EXPREL(X)  DEXPRL  CEXPRL
   tial from first order
@@ -82,7 +77,7 @@
  Exponential integral     E sub n+k (x) Call EXINT(X,   DEXINT    --
                         =the integral from   N,KODE,M,TOL,
                          1 to infinity of    EN,IERR)
-                       (\exp(-x*t)/t**(n+k))dt
+                       (e**(-x*t)/t**(n+k))dt
                  ***Gamma Functions and Related Functions***
  Factorial                n!                 FAC(N)     DFAC      --
  Binomial                 n!/(m!*(n-m)!)     BINOM(N,M) DBINOM    --
@@ -135,16 +130,16 @@
                           square root of pi) *
                           the integral from
                           0 to x of
-                          \exp(-t**2)dt
+                          e**(-t**2)dt
  Complementary            erfc x = (2 /      ERFC(X)    DERFC     --
   error function          square root of pi) *
                           the integral from
                           x to infinity of
-                          \exp(-t**2)dt
- Dawson's function        F(x) = \exp(-x**2)  DAWS(X)    DDAWS     --
+                          e**(-t**2)dt
+ Dawson's function        F(x) = e**(-x**2)  DAWS(X)    DDAWS     --
                           * the integral from
                           from 0 to x of
-                          \exp(t**2)dt
+                          e**(t**2)dt
                          ***Bessel Functions***
    Bessel functions of special integer order
  First kind, order zero   J sub 0 (x)        BESJ0(X)   DBESJ0    --
@@ -166,14 +161,14 @@
    N values are computed where  k = 1,2,...N and v >= 0.
  Modified first kind      I sub v+k-1 (x) Call BESI(X,   DBESI    --
                           optional scaling  ALPHA,KODE,N,
-                          by \exp(-x)        Y,NZ)
+                          by e**(-x)        Y,NZ)
  First kind               J sub v+k-1 (x) Call BESJ(X,   DBESJ    --
                                             ALPHA,N,Y,NZ)
  Second kind              Y sub v+k-1 (x) Call BESY(X,   DBESY    --
                                             FNU,N,Y)
  Modified third kind      K sub v+k-1 (x) Call BESK(X,   DBESK    --
                           optional scaling  FNU,KODE,N,Y,
-                          by \exp(x)         NZ)
+                          by e**(x)         NZ)
    Sequences of Bessel functions.  \N\ values are computed where
    I = 0, 1, 2, ..., N-1  for N > 0  or I = 0, -1, -2, ..., N+1
    for N < 0.
@@ -203,3 +198,13 @@
   dilogarithm             integral from
                           0 to x of
                           ((ln \1-y\) / y)dy
+
+***
+ **References:**  (NONE)
+
+* REVISION HISTORY  (YYMMDD)
+   801015  DATE WRITTEN
+   861211  REVISION DATE from Version 3.2
+   891214  Prologue converted to Version 4.0 format.  (BAB)
+   900326  Routine name changed from FNLIBD to FUNDOC.  (WRB)
+   900723  PURPOSE section revised.  (WRB)

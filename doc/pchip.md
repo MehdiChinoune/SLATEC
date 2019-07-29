@@ -1,18 +1,13 @@
- Documentation for PCHIP, a Fortran package for piecewise cubic Hermite interpolation of data.
+  Documentation for PCHIP, a Fortran package for piecewise
+  cubic Hermite interpolation of data.
 ***
- ****Category:****  E1A, Z
-***
- ****Type:****      ALL (PCHDOC-A)
-***
- ****Keywords:****  CUBIC HERMITE INTERPOLATION, DOCUMENTATION, MONOTONE INTERPOLATION, PCHIP, PIECEWISE CUBIC INTERPOLATION
-***
- ****Author:****  Fritsch, F. N., (LLNL)
+ **Author:**  Fritsch, F. N., (LLNL)
              Lawrence Livermore National Laboratory
              P.O. Box 808  (L-316)
              Livermore, CA  94550
              FTS 532-4275, (510) 422-4275
 ***
- ****Description:****
+ **Description:**
 
             PCHIP:  Piecewise Cubic Hermite Interpolation Package
 
@@ -176,9 +171,29 @@
     in Fortran.)
 
 ***
- ****References:****
- 
-      1. Carl de Boor, A Practical Guide to Splines, Springer-Verlag, New York, 1978 (esp. Chapter IV, pp.49-62).
-      2. F. N. Fritsch, Piecewise Cubic Hermite Interpolation Package, Report UCRL-87285, Lawrence Livermore National Laboratory, July 1982.  [Poster presented at the SIAM 30th Anniversary Meeting, 19-23 July 1982.]
-      3. F. N. Fritsch and J. Butland, A method for constructing local monotone piecewise cubic interpolants, SIAM Journal on Scientific and Statistical Computing 5, 2 (June 1984), pp. 300-304.
-      4. F. N. Fritsch and R. E. Carlson, Monotone piecewise cubic interpolation, SIAM Journal on Numerical Analysis 17, 2 (April 1980), pp. 238-246.
+ **References:**  1. Carl de Boor, A Practical Guide to Splines, Springer-
+                 Verlag, New York, 1978 (esp. Chapter IV, pp.49-62).
+               2. F. N. Fritsch, Piecewise Cubic Hermite Interpolation
+                 Package, Report UCRL-87285, Lawrence Livermore Natio-
+                 nal Laboratory, July 1982.  [Poster presented at the
+                 SIAM 30th Anniversary Meeting, 19-23 July 1982.]
+               3. F. N. Fritsch and J. Butland, A method for construc-
+                 ting local monotone piecewise cubic interpolants, SIAM
+                 Journal on Scientific and Statistical Computing 5, 2
+                 (June 1984), pp. 300-304.
+               4. F. N. Fritsch and R. E. Carlson, Monotone piecewise
+                 cubic interpolation, SIAM Journal on Numerical Ana-
+                 lysis 17, 2 (April 1980), pp. 238-246.
+
+* REVISION HISTORY  (YYMMDD)
+   811106  DATE WRITTEN
+   870930  Updated Reference 3.
+   890414  Changed PCHMC and CHFMC to PCHCM and CHFCM, respectively,
+           and augmented description of PCHCM.
+   891214  Prologue converted to Version 4.0 format.  (BAB)
+   910826  1. Revised purpose, clarified role of argument INCFD,
+              corrected error in example, and removed redundant
+              reference list.
+           2. Added description of PCHBS.  (FNF)
+   920429  Revised format and order of references.  (WRB,FNF)
+   930505  Changed CHFIV to CHFIE.  (FNF)

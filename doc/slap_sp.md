@@ -1,19 +1,8 @@
- Sparse Linear Algebra Package Version 2.0.2 Documentation.
-            Routines to solve large sparse symmetric and nonsymmetric
-            positive definite linear systems, Ax = b, using precondi-
-            tioned iterative methods.
+  Sparse Linear Algebra Package Version 2.0.2 Documentation.
+  Routines to solve large sparse symmetric and nonsymmetric positive definite
+  linear systems, Ax = b, using preconditioned iterative methods.
 ***
- ****Category:****  D2A4, D2B4, Z
-***
- ****Type:****      SINGLE PRECISION (SLPDOC-S, DLPDOC-D)
-***
- ****Keywords:****  BICONJUGATE GRADIENT SQUARED, DOCUMENTATION,
-             GENERALIZED MINIMUM RESIDUAL, ITERATIVE IMPROVEMENT,
-             NORMAL EQUATIONS, ORTHOMIN,
-             PRECONDITIONED CONJUGATE GRADIENT, SLAP,
-             SPARSE ITERATIVE METHODS
-***
- ****Author:****  Seager, Mark. K., (LLNL)
+ **Author:**  Seager, Mark. K., (LLNL)
              User Systems Division
              Lawrence Livermore National Laboratory
              PO BOX 808, L-60
@@ -21,7 +10,7 @@
              (FTS) 543-3141, (510) 423-3141
              seager@llnl.gov
 ***
- ****Description:****
+ **Description:**
                                  The
                     Sparse Linear Algebra Package
 
@@ -429,6 +418,24 @@
 
 
 ***
- ****References:****
+ **References:**  1. Mark K. Seager, A SLAP for the Masses, in
+                  G. F. Carey, Ed., Parallel Supercomputing: Methods,
+                  Algorithms and Applications, Wiley, 1989, pp.135-155.
 
-      1. Mark K. Seager, A SLAP for the Masses, in G. F. Carey, Ed., Parallel Supercomputing: Methods, Algorithms and Applications, Wiley, 1989, pp.135-155.
+* REVISION HISTORY  (YYMMDD)
+   880715  DATE WRITTEN
+   890404  Previous REVISION DATE
+   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
+   890921  Removed TeX from comments.  (FNF)
+   890922  Numerous changes to prologue to make closer to SLATEC standard.  (FNF)
+   890929  Numerous changes to reduce SP/DP differences.  (FNF)
+           -----( This produced Version 2.0.1. )-----
+   891003  Rearranged list of user callable routines to agree with
+           order in source deck.  (FNF)
+   891004  Updated reference.
+   910411  Prologue converted to Version 4.0 format.  (BAB)
+           -----( This produced Version 2.0.2. )-----
+   910506  Minor improvements to prologue.  (FNF)
+   920511  Added complete declaration section.  (WRB)
+   920929  Corrected format of reference.  (FNF)
+   921019  Improved one-line descriptions, reordering some.  (FNF)

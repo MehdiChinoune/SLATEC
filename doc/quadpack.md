@@ -1,12 +1,7 @@
- Documentation for QUADPACK, a package of subprograms for automatic evaluation of one-dimensional definite integrals.
+  Documentation for QUADPACK, a package of subprograms for
+  automatic evaluation of one-dimensional definite integrals.
 ***
- ****Category:****  H2, Z
-***
- ****Type:****      ALL (QPDOC-A)
-***
- ****Keywords:****  DOCUMENTATION, GUIDELINES FOR SELECTION, QUADPACK, QUADRATURE, SURVEY OF INTEGRATORS
-***
- ****Author:****  Piessens, Robert
+ **Author:**  Piessens, Robert
              Applied Mathematics and Programming Division
              K. U. Leuven
            de Doncker, Elise
@@ -14,7 +9,7 @@
              K. U. Leuven
            Kahaner, D. K., (NBS)
 ***
- ****Description:****
+ **Description:**
 
  1. Introduction
     ------------
@@ -90,7 +85,7 @@
              contributions.
 
     - QAWS : Integrates W(X)*F(X) over (A,B) with A<B finite,
-             and   W(X) = ((X-A)****ALFA)*((B-X)****BETA)*V(X)
+             and   W(X) = ((X-A)**ALFA)*((B-X)**BETA)*V(X)
              where V(X) = 1 or LOG(X-A) or LOG(B-X)
                             or LOG(X-A)*LOG(B-X)
              and   ALFA>(-1), BETA>(-1).
@@ -331,8 +326,8 @@
             REAL X
             F = 0.0E+00
             IF(X/=1.0E0/7.0E0 .AND. X/=2.0E0/3.0E0) F =
-           *  ABS(X-1.0E0/7.0E0)****(-0.25E0)*
-           *  ABS(X-2.0E0/3.0E0)****(-0.55E0)
+           *  ABS(X-1.0E0/7.0E0)**(-0.25E0)*
+           *  ABS(X-2.0E0/3.0E0)**(-0.55E0)
             RETURN
             END
 
@@ -475,3 +470,13 @@
             F = 1.0E0/(X*X+1.0E-4)
             RETURN
             END
+
+***
+ **References:**  (NONE)
+
+* REVISION HISTORY  (YYMMDD)
+   810401  DATE WRITTEN
+   890531  Changed all specific intrinsics to generic.  (WRB)
+   890531  REVISION DATE from Version 3.2
+   891214  Prologue converted to Version 4.0 format.  (BAB)
+   900723  PURPOSE section revised.  (WRB)
