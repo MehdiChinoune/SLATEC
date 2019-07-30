@@ -23,6 +23,7 @@ PURE SUBROUTINE ZMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
   USE service, ONLY : tiny_dp
+  USE IEEE_ARITHMETIC, ONLY : IEEE_IS_NORMAL
   !
   INTEGER, INTENT(IN) :: Kode, N
   INTEGER, INTENT(OUT) :: Nz
@@ -34,6 +35,7 @@ PURE SUBROUTINE ZMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   COMPLEX(DP) :: ck, cnorm, pt, p1, p2, rz, summ
   REAL(DP) :: ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, rho, &
     rho2, scle, tfnf, tst, x
+  REAL(DP), PARAMETER :: sqrt_tiny = SQRT( tiny_dp )
   !* FIRST EXECUTABLE STATEMENT  CMLRI
   scle = tiny_dp/Tol
   Nz = 0
@@ -164,6 +166,7 @@ PURE SUBROUTINE ZMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !-----------------------------------------------------------------------
   p2 = p2 + summ
   ap = ABS(p2)
+  IF( .NOT. IEEE_IS_NORMAL(ap) ) ap = ABS(p2/sqrt_tiny) * sqrt_tiny
   p1 = CMPLX(1._DP/ap,0._DP,DP)
   ck = EXP(pt)*p1
   pt = CONJG(p2)*p1
