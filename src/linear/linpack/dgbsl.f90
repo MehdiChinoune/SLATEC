@@ -1,13 +1,13 @@
-!** SGBSL
-PURE SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
+!** DGBSL
+PURE SUBROUTINE DGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !> Solve the real band system A*X=B or TRANS(A)*X=B using
-  !  the factors computed by SGBCO or SGBFA.
+  !  the factors computed by DGBCO or DGBFA.
   !***
   ! **Library:**   SLATEC (LINPACK)
   !***
   ! **Category:**  D2A2
   !***
-  ! **Type:**      SINGLE PRECISION (SGBSL-S, DGBSL-D, CGBSL-C)
+  ! **Type:**      DOUBLE PRECISION (SGBSL-S, DGBSL-D, CGBSL-C)
   !***
   ! **Keywords:**  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE
   !***
@@ -15,14 +15,14 @@ PURE SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !***
   ! **Description:**
   !
-  !     SGBSL solves the real band system
+  !     DGBSL solves the double precision band system
   !     A * X = B  or  TRANS(A) * X = B
-  !     using the factors computed by SBGCO or SGBFA.
+  !     using the factors computed by DGBCO or DGBFA.
   !
   !     On Entry
   !
-  !        ABD     REAL(LDA, N)
-  !                the output from SBGCO or SGBFA.
+  !        ABD     DOUBLE PRECISION(LDA, N)
+  !                the output from DGBCO or DGBFA.
   !
   !        LDA     INTEGER
   !                the leading dimension of the array  ABD .
@@ -37,9 +37,9 @@ PURE SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !                number of diagonals above the main diagonal.
   !
   !        IPVT    INTEGER(N)
-  !                the pivot vector from SBGCO or SGBFA.
+  !                the pivot vector from DGBCO or DGBFA.
   !
-  !        B       REAL(N)
+  !        B       DOUBLE PRECISION(N)
   !                the right hand side vector.
   !
   !        JOB     INTEGER
@@ -54,25 +54,25 @@ PURE SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !     Error Condition
   !
   !        A division by zero will occur if the input factor contains a
-  !        zero on the diagonal.  Technically, this indicates singularity,
+  !        zero on the diagonal.  Technically this indicates singularity
   !        but it is often caused by improper arguments or improper
   !        setting of LDA .  It will not occur if the subroutines are
-  !        called correctly and if SBGCO has set RCOND > 0.0
-  !        or SGBFA has set INFO = 0 .
+  !        called correctly and if DGBCO has set RCOND .GT. 0.0
+  !        or DGBFA has set INFO .EQ. 0 .
   !
   !     To compute  INVERSE(A) * C  where  C  is a matrix
   !     with  P  columns
-  !           CALL SBGCO(ABD,LDA,N,ML,MU,IPVT,RCOND,Z)
-  !           If (RCOND is too small) GO TO ...
+  !           CALL DGBCO(ABD,LDA,N,ML,MU,IPVT,RCOND,Z)
+  !           IF (RCOND is too small) GO TO ...
   !           DO 10 J = 1, P
-  !              CALL SGBSL(ABD,LDA,N,ML,MU,IPVT,C(1,J),0)
+  !              CALL DGBSL(ABD,LDA,N,ML,MU,IPVT,C(1,J),0)
   !        10 CONTINUE
   !
   !***
   ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
   !***
-  ! **Routines called:**  SAXPY, SDOT
+  ! **Routines called:**  DAXPY, DDOT
 
   !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
@@ -80,20 +80,20 @@ PURE SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
+  !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE blas, ONLY : SAXPY
+  USE blas, ONLY : DAXPY
 
   INTEGER, INTENT(IN) :: Lda, N, Ml, Mu, Job, Ipvt(N)
-  REAL(SP), INTENT(IN) :: Abd(Lda,N)
-  REAL(SP), INTENT(INOUT) :: B(N)
+  REAL(DP), INTENT(IN) :: Abd(Lda,N)
+  REAL(DP), INTENT(INOUT) :: B(N)
   !
   INTEGER :: k, kb, l, la, lb, lm, m, nm1
-  REAL(SP) :: t
-  !* FIRST EXECUTABLE STATEMENT  SGBSL
+  REAL(DP) :: t
+  !* FIRST EXECUTABLE STATEMENT  DGBSL
   m = Mu + Ml + 1
   nm1 = N - 1
-  IF( Job/=0 ) THEN
+  IF ( Job/=0 ) THEN
     !
     !        JOB = NONZERO, SOLVE  TRANS(A) * X = B
     !        FIRST SOLVE  TRANS(U)*Y = B
@@ -108,14 +108,14 @@ PURE SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
     !
     !        NOW SOLVE TRANS(L)*X = Y
     !
-    IF( Ml/=0 ) THEN
-      IF( nm1>=1 ) THEN
+    IF ( Ml/=0 ) THEN
+      IF ( nm1>=1 ) THEN
         DO kb = 1, nm1
           k = N - kb
           lm = MIN(Ml,N-k)
           B(k) = B(k) + DOT_PRODUCT(Abd(m+1:m+lm,k),B(k+1:k+lm))
           l = Ipvt(k)
-          IF( l/=k ) THEN
+          IF ( l/=k ) THEN
             t = B(l)
             B(l) = B(k)
             B(k) = t
@@ -128,17 +128,17 @@ PURE SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
     !        JOB = 0, SOLVE  A * X = B
     !        FIRST SOLVE L*Y = B
     !
-    IF( Ml/=0 ) THEN
-      IF( nm1>=1 ) THEN
+    IF ( Ml/=0 ) THEN
+      IF ( nm1>=1 ) THEN
         DO k = 1, nm1
           lm = MIN(Ml,N-k)
           l = Ipvt(k)
           t = B(l)
-          IF( l/=k ) THEN
+          IF ( l/=k ) THEN
             B(l) = B(k)
             B(k) = t
           END IF
-          CALL SAXPY(lm,t,Abd(m+1:m+lm,k),1,B(k+1:k+lm),1)
+          CALL DAXPY(lm,t,Abd(m+1,k),1,B(k+1),1)
         END DO
       END IF
     END IF
@@ -152,8 +152,8 @@ PURE SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
       la = m - lm
       lb = k - lm
       t = -B(k)
-      CALL SAXPY(lm,t,Abd(la:m-1,k),1,B(lb:k-1),1)
+      CALL DAXPY(lm,t,Abd(la,k),1,B(lb),1)
     END DO
   END IF
   !
-END SUBROUTINE SGBSL
+END SUBROUTINE DGBSL

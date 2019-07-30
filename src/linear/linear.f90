@@ -10,7 +10,7 @@ MODULE linpack
   PRIVATE
   PUBLIC :: CGBFA, CGEFA, CGECO, CPOCO, CPOSL, CGESL, CPOFA
   PUBLIC :: SGBFA, SGEFA, SGECO, SPOCO, SPOSL, SGESL, SGBSL, SPOFA
-  PUBLIC :: DGBFA, DGEFA, DGECO, DPOCO, DPOSL, DGESL
+  PUBLIC :: DGBFA, DGEFA, DGECO, DPOCO, DPOSL, DGESL, DGBSL
 
 CONTAINS
   include"linpack/csign1.f90"
@@ -22,6 +22,7 @@ CONTAINS
   include"linpack/cpofa.f90"
   include"linpack/cposl.f90"
   include"linpack/dgbfa.f90"
+  include"linpack/dgbsl.f90"
   include"linpack/dgeco.f90"
   include"linpack/dgefa.f90"
   include"linpack/dgesl.f90"
