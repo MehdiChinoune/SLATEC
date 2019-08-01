@@ -32,6 +32,7 @@ PURE SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   INTEGER :: i, nw
   COMPLEX(SP) :: cinu, cscl, ct, c1, c2, rct, st
   REAL(SP) :: act, acw, ascle, s1, s2, yy
+  REAL(SP), PARAMETER :: sqrt_tiny = SQRT( tiny_sp )
   !* FIRST EXECUTABLE STATEMENT  CWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS
@@ -82,6 +83,7 @@ PURE SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   ct = Zr*(c2+st*c1)
   act = ABS(ct)
+  IF( act<tiny_sp .OR. act==0._SP ) act = ABS(ct/sqrt_tiny)*sqrt_tiny
   rct = CMPLX(1._SP/act,0._SP,SP)
   ct = CONJG(ct)*rct
   cinu = cinu*rct*ct

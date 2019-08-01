@@ -63,7 +63,8 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-    USE slatec, ONLY : ZAIRY, ZBIRY, eps_dp, log10_radix_dp, min_exp_dp, max_exp_dp
+    USE slatec, ONLY : ZAIRY, ZBIRY, eps_dp, log10_radix_dp, min_exp_dp, max_exp_dp, huge_dp
+    USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -87,6 +88,7 @@ CONTAINS
     COMPLEX(DP) :: con1, con2, con3, cv, cw, cy, w(20), y(20), z, zr
     INTEGER :: i, icase, icl, ierr, il, ir, irb, irset, it, itl, k, &
       kdo(20), keps(20), kode, k1, k2, lflg, nz1, nz2, nz3, nz4
+    REAL(DP), PARAMETER :: sqrt_huge = SQRT( huge_dp )
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCAI
     IF( Kprint>=2 ) THEN
@@ -296,10 +298,14 @@ CONTAINS
               cw = y(1)*w(2)
               cy = y(2)*w(1)
               cy = cw - cy - cv
-              acy = ABS(y(1))*ABS(w(2))
-              acw = ABS(w(1))*ABS(y(2))
+              acw = ABS(cw)
+              IF( .NOT. IEEE_IS_FINITE(acw) ) acw = ABS(cw/sqrt_huge)*sqrt_huge
+              acy = ABS(y(2)*w(1))
+              IF( .NOT. IEEE_IS_FINITE(acy) ) acy = ABS(y(2)*w(1)/sqrt_huge)*sqrt_huge
               av = MAX(acw,acy,av)
-              er = ABS(cy)/av
+              acy = ABS(cy)
+              IF( .NOT. IEEE_IS_FINITE(acy) ) acy = ABS(cy/sqrt_huge)*sqrt_huge
+              er = acy/av
               IF( er>=ertol ) THEN
                 IF( lflg==0 ) THEN
                   IF( Kprint>=2 ) THEN
@@ -427,7 +433,8 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-    USE slatec, ONLY : ZBESH, ZUOIK, eps_dp, log10_radix_dp, min_exp_dp, max_exp_dp
+    USE slatec, ONLY : ZBESH, ZUOIK, eps_dp, log10_radix_dp, min_exp_dp, max_exp_dp, huge_dp
+    USE IEEE_ARITHMETIC, ONLY : IEEE_IS_FINITE
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -451,6 +458,7 @@ CONTAINS
       rl, rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20)
     INTEGER :: i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
       kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, nz2, n1
+    REAL(DP), PARAMETER :: sqrt_huge = SQRT( huge_dp )
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCBH
     IF( Kprint>=2 ) THEN
@@ -639,7 +647,9 @@ CONTAINS
                       !     Error relative to maximum term
                       !--------------------------------------------------------
                       aw = ABS(w(i+1))
+                      IF( .NOT. IEEE_IS_FINITE(aw) ) aw = ABS(w(i+1)/sqrt_huge)*sqrt_huge
                       ay = ABS(y(i))
+                      IF( .NOT. IEEE_IS_FINITE(ay) ) ay = ABS(y(i)/sqrt_huge)*sqrt_huge
                       az = LOG(aw) + LOG(ay)
                       az = ABS(az)
                       IF( az<=alim ) THEN
@@ -650,8 +660,12 @@ CONTAINS
                         cy = cw - cy - cv
                         acy = aw*ay
                         acw = ABS(w(i))*ABS(y(i+1))
+                        IF( .NOT. IEEE_IS_FINITE(acw) ) &
+                          acw = ABS(w(i)*y(i+1)/sqrt_huge)*sqrt_huge
                         av = MAX(acw,acy,av)
-                        er = ABS(cy)/av
+                        acy = ABS(cy)
+                        IF( .NOT. IEEE_IS_FINITE(acy) ) acy = ABS(cy/sqrt_huge)*sqrt_huge
+                        er = acy/av
                         aer(i) = er
                         IF( er>ertol ) mflg = 1
                       END IF
