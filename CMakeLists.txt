@@ -6,7 +6,7 @@ set( slatec_MAJOR_VERSION 4 )
 set( slatec_MINOR_VERSION 2 )
 set( slatec_VERSION  ${slatec_MAJOR_VERSION}.${slatec_MINOR_VERSION} )
 
-set ( CMAKE_CONFIGURATION_TYPES "Debug" "Release" "CodeCoverage" )
+set ( CMAKE_CONFIGURATION_TYPES "Debug" "Release" "CodeCoverage" "Fast" )
 
 enable_testing()
 
@@ -20,6 +20,7 @@ endif()
 if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 
   set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wall -Wimplicit-procedure -std=f2018" )
+  set( CMAKE_Fortran_FLAGS_FAST "-Ofast -flto" )
   set( CMAKE_Fortran_FLAGS_RELEASE "-O3 -flto" )
   set( CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -fcheck=all -ffpe-trap=zero,overflow,invalid -fbacktrace" )
   set ( CMAKE_Fortran_FLAGS_CODECOVERAGE "--coverage -g -O0" )
@@ -27,19 +28,22 @@ if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )
 
   set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -warn all -stand f18 -standard-semantics" )
+  set( CMAKE_Fortran_FLAGS_FAST "-Ofast -ipo" )
   set( CMAKE_Fortran_FLAGS_RELEASE "-O3 -ipo" )
   set( CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -check all -fpe-all=0 -traceback" )
   set ( CMAKE_Fortran_FLAGS_CODECOVERAGE "-prof-gen:srcpos -prof-dir=${CMAKE_BINARY_DIR}/prof/ -g -O0" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Flang" )
 
+  set( CMAKE_Fortran_FLAGS_FAST "${CMAKE_Fortran_FLAGS} -Ofast" )
   set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -g -Wall" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -O0 -g -Wall" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "PGI" )
 
+  set( CMAKE_Fortran_FLAGS_FAST "${CMAKE_Fortran_FLAGS} -Mallocatable=03 -fast" )
   set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -Mallocatable=03 -O3" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Minform=inform -Mallocatable=03 -Mstandard -g -C" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Minform=inform -Mallocatable=03 -Mstandard -O0 -g -C" )
 
 endif ()
 
