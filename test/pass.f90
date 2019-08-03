@@ -23,5 +23,6 @@ SUBROUTINE PASS(Lun,Icnt,Itest)
     WRITE (Lun,99002) Icnt
     99002 FORMAT (/' *****TEST NUMBER',I5,' FAILED**********')
   END IF
+  !
   RETURN
 END SUBROUTINE PASS

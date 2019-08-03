@@ -1,8 +1,7 @@
 !** ISMPL
 SUBROUTINE ISMPL(N,M,Indx)
   !> Generate integer sample.
-  !            This routine picks M "random" integers in the range 1 to
-  !            N without any repetitions.
+  !  This routine picks M "random" integers in the range 1 to N without any repetitions.
   !***
   ! **Library:**   SLATEC (SLAP)
   !***
@@ -22,7 +21,8 @@ SUBROUTINE ISMPL(N,M,Indx)
   !   890919  Changed to integer name ISMPL.  (MKS)
   !   890920  Converted prologue to SLATEC 4.0 format.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  USE slatec, ONLY : RAND
+  USE service, ONLY : SP
+  USE special_functions, ONLY : RAND
   !     .. Scalar Arguments ..
   INTEGER :: M, N
   !     .. Array Arguments ..
