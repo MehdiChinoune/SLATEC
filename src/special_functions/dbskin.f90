@@ -101,7 +101,7 @@ PURE SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  USE service, ONLY : log10_radix_dp, eps_dp, digits_dp, max_exp_dp, min_exp_dp
+  USE service, ONLY : log10_radix_dp, eps_dp, digits_dp, min_exp_dp
   !
   INTEGER, INTENT(IN) :: Kode, M, N
   INTEGER, INTENT(OUT) :: Ierr, Nz

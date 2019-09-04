@@ -56,14 +56,14 @@ ELEMENTAL SUBROUTINE D9B1MP(X,Ampl,Theta)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable name and code restructured to
   !           use IF-THEN-ELSE.  (RWC, WRB)
-  USE service, ONLY : eps_2_dp, eps_dp
+  USE service, ONLY : eps_dp
   !
   REAL(DP), INTENT(IN) :: X
   REAL(DP), INTENT(OUT) :: Ampl, Theta
   !
   REAL(DP) :: z
   INTEGER, PARAMETER :: nbm1 = 15, nbt12 = 16, nbm12 = 13, nbth1 = 14
-  REAL(DP), PARAMETER :: eta = 0.1_DP*eps_2_dp, xmax = 1._DP/eps_dp
+  REAL(DP), PARAMETER :: xmax = 1._DP/eps_dp
   REAL(DP), PARAMETER :: bm1cs(37) = [ +.1069845452618063014969985308538E+0_DP, &
     +.3274915039715964900729055143445E-2_DP, -.2987783266831698592030445777938E-4_DP, &
     +.8331237177991974531393222669023E-6_DP, -.4112665690302007304896381725498E-7_DP, &

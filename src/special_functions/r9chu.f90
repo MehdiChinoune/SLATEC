@@ -40,7 +40,7 @@ REAL(SP) ELEMENTAL FUNCTION R9CHU(A,B,Z)
   !
   INTEGER:: i, j
   REAL(SP) :: aa(4), ab, anbn, bb(4), bp, c2, ct1, ct2, ct3, d1z, g1, g2, g3, sab, x2i1
-  REAL(SP), PARAMETER :: eps = 4._SP*eps_sp, sqeps = SQRT(eps_sp)
+  REAL(SP), PARAMETER :: eps = 4._SP*eps_sp
   !* FIRST EXECUTABLE STATEMENT  R9CHU
   !
   bp = 1._SP + A - B

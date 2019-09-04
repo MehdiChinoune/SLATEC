@@ -41,7 +41,7 @@ REAL(DP) ELEMENTAL FUNCTION D9CHU(A,B,Z)
   !
   INTEGER :: i, j
   REAL(DP) :: aa(4), bb(4), ab, anbn, bp, ct1, ct2, ct3, c2, d1z, g1, g2, g3, sab, x2i1
-  REAL(DP), PARAMETER :: eps = 4._DP*eps_dp, sqeps = SQRT(eps_dp)
+  REAL(DP), PARAMETER :: eps = 4._DP*eps_dp
   !* FIRST EXECUTABLE STATEMENT  D9CHU
   bp = 1._DP + A - B
   ab = A*bp

@@ -85,14 +85,13 @@ REAL(DP) ELEMENTAL FUNCTION DE1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  USE service, ONLY : eps_2_dp, tiny_dp
+  USE service, ONLY : tiny_dp
   !
   REAL(DP), INTENT(IN) :: X
   !
   INTEGER, PARAMETER :: ntae10 = 17, ntae11 = 30, ntae12 = 22, nte11 = 18, &
     nte12 = 15, ntae13 = 25, ntae14 = 27
-  REAL(DP), PARAMETER :: eta = 0.1_DP*eps_2_dp, xmaxt = -LOG(tiny_dp), &
-    xmax = xmaxt - LOG(xmaxt)
+  REAL(DP), PARAMETER :: xmaxt = -LOG(tiny_dp), xmax = xmaxt - LOG(xmaxt)
   REAL(DP), PARAMETER :: ae10cs(50)  = [ +.3284394579616699087873844201881E-1_DP, &
     -.1669920452031362851476184343387E-1_DP, +.2845284724361346807424899853252E-3_DP, &
     -.7563944358516206489487866938533E-5_DP, +.2798971289450859157504843180879E-6_DP, &

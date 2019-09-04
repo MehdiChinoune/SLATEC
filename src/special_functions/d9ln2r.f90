@@ -43,15 +43,13 @@ REAL(DP) ELEMENTAL FUNCTION D9LN2R(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : eps_2_dp, eps_dp
+  USE service, ONLY : eps_2_dp
   !
   REAL(DP), INTENT(IN) :: X
   !
   INTEGER, PARAMETER :: ntln21 = 26, ntln22 = 20
   REAL(DP), PARAMETER :: eps = eps_2_dp, sqeps = SQRT(eps), txmax = 8._SP/sqeps, &
-    txbig = 6._SP/SQRT(sqeps), xmin = -1._DP + SQRT(eps_dp), &
-    xmax = txmax - (eps*txmax**2-2._DP*LOG(txmax))/(2._DP*eps*txmax), &
-    xbig = txbig - (sqeps*txbig**2-2._DP*LOG(txbig))/(2._DP*sqeps*txbig)
+    xmax = txmax - (eps*txmax**2-2._DP*LOG(txmax))/(2._DP*eps*txmax)
   REAL(DP), PARAMETER :: ln21cs(50) = [ +.18111962513478809875894953043071E+0_DP, &
     -.15627123192872462669625155541078E+0_DP, +.28676305361557275209540627102051E-1_DP, &
     -.55586996559481398781157725126781E-2_DP, +.11178976652299837657335666279727E-2_DP, &

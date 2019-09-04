@@ -27,10 +27,7 @@ CONTAINS
     INTEGER :: ierv(2), Lun
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, work(400)
     INTEGER :: ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
-    REAL(SP), PARAMETER :: pi = 0.31415926535897932E+01_SP
     REAL(SP), PARAMETER :: exact1 = 0.1154700538379252E+01_SP
-    REAL(SP), PARAMETER :: exact2 = 0.11780972450996172_SP
-    REAL(SP), PARAMETER :: exact3 = 0.1855802E+02_SP
     !* FIRST EXECUTABLE STATEMENT  CQAG
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAG QUICK CHECK''/)')
     !
@@ -138,10 +135,7 @@ CONTAINS
     INTEGER :: ierv(4), inf
     REAL(SP) :: abserr, bound, epmach, epsabs, epsrel, error, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
-    REAL(SP), PARAMETER :: exact0 = 2._SP, exact1 = 0.115470066904E1_SP
-    REAL(SP), PARAMETER :: exact2 = 0.909864525656E-02_SP
-    REAL(SP), PARAMETER :: exact3 = 0.31415926535897932E+01_SP
-    REAL(SP), PARAMETER :: exact4 = 0.19984914554328673E+04_SP
+    REAL(SP), PARAMETER :: exact0 = 2._SP
     !* FIRST EXECUTABLE STATEMENT  CQAGI
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAGI QUICK CHECK''/)')
     !
@@ -268,8 +262,6 @@ CONTAINS
     INTEGER :: ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
     REAL(SP), PARAMETER :: exact1 = 0.4285277667368085E+01_SP
-    REAL(SP), PARAMETER :: exact2 = 0.909864525656E-2_SP
-    REAL(SP), PARAMETER :: exact3 = 0.31415926535897932E+01_SP
     REAL(SP), PARAMETER :: p1 = 0.1428571428571428_SP
     REAL(SP), PARAMETER :: p2 = 0.6666666666666667_SP
     !* FIRST EXECUTABLE STATEMENT  CQAGP
@@ -410,10 +402,6 @@ CONTAINS
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(SP), PARAMETER :: exact0 = 2._SP
-    REAL(SP), PARAMETER :: exact1 = 0.115470066904E+01_SP
-    REAL(SP), PARAMETER :: exact2 = 0.909864525656E-02_SP
-    REAL(SP), PARAMETER :: exact3 = 0.31415926535897932E+01_SP
-    REAL(SP), PARAMETER :: exact4 = 0.19984914554328673E+04_SP
     !* FIRST EXECUTABLE STATEMENT  CQAGS
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAGS QUICK CHECK''/)')
     !
@@ -546,7 +534,6 @@ CONTAINS
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, c, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     REAL(SP), PARAMETER :: exact0 = -0.6284617285065624E+03_SP
-    REAL(SP), PARAMETER :: exact1 = 0.1855802E+01_SP
     !* FIRST EXECUTABLE STATEMENT  CQAWC
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAWC QUICK CHECK''/)')
     !
@@ -647,7 +634,6 @@ CONTAINS
     REAL(SP) :: a, abserr, epsabs, epmach, error, omega, result, work(1425)
     INTEGER :: ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
     REAL(SP), PARAMETER :: exact0 = 0.1422552162575912E+01_SP
-    REAL(SP), PARAMETER :: pi = 0.31415926535897932E+01_SP
     !* FIRST EXECUTABLE STATEMENT  CQAWF
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAWF QUICK CHECK''/)')
     !
@@ -887,7 +873,6 @@ CONTAINS
       alfa, beta, result, work(800)
     INTEGER :: ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
     REAL(SP), PARAMETER :: exact0 = 0.5350190569223644_SP
-    REAL(SP), PARAMETER :: exact1 = 0.1998491554328673E+04_SP
     !* FIRST EXECUTABLE STATEMENT  CQAWS
     IF( Kprint>=2 ) WRITE (Lun,'(''1QAWS QUICK CHECK''/)')
     !
@@ -990,7 +975,6 @@ CONTAINS
     REAL(SP) :: a, abserr, b, epmach, epsabs, epsrel, error, result, uflow
     INTEGER :: ier, ierv(1), ip, Ipass, Kprint, neval
     REAL(SP), PARAMETER :: exact1 = 0.7281029132255818_SP
-    REAL(SP), PARAMETER :: exact2 = 0.1E+02_SP
     !* FIRST EXECUTABLE STATEMENT  CQNG
     IF( Kprint>=2 ) WRITE (Lun,'(''1QNG QUICK CHECK''/)')
     !

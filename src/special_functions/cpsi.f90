@@ -29,7 +29,7 @@ COMPLEX(SP) ELEMENTAL FUNCTION CPSI(Zin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  USE service, ONLY : eps_2_sp, eps_sp, tiny_sp, huge_sp
+  USE service, ONLY : eps_2_sp, tiny_sp, huge_sp
   !
   COMPLEX(SP), INTENT(IN) :: Zin
   !
@@ -39,8 +39,7 @@ COMPLEX(SP) ELEMENTAL FUNCTION CPSI(Zin)
   INTEGER, PARAMETER :: nterm = INT( -0.30*LOG(eps_2_sp) )
   ! MAYBE BOUND = N*(0.1*EPS)**(-1/(2*N-1)) / (PI*EXP(1))
   REAL(SP), PARAMETER ::  bound = 0.1171_SP*nterm*(0.1_SP*eps_2_sp)**(-1._SP/(2*nterm-1)), &
-    dxrel = SQRT(eps_sp), rmin = EXP(MAX(LOG(tiny_sp),-LOG(huge_sp))+0.011_SP), &
-    rbig = 1._SP/eps_2_sp
+    rmin = EXP(MAX(LOG(tiny_sp),-LOG(huge_sp))+0.011_SP), rbig = 1._SP/eps_2_sp
   REAL(SP), PARAMETER :: bern(13) = [ .83333333333333333E-1_SP, -.83333333333333333E-2_SP, &
     .39682539682539683E-2_SP, -.41666666666666667E-2_SP, .75757575757575758E-2_SP, &
     -.21092796092796093E-1_SP, .83333333333333333E-1_SP, -.44325980392156863E0_SP, &

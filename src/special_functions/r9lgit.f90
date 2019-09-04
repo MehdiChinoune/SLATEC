@@ -31,13 +31,13 @@ REAL(SP) ELEMENTAL FUNCTION R9LGIT(A,X,Algap1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : eps_2_sp, eps_sp
+  USE service, ONLY : eps_2_sp
   !
   REAL(SP), INTENT(IN) :: A, Algap1, X
   !
   INTEGER :: k
   REAL(SP) :: a1x, ax, fk, hstar, p, r, s, t
-  REAL(SP), PARAMETER :: eps = 0.5_SP*eps_2_sp, sqeps = SQRT(eps_sp)
+  REAL(SP), PARAMETER :: eps = 0.5_SP*eps_2_sp
   !* FIRST EXECUTABLE STATEMENT  R9LGIT
   !
   IF( X<=0._SP .OR. A<X ) ERROR STOP 'R9LGIT : X SHOULD BE > 0.0 AND <= A'

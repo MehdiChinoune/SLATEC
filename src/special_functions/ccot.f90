@@ -28,12 +28,10 @@ COMPLEX(SP) ELEMENTAL FUNCTION CCOT(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.  (WRB)
-  USE service, ONLY : eps_sp
   !
   COMPLEX(SP), INTENT(IN) :: Z
   !
   REAL(SP) :: den, sn2x, x2, y2
-  REAL(SP), PARAMETER :: sqeps = SQRT(eps_sp)
   !* FIRST EXECUTABLE STATEMENT  CCOT
   !
   x2 = 2._SP*REAL(Z)

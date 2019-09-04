@@ -55,13 +55,12 @@ REAL(SP) ELEMENTAL FUNCTION GAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : eps_2_sp, eps_sp, tiny_sp
+  USE service, ONLY : eps_2_sp
   !
   REAL(SP), INTENT(IN) :: A, X
   !
   REAL(SP) :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
-  REAL(SP), PARAMETER :: alneps = -LOG(eps_2_sp), sqeps = SQRT(eps_sp), &
-    bot = LOG(tiny_sp)
+  REAL(SP), PARAMETER :: alneps = -LOG(eps_2_sp)
   !* FIRST EXECUTABLE STATEMENT  GAMIT
   !
   IF( X<0._SP ) ERROR STOP 'GAMIT : X IS NEGATIVE'

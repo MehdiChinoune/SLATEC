@@ -37,10 +37,10 @@ REAL(SP) ELEMENTAL FUNCTION ALNREL(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTIONsection.  (WRB)
-  USE service, ONLY : eps_sp
+  !
   REAL(SP), INTENT(IN) :: X
+  !
   INTEGER, PARAMETER :: nlnrel = 11
-  REAL(SP), PARAMETER :: xmin = -1._SP + SQRT(eps_sp)
   REAL(SP), PARAMETER :: alnrcs(23) = [ 1.0378693562743770_SP, -.13364301504908918_SP, &
     .019408249135520563_SP, -.003010755112753577_SP, .000486946147971548_SP, &
     -.000081054881893175_SP, .000013778847799559_SP,-.000002380221089435_SP, &

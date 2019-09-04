@@ -482,7 +482,6 @@ CONTAINS
       (8._SP,6._SP), (28._SP,8._SP), (-49._SP,-24._SP), (7._SP,2._SP),&
       (-8._SP,-6._SP), (-28._SP,-8._SP), (48._SP,24._SP) ]
     COMPLEX(SP), PARAMETER :: coeff2(2) = [ (1._SP,1._SP), (1._SP,3._SP) ]
-    COMPLEX(SP), PARAMETER :: coeff3(2) = [ (0._SP,0._SP), (1._SP,3._SP) ]
     COMPLEX(SP), PARAMETER :: chk1(8) = [ (4._SP,2._SP), (3._SP,0._SP), (-2._SP,0._SP), &
       (2._SP,0._SP), (0._SP,-1._SP), (-1._SP,0._SP), (0._SP,1._SP), (1._SP,0._SP) ]
     COMPLEX(SP), PARAMETER :: chk2 = (-2._SP,-1._SP)

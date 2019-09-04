@@ -8,8 +8,6 @@ set( slatec_VERSION  ${slatec_MAJOR_VERSION}.${slatec_MINOR_VERSION} )
 
 set ( CMAKE_CONFIGURATION_TYPES "Debug" "Release" "CodeCoverage" "Fast" )
 
-enable_testing()
-
 set( CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}" )
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -19,7 +17,7 @@ endif()
 
 if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 
-  set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wall -Wimplicit-procedure -std=f2018" )
+  set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wall -Wimplicit-procedure -Wunused-parameter -std=f2018" )
   set( CMAKE_Fortran_FLAGS_FAST "-Ofast -flto" )
   set( CMAKE_Fortran_FLAGS_RELEASE "-O3 -flto" )
   set( CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -fcheck=all -ffpe-trap=zero,overflow,invalid -fbacktrace" )
@@ -56,4 +54,5 @@ find_package(LAPACK REQUIRED)
 
 add_subdirectory(src)
 
+enable_testing()
 add_subdirectory(test)

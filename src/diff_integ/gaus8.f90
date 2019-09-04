@@ -56,10 +56,9 @@ PURE SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   !        ANS - computed value of integral
   !        IERR- a status code
   !            --Normal codes
-  !               1 ANS most likely meets requested error tolerance,
-  !                 or A=B.
-  !              -1 A and B are too nearly equal to allow normal
-  !                 integration.  ANS is set to zero.
+  !               1 ANS most likely meets requested error tolerance, or A=B.
+  !              -1 A and B are too nearly equal to allow normal integration.
+  !                 ANS is set to zero.
   !            --Abnormal code
   !               2 ANS probably does not meet requested error tolerance.
   !

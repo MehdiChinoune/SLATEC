@@ -55,13 +55,12 @@ REAL(DP) ELEMENTAL FUNCTION DGAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  USE service, ONLY : eps_2_dp, eps_dp, tiny_dp
+  USE service, ONLY : eps_2_dp
   !
   REAL(DP), INTENT(IN) :: A, X
   !
   REAL(DP) :: aeps, ainta, algap1, alng, alx, h, sga, sgngam, t
-  REAL(DP), PARAMETER :: alneps = -LOG(eps_2_dp), sqeps = SQRT(eps_dp), &
-    bot = LOG(tiny_dp)
+  REAL(DP), PARAMETER :: alneps = -LOG(eps_2_dp)
   !* FIRST EXECUTABLE STATEMENT  DGAMIT
   IF( X<0._DP ) ERROR STOP 'DGAMIT : X IS NEGATIVE'
   !

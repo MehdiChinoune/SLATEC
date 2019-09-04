@@ -1,9 +1,9 @@
 MODULE TEST53_MOD
   USE service, ONLY : SP, DP
   IMPLICIT NONE
-  REAL(DP) :: EPS, RP, SVEps, TOL
-  INTEGER :: IERp, IERr, NORd, NORdp
-  REAL(DP) :: R(11)
+  REAL(DP) :: eps_com, rp_com, sveps_com, tol_com
+  INTEGER :: ierp_com, ierr_com, nord_com, nordp_com
+  REAL(DP) :: r_com(11)
 
 CONTAINS
   !** DCMPAR
@@ -44,14 +44,14 @@ CONTAINS
     itemp(2) = 0
     itemp(3) = 0
     itemp(4) = 0
-    ss = SVEps - EPS
-    nrdp = NORdp - NORd
-    rpp = RP - R(11)
-    ierpp = IERp - IERr
-    IF( ABS(ss)<=TOL .OR. Icnt<=2 .OR. Icnt>=6 ) itemp(1) = 1
+    ss = sveps_com - eps_com
+    nrdp = nordp_com - nord_com
+    rpp = rp_com - r_com(11)
+    ierpp = ierp_com - ierr_com
+    IF( ABS(ss)<=tol_com .OR. Icnt<=2 .OR. Icnt>=6 ) itemp(1) = 1
     IF( ABS(nrdp)==0 ) itemp(2) = 1
     IF( Icnt==2 ) itemp(2) = 1
-    IF( ABS(rpp)<=TOL ) itemp(3) = 1
+    IF( ABS(rpp)<=tol_com ) itemp(3) = 1
     IF( ABS(ierpp)==0 ) itemp(4) = 1
     !
     !     Check to see if all four tests were good.
@@ -108,7 +108,7 @@ CONTAINS
       itest(i) = 0
     END DO
     icnt = 0
-    TOL = SQRT(eps_dp)
+    tol_com = SQRT(eps_dp)
     m = 11
     DO i = 1, m
       x(i) = i - 6
@@ -119,13 +119,13 @@ CONTAINS
     !     Input EPS is negative - specified level
     !
     w(1) = -1._DP
-    EPS = -0.01_DP
-    SVEps = EPS
+    eps_com = -0.01_DP
+    sveps_com = eps_com
     maxord = 8
-    NORdp = 4
-    RP = 625._DP
-    IERp = 1
-    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+    nordp_com = 4
+    rp_com = 625._DP
+    ierp_com = 1
+    CALL DPOLFT(m,x,y,w,maxord,nord_com,eps_com,r_com,ierr_com,a)
     !
     !     See if test passed
     !
@@ -138,8 +138,8 @@ CONTAINS
         WRITE (Lun,FMT=99003)
         WRITE (Lun,FMT=99004)
         IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
-          WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
-          WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
+          WRITE (Lun,FMT=99005) sveps_com, nordp_com, rp_com, ierp_com
+          WRITE (Lun,FMT=99006) eps_com, nord_com, r_com(11), ierr_com
         END IF
         !
         !     Send message indicating passage or failure of test
@@ -150,9 +150,9 @@ CONTAINS
     !
     !     Input EPS is negative - computed level
     !
-    EPS = -1._DP
-    SVEps = EPS
-    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+    eps_com = -1._DP
+    sveps_com = eps_com
+    CALL DPOLFT(m,x,y,w,maxord,nord_com,eps_com,r_com,ierr_com,a)
     !
     !     See if test passed
     !
@@ -165,8 +165,8 @@ CONTAINS
         WRITE (Lun,FMT=99007)
         IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
-          WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
-          WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
+          WRITE (Lun,FMT=99005) sveps_com, nordp_com, rp_com, ierp_com
+          WRITE (Lun,FMT=99006) eps_com, nord_com, r_com(11), ierr_com
         END IF
         !
         !     Send message indicating passage or failure of test
@@ -178,11 +178,11 @@ CONTAINS
     !     Input EPS is zero
     !
     w(1) = -1._DP
-    EPS = 0._DP
-    SVEps = EPS
-    NORdp = 5
+    eps_com = 0._DP
+    sveps_com = eps_com
+    nordp_com = 5
     maxord = 5
-    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+    CALL DPOLFT(m,x,y,w,maxord,nord_com,eps_com,r_com,ierr_com,a)
     !
     !     See if test passed
     !
@@ -195,8 +195,8 @@ CONTAINS
         WRITE (Lun,FMT=99009)
         IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
-          WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
-          WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
+          WRITE (Lun,FMT=99005) sveps_com, nordp_com, rp_com, ierp_com
+          WRITE (Lun,FMT=99006) eps_com, nord_com, r_com(11), ierr_com
         END IF
         !
         !     Send message indicating passage or failure of test
@@ -207,11 +207,11 @@ CONTAINS
     !
     !     Input EPS is positive
     !
-    IERp = 1
-    NORdp = 4
-    EPS = 75._DP*eps_dp
-    SVEps = EPS
-    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+    ierp_com = 1
+    nordp_com = 4
+    eps_com = 75._DP*eps_dp
+    sveps_com = eps_com
+    CALL DPOLFT(m,x,y,w,maxord,nord_com,eps_com,r_com,ierr_com,a)
     !
     !     See if test passed
     !
@@ -224,8 +224,8 @@ CONTAINS
         WRITE (Lun,FMT=99010)
         IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
-          WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
-          WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
+          WRITE (Lun,FMT=99005) sveps_com, nordp_com, rp_com, ierp_com
+          WRITE (Lun,FMT=99006) eps_com, nord_com, r_com(11), ierr_com
         END IF
         !
         !     Send message indicating passage or failure of test
@@ -236,7 +236,7 @@ CONTAINS
     !
     !     Improper input
     !
-!    IERp = 2
+!    ierp_com = 2
 !    m = -2
     !
     !     Check for suppression of printing.
@@ -251,17 +251,17 @@ CONTAINS
     !
 !    IF( Kprint>=3 ) WRITE (Lun,99001)
 !    99001 FORMAT (/' Invalid input')
-!    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+!    CALL DPOLFT(m,x,y,w,maxord,nord_com,EPS,r_com,ierr_com,a)
     !
     !     See if test passed
     !
     icnt = icnt + 1
     itest(icnt) = 1
-!    IF( IERr==2 ) THEN
+!    IF( ierr_com==2 ) THEN
 !      itest(icnt) = 1
-!      IF( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', IERr
+!      IF( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', ierr_com
 !    ELSEIF( Kprint>=2 ) THEN
-!      WRITE (Lun,99011) 'FAILED', IERr
+!      WRITE (Lun,99011) 'FAILED', ierr_com
 !    END IF
     !
     !     Check for suppression of printing.
@@ -284,13 +284,13 @@ CONTAINS
     !
     m = 11
     w(1) = -1._DP
-    EPS = 5._DP*eps_dp
-    SVEps = EPS
-    RP = 553._DP
+    eps_com = 5._DP*eps_dp
+    sveps_com = eps_com
+    rp_com = 553._DP
     maxord = 2
-    IERp = 3
-    NORdp = 2
-    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+    ierp_com = 3
+    nordp_com = 2
+    CALL DPOLFT(m,x,y,w,maxord,nord_com,eps_com,r_com,ierr_com,a)
     !
     !     See if test passed
     !
@@ -303,8 +303,8 @@ CONTAINS
         WRITE (Lun,FMT=99012)
         IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
-          WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
-          WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
+          WRITE (Lun,FMT=99005) sveps_com, nordp_com, rp_com, ierp_com
+          WRITE (Lun,FMT=99006) eps_com, nord_com, r_com(11), ierr_com
         END IF
         !
         !     Send message indicating passage or failure of test
@@ -315,13 +315,13 @@ CONTAINS
     !
     !     MAXORD too small to meet statistical test
     !
-    NORdp = 4
-    IERp = 4
-    RP = 625._DP
-    EPS = -0.01_DP
-    SVEps = EPS
+    nordp_com = 4
+    ierp_com = 4
+    rp_com = 625._DP
+    eps_com = -0.01_DP
+    sveps_com = eps_com
     maxord = 5
-    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+    CALL DPOLFT(m,x,y,w,maxord,nord_com,eps_com,r_com,ierr_com,a)
     !
     !     See if test passed
     !
@@ -334,8 +334,8 @@ CONTAINS
         WRITE (Lun,FMT=99013)
         IF( Kprint>2 .OR. itest(icnt)/=1 ) THEN
           WRITE (Lun,FMT=99008) maxord
-          WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
-          WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
+          WRITE (Lun,FMT=99005) sveps_com, nordp_com, rp_com, ierp_com
+          WRITE (Lun,FMT=99006) eps_com, nord_com, r_com(11), ierr_com
         END IF
         !
         !     Send message indicating passage or failure of test
@@ -347,27 +347,27 @@ CONTAINS
     !     Test DPCOEF
     !
     maxord = 6
-    EPS = 0._DP
-    SVEps = EPS
+    eps_com = 0._DP
+    sveps_com = eps_com
     y(6) = 1._DP
     DO i = 1, m
       w(i) = 1._DP/(y(i)**2)
     END DO
     y(6) = 0._DP
-    CALL DPOLFT(m,x,y,w,maxord,NORd,EPS,R,IERr,a)
+    CALL DPOLFT(m,x,y,w,maxord,nord_com,eps_com,r_com,ierr_com,a)
     CALL DPCOEF(4,5._DP,tc,a)
     !
     !     See if test passed
     !
     icnt = icnt + 1
-    IF( ABS(R(11)-tc(1))<=TOL ) itest(icnt) = 1
+    IF( ABS(r_com(11)-tc(1))<=tol_com ) itest(icnt) = 1
     !
     !     Check for suppression of printing
     !
     IF( Kprint/=0 ) THEN
       IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99014)
-        IF( Kprint>2 .OR. itest(icnt)/=1 ) WRITE (Lun,FMT=99015) R(11), tc(1)
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) WRITE (Lun,FMT=99015) r_com(11), tc(1)
         !
         !     Send message indicating passage or failure of test
         !
@@ -383,7 +383,7 @@ CONTAINS
     !     See if test passed
     !
     icnt = icnt + 1
-    IF( ABS(R(8)-yfit)<=TOL ) itest(icnt) = 1
+    IF( ABS(r_com(8)-yfit)<=tol_com ) itest(icnt) = 1
     !
     !     Check for suppression of printing
     !
@@ -391,7 +391,7 @@ CONTAINS
       IF( Kprint/=1 .OR. itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99016)
         WRITE (Lun,FMT=99017)
-        IF( Kprint>2 .OR. itest(icnt)/=1 ) WRITE (Lun,FMT=99018) x(8), R(8), yfit
+        IF( Kprint>2 .OR. itest(icnt)/=1 ) WRITE (Lun,FMT=99018) x(8), r_com(8), yfit
         !
         !     Send message indicating passage or failure of test
         !

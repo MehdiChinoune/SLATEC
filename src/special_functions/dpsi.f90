@@ -45,14 +45,14 @@ REAL(DP) ELEMENTAL FUNCTION DPSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
-  USE service, ONLY : eps_2_dp, eps_dp
+  USE service, ONLY : eps_2_dp
   !
   REAL(DP), INTENT(IN) :: X
   !
   INTEGER :: i, n
   REAL(DP) :: aux, y
   INTEGER, PARAMETER :: ntpsi = 23, ntapsi = 6
-  REAL(DP), PARAMETER :: xbig = 1._DP/SQRT(eps_2_dp), dxrel = SQRT(eps_dp)
+  REAL(DP), PARAMETER :: xbig = 1._DP/SQRT(eps_2_dp)
   REAL(DP), PARAMETER :: psics(42) = [ -.38057080835217921520437677667039E-1_DP, &
     +.49141539302938712748204699654277E+0_DP, -.56815747821244730242892064734081E-1_DP, &
     +.83578212259143131362775650747862E-2_DP, -.13332328579943425998079274172393E-2_DP, &

@@ -31,13 +31,13 @@ REAL(DP) ELEMENTAL FUNCTION D9LGIT(A,X,Algap1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  USE service, ONLY : eps_2_dp, eps_dp
+  USE service, ONLY : eps_2_dp
   !
   REAL(DP), INTENT(IN) :: A, X, Algap1
   !
   INTEGER :: k
   REAL(DP) :: ax, a1x, fk, hstar, p, r, s, t
-  REAL(DP), PARAMETER :: eps = 0.5_DP*eps_2_dp, sqeps = SQRT(eps_dp)
+  REAL(DP), PARAMETER :: eps = 0.5_DP*eps_2_dp
   !* FIRST EXECUTABLE STATEMENT  D9LGIT
   !
   IF( X<=0._DP .OR. A<X ) ERROR STOP 'D9LGIT : X SHOULD BE > 0.0 AND <= A'
