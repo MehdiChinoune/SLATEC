@@ -107,6 +107,7 @@ PURE SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   REAL(SP), INTENT(INOUT) :: A(Nrda,Nuk), B(Neq), Work(*), X(Nuk)
   !
   INTEGER :: ip, is, iter, kc, kd, ks, kt, kv, kz
+  REAL(SP) :: dumb(Neq)
   !
   !* FIRST EXECUTABLE STATEMENT  SODS
   iter = 0
@@ -119,7 +120,8 @@ PURE SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   kt = kv + Nuk
   kc = kt + Nuk
   !
-  CALL LSSODS(A,X,B,Neq,Nuk,Nrda,Iflag,Iwork(1),Iwork(is),A,Work(kd),&
+  dumb = B
+  CALL LSSODS(A,X,dumb,Neq,Nuk,Nrda,Iflag,Iwork(1),Iwork(is),A,Work(kd),&
     Iwork(ip),iter,Work(1),Work(ks),Work(kz),B,Work(kv),Work(kt),Work(kc))
   !
 END SUBROUTINE SODS

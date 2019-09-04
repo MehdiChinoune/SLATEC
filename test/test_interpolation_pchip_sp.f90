@@ -441,7 +441,7 @@ CONTAINS
     !  DECLARATIONS.
     !
     INTEGER :: i, ierr, nerr, next(2)
-    REAL(SP) :: d(10), dum(1), f(10), temp, x(10)
+    REAL(SP) :: d(10), dum1(1), dum2(1), dum3(1), f(10), temp, x(10)
     LOGICAL :: skip
     !
     !  INITIALIZE.
@@ -462,19 +462,19 @@ CONTAINS
     !  FIRST, TEST CHFEV AND CHFDV.
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
-    CALL CHFEV(0._SP,1._SP,3._SP,7._SP,3._SP,6._SP,0,dum,dum,next,ierr)
+    CALL CHFEV(0._SP,1._SP,3._SP,7._SP,3._SP,6._SP,0,dum1,dum2,next,ierr)
     IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
-    CALL CHFEV(1._SP,1._SP,3._SP,7._SP,3._SP,6._SP,1,dum,dum,next,ierr)
+    CALL CHFEV(1._SP,1._SP,3._SP,7._SP,3._SP,6._SP,1,dum1,dum2,next,ierr)
     IF( ierr /= -2 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
-    CALL CHFDV(0._SP,1._SP,3._SP,7._SP,3._SP,6._SP,0,dum,dum,dum,next,ierr)
+    CALL CHFDV(0._SP,1._SP,3._SP,7._SP,3._SP,6._SP,0,dum1,dum2,dum3,next,ierr)
     IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
-    CALL CHFDV(1._SP,1._SP,3._SP,7._SP,3._SP,6._SP,1,dum,dum,dum,next,ierr)
+    CALL CHFDV(1._SP,1._SP,3._SP,7._SP,3._SP,6._SP,1,dum1,dum2,dum3,next,ierr)
     IF( ierr /= -2 ) nerr = nerr + 1
     !
     !  SET UP PCH DEFINITION.
@@ -495,32 +495,32 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
     skip = .FALSE.
-    CALL PCHFE(1,x,f,d,1,skip,0,dum,dum,ierr)
+    CALL PCHFE(1,x,f,d,1,skip,0,dum1,dum2,ierr)
     IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -3
     skip = .FALSE.
-    CALL PCHFE(N,x,f,d,1,skip,0,dum,dum,ierr)
+    CALL PCHFE(N,x,f,d,1,skip,0,dum1,dum2,ierr)
     IF( ierr /= -3 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -4
     skip = .TRUE.
-    CALL PCHFE(N,x,f,d,1,skip,0,dum,dum,ierr)
+    CALL PCHFE(N,x,f,d,1,skip,0,dum1,dum2,ierr)
     IF( ierr /= -4 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
     skip = .FALSE.
-    CALL PCHFD(1,x,f,d,1,skip,0,dum,dum,dum,ierr)
+    CALL PCHFD(1,x,f,d,1,skip,0,dum1,dum2,dum3,ierr)
     IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -3
     skip = .FALSE.
-    CALL PCHFD(N,x,f,d,1,skip,0,dum,dum,dum,ierr)
+    CALL PCHFD(N,x,f,d,1,skip,0,dum1,dum2,dum3,ierr)
     IF( ierr /= -3 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -4
     skip = .TRUE.
-    CALL PCHFD(N,x,f,d,1,skip,0,dum,dum,dum,ierr)
+    CALL PCHFD(N,x,f,d,1,skip,0,dum1,dum2,dum3,ierr)
     IF( ierr /= -4 ) nerr = nerr + 1
     !
     !  SUMMARIZE RESULTS.

@@ -79,7 +79,9 @@ PURE SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   INTEGER, INTENT(IN) :: N, Ifac(15)
   REAL(SP), INTENT(IN) :: Wa(2*N)
   REAL(SP), INTENT(INOUT) :: Ch(2*N), C(2*N)
+  !
   INTEGER :: i, idl1, ido, idot, ip, iw, ix2, ix3, ix4, k1, l1, l2, n2, na, nac, nf
+  REAL(SP) :: dum(2*N)
   !* FIRST EXECUTABLE STATEMENT  CFFTB1
   nf = Ifac(2)
   na = 0
@@ -117,9 +119,11 @@ PURE SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
       na = 1 - na
     ELSEIF( ip/=5 ) THEN
       IF( na/=0 ) THEN
-        CALL PASSB(nac,idot,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw:))
+        dum = Ch
+        CALL PASSB(nac,idot,ip,l1,idl1,dum,Ch,Ch,C,C,Wa(iw:))
       ELSE
-        CALL PASSB(nac,idot,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw:))
+        dum = C
+        CALL PASSB(nac,idot,ip,l1,idl1,dum,C,C,Ch,Ch,Wa(iw:))
       END IF
       IF( nac/=0 ) na = 1 - na
     ELSE

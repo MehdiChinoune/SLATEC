@@ -444,7 +444,7 @@ CONTAINS
     !  DECLARATIONS.
     !
     INTEGER :: i, ierr, nerr, next(2)
-    REAL(DP) :: d(10), dum(1), f(10), temp, x(10)
+    REAL(DP) :: d(10), dum1(1), dum2(1), dum3(1), f(10), temp, x(10)
     LOGICAL :: skip
     !  INITIALIZE.
     INTEGER, PARAMETER :: N = 10
@@ -463,19 +463,19 @@ CONTAINS
     !  FIRST, TEST DCHFEV AND DCHFDV.
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
-    CALL DCHFEV(0._DP,1._DP,3._DP,7._DP,3._DP,6._DP,0,dum,dum,next,ierr)
+    CALL DCHFEV(0._DP,1._DP,3._DP,7._DP,3._DP,6._DP,0,dum1,dum2,next,ierr)
     IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
-    CALL DCHFEV(1._DP,1._DP,3._DP,7._DP,3._DP,6._DP,1,dum,dum,next,ierr)
+    CALL DCHFEV(1._DP,1._DP,3._DP,7._DP,3._DP,6._DP,1,dum1,dum2,next,ierr)
     IF( ierr /= -2 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
-    CALL DCHFDV(0._DP,1._DP,3._DP,7._DP,3._DP,6._DP,0,dum,dum,dum,next,ierr)
+    CALL DCHFDV(0._DP,1._DP,3._DP,7._DP,3._DP,6._DP,0,dum1,dum2,dum3,next,ierr)
     IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -2
-    CALL DCHFDV(1._DP,1._DP,3._DP,7._DP,3._DP,6._DP,1,dum,dum,dum,next,ierr)
+    CALL DCHFDV(1._DP,1._DP,3._DP,7._DP,3._DP,6._DP,1,dum1,dum2,dum3,next,ierr)
     IF( ierr /= -2 ) nerr = nerr + 1
     !
     !  SET UP PCH DEFINITION.
@@ -496,32 +496,32 @@ CONTAINS
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
     skip = .FALSE.
-    CALL DPCHFE(1,x,f,d,1,skip,0,dum,dum,ierr)
+    CALL DPCHFE(1,x,f,d,1,skip,0,dum1,dum2,ierr)
     IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -3
     skip = .FALSE.
-    CALL DPCHFE(N,x,f,d,1,skip,0,dum,dum,ierr)
+    CALL DPCHFE(N,x,f,d,1,skip,0,dum1,dum2,ierr)
     IF( ierr /= -3 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -4
     skip = .TRUE.
-    CALL DPCHFE(N,x,f,d,1,skip,0,dum,dum,ierr)
+    CALL DPCHFE(N,x,f,d,1,skip,0,dum1,dum2,ierr)
     IF( ierr /= -4 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -1
     skip = .FALSE.
-    CALL DPCHFD(1,x,f,d,1,skip,0,dum,dum,dum,ierr)
+    CALL DPCHFD(1,x,f,d,1,skip,0,dum1,dum2,dum3,ierr)
     IF( ierr /= -1 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -3
     skip = .FALSE.
-    CALL DPCHFD(N,x,f,d,1,skip,0,dum,dum,dum,ierr)
+    CALL DPCHFD(N,x,f,d,1,skip,0,dum1,dum2,dum3,ierr)
     IF( ierr /= -3 ) nerr = nerr + 1
     !
     IF( Kprint>=3 ) WRITE (Lout,99005) -4
     skip = .TRUE.
-    CALL DPCHFD(N,x,f,d,1,skip,0,dum,dum,dum,ierr)
+    CALL DPCHFD(N,x,f,d,1,skip,0,dum1,dum2,dum3,ierr)
     IF( ierr /= -4 ) nerr = nerr + 1
     !
     !  SUMMARIZE RESULTS.

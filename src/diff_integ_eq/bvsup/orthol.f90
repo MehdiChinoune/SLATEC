@@ -86,8 +86,8 @@ PURE SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   REAL(SP), INTENT(OUT) :: Cols(N), Cs(N), Diag(N), Scales(N)
   !
   INTEGER :: j, jcol, k, kp, l, mk
-  REAL(SP) :: acc, akk, anorm, as, asave, css, diagk, dum(1), sad, sc, sig, sigma, &
-    sruro, uro
+  REAL(SP) :: acc, akk, anorm, as, asave, css, diagk, dum1(1), dum2(1), sad, sc, &
+    sig, sigma, sruro, uro
   !
   !- *********************************************************************
   !
@@ -96,7 +96,8 @@ PURE SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !
   !* FIRST EXECUTABLE STATEMENT  ORTHOL
   uro = eps_2_sp
-  dum = 0._SP
+  dum1 = 0._SP
+  dum2 = 0._SP
   !
   !- *********************************************************************
   !
@@ -120,7 +121,7 @@ PURE SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
     !
     !     PERFORM COLUMN SCALING ON A WHEN SPECIFIED
     !
-    CALL CSCALE(A,Nrda,M,N,Cols,Cs,dum,dum,anorm,Scales,Iscale,0)
+    CALL CSCALE(A,Nrda,M,N,Cols,Cs,dum1,dum2,anorm,Scales,Iscale,0)
     !
     anorm = SQRT(anorm)
     !

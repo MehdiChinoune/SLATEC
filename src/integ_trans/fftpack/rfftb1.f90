@@ -92,7 +92,9 @@ PURE SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   INTEGER, INTENT(IN) :: N, Ifac(15)
   REAL(SP), INTENT(IN) :: Wa(N)
   REAL(SP), INTENT(INOUT) :: C(N),  Ch(N)
+  !
   INTEGER :: i, idl1, ido, ip, iw, ix2, ix3, ix4, k1, l1, l2, na, nf
+  REAL(SP) :: dum(N)
   !* FIRST EXECUTABLE STATEMENT  RFFTB1
   nf = Ifac(2)
   na = 0
@@ -129,9 +131,11 @@ PURE SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
       na = 1 - na
     ELSEIF( ip/=5 ) THEN
       IF( na/=0 ) THEN
-        CALL RADBG(ido,ip,l1,idl1,Ch,Ch,Ch,C,C,Wa(iw:))
+        dum = Ch
+        CALL RADBG(ido,ip,l1,idl1,dum,Ch,Ch,C,C,Wa(iw:))
       ELSE
-        CALL RADBG(ido,ip,l1,idl1,C,C,C,Ch,Ch,Wa(iw:))
+        dum = C
+        CALL RADBG(ido,ip,l1,idl1,dum,C,C,Ch,Ch,Wa(iw:))
       END IF
       IF( ido==1 ) na = 1 - na
     ELSE
@@ -152,4 +156,5 @@ PURE SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   DO i = 1, N
     C(i) = Ch(i)
   END DO
+  !
 END SUBROUTINE RFFTB1

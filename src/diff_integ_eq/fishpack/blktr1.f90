@@ -58,7 +58,7 @@ PURE SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
   INTEGER :: i, i1, i2, i3, i4, idxa, idxc, if, ifd, im1, im2, im3, imi1, &
     imi2, ip, ip1, ip2, ip3, ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, kdo, l, &
     ll, na, nc, nm1, nm2, nm3, np, np1, np2, np3, nz
-  REAL(SP) :: dum(0), dum2(0,0)
+  REAL(SP) :: dum(0), dum2(0,0), duma(M)
   COMPLEX(SP) :: bc(nm_com/2), dc(M), wc(M), yc(M)
   !* FIRST EXECUTABLE STATEMENT  BLKTR1
   kdo = k_com - 1
@@ -133,12 +133,14 @@ PURE SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
       CALL INDXB(i,ir,iz,nz)
       CALL INDXB(i-i1,ir-1,im1,nm1)
       CALL INDXB(i+i1,ir-1,ip1,np1)
-      CALL PRDCT(np1,B(ip1:ip1+np1-1),0,dum,0,dum,nc,Cn(idxc),W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
+      duma = W1
+      CALL PRDCT(np1,B(ip1:ip1+np1-1),0,dum,0,dum,nc,Cn(idxc),duma,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
       DO j = 1, M
         W1(j) = Y(j,i) + W1(j)
       END DO
+      duma = W1
       CALL PRDCT(nz,B(iz:iz+nz-1),nm1,B(im1:im1+nm1-1),np1,B(ip1:ip1+np1-1),0,dum2,&
-        W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
+        duma,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
     END DO
     DO ll = 2, k_com
       l = k_com - ll + 1
@@ -154,13 +156,15 @@ PURE SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
           CALL INDXB(i,ir,iz,nz)
           CALL INDXB(i-i1,ir-1,im1,nm1)
           CALL INDXB(i+i1,ir-1,ip1,np1)
-          CALL PRDCT(nm1,B(im1:im1+nm1-1),0,dum,0,dum,na,An(idxa),W2,W2,M,Am,Bm,&
+          duma = W2
+          CALL PRDCT(nm1,B(im1:im1+nm1-1),0,dum,0,dum,na,An(idxa),duma,W2,M,Am,Bm,&
             Cm,Wd,Ww,Wu)
           DO j = 1, M
             W2(j) = Y(j,i) + W2(j)
           END DO
+          duma = W2
           CALL PRDCT(nz,B(iz:iz+nz-1),nm1,B(im1:im1+nm1-1),np1,B(ip1:ip1+np1-1),&
-            0,dum,W2,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
+            0,dum,duma,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
           izr = i
           IF( i==nm_com ) GOTO 50
         END IF
@@ -199,9 +203,11 @@ PURE SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
       CALL INDXB(i-i2,ir,im2,nm2)
       CALL INDXB(i-i2-i1,ir-1,im3,nm3)
       CALL INDXB(i-i1,ir-1,im1,nm1)
+      duma = W1
       CALL PRDCT(nm2,B(im2:im2+nm2-1),nm3,B(im3:im3+nm3-1),nm1,B(im1:im1+nm1-1),0,&
-        dum,W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
-      CALL PRDCT(nm1,B(im1:im1+nm1-1),0,dum,0,dum,na,An(idxa),W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
+        dum,duma,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
+      duma = W1
+      CALL PRDCT(nm1,B(im1:im1+nm1-1),0,dum,0,dum,na,An(idxa),duma,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
       DO j = 1, M
         Y(j,i) = Y(j,i) - W1(j)
       END DO
@@ -224,9 +230,11 @@ PURE SUBROUTINE BLKTR1(An,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
           CALL INDXB(ipi2,ir,ip2,np2)
           CALL INDXB(ipi1,irm1,ip1,np1)
           CALL INDXB(ipi3,irm1,ip3,np3)
+          duma = W2
           CALL PRDCT(np2,B(ip2:ip2+np2-1),np1,B(ip1:ip1+np1-1),np3,B(ip3:ip3+np3-1),0,&
-            dum,W2,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
-          CALL PRDCT(np1,B(ip1:ip1+np1-1),0,dum,0,dum,nc,Cn(idxc),W2,W2,M,Am,Bm,&
+            dum,duma,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
+          duma = W2
+          CALL PRDCT(np1,B(ip1:ip1+np1-1),0,dum,0,dum,nc,Cn(idxc),duma,W2,M,Am,Bm,&
             Cm,Wd,Ww,Wu)
           DO j = 1, M
             Y(j,i) = Y(j,i) - W2(j)

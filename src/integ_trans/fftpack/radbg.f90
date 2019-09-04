@@ -29,6 +29,7 @@ PURE SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   REAL(SP), INTENT(IN) :: Cc(Ido,Ip,L1), Wa(:)
   REAL(SP), INTENT(INOUT) :: Ch2(Idl1,Ip)
   REAL(SP), INTENT(OUT) :: C1(Ido,L1,Ip), C2(Idl1,Ip), Ch(Ido,L1,Ip)
+  !
   INTEGER :: i, ic, idij, idp2, ik, ipp2, ipph, is, j, j2, jc, k, l, lc, nbd
   REAL(SP) :: ai1, ai2, ar1, ar1h, ar2, ar2h, arg, dc2, dcp, ds2, dsp, tpi
   !* FIRST EXECUTABLE STATEMENT  RADBG
@@ -191,5 +192,5 @@ PURE SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
       END DO
     END DO
   END IF
-
+  !
 END SUBROUTINE RADBG

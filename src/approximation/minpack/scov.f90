@@ -163,7 +163,7 @@ PURE SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   REAL(SP), INTENT(OUT) :: R(Ldr,N), Fvec(M), Wa1(N,1), Wa2(N), Wa3(N), Wa4(M)
   !
   INTEGER :: i, idum(1), iflag, j, k, kp1, nm1, nrow
-  REAL(SP) :: sigma, temp
+  REAL(SP) :: sigma, temp, dum1(N), dum2(N)
   LOGICAL :: sing
   !* FIRST EXECUTABLE STATEMENT  SCOV
   sing = .FALSE.
@@ -215,7 +215,7 @@ PURE SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         IF( iflag<0 ) GOTO 100
         !
         !     COMPUTE THE QR DECOMPOSITION
-        CALL QRFAC(M,N,R,Ldr,.FALSE.,idum,1,Wa1,Wa1,Wa1)
+        CALL QRFAC(M,N,R,Ldr,.FALSE.,idum,1,Wa1,dum1,dum2)
         DO i = 1, N
           R(i,i) = Wa1(i,1)
         END DO

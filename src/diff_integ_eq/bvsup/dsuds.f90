@@ -114,6 +114,7 @@ PURE SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   REAL(DP), INTENT(INOUT) :: B(Neq), A(Nrda,Nuk), Work(*), X(Nuk)
   !
   INTEGER :: il, ip, is, ks, kt, ku, kv
+  REAL(DP) :: dumb(Neq)
   !
   !* FIRST EXECUTABLE STATEMENT  DSUDS
   is = 2
@@ -124,7 +125,8 @@ PURE SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   ks = kt + Neq
   ku = ks + Nuk
   !
-  CALL DLSSUD(A,X,B,Neq,Nuk,Nrda,Work(ku),Nuk,Iflag,Mlso,Iwork(1),Iwork(is),&
+  dumb = B
+  CALL DLSSUD(A,X,dumb,Neq,Nuk,Nrda,Work(ku),Nuk,Iflag,Mlso,Iwork(1),Iwork(is),&
     A,Work(1),Iwork(ip),B,Work(kv),Work(kt),Iwork(il),Work(ks))
   !
 END SUBROUTINE DSUDS

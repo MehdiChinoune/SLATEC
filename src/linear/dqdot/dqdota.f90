@@ -75,11 +75,12 @@ REAL(DP) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   INTEGER, INTENT(INOUT) :: Qc(mxr_com)
   REAL(DP), INTENT(IN) :: Dx(:), Dy(:), Db
   INTEGER :: i, ix, iy
-  INTEGER :: qx(mxr_com), qy(mxr_com)
+  INTEGER :: qx(mxr_com), qy(mxr_com), qdum(mxr_com)
   !* FIRST EXECUTABLE STATEMENT  DQDOTA
   IF( Db/=0._DP ) THEN
     CALL MPCDM(Db,qx)
-    CALL MPADD(Qc,qx,Qc)
+    qdum = Qc
+    CALL MPADD(qdum,qx,Qc)
   END IF
   IF( N/=0 ) THEN
     ix = 1
@@ -89,8 +90,10 @@ REAL(DP) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
     DO i = 1, N
       CALL MPCDM(Dx(ix),qx)
       CALL MPCDM(Dy(iy),qy)
-      CALL MPMUL(qx,qy,qx)
-      CALL MPADD(Qc,qx,Qc)
+      qdum = qx
+      CALL MPMUL(qdum,qy,qx)
+      qdum = Qc
+      CALL MPADD(qdum,qx,Qc)
       ix = ix + Incx
       iy = iy + Incy
     END DO

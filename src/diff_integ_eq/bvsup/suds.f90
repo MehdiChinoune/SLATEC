@@ -114,6 +114,7 @@ PURE SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   REAL(SP), INTENT(INOUT) :: B(Neq), A(Nrda,Nuk), Work(*), X(Nuk)
   !
   INTEGER :: il, ip, is, ks, kt, ku, kv
+  REAL(SP) :: dumb(Neq)
   !* FIRST EXECUTABLE STATEMENT  SUDS
   is = 2
   ip = 3
@@ -123,7 +124,8 @@ PURE SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   ks = kt + Neq
   ku = ks + Nuk
   !
-  CALL LSSUDS(A,X,B,Neq,Nuk,Nrda,Work(ku),Nuk,Iflag,Mlso,Iwork(1),Iwork(is),&
+  dumb = B
+  CALL LSSUDS(A,X,dumb,Neq,Nuk,Nrda,Work(ku),Nuk,Iflag,Mlso,Iwork(1),Iwork(is),&
     A,Work(1),Iwork(ip),B,Work(kv),Work(kt),Iwork(il),Work(ks))
   !
 END SUBROUTINE SUDS

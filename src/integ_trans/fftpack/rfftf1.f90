@@ -93,6 +93,7 @@ PURE SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   INTEGER, INTENT(IN) :: N, Ifac(15)
   REAL(SP), INTENT(IN) :: Wa(N)
   REAL(SP), INTENT(INOUT) :: C(N), Ch(N)
+  !
   INTEGER :: i, idl1, ido, ip, iw, ix2, ix3, ix4, k1, kh, l1, l2, na, nf
   !* FIRST EXECUTABLE STATEMENT  RFFTF1
   nf = Ifac(2)
@@ -153,5 +154,5 @@ PURE SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   DO i = 1, N
     C(i) = Ch(i)
   END DO
-
+  !
 END SUBROUTINE RFFTF1
