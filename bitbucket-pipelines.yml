@@ -1,10 +1,10 @@
-image: chinoune/my-image
 
 pipelines:
   default:
     - parallel:
       - step:
           name: Debug
+          image: chinoune/cl-gfortran-testing
           script:
            - mkdir build && cd build
            - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
@@ -12,6 +12,7 @@ pipelines:
            - make test
       - step:
           name: Release
+          image: chinoune/cl-gfortran-testing
           script:
            - mkdir build && cd build
            - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Release
