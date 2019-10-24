@@ -11,8 +11,8 @@ jobs:
   steps:
   - script: |
       mkdir build && cd build
-      cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
-      make -j
+      cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
+      make -j$(nproc)
     displayName: 'Building gfortran-Debug'
   - script: |
       cd build
@@ -28,7 +28,7 @@ jobs:
   steps:
   - script: |
       mkdir build && cd build
-      cmake .. -DCMAKE_Fortran_COMPILER=gfortran
+      cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
       make -j$(nproc)
     displayName: 'Building gfortran-Release'
   - script: |

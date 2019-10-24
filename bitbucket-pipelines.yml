@@ -7,7 +7,7 @@ pipelines:
           image: chinoune/cl-gfortran-testing
           script:
            - mkdir build && cd build
-           - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
+           - cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
            - make -j$(nproc)
            - make test
       - step:
@@ -15,7 +15,7 @@ pipelines:
           image: chinoune/cl-gfortran-testing
           script:
            - mkdir build && cd build
-           - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Release
+           - cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
            - make -j$(nproc)
            - make test
       - step:
@@ -25,7 +25,7 @@ pipelines:
            - apt update
            - apt install -y cmake libopenblas-dev
            - mkdir build && cd build
-           - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Debug
+           - cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
            - make -j$(nproc)
            - make test
       - step:
@@ -35,6 +35,6 @@ pipelines:
            - apt update
            - apt install -y cmake libopenblas-dev
            - mkdir build && cd build
-           - cmake .. -DCMAKE_Fortran_COMPILER=gfortran -DCMAKE_BUILD_TYPE=Release
+           - cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
            - make -j$(nproc)
            - make test
