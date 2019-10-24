@@ -25,7 +25,7 @@ if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )
 
-  set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -warn all -stand f18 -standard-semantics" )
+  set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -warn all -stand f18 -standard-semantics -assume nostd_mod_proc_name" )
   set( CMAKE_Fortran_FLAGS_FAST "-Ofast -ipo" )
   set( CMAKE_Fortran_FLAGS_RELEASE "-O3 -ipo" )
   set( CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -check all -fpe-all=0 -traceback" )

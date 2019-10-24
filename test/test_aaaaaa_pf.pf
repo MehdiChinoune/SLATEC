@@ -1,0 +1,28 @@
+MODULE TEST_AAAAAA_PF
+  USE funit
+  IMPLICIT NONE
+
+CONTAINS
+  @test
+  SUBROUTINE QC6A()
+    !> Test subroutine AAAAAA
+    !
+    !- Description:
+    !
+    !   This routine tests the SLATEC routine AAAAAA to see if the version
+    !   number in the SLATEC library source is the same as the quick check
+    !   version number.
+    USE slatec, ONLY : AAAAAA
+    !
+    !  DECLARE VARIABLES.
+    !
+    CHARACTER(3) :: ver
+    CHARACTER(3), PARAMETER :: VERSN = '4.2'
+    !
+    !* FIRST EXECUTABLE STATEMENT  QC6A
+    CALL AAAAAA(ver)
+    @AssertEqual( ver, VERSN )
+    !------------- LAST LINE OF QC6A FOLLOWS -----------------------------
+  END SUBROUTINE QC6A
+  !
+END MODULE TEST_AAAAAA_PF

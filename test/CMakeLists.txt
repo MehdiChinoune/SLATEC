@@ -77,3 +77,8 @@ target_link_libraries( test_specfun_wigner_sp special_functions )
 target_link_libraries( test_specfun_wigner_dp special_functions )
 target_link_libraries( test_specfun_xleg_sp special_functions )
 target_link_libraries( test_specfun_xleg_dp special_functions )
+
+find_package(PFUNIT)
+
+add_pfunit_test( test_aaaaaa_pf test_aaaaaa_pf.pf "" "" )
+target_link_libraries( test_aaaaaa_pf slatec )
