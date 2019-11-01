@@ -1,0 +1,175 @@
+MODULE TEST_FC_PF
+  USE service, ONLY : SP
+  USE funit
+  IMPLICIT NONE
+
+CONTAINS
+  @test
+  SUBROUTINE FCQX()
+    !> Quick check for FC.
+    !***
+    ! **Description:**
+    !
+    !   Quick check subprogram for the subroutine FC.
+    !
+    !   Fit discrete data by an S-shaped curve.  Evaluate the fitted curve,
+    !   its first two derivatives, and probable error curve.
+    !
+    !   Use subprogram FC to obtain the constrained cubic B-spline
+    !   representation of the curve.
+    !
+    !   The values of the coefficients of the B-spline as computed by FC
+    !   and the values of the fitted curve as computed by BVALU in the
+    !   de Boor package are tested for accuracy with the expected values.
+    !   See the example program in the report sand78-1291, pp. 22-27.
+    !
+    !   The dimensions in the following arrays are as small as possible for
+    !   the problem being solved.
+
+    USE service, ONLY : eps_sp
+    USE approximation, ONLY : CV, FC
+    USE interpolation, ONLY : BVALU
+    !     .. Local Scalars ..
+    REAL(SP) :: t, tol, xval
+    INTEGER :: i, idigit, ii, j, l, mode, n, nconst, ndeg, nval
+    !     .. Local Arrays ..
+    REAL(SP) :: coeff(9), v(51,5), w(529), xconst(11), yconst(11)
+    INTEGER :: iw(30), nderiv(11)
+    !     .. Data statements ..
+    !
+    INTEGER, PARAMETER :: ndata = 9, nord = 4, nbkpt = 13, last = 10
+    REAL(SP), PARAMETER :: xdata(9) = [ 0.15_SP, 0.27_SP, 0.33_SP, 0.40_SP, 0.43_SP, &
+      0.47_SP, 0.53_SP, 0.58_SP, 0.63_SP ]
+    REAL(SP), PARAMETER :: ydata(9) = [ 0.025_SP, 0.05_SP, 0.13_SP, 0.27_SP, 0.37_SP, &
+      0.47_SP, 0.64_SP, 0.77_SP, 0.87_SP ]
+    REAL(SP), PARAMETER :: sddata(9) = 0.015_SP
+    REAL(SP), PARAMETER :: bkpt(13) = [ -0.6_SP, -0.4_SP, -0.2_SP, 0._SP, 0.2_SP, &
+      0.4_SP, 0.6_SP, 0.8_SP, 0.9_SP, 1._SP, 1.1_SP, 1.2_SP, 1.3_SP ]
+    !
+    !  Store the data to be used to check the accuracy of the computed results.
+    !  See SAND78-1291, p.26.
+    !
+    REAL(SP), PARAMETER :: coefck(9) = [ 1.186380846E-13_SP, -2.826166426E-14_SP, &
+      -4.333929094E-15_SP, 1.722113311E-01_SP, 9.421965984E-01_SP, 9.684708719E-01_SP, &
+      9.894902905E-01_SP, 1.005254855E+00_SP, 9.894902905E-01_SP ]
+    REAL(SP), PARAMETER :: check(51) = [ 2.095830752E-16_SP, 2.870188850E-05_SP, &
+      2.296151081E-04_SP, 7.749509897E-04_SP, 1.836920865E-03_SP, 3.587736064E-03_SP, &
+      6.199607918E-03_SP, 9.844747759E-03_SP, 1.469536692E-02_SP, 2.092367672E-02_SP, &
+      2.870188851E-02_SP, 3.824443882E-02_SP, 4.993466504E-02_SP, 6.419812979E-02_SP, &
+      8.146039566E-02_SP, 1.021470253E-01_SP, 1.266835812E-01_SP, 1.554956261E-01_SP, &
+      1.890087225E-01_SP, 2.276484331E-01_SP, 2.718403204E-01_SP, 3.217163150E-01_SP, &
+      3.762338189E-01_SP, 4.340566020E-01_SP, 4.938484342E-01_SP, 5.542730855E-01_SP, &
+      6.139943258E-01_SP, 6.716759250E-01_SP, 7.259816530E-01_SP, 7.755752797E-01_SP, &
+      8.191205752E-01_SP, 8.556270903E-01_SP, 8.854875002E-01_SP, 9.094402609E-01_SP, &
+      9.282238286E-01_SP, 9.425766596E-01_SP, 9.532372098E-01_SP, 9.609439355E-01_SP, &
+      9.664352927E-01_SP, 9.704497377E-01_SP, 9.737257265E-01_SP, 9.768786393E-01_SP, &
+      9.800315521E-01_SP, 9.831844649E-01_SP, 9.863373777E-01_SP, 9.894902905E-01_SP, &
+      9.926011645E-01_SP, 9.954598055E-01_SP, 9.978139804E-01_SP, 9.994114563E-01_SP, &
+      1.000000000E+00_SP ]
+    !* FIRST EXECUTABLE STATEMENT  FCQX
+    ndeg = nord - 1
+    !
+    !     Write the various constraints for the fitted curve.
+    !
+    nconst = 0
+    t = bkpt(nord)
+    !
+    !     Constrain function to be zero at left-most breakpoint.
+    !
+    nconst = nconst + 1
+    xconst(nconst) = t
+    yconst(nconst) = 0._SP
+    nderiv(nconst) = 2 + 4*0
+    !
+    !     Constrain first derivative to be nonnegative at left-most
+    !     breakpoint.
+    !
+    nconst = nconst + 1
+    xconst(nconst) = t
+    yconst(nconst) = 0._SP
+    nderiv(nconst) = 1 + 4*1
+    !
+    !  Constrain second derivatives to be nonnegative at left set of breakpoints.
+    !
+    DO i = 1, 3
+      l = ndeg + i
+      t = bkpt(l)
+      nconst = nconst + 1
+      xconst(nconst) = t
+      yconst(nconst) = 0._SP
+      nderiv(nconst) = 1 + 4*2
+    END DO
+    !
+    !     Constrain function value at right-most breakpoint to be one.
+    !
+    nconst = nconst + 1
+    t = bkpt(last)
+    xconst(nconst) = t
+    yconst(nconst) = 1._SP
+    nderiv(nconst) = 2 + 4*0
+    !
+    !     Constrain slope to agree at left- and right-most breakpoints.
+    !
+    nconst = nconst + 1
+    xconst(nconst) = bkpt(nord)
+    yconst(nconst) = bkpt(last)
+    nderiv(nconst) = 3 + 4*1
+    !
+    !     Constrain second derivatives to be nonpositive at right set of
+    !     breakpoints.
+    !
+    DO i = 1, 4
+      nconst = nconst + 1
+      l = last - 4 + i
+      xconst(nconst) = bkpt(l)
+      yconst(nconst) = 0._SP
+      nderiv(nconst) = 0 + 4*2
+    END DO
+    !
+    idigit = -4
+    !
+    !     Declare amount of working storage allocated to FC.
+    !
+    iw(1) = 529
+    iw(2) = 30
+    !
+    !  Set mode to indicate a new problem and request the variance function.
+    !
+    mode = 2
+    !
+    !     Obtain the coefficients of the B-spline.
+    !
+    CALL FC(ndata,xdata,ydata,sddata,nord,nbkpt,bkpt,nconst,xconst,yconst,&
+      nderiv,mode,coeff,w,iw)
+    !
+    !     Check coefficients.
+    !
+    tol = 7._SP*SQRT(eps_sp)
+    @AssertEqual( coefck, coeff, tol )
+    !
+    !     Compute value, first two derivatives and probable uncertainty.
+    !
+    n = nbkpt - nord
+    nval = 51
+    DO i = 1, nval
+      !
+      !       The function BVALU is in the de Boor B-spline package.
+      !
+      xval = REAL(i-1,SP)/(nval-1)
+      ii = 1
+      DO j = 1, 3
+        v(i,j+1) = BVALU(bkpt,coeff,n,nord,j-1,xval)
+      END DO
+      v(i,1) = xval
+      !
+      !       The variance function CV is a companion subprogram to FC.
+      !
+      v(i,5) = SQRT(CV(xval,ndata,nconst,nord,nbkpt,bkpt,w))
+    END DO
+    !
+    @AssertEqual( check, v(:,2), tol )
+    !
+    RETURN
+  END SUBROUTINE FCQX
+  !
+END MODULE TEST_FC_PF

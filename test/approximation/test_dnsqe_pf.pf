@@ -1,0 +1,88 @@
+MODULE TEST_DNSQE_PF
+  USE service, ONLY : DP
+  USE funit
+  IMPLICIT NONE
+
+CONTAINS
+  @test
+  SUBROUTINE DNSQQK()
+    !> Quick check for DNSQE and DNSQ.
+    !***
+    ! **Description:**
+    !
+    !  This subroutine performs a quick check on the subroutine DNSQE (and DNSQ).
+    USE service, ONLY : eps_dp
+    USE approximation, ONLY : DNSQE
+    !     .. Local Scalars ..
+    REAL(DP) :: fnorm, fnorms, tol
+    INTEGER :: info, infos, iopt, lwa, n, nprint
+    !     .. Local Arrays ..
+    REAL(DP) :: fvec(2), wa(19), x(2)
+    !* FIRST EXECUTABLE STATEMENT  DNSQQK
+    infos = 1
+    fnorms = 0._DP
+    n = 2
+    lwa = 19
+    nprint = -1
+    tol = SQRT(eps_dp)
+    !
+    !     Option 1, the user provides the Jacobian.
+    !
+    iopt = 1
+    x(1) = -1.2_DP
+    x(2) = 1._DP
+    CALL DNSQE(DQFCN2,DQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
+    fnorm = NORM2(fvec)
+    @AssertEqual( infos, info )
+    @AssertEqual( fnorms, fnorm, tol )
+    !
+    !     Option 2, the code approximates the Jacobian.
+    !
+    iopt = 2
+    x(1) = -1.2_DP
+    x(2) = 1._DP
+    CALL DNSQE(DQFCN2,DQJAC2,iopt,n,x,fvec,tol,nprint,info,wa,lwa)
+    fnorm = NORM2(fvec)
+    @AssertEqual( infos, info )
+    @AssertEqual( fnorms, fnorm, tol )
+    !
+    RETURN
+  END SUBROUTINE DNSQQK
+  !** DQFCN2
+  PURE SUBROUTINE DQFCN2(N,X,Fvec,Iflag)
+    !> Evaluate function used in DNSQE.
+    !***
+    ! **Description:**
+    !
+    !   Subroutine which evaluates the function for test program
+    !   used in quick check of DNSQE.
+
+    !     .. Scalar Arguments ..
+    INTEGER, INTENT(IN) :: Iflag, N
+    !     .. Array Arguments ..
+    REAL(DP), INTENT(IN) :: X(N)
+    REAL(DP), INTENT(OUT) :: Fvec(N)
+    !* FIRST EXECUTABLE STATEMENT  DQFCN2
+    Fvec(1) = 1._DP - X(1)
+    Fvec(2) = 10._DP*(X(2)-X(1)**2)
+  END SUBROUTINE DQFCN2
+  !** DQJAC2
+  PURE SUBROUTINE DQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
+    !>
+    !***
+    ! **Description:**
+    !
+    !  Subroutine to evaluate the full jacobian for test problem used in quick
+    !  check of DNSQE.
+
+    INTEGER, INTENT(IN) :: Iflag, Ldfjac, N
+    REAL(DP), INTENT(IN) :: Fvec(N), X(N)
+    REAL(DP), INTENT(OUT) :: Fjac(Ldfjac,N)
+    !* FIRST EXECUTABLE STATEMENT  DQJAC2
+    Fjac(1,1) = -1._DP
+    Fjac(1,2) = 0._DP
+    Fjac(2,1) = -20._DP*X(1)
+    Fjac(2,2) = 10._DP
+  END SUBROUTINE DQJAC2
+  !
+END MODULE TEST_DNSQE_PF

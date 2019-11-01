@@ -1,0 +1,152 @@
+MODULE TEST_DPFITT_PF
+  USE service, ONLY : DP
+  USE funit
+  IMPLICIT NONE
+
+CONTAINS
+  @test
+  SUBROUTINE DPFITT()
+    !> Quick check for DPOLFT, DPCOEF and DP1VLU.
+
+    USE service, ONLY : eps_dp
+    USE approximation, ONLY : DP1VLU, DPCOEF, DPOLFT
+    !     .. Local Scalars ..
+    REAL(DP) :: yfit, eps, rp, sveps, tol
+    INTEGER :: i, m, maxord, ierp, ierr, nord, nordp
+    !     .. Local Arrays ..
+    REAL(DP) :: a(97), tc(5), w(11), x(11), y(11), yp(5), r(11)
+    !* FIRST EXECUTABLE STATEMENT  DPFITT
+    !
+    !     Initialize variables for testing passage or failure of tests
+    !
+    tol = SQRT(eps_dp)
+    m = 11
+    DO i = 1, m
+      x(i) = i - 6
+      y(i) = x(i)**4
+    END DO
+    !
+    !     Test DPOLFT
+    !     Input EPS is negative - specified level
+    !
+    w(1) = -1._DP
+    eps = -0.01_DP
+    sveps = eps
+    maxord = 8
+    nordp = 4
+    rp = 625._DP
+    ierp = 1
+    CALL DPOLFT(m,x,y,w,maxord,nord,eps,r,ierr,a)
+    !
+    !     See if test passed
+    !
+    @AssertEqual( nord, nordp )
+    @AssertEqual( r(11), rp, tol )
+    @AssertEqual( ierp, ierr )
+    !
+    !     Input EPS is negative - computed level
+    !
+    eps = -1._DP
+    sveps = eps
+    CALL DPOLFT(m,x,y,w,maxord,nord,eps,r,ierr,a)
+    !
+    !     See if test passed
+    !
+    @AssertEqual( r(11), rp, tol )
+    @AssertEqual( ierp, ierr )
+    !
+    !     Input EPS is zero
+    !
+    w(1) = -1._DP
+    eps = 0._DP
+    sveps = eps
+    nordp = 5
+    maxord = 5
+    CALL DPOLFT(m,x,y,w,maxord,nord,eps,r,ierr,a)
+    !
+    !     See if test passed
+    !
+    @AssertEqual( eps, sveps, tol )
+    @AssertEqual( nord, nordp )
+    @AssertEqual( r(11), rp, tol )
+    @AssertEqual( ierp, ierr )
+    !
+    !     Input EPS is positive
+    !
+    ierp = 1
+    nordp = 4
+    eps = 75._DP*eps_dp
+    sveps = eps
+    CALL DPOLFT(m,x,y,w,maxord,nord,eps,r,ierr,a)
+    !
+    !     See if test passed
+    !
+    @AssertEqual( eps, sveps, tol )
+    @AssertEqual( nord, nordp )
+    @AssertEqual( r(11), rp, tol )
+    @AssertEqual( ierp, ierr )
+    !
+    !     MAXORD too small to meet RMS error
+    !
+    m = 11
+    w(1) = -1._DP
+    eps = 5._DP*eps_dp
+    sveps = eps
+    rp = 553._DP
+    maxord = 2
+    ierp = 3
+    nordp = 2
+    CALL DPOLFT(m,x,y,w,maxord,nord,eps,r,ierr,a)
+    !
+    !     See if test passed
+    !
+    @AssertEqual( nord, nordp )
+    @AssertEqual( r(11), rp, tol )
+    @AssertEqual( ierp, ierr )
+    !
+    !     MAXORD too small to meet statistical test
+    !
+    nordp = 4
+    ierp = 4
+    rp = 625._DP
+    eps = -0.01_DP
+    sveps = eps
+    maxord = 5
+    CALL DPOLFT(m,x,y,w,maxord,nord,eps,r,ierr,a)
+    !
+    !     See if test passed
+    !
+    @AssertEqual( nord, nordp )
+    @AssertEqual( r(11), rp, tol )
+    @AssertEqual( ierp, ierr )
+    !
+    !     Test DPCOEF
+    !
+    maxord = 6
+    eps = 0._DP
+    sveps = eps
+    y(6) = 1._DP
+    DO i = 1, m
+      w(i) = 1._DP/(y(i)**2)
+    END DO
+    y(6) = 0._DP
+    CALL DPOLFT(m,x,y,w,maxord,nord,eps,r,ierr,a)
+    CALL DPCOEF(4,5._DP,tc,a)
+    !
+    !     See if test passed
+    !
+    @AssertEqual( tc(1), r(11), tol )
+    !
+    !     Test DP1VLU
+    !     Normal call
+    !
+    CALL DP1VLU(6,0,x(8),yfit,yp,a)
+    !
+    !     See if test passed
+    !
+    @AssertEqual( yfit, r(8), tol )
+    !
+    RETURN
+  END SUBROUTINE DPFITT
+  !
+END MODULE TEST_DPFITT_PF
