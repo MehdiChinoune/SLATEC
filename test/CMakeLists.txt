@@ -84,3 +84,5 @@ add_pfunit_test( test_aaaaaa_pf test_aaaaaa_pf.pf "" "" )
 target_link_libraries( test_aaaaaa_pf slatec )
 
 add_subdirectory( approximation )
+
+add_subdirectory( data_handling )

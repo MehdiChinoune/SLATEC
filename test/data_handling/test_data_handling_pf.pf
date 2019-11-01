@@ -1,0 +1,484 @@
+MODULE TEST_DATA_HANDLING_PF
+  USE service, ONLY : SP, DP
+  USE funit
+  IMPLICIT NONE
+
+CONTAINS
+  @test
+  SUBROUTINE ISRTQC()
+    !> Quick check for SLATEC routines ISORT, IPSORT, IPPERM
+    USE data_handling, ONLY : IPPERM, IPSORT, ISORT
+    !
+    INTEGER, PARAMETER :: N = 9, NTEST = 4
+    !
+    INTEGER :: y(N), yc(N), iy(N)
+    INTEGER :: j, i, kabs, ier
+    !
+    !     ---------
+    !     TEST DATA
+    !     ---------
+    !
+    !         X   = TEST VECTOR
+    !         XS  = TEST VECTOR IN SORTED ORDER
+    !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
+    !
+    INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
+    INTEGER, PARAMETER :: x(N,NTEST) = RESHAPE( [ 36, 54, -1, 29, 1, 80, 98, 99, 55, &
+      1, 2, 3, 4, 5, 6, 7, 8, 9, &
+      -9, -8, -7, -6, -5, -4, -3, -2, -1, &
+      36, 54, -1, 29, 1, 80, 98, 99, 55 ], [N,NTEST] )
+    INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 3, 5, 4, 1, 2, 9, 6, 7, 8, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      3, 5, 4, 1, 2, 9, 6, 7, 8], [N,NTEST] )
+    INTEGER, PARAMETER :: xs(N,NTEST) = RESHAPE( [ -1, 1, 29, 36, 54, 55, 80, 98, 99, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      -1, -2, -3, -4, -5, -6, -7, -8, -9, &
+      -1, 1, 29, 36, 54, 55, 80, 98, 99], [N,NTEST] )
+    !* FIRST EXECUTABLE STATEMENT  ISRTQC
+    !     -------------------------------------------------------------
+    !                          CHECK ISORT
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      DO i = 1, N
+        y(i) = x(i,j)
+        yc(i) = x(i,j)
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL ISORT(y,yc,N,kflag(j))
+      !
+      !        ... EVALUATE RESULTS
+      !
+      kabs = ABS(kflag(j))
+      @AssertEqual( xs(:,j), y )
+      IF(kabs==1) THEN
+        @AssertEqual( x(:,j), yc )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( xs(:,j), yc )
+      END IF
+      !
+    END DO
+    !     -------------------------------------------------------------
+    !                            CHECK IPSORT
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      DO i = 1, N
+        y(i) = x(i,j)
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL IPSORT(y,N,iy,kflag(j),ier)
+      !
+      !        ... EVALUATE RESULTS
+      !
+      kabs = ABS(kflag(j))
+      @AssertEqual( ix(:,j), iy )
+      IF(kabs==1) THEN
+        @AssertEqual( x(:,j), y )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( xs(:,j), y )
+      END IF
+      @AssertLessThanOrEqual( ier, 0 )
+      !
+    END DO
+    !     -------------------------------------------------------------
+    !                            CHECK IPPERM
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      kabs = ABS(kflag(j))
+      DO i = 1, N
+        y(i) = x(i,j)
+        IF( kabs==1 ) THEN
+          iy(i) = i
+        ELSE
+          iy(i) = ix(i,j)
+        END IF
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL IPPERM(y,N,iy,ier)
+      !
+      !        ... EVALUATE RESULTS
+      !
+      IF(kabs==1) THEN
+        @AssertEqual( [(i,i=1,N)], iy )
+        @AssertEqual( x(:,j), y )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( ix(:,j), iy )
+        @AssertEqual( xs(:,j), y )
+      END IF
+      @AssertLessThanOrEqual( ier, 0 )
+      !
+    END DO
+    !
+  END SUBROUTINE ISRTQC
+  @test
+  SUBROUTINE HSRTQC()
+    !> Quick check for SLATEC routine HPSORT, HPPERM
+    USE data_handling, ONLY : HPPERM, HPSORT
+    !
+    INTEGER, PARAMETER :: N = 9, NTEST = 4
+    !
+    LOGICAL :: failed
+    CHARACTER(2) :: y(N), work
+    INTEGER :: iy(N), j, i, kabs, ier
+    !
+    !     ---------
+    !     TEST DATA
+    !     ---------
+    !
+    !         X   = TEST VECTOR
+    !         XS  = TEST VECTOR IN SORTED ORDER
+    !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
+    !
+    INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
+    CHARACTER(2), PARAMETER :: x(N,NTEST) = RESHAPE( [ &
+      'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA', 'ZX', 'ZY', &
+      'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', 'HH', 'II', &
+      'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', 'HH', 'II', &
+      'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA', 'ZX', 'ZY' ], [N,NTEST] )
+    INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 4, 5, 1, 3, 2, 7, 8, 9, 6, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      4, 5, 1, 3, 2, 7, 8, 9, 6], [N,NTEST] )
+    CHARACTER(2), PARAMETER :: xs(N,NTEST) = RESHAPE( [ &
+      'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', 'ZY', 'ZZ', &
+      'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC', 'BB', 'AA', &
+      'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC', 'BB', 'AA', &
+      'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', 'ZY', 'ZZ'], [N,NTEST] )
+    !
+    !* FIRST EXECUTABLE STATEMENT  HSRTQC
+    !
+    !     -------------------------------------------------------------
+    !                            CHECK HPSORT
+    !     -------------------------------------------------------------
+    !
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      DO i = 1, N
+        y(i) = x(i,j)
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL HPSORT(y,N,1,2,iy,kflag(j),work,ier)
+      !
+      !        ... EVALUATE RESULTS
+      !
+      kabs = ABS(kflag(j))
+      @AssertEqual( ix(:,j), iy )
+      IF(kabs==1) THEN
+        failed = ANY( x(:,j)/=y )
+        @AssertEquivalent( .FALSE., failed )
+      ELSEIF( kabs==2 ) THEN
+        failed = ANY( xs(:,j)/=y )
+        @AssertEquivalent( .FALSE., failed )
+      END IF
+      @AssertLessThanOrEqual( ier, 0 )
+      !
+    END DO
+    !     -------------------------------------------------------------
+    !                            CHECK HPPERM
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      kabs = ABS(kflag(j))
+      DO i = 1, N
+        y(i) = x(i,j)
+        IF( kabs==1 ) THEN
+          iy(i) = i
+        ELSE
+          iy(i) = ix(i,j)
+        END IF
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL HPPERM(y,N,iy,work,ier)
+      !
+      !        ... EVALUATE RESULTS
+      !
+      IF(kabs==1) THEN
+        @AssertEqual( [(i,i=1,N)], iy )
+        failed = ANY( x(:,j)/=y )
+        @AssertEquivalent( .FALSE., failed )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( ix(:,j), iy )
+        failed = ANY( xs(:,j)/=y )
+        @AssertEquivalent( .FALSE., failed )
+      END IF
+      @AssertLessThanOrEqual( ier, 0 )
+      !
+    END DO
+    !
+    RETURN
+  END SUBROUTINE HSRTQC
+  @test
+  SUBROUTINE SSRTQC()
+    !> Quick check for SLATEC routines SSORT, SPSORT, SPPERM
+    USE data_handling, ONLY : SPPERM, SPSORT, SSORT
+    !
+    INTEGER, PARAMETER :: N = 9, NTEST = 4
+    !
+    REAL(SP) :: y(N), yc(N)
+    INTEGER :: iy(N), j, i, kabs, ier
+    !
+    !     ---------
+    !     TEST DATA
+    !     ---------
+    !
+    !         X   = TEST VECTOR
+    !         XS  = TEST VECTOR IN SORTED ORDER
+    !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
+    !
+    INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
+    REAL(SP), PARAMETER :: x(N,NTEST) = RESHAPE( [ &
+      36._SP, 54._SP, -1._SP, 29._SP, 1._SP, 80._SP, 98._SP, 99._SP, 55._SP, &
+      1._SP, 2._SP, 3._SP, 4._SP, 5._SP, 6._SP, 7._SP, 8._SP, 9._SP, &
+      -9._SP, -8._SP, -7._SP, -6._SP, -5._SP, -4._SP, -3._SP, -2._SP, -1._SP, &
+      36._SP, 54._SP, -1._SP, 29._SP, 1._SP, 80._SP, 98._SP, 99._SP, 55._SP ], [N,NTEST] )
+    INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 3, 5, 4, 1, 2, 9, 6, 7, 8, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      3, 5, 4, 1, 2, 9, 6, 7, 8 ], [N,NTEST] )
+    REAL(SP), PARAMETER :: xs(N,NTEST) = RESHAPE( [ &
+      -1._SP, 1._SP, 29._SP, 36._SP, 54._SP, 55._SP, 80._SP, 98._SP, 99._SP, &
+      9._SP, 8._SP, 7._SP, 6._SP, 5._SP, 4._SP, 3._SP, 2._SP, 1._SP, &
+      -1._SP, -2._SP, -3._SP, -4._SP, -5._SP, -6._SP, -7._SP, -8._SP, -9._SP, &
+      -1._SP, 1._SP, 29._SP, 36._SP, 54._SP, 55._SP, 80._SP, 98._SP, 99._SP ], [N,NTEST] )
+    !
+    !* FIRST EXECUTABLE STATEMENT  SSRTQC
+    !     -------------------------------------------------------------
+    !                          CHECK SSORT
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      DO i = 1, N
+        y(i) = x(i,j)
+        yc(i) = x(i,j)
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL SSORT(y,yc,N,kflag(j))
+      !
+      !        ... EVALUATE RESULTS
+      !
+      kabs = ABS(kflag(j))
+      @AssertEqual( xs(:,j), y )
+      IF(kabs==1) THEN
+        @AssertEqual( x(:,j), yc )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( xs(:,j), yc )
+      END IF
+      !
+    END DO
+    !     -------------------------------------------------------------
+    !                            CHECK SPSORT
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      DO i = 1, N
+        y(i) = x(i,j)
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL SPSORT(y,N,iy,kflag(j),ier)
+      !
+      !        ... EVALUATE RESULTS
+      !
+      kabs = ABS(kflag(j))
+      @AssertEqual( ix(:,j), iy )
+      IF(kabs==1) THEN
+        @AssertEqual( x(:,j), y )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( xs(:,j), y )
+      END IF
+      @AssertLessThanOrEqual( ier, 0 )
+      !
+    END DO
+    !     -------------------------------------------------------------
+    !                            CHECK SPPERM
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      kabs = ABS(kflag(j))
+      DO i = 1, N
+        y(i) = x(i,j)
+        IF( kabs==1 ) THEN
+          iy(i) = i
+        ELSE
+          iy(i) = ix(i,j)
+        END IF
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL SPPERM(y,N,iy,ier)
+      !
+      !        ... EVALUATE RESULTS
+      !
+      IF(kabs==1) THEN
+        @AssertEqual( [(i,i=1,N)], iy )
+        @AssertEqual( x(:,j), y )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( ix(:,j), iy )
+        @AssertEqual( xs(:,j), y )
+      END IF
+      @AssertLessThanOrEqual( ier, 0 )
+      !
+    END DO
+    !
+    RETURN
+  END SUBROUTINE SSRTQC
+  @test
+  SUBROUTINE DSRTQC()
+    !> Quick check for SLATEC routines DSORT, DPSORT, DPPERM
+    USE data_handling, ONLY : DPPERM, DPSORT, DSORT
+    !
+    INTEGER, PARAMETER :: N = 9, NTEST = 4
+    !
+    REAL(DP) :: y(N), yc(N)
+    INTEGER :: iy(N), j, i, kabs, ier!, nn, kkflag
+    !
+    !     ---------
+    !     TEST DATA
+    !     ---------
+    !
+    !         X   = TEST VECTOR
+    !         XS  = TEST VECTOR IN SORTED ORDER
+    !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
+    !
+    INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
+    REAL(DP), PARAMETER ::  x(N,NTEST) = RESHAPE( [ &
+      36._DP, 54._DP, -1._DP, 29._DP, 1._DP, 80._DP, 98._DP, 99._DP, 55._DP, &
+      1._DP, 2._DP, 3._DP, 4._DP, 5._DP, 6._DP, 7._DP, 8._DP, 9._DP, &
+      -9._DP, -8._DP, -7._DP, -6._DP, -5._DP, -4._DP, -3._DP, -2._DP, -1._DP, &
+      36._DP, 54._DP, -1._DP, 29._DP, 1._DP, 80._DP, 98._DP, 99._DP, 55._DP ], [N,NTEST] )
+    INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 3, 5, 4, 1, 2, 9, 6, 7, 8, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      3, 5, 4, 1, 2, 9, 6, 7, 8 ], [N,NTEST] )
+    REAL(DP), PARAMETER ::  xs(N,NTEST) = RESHAPE( [ &
+      -1._DP, 1._DP, 29._DP, 36._DP, 54._DP, 55._DP, 80._DP, 98._DP, 99._DP, &
+      9._DP, 8._DP, 7._DP, 6._DP, 5._DP, 4._DP, 3._DP, 2._DP, 1._DP, &
+      -1._DP, -2._DP, -3._DP, -4._DP, -5._DP, -6._DP, -7._DP, -8._DP, -9._DP, &
+     -1._DP, 1._DP, 29._DP, 36._DP, 54._DP, 55._DP, 80._DP, 98._DP, 99._DP ], [N,NTEST] )
+    !
+    !* FIRST EXECUTABLE STATEMENT  DSRTQC
+    !     -------------------------------------------------------------
+    !                          CHECK DSORT
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      DO i = 1, N
+        y(i) = x(i,j)
+        yc(i) = x(i,j)
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL DSORT(y,yc,N,kflag(j))
+      !
+      !        ... EVALUATE RESULTS
+      !
+      kabs = ABS(kflag(j))
+      @AssertEqual( xs(:,j), y )
+      IF(kabs==1) THEN
+        @AssertEqual( x(:,j), yc )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( xs(:,j), yc )
+      END IF
+      !
+    END DO
+    !     -------------------------------------------------------------
+    !                            CHECK DPSORT
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      DO i = 1, N
+        y(i) = x(i,j)
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL DPSORT(y,N,iy,kflag(j),ier)
+      !
+      !        ... EVALUATE RESULTS
+      !
+      kabs = ABS(kflag(j))
+      @AssertEqual( ix(:,j), iy )
+      IF(kabs==1) THEN
+        @AssertEqual( x(:,j), y )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( xs(:,j), y )
+      END IF
+      @AssertLessThanOrEqual( ier, 0 )
+      !
+    END DO
+    !     -------------------------------------------------------------
+    !                            CHECK DPPERM
+    !     -------------------------------------------------------------
+    DO j = 1, NTEST
+      !
+      !        ... SETUP PROBLEM
+      !
+      kabs = ABS(kflag(j))
+      DO i = 1, N
+        y(i) = x(i,j)
+        IF( kabs==1 ) THEN
+          iy(i) = i
+        ELSE
+          iy(i) = ix(i,j)
+        END IF
+      END DO
+      !
+      !        ... CALL ROUTINE TO BE TESTED
+      !
+      CALL DPPERM(y,N,iy,ier)
+      !
+      !        ... EVALUATE RESULTS
+      !
+      IF(kabs==1) THEN
+        @AssertEqual( [(i,i=1,N)], iy )
+        @AssertEqual( x(:,j), y )
+      ELSEIF( kabs==2 ) THEN
+        @AssertEqual( ix(:,j), iy )
+        @AssertEqual( xs(:,j), y )
+      END IF
+      @AssertLessThanOrEqual( ier, 0 )
+      !
+    END DO
+    !
+    RETURN
+  END SUBROUTINE DSRTQC
+  !
+END MODULE TEST_DATA_HANDLING_PF
