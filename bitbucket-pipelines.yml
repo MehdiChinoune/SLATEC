@@ -3,38 +3,50 @@ pipelines:
   default:
     - parallel:
       - step:
-          name: Debug
-          image: chinoune/cl-gfortran-testing
+          name: old Debug
+          image: chinoune/debian-gfortran-testing:old
           script:
            - mkdir build && cd build
-           - cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
+           - cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
            - make -j$(nproc)
            - make test
       - step:
-          name: Release
-          image: chinoune/cl-gfortran-testing
+          name: old Release
+          image: chinoune/debian-gfortran-testing:old
           script:
            - mkdir build && cd build
-           - cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
+           - cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
            - make -j$(nproc)
            - make test
       - step:
-          name: gcc-trunk Debug
-          image: zbeekman/nightly-gcc-trunk-docker-image
+          name: stable Debug
+          image: chinoune/debian-gfortran-testing:stable
           script:
-           - apt update
-           - apt install -y cmake libopenblas-dev
            - mkdir build && cd build
-           - cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
+           - cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
            - make -j$(nproc)
            - make test
       - step:
-          name: gcc-trunk Release
-          image: zbeekman/nightly-gcc-trunk-docker-image
+          name: stable Release
+          image: chinoune/debian-gfortran-testing:stable
           script:
-           - apt update
-           - apt install -y cmake libopenblas-dev
            - mkdir build && cd build
-           - cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.0/cmake
+           - cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
+           - make -j$(nproc)
+           - make test
+      - step:
+          name: trunk Debug
+          image: chinoune/debian-gfortran-testing:trunk
+          script:
+           - mkdir build && cd build
+           - cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
+           - make -j$(nproc)
+           - make test
+      - step:
+          name: trunk Release
+          image: chinoune/debian-gfortran-testing:trunk
+          script:
+           - mkdir build && cd build
+           - cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
            - make -j$(nproc)
            - make test
