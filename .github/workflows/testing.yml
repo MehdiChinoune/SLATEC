@@ -1,15 +1,24 @@
 name: Github actions
 
-on: [push]
+on:
+  push:
+  schedule:
+    - cron: '0 2 * * 1,4'
 
 jobs:
-  Release-old:
+  Build:
 
-    name: gfortran-release-old
+    name: build
+
+    strategy:
+      fail-fast: false
+      matrix:
+        image_type: [old, stable, trunk]
+        build_type: [Debug, Release]
 
     runs-on: ubuntu-latest
 
-    container: chinoune/debian-gfortran-testing:old
+    container: chinoune/debian-gfortran-testing:${{ matrix.image_type }}
 
     steps:
     - uses: actions/checkout@v1
@@ -17,108 +26,10 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
+        cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
     - name: Building
       run: make -C build -j$(nproc)
     - name: Testing
-      run: make -C build test
-
-  Debug-old:
-
-    name: gfortran-debug-old
-
-    runs-on: ubuntu-latest
-
-    container: chinoune/debian-gfortran-testing:old
-
-    steps:
-    - uses: actions/checkout@v1
-    - name: Configuring
       run: |
-        mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
-    - name: Building
-      run: make -C build -j$(nproc)
-    - name: Testing
-      run: make -C build test
-
-  Release-stable:
-
-    name: gfortran-release-stable
-
-    runs-on: ubuntu-latest
-
-    container: chinoune/debian-gfortran-testing:stable
-
-    steps:
-    - uses: actions/checkout@v1
-    - name: Configuring
-      run: |
-        mkdir build
-        cd build
-        cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
-    - name: Building
-      run: make -C build -j$(nproc)
-    - name: Testing
-      run: make -C build test
-
-  Debug-stable:
-
-    name: gfortran-debug-stable
-
-    runs-on: ubuntu-latest
-
-    container: chinoune/debian-gfortran-testing:stable
-
-    steps:
-    - uses: actions/checkout@v1
-    - name: Configuring
-      run: |
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
-    - name: Building
-      run: make -C build -j$(nproc)
-    - name: Testing
-      run: make -C build test
-
-  Release-trunk:
-
-    name: gfortran-release-trunk
-
-    runs-on: ubuntu-latest
-
-    container: chinoune/debian-gfortran-testing:trunk
-
-    steps:
-    - uses: actions/checkout@v1
-    - name: Configuring
-      run: |
-        mkdir build
-        cd build
-        cmake .. -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
-    - name: Building
-      run: make -C build -j$(nproc)
-    - name: Testing
-      run: make -C build test
-
-  Debug-trunk:
-
-    name: gfortran-debug-trunk
-
-    runs-on: ubuntu-latest
-
-    container: chinoune/debian-gfortran-testing:trunk
-
-    steps:
-    - uses: actions/checkout@v1
-    - name: Configuring
-      run: |
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Debug -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.1/cmake
-    - name: Building
-      run: make -C build -j$(nproc)
-    - name: Testing
-      run: make -C build test
+        ctest -j $(nproc) -V
