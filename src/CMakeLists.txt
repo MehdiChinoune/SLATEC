@@ -42,4 +42,4 @@ add_subdirectory( special_functions )
 target_link_libraries( slatec special_functions )
 
 install(TARGETS slatec LIBRARY DESTINATION lib RUNTIME DESTINATION bin)
-install(DIRECTORY ${CMAKE_BINARY_DIR}/modules DESTINATION include PATTERN "*_genmod*" EXCLUDE )
+install( DIRECTORY ${CMAKE_BINARY_DIR}/modules/ DESTINATION include )
