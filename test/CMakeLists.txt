@@ -1,4 +1,4 @@
-FILE(GLOB tests RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} CONFIGURE_DEPENDS test*.f90 )
+FILE( GLOB tests RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} CONFIGURE_DEPENDS test*.f90 )
 
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR}/modules )
 
@@ -10,10 +10,10 @@ set_source_files_properties( ${common_files} PROPERTIES HEADER_FILE_ONLY TRUE )
 target_sources( common_mod PRIVATE ${common_files} )
 
 foreach( tst ${tests} )
-  STRING(REPLACE ".f90" "" exe ${tst})
+  STRING( REPLACE ".f90" "" exe ${tst} )
   add_executable( ${exe} ${tst} )
   target_link_libraries( ${exe} common_mod )
-  add_test( NAME ${exe} COMMAND ./${exe} 2 WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+  add_test( NAME ${exe} COMMAND ./${exe} 2 WORKING_DIRECTORY ${CMAKE_BINARY_DIR} )
   set_tests_properties( ${exe} PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Failed;FAILED" )
 endforeach()
 
@@ -78,7 +78,7 @@ target_link_libraries( test_specfun_wigner_dp special_functions )
 target_link_libraries( test_specfun_xleg_sp special_functions )
 target_link_libraries( test_specfun_xleg_dp special_functions )
 
-find_package(PFUNIT)
+find_package( PFUNIT )
 
 add_pfunit_test( test_aaaaaa_pf test_aaaaaa_pf.pf "" "" )
 target_link_libraries( test_aaaaaa_pf slatec )

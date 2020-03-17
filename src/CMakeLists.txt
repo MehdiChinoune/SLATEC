@@ -3,7 +3,7 @@ set( CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/modules )
 
 add_library( slatec SHARED slatec.f90 )
 
-file(GLOB_RECURSE srcs CONFIGURE_DEPENDS *.f90 )
+file( GLOB_RECURSE srcs CONFIGURE_DEPENDS *.f90 )
 list( FILTER srcs EXCLUDE REGEX "slatec.f90" )
 set_source_files_properties( ${srcs} PROPERTIES HEADER_FILE_ONLY TRUE )
 target_sources( slatec PRIVATE ${srcs} )
@@ -41,5 +41,5 @@ target_link_libraries( slatec service )
 add_subdirectory( special_functions )
 target_link_libraries( slatec special_functions )
 
-install(TARGETS slatec LIBRARY DESTINATION lib RUNTIME DESTINATION bin)
+install( TARGETS slatec LIBRARY DESTINATION lib RUNTIME DESTINATION bin )
 install( DIRECTORY ${CMAKE_BINARY_DIR}/modules/ DESTINATION include )
