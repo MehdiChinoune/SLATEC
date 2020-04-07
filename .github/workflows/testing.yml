@@ -3,7 +3,7 @@ name: Github actions
 on:
   push:
   schedule:
-    - cron: '0 2 * * 1,4'
+    - cron: '0 2 * * 1'
 
 jobs:
   Build:
@@ -21,7 +21,7 @@ jobs:
     container: chinoune/debian-gfortran-testing:${{ matrix.image_type }}
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Configuring
       run: |
         mkdir build
@@ -32,4 +32,4 @@ jobs:
     - name: Testing
       run: |
         cd build
-        ctest -j $(nproc) -V
+        ctest -j $(nproc) --output-on-failure
