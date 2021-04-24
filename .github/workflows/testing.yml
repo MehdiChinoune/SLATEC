@@ -18,7 +18,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    container: chinoune/debian-gfortran-testing:${{ matrix.image_type }}
+    container: ghcr.io/mehdichinoune/debian-gfortran-testing:${{ matrix.image_type }}
 
     steps:
     - uses: actions/checkout@v2
