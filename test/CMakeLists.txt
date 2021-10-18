@@ -80,11 +80,13 @@ target_link_libraries( test_specfun_xleg_dp special_functions )
 
 find_package( PFUNIT )
 
-add_pfunit_test( test_aaaaaa_pf test_aaaaaa_pf.pf "" "" )
-target_link_libraries( test_aaaaaa_pf slatec )
+if( PFUNIT_FOUND )
+  add_pfunit_test( test_aaaaaa_pf test_aaaaaa_pf.pf "" "" )
+  target_link_libraries( test_aaaaaa_pf slatec )
 
-add_subdirectory( approximation )
+  add_subdirectory( approximation )
 
-add_subdirectory( data_handling )
+  add_subdirectory( data_handling )
 
-add_subdirectory( diff_integ )
+  add_subdirectory( diff_integ )
+endif()
