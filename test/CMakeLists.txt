@@ -81,8 +81,10 @@ target_link_libraries( test_specfun_xleg_dp special_functions )
 find_package( PFUNIT )
 
 if( PFUNIT_FOUND )
-  add_pfunit_test( test_aaaaaa_pf test_aaaaaa_pf.pf "" "" )
-  target_link_libraries( test_aaaaaa_pf slatec )
+  add_pfunit_ctest( test_aaaaaa_pf
+    TEST_SOURCES test_aaaaaa_pf.pf
+    LINK_LIBRARIES slatec
+  )
 
   add_subdirectory( approximation )
 

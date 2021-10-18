@@ -12,8 +12,10 @@ FILE(GLOB tests_pf RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} CONFIGURE_DEPENDS test*.
 
 foreach( tst ${tests_pf} )
   STRING(REPLACE ".pf" "" exe ${tst})
-  add_pfunit_test( ${exe} ${tst} "" "" )
-  target_link_libraries( ${exe} approximation )
+  add_pfunit_ctest( ${exe} 
+    TEST_SOURCES ${tst}
+    LINK_LIBRARIES approximation
+  )
 endforeach()
 
 target_link_libraries( test_dfc_pf interpolation )
