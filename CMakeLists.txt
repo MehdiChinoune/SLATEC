@@ -1,6 +1,14 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.10)
 
-project(slatec Fortran)
+cmake_policy(SET CMP0069 NEW) # INTERPROCEDURAL_OPTIMIZATION
+cmake_policy(SET CMP0074 NEW) # to use <PackageName>_ROOT variables
+cmake_policy(SET CMP0083 NEW) # POSITION_INDEPENDENT_CODE
+
+project( slatec
+  VERSION 4.2
+  DESCRIPTION "A comprehensive software library containing over 1400 general purpose mathematical and statistical routines written in Fortran."
+  LANGUAGES Fortran
+)
 
 set( slatec_MAJOR_VERSION 4 )
 set( slatec_MINOR_VERSION 2 )
@@ -15,34 +23,35 @@ if( NOT CMAKE_BUILD_TYPE )
   message( STATUS "No CMAKE_BUILD_TYPE selected, default to ${CMAKE_BUILD_TYPE}" )
 endif()
 
-if( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
-
+if( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "GNU" )
   set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wall -Wimplicit-procedure -Wunused-parameter -std=f2018" )
-  set( CMAKE_Fortran_FLAGS_FAST "-Ofast -flto" )
-  set( CMAKE_Fortran_FLAGS_RELEASE "-O3 -flto" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -fcheck=all -ffpe-trap=zero,overflow,invalid -fbacktrace" )
+  set( CMAKE_Fortran_FLAGS_FAST "-Ofast" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -fcheck=all -ffpe-trap=zero,overflow,invalid -fbacktrace" )
   set( CMAKE_Fortran_FLAGS_CODECOVERAGE "--coverage -g -O0" )
-
-elseif( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )
-
+elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel|IntelLLVM" )
   set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -warn all -stand f18 -standard-semantics -assume nostd_mod_proc_name" )
-  set( CMAKE_Fortran_FLAGS_FAST "-Ofast -ipo" )
-  set( CMAKE_Fortran_FLAGS_RELEASE "-O3 -ipo" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -check all -fpe-all=0 -traceback" )
+  set( CMAKE_Fortran_FLAGS_FAST "-Ofast" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -check all -fpe-all=0 -traceback" )
   set( CMAKE_Fortran_FLAGS_CODECOVERAGE "-prof-gen:srcpos -prof-dir=${CMAKE_BINARY_DIR}/prof/ -g -O0" )
-
-elseif( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Flang" )
-
+elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Flang" )
   set( CMAKE_Fortran_FLAGS_FAST "${CMAKE_Fortran_FLAGS} -Ofast" )
-  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -O0 -g -Wall" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -Wall" )
+elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "PGI|NVHPC" )
+  set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Mallocatable=03 -Mstandard" )
+  set( CMAKE_Fortran_FLAGS_FAST "${CMAKE_Fortran_FLAGS} -fast" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -Minform=inform -C" )
+endif()
 
-elseif( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "PGI" )
+include( CheckIPOSupported )
+check_ipo_supported( RESULT IPO_SUPPORTED OUTPUT IPO_MESSAGE LANGUAGES CXX )
+if( IPO_SUPPORTED AND NOT MINGW )
+  set( CMAKE_INTERPROCEDURAL_OPTIMIZATION ON )
+endif()
 
-  set( CMAKE_Fortran_FLAGS_FAST "${CMAKE_Fortran_FLAGS} -Mallocatable=03 -fast" )
-  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -Mallocatable=03 -O3" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Minform=inform -Mallocatable=03 -Mstandard -O0 -g -C" )
-
+include( CheckPIESupported )
+check_pie_supported( OUTPUT_VARIABLE PIE_MESSAGE LANGUAGES CXX )
+if( CMAKE_CXX_LINK_PIE_SUPPORTED )
+  set( CMAKE_POSITION_INDEPENDENT_CODE TRUE )
 endif()
 
 if( "${BLA_VENDOR}" MATCHES "Intel" )
