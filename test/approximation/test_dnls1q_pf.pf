@@ -42,7 +42,7 @@ CONTAINS
     CALL DNLS1E(DFCN2,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = NORM2(fvec)
     @AssertEqual( infos, info )
-    @AssertEqual( fnorms, fnorm, tol2*fnorms )
+    @AssertRelativelyEqual( fnorms, fnorm, tol2 )
     !
     !     Form JAC-transpose*JAC.
     !
@@ -80,7 +80,7 @@ CONTAINS
     CALL DNLS1E(DFCN1,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = NORM2(fvec)
     @AssertEqual( infos, info )
-    @AssertEqual( fnorms, fnorm, tol2*fnorms )
+    @AssertRelativelyEqual( fnorms, fnorm, tol2 )
     !
     !     Form JAC-transpose*JAC.
     !
@@ -119,7 +119,7 @@ CONTAINS
     CALL DNLS1E(DFCN3,iopt,m,n,x,fvec,tol,nprint,info,iw,wa,lwa)
     fnorm = NORM2(fvec)
     @AssertEqual( infos, info )
-    @AssertEqual( fnorms, fnorm, tol2*fnorms )
+    @AssertRelativelyEqual( fnorms, fnorm, tol2 )
     !
     !     Form JAC-transpose*JAC.
     !

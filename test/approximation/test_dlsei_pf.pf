@@ -102,8 +102,8 @@ CONTAINS
     !
     !  Compute relative error in problem variable solution and residual norm computation.
     !
-    @AssertEqual( sol(1:n), x(1:n), 70._DP*SQRT(eps_dp) )
-    @AssertEqual( resnrm, rnorml, 5._DP*eps_dp )
+    @AssertRelativelyEqual( sol(1:n), x(1:n), 70._DP*SQRT(eps_dp) )
+    @AssertRelativelyEqual( resnrm, rnorml, 5._DP*eps_dp )
     !
     RETURN
   END SUBROUTINE DLSEIT

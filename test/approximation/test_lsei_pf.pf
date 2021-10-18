@@ -102,8 +102,8 @@ CONTAINS
     !
     !  Compute relative error in problem variable solution and residual norm computation.
     !
-    @AssertEqual( sol(1:n), x(1:n), 70._SP*SQRT(eps_sp) )
-    @AssertEqual( resnrm, rnorml, 5._SP*eps_sp )
+    @AssertRelativelyEqual( sol(1:n), x(1:n), 70._SP*SQRT(eps_sp) )
+    @AssertRelativelyEqual( resnrm, rnorml, 5._SP*eps_sp )
     !
     RETURN
   END SUBROUTINE LSEIQX
