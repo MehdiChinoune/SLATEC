@@ -1,0 +1,230 @@
+module test_diff_integ_dp_pf
+  use service, only : DP
+  use funit
+  implicit none
+
+contains
+  @test
+  subroutine DAVNTS()
+    !> Quick check for DAVINT.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (AVNTST-S, DAVNTS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DAVINT, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   890911  Removed unnecessary intrinsics.  (WRB)
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Changed usage of eps_2_dp to eps_dp.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    !   910708  Minor modifications in use of KPRINT.  (WRB)
+    !   920210  Code restructured and revised to test error returns for all
+    !           values of KPRINT.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DAVINT
+    !
+    integer :: i, ierr, n
+    real(DP) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
+    !* FIRST EXECUTABLE STATEMENT  DAVNTS
+    tol = max(.0001_DP,sqrt(eps_dp))
+    tol1 = 1.E-2_DP*tol
+    !
+    !     Perform first accuracy test.
+    !
+    a = 0._DP
+    b = 5._DP
+    xint = exp(5._DP) - 1._DP
+    n = 500
+    rn1 = n - 1
+    sqb = sqrt(b)
+    del = 0.4_DP*(b-a)/(n-1)
+    do i = 1, n
+      x(i) = sqb*sqrt(a+(i-1)*(b-a)/rn1) + del
+      y(i) = exp(x(i))
+    end do
+    call DAVINT(x,y,n,a,b,ans,ierr)
+    !
+    !     See if test was passed.
+    !
+    @AssertEqual( xint, ans, tol )
+    !
+    !     Perform second accuracy test.
+    !
+    x(1) = 0._DP
+    x(2) = 5._DP
+    y(1) = 1._DP
+    y(2) = 0.5_DP
+    a = -0.5_DP
+    b = 0.5_DP
+    xint = 1._DP
+    call DAVINT(x,y,2,a,b,ans,ierr)
+    !
+    !     See if test was passed.
+    !
+    @AssertEqual( xint, ans, tol1 )
+    !
+  end subroutine DAVNTS
+  @test
+  subroutine DQG8TS()
+    !> Quick check for DGAUS8.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (QG8TST-S, DQG8TS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DFQD1, DFQD2, DGAUS8, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Changed usage of eps_2_dp to eps_dp.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    !   910708  Minor modifications in use of KPRINT.  (WRB)
+    !   920213  Code restructured to test DGAUS8 for all values of KPRINT,
+    !           second accuracy test added and testing of error returns revised.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DGAUS8
+    !     .. Local Scalars ..
+    integer :: ierr
+    real(DP) :: a, ans, b, cor, err, tol
+    !     .. Intrinsic Functions ..
+    intrinsic abs, atan, exp, sqrt
+    !* FIRST EXECUTABLE STATEMENT  DQG8TS
+    !
+    !     Initialize variables for testing.
+    !
+    tol = sqrt(eps_dp)
+    !
+    !     First accuracy test.
+    !
+    a = 1._DP
+    b = 4._DP
+    err = tol/100._DP
+    call DGAUS8(DFQD1,a,b,err,ans,ierr)
+    cor = 2._DP
+    @AssertEqual( cor, ans, tol )
+    @AssertEqual( 1, ierr )
+    !
+    !     Second accuracy test.
+    !
+    a = 0._DP
+    b = 4._DP*atan(1._DP)
+    err = tol/100._DP
+    call DGAUS8(DFQD2,a,b,err,ans,ierr)
+    cor = (exp(b)-1._DP)/101._DP
+    @AssertEqual( cor, ans, tol )
+    @AssertEqual( 1, ierr )
+    !
+  end subroutine DQG8TS
+  @test
+  subroutine DQN79Q()
+    !> Quick check for DQNC79.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (QN79QX-S, DQN79Q-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DFQD1, DFQD2, DQNC79, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Changed usage of eps_2_dp to eps_dp.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    !   910708  Minor modifications in use of KPRINT.  (WRB)
+    !   920213  Code restructured to test DQNC79 for all values of KPRINT,
+    !           second accuracy test added and testing of error returns revised.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DQNC79
+    !     .. Local Scalars ..
+    integer :: ierr, nfct
+    real(DP) :: a, ans, b, cor, err, tol
+    !     .. Intrinsic Functions ..
+    intrinsic abs, max, sqrt
+    !* FIRST EXECUTABLE STATEMENT  DQN79Q
+    !
+    !     Initialize variables for testing.
+    !
+    tol = sqrt(eps_dp)
+    !
+    !     First accuracy test.
+    !
+    a = 1._DP
+    b = 4._DP
+    err = tol/100._DP
+    call DQNC79(DFQD1,a,b,err,ans,ierr,nfct)
+    cor = 2._DP
+    @AssertEqual( cor, ans, tol )
+    @AssertEqual( 1, ierr )
+    !
+    !     Second accuracy test.
+    !
+    a = 0._DP
+    b = 4._DP*atan(1._DP)
+    err = tol/10._DP
+    call DQNC79(DFQD2,a,b,err,ans,ierr,nfct)
+    cor = (exp(b)-1._DP)/101._DP
+    @AssertEqual( cor, ans, tol )
+    @AssertEqual( 1, ierr )
+    !
+  end subroutine DQN79Q
+  !** DFQD1
+  real(DP) pure function DFQD1(X)
+    !> Function evaluator for DQNC79 and DGAUS8 quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FQD1-S, DFQD1-D)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **See also:**  DQG8TS, DQN79Q
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   920229  DATE WRITTEN
+
+    !     .. Scalar Arguments ..
+    real(DP), intent(in) :: X
+    !     .. Intrinsic Functions ..
+    intrinsic sqrt
+    !* FIRST EXECUTABLE STATEMENT  DFQD1
+    DFQD1 = 0._DP
+    if( X>0._DP ) DFQD1 = 1._DP/sqrt(X)
+  end function DFQD1
+  !** DFQD2
+  real(DP) pure function DFQD2(X)
+    !> Function evaluator for DQNC79 and DGAUS8 quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FQD2-S, DFQD2-D)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **See also:**  DQG8TS, DQN79Q
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   920229  DATE WRITTEN
+
+    !     .. Scalar Arguments ..
+    real(DP), intent(in) :: X
+    !     .. Intrinsic Functions ..
+    intrinsic cos, exp
+    !* FIRST EXECUTABLE STATEMENT  DFQD2
+    DFQD2 = exp(X)*cos(10._DP*X)
+  end function DFQD2
+  !
+end module test_diff_integ_dp_pf

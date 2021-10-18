@@ -1,0 +1,1014 @@
+module test_diff_integ_quadpack_sp_pf
+  use service, only : SP
+  use funit
+  implicit none
+
+contains
+  !** CQAG
+  @test
+  subroutine CQAG()
+    !> Quick check for QAG.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CQAG-S, CDQAG-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPRIN, F1G, F2G, F3G, QAG, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : QAG
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(SP) :: a, abserr, b, epmach, epsabs, epsrel, result, work(400)
+    integer :: ier, iwork(100), key, last, lenw, limit, neval
+    real(SP), parameter :: exact1 = 0.1154700538379252E+01_SP
+    !* FIRST EXECUTABLE STATEMENT  CQAG
+    !
+    ! TEST ON IER = 0
+    !
+    limit = 100
+    lenw = limit*4
+    epsabs = 0._SP
+    epmach = eps_sp
+    key = 6
+    epsrel = max(sqrt(epmach),0.1E-7_SP)
+    a = 0._SP
+    b = 1._SP
+    call QAG(F1G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
+      last,iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact1, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact1) )
+    !
+  end subroutine CQAG
+  !** CQAGI
+  @test
+  subroutine CQAGI()
+    !> Quick check for QAGI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CQAGI-S, CDQAGI-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPRIN, QAGI, R1MACH, T0, T1, T2, T3, T4, T5
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891009  Removed unreferenced variables.  (WRB)
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : QAGI
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    integer :: inf
+    real(SP) :: abserr, bound, epmach, epsabs, epsrel, result, work(800)
+    integer :: ier, iwork(200), last, lenw, limit, neval
+    real(SP), parameter :: exact0 = 2._SP
+    !* FIRST EXECUTABLE STATEMENT  CQAGI
+    !
+    ! TEST ON IER = 0
+    !
+    limit = 200
+    lenw = limit*4
+    epsabs = 0._SP
+    epmach = eps_sp
+    epsrel = max(sqrt(epmach),0.1E-7_SP)
+    bound = 0._SP
+    inf = 1
+    call QAGI(T0,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
+      last,iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact0, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact0) )
+    !
+  end subroutine CQAGI
+  !** CQAGP
+  @test
+  subroutine CQAGP()
+    !> Quick check for QAGP.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CQAGP-S, CDQAGP-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPRIN, F1P, F2P, F3P, F4P, QAGP, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : QAGP
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(SP) :: a, abserr, b, epmach, epsabs, epsrel, points(5), result, work(405)
+    integer :: ier, iwork(205), last, leniw, lenw, limit, neval, npts2
+    real(SP), parameter :: exact1 = 0.4285277667368085E+01_SP
+    real(SP), parameter :: p1 = 0.1428571428571428_SP
+    real(SP), parameter :: p2 = 0.6666666666666667_SP
+    !* FIRST EXECUTABLE STATEMENT  CQAGP
+    !
+    ! TEST ON IER = 0
+    !
+    npts2 = 4
+    limit = 100
+    leniw = limit*2 + npts2
+    lenw = limit*4 + npts2
+    epsabs = 0._SP
+    epmach = eps_sp
+    epsrel = max(sqrt(epmach),0.1E-7_SP)
+    a = 0._SP
+    b = 1._SP
+    points(1) = p1
+    points(2) = p2
+    call QAGP(F1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
+      leniw,lenw,last,iwork,work)
+    @assertEqual( 0, ier )
+    @AssertRelativelyEqual( exact1, result, epsrel )
+    !
+  end subroutine CQAGP
+  !** CQAGS
+  @test
+  subroutine CQAGS()
+    !> Quick check for QAGS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CQAGS-S, CDQAGS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPRIN, F0S, F1S, F2S, F3S, F4S, F5S, QAGS, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    !   911114  Modified test on IER=4 to allow IER=5.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : QAGS
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(SP) :: a, abserr, b, epmach, epsabs, epsrel, result, work(800)
+    integer :: ier, iwork(200), last, lenw, limit, neval
+    real(SP), parameter :: exact0 = 2._SP
+    !* FIRST EXECUTABLE STATEMENT  CQAGS
+    !
+    ! TEST ON IER = 0
+    !
+    limit = 200
+    lenw = limit*4
+    epsabs = 0._SP
+    epmach = eps_sp
+    epsrel = max(sqrt(epmach),0.1E-7_SP)
+    a = 0._SP
+    b = 1._SP
+    call QAGS(F0S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
+      iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact0, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact0) )
+    !
+  end subroutine CQAGS
+  !** CQAWC
+  @test
+  subroutine CQAWC()
+    !> Quick check for QAWC.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CQAWC-S, CDQAWC-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPRIN, F0C, F1C, QAWC, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : QAWC
+    !
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(SP) :: a, abserr, b, epmach, epsabs, epsrel, c, result, work(800)
+    integer :: ier, iwork(200), last, lenw, limit, neval
+    real(SP), parameter :: exact0 = -0.6284617285065624E+03_SP
+    !* FIRST EXECUTABLE STATEMENT  CQAWC
+    !
+    ! TEST ON IER = 0
+    !
+    c = 0.5_SP
+    a = -1._SP
+    b = 1._SP
+    limit = 200
+    lenw = limit*4
+    epsabs = 0._SP
+    epmach = eps_sp
+    epsrel = max(sqrt(epmach),0.1E-7_SP)
+    call QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
+      iwork,work)
+    @assertEqual( 0, ier )
+    @AssertRelativelyEqual( exact0, result, epsrel )
+    !
+  end subroutine CQAWC
+  !** CQAWF
+  @test
+  subroutine CQAWF()
+    !> Quick check for QAWF.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CQAWF-S, CDQAWF-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPRIN, F0F, F1F, QAWF, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : QAWF
+    !
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    integer :: integr, iwork(450), leniw, maxp1
+    real(SP) :: a, abserr, epsabs, epmach, omega, result, work(1425)
+    integer :: ier, lenw, limit, limlst, lst, neval
+    real(SP), parameter :: exact0 = 0.1422552162575912E+01_SP
+    !* FIRST EXECUTABLE STATEMENT  CQAWF
+    !
+    ! TEST ON IER = 0
+    !
+    maxp1 = 21
+    limlst = 50
+    limit = 200
+    leniw = limit*2 + limlst
+    lenw = leniw*2 + maxp1*25
+    epmach = eps_sp
+    epsabs = max(sqrt(epmach),0.1E-02_SP)
+    a = 0._SP
+    omega = 0.8E+01
+    integr = 2
+    call QAWF(F0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
+      leniw,maxp1,lenw,iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact0, result, abserr )
+    @assertLessThanOrEqual( abserr, epsabs )
+    !
+  end subroutine CQAWF
+  !** CQAWO
+  @test
+  subroutine CQAWO()
+    !> Quick check for QAWO.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CQAWO-S, CDQAWO-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPRIN, F0O, F1O, F2O, QAWO, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : QAWO
+    !
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    integer :: leniw
+    real(SP) :: a, abserr, b, epmach, epsabs, epsrel, omega, result, work(1325)
+    integer :: ier, integr, iwork(400), last, lenw, maxp1, neval
+    real(SP), parameter :: exact0 = 0.1042872789432789E+05_SP
+    real(SP), parameter :: pi = 0.31415926535897932E+01_SP
+    !* FIRST EXECUTABLE STATEMENT  CQAWO
+    !
+    ! TEST ON IER = 0
+    !
+    maxp1 = 21
+    leniw = 400
+    lenw = leniw*2 + maxp1*25
+    epsabs = 0._SP
+    epmach = eps_sp
+    epsrel = max(sqrt(epmach),0.1E-7_SP)
+    a = 0._SP
+    b = pi
+    omega = 1._SP
+    integr = 2
+    call QAWO(F0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
+      leniw,maxp1,lenw,last,iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact0, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact0) )
+    !
+  end subroutine CQAWO
+  !** CQAWS
+  @test
+  subroutine CQAWS()
+    !> Quick check for QAWS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CQAWS-S, CDQAWS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPRIN, F0WS, F1WS, QAWS, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : QAWS
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(SP) :: a, abserr, b, epmach, epsabs, epsrel, alfa, beta, result, work(800)
+    integer :: ier, iwork(200), last, lenw, limit, neval, integr
+    real(SP), parameter :: exact0 = 0.5350190569223644_SP
+    !* FIRST EXECUTABLE STATEMENT  CQAWS
+    !
+    ! TEST ON IER = 0
+    !
+    alfa = -0.5_SP
+    beta = -0.5_SP
+    integr = 1
+    a = 0._SP
+    b = 1._SP
+    limit = 200
+    lenw = limit*4
+    epsabs = 0._SP
+    epmach = eps_sp
+    epsrel = max(sqrt(epmach),0.1E-7_SP)
+    call QAWS(F0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,ier,&
+      limit,lenw,last,iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact0, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact0) )
+    !
+  end subroutine CQAWS
+  !** CQNG
+  @test
+  subroutine CQNG()
+    !> Quick check for QNG.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CQNG-S, CDQNG-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPRIN, F1N, F2N, QNG, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_sp, tiny_sp
+    use diff_integ, only : QNG
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(SP) :: a, abserr, b, epmach, epsabs, epsrel, result, uflow
+    integer :: ier, neval
+    real(SP), parameter :: exact1 = 0.7281029132255818_SP
+    !* FIRST EXECUTABLE STATEMENT  CQNG
+    !
+    ! TEST ON IER = 0
+    !
+    epsabs = 0._SP
+    epmach = eps_sp
+    uflow = tiny_sp
+    epsrel = max(sqrt(epmach),0.1E-07_SP)
+    a = 0._SP
+    b = 1._SP
+    call QNG(F1N,a,b,epsabs,epsrel,result,abserr,neval,ier)
+    @assertEqual( 0, ier )
+    @assertEqual( exact1, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact1) )
+    !
+  end subroutine CQNG
+  !** F0C
+  real(SP) pure function F0C(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F0C
+    F0C = 1._SP/(X*X+1.E-4_SP)
+  end function F0C
+  !** F0F
+  real(SP) pure function F0F(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F0F
+    F0F = 0._SP
+    if( X/=0._SP ) F0F = sin(0.5E+02_SP*X)/(X*sqrt(X))
+  end function F0F
+  !** F0O
+  real(SP) pure function F0O(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F0O
+    F0O = (2._SP*sin(X))**14
+  end function F0O
+  !** F0S
+  real(SP) pure function F0S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F0S
+    F0S = 0._SP
+    if( X/=0.0 ) F0S = 1._SP/sqrt(X)
+  end function F0S
+  !** F0WS
+  real(SP) pure function F0WS(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F0WS
+    F0WS = sin(10._SP*X)
+  end function F0WS
+  !** F1C
+  real(SP) pure function F1C(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F1C
+    F1C = 0._SP
+    if( X/=0.33_SP ) F1C = (X-0.5_SP)*abs(X-0.33_SP)**(-0.9_SP)
+  end function F1C
+  !** F1F
+  real(SP) pure function F1F(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    real(SP) :: x1, y
+    !* FIRST EXECUTABLE STATEMENT  F1F
+    x1 = X + 1._SP
+    F1F = 5._SP/x1/x1
+    y = 5._SP/x1
+    if( y>3.1415926535897932 ) F1F = 0._SP
+  end function F1F
+  !** F1G
+  real(SP) pure function F1G(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    real(SP), parameter :: pi = 3.1415926535897932_SP
+    !* FIRST EXECUTABLE STATEMENT  F1G
+    F1G = 2._SP/(2._SP+sin(10._SP*pi*X))
+  end function F1G
+  !** F1N
+  real(SP) pure function F1N(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F1N
+    F1N = 1._SP/(X**4+X**2+1._SP)
+  end function F1N
+  !** F1O
+  real(SP) pure function F1O(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F1O
+    F1O = 1._SP
+    if( X>3.1415926535897932 ) F1O = 0._SP
+  end function F1O
+  !** F1P
+  real(SP) pure function F1P(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    real(SP) :: alfa1, alfa2, d1, d2
+    !  P1 = 1/7, P2 = 2/3
+    real(SP), parameter :: p1 = 0.1428571428571428_SP
+    real(SP), parameter :: p2 = 0.6666666666666667_SP
+    !* FIRST EXECUTABLE STATEMENT  F1P
+    alfa1 = -0.25_SP
+    alfa2 = -0.5_SP
+    d1 = abs(X-p1)
+    d2 = abs(X-p2)
+    F1P = 0._SP
+    if( d1/=0._SP .AND. d2/=0._SP ) F1P = d1**alfa1 + d2**alfa2
+  end function F1P
+  !** F1S
+  real(SP) pure function F1S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F1S
+    F1S = 2._SP/(2._SP+sin(0.314159E+02_SP*X))
+  end function F1S
+  !** F1WS
+  real(SP) pure function F1WS(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F1WS
+    F1WS = abs(X-0.33_SP)**(-0.999_SP)
+  end function F1WS
+  !** F2G
+  real(SP) pure function F2G(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F2G
+    F2G = X*sin(0.3E+02_SP*X)*cos(0.5E+02_SP*X)
+  end function F2G
+  !** F2N
+  real(SP) pure function F2N(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F2N
+    F2N = X**(-0.9_SP)
+  end function F2N
+  !** F2O
+  real(SP) pure function F2O(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F2O
+    F2O = 0._SP
+    if( X/=0._SP ) F2O = 1._SP/(X*X*sqrt(X))
+  end function F2O
+  !** F2P
+  real(SP) pure function F2P(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F2P
+    F2P = sin(0.314159E+03_SP*X)/(0.314159E+01_SP*X)
+  end function F2P
+  !** F2S
+  real(SP) pure function F2S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F2S
+    F2S = 100._SP
+    if( X/=0._SP ) F2S = sin(0.314159E+03_SP*X)/(0.314159E+01_SP*X)
+  end function F2S
+  !** F3G
+  real(SP) pure function F3G(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F3G
+    F3G = abs(X-0.33_SP)**(-0.9_SP)
+  end function F3G
+  !** F3P
+  real(SP) pure function F3P(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F3P
+    F3P = 1._SP
+    if( X>3.1415926535897932 ) F3P = 0._SP
+  end function F3P
+  !** F3S
+  real(SP) pure function F3S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F3S
+    F3S = 1._SP
+    if( X>3.1415926535897932 ) F3S = 0._SP
+  end function F3S
+  !** F4P
+  real(SP) pure function F4P(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F4P
+    F4P = 0._SP
+    if( X>0.0 ) F4P = 1._SP/(X*sqrt(X))
+  end function F4P
+  !** F4S
+  real(SP) pure function F4S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F4S
+    if( X==.33_SP ) then
+      F4S = 0._SP
+      return
+    end if
+    F4S = abs(X-0.33_SP)**(-0.999_SP)
+    return
+    return
+  end function F4S
+  !** F5S
+  real(SP) pure function F5S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  F5S
+    F5S = 0._SP
+    if( X/=0.0 ) F5S = 1._SP/(X*sqrt(X))
+  end function F5S
+  !** T0
+  real(SP) pure function T0(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  F0S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    real(SP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  T0
+    a = 0._SP
+    b = 1._SP
+    x1 = X + 1._SP
+    y = (b-a)/x1 + a
+    T0 = (b-a)*F0S(y)/x1/x1
+  end function T0
+  !** T1
+  real(SP) pure function T1(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  F1S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    real(SP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  T1
+    a = 0._SP
+    b = 1._SP
+    x1 = X + 1._SP
+    y = (b-a)/x1 + a
+    T1 = (b-a)*F1S(y)/x1/x1
+  end function T1
+  !** T2
+  real(SP) pure function T2(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  F2S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    real(SP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  T2
+    a = 0.1_SP
+    b = 1._SP
+    x1 = X + 1._SP
+    y = (b-a)/x1 + a
+    T2 = (b-a)*F2S(y)/x1/x1
+  end function T2
+  !** T3
+  real(SP) pure function T3(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  F3S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    real(SP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  T3
+    a = 0._SP
+    b = 5._SP
+    x1 = X + 1._SP
+    y = (b-a)/x1 + a
+    T3 = (b-a)*F3S(y)/x1/x1
+  end function T3
+  !** T4
+  real(SP) pure function T4(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  F4S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    real(SP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  T4
+    a = 0._SP
+    b = 1._SP
+    x1 = X + 1._SP
+    y = (b-a)/x1 + a
+    T4 = (b-a)*F4S(y)/x1/x1
+  end function T4
+  !** T5
+  real(SP) pure function T5(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  F5S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(SP), intent(in) :: X
+    real(SP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  T5
+    a = 0._SP
+    b = 1._SP
+    x1 = X + 1._SP
+    y = (b-a)/x1 + a
+    T5 = (b-a)*F5S(y)/x1/x1
+  end function T5
+  !
+end module test_diff_integ_quadpack_sp_pf

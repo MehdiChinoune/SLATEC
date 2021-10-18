@@ -86,3 +86,5 @@ target_link_libraries( test_aaaaaa_pf slatec )
 add_subdirectory( approximation )
 
 add_subdirectory( data_handling )
+
+add_subdirectory( diff_integ )

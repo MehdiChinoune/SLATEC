@@ -1,0 +1,229 @@
+module test_diff_integ_sp_pf
+  use service, only : SP
+  use funit
+  implicit none
+
+contains
+  !** AVNTST
+  @test
+  subroutine AVNTST()
+    !> Quick check for AVINT.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (AVNTST-S, DAVNTS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  AVINT, R1MACH, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   890911  Removed unnecessary intrinsics.  (WRB)
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    !   910708  Minor modifications in use of KPRINT.  (WRB)
+    !   920210  Code restructured and revised to test error returns for all
+    !           values of KPRINT.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : AVINT
+    !
+    real(SP) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
+    integer :: i, ierr, n
+    !* FIRST EXECUTABLE STATEMENT  AVNTST
+    tol = max(.0001_SP,sqrt(eps_sp))
+    tol1 = 1.E-2_SP*tol
+    !
+    !     Perform first accuracy test.
+    !
+    a = 0._SP
+    b = 5._SP
+    xint = exp(5._SP) - 1._SP
+    n = 500
+    rn1 = n - 1
+    sqb = sqrt(b)
+    del = 0.4_SP*(b-a)/(n-1)
+    do i = 1, n
+      x(i) = sqb*sqrt(a+(i-1)*(b-a)/rn1) + del
+      y(i) = exp(x(i))
+    end do
+    call AVINT(x,y,n,a,b,ans,ierr)
+    !
+    !     See if test was passed.
+    !
+    @assertEqual( xint, ans, tol )
+    !
+    !     Perform second accuracy test.
+    !
+    x(1) = 0._SP
+    x(2) = 5._SP
+    y(1) = 1._SP
+    y(2) = 0.5_SP
+    a = -0.5_SP
+    b = 0.5_SP
+    xint = 1._SP
+    call AVINT(x,y,2,a,b,ans,ierr)
+    !
+    !     See if test was passed.
+    !
+    @assertEqual( xint, ans, tol1 )
+    !
+  end subroutine AVNTST
+  !** QG8TST
+  @test
+  subroutine QG8TST()
+    !> Quick check for GAUS8.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (QG8TST-S, DQG8TS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  FQD1, FQD2, GAUS8, R1MACH, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    !   910708  Minor modifications in use of KPRINT.  (WRB)
+    !   920213  Code restructured to test GAUS8 for all values of KPRINT,
+    !           second accuracy test added and testing of error returns revised.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : GAUS8
+    !     .. Local Scalars ..
+    integer :: ierr
+    real(SP) :: a, ans, b, cor, err, tol
+    !* FIRST EXECUTABLE STATEMENT  QG8TST
+    !
+    !     Initialize variables for testing.
+    !
+    tol = sqrt(eps_sp)
+    !
+    !     First accuracy test.
+    !
+    a = 1._SP
+    b = 4._SP
+    err = tol/100._SP
+    call GAUS8(FQD1,a,b,err,ans,ierr)
+    cor = 2._SP
+    @assertEqual( cor, ans, tol )
+    @assertEqual( 1, ierr )
+    !
+    !     Second accuracy test.
+    !
+    a = 0._SP
+    b = 4._SP*atan(1._SP)
+    err = tol/100._SP
+    call GAUS8(FQD2,a,b,err,ans,ierr)
+    cor = (exp(b)-1._SP)/101._SP
+    @assertEqual( cor, ans, tol )
+    @assertEqual( 1, ierr )
+    !
+  end subroutine QG8TST
+  !** QN79QX
+  @test
+  subroutine QN79QX()
+    !> Quick check for QNC79.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (QN79QX-S, DQN79Q-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  FQD1, FQD2, QNC79, R1MACH, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Changed usage of eps_2_sp to eps_sp.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    !   910708  Minor modifications in use of KPRINT.  (WRB)
+    !   920213  Code restructured to test QNC79 for all values of KPRINT,
+    !           second accuracy test added and testing of error returns revised.  (WRB)
+    use service, only : eps_sp
+    use diff_integ, only : QNC79
+    !     .. Local Scalars ..
+    integer :: ierr, nfct
+    real(SP) :: a, ans, b, cor, err, tol
+    !* FIRST EXECUTABLE STATEMENT  QN79QX
+    !
+    !     Initialize variables for testing.
+    !
+    tol = sqrt(eps_sp)
+    !
+    !     First accuracy test.
+    !
+    a = 1._SP
+    b = 4._SP
+    err = tol/100._SP
+    call QNC79(FQD1,a,b,err,ans,ierr,nfct)
+    cor = 2._SP
+    @assertEqual( cor, ans, tol )
+    @assertEqual( 1, ierr )
+    !
+    !     Second accuracy test.
+    !
+    a = 0._SP
+    b = 4._SP*atan(1._SP)
+    err = tol/10._SP
+    call QNC79(FQD2,a,b,err,ans,ierr,nfct)
+    cor = (exp(b)-1._SP)/101._SP
+    @assertEqual( cor, ans, tol )
+    @assertEqual( 1, ierr )
+    !
+  end subroutine QN79QX
+  !** FQD1
+  real(SP) pure function FQD1(X)
+    !> Function evaluator for QNC79 and GAUS8 quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FQD1-S, DFQD1-D)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **See also:**  QG8TST, QN79QX
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   920229  DATE WRITTEN
+
+    !     .. Scalar Arguments ..
+    real(SP),intent(in) :: X
+    !     .. Intrinsic Functions ..
+    intrinsic sqrt
+    !* FIRST EXECUTABLE STATEMENT  FQD1
+    FQD1 = 0._SP
+    if( X>0._SP ) FQD1 = 1._SP/sqrt(X)
+  end function FQD1
+  !** FQD2
+  real(SP) pure function FQD2(X)
+    !> Function evaluator for QNC79 and GAUS8 quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FQD2-S, DFQD2-D)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **See also:**  QG8TST, QN79QX
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   920229  DATE WRITTEN
+
+    !     .. Scalar Arguments ..
+    real(SP),intent(in) :: X
+    !     .. Intrinsic Functions ..
+    intrinsic cos, exp
+    !* FIRST EXECUTABLE STATEMENT  FQD2
+    FQD2 = exp(X)*cos(10._SP*X)
+  end function FQD2
+  !
+end module test_diff_integ_sp_pf

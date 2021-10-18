@@ -1,0 +1,1009 @@
+module test_diff_integ_quadpack_dp_pf
+  use service, only : DP
+  use funit
+  implicit none
+
+contains
+  !** CDQAG
+  @test
+  subroutine CDQAG()
+    !> Quick check for DQAG.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAG-S, CDQAG-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF1G, DF2G, DF3G, DPRIN, DQAG
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DQAG
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(DP) :: a, abserr, b, epmach, epsabs, epsrel, result, work(400)
+    integer :: ier, iwork(100), key, last, lenw, limit, neval
+    real(DP), parameter :: exact1 = 0.1154700538379252E+01_DP
+    !* FIRST EXECUTABLE STATEMENT  CDQAG
+    !
+    ! TEST ON IER = 0
+    !
+    limit = 100
+    lenw = limit*4
+    epsabs = 0._DP
+    epmach = eps_dp
+    key = 6
+    epsrel = max(sqrt(epmach),0.1E-7_DP)
+    a = 0._DP
+    b = 1._DP
+    call DQAG(DF1G,a,b,epsabs,epsrel,key,result,abserr,neval,ier,limit,lenw,&
+      last,iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact1, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact1) )
+    !
+  end subroutine CDQAG
+  !** CDQAGI
+  @test
+  subroutine CDQAGI()
+    !> Quick check for DQAGI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAGI-S, CDQAGI-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DPRIN, DQAGI, DT0, DT1, DT2, DT3, DT4, DT5
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891009  Removed unreferenced variables.  (WRB)
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DQAGI
+    !
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    integer :: inf
+    real(DP) :: abserr, bound, epmach, epsabs, epsrel, result, work(800)
+    integer :: ier, iwork(200), last, lenw, limit, neval
+    real(DP), parameter :: exact0 = 2._DP
+    !* FIRST EXECUTABLE STATEMENT  CDQAGI
+    !
+    ! TEST ON IER = 0
+    !
+    limit = 200
+    lenw = limit*4
+    epsabs = 0._DP
+    epmach = eps_dp
+    epsrel = max(sqrt(epmach),0.1E-7_DP)
+    bound = 0._DP
+    inf = 1
+    call DQAGI(DT0,bound,inf,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
+      last,iwork,work)
+    @assertEqual( 0, ier )
+    @AssertRelativelyEqual( exact0, result, epsrel )
+    !
+  end subroutine CDQAGI
+  !** CDQAGP
+  @test
+  subroutine CDQAGP()
+    !> Quick check for DQAGP.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAGP-S, CDQAGP-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF1P, DF2P, DF3P, DF4P, DPRIN, DQAGP
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DQAGP
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(DP) :: a, abserr, b, epmach, epsabs, epsrel, points(5), result, work(405)
+    integer :: ier, iwork(205), last, leniw, lenw, limit, neval, npts2
+    real(DP), parameter :: exact1 = 0.4285277667368085E+01_DP
+    real(DP), parameter :: p1 = 0.1428571428571428_DP
+    real(DP), parameter :: p2 = 0.6666666666666667_DP
+    !* FIRST EXECUTABLE STATEMENT  CDQAGP
+    !
+    ! TEST ON IER = 0
+    !
+    npts2 = 4
+    limit = 100
+    leniw = limit*2 + npts2
+    lenw = limit*4 + npts2
+    epsabs = 0._DP
+    epmach = eps_dp
+    epsrel = max(sqrt(epmach),0.1E-7_DP)
+    a = 0._DP
+    b = 1._DP
+    points(1) = p1
+    points(2) = p2
+    call DQAGP(DF1P,a,b,npts2,points,epsabs,epsrel,result,abserr,neval,ier,&
+      leniw,lenw,last,iwork,work)
+    @assertEqual( 0, ier )
+    @AssertRelativelyEqual( exact1, result, epsrel )
+    !
+  end subroutine CDQAGP
+  !** CDQAGS
+  @test
+  subroutine CDQAGS()
+    !> Quick check for DQAGS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAGS-S, CDQAGS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0S, DF1S, DF2S, DF3S, DF4S, DF5S, DPRIN,
+    !                    DQAGS
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    !   911114  Modified test on IER=4 to allow IER=5.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DQAGS
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(DP) :: a, abserr, b, epmach, epsabs, epsrel, result, work(800)
+    integer :: ier, iwork(200), last, lenw, limit, neval
+    real(DP), parameter :: exact0 = 2._DP
+    !* FIRST EXECUTABLE STATEMENT  CDQAGS
+    !
+    ! TEST ON IER = 0
+    !
+    limit = 200
+    lenw = limit*4
+    epsabs = 0._DP
+    epmach = eps_dp
+    epsrel = max(sqrt(epmach),0.1E-7_DP)
+    a = 0._DP
+    b = 1._DP
+    call DQAGS(DF0S,a,b,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,last,&
+      iwork,work)
+    @assertEqual( 0, ier )
+    @AssertRelativelyEqual( exact0, result, epsrel )
+    !
+  end subroutine CDQAGS
+  !** CDQAWC
+  @test
+  subroutine CDQAWC()
+    !> Quick check for DQAWC.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAWC-S, CDQAWC-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0C, DF1C, DPRIN, DQAWC
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DQAWC
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(DP) :: a, abserr, b, epmach, epsabs, epsrel, c, result, work(800)
+    integer :: ier, iwork(200), last, lenw, limit, neval
+    real(DP), parameter :: exact0 = -0.6284617285065624E+03_DP
+    !* FIRST EXECUTABLE STATEMENT  CDQAWC
+    !
+    ! TEST ON IER = 0
+    !
+    c = 0.5_DP
+    a = -1._DP
+    b = 1._DP
+    limit = 200
+    lenw = limit*4
+    epsabs = 0._DP
+    epmach = eps_dp
+    epsrel = max(sqrt(epmach),0.1E-7_DP)
+    call DQAWC(DF0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,limit,lenw,&
+      last,iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact0, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact0) )
+    !
+  end subroutine CDQAWC
+  !** CDQAWF
+  @test
+  subroutine CDQAWF()
+    !> Quick check for DQAWF.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAWF-S, CDQAWF-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0F, DF1F, DPRIN, DQAWF
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DQAWF
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    integer :: integr, iwork(450), leniw, maxp1
+    real(DP) :: a, abserr, epsabs, epmach, omega, result, work(1425)
+    integer :: ier, lenw, limit, limlst, lst, neval
+    real(DP), parameter :: exact0 = 0.1422552162575912E+01_DP
+    !* FIRST EXECUTABLE STATEMENT  CDQAWF
+    !
+    ! TEST ON IER = 0
+    !
+    maxp1 = 21
+    limlst = 50
+    limit = 200
+    leniw = limit*2 + limlst
+    lenw = leniw*2 + maxp1*25
+    epmach = eps_dp
+    epsabs = max(sqrt(epmach),0.1E-2_DP)
+    a = 0._DP
+    omega = 0.8E+01_DP
+    integr = 2
+    call DQAWF(DF0F,a,omega,integr,epsabs,result,abserr,neval,ier,limlst,lst,&
+      leniw,maxp1,lenw,iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact0, result, abserr )
+    @assertLessThanOrEqual( abserr, epsabs )
+    !
+  end subroutine CDQAWF
+  !** CDQAWO
+  @test
+  subroutine CDQAWO()
+    !> Quick check for DQAWO.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAWO-S, CDQAWO-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0O, DF1O, DF2O, DPRIN, DQAWO
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DQAWO
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    integer :: leniw
+    real(DP) :: a, abserr, b, epmach, epsabs, epsrel, omega, result, work(1325)
+    integer :: ier, integr, iwork(400), last, lenw, maxp1, neval
+    real(DP), parameter :: exact0 = 0.1042872789432789E+05_DP
+    real(DP), parameter :: pi = 0.31415926535897932E+01_DP
+    !* FIRST EXECUTABLE STATEMENT  CDQAWO
+    !
+    ! TEST ON IER = 0
+    !
+    maxp1 = 21
+    leniw = 400
+    lenw = leniw*2 + maxp1*25
+    epsabs = 0._DP
+    epmach = eps_dp
+    epsrel = max(sqrt(epmach),0.1E-7_DP)
+    a = 0._DP
+    b = pi
+    omega = 1._DP
+    integr = 2
+    call DQAWO(DF0O,a,b,omega,integr,epsabs,epsrel,result,abserr,neval,ier,&
+      leniw,maxp1,lenw,last,iwork,work)
+    @assertEqual( 0, ier )
+    @assertEqual( exact0, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact0) )
+    !
+  end subroutine CDQAWO
+  !** CDQAWS
+  @test
+  subroutine CDQAWS()
+    !> Quick check for DQAWS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAWS-S, CDQAWS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0WS, DF1WS, DPRIN, DQAWS
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : eps_dp
+    use diff_integ, only : DQAWS
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(DP) :: a, abserr, b, epmach, epsabs, epsrel, alfa, beta, result, work(800)
+    integer :: ier, iwork(200), last, lenw, limit, neval, integr
+    real(DP), parameter :: exact0 = 0.5350190569223644_DP
+    !* FIRST EXECUTABLE STATEMENT  CDQAWS
+    !
+    ! TEST ON IER = 0
+    !
+    alfa = -0.5_DP
+    beta = -0.5_DP
+    integr = 1
+    a = 0._DP
+    b = 1._DP
+    limit = 200
+    lenw = limit*4
+    epsabs = 0._DP
+    epmach = eps_dp
+    epsrel = max(sqrt(epmach),0.1E-7_DP)
+    call DQAWS(DF0WS,a,b,alfa,beta,integr,epsabs,epsrel,result,abserr,neval,&
+      ier,limit,lenw,last,iwork,work)
+    @assertEqual( 0, ier )
+    @AssertRelativelyEqual( exact0, result, epsrel )
+    !
+  end subroutine CDQAWS
+  !** CDQNG
+  @test
+  subroutine CDQNG()
+    !> Quick check for DQNG.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQNG-S, CDQNG-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF1N, DF2N, DPRIN, DQNG
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+    !   901205  Added PASS/FAIL message and changed the name of the first argument.  (RWC)
+    !   910501  Added PURPOSE and TYPE records.  (WRB)
+    use service, only : tiny_dp, eps_dp
+    use diff_integ, only : DQNG
+
+    ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
+    real(DP) :: a, abserr, b, epmach, epsabs, epsrel, result, uflow
+    integer :: ier, neval
+    real(DP), parameter :: exact1 = 0.7281029132255818_DP
+    !* FIRST EXECUTABLE STATEMENT  CDQNG
+    !
+    ! TEST ON IER = 0
+    !
+    epsabs = 0._DP
+    epmach = eps_dp
+    uflow = tiny_dp
+    epsrel = max(sqrt(epmach),0.1E-7_DP)
+    a = 0._DP
+    b = 1._DP
+    call DQNG(DF1N,a,b,epsabs,epsrel,result,abserr,neval,ier)
+    @assertEqual( 0, ier )
+    @assertEqual( exact1, result, abserr )
+    @assertLessThanOrEqual( abserr, epsrel*abs(exact1) )
+    !
+  end subroutine CDQNG
+  !** DF0C
+  real(DP) pure function DF0C(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF0C
+    DF0C = 1._DP/(X*X+1.E-4_DP)
+  end function DF0C
+  !** DF0F
+  real(DP) pure function DF0F(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF0F
+    DF0F = 0._DP
+    if( X/=0._DP ) DF0F = sin(0.5E+02_DP*X)/(X*sqrt(X))
+  end function DF0F
+  !** DF0O
+  real(DP) pure function DF0O(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF0O
+    DF0O = (2._DP*sin(X))**14
+  end function DF0O
+  !** DF0S
+  real(DP) pure function DF0S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF0S
+    DF0S = 0._DP
+    if( X/=0._DP ) DF0S = 1._DP/sqrt(X)
+  end function DF0S
+  !** DF0WS
+  real(DP) pure function DF0WS(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF0WS
+    DF0WS = sin(0.1E+02_DP*X)
+  end function DF0WS
+  !** DF1C
+  real(DP) pure function DF1C(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF1C
+    DF1C = 0._DP
+    if( X/=0.33_DP ) DF1C = (X-0.5_DP)*abs(X-0.33_DP)**(-0.9_DP)
+  end function DF1C
+  !** DF1F
+  real(DP) pure function DF1F(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    real(DP) :: x1, y
+    !* FIRST EXECUTABLE STATEMENT  DF1F
+    x1 = X + 1._DP
+    DF1F = 5._DP/x1/x1
+    y = 5._DP/x1
+    if( y>3.1415926535897932_DP ) DF1F = 0._DP
+  end function DF1F
+  !** DF1G
+  real(DP) pure function DF1G(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    real(DP), parameter :: pi = 3.1415926535897932_DP
+    !* FIRST EXECUTABLE STATEMENT  DF1G
+    DF1G = 2._DP/(2._DP+sin(10._DP*pi*X))
+  end function DF1G
+  !** DF1N
+  real(DP) pure function DF1N(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF1N
+    DF1N = 1._DP/(X**4+X**2+1._DP)
+  end function DF1N
+  !** DF1O
+  real(DP) pure function DF1O(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF1O
+    DF1O = 1._DP
+    if( X>0.31415926535897932E+01_DP ) DF1O = 0._DP
+  end function DF1O
+  !** DF1P
+  real(DP) pure function DF1P(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    real(DP) :: alfa1, alfa2, d1, d2
+    !* FIRST EXECUTABLE STATEMENT  DF1P
+    !  P1 = 1/7, P2 = 2/3
+    real(DP), parameter :: p1 = 0.1428571428571428_DP
+    real(DP), parameter :: p2 = 0.6666666666666667_DP
+    alfa1 = -0.25_DP
+    alfa2 = -0.5_DP
+    d1 = abs(X-p1)
+    d2 = abs(X-p2)
+    DF1P = 0._DP
+    if( d1/=0._DP .AND. d2/=0._DP ) DF1P = d1**alfa1 + d2**alfa2
+  end function DF1P
+  !** DF1S
+  real(DP) pure function DF1S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF1S
+    DF1S = 2._DP/(2._DP+sin(0.314159E+02_DP*X))
+  end function DF1S
+  !** DF1WS
+  real(DP) pure function DF1WS(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF1WS
+    DF1WS = 0.00_DP
+    if( X-0.33_DP/=0._DP ) DF1WS = abs(X-0.33_DP)**(-0.999_DP)
+  end function DF1WS
+  !** DF2G
+  real(DP) pure function DF2G(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF2G
+    DF2G = X*sin(0.3E+02_DP*X)*cos(0.5E+02_DP*X)
+  end function DF2G
+  !** DF2N
+  real(DP) pure function DF2N(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF2N
+    DF2N = X**(-0.9_DP)
+  end function DF2N
+  !** DF2O
+  real(DP) pure function DF2O(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF2O
+    DF2O = 0._DP
+    if( X/=0._DP ) DF2O = 1._DP/(X*X*sqrt(X))
+  end function DF2O
+  !** DF2P
+  real(DP) pure function DF2P(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF2P
+    DF2P = sin(0.314159E+03_DP*X)/(0.314159E+01_DP*X)
+  end function DF2P
+  !** DF2S
+  real(DP) pure function DF2S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF2S
+    DF2S = 0.1E+03_DP
+    if( X/=0._DP ) DF2S = sin(0.314159E+03_DP*X)/(0.314159E+01_DP*X)
+  end function DF2S
+  !** DF3G
+  real(DP) pure function DF3G(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF3G
+    DF3G = abs(X-0.33_DP)**(-.90_DP)
+  end function DF3G
+  !** DF3P
+  real(DP) pure function DF3P(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF3P
+    DF3P = 1._DP
+    if( X>0.31415926535897932E+01_DP ) DF3P = 0._DP
+  end function DF3P
+  !** DF3S
+  real(DP) pure function DF3S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF3S
+    DF3S = 1._DP
+    if( X>0.31415926535897932E+01_DP ) DF3S = 0._DP
+  end function DF3S
+  !** DF4P
+  real(DP) pure function DF4P(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF4P
+    DF4P = 0._DP
+    if( X>0._DP ) DF4P = 1._DP/(X*sqrt(X))
+  end function DF4P
+  !** DF4S
+  real(DP) pure function DF4S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF4S
+    DF4S = 0.00_DP
+    if( X-0.33_DP/=0._DP ) DF4S = abs(X-0.33_DP)**(-0.999_DP)
+  end function DF4S
+  !** DF5S
+  real(DP) pure function DF5S(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    !* FIRST EXECUTABLE STATEMENT  DF5S
+    DF5S = 0._DP
+    if( X/=0._DP ) DF5S = 1._DP/(X*sqrt(X))
+  end function DF5S
+  !** DT0
+  real(DP) pure function DT0(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF0S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    real(DP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  DT0
+    a = 0._DP
+    b = 1._DP
+    x1 = X + 1._DP
+    y = (b-a)/x1 + a
+    DT0 = (b-a)*DF0S(y)/x1/x1
+  end function DT0
+  !** DT1
+  real(DP) pure function DT1(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF1S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    real(DP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  DT1
+    a = 0._DP
+    b = 1._DP
+    x1 = X + 1._DP
+    y = (b-a)/x1 + a
+    DT1 = (b-a)*DF1S(y)/x1/x1
+  end function DT1
+  !** DT2
+  real(DP) pure function DT2(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF2S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    real(DP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  DT2
+    a = 0.1_DP
+    b = 1._DP
+    x1 = X + 1._DP
+    y = (b-a)/x1 + a
+    DT2 = (b-a)*DF2S(y)/x1/x1
+  end function DT2
+  !** DT3
+  real(DP) pure function DT3(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF3S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    real(DP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  DT3
+    a = 0._DP
+    b = 5._DP
+    x1 = X + 1._DP
+    y = (b-a)/x1 + a
+    DT3 = (b-a)*DF3S(y)/x1/x1
+  end function DT3
+  !** DT4
+  real(DP) pure function DT4(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF4S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    real(DP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  DT4
+    a = 0._DP
+    b = 1._DP
+    x1 = X + 1._DP
+    y = (b-a)/x1 + a
+    DT4 = (b-a)*DF4S(y)/x1/x1
+  end function DT4
+  !** DT5
+  real(DP) pure function DT5(X)
+    !> Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF5S
+
+    !* REVISION HISTORY  (YYMMDD)
+    !   ??????  DATE WRITTEN
+    !   891214  Prologue converted to Version 4.0 format.  (BAB)
+
+    real(DP), intent(in) :: X
+    real(DP) :: a, b, x1, y
+    !* FIRST EXECUTABLE STATEMENT  DT5
+    a = 0._DP
+    b = 1._DP
+    x1 = X + 1._DP
+    y = (b-a)/x1 + a
+    DT5 = (b-a)*DF5S(y)/x1/x1
+  end function DT5
+  !
+end module test_diff_integ_quadpack_dp_pf
