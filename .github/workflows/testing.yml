@@ -21,7 +21,7 @@ jobs:
     container: ghcr.io/mehdichinoune/debian-gfortran-testing:${{ matrix.image_type }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Configuring
       run: |
         mkdir build
