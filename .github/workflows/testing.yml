@@ -26,9 +26,12 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.2/cmake
+        cmake .. \
+          -GNinja \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.2/cmake
     - name: Building
-      run: make -C build -j$(nproc)
+      run: ninja -C build
     - name: Testing
       run: |
         cd build
