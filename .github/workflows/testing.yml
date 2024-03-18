@@ -7,19 +7,15 @@ on:
     - cron: '0 2 * * 1'
 
 jobs:
-  Build:
-
-    name: build
-
+  Debian:
+    name: Debian GNU Fortran - ${{ matrix.image_type }} (${{ matrix.build_type }})
+    runs-on: ubuntu-26.04
+    container: ghcr.io/mehdichinoune/debian-gfortran-testing:${{ matrix.image_type }}
     strategy:
       fail-fast: false
       matrix:
         image_type: [old, stable, trunk]
         build_type: [Debug, Release]
-
-    runs-on: ubuntu-26.04
-
-    container: ghcr.io/mehdichinoune/debian-gfortran-testing:${{ matrix.image_type }}
 
     steps:
     - uses: actions/checkout@v7
@@ -35,3 +31,96 @@ jobs:
     - name: Testing
       run: |
         ctest -j $(nproc) --output-on-failure --test-dir build
+
+  Ubuntu:
+    name: Ubuntu-${{ matrix.compiler }} (${{ matrix.build_type }})
+    runs-on: ubuntu-26.04
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gfortran-15, gfortran-16, ifx, nvfortran]
+        build_type: [Debug, Release] #, Fast]
+
+    steps:
+      - name: Get Processor Info
+        run : |
+          lscpu | grep name
+          nproc
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install the compiler
+        run: |
+          if [[ ${{ matrix.compiler }} == gfortran-* ]]; then
+            sudo add-apt-repository ppa:misterc/gcc-snapshot-latest-lts
+            #sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+            sudo apt update
+            sudo apt install --no-install-recommends -y ${{ matrix.compiler }} libopenblas-dev
+          elif [[ ${{ matrix.compiler }} == ifx ]]; then
+            wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB \
+              | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
+            echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+            sudo apt update
+            sudo apt install --no-install-recommends -y intel-oneapi-compiler-fortran intel-oneapi-mkl-devel
+            source /opt/intel/oneapi/setvars.sh
+            printenv >> $GITHUB_ENV
+          elif [[ ${{ matrix.compiler }} == nvfortran ]]; then
+            NV_VERSION="26.9"
+            curl https://developer.download.nvidia.com/hpc-sdk/ubuntu/DEB-GPG-KEY-NVIDIA-HPC-SDK | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg
+            echo 'deb [signed-by=/usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg] https://developer.download.nvidia.com/hpc-sdk/ubuntu/amd64 /' | sudo tee /etc/apt/sources.list.d/nvhpc.list
+            sudo apt-get update
+            sudo apt install --no-install-recommends -y nvhpc-${NV_VERSION/./-}
+            echo "/opt/nvidia/hpc_sdk/Linux_x86_64/${NV_VERSION}/compilers/bin" >> $GITHUB_PATH
+            echo "LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/${NV_VERSION}/compilers/lib:/opt/nvidia/hpc_sdk/Linux_x86_64/${NV_VERSION}/math_libs/lib64" >> $GITHUB_ENV
+          fi
+          sudo apt install --no-install-recommends -y ninja-build
+      - name: Configuring
+        run: |
+          declare -a _cmake_opt
+          if [[ ${{ matrix.compiler }} == ifx ]]; then
+            _cmake_opt+=("-DBLA_VENDOR=Intel10_64lp")
+          fi
+          cmake \
+            -G Ninja \
+            -DCMAKE_Fortran_COMPILER=${{ matrix.compiler }} \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            "${_cmake_opt[@]}" \
+            -S . \
+            -B build
+      - name: Building
+        run: cmake --build build
+      - name: Testing
+        run: |
+          ctest -j $(nproc) --output-on-failure --test-dir build
+
+  MSYS2:
+    name: MSYS2-${{ matrix.msystem }}-${{ matrix.build_type }}
+    runs-on: windows-2025
+    strategy:
+      fail-fast: false
+      matrix:
+        msystem: [UCRT64] #, CLANG64]
+        build_type: [Debug, Release]
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install compiler
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{ matrix.msystem }}
+          release: false
+          update: true
+          pacboy: fc:p cc:p openblas:p cmake:p
+      - name: Configuring
+        run: |
+          cmake \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -S . \
+            -B build
+      - name: Building
+        run: cmake --build build
+      - name: Testing
+        run: |
+          ctest -j $(nproc) --output-on-failure --test-dir build
