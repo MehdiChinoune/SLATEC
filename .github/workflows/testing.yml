@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         image_type: [old, stable, trunk]
-        build_type: [Debug, Release]
+        build_type: [Debug, Release] #, Fast]
 
     steps:
     - uses: actions/checkout@v7
@@ -38,7 +38,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        compiler: [gnu-15, gnu-16, intel, nvidia]
+        compiler: [gnu-15, gnu-16, intel, nvidia, flang-23]
         build_type: [Debug, Release] #, Fast]
     env:
       PFUNIT_VER: "4.22.0"
@@ -87,6 +87,13 @@ jobs:
             echo "FC=nvfortran" >> $GITHUB_ENV
             echo "CC=nvc" >> $GITHUB_ENV
             echo "LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/${NV_VERSION}/compilers/lib:/opt/nvidia/hpc_sdk/Linux_x86_64/${NV_VERSION}/math_libs/lib64" >> $GITHUB_ENV
+          elif [[ ${{ matrix.compiler }} == flang-* ]]; then
+            wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+            echo 'deb http://apt.llvm.org/resolute/ llvm-toolchain-resolute-23 main' | sudo tee /etc/apt/sources.list.d/LLVM.list
+            sudo apt-get update
+            sudo apt install --no-install-recommends -y flang-23 clang-23 libomp-23-dev libopenblas-dev
+            echo "FC=flang-23" >> $GITHUB_ENV
+            echo "CC=clang-23" >> $GITHUB_ENV
           fi
           sudo apt install --no-install-recommends -y ninja-build
 
@@ -107,9 +114,12 @@ jobs:
           elif [[  ${{ matrix.compiler }} == nvidia ]]; then
             export FFLAGS=" -Mstandard"
           fi
+          declare -a _cmake_opt
+          if [[ ${{ matrix.compiler }} != nvidia || ${{ matrix.compiler }} != flang-* ]]; then
+            _cmake_opt+=("-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON")
+          fi
           cmake -G Ninja \
             -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/pfunit \
-            -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=$([[ ${{ matrix.compiler }} != nvidia* ]] && echo "ON" || echo "OFF") \
             -S pFUnit-v${{ env.PFUNIT_VER }} \
             -B build-pfunit
           cmake --build build-pfunit
@@ -184,8 +194,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        msystem: [UCRT64] #, CLANG64]
-        build_type: [Debug, Release]
+        msystem: [UCRT64, CLANG64]
+        build_type: [Debug, Release] #, Fast]
     defaults:
       run:
         shell: msys2 {0}
