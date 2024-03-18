@@ -6,19 +6,15 @@ on:
     - cron: '0 2 * * 1'
 
 jobs:
-  Build:
-
-    name: build
-
+  Debian:
+    name: Debian
+    runs-on: ubuntu-latest
+    container: ghcr.io/mehdichinoune/debian-gfortran-testing:${{ matrix.image_type }}
     strategy:
       fail-fast: false
       matrix:
         image_type: [old, stable, trunk]
         build_type: [Debug, Release]
-
-    runs-on: ubuntu-latest
-
-    container: ghcr.io/mehdichinoune/debian-gfortran-testing:${{ matrix.image_type }}
 
     steps:
     - uses: actions/checkout@v4
@@ -35,3 +31,144 @@ jobs:
       run: |
         cd build
         ctest -j $(nproc) --output-on-failure
+
+  Ubuntu:
+    name: Ubuntu gcc-${{ matrix.gnu_ver }}-${{ matrix.build_type }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        gnu_ver: [13, 14]
+        build_type: [Debug, Release]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install gfortran
+        run: |
+          sudo apt update
+          sudo apt install --no-install-recommends -y \
+            gfortran-${{ matrix.gnu_ver }} \
+            libopenblas-dev \
+            make
+      - name: Configuring
+        run: |
+          cmake \
+            -DCMAKE_Fortran_COMPILER=gfortran-${{ matrix.gnu_ver }} \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -B build \
+            -S .
+      - name: Building
+        run: cmake --build build -j5
+      - name: Testing
+        run: |
+          cd build
+          ctest -j $(nproc) --output-on-failure
+
+  MSYS2:
+    name: MSYS2-${{ matrix.msystem }}-${{ matrix.build_type }}
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        msystem: [UCRT64, CLANG64]
+        build_type: [Debug, Release]
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install compiler
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{ matrix.msystem }}
+          release: false
+          update: true
+          install: make
+          pacboy: fc:p cc:p openblas:p cmake:p
+      - name: Configuring
+        run: |
+          cmake \
+            -G"Unix Makefiles" \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -B build \
+            -S .
+      - name: Building
+        run: cmake --build build -j5
+      - name: Testing
+        run: |
+          cd build
+          ctest -j $(nproc) --output-on-failure
+
+  Intel:
+    name: Intel ${{ matrix.compiler }}-${{ matrix.build_type }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Debug, Release]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Intel compilers
+        run: |
+          wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB \
+            | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
+          echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+          sudo apt update
+          sudo apt install --no-install-recommends -y \
+            intel-oneapi-compiler-fortran \
+            intel-oneapi-mkl-devel \
+            make
+          source /opt/intel/oneapi/setvars.sh
+          printenv >> $GITHUB_ENV
+      - name: Configuring
+        run: |
+          cmake \
+            -DCMAKE_Fortran_COMPILER=ifx \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DBLA_VENDOR=Intel10_64lp \
+            -B build \
+            -S .
+      - name: Building
+        run: cmake --build build -j5
+      - name: Testing
+        run: |
+          cd build
+          ctest -j $(nproc) --output-on-failure
+
+  Nvidia:
+    name: Nvidia-${{ matrix.build_type }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Debug, Release]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Nvidia HPC Compiler
+        run: |
+          curl https://developer.download.nvidia.com/hpc-sdk/ubuntu/DEB-GPG-KEY-NVIDIA-HPC-SDK | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg
+          echo 'deb [signed-by=/usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg] https://developer.download.nvidia.com/hpc-sdk/ubuntu/amd64 /' | sudo tee /etc/apt/sources.list.d/nvhpc.list
+          sudo apt-get update
+          sudo apt install --no-install-recommends -y \
+            nvhpc-24-11 \
+            make
+          echo "/opt/nvidia/hpc_sdk/Linux_x86_64/24.11/compilers/bin" >> $GITHUB_PATH
+          echo "LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/24.11/compilers/lib" >> $GITHUB_ENV
+      - name: Configuring
+        run: |
+          cmake \
+            -DCMAKE_Fortran_COMPILER=nvfortran \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -B build \
+            -S .
+      - name: Building
+        run: cmake --build build -j5
+      - name: Testing
+        run: |
+          cd build
+          ctest -j $(nproc) --output-on-failure
