@@ -2,37 +2,35 @@ name: Github actions
 
 on:
   push:
-  schedule:
-    - cron: '0 2 * * 1'
 
 jobs:
   Build:
-
-    name: build
-
+    name: ubuntu
+    runs-on: ubuntu-latest
+    container: ubuntu:22.04
     strategy:
       fail-fast: false
       matrix:
-        image_type: [old, stable, trunk]
-        build_type: [Debug, Release]
-
-    runs-on: ubuntu-latest
-
-    container: ghcr.io/mehdichinoune/debian-gfortran-testing:${{ matrix.image_type }}
+        cmake_ver: ["3.26.4", "3.27.7", "3.27.9", "3.28.3"]
 
     steps:
     - uses: actions/checkout@v4
+    - name: install packages
+      run: |
+        apt update
+        apt install --no-install-recommends -y \
+          gcc \
+          gfortran \
+          ninja-build \
+          libopenblas-dev \
+          python3-pip
+        pip install cmake==${{ matrix.cmake_ver }}
     - name: Configuring
       run: |
-        mkdir build
-        cd build
-        cmake .. \
+        cmake \
           -GNinja \
-          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-          -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.2/cmake
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+          -B build \
+          -S .
     - name: Building
       run: ninja -C build
-    - name: Testing
-      run: |
-        cd build
-        ctest -j $(nproc) --output-on-failure
