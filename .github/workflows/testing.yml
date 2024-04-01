@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        cmake_ver: ["3.26.4", "3.27.7", "3.27.9", "3.28.3"]
+        cmake_ver: ["3.26.4", "3.27.7", "3.27.9", "3.28.3", "3.29.0"]
 
     steps:
     - uses: actions/checkout@v4
