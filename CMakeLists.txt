@@ -1,8 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
-
-cmake_policy(SET CMP0069 NEW) # INTERPROCEDURAL_OPTIMIZATION
-cmake_policy(SET CMP0074 NEW) # to use <PackageName>_ROOT variables
-cmake_policy(SET CMP0083 NEW) # POSITION_INDEPENDENT_CODE
+cmake_minimum_required(VERSION 3.22)
 
 project( slatec
   VERSION 4.2
