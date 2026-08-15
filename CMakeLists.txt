@@ -6,6 +6,8 @@ project( slatec
   LANGUAGES Fortran
 )
 
+option( BUILD_SHARED_LIBS "Build shared libraries" ON )
+
 set( slatec_MAJOR_VERSION 4 )
 set( slatec_MINOR_VERSION 2 )
 set( slatec_VERSION  ${slatec_MAJOR_VERSION}.${slatec_MINOR_VERSION} )
