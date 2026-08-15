@@ -1,4 +1,4 @@
 
-add_library( nonlin_eq SHARED nonlin_eq.f90 )
+add_library( nonlin_eq nonlin_eq.f90 )
 
 target_link_libraries( nonlin_eq linear ${LAPACK_LIBRARIES} )
