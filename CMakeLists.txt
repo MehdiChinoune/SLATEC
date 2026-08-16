@@ -6,6 +6,8 @@ project( slatec
   LANGUAGES Fortran
 )
 
+option( BUILD_SHARED_LIBS "Build shared libraries" ON )
+
 set( slatec_MAJOR_VERSION 4 )
 set( slatec_MINOR_VERSION 2 )
 set( slatec_VERSION  ${slatec_MAJOR_VERSION}.${slatec_MINOR_VERSION} )
@@ -56,6 +58,13 @@ endif()
 find_package( BLAS REQUIRED )
 
 find_package( LAPACK REQUIRED )
+
+# generate and install pkg-config files
+string( REPLACE ";" " " SLATEC_LAPACK_LIBS "${LAPACK_LIBRARIES}" )
+configure_file( slatec.pc.in slatec.pc @ONLY )
+configure_file( slatec-static.pc.in slatec-static.pc @ONLY )
+install( FILES "${CMAKE_CURRENT_BINARY_DIR}/slatec.pc" "${CMAKE_CURRENT_BINARY_DIR}/slatec-static.pc"
+         DESTINATION lib/pkgconfig )
 
 add_subdirectory( src )
 

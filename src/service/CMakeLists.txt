@@ -1,2 +1,2 @@
 
-add_library( service SHARED service.f90 )
+add_library( service service.f90 )

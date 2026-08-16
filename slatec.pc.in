@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: SLATEC
+Description: SLATEC Common Mathematical Library (shared libraries)
+Version: @PROJECT_VERSION@
+Cflags: -I${includedir}
+Libs: -L${libdir} -lslatec -lapproximation -ldata_handling -ldiff_integ -ldiff_integ_eq -linteg_trans -linterpolation -llinear -lnonlin_eq -loptimization -lservice -lspecial_functions
+Libs.private: @SLATEC_LAPACK_LIBS@
