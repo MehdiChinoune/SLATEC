@@ -41,6 +41,8 @@ target_link_libraries( slatec service )
 add_subdirectory( special_functions )
 target_link_libraries( slatec special_functions )
 
-install( TARGETS approximation data_handling diff_integ diff_integ_eq integ_trans interpolation linear nonlin_eq optimization service special_functions LIBRARY DESTINATION lib )
-install( TARGETS slatec LIBRARY DESTINATION lib RUNTIME DESTINATION bin )
-install( DIRECTORY ${CMAKE_BINARY_DIR}/modules/ DESTINATION include )
+install( TARGETS slatec approximation data_handling diff_integ diff_integ_eq integ_trans interpolation linear nonlin_eq optimization service special_functions
+         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install( DIRECTORY ${CMAKE_BINARY_DIR}/modules/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} )
