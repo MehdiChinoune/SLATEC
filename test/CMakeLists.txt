@@ -2,7 +2,7 @@ FILE( GLOB tests RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} CONFIGURE_DEPENDS test*.f9
 
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR}/modules )
 
-add_library( common_mod SHARED common.f90 )
+add_library( common_mod common.f90 )
 target_link_libraries( common_mod PRIVATE special_functions )
 
 set( common_files get_argument.f90 ismpl.f90 pass.f90 )
