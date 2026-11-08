@@ -1,7 +1,7 @@
 
 set( CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/modules )
 
-add_library( slatec SHARED slatec.f90 )
+add_library( slatec slatec.f90 )
 
 file( GLOB_RECURSE srcs CONFIGURE_DEPENDS *.f90 )
 list( FILTER srcs EXCLUDE REGEX "slatec.f90" )
