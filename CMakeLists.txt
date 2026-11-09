@@ -44,11 +44,11 @@ if( IPO_SUPPORTED AND NOT MINGW )
   set( CMAKE_INTERPROCEDURAL_OPTIMIZATION ON )
 endif()
 
-include( CheckPIESupported )
-check_pie_supported( OUTPUT_VARIABLE PIE_MESSAGE LANGUAGES Fortran )
-if( CMAKE_CXX_LINK_PIE_SUPPORTED )
-  set( CMAKE_POSITION_INDEPENDENT_CODE TRUE )
-endif()
+#include( CheckPIESupported )
+#check_pie_supported( OUTPUT_VARIABLE PIE_MESSAGE LANGUAGES Fortran )
+# objects must be position-independent to go into the shared libslatec; the
+# PIE check above only decides whether executables are also linked with -pie
+set( CMAKE_POSITION_INDEPENDENT_CODE ON )
 
 if( "${BLA_VENDOR}" MATCHES "Intel" )
   enable_language( C )
