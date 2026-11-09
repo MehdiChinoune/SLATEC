@@ -72,6 +72,43 @@ option( BUILD_SHARED_LIBS "Build shared libraries" ON )
 
 include(GNUInstallDirs)
 
+# generate and install the pkg-config file
+set( SLATEC_PC_REQUIRES_PRIVATE "" CACHE STRING
+  "pkg-config module(s) providing BLAS/LAPACK, e.g. 'flexiblas' or 'openblas'. If set, slatec.pc uses them in Requires.private instead of the library paths found by CMake." )
+
+# BLAS/LAPACK are only needed explicitly for static linking (Libs.private)
+set( pc_private "" )
+if( NOT SLATEC_PC_REQUIRES_PRIVATE )
+  set( pc_deps ${LAPACK_LIBRARIES} ${BLAS_LIBRARIES} )
+  list( REMOVE_DUPLICATES pc_deps )
+  foreach( lib IN LISTS pc_deps )
+    if( lib MATCHES "^-" )                                  # linker flag, e.g. -lm or -fopenmp
+      list( APPEND pc_private "${lib}" )
+    elseif( lib MATCHES "::" )                              # imported target: not expressible
+      message( WARNING "slatec.pc: cannot express '${lib}'; set SLATEC_PC_REQUIRES_PRIVATE" )
+    elseif( lib MATCHES "/([^/]+)\\.framework$" )           # macOS, e.g. Accelerate
+      list( APPEND pc_private "-framework ${CMAKE_MATCH_1}" )
+    elseif( lib MATCHES "^(.*)/(lib)?([^/]+)\\.dll\\.a$"    # MinGW import library
+         OR lib MATCHES "^(.*)/(lib)?([^/]+)\\.(so[.0-9]*|dylib|tbd|a|lib)$" )
+      list( APPEND pc_private "-L${CMAKE_MATCH_1}" "-l${CMAKE_MATCH_3}" )
+    else()
+      list( APPEND pc_private "${lib}" )
+    endif()
+  endforeach()
+  list( REMOVE_DUPLICATES pc_private )
+endif()
+string( JOIN " " SLATEC_PC_LIBS_PRIVATE ${pc_private} )
+
+# paths relative to the .pc file, so that the installation is relocatable
+set( pc_dest "${CMAKE_INSTALL_LIBDIR}/pkgconfig" )
+cmake_path( ABSOLUTE_PATH pc_dest BASE_DIRECTORY "${CMAKE_INSTALL_PREFIX}" OUTPUT_VARIABLE pc_dest_full )
+file( RELATIVE_PATH SLATEC_PC_PREFIX "${pc_dest_full}" "${CMAKE_INSTALL_PREFIX}" )
+file( RELATIVE_PATH SLATEC_PC_LIBDIR "${CMAKE_INSTALL_PREFIX}" "${CMAKE_INSTALL_FULL_LIBDIR}" )
+file( RELATIVE_PATH SLATEC_PC_INCLUDEDIR "${CMAKE_INSTALL_PREFIX}" "${CMAKE_INSTALL_FULL_INCLUDEDIR}" )
+
+configure_file( slatec.pc.in slatec.pc @ONLY )
+install( FILES "${CMAKE_CURRENT_BINARY_DIR}/slatec.pc" DESTINATION "${pc_dest}" )
+
 add_subdirectory( src )
 
 enable_testing()
