@@ -46,7 +46,8 @@ elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "LLVMFlang" )
 elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "NVHPC" )
   set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Mallocatable=03 -Minform=warn -Mstandard" )
   set( CMAKE_Fortran_FLAGS_FAST "${CMAKE_Fortran_FLAGS} -fast" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -Minfo=all -Mneginfo=all -Kieee -Ktrap=fp -C" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -Minfo=all -Mneginfo=all -Kieee -C" )
+  # Tests fail with -Ktrap=fp
 endif()
 
 include( CheckIPOSupported )
