@@ -1,4 +1,4 @@
 
-add_library( diff_integ_eq diff_integ_eq.f90 )
+add_library( diff_integ_eq OBJECT diff_integ_eq.f90 )
 
-target_link_libraries( diff_integ_eq data_handling linear integ_trans ${LAPACK_LIBRARIES} )
+target_link_libraries( diff_integ_eq data_handling linear integ_trans )

@@ -1,4 +1,4 @@
 
-add_library( diff_integ diff_integ.f90 )
+add_library( diff_integ OBJECT diff_integ.f90 )
 
-target_link_libraries( diff_integ linear interpolation ${LAPACK_LIBRARIES} )
+target_link_libraries( diff_integ linear interpolation )

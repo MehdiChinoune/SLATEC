@@ -1,4 +1,4 @@
 
-add_library( integ_trans integ_trans.f90 )
+add_library( integ_trans OBJECT integ_trans.f90 )
 
-add_dependencies( integ_trans service )
+target_link_libraries( integ_trans service )

@@ -1,4 +1,4 @@
 
-add_library( data_handling data_handling.f90 )
+add_library( data_handling OBJECT data_handling.f90 )
 
-add_dependencies( data_handling service )
+target_link_libraries( data_handling service )

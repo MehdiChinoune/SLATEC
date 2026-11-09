@@ -1,6 +1,4 @@
 
-add_library( linear linear.f90 )
+add_library( linear OBJECT linear.f90 )
 
-target_link_libraries( linear ${LAPACK_LIBRARIES} )
-
-add_dependencies( linear service )
+target_link_libraries( linear service )

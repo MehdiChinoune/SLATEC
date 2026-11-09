@@ -1,4 +1,4 @@
 
-add_library( interpolation interpolation.f90 )
+add_library( interpolation OBJECT interpolation.f90 )
 
-add_dependencies( interpolation service )
+target_link_libraries( interpolation service )

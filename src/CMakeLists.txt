@@ -1,49 +1,40 @@
 
 set( CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/modules )
 
-add_library( slatec slatec.f90 )
-
-file( GLOB_RECURSE srcs CONFIGURE_DEPENDS *.f90 )
-list( FILTER srcs EXCLUDE REGEX "slatec.f90" )
-set_source_files_properties( ${srcs} PROPERTIES HEADER_FILE_ONLY TRUE )
-target_sources( slatec PRIVATE ${srcs} )
-
 add_subdirectory( approximation )
-target_link_libraries( slatec approximation )
-
 add_subdirectory( data_handling )
-target_link_libraries( slatec data_handling )
-
 add_subdirectory( diff_integ )
-target_link_libraries( slatec diff_integ )
-
 add_subdirectory( diff_integ_eq )
-target_link_libraries( slatec diff_integ_eq )
-
 add_subdirectory( integ_trans )
-target_link_libraries( slatec integ_trans )
-
 add_subdirectory( interpolation )
-target_link_libraries( slatec interpolation )
-
 add_subdirectory( linear )
-target_link_libraries( slatec linear )
-
 add_subdirectory( nonlin_eq )
-target_link_libraries( slatec nonlin_eq )
-
 add_subdirectory( optimization )
-target_link_libraries( slatec optimization )
-
 add_subdirectory( service )
-target_link_libraries( slatec service )
-
 add_subdirectory( special_functions )
-target_link_libraries( slatec special_functions )
 
-include(GNUInstallDirs)
+add_library( slatec
+  aaaaaa.f90
+  slatec.f90
+  $<TARGET_OBJECTS:approximation>
+  $<TARGET_OBJECTS:data_handling>
+  $<TARGET_OBJECTS:diff_integ>
+  $<TARGET_OBJECTS:diff_integ_eq>
+  $<TARGET_OBJECTS:integ_trans>
+  $<TARGET_OBJECTS:interpolation>
+  $<TARGET_OBJECTS:linear>
+  $<TARGET_OBJECTS:nonlin_eq>
+  $<TARGET_OBJECTS:optimization>
+  $<TARGET_OBJECTS:service>
+  $<TARGET_OBJECTS:special_functions>
+)
 
-install( TARGETS slatec approximation data_handling diff_integ diff_integ_eq integ_trans interpolation linear nonlin_eq optimization service special_functions
+target_link_libraries(slatec PUBLIC ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
+
+set_source_files_properties( aaaaaa.f90 PROPERTIES HEADER_FILE_ONLY TRUE )
+target_sources( slatec PRIVATE aaaaaa.f90 )
+
+install( TARGETS slatec
          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
