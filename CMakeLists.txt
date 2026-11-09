@@ -40,7 +40,14 @@ elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel" OR "${CMAKE_Fortran_COMP
   set( CMAKE_Fortran_FLAGS_FAST "-Ofast" )
   set( CMAKE_Fortran_FLAGS_CODECOVERAGE "-prof-gen:srcpos -prof-dir=${CMAKE_BINARY_DIR}/prof/ -g -O0" )
 elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "LLVMFlang" )
-  set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fimplicit-none-ext -std=f2018" )
+  set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -std=f2018" )
+  # -fimplicit-none-ext is unknown to older flang (e.g. 20.x), and an unknown
+  # flag breaks every later try_compile, including the BLAS/LAPACK checks
+  include( CheckFortranCompilerFlag )
+  check_fortran_compiler_flag( -fimplicit-none-ext HAVE_FLANG_IMPLICIT_NONE_EXT )
+  if( HAVE_FLANG_IMPLICIT_NONE_EXT )
+    set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fimplicit-none-ext" )
+  endif()
   set( CMAKE_Fortran_FLAGS_FAST "-O3 -ffast-math -fstack-arrays" )
   set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -pedantic -Wall" )
 elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "NVHPC" )
