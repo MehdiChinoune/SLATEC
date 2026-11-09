@@ -16,22 +16,21 @@ jobs:
         image_type: [old, stable, trunk]
         build_type: [Debug, Release]
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
 
     container: ghcr.io/mehdichinoune/debian-gfortran-testing:${{ matrix.image_type }}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Configuring
       run: |
         cmake \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-          -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.14/cmake \
+          -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.20/cmake \
           -S . \
           -B build
     - name: Building
       run: cmake --build build -j$(nproc)
     - name: Testing
       run: |
-        cd build
-        ctest -j $(nproc) --output-on-failure
+        ctest -j $(nproc) --output-on-failure --test-dir build
