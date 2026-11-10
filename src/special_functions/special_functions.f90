@@ -5,6 +5,21 @@ MODULE special_functions
   USE service, ONLY : SP, DP
   IMPLICIT NONE
 
+#if defined(__flang__) && !defined(HAVE_BESSEL_SP)
+  INTERFACE BESSEL_J0
+    MODULE PROCEDURE BESJ0
+  END INTERFACE BESSEL_J0
+  INTERFACE BESSEL_J1
+    MODULE PROCEDURE BESJ1
+  END INTERFACE BESSEL_J1
+  INTERFACE BESSEL_Y0
+    MODULE PROCEDURE BESY0
+  END INTERFACE BESSEL_Y0
+  INTERFACE BESSEL_Y1
+    MODULE PROCEDURE BESY1
+  END INTERFACE BESSEL_Y1
+#endif
+
 CONTAINS
   include"ai.f90"
   include"aie.f90"
@@ -21,6 +36,10 @@ CONTAINS
   include"besi1.f90"
   include"besi1e.f90"
   include"besj.f90"
+#if defined(__flang__) && !defined(HAVE_BESSEL_SP)
+  include"besj0.f90"
+  include"besj1.f90"
+#endif
   include"besk.f90"
   include"besk0.f90"
   include"besk0e.f90"
@@ -30,6 +49,10 @@ CONTAINS
   include"besknu.f90"
   include"besks.f90"
   include"besy.f90"
+#if defined(__flang__) && !defined(HAVE_BESSEL_SP)
+  include"besy0.f90"
+  include"besy1.f90"
+#endif
   include"besynu.f90"
   include"beta.f90"
   include"betai.f90"
