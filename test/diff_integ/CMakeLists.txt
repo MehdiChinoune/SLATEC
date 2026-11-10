@@ -1,14 +1,9 @@
-FILE(GLOB tests RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} CONFIGURE_DEPENDS test*.f90 )
-
-foreach( tst ${tests} )
-  STRING(REPLACE ".f90" "" exe ${tst})
-  add_executable( ${exe} ${tst} )
-  target_link_libraries( ${exe} slatec )
-  add_test( NAME ${exe} COMMAND ./${exe} WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
-  set_tests_properties( ${exe} PROPERTIES WILL_FAIL ON )
-endforeach()
-
-FILE(GLOB tests_pf RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} CONFIGURE_DEPENDS test*.pf )
+set( tests_pf
+  test_diff_integ_dp_pf.pf
+  test_diff_integ_quadpack_dp_pf.pf
+  test_diff_integ_quadpack_sp_pf.pf
+  test_diff_integ_sp_pf.pf
+)
 
 foreach( tst ${tests_pf} )
   STRING(REPLACE ".pf" "" exe ${tst})
