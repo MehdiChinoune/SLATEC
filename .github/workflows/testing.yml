@@ -134,6 +134,50 @@ jobs:
         run: |
           ctest -j $(nproc) --output-on-failure --test-dir build
 
+  macos:
+    name: macos-${{ matrix.compiler }} (${{ matrix.build_type }})
+    runs-on: xcode-27
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gfortran, flang]
+        build_type: [Debug, Release] #, Fast]
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+
+    steps:
+      - name: Get Processor Info
+        run : |
+          sysctl -n machdep.cpu.brand_string
+          sysctl -n hw.logicalcpu
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install the compiler
+        run: |
+          brew list -1 | grep python | while read formula; do brew unlink $formula; brew link --overwrite $formula; done
+          brew update
+          if [[ ${{ matrix.compiler }} == gfortran ]]; then
+            brew install gcc
+          elif [[ ${{ matrix.compiler }} == flang ]]; then
+            brew install flang
+          fi
+          brew install ninja openblas
+      - name: Configuring
+        run: |
+          cmake \
+            -G Ninja \
+            -DCMAKE_Fortran_COMPILER=${{ matrix.compiler }} \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DBLA_VENDOR=OpenBLAS \
+            -DCMAKE_PREFIX_PATH=$(brew --prefix)/opt/openblas \
+            -S . \
+            -B build
+      - name: Building
+        run: cmake --build build
+      - name: Testing
+        run: |
+          ctest --output-on-failure --test-dir build
+
   MSYS2:
     name: MSYS2-${{ matrix.msystem }}-${{ matrix.build_type }}
     runs-on: windows-2025
