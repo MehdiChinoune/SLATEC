@@ -38,8 +38,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        compiler: [gfortran-15, gfortran-16, ifx, nvfortran]
+        compiler: [gnu-15, gnu-16, intel, nvidia]
         build_type: [Debug, Release] #, Fast]
+    env:
+      PFUNIT_VER: "4.22.0"
 
     steps:
       - name: Get Processor Info
@@ -50,40 +52,80 @@ jobs:
         uses: actions/checkout@v7
       - name: Install the compiler
         run: |
-          if [[ ${{ matrix.compiler }} == gfortran-* ]]; then
+          if [[ ${{ matrix.compiler }} == gnu-* ]]; then
             sudo add-apt-repository ppa:misterc/gcc-snapshot-latest-lts
             #sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
             sudo apt update
-            sudo apt install --no-install-recommends -y ${{ matrix.compiler }} libopenblas-dev
-          elif [[ ${{ matrix.compiler }} == ifx ]]; then
+            _COMPILER=${{ matrix.compiler }}
+            _COMPILER_VER=${_COMPILER/gnu-/}
+            sudo apt install --no-install-recommends -y \
+              gfortran-${_COMPILER_VER} \
+              gcc-${_COMPILER_VER} \
+              libopenblas-dev
+            echo "FC=gfortran-${_COMPILER_VER}" >> $GITHUB_ENV
+            echo "CC=gcc-${_COMPILER_VER}" >> $GITHUB_ENV
+          elif [[ ${{ matrix.compiler }} == intel ]]; then
             wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB \
               | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
             echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
             sudo apt update
-            sudo apt install --no-install-recommends -y intel-oneapi-compiler-fortran intel-oneapi-mkl-devel
+            sudo apt install --no-install-recommends -y \
+              intel-oneapi-compiler-fortran \
+              intel-oneapi-compiler-dpcpp-cpp \
+              intel-oneapi-mkl-devel
             source /opt/intel/oneapi/setvars.sh
+            echo "FC=ifx" >> $GITHUB_ENV
+            echo "CC=icx" >> $GITHUB_ENV
             printenv >> $GITHUB_ENV
-          elif [[ ${{ matrix.compiler }} == nvfortran ]]; then
+          elif [[ ${{ matrix.compiler }} == nvidia ]]; then
             NV_VERSION="26.9"
             curl https://developer.download.nvidia.com/hpc-sdk/ubuntu/DEB-GPG-KEY-NVIDIA-HPC-SDK | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg
             echo 'deb [signed-by=/usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg] https://developer.download.nvidia.com/hpc-sdk/ubuntu/amd64 /' | sudo tee /etc/apt/sources.list.d/nvhpc.list
             sudo apt-get update
             sudo apt install --no-install-recommends -y nvhpc-${NV_VERSION/./-}
             echo "/opt/nvidia/hpc_sdk/Linux_x86_64/${NV_VERSION}/compilers/bin" >> $GITHUB_PATH
+            echo "FC=nvfortran" >> $GITHUB_ENV
+            echo "CC=nvc" >> $GITHUB_ENV
             echo "LD_LIBRARY_PATH=/opt/nvidia/hpc_sdk/Linux_x86_64/${NV_VERSION}/compilers/lib:/opt/nvidia/hpc_sdk/Linux_x86_64/${NV_VERSION}/math_libs/lib64" >> $GITHUB_ENV
           fi
           sudo apt install --no-install-recommends -y ninja-build
+
+      - name: Restore cached pfunit
+        id: cache-pfunit
+        uses: actions/cache@v6
+        with:
+          path: ${{ github.workspace }}/pfunit
+          key: ${{ runner.os }}-${{ matrix.compiler }}-pfunit-${{ env.PFUNIT_VER }}
+
+      - name: Build and install pfunit
+        if:  ${{ steps.cache-pfunit.outputs.cache-hit != 'true' && matrix.compiler != 'nvidia' }}
+        run: |
+          wget https://github.com/Goddard-Fortran-Ecosystem/pFUnit/releases/download/v${{ env.PFUNIT_VER }}/pFUnit-v${{ env.PFUNIT_VER }}.tar
+          tar -xf pFUnit-v${{ env.PFUNIT_VER }}.tar
+          if [[ ${{ matrix.compiler }} == intel ]]; then
+            export FFLAGS="-standard-semantics"
+          elif [[  ${{ matrix.compiler }} == nvidia ]]; then
+            export FFLAGS=" -Mstandard"
+          fi
+          cmake -G Ninja \
+            -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/pfunit \
+            -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=$([[ ${{ matrix.compiler }} != nvidia* ]] && echo "ON" || echo "OFF") \
+            -S pFUnit-v${{ env.PFUNIT_VER }} \
+            -B build-pfunit
+          cmake --build build-pfunit
+          cmake --install build-pfunit
+
       - name: Configuring
         run: |
           declare -a _cmake_opt
-          if [[ ${{ matrix.compiler }} == ifx ]]; then
+          if [[ ${{ matrix.compiler }} == intel ]]; then
             _cmake_opt+=("-DBLA_VENDOR=Intel10_64lp")
           fi
           cmake \
             -G Ninja \
-            -DCMAKE_Fortran_COMPILER=${{ matrix.compiler }} \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             "${_cmake_opt[@]}" \
+            -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/pfunit \
             -S . \
             -B build
       - name: Building
