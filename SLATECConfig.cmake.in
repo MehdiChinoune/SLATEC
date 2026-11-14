@@ -1,0 +1,8 @@
+@PACKAGE_INIT@
+
+find_dependency(BLAS)
+find_dependency(LAPACK)
+
+include("${CMAKE_CURRENT_LIST_DIR}/SLATECTargets.cmake")
+
+check_required_components(SLATEC)

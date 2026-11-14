@@ -29,13 +29,34 @@ add_library( slatec
   $<TARGET_OBJECTS:special_functions>
 )
 
-target_link_libraries(slatec PUBLIC ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
+target_link_libraries(slatec PUBLIC BLAS::BLAS LAPACK::LAPACK)
 
 set_source_files_properties( aaaaaa.f90 PROPERTIES HEADER_FILE_ONLY TRUE )
 target_sources( slatec PRIVATE aaaaaa.f90 )
 
+target_include_directories( slatec PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/slatec>)
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file( ${CMAKE_SOURCE_DIR}/SLATECConfig.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/SLATECConfig.cmake"
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/SLATEC)
+write_basic_package_version_file(
+  "${CMAKE_CURRENT_BINARY_DIR}/SLATECConfigVersion.cmake"
+  VERSION "${slatec_VERSION}"
+  COMPATIBILITY AnyNewerVersion)
+install( FILES
+         "${CMAKE_CURRENT_BINARY_DIR}/SLATECConfig.cmake"
+         "${CMAKE_CURRENT_BINARY_DIR}/SLATECConfigVersion.cmake"
+         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/SLATEC)
+
 install( TARGETS slatec
+         EXPORT "SLATECTargets"
          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-install( DIRECTORY ${CMAKE_BINARY_DIR}/modules/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} )
+install( DIRECTORY ${CMAKE_BINARY_DIR}/modules/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/slatec )
+install( EXPORT SLATECTargets
+         FILE SLATECTargets.cmake
+         NAMESPACE SLATEC::
+         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/SLATEC)
