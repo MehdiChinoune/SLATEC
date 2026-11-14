@@ -40,7 +40,7 @@ elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel" OR "${CMAKE_Fortran_COMP
   set( CMAKE_Fortran_FLAGS_FAST "-Ofast" )
   set( CMAKE_Fortran_FLAGS_CODECOVERAGE "-prof-gen:srcpos -prof-dir=${CMAKE_BINARY_DIR}/prof/ -g -O0" )
 elseif( "${CMAKE_Fortran_COMPILER_ID}" STREQUAL "LLVMFlang" )
-  set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fimplicit-none-ext -std=f2018" )
+  set( CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -std=f2018" ) # -fimplicit-none-ext Fails with pfunit
   set( CMAKE_Fortran_FLAGS_FAST "-O3 -ffast-math -fstack-arrays" )
   set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -pedantic -Wall" )
   if(APPLE)
