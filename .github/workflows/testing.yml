@@ -24,6 +24,7 @@ jobs:
         cmake \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
           -DPFUNIT_DIR=/opt/pfunit/PFUNIT-4.20/cmake \
+          -DSLATEC_ENABLE_TESTS=ON \
           -S . \
           -B build
     - name: Building
@@ -126,6 +127,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             "${_cmake_opt[@]}" \
             -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/pfunit \
+            -DSLATEC_ENABLE_TESTS=ON \
             -S . \
             -B build
       - name: Building
@@ -160,6 +162,7 @@ jobs:
           cmake \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DPython_EXECUTABLE=${MINGW_PREFIX}/bin/python \
+            -DSLATEC_ENABLE_TESTS=ON \
             -S . \
             -B build
       - name: Building

@@ -80,5 +80,9 @@ include(GNUInstallDirs)
 
 add_subdirectory( src )
 
-enable_testing()
-add_subdirectory( test )
+option( SLATEC_ENABLE_TESTS "Build slatec with IPO/LTO" OFF )
+
+if( SLATEC_ENABLE_TESTS )
+  enable_testing()
+  add_subdirectory( test )
+endif()
