@@ -154,11 +154,12 @@ jobs:
           msystem: ${{ matrix.msystem }}
           release: false
           update: true
-          pacboy: fc:p cc:p openblas:p cmake:p
+          pacboy: fc:p cc:p openblas:p cmake:p pfunit:p
       - name: Configuring
         run: |
           cmake \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DPython_EXECUTABLE=${MINGW_PREFIX}/bin/python \
             -S . \
             -B build
       - name: Building
